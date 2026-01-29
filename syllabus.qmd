@@ -49,6 +49,7 @@ By the end of this course, students will be able to:
 
 ## Optional Materials
 
+- Grolemund, G. (2014). *Hands-on programming with R.* O.'Reilly Media. Available for free at [https://rstudio-education.github.io/hopr](https://rstudio-education.github.io/hopr/).
 - Knaflic, C. N. (2015). *Storytelling with Data: A Data Visualization Guide for Business Professionals*. Wiley. 
 
 
@@ -58,7 +59,7 @@ The course is organized into 10 weeks with 18 class sessions. See the [Schedule]
 
 | Week | Topics | R4DS Chapters |
 |------|--------|---------------|
-| 1 | Introduction, Setup, First Visualization | 1, 2, 6 |
+| 1 | Introduction, Setup, First Visualization | Intro, 1, 2, 6 |
 | 2 | Data Transformation | 3, 4 |
 | 3 | Data Tidying & Import | 5, 7, 20 |
 | 4 | Data Visualization Deep Dive | 9 |

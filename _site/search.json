@@ -39,14 +39,14 @@
     "href": "syllabus.html#optional-materials",
     "title": "Syllabus",
     "section": "Optional Materials",
-    "text": "Optional Materials\n\nKnaflic, C. N. (2015). Storytelling with Data: A Data Visualization Guide for Business Professionals. Wiley."
+    "text": "Optional Materials\n\nGrolemund, G. (2014). Hands-on programming with R. O.’Reilly Media. Available for free at https://rstudio-education.github.io/hopr.\nKnaflic, C. N. (2015). Storytelling with Data: A Data Visualization Guide for Business Professionals. Wiley."
   },
   {
     "objectID": "syllabus.html#course-schedule-overview",
     "href": "syllabus.html#course-schedule-overview",
     "title": "Syllabus",
     "section": "Course Schedule Overview",
-    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\n1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types (Logical, Numeric, Strings, Factors)\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nFunctions, Iteration, & Wrap-up\n25, 26, 8"
+    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\nIntro, 1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types (Logical, Numeric, Strings, Factors)\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nFunctions, Iteration, & Wrap-up\n25, 26, 8"
   },
   {
     "objectID": "syllabus.html#course-policies",
@@ -303,7 +303,7 @@
     "href": "content/01-content.html#before-class",
     "title": "1: Introduction & Setup",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 2: Workflow: basics\nR4DS Ch 6: Workflow: scripts and projects\n\n✅ Setup tasks:\n\nDownload and install R\nDownload and install RStudio",
+    "text": "Before class\n📖 Readings:\n\nR4DS Introduction\nR4DS Ch 2: Workflow: basics\nR4DS Ch 6: Workflow: scripts and projects\n\n✅ Setup tasks:\n\nDownload and install R\nDownload and install RStudio",
     "crumbs": [
       "Content",
       "Course content",

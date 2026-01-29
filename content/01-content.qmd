@@ -7,6 +7,7 @@ date: "2026-03-30"
 
 📖 **Readings:**
 
+- [R4DS Introduction](https://r4ds.hadley.nz/intro.html)
 - [R4DS Ch 2: Workflow: basics](https://r4ds.hadley.nz/workflow-basics)
 - [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
 
