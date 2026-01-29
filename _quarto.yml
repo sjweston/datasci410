@@ -21,6 +21,7 @@ description-meta: "{{< var course.description >}}"
 
 website:
   title: "{{< var course.number >}}: {{< var course.title >}}"
+  site-url: https://sarajweston.com/datasci410/
 
   favicon: "/files/icon-512.png"
 
