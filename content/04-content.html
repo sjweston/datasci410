@@ -110,12 +110,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <meta property="og:title" content="4: Data Transformation II – PSY 410: Data Science for Psychology">
 <meta property="og:description" content="">
-<meta property="og:image" content="/files/social-image.png">
+<meta property="og:image" content="https://sjweston.github.io/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:title" content="4: Data Transformation II – PSY 410: Data Science for Psychology">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="/files/social-image.png">
+<meta name="twitter:image" content="https://sjweston.github.io/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -430,7 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/sjweston\.github\.io\/datasci410\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
