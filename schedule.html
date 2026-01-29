@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
+
+<title>Schedule – PSY 410: Data Science for Psychology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href=".//files/icon-512.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-4c7b890cc350be7067044af900615741.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-37abeb36942f7dd8c53f636b7376e202.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="Schedule – PSY 410: Data Science for Psychology">
+<meta property="og:description" content="">
+<meta property="og:image" content="/files/social-image.png">
+<meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
+<meta property="og:locale" content="en_US">
+<meta name="twitter:title" content="Schedule – PSY 410: Data Science for Psychology">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="/files/social-image.png">
+<meta name="twitter:creator" content="">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">PSY 410: Data Science for Psychology</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./syllabus.html"> 
+<span class="menu-text">Syllabus</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./schedule.html" aria-current="page"> 
+<span class="menu-text">Schedule</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./content/index.html"> 
+<span class="menu-text">Content</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./assignment/index.html"> 
+<span class="menu-text">Assignments</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resource/index.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#course-schedule" id="toc-course-schedule" class="nav-link active" data-scroll-target="#course-schedule">Course Schedule</a></li>
+  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1">Week 1: Getting Started</a>
+  <ul class="collapse">
+  <li><a href="#session-1-introduction-setup" id="toc-session-1-introduction-setup" class="nav-link" data-scroll-target="#session-1-introduction-setup">Session 1: Introduction &amp; Setup</a></li>
+  <li><a href="#session-2-your-first-visualization" id="toc-session-2-your-first-visualization" class="nav-link" data-scroll-target="#session-2-your-first-visualization">Session 2: Your First Visualization</a></li>
+  </ul></li>
+  <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2">Week 2: Data Transformation</a>
+  <ul class="collapse">
+  <li><a href="#session-3-data-transformation-i" id="toc-session-3-data-transformation-i" class="nav-link" data-scroll-target="#session-3-data-transformation-i">Session 3: Data Transformation I</a></li>
+  <li><a href="#session-4-data-transformation-ii" id="toc-session-4-data-transformation-ii" class="nav-link" data-scroll-target="#session-4-data-transformation-ii">Session 4: Data Transformation II</a></li>
+  </ul></li>
+  <li><a href="#week-3" id="toc-week-3" class="nav-link" data-scroll-target="#week-3">Week 3: Working with Data</a>
+  <ul class="collapse">
+  <li><a href="#session-5-data-tidying" id="toc-session-5-data-tidying" class="nav-link" data-scroll-target="#session-5-data-tidying">Session 5: Data Tidying</a></li>
+  <li><a href="#session-6-data-import" id="toc-session-6-data-import" class="nav-link" data-scroll-target="#session-6-data-import">Session 6: Data Import</a></li>
+  </ul></li>
+  <li><a href="#week-4" id="toc-week-4" class="nav-link" data-scroll-target="#week-4">Week 4: Data Visualization Deep Dive I</a>
+  <ul class="collapse">
+  <li><a href="#session-7-layers-aesthetics" id="toc-session-7-layers-aesthetics" class="nav-link" data-scroll-target="#session-7-layers-aesthetics">Session 7: Layers &amp; Aesthetics</a></li>
+  <li><a href="#session-8-perception-design" id="toc-session-8-perception-design" class="nav-link" data-scroll-target="#session-8-perception-design">Session 8: Perception &amp; Design</a></li>
+  </ul></li>
+  <li><a href="#week-5" id="toc-week-5" class="nav-link" data-scroll-target="#week-5">Week 5: Exploratory Data Analysis</a>
+  <ul class="collapse">
+  <li><a href="#session-9-eda---variation" id="toc-session-9-eda---variation" class="nav-link" data-scroll-target="#session-9-eda---variation">Session 9: EDA - Variation</a></li>
+  <li><a href="#session-10-eda---covariation" id="toc-session-10-eda---covariation" class="nav-link" data-scroll-target="#session-10-eda---covariation">Session 10: EDA - Covariation</a></li>
+  </ul></li>
+  <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6">Week 6: Data Types in Depth</a>
+  <ul class="collapse">
+  <li><a href="#session-11-logical-vectors-numbers" id="toc-session-11-logical-vectors-numbers" class="nav-link" data-scroll-target="#session-11-logical-vectors-numbers">Session 11: Logical Vectors &amp; Numbers</a></li>
+  <li><a href="#session-12-strings-factors" id="toc-session-12-strings-factors" class="nav-link" data-scroll-target="#session-12-strings-factors">Session 12: Strings &amp; Factors</a></li>
+  </ul></li>
+  <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7: Combining &amp; Cleaning Data</a>
+  <ul class="collapse">
+  <li><a href="#session-13-joins" id="toc-session-13-joins" class="nav-link" data-scroll-target="#session-13-joins">Session 13: Joins</a></li>
+  <li><a href="#session-14-missing-data" id="toc-session-14-missing-data" class="nav-link" data-scroll-target="#session-14-missing-data">Session 14: Missing Data</a></li>
+  </ul></li>
+  <li><a href="#week-8" id="toc-week-8" class="nav-link" data-scroll-target="#week-8">Week 8: Storytelling with Data</a>
+  <ul class="collapse">
+  <li><a href="#monday-may-18" id="toc-monday-may-18" class="nav-link" data-scroll-target="#monday-may-18">Monday, May 18</a></li>
+  <li><a href="#session-15-storytelling-with-data" id="toc-session-15-storytelling-with-data" class="nav-link" data-scroll-target="#session-15-storytelling-with-data">Session 15: Storytelling with Data</a></li>
+  </ul></li>
+  <li><a href="#week-9" id="toc-week-9" class="nav-link" data-scroll-target="#week-9">Week 9: Reproducible Research</a>
+  <ul class="collapse">
+  <li><a href="#monday-may-25" id="toc-monday-may-25" class="nav-link" data-scroll-target="#monday-may-25">Monday, May 25</a></li>
+  <li><a href="#session-16-quarto" id="toc-session-16-quarto" class="nav-link" data-scroll-target="#session-16-quarto">Session 16: Quarto</a></li>
+  </ul></li>
+  <li><a href="#week-10" id="toc-week-10" class="nav-link" data-scroll-target="#week-10">Week 10: Programming &amp; Wrap-up</a>
+  <ul class="collapse">
+  <li><a href="#session-17-functions-iteration" id="toc-session-17-functions-iteration" class="nav-link" data-scroll-target="#session-17-functions-iteration">Session 17: Functions &amp; Iteration</a></li>
+  <li><a href="#session-18-putting-it-all-together" id="toc-session-18-putting-it-all-together" class="nav-link" data-scroll-target="#session-18-putting-it-all-together">Session 18: Putting It All Together</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content column-page-left" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Schedule</h1>
+</div>
+
+
+
+<div class="quarto-title-meta column-page-left">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="course-schedule" class="level2">
+<h2 class="anchored" data-anchor-id="course-schedule">Course Schedule</h2>
+<p>Below is the schedule for PSY 410: Data Science for Psychology.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Schedule Notes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>All readings should be completed <strong>before</strong> the class session</li>
+<li>R4DS = <a href="https://r4ds.hadley.nz/">R for Data Science (2nd ed.)</a></li>
+<li>Schedule is subject to change based on course needs</li>
+</ul>
+</div>
+</div>
+<hr>
+</section>
+<section id="week-1" class="level2">
+<h2 class="anchored" data-anchor-id="week-1">Week 1: Getting Started</h2>
+<section id="session-1-introduction-setup" class="level3">
+<h3 class="anchored" data-anchor-id="session-1-introduction-setup">Session 1: Introduction &amp; Setup</h3>
+<p><strong>Monday, March 30</strong></p>
+<ul>
+<li>Course overview: Why data science for psychology?</li>
+<li>Installing R and RStudio</li>
+<li>RStudio interface, projects, and workflow basics</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/workflow-basics">R4DS Ch 2: Workflow: basics</a> | <a href="https://r4ds.hadley.nz/workflow-scripts">R4DS Ch 6: Workflow: scripts and projects</a></p>
+</section>
+<section id="session-2-your-first-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="session-2-your-first-visualization">Session 2: Your First Visualization</h3>
+<p><strong>Wednesday, April 1</strong></p>
+<ul>
+<li>Introduction to ggplot2</li>
+<li>Grammar of graphics: aesthetics, geoms, facets</li>
+<li>Making your first plots</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/data-visualize">R4DS Ch 1: Data visualization</a></p>
+<hr>
+</section>
+</section>
+<section id="week-2" class="level2">
+<h2 class="anchored" data-anchor-id="week-2">Week 2: Data Transformation</h2>
+<section id="session-3-data-transformation-i" class="level3">
+<h3 class="anchored" data-anchor-id="session-3-data-transformation-i">Session 3: Data Transformation I</h3>
+<p><strong>Monday, April 6</strong></p>
+<ul>
+<li>Working with rows: <code>filter()</code>, <code>arrange()</code></li>
+<li>Working with columns: <code>select()</code>, <code>mutate()</code></li>
+<li>The pipe operator</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/data-transform">R4DS Ch 3: Data transformation</a> (sections 3.1–3.4)</p>
+</section>
+<section id="session-4-data-transformation-ii" class="level3">
+<h3 class="anchored" data-anchor-id="session-4-data-transformation-ii">Session 4: Data Transformation II</h3>
+<p><strong>Wednesday, April 8</strong></p>
+<ul>
+<li>Working with groups: <code>group_by()</code>, <code>summarize()</code></li>
+<li>Combining operations</li>
+<li>Code style best practices</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/data-transform">R4DS Ch 3: Data transformation</a> (section 3.5) | <a href="https://r4ds.hadley.nz/workflow-style">R4DS Ch 4: Workflow: code style</a></p>
+<hr>
+</section>
+</section>
+<section id="week-3" class="level2">
+<h2 class="anchored" data-anchor-id="week-3">Week 3: Working with Data</h2>
+<section id="session-5-data-tidying" class="level3">
+<h3 class="anchored" data-anchor-id="session-5-data-tidying">Session 5: Data Tidying</h3>
+<p><strong>Monday, April 13</strong></p>
+<ul>
+<li>Tidy data principles</li>
+<li>Reshaping data: <code>pivot_longer()</code>, <code>pivot_wider()</code></li>
+<li>Common tidying problems</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/data-tidy">R4DS Ch 5: Data tidying</a></p>
+</section>
+<section id="session-6-data-import" class="level3">
+<h3 class="anchored" data-anchor-id="session-6-data-import">Session 6: Data Import</h3>
+<p><strong>Wednesday, April 15</strong></p>
+<ul>
+<li>Reading and writing CSV files</li>
+<li>Working with Excel spreadsheets</li>
+<li>Common import issues and solutions</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/data-import">R4DS Ch 7: Data import</a> | <a href="https://r4ds.hadley.nz/spreadsheets">R4DS Ch 20: Spreadsheets</a></p>
+<hr>
+</section>
+</section>
+<section id="week-4" class="level2">
+<h2 class="anchored" data-anchor-id="week-4">Week 4: Data Visualization Deep Dive I</h2>
+<section id="session-7-layers-aesthetics" class="level3">
+<h3 class="anchored" data-anchor-id="session-7-layers-aesthetics">Session 7: Layers &amp; Aesthetics</h3>
+<p><strong>Monday, April 20</strong></p>
+<ul>
+<li>Geoms, stats, and position adjustments</li>
+<li>Coordinate systems and scales</li>
+<li>Choosing the right plot for your data</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/layers">R4DS Ch 9: Layers</a></p>
+</section>
+<section id="session-8-perception-design" class="level3">
+<h3 class="anchored" data-anchor-id="session-8-perception-design">Session 8: Perception &amp; Design</h3>
+<p><strong>Wednesday, April 22</strong></p>
+<ul>
+<li>Visual perception principles</li>
+<li>Color theory and accessibility</li>
+<li>Psychology-specific visualizations: error bars, interaction plots, raincloud plots</li>
+</ul>
+<p>📖 <strong>Read:</strong> TBD (supplementary materials on visual perception)</p>
+<hr>
+</section>
+</section>
+<section id="week-5" class="level2">
+<h2 class="anchored" data-anchor-id="week-5">Week 5: Exploratory Data Analysis</h2>
+<section id="session-9-eda---variation" class="level3">
+<h3 class="anchored" data-anchor-id="session-9-eda---variation">Session 9: EDA - Variation</h3>
+<p><strong>Monday, April 27</strong></p>
+<ul>
+<li>Exploring distributions</li>
+<li>Identifying outliers and unusual values</li>
+<li>Asking good questions of your data</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/eda">R4DS Ch 10: Exploratory data analysis</a> (sections 10.1–10.4)</p>
+</section>
+<section id="session-10-eda---covariation" class="level3">
+<h3 class="anchored" data-anchor-id="session-10-eda---covariation">Session 10: EDA - Covariation</h3>
+<p><strong>Wednesday, April 29</strong></p>
+<ul>
+<li>Exploring relationships between variables</li>
+<li>Patterns and models</li>
+<li>Hands-on: Explore a psychology dataset</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/eda">R4DS Ch 10: Exploratory data analysis</a> (sections 10.5–10.6)</p>
+<hr>
+</section>
+</section>
+<section id="week-6" class="level2">
+<h2 class="anchored" data-anchor-id="week-6">Week 6: Data Types in Depth</h2>
+<section id="session-11-logical-vectors-numbers" class="level3">
+<h3 class="anchored" data-anchor-id="session-11-logical-vectors-numbers">Session 11: Logical Vectors &amp; Numbers</h3>
+<p><strong>Monday, May 4</strong></p>
+<ul>
+<li>Comparisons and Boolean operations</li>
+<li>Working with numeric data</li>
+<li>Recoding and computing scale scores</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/logicals">R4DS Ch 12: Logical vectors</a> | <a href="https://r4ds.hadley.nz/numbers">R4DS Ch 13: Numbers</a></p>
+</section>
+<section id="session-12-strings-factors" class="level3">
+<h3 class="anchored" data-anchor-id="session-12-strings-factors">Session 12: Strings &amp; Factors</h3>
+<p><strong>Wednesday, May 6</strong></p>
+<ul>
+<li>Basic string manipulation</li>
+<li>Working with categorical variables</li>
+<li>Releveling factors for analysis and visualization</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/strings">R4DS Ch 14: Strings</a> | <a href="https://r4ds.hadley.nz/factors">R4DS Ch 16: Factors</a></p>
+<hr>
+</section>
+</section>
+<section id="week-7" class="level2">
+<h2 class="anchored" data-anchor-id="week-7">Week 7: Combining &amp; Cleaning Data</h2>
+<section id="session-13-joins" class="level3">
+<h3 class="anchored" data-anchor-id="session-13-joins">Session 13: Joins</h3>
+<p><strong>Monday, May 11</strong></p>
+<ul>
+<li>Primary keys and foreign keys</li>
+<li>Mutating joins: <code>left_join()</code>, <code>inner_join()</code>, etc.</li>
+<li>Filtering joins: <code>semi_join()</code>, <code>anti_join()</code></li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/joins">R4DS Ch 19: Joins</a></p>
+</section>
+<section id="session-14-missing-data" class="level3">
+<h3 class="anchored" data-anchor-id="session-14-missing-data">Session 14: Missing Data</h3>
+<p><strong>Wednesday, May 13</strong></p>
+<ul>
+<li>Implicit vs.&nbsp;explicit missing values</li>
+<li>Patterns of missingness</li>
+<li>Strategies for handling missing data in psychological research</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/missing-values">R4DS Ch 18: Missing values</a></p>
+<hr>
+</section>
+</section>
+<section id="week-8" class="level2">
+<h2 class="anchored" data-anchor-id="week-8">Week 8: Storytelling with Data</h2>
+<section id="monday-may-18" class="level3">
+<h3 class="anchored" data-anchor-id="monday-may-18">Monday, May 18</h3>
+<div class="callout callout-style-default callout-warning callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>No Class
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</section>
+<section id="session-15-storytelling-with-data" class="level3">
+<h3 class="anchored" data-anchor-id="session-15-storytelling-with-data">Session 15: Storytelling with Data</h3>
+<p><strong>Wednesday, May 20</strong></p>
+<p><em>Drawing from Knaflic’s “Storytelling with Data”</em></p>
+<ol type="1">
+<li><strong>Understand the context</strong> — Audience, message, and the Big Idea; 3-minute story; storyboarding</li>
+<li><strong>Choose appropriate visuals</strong> — Review: continuous → line/scatter; categorical → bars; avoid pies, 3D, dual axes</li>
+<li><strong>Eliminate clutter</strong> — Gestalt principles; strategic contrast; alignment and whitespace</li>
+<li><strong>Focus attention</strong> — Preattentive attributes (color, size, position); “Where are your eyes drawn?” test</li>
+<li><strong>Think like a designer</strong> — Visual affordances and hierarchy; accessibility; colorblind-friendly palettes</li>
+</ol>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/communication">R4DS Ch 11: Communication</a></p>
+<hr>
+</section>
+</section>
+<section id="week-9" class="level2">
+<h2 class="anchored" data-anchor-id="week-9">Week 9: Reproducible Research</h2>
+<section id="monday-may-25" class="level3">
+<h3 class="anchored" data-anchor-id="monday-may-25">Monday, May 25</h3>
+<div class="callout callout-style-default callout-warning callout-empty-content callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>No Class — Memorial Day
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</section>
+<section id="session-16-quarto" class="level3">
+<h3 class="anchored" data-anchor-id="session-16-quarto">Session 16: Quarto</h3>
+<p><strong>Wednesday, May 27</strong></p>
+<ul>
+<li>Literate programming and reproducibility</li>
+<li>Quarto documents: YAML, markdown, code chunks</li>
+<li>Inline code and output formats</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/quarto">R4DS Ch 28: Quarto</a></p>
+<hr>
+</section>
+</section>
+<section id="week-10" class="level2">
+<h2 class="anchored" data-anchor-id="week-10">Week 10: Programming &amp; Wrap-up</h2>
+<section id="session-17-functions-iteration" class="level3">
+<h3 class="anchored" data-anchor-id="session-17-functions-iteration">Session 17: Functions &amp; Iteration</h3>
+<p><strong>Monday, June 1</strong></p>
+<ul>
+<li>Writing reusable functions</li>
+<li>Iteration with purrr: <code>map()</code> and friends</li>
+<li>Automating common psychology workflows</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/functions">R4DS Ch 25: Functions</a> | <a href="https://r4ds.hadley.nz/iteration">R4DS Ch 26: Iteration</a></p>
+</section>
+<section id="session-18-putting-it-all-together" class="level3">
+<h3 class="anchored" data-anchor-id="session-18-putting-it-all-together">Session 18: Putting It All Together</h3>
+<p><strong>Wednesday, June 3</strong></p>
+<ul>
+<li>Complete analysis workflow demonstration</li>
+<li>Getting help: <a href="https://r4ds.hadley.nz/workflow-help">R4DS Ch 8</a></li>
+<li>Course review and next steps</li>
+</ul>
+<p>📖 <strong>Read:</strong> <a href="https://r4ds.hadley.nz/workflow-help">R4DS Ch 8: Workflow: getting help</a></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Content <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> 2026 by <a href="">Sara Weston</a> <br> All content licensed under a <i class="fa-brands fa-creative-commons" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-by" aria-hidden="true"></i> <i class="fa-brands fa-creative-commons-nc" aria-hidden="true"></i> <a href="https://creativecommons.org/licenses/by-nc/4.0/">Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0)</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Made with <i class="fa-brands fa-r-project" aria-hidden="true"></i> and <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
