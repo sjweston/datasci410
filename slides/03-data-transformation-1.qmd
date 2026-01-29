@@ -1,0 +1,568 @@
+---
+title: "Data Transformation I"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 6, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 3"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(nycflights13)  # For the flights dataset
+```
+
+# Data transformation {background-color="#2c3e50"}
+
+## Why transform data?
+
+Real data rarely comes in the exact form you need:
+
+- Filter to specific participants or conditions
+- Create new variables (e.g., scale scores, dummy codes)
+- Sort to find extreme values
+- Select relevant columns from wide datasets
+
+**dplyr** makes all of this straightforward.
+
+## The dplyr verbs
+
+| Verb | What it does |
+|------|--------------|
+| `filter()` | Pick **rows** by their values |
+| `arrange()` | Reorder **rows** |
+| `select()` | Pick **columns** by name |
+| `mutate()` | Create new **columns** |
+| `summarize()` | Collapse to a **summary** |
+
+Today: `filter()`, `arrange()`, `select()`, `mutate()`
+
+## Our dataset: flights
+
+```{r}
+# All 336,776 flights departing NYC in 2013
+glimpse(flights)
+```
+
+## Understanding the data
+
+- `year`, `month`, `day` — departure date
+- `dep_time`, `arr_time` — actual times (HHMM format)
+- `dep_delay`, `arr_delay` — delays in minutes (negative = early)
+- `carrier` — airline code
+- `origin`, `dest` — airport codes
+- `air_time`, `distance` — in minutes and miles
+
+# filter() {background-color="#2c3e50"}
+
+## filter() picks rows
+
+```{r}
+#| output-location: fragment
+# All flights on January 1st
+filter(flights, month == 1, day == 1)
+```
+
+## Comparison operators
+
+| Operator | Meaning |
+|----------|---------|
+| `==` | equal to |
+| `!=` | not equal to |
+| `<`, `>` | less than, greater than |
+| `<=`, `>=` | less/greater than or equal |
+
+::: {.callout-warning}
+Use `==` for comparison, not `=`!
+:::
+
+## Filter examples
+
+```{r}
+#| eval: false
+# Flights to Los Angeles
+filter(flights, dest == "LAX")
+
+# Flights with arrival delay over 2 hours
+filter(flights, arr_delay > 120)
+
+# Flights by United Airlines
+filter(flights, carrier == "UA")
+```
+
+## Multiple conditions
+
+Conditions separated by `,` are combined with AND:
+
+```{r}
+# January 1st flights (both must be true)
+filter(flights, month == 1, day == 1)
+```
+
+Equivalent to:
+
+```{r}
+#| eval: false
+filter(flights, month == 1 & day == 1)
+```
+
+## Logical operators
+
+| Operator | Meaning |
+|----------|---------|
+| `&` | AND (both true) |
+| `|` | OR (either true) |
+| `!` | NOT (negation) |
+
+## Using OR
+
+```{r}
+# Flights in November OR December
+filter(flights, month == 11 | month == 12)
+```
+
+## A useful shortcut: %in%
+
+```{r}
+# Same as above, but cleaner
+filter(flights, month %in% c(11, 12))
+```
+
+`%in%` checks if the value is in the vector.
+
+## filter() with psychology data
+
+Imagine a survey dataset:
+
+```{r}
+#| eval: false
+# Exclude participants who failed attention check
+filter(survey, attention_check == "correct")
+
+# Keep only complete responses
+filter(survey, !is.na(total_score))
+
+# Adults only
+filter(survey, age >= 18)
+
+# Specific conditions
+filter(survey, condition %in% c("treatment", "control"))
+```
+
+## Missing values: NA
+
+`NA` means "not available" — a missing value.
+
+```{r}
+x <- c(1, 2, NA, 4)
+x > 2
+```
+
+Any operation with `NA` returns `NA` (it's unknown!).
+
+## Checking for NA
+
+Use `is.na()` to check for missing values:
+
+```{r}
+x <- c(1, 2, NA, 4)
+is.na(x)
+```
+
+```{r}
+#| eval: false
+# Keep rows where dep_delay is NOT missing
+filter(flights, !is.na(dep_delay))
+```
+
+# arrange() {background-color="#2c3e50"}
+
+## arrange() reorders rows
+
+```{r}
+# Sort by departure delay (smallest first)
+arrange(flights, dep_delay)
+```
+
+## Descending order
+
+```{r}
+# Most delayed flights first
+arrange(flights, desc(dep_delay))
+```
+
+## Multiple sort columns
+
+```{r}
+# Sort by month, then by day, then by departure time
+arrange(flights, month, day, dep_time)
+```
+
+## arrange() use cases
+
+```{r}
+#| eval: false
+# Psychology examples:
+# Find participants with highest scores
+arrange(data, desc(total_score))
+
+# Sort by condition, then by participant ID
+arrange(data, condition, participant_id)
+
+# Find earliest responses
+arrange(data, response_time)
+```
+
+# select() {background-color="#2c3e50"}
+
+## select() picks columns
+
+```{r}
+# Just these three columns
+select(flights, year, month, day)
+```
+
+## Select a range
+
+```{r}
+# All columns from year to day
+select(flights, year:day)
+```
+
+## Select helpers
+
+| Helper | What it does |
+|--------|--------------|
+| `starts_with("x")` | Columns starting with "x" |
+| `ends_with("x")` | Columns ending with "x" |
+| `contains("x")` | Columns containing "x" |
+| `everything()` | All remaining columns |
+
+## Using select helpers
+
+```{r}
+# All delay-related columns
+select(flights, contains("delay"))
+```
+
+```{r}
+# All time columns
+select(flights, ends_with("time"))
+```
+
+## Reorder columns
+
+```{r}
+# Move air_time and distance to the front
+select(flights, air_time, distance, everything())
+```
+
+## Exclude columns
+
+Use `-` to remove columns:
+
+```{r}
+# Remove year column
+select(flights, -year)
+```
+
+```{r}
+#| eval: false
+# Remove multiple columns
+select(flights, -year, -month, -day)
+select(flights, -(year:day))  # same thing
+```
+
+## select() in psychology
+
+```{r}
+#| eval: false
+# Select demographic columns
+select(survey, starts_with("demo_"))
+
+# Select all BDI items
+select(survey, contains("bdi"))
+
+# Remove identifying information
+select(survey, -name, -email, -ip_address)
+
+# Reorder for analysis
+select(survey, participant_id, condition, starts_with("outcome"))
+```
+
+# mutate() {background-color="#2c3e50"}
+
+## mutate() creates new columns
+
+```{r}
+# Calculate total delay
+mutate(flights, total_delay = dep_delay + arr_delay)
+```
+
+## Multiple new columns
+
+```{r}
+mutate(flights,
+       # Create new variables
+       total_delay = dep_delay + arr_delay,
+       speed = distance / air_time * 60,  # mph
+       # Can reference columns you just created!
+       delay_per_mile = total_delay / distance
+)
+```
+
+## mutate() keeps all columns
+
+`mutate()` adds new columns while keeping existing ones.
+
+Use `transmute()` to *only* keep new columns:
+
+```{r}
+transmute(flights,
+          total_delay = dep_delay + arr_delay,
+          speed = distance / air_time * 60
+)
+```
+
+## Useful functions in mutate()
+
+**Arithmetic:** `+`, `-`, `*`, `/`, `^`, `%%` (modulo), `%/%` (integer division)
+
+**Logs:** `log()`, `log2()`, `log10()`
+
+**Offsets:** `lead()`, `lag()` (for time series)
+
+**Cumulative:** `cumsum()`, `cummean()`, `cummax()`
+
+**Ranking:** `min_rank()`, `dense_rank()`, `row_number()`
+
+## Common transformations
+
+```{r}
+#| eval: false
+# Z-score (standardize)
+mutate(data, score_z = (score - mean(score)) / sd(score))
+
+# Log transform (for skewed data)
+mutate(data, rt_log = log(reaction_time))
+
+# Create categories from continuous
+mutate(data, age_group = case_when(
+  age < 30 ~ "young",
+  age < 60 ~ "middle",
+  TRUE ~ "older"
+))
+```
+
+## mutate() for psychology
+
+```{r}
+#| eval: false
+# Calculate scale scores (mean of items)
+mutate(survey,
+       bdi_total = (bdi_1 + bdi_2 + bdi_3 + bdi_4) / 4,
+       # Or rowwise if you have many items:
+       anxiety = rowMeans(select(., anx_1:anx_20), na.rm = TRUE)
+)
+
+# Create dummy codes
+mutate(survey,
+       female = if_else(gender == "female", 1, 0),
+       treatment = if_else(condition == "treatment", 1, 0)
+)
+
+# Reverse code items
+mutate(survey,
+       item_5r = 8 - item_5  # For 1-7 scale
+)
+```
+
+# The pipe: |> {background-color="#2c3e50"}
+
+## The problem with nested functions
+
+What if we want to:
+
+1. Filter to January flights
+2. Select departure time and delay
+3. Arrange by delay
+
+Nested approach:
+
+```{r}
+#| eval: false
+arrange(
+  select(
+    filter(flights, month == 1),
+    dep_time, dep_delay
+  ),
+  dep_delay
+)
+```
+
+This is hard to read!
+
+## Intermediate objects approach
+
+```{r}
+#| eval: false
+# Save each step
+jan_flights <- filter(flights, month == 1)
+jan_selected <- select(jan_flights, dep_time, dep_delay)
+jan_arranged <- arrange(jan_selected, dep_delay)
+```
+
+Works, but clutters your environment with objects.
+
+## The pipe: |>
+
+The pipe takes the result of one function and passes it as the first argument to the next:
+
+```{r}
+# Same result, much cleaner!
+flights |>
+  filter(month == 1) |>
+  select(dep_time, dep_delay) |>
+  arrange(dep_delay)
+```
+
+## Reading piped code
+
+Read `|>` as **"then"**:
+
+```{r}
+#| eval: false
+flights |>                     # Start with flights, THEN
+  filter(month == 1) |>        # filter to January, THEN
+  select(dep_time, dep_delay) |>  # select these columns, THEN
+  arrange(dep_delay)           # arrange by delay
+```
+
+## Keyboard shortcut
+
+The pipe is so common, there's a shortcut:
+
+- **Windows/Linux:** Ctrl + Shift + M
+- **Mac:** Cmd + Shift + M
+
+. . .
+
+::: {.callout-tip}
+In RStudio settings, make sure "Use native pipe operator" is enabled (Tools → Global Options → Code)
+:::
+
+## Note: |> vs %>%
+
+You'll see both:
+
+- `|>` — the **native** pipe (built into R 4.1+)
+- `%>%` — the **magrittr** pipe (older, from tidyverse)
+
+They work almost identically. We'll use `|>` since it's now standard.
+
+## Piping into ggplot
+
+The pipe works beautifully with ggplot:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+flights |>
+  filter(month == 1, carrier == "UA") |>
+  ggplot(aes(x = dep_delay, y = arr_delay)) +
+  geom_point(alpha = 0.3) +
+  labs(title = "United Airlines Delays (January)")
+```
+
+# Putting it together {background-color="#2c3e50"}
+
+## A complete workflow
+
+```{r}
+#| output-location: slide
+# Which airlines have the longest delays in summer?
+flights |>
+  filter(month %in% c(6, 7, 8)) |>           # Summer months
+  filter(!is.na(arr_delay)) |>               # Remove NAs
+  mutate(delay_hours = arr_delay / 60) |>    # Convert to hours
+  select(carrier, delay_hours) |>            # Keep relevant columns
+  arrange(desc(delay_hours))                 # Longest delays first
+```
+
+## Your turn!
+
+Using the `flights` dataset:
+
+1. Filter to American Airlines ("AA") flights to Los Angeles ("LAX")
+2. Create a new variable `speed` (distance / air_time * 60)
+3. Select carrier, origin, dest, and speed
+4. Arrange by speed (highest first)
+5. What's the fastest AA flight to LAX?
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution
+flights |>
+  filter(carrier == "AA", dest == "LAX") |>
+  mutate(speed = distance / air_time * 60) |>
+  select(carrier, origin, dest, speed) |>
+  arrange(desc(speed))
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## The dplyr workflow
+
+```{r}
+#| eval: false
+data |>
+  filter(<conditions>) |>    # Pick rows
+  select(<columns>) |>       # Pick columns
+  mutate(<new vars>) |>      # Create columns
+  arrange(<order>)           # Sort rows
+```
+
+The pipe (`|>`) connects these verbs into a readable workflow.
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (section 3.5)
+- [R4DS Ch 4: Workflow: code style](https://r4ds.hadley.nz/workflow-style)
+
+✅ **Practice:**
+
+- Transform `flights` in different ways
+- Create new variables with `mutate()`
+- Build multi-step pipelines
+
+## Key takeaways
+
+1. **filter()** picks rows by condition
+2. **arrange()** reorders rows (use `desc()` for descending)
+3. **select()** picks columns (helpers like `contains()` are useful)
+4. **mutate()** creates new columns
+5. **The pipe |>** makes code readable and elegant
+
+## Questions?
+
+Next time: **group_by() and summarize()**
+
+We'll learn to calculate statistics by group!

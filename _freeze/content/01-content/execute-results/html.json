@@ -1,0 +1,15 @@
+{
+  "hash": "62e885fb06edf212c3a388342507f563",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Topic 1 Title\"\ndate: \"YYYY-MM-DD\"\n---\n\n## Before class\n\n- [Reading 1 title](/path/to/reading.pdf)\n- [Reading 2 title](https://example.com)\n\n## During class\n\nLecture slides are available below. Use the buttons to open slides in a new tab or download a PDF.\n\n\n\n<!-- Embed slides when ready -->\n<!-- <iframe src=\"/slides/lecture01.html\" width=\"100%\" height=\"500px\"></iframe> -->\n\n## After class\n\n- Complete [Assignment 1](/assignment/01-assignment.qmd)\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

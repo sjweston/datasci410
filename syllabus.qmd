@@ -1,0 +1,96 @@
+---
+title: "Syllabus"
+format:
+  html:
+    toc: true
+    toc-depth: 4
+page-layout: full
+---
+
+## Course Information
+
+**Course:** {{< var course.number >}}: {{< var course.title >}} (CRN: {{< var course.crn >}})
+
+**Instructor:** {{< var instructor.name >}}
+
+**Email:** {{< var instructor.email >}}
+
+**Class Meetings:** {{< var course.days >}}, {{< var course.time >}}
+
+**Location:** {{< var course.location >}}
+
+**Dates:** {{< var course.dates >}}
+
+## Course Description
+
+This course introduces psychology majors to modern data science tools and techniques using R and the tidyverse. Students will learn to import, tidy, transform, visualize, and communicate data effectively. The course emphasizes practical skills for working with real psychological data, reproducible research practices, and creating publication-ready visualizations.
+
+## Learning Objectives
+
+By the end of this course, students will be able to:
+
+1. **Import and tidy data** from various sources (CSV, Excel) into analysis-ready formats
+2. **Transform data** using dplyr verbs (filter, select, mutate, summarize, join)
+3. **Create effective visualizations** using ggplot2, applying principles of visual perception and design
+4. **Conduct exploratory data analysis** to understand patterns and relationships in data
+5. **Produce reproducible reports** using Quarto that integrate code, results, and narrative
+6. **Communicate findings** through well-designed figures that tell a clear story
+
+## Required Materials
+
+### Textbook (Free Online)
+
+- Wickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). *R for Data Science* (2nd ed.). O'Reilly Media. Available free at [r4ds.hadley.nz](https://r4ds.hadley.nz/)
+
+### Software (Free)
+
+- **R**: Download from [cloud.r-project.org](https://cloud.r-project.org/)
+- **RStudio Desktop**: Download from [posit.co/downloads](https://posit.co/download/rstudio-desktop/)
+
+## Optional Materials
+
+- Knaflic, C. N. (2015). *Storytelling with Data: A Data Visualization Guide for Business Professionals*. Wiley. 
+
+
+## Course Schedule Overview
+
+The course is organized into 10 weeks with 18 class sessions. See the [Schedule](/schedule.qmd) page for detailed topics and readings.
+
+| Week | Topics | R4DS Chapters |
+|------|--------|---------------|
+| 1 | Introduction, Setup, First Visualization | 1, 2, 6 |
+| 2 | Data Transformation | 3, 4 |
+| 3 | Data Tidying & Import | 5, 7, 20 |
+| 4 | Data Visualization Deep Dive | 9 |
+| 5 | Exploratory Data Analysis | 10 |
+| 6 | Data Types (Logical, Numeric, Strings, Factors) | 12, 13, 14, 16 |
+| 7 | Joins & Missing Data | 18, 19 |
+| 8 | Storytelling with Data | 11 |
+| 9 | Reproducible Research with Quarto | 28 |
+| 10 | Functions, Iteration, & Wrap-up | 25, 26, 8 |
+
+## Course Policies
+
+### Attendance
+
+Regular attendance is expected. If you must miss class, please notify me in advance when possible.
+
+### Late Work
+
+[Add late work policy]
+
+### Academic Integrity
+
+[Add academic integrity policy]
+
+### Accessibility
+
+[Add accessibility statement]
+
+### Basic Needs
+
+[Add basic needs resources]
+
+## Grading
+
+[Add grading breakdown]

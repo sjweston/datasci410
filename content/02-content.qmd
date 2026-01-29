@@ -1,0 +1,61 @@
+---
+title: "2: Your First Visualization"
+date: "2026-04-01"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 1: Data visualization](https://r4ds.hadley.nz/data-visualize)
+
+## During class
+
+We'll cover:
+
+- Why visualize data? (Anscombe's Quartet)
+- Introduction to ggplot2
+- The grammar of graphics: data, aesthetics, geoms
+- Aesthetic mappings (color, size, shape)
+- Faceting for small multiples
+- Themes and labels
+
+### Slides
+
+```{=html}
+<a href="/slides/02-first-visualization.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/02-first-visualization.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/02-first-visualization.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Create at least 3 different plots using the `mpg` dataset
+2. Try different geoms: `geom_point()`, `geom_bar()`, `geom_histogram()`, `geom_boxplot()`
+3. Experiment with mapping different variables to color, size, and shape
+4. Use `facet_wrap()` to create small multiples
+5. Save your favorite plot using `ggsave()`
+
+::: {.callout-note}
+## The ggplot2 template
+
+```r
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>()
+```
+
+This simple template can create almost any visualization!
+:::

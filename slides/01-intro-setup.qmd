@@ -1,0 +1,395 @@
+---
+title: "Introduction & Setup"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "March 30, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 1"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: false
+---
+
+# Welcome to PSY 410! {background-color="#2c3e50"}
+
+## About this course
+
+:::: {.columns}
+::: {.column width="50%"}
+**What we'll learn:**
+
+- Data visualization with ggplot2
+- Data transformation with dplyr
+- Data tidying with tidyr
+- Reproducible research with Quarto
+:::
+
+::: {.column width="50%"}
+**Why it matters:**
+
+- Psychology is increasingly data-driven
+- Reproducibility crisis demands better practices
+- These skills are transferable everywhere
+:::
+::::
+
+## Why data science for psychology?
+
+Psychology research involves:
+
+- Collecting data from experiments, surveys, observations
+- Cleaning messy real-world data
+- Visualizing patterns and relationships
+- Communicating findings clearly
+
+. . .
+
+**Data science gives us tools to do all of this better.**
+
+## The old way vs. the new way
+
+:::: {.columns}
+::: {.column width="50%"}
+**Point-and-click (SPSS, Excel)**
+
+- Hard to reproduce
+- Error-prone
+- Limited visualizations
+- Doesn't scale
+:::
+
+::: {.column width="50%"}
+**Code-based (R)**
+
+- Fully reproducible
+- Transparent & shareable
+- Unlimited customization
+- Handles any data size
+:::
+::::
+
+## Why R specifically?
+
+- **Free and open source** — no expensive licenses
+- **Designed for statistics** — built by statisticians for data analysis
+- **Massive community** — packages for everything
+- **Psychology-friendly** — `psych`, `lavaan`, `lme4`, `brms`...
+- **Beautiful visualizations** — ggplot2 is industry-leading
+- **Reproducible research** — Quarto/RMarkdown integration
+
+# Getting set up {background-color="#2c3e50"}
+
+## What you need to install
+
+1. **R** — the programming language
+   - Download from [cloud.r-project.org](https://cloud.r-project.org)
+
+2. **RStudio** — the interface we'll use to write R
+   - Download from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+
+. . .
+
+::: {.callout-important}
+Install R **first**, then RStudio. RStudio needs R to work!
+:::
+
+## R vs RStudio
+
+Think of it like this:
+
+- **R** is the engine of a car
+- **RStudio** is the dashboard, steering wheel, and GPS
+
+You *could* drive with just an engine... but why would you?
+
+## The RStudio interface
+
+![](img/rstudio-panes.png){fig-alt="RStudio interface showing four panes" width="80%"}
+
+::: {.notes}
+The four panes: Source (top-left), Console (bottom-left), Environment (top-right), Files/Plots/Help (bottom-right)
+:::
+
+## The four panes
+
+| Pane | What it does |
+|------|--------------|
+| **Source** (top-left) | Write and edit your code files |
+| **Console** (bottom-left) | Run code interactively, see output |
+| **Environment** (top-right) | See your data and objects |
+| **Files/Plots/Help** (bottom-right) | Navigate files, view plots, get help |
+
+## Let's try it: The Console
+
+Type in the Console and press Enter:
+
+```{r}
+2 + 2
+```
+
+. . .
+
+```{r}
+#| eval: true
+2 + 2
+```
+
+Congrats — you just ran R code!
+
+## More console experiments
+
+```{r}
+# R can do math
+10 * 5
+sqrt(144)
+```
+
+```{r}
+# R has built-in functions
+mean(c(1, 2, 3, 4, 5))
+```
+
+```{r}
+# R can store things in objects
+my_number <- 42
+my_number * 2
+```
+
+## The assignment operator
+
+In R, we use `<-` to assign values to objects:
+```{r}
+x <- 10
+```
+
+Think of it as an arrow pointing left: "put 10 into x"
+
+. . .
+
+::: {.callout-tip}
+**Keyboard shortcut:** Alt + - (Windows) or Option + - (Mac)
+:::
+
+# Projects & workflow {background-color="#2c3e50"}
+
+## Why use RStudio Projects?
+
+:::: {.columns}
+::: {.column width="50%"}
+**Without projects:**
+
+- Files scattered everywhere
+- `setwd()` nightmares
+- "It works on my computer"
+- Lost work when switching tasks
+:::
+
+::: {.column width="50%"}
+**With projects:**
+
+- Everything in one folder
+- Paths just work
+- Share the whole folder
+- Easy to switch between projects
+:::
+::::
+
+## Creating a project
+
+1. File → New Project...
+2. Choose "New Directory" → "New Project"
+3. Name it (e.g., "psy410")
+4. Pick a location (Documents folder is fine)
+5. Click "Create Project"
+
+. . .
+
+You'll see a `.Rproj` file appear — this is your project file.
+
+## Project folder structure
+
+A good project folder might look like:
+
+```
+psy410/
+├── psy410.Rproj
+├── data/
+│   └── survey_data.csv
+├── scripts/
+│   └── analysis.R
+└── output/
+    └── figures/
+```
+
+Keep your work organized from the start!
+
+## R Scripts
+
+R scripts (`.R` files) are where you write and save your code.
+
+To create one:
+
+1. File → New File → R Script
+2. Or press Ctrl/Cmd + Shift + N
+
+. . .
+
+**Always save your scripts!** The console history disappears.
+
+## Running code from a script
+
+- **Run one line:** Put cursor on line, press Ctrl/Cmd + Enter
+- **Run selection:** Highlight code, press Ctrl/Cmd + Enter
+- **Run entire script:** Ctrl/Cmd + Shift + Enter
+
+. . .
+
+::: {.callout-tip}
+You'll use Ctrl/Cmd + Enter constantly. Memorize it!
+:::
+
+## Comments
+
+Use `#` to write comments — notes for yourself and others:
+
+```{r}
+# This calculates the mean age of participants
+mean_age <- mean(ages)
+
+# Anything after # is ignored by R
+x <- 10  # this assigns 10 to x
+```
+
+Comments are essential. Your future self will thank you.
+
+# Your first real task {background-color="#2c3e50"}
+
+## Installing packages
+
+R's power comes from **packages** — bundles of functions others have written.
+
+```{r}
+# Install a package (do this once)
+install.packages("tidyverse")
+```
+
+```{r}
+# Load a package (do this every session)
+library(tidyverse)
+```
+
+## The tidyverse
+
+The `tidyverse` is actually a collection of packages:
+
+| Package | Purpose |
+|---------|---------|
+| `ggplot2` | Data visualization |
+| `dplyr` | Data manipulation |
+| `tidyr` | Data tidying |
+| `readr` | Reading data files |
+| `tibble` | Modern data frames |
+| `stringr` | String manipulation |
+| `forcats` | Working with factors |
+| `purrr` | Functional programming |
+
+We'll use most of these throughout the course.
+
+## Let's look at some data
+
+After loading tidyverse, you have access to built-in datasets:
+
+```{r}
+#| eval: true
+#| echo: true
+library(tidyverse)
+
+# mpg is a dataset about fuel economy
+glimpse(mpg)
+```
+
+## Your turn!
+
+1. Create a new RStudio Project called "psy410"
+2. Create a new R script
+3. Install and load the tidyverse
+4. Run `glimpse(mpg)` and `glimpse(diamonds)`
+5. Save your script!
+
+# Getting help {background-color="#2c3e50"}
+
+## When you're stuck
+
+1. **Use `?`** — e.g., `?mean` opens the help page
+2. **Google it** — seriously, everyone does this
+3. **Stack Overflow** — most R questions are answered there
+4. **R4DS book** — [r4ds.hadley.nz](https://r4ds.hadley.nz)
+5. **Ask me** — that's what I'm here for!
+
+## Reading help pages
+
+```{r}
+?mean
+```
+
+Help pages include:
+
+- **Description** — what the function does
+- **Usage** — how to call it
+- **Arguments** — what inputs it takes
+- **Examples** — working code you can run
+
+The examples section is gold — run them!
+
+## Error messages
+
+Errors will happen. A lot. That's normal.
+
+```{r}
+#| error: true
+#| eval: true
+# This will error - can you spot why?
+maen(c(1, 2, 3))
+```
+
+. . .
+
+Read the error message carefully — R is trying to help you.
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 2: Workflow basics](https://r4ds.hadley.nz/workflow-basics)
+- [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
+
+✅ **Do:**
+
+- Install R and RStudio
+- Create your psy410 project
+- Install the tidyverse package
+- Poke around! Try things! Break stuff!
+
+## Key takeaways
+
+1. **R is a tool** — like learning any tool, it takes practice
+2. **RStudio makes R usable** — learn the interface
+3. **Projects keep you organized** — always use them
+4. **Scripts save your work** — never just type in the console
+5. **Errors are learning opportunities** — read them, Google them
+
+## Questions?
+
+![](img/questions.png){fig-alt="Question mark" width="30%"}
+
+See you Wednesday for your first visualization!

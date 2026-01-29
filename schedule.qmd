@@ -1,0 +1,238 @@
+---
+title: "Schedule"
+format:
+  html:
+    toc: true
+    toc-depth: 3
+sidebar: false
+page-layout: full
+---
+
+## Course Schedule
+
+Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
+
+::: {.callout-note}
+## Schedule Notes
+- All readings should be completed **before** the class session
+- R4DS = [R for Data Science (2nd ed.)](https://r4ds.hadley.nz/)
+- Schedule is subject to change based on course needs
+:::
+
+---
+
+## Week 1: Getting Started {#week-1}
+
+### Session 1: Introduction & Setup
+**Monday, March 30**
+
+- Course overview: Why data science for psychology?
+- Installing R and RStudio
+- RStudio interface, projects, and workflow basics
+
+📖 **Read:** [R4DS Ch 2: Workflow: basics](https://r4ds.hadley.nz/workflow-basics) | [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
+
+### Session 2: Your First Visualization
+**Wednesday, April 1**
+
+- Introduction to ggplot2
+- Grammar of graphics: aesthetics, geoms, facets
+- Making your first plots
+
+📖 **Read:** [R4DS Ch 1: Data visualization](https://r4ds.hadley.nz/data-visualize)
+
+---
+
+## Week 2: Data Transformation {#week-2}
+
+### Session 3: Data Transformation I
+**Monday, April 6**
+
+- Working with rows: `filter()`, `arrange()`
+- Working with columns: `select()`, `mutate()`
+- The pipe operator
+
+📖 **Read:** [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (sections 3.1–3.4)
+
+### Session 4: Data Transformation II
+**Wednesday, April 8**
+
+- Working with groups: `group_by()`, `summarize()`
+- Combining operations
+- Code style best practices
+
+📖 **Read:** [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (section 3.5) | [R4DS Ch 4: Workflow: code style](https://r4ds.hadley.nz/workflow-style)
+
+---
+
+## Week 3: Working with Data {#week-3}
+
+### Session 5: Data Tidying
+**Monday, April 13**
+
+- Tidy data principles
+- Reshaping data: `pivot_longer()`, `pivot_wider()`
+- Common tidying problems
+
+📖 **Read:** [R4DS Ch 5: Data tidying](https://r4ds.hadley.nz/data-tidy)
+
+### Session 6: Data Import
+**Wednesday, April 15**
+
+- Reading and writing CSV files
+- Working with Excel spreadsheets
+- Common import issues and solutions
+
+📖 **Read:** [R4DS Ch 7: Data import](https://r4ds.hadley.nz/data-import) | [R4DS Ch 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets)
+
+---
+
+## Week 4: Data Visualization Deep Dive I {#week-4}
+
+### Session 7: Layers & Aesthetics
+**Monday, April 20**
+
+- Geoms, stats, and position adjustments
+- Coordinate systems and scales
+- Choosing the right plot for your data
+
+📖 **Read:** [R4DS Ch 9: Layers](https://r4ds.hadley.nz/layers)
+
+### Session 8: Perception & Design
+**Wednesday, April 22**
+
+- Visual perception principles
+- Color theory and accessibility
+- Psychology-specific visualizations: error bars, interaction plots, raincloud plots
+
+📖 **Read:** TBD (supplementary materials on visual perception)
+
+---
+
+## Week 5: Exploratory Data Analysis {#week-5}
+
+### Session 9: EDA - Variation
+**Monday, April 27**
+
+- Exploring distributions
+- Identifying outliers and unusual values
+- Asking good questions of your data
+
+📖 **Read:** [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
+
+### Session 10: EDA - Covariation
+**Wednesday, April 29**
+
+- Exploring relationships between variables
+- Patterns and models
+- Hands-on: Explore a psychology dataset
+
+📖 **Read:** [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.5–10.6)
+
+---
+
+## Week 6: Data Types in Depth {#week-6}
+
+### Session 11: Logical Vectors & Numbers
+**Monday, May 4**
+
+- Comparisons and Boolean operations
+- Working with numeric data
+- Recoding and computing scale scores
+
+📖 **Read:** [R4DS Ch 12: Logical vectors](https://r4ds.hadley.nz/logicals) | [R4DS Ch 13: Numbers](https://r4ds.hadley.nz/numbers)
+
+### Session 12: Strings & Factors
+**Wednesday, May 6**
+
+- Basic string manipulation
+- Working with categorical variables
+- Releveling factors for analysis and visualization
+
+📖 **Read:** [R4DS Ch 14: Strings](https://r4ds.hadley.nz/strings) | [R4DS Ch 16: Factors](https://r4ds.hadley.nz/factors)
+
+---
+
+## Week 7: Combining & Cleaning Data {#week-7}
+
+### Session 13: Joins
+**Monday, May 11**
+
+- Primary keys and foreign keys
+- Mutating joins: `left_join()`, `inner_join()`, etc.
+- Filtering joins: `semi_join()`, `anti_join()`
+
+📖 **Read:** [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
+
+### Session 14: Missing Data
+**Wednesday, May 13**
+
+- Implicit vs. explicit missing values
+- Patterns of missingness
+- Strategies for handling missing data in psychological research
+
+📖 **Read:** [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
+
+---
+
+## Week 8: Storytelling with Data {#week-8}
+
+### Monday, May 18
+
+::: {.callout-warning}
+## No Class
+:::
+
+### Session 15: Storytelling with Data
+**Wednesday, May 20**
+
+*Drawing from Knaflic's "Storytelling with Data"*
+
+1. **Understand the context** — Audience, message, and the Big Idea; 3-minute story; storyboarding
+2. **Choose appropriate visuals** — Review: continuous → line/scatter; categorical → bars; avoid pies, 3D, dual axes
+3. **Eliminate clutter** — Gestalt principles; strategic contrast; alignment and whitespace
+4. **Focus attention** — Preattentive attributes (color, size, position); "Where are your eyes drawn?" test
+5. **Think like a designer** — Visual affordances and hierarchy; accessibility; colorblind-friendly palettes
+
+📖 **Read:** [R4DS Ch 11: Communication](https://r4ds.hadley.nz/communication) 
+
+---
+
+## Week 9: Reproducible Research {#week-9}
+
+### Monday, May 25
+
+::: {.callout-warning}
+## No Class — Memorial Day
+:::
+
+### Session 16: Quarto
+**Wednesday, May 27**
+
+- Literate programming and reproducibility
+- Quarto documents: YAML, markdown, code chunks
+- Inline code and output formats
+
+📖 **Read:** [R4DS Ch 28: Quarto](https://r4ds.hadley.nz/quarto)
+
+---
+
+## Week 10: Programming & Wrap-up {#week-10}
+
+### Session 17: Functions & Iteration
+**Monday, June 1**
+
+- Writing reusable functions
+- Iteration with purrr: `map()` and friends
+- Automating common psychology workflows
+
+📖 **Read:** [R4DS Ch 25: Functions](https://r4ds.hadley.nz/functions) | [R4DS Ch 26: Iteration](https://r4ds.hadley.nz/iteration)
+
+### Session 18: Putting It All Together
+**Wednesday, June 3**
+
+- Complete analysis workflow demonstration
+- Getting help: [R4DS Ch 8](https://r4ds.hadley.nz/workflow-help)
+- Course review and next steps
+
+📖 **Read:** [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)

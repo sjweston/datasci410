@@ -1,0 +1,524 @@
+[
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course: PSY 410: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: email@university.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
+  },
+  {
+    "objectID": "syllabus.html#course-information",
+    "href": "syllabus.html#course-information",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Course: PSY 410: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: email@university.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
+  },
+  {
+    "objectID": "syllabus.html#course-description",
+    "href": "syllabus.html#course-description",
+    "title": "Syllabus",
+    "section": "Course Description",
+    "text": "Course Description\nThis course introduces psychology majors to modern data science tools and techniques using R and the tidyverse. Students will learn to import, tidy, transform, visualize, and communicate data effectively. The course emphasizes practical skills for working with real psychological data, reproducible research practices, and creating publication-ready visualizations."
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nBy the end of this course, students will be able to:\n\nImport and tidy data from various sources (CSV, Excel) into analysis-ready formats\nTransform data using dplyr verbs (filter, select, mutate, summarize, join)\nCreate effective visualizations using ggplot2, applying principles of visual perception and design\nConduct exploratory data analysis to understand patterns and relationships in data\nProduce reproducible reports using Quarto that integrate code, results, and narrative\nCommunicate findings through well-designed figures that tell a clear story"
+  },
+  {
+    "objectID": "syllabus.html#required-materials",
+    "href": "syllabus.html#required-materials",
+    "title": "Syllabus",
+    "section": "Required Materials",
+    "text": "Required Materials\n\nTextbook (Free Online)\n\nWickham, H., Çetinkaya-Rundel, M., & Grolemund, G. (2023). R for Data Science (2nd ed.). O’Reilly Media. Available free at r4ds.hadley.nz\n\n\n\nSoftware (Free)\n\nR: Download from cloud.r-project.org\nRStudio Desktop: Download from posit.co/downloads"
+  },
+  {
+    "objectID": "syllabus.html#optional-materials",
+    "href": "syllabus.html#optional-materials",
+    "title": "Syllabus",
+    "section": "Optional Materials",
+    "text": "Optional Materials\n\nKnaflic, C. N. (2015). Storytelling with Data: A Data Visualization Guide for Business Professionals. Wiley."
+  },
+  {
+    "objectID": "syllabus.html#course-schedule-overview",
+    "href": "syllabus.html#course-schedule-overview",
+    "title": "Syllabus",
+    "section": "Course Schedule Overview",
+    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\n1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types (Logical, Numeric, Strings, Factors)\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nFunctions, Iteration, & Wrap-up\n25, 26, 8"
+  },
+  {
+    "objectID": "syllabus.html#course-policies",
+    "href": "syllabus.html#course-policies",
+    "title": "Syllabus",
+    "section": "Course Policies",
+    "text": "Course Policies\n\nAttendance\nRegular attendance is expected. If you must miss class, please notify me in advance when possible.\n\n\nLate Work\n[Add late work policy]\n\n\nAcademic Integrity\n[Add academic integrity policy]\n\n\nAccessibility\n[Add accessibility statement]\n\n\nBasic Needs\n[Add basic needs resources]"
+  },
+  {
+    "objectID": "syllabus.html#grading",
+    "href": "syllabus.html#grading",
+    "title": "Syllabus",
+    "section": "Grading",
+    "text": "Grading\n[Add grading breakdown]"
+  },
+  {
+    "objectID": "resource/index.html",
+    "href": "resource/index.html",
+    "title": "Resources",
+    "section": "",
+    "text": "This section contains helpful resources and tutorials for the course.",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#recommended-resources",
+    "href": "resource/index.html#recommended-resources",
+    "title": "Resources",
+    "section": "Recommended Resources",
+    "text": "Recommended Resources\n\nResource 1 title\nResource 2 title",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#software",
+    "href": "resource/index.html#software",
+    "title": "Resources",
+    "section": "Software",
+    "text": "Software\n[Add software installation guides and links here]",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#getting-help",
+    "href": "resource/index.html#getting-help",
+    "title": "Resources",
+    "section": "Getting Help",
+    "text": "Getting Help\n[Add information about how to get help]",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "content/index.html",
+    "href": "content/index.html",
+    "title": "Course Content",
+    "section": "",
+    "text": "Each class session has materials that you should review. On each content page you’ll find:\n\nLecture slides (if applicable)\nRequired readings\nAdditional resources\n\nNavigate through the sidebar to access each week’s content.",
+    "crumbs": [
+      "Content",
+      "Overview",
+      "Course Content"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html",
+    "href": "content/04-content.html",
+    "title": "4: Data Transformation II",
+    "section": "",
+    "text": "Content for Wednesday, April 8, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Data Transformation II"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#before-class",
+    "href": "content/04-content.html#before-class",
+    "title": "4: Data Transformation II",
+    "section": "Before class",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 3: Data transformation (section 3.5)\nR4DS Ch 4: Workflow: code style",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Data Transformation II"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#during-class",
+    "href": "content/04-content.html#during-class",
+    "title": "4: Data Transformation II",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\ngroup_by() — define groups for operations\nsummarize() — calculate summary statistics\nCombining group_by() + summarize() for grouped statistics\ncount() — a quick shortcut for counting\nCode style best practices\nBuilding complete analysis pipelines\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Data Transformation II"
+    ]
+  },
+  {
+    "objectID": "content/04-content.html#after-class",
+    "href": "content/04-content.html#after-class",
+    "title": "4: Data Transformation II",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\nUsing the flights dataset:\n\nCalculate the average departure delay by carrier\nFind which carrier has the most flights\nCalculate the percentage of flights that were delayed (arr_delay &gt; 0) by month\nFind the top 5 destinations with the highest average arrival delay\nCreate a complete pipeline that filters, groups, summarizes, and arranges\n\n\n\n\n\n\n\nNoteThe power of group_by()\n\n\n\ngroup_by() doesn’t change how your data looks — it changes how other verbs work on it. Think of it as setting up the “behind the scenes” grouping structure.\ndata |&gt;\n  group_by(condition) |&gt;\n  summarize(mean = mean(score))\n\n\n\nPsychology application\n# Calculate descriptive statistics by condition\nexperiment_data |&gt;\n  group_by(condition) |&gt;\n  summarize(\n    M = mean(score, na.rm = TRUE),\n    SD = sd(score, na.rm = TRUE),\n    n = n()\n  )",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "4: Data Transformation II"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html",
+    "href": "content/02-content.html",
+    "title": "2: Your First Visualization",
+    "section": "",
+    "text": "Content for Wednesday, April 1, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Your First Visualization"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#before-class",
+    "href": "content/02-content.html#before-class",
+    "title": "2: Your First Visualization",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 1: Data visualization",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Your First Visualization"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#during-class",
+    "href": "content/02-content.html#during-class",
+    "title": "2: Your First Visualization",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nWhy visualize data? (Anscombe’s Quartet)\nIntroduction to ggplot2\nThe grammar of graphics: data, aesthetics, geoms\nAesthetic mappings (color, size, shape)\nFaceting for small multiples\nThemes and labels\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Your First Visualization"
+    ]
+  },
+  {
+    "objectID": "content/02-content.html#after-class",
+    "href": "content/02-content.html#after-class",
+    "title": "2: Your First Visualization",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\n\nCreate at least 3 different plots using the mpg dataset\nTry different geoms: geom_point(), geom_bar(), geom_histogram(), geom_boxplot()\nExperiment with mapping different variables to color, size, and shape\nUse facet_wrap() to create small multiples\nSave your favorite plot using ggsave()\n\n\n\n\n\n\n\nNoteThe ggplot2 template\n\n\n\nggplot(data = &lt;DATA&gt;, mapping = aes(&lt;MAPPINGS&gt;)) +\n  &lt;GEOM_FUNCTION&gt;()\nThis simple template can create almost any visualization!",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "2: Your First Visualization"
+    ]
+  },
+  {
+    "objectID": "assignment/index.html#assignment-overview",
+    "href": "assignment/index.html#assignment-overview",
+    "title": "Assignments",
+    "section": "Assignment Overview",
+    "text": "Assignment Overview\n[Describe your assignment structure here]",
+    "crumbs": [
+      "Assignments",
+      "Overview",
+      "Assignments"
+    ]
+  },
+  {
+    "objectID": "assignment/index.html#submission-guidelines",
+    "href": "assignment/index.html#submission-guidelines",
+    "title": "Assignments",
+    "section": "Submission Guidelines",
+    "text": "Submission Guidelines\n\nAll assignments should be submitted through [Canvas/other platform]\n[Add specific format requirements]\n[Add deadline information]",
+    "crumbs": [
+      "Assignments",
+      "Overview",
+      "Assignments"
+    ]
+  },
+  {
+    "objectID": "assignment/01-assignment.html",
+    "href": "assignment/01-assignment.html",
+    "title": "Assignment 1",
+    "section": "",
+    "text": "Due by 11:59 PM on Invalid Date",
+    "crumbs": [
+      "Assignments",
+      "Assignment 1"
+    ]
+  },
+  {
+    "objectID": "assignment/01-assignment.html#instructions",
+    "href": "assignment/01-assignment.html#instructions",
+    "title": "Assignment 1",
+    "section": "Instructions",
+    "text": "Instructions\n[Provide assignment instructions here]",
+    "crumbs": [
+      "Assignments",
+      "Assignment 1"
+    ]
+  },
+  {
+    "objectID": "assignment/01-assignment.html#questions",
+    "href": "assignment/01-assignment.html#questions",
+    "title": "Assignment 1",
+    "section": "Questions",
+    "text": "Questions\n\nQuestion 1\nQuestion 2",
+    "crumbs": [
+      "Assignments",
+      "Assignment 1"
+    ]
+  },
+  {
+    "objectID": "assignment/01-assignment.html#submission",
+    "href": "assignment/01-assignment.html#submission",
+    "title": "Assignment 1",
+    "section": "Submission",
+    "text": "Submission\nSubmit your completed assignment on [Canvas/other platform] by [deadline].",
+    "crumbs": [
+      "Assignments",
+      "Assignment 1"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html",
+    "href": "content/01-content.html",
+    "title": "1: Introduction & Setup",
+    "section": "",
+    "text": "Content for Monday, March 30, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction & Setup"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#before-class",
+    "href": "content/01-content.html#before-class",
+    "title": "1: Introduction & Setup",
+    "section": "Before class",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 2: Workflow: basics\nR4DS Ch 6: Workflow: scripts and projects\n\n✅ Setup tasks:\n\nDownload and install R\nDownload and install RStudio",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction & Setup"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#during-class",
+    "href": "content/01-content.html#during-class",
+    "title": "1: Introduction & Setup",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nWhy data science for psychology?\nR vs RStudio: What’s the difference?\nThe RStudio interface\nCreating projects and scripts\nInstalling packages\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction & Setup"
+    ]
+  },
+  {
+    "objectID": "content/01-content.html#after-class",
+    "href": "content/01-content.html#after-class",
+    "title": "1: Introduction & Setup",
+    "section": "After class",
+    "text": "After class\n✅ Complete these tasks:\n\nMake sure R and RStudio are installed and working\nCreate a new RStudio Project called “psy410”\nInstall the tidyverse package: install.packages(\"tidyverse\")\nRun library(tidyverse) and make sure it loads without errors\nTry glimpse(mpg) to see your first dataset!\n\n\n\n\n\n\n\nTipGetting help\n\n\n\nIf you run into installation issues, check out R4DS Chapter 8: Workflow: getting help or post in our class discussion forum.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "1: Introduction & Setup"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html",
+    "href": "content/03-content.html",
+    "title": "3: Data Transformation I",
+    "section": "",
+    "text": "Content for Monday, April 6, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "3: Data Transformation I"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#before-class",
+    "href": "content/03-content.html#before-class",
+    "title": "3: Data Transformation I",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 3: Data transformation (sections 3.1–3.4)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "3: Data Transformation I"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#during-class",
+    "href": "content/03-content.html#during-class",
+    "title": "3: Data Transformation I",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nIntroduction to dplyr\nfilter() — pick rows by their values\narrange() — reorder rows\nselect() — pick columns by name\nmutate() — create new columns\nThe pipe operator (|&gt;)\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "3: Data Transformation I"
+    ]
+  },
+  {
+    "objectID": "content/03-content.html#after-class",
+    "href": "content/03-content.html#after-class",
+    "title": "3: Data Transformation I",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\nUsing the flights dataset from the nycflights13 package:\n\nFilter to flights departing in December\nFind all flights to Los Angeles (LAX)\nCreate a new variable for flight speed (distance / air_time * 60)\nSelect only the carrier, origin, destination, and your new speed variable\nArrange by speed to find the fastest flights\n\n\n\n\n\n\n\nTipKeyboard shortcut\n\n\n\nThe pipe (|&gt;) is so common that there’s a keyboard shortcut:\n\nWindows/Linux: Ctrl + Shift + M\nMac: Cmd + Shift + M\n\n\n\n\nInstalling the flights dataset\ninstall.packages(\"nycflights13\")\nlibrary(nycflights13)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "3: Data Transformation I"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html",
+    "href": "content/05-content.html",
+    "title": "5: Data Tidying",
+    "section": "",
+    "text": "Content for Monday, April 13, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Data Tidying"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#before-class",
+    "href": "content/05-content.html#before-class",
+    "title": "5: Data Tidying",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 5: Data tidying",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Data Tidying"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#during-class",
+    "href": "content/05-content.html#during-class",
+    "title": "5: Data Tidying",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nWhat is tidy data? The three rules\nWide vs. long format\npivot_longer() — wide to long\npivot_wider() — long to wide\nExtracting information from column names\nseparate_*() and unite() for splitting/combining columns\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Data Tidying"
+    ]
+  },
+  {
+    "objectID": "content/05-content.html#after-class",
+    "href": "content/05-content.html#after-class",
+    "title": "5: Data Tidying",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\n\nTake this wide dataset and make it tidy:\n\nwide_data &lt;- tibble(\n  participant = c(\"P1\", \"P2\", \"P3\"),\n  pre_test = c(45, 52, 48),\n  post_test = c(62, 58, 71)\n)\n\nPractice with survey data — pivot questionnaire items from columns to rows\nCreate a summary table and use pivot_wider() to format it nicely\nUse separate_wider_delim() to split a column like “age_gender” into separate columns\n\n\n\n\n\n\n\nImportantThe three rules of tidy data\n\n\n\n\nEach variable is a column\nEach observation is a row\nEach value is a cell\n\nWhen your data follows these rules, tidyverse tools (ggplot2, dplyr) work seamlessly!\n\n\n\nCommon patterns in psychology data\nRepeated measures:\n# Wide (common in SPSS)\ndata_wide &lt;- tibble(\n  id = 1:3,\n  time1 = c(50, 55, 48),\n  time2 = c(55, 58, 52)\n)\n\n# Tidy version\ndata_wide |&gt;\n  pivot_longer(\n    cols = starts_with(\"time\"),\n    names_to = \"time\",\n    values_to = \"score\"\n  )\nQuestionnaire items:\n# Calculate scale scores from long format\nsurvey |&gt;\n  pivot_longer(cols = starts_with(\"bdi_\")) |&gt;\n  group_by(participant) |&gt;\n  summarize(bdi_total = sum(value))",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "5: Data Tidying"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "\n            Data Science for Psychology\n        ",
+    "section": "",
+    "text": "Course subtitle here\n        \n        \n            PSY 410 • Spring 2026 Department of Psychology University Name\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Sara Weston\n   \n   email@university.edu\n   Schedule an appointment\n\n\n\nCourse details\n\n   Mondays & Wednesdays\n   March 30 – June 3, 2026\n   12:00–1:20 PM\n   16 PAC\n\n\n\nContacting me\nEmail is the best way to get in contact with me. I will try to respond to all course-related emails within one business day."
+  },
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\nSchedule is subject to change based on course needs"
+  },
+  {
+    "objectID": "schedule.html#course-schedule",
+    "href": "schedule.html#course-schedule",
+    "title": "Schedule",
+    "section": "",
+    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\nSchedule is subject to change based on course needs"
+  },
+  {
+    "objectID": "schedule.html#week-1",
+    "href": "schedule.html#week-1",
+    "title": "Schedule",
+    "section": "Week 1: Getting Started",
+    "text": "Week 1: Getting Started\n\nSession 1: Introduction & Setup\nMonday, March 30\n\nCourse overview: Why data science for psychology?\nInstalling R and RStudio\nRStudio interface, projects, and workflow basics\n\n📖 Read: R4DS Ch 2: Workflow: basics | R4DS Ch 6: Workflow: scripts and projects\n\n\nSession 2: Your First Visualization\nWednesday, April 1\n\nIntroduction to ggplot2\nGrammar of graphics: aesthetics, geoms, facets\nMaking your first plots\n\n📖 Read: R4DS Ch 1: Data visualization"
+  },
+  {
+    "objectID": "schedule.html#week-2",
+    "href": "schedule.html#week-2",
+    "title": "Schedule",
+    "section": "Week 2: Data Transformation",
+    "text": "Week 2: Data Transformation\n\nSession 3: Data Transformation I\nMonday, April 6\n\nWorking with rows: filter(), arrange()\nWorking with columns: select(), mutate()\nThe pipe operator\n\n📖 Read: R4DS Ch 3: Data transformation (sections 3.1–3.4)\n\n\nSession 4: Data Transformation II\nWednesday, April 8\n\nWorking with groups: group_by(), summarize()\nCombining operations\nCode style best practices\n\n📖 Read: R4DS Ch 3: Data transformation (section 3.5) | R4DS Ch 4: Workflow: code style"
+  },
+  {
+    "objectID": "schedule.html#week-3",
+    "href": "schedule.html#week-3",
+    "title": "Schedule",
+    "section": "Week 3: Working with Data",
+    "text": "Week 3: Working with Data\n\nSession 5: Data Tidying\nMonday, April 13\n\nTidy data principles\nReshaping data: pivot_longer(), pivot_wider()\nCommon tidying problems\n\n📖 Read: R4DS Ch 5: Data tidying\n\n\nSession 6: Data Import\nWednesday, April 15\n\nReading and writing CSV files\nWorking with Excel spreadsheets\nCommon import issues and solutions\n\n📖 Read: R4DS Ch 7: Data import | R4DS Ch 20: Spreadsheets"
+  },
+  {
+    "objectID": "schedule.html#week-4",
+    "href": "schedule.html#week-4",
+    "title": "Schedule",
+    "section": "Week 4: Data Visualization Deep Dive I",
+    "text": "Week 4: Data Visualization Deep Dive I\n\nSession 7: Layers & Aesthetics\nMonday, April 20\n\nGeoms, stats, and position adjustments\nCoordinate systems and scales\nChoosing the right plot for your data\n\n📖 Read: R4DS Ch 9: Layers\n\n\nSession 8: Perception & Design\nWednesday, April 22\n\nVisual perception principles\nColor theory and accessibility\nPsychology-specific visualizations: error bars, interaction plots, raincloud plots\n\n📖 Read: TBD (supplementary materials on visual perception)"
+  },
+  {
+    "objectID": "schedule.html#week-5",
+    "href": "schedule.html#week-5",
+    "title": "Schedule",
+    "section": "Week 5: Exploratory Data Analysis",
+    "text": "Week 5: Exploratory Data Analysis\n\nSession 9: EDA - Variation\nMonday, April 27\n\nExploring distributions\nIdentifying outliers and unusual values\nAsking good questions of your data\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\nSession 10: EDA - Covariation\nWednesday, April 29\n\nExploring relationships between variables\nPatterns and models\nHands-on: Explore a psychology dataset\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)"
+  },
+  {
+    "objectID": "schedule.html#week-6",
+    "href": "schedule.html#week-6",
+    "title": "Schedule",
+    "section": "Week 6: Data Types in Depth",
+    "text": "Week 6: Data Types in Depth\n\nSession 11: Logical Vectors & Numbers\nMonday, May 4\n\nComparisons and Boolean operations\nWorking with numeric data\nRecoding and computing scale scores\n\n📖 Read: R4DS Ch 12: Logical vectors | R4DS Ch 13: Numbers\n\n\nSession 12: Strings & Factors\nWednesday, May 6\n\nBasic string manipulation\nWorking with categorical variables\nReleveling factors for analysis and visualization\n\n📖 Read: R4DS Ch 14: Strings | R4DS Ch 16: Factors"
+  },
+  {
+    "objectID": "schedule.html#week-7",
+    "href": "schedule.html#week-7",
+    "title": "Schedule",
+    "section": "Week 7: Combining & Cleaning Data",
+    "text": "Week 7: Combining & Cleaning Data\n\nSession 13: Joins\nMonday, May 11\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\nSession 14: Missing Data\nWednesday, May 13\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values"
+  },
+  {
+    "objectID": "schedule.html#week-8",
+    "href": "schedule.html#week-8",
+    "title": "Schedule",
+    "section": "Week 8: Storytelling with Data",
+    "text": "Week 8: Storytelling with Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\n\n\n\n\n\nSession 15: Storytelling with Data\nWednesday, May 20\nDrawing from Knaflic’s “Storytelling with Data”\n\nUnderstand the context — Audience, message, and the Big Idea; 3-minute story; storyboarding\nChoose appropriate visuals — Review: continuous → line/scatter; categorical → bars; avoid pies, 3D, dual axes\nEliminate clutter — Gestalt principles; strategic contrast; alignment and whitespace\nFocus attention — Preattentive attributes (color, size, position); “Where are your eyes drawn?” test\nThink like a designer — Visual affordances and hierarchy; accessibility; colorblind-friendly palettes\n\n📖 Read: R4DS Ch 11: Communication"
+  },
+  {
+    "objectID": "schedule.html#week-9",
+    "href": "schedule.html#week-9",
+    "title": "Schedule",
+    "section": "Week 9: Reproducible Research",
+    "text": "Week 9: Reproducible Research\n\nMonday, May 25\n\n\n\n\n\n\nWarningNo Class — Memorial Day\n\n\n\n\n\n\n\n\nSession 16: Quarto\nWednesday, May 27\n\nLiterate programming and reproducibility\nQuarto documents: YAML, markdown, code chunks\nInline code and output formats\n\n📖 Read: R4DS Ch 28: Quarto"
+  },
+  {
+    "objectID": "schedule.html#week-10",
+    "href": "schedule.html#week-10",
+    "title": "Schedule",
+    "section": "Week 10: Programming & Wrap-up",
+    "text": "Week 10: Programming & Wrap-up\n\nSession 17: Functions & Iteration\nMonday, June 1\n\nWriting reusable functions\nIteration with purrr: map() and friends\nAutomating common psychology workflows\n\n📖 Read: R4DS Ch 25: Functions | R4DS Ch 26: Iteration\n\n\nSession 18: Putting It All Together\nWednesday, June 3\n\nComplete analysis workflow demonstration\nGetting help: R4DS Ch 8\nCourse review and next steps\n\n📖 Read: R4DS Ch 8: Workflow: getting help"
+  }
+]

@@ -1,0 +1,612 @@
+---
+title: "Data Tidying"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 13, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 5"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# What is tidy data? {background-color="#2c3e50"}
+
+## The tidyverse philosophy
+
+> "Tidy datasets are all alike, but every messy dataset is messy in its own way."
+> — Hadley Wickham
+
+The tools we've learned (ggplot2, dplyr) expect data in a specific format: **tidy data**.
+
+## The three rules of tidy data
+
+1. Each **variable** is a column
+2. Each **observation** is a row
+3. Each **value** is a cell
+
+. . .
+
+Simple in theory, surprisingly complex in practice.
+
+## Tidy data visualized
+
+```{r}
+#| echo: false
+tibble(
+  participant = c("P1", "P2", "P3"),
+  pre_test = c(45, 52, 48),
+  post_test = c(62, 58, 71)
+) |>
+  knitr::kable(caption = "Is this tidy?")
+```
+
+. . .
+
+**No!** Time (pre/post) is a variable, but it's spread across columns.
+
+## The tidy version
+
+```{r}
+#| echo: false
+tibble(
+  participant = rep(c("P1", "P2", "P3"), each = 2),
+  time = rep(c("pre", "post"), 3),
+  score = c(45, 62, 52, 58, 48, 71)
+) |>
+  knitr::kable(caption = "Now it's tidy!")
+```
+
+Now: participant, time, and score are all columns.
+
+## Why does it matter?
+
+**Tidy data works with tidyverse tools:**
+
+```{r}
+#| eval: false
+# Easy to visualize
+ggplot(data, aes(x = time, y = score, color = participant)) +
+  geom_point()
+
+# Easy to analyze
+data |>
+  group_by(time) |>
+  summarize(mean = mean(score))
+```
+
+## Wide vs. Long
+
+:::: {.columns}
+::: {.column width="50%"}
+**Wide format**
+
+- Variables spread across columns
+- One row per subject
+- Humans like to read this
+:::
+
+::: {.column width="50%"}
+**Long format**
+
+- Variables in a single column
+- Multiple rows per subject
+- R likes to work with this
+:::
+::::
+
+Most real data needs reshaping.
+
+# Common untidy patterns {background-color="#2c3e50"}
+
+## Pattern 1: Column headers are values
+
+```{r}
+# Exam scores by semester
+wide_scores <- tibble(
+  student = c("Alice", "Bob", "Carol"),
+  fall_2024 = c(85, 78, 92),
+  spring_2025 = c(88, 82, 95),
+  fall_2025 = c(91, 85, 94)
+)
+wide_scores
+```
+
+The semester names are **values**, not variable names.
+
+## Pattern 2: Multiple variables in one column
+
+```{r}
+# Data export with combined columns
+messy_data <- tibble(
+  id = 1:3,
+  age_sex = c("25_M", "32_F", "28_F")
+)
+messy_data
+```
+
+Age and sex are crammed into one column.
+
+## Pattern 3: Variables in rows and columns
+
+```{r}
+# Weather data
+weather <- tibble(
+  id = c("MX001", "MX001", "MX002", "MX002"),
+  year = c(2020, 2020, 2020, 2020),
+  month = c(1, 2, 1, 2),
+  element = c("tmax", "tmax", "tmin", "tmin"),
+  value = c(85, 87, 32, 35)
+)
+weather
+```
+
+`element` contains variable names (tmax, tmin).
+
+## Psychology-specific patterns
+
+Surveys often look like:
+
+```{r}
+# Wide survey format
+survey_wide <- tibble(
+  participant = 1:3,
+  bdi_1 = c(2, 1, 3),
+  bdi_2 = c(1, 0, 2),
+  bdi_3 = c(3, 2, 2),
+  bdi_4 = c(2, 1, 1)
+)
+survey_wide
+```
+
+Each item is a column — wide format.
+
+# pivot_longer() {background-color="#2c3e50"}
+
+## The most common tidying operation
+
+`pivot_longer()` takes wide data and makes it long:
+
+```{r}
+wide_scores |>
+  pivot_longer(
+    cols = fall_2024:fall_2025,  # Which columns to pivot
+    names_to = "semester",        # New column for old column names
+    values_to = "score"           # New column for values
+  )
+```
+
+## Breaking it down
+
+```{r}
+#| eval: false
+pivot_longer(
+  cols = ...,        # Columns to reshape (use select helpers!)
+  names_to = "...",  # Name for the new "names" column
+  values_to = "..."  # Name for the new "values" column
+)
+```
+
+## Selecting columns to pivot
+
+Use any of the `select()` helpers:
+
+```{r}
+#| eval: false
+# By name
+pivot_longer(cols = c(fall_2024, spring_2025, fall_2025))
+
+# By range
+pivot_longer(cols = fall_2024:fall_2025)
+
+# By pattern
+pivot_longer(cols = starts_with("fall"))
+pivot_longer(cols = contains("202"))
+
+# Everything except
+pivot_longer(cols = -student)
+```
+
+## Psychology example: Survey items
+
+```{r}
+survey_wide |>
+  pivot_longer(
+    cols = starts_with("bdi"),
+    names_to = "item",
+    values_to = "response"
+  )
+```
+
+Now each response is its own row!
+
+## Extracting information from names
+
+What if column names contain useful info?
+
+```{r}
+# Scores at different time points
+experiment_wide <- tibble(
+  id = 1:3,
+  score_t1 = c(100, 95, 110),
+  score_t2 = c(105, 100, 115),
+  score_t3 = c(108, 102, 120)
+)
+experiment_wide
+```
+
+We want to extract the time point (t1, t2, t3).
+
+## names_prefix argument
+
+```{r}
+experiment_wide |>
+  pivot_longer(
+    cols = starts_with("score"),
+    names_to = "time",
+    names_prefix = "score_",  # Remove this prefix from names
+    values_to = "score"
+  )
+```
+
+## names_pattern argument
+
+For more complex parsing:
+
+```{r}
+# Column names like "bdi_1", "anxiety_1", etc.
+multi_scale <- tibble(
+  id = 1:2,
+  bdi_1 = c(2, 1), bdi_2 = c(1, 2),
+  anxiety_1 = c(3, 2), anxiety_2 = c(2, 3)
+)
+
+multi_scale |>
+  pivot_longer(
+    cols = -id,
+    names_to = c("scale", "item"),
+    names_pattern = "(.+)_(.+)",  # Regex: anything_anything
+    values_to = "response"
+  )
+```
+
+## Pivoting to calculate scale scores
+
+```{r}
+# Calculate BDI total from long format
+survey_wide |>
+  pivot_longer(
+    cols = starts_with("bdi"),
+    names_to = "item",
+    values_to = "response"
+  ) |>
+  group_by(participant) |>
+  summarize(bdi_total = sum(response))
+```
+
+# pivot_wider() {background-color="#2c3e50"}
+
+## The opposite operation
+
+Sometimes you need to go from long to wide:
+
+```{r}
+long_data <- tibble(
+  participant = rep(1:3, each = 2),
+  time = rep(c("pre", "post"), 3),
+  score = c(45, 62, 52, 58, 48, 71)
+)
+long_data
+```
+
+## pivot_wider() syntax
+
+```{r}
+long_data |>
+  pivot_wider(
+    names_from = time,   # Column to get new column names from
+    values_from = score  # Column to get values from
+  )
+```
+
+## When to use pivot_wider()
+
+- Creating summary tables for reports
+- Some analyses need wide format
+- Merging data that was collected differently
+- Human-readable output
+
+## Multiple value columns
+
+```{r}
+# Long data with multiple measures
+long_multi <- tibble(
+  id = rep(1:2, each = 2),
+  time = rep(c("pre", "post"), 2),
+  score = c(45, 62, 52, 58),
+  rt = c(500, 480, 520, 490)
+)
+
+long_multi |>
+  pivot_wider(
+    names_from = time,
+    values_from = c(score, rt)  # Multiple columns!
+  )
+```
+
+## Creating an APA-style summary table
+
+```{r}
+# Start with your data
+experiment <- tibble(
+  id = 1:60,
+  condition = rep(c("control", "treatment"), 30),
+  score = c(rnorm(30, 50, 10), rnorm(30, 55, 10))
+)
+
+# Create summary
+experiment |>
+  group_by(condition) |>
+  summarize(
+    M = round(mean(score), 2),
+    SD = round(sd(score), 2)
+  ) |>
+  pivot_wider(
+    names_from = condition,
+    values_from = c(M, SD)
+  )
+```
+
+# Separating and uniting {background-color="#2c3e50"}
+
+## separate_wider_delim()
+
+Split one column into multiple:
+
+```{r}
+messy_data <- tibble(
+  id = 1:3,
+  age_sex = c("25_M", "32_F", "28_F")
+)
+
+messy_data |>
+  separate_wider_delim(
+    cols = age_sex,
+    delim = "_",
+    names = c("age", "sex")
+  )
+```
+
+## separate_wider_regex()
+
+For complex patterns:
+
+```{r}
+tibble(
+  code = c("A123", "B456", "C789")
+) |>
+  separate_wider_regex(
+    cols = code,
+    patterns = c(letter = "[A-Z]", number = "[0-9]+")
+  )
+```
+
+## unite()
+
+The opposite — combine columns:
+
+```{r}
+tibble(
+  year = c(2024, 2024, 2025),
+  month = c(1, 6, 1),
+  day = c(15, 20, 10)
+) |>
+  unite(
+    col = "date",       # New column name
+    year, month, day,   # Columns to combine
+    sep = "-"           # Separator
+  )
+```
+
+# Real-world examples {background-color="#2c3e50"}
+
+## Example 1: Repeated measures experiment
+
+```{r}
+# Data as you might receive it from SPSS
+wide_rm <- tibble(
+  subject = 1:4,
+  cond_a_time1 = c(450, 520, 480, 510),
+  cond_a_time2 = c(420, 490, 460, 480),
+  cond_b_time1 = c(480, 540, 500, 530),
+  cond_b_time2 = c(440, 510, 470, 500)
+)
+wide_rm
+```
+
+## Tidying repeated measures
+
+```{r}
+tidy_rm <- wide_rm |>
+  pivot_longer(
+    cols = -subject,
+    names_to = c("condition", "time"),
+    names_pattern = "cond_(.+)_time(.+)",
+    values_to = "rt"
+  )
+tidy_rm
+```
+
+## Now we can analyze it!
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+tidy_rm |>
+  ggplot(aes(x = time, y = rt, color = condition, group = condition)) +
+  stat_summary(fun = mean, geom = "point", size = 3) +
+  stat_summary(fun = mean, geom = "line") +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.1) +
+  labs(
+    title = "Reaction Time by Condition and Time",
+    x = "Time Point",
+    y = "Reaction Time (ms)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Example 2: Questionnaire with subscales
+
+```{r}
+# Raw questionnaire data
+quest <- tibble(
+  pid = 1:3,
+  anx_1 = c(3, 2, 4), anx_2 = c(2, 3, 3), anx_3 = c(4, 2, 5),
+  dep_1 = c(2, 1, 3), dep_2 = c(3, 2, 4), dep_3 = c(2, 1, 3)
+)
+
+# Tidy and calculate subscales
+quest |>
+  pivot_longer(
+    cols = -pid,
+    names_to = c("scale", "item"),
+    names_pattern = "(.+)_(.+)",
+    values_to = "response"
+  ) |>
+  group_by(pid, scale) |>
+  summarize(subscale_mean = mean(response), .groups = "drop") |>
+  pivot_wider(names_from = scale, values_from = subscale_mean)
+```
+
+## Example 3: Multilevel/nested data
+
+```{r}
+# Students nested in classrooms
+students <- tibble(
+  classroom = rep(c("A", "B"), each = 3),
+  student = 1:6,
+  pretest = c(70, 75, 72, 68, 71, 69),
+  posttest = c(80, 82, 78, 75, 79, 77)
+)
+
+# Tidy for analysis
+students |>
+  pivot_longer(
+    cols = c(pretest, posttest),
+    names_to = "time",
+    values_to = "score"
+  )
+```
+
+# Common pitfalls {background-color="#2c3e50"}
+
+## Pitfall 1: Forgetting what's a variable
+
+Ask yourself: What are my **variables**?
+
+- Participant ID? ✓ Variable
+- Time point? ✓ Variable (not separate columns!)
+- Score? ✓ Variable
+- Item number? Depends on your analysis
+
+## Pitfall 2: Over-pivoting
+
+Not everything needs to be long:
+
+```{r}
+#| eval: false
+# Maybe this is fine as-is?
+tibble(
+  id = 1:3,
+  age = c(25, 32, 28),
+  gender = c("M", "F", "F"),
+  score = c(85, 92, 88)
+)
+```
+
+Age, gender, and score are **different variables** — keep them as columns.
+
+## Pitfall 3: Losing information
+
+Make sure your pivot preserves all data:
+
+```{r}
+# Before pivoting: 3 rows
+wide_scores
+
+# After pivoting: 9 rows (3 students × 3 semesters)
+wide_scores |>
+  pivot_longer(-student, names_to = "semester", values_to = "score")
+```
+
+Check: `nrow(original) × ncol(pivoted_columns) = nrow(result)`
+
+## General tidying strategy
+
+1. **Identify** the variables (what are you measuring?)
+2. **Look** at your current structure (what's a row? column?)
+3. **Determine** what operations you need
+4. **Test** with a small subset first
+5. **Verify** you haven't lost data
+
+# Wrapping up {background-color="#2c3e50"}
+
+## The tidyr toolkit
+
+| Function | What it does |
+|----------|--------------|
+| `pivot_longer()` | Wide → Long |
+| `pivot_wider()` | Long → Wide |
+| `separate_*()` | Split columns |
+| `unite()` | Combine columns |
+
+## The tidy data mantra
+
+1. Each **variable** is a column
+2. Each **observation** is a row
+3. Each **value** is a cell
+
+When in doubt, ask: "What would make this easiest to plot/analyze?"
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 7: Data import](https://r4ds.hadley.nz/data-import)
+- [R4DS Ch 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets)
+
+✅ **Practice:**
+
+- Reshape a dataset you've worked with
+- Try tidying some messy example data
+- Practice `pivot_longer()` — it's the most common
+
+## Key takeaways
+
+1. **Tidy data** has a specific structure that works with tidyverse
+2. **pivot_longer()** is your most-used tidying function
+3. **pivot_wider()** is useful for tables and some analyses
+4. **Think about your variables** before reshaping
+5. **Column names contain information** — extract it with `names_pattern`
+
+## Questions?
+
+Next time: **Data Import**
+
+We'll learn to read CSV files, Excel spreadsheets, and more!

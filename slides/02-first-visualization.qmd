@@ -1,0 +1,545 @@
+---
+title: "Your First Visualization"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 1, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 2"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+# Load packages for all slides
+library(tidyverse)
+```
+
+# Why visualize? {background-color="#2c3e50"}
+
+## Anscombe's Quartet
+
+Four datasets with identical summary statistics:
+
+```{r}
+#| echo: false
+anscombe_long <- anscombe |>
+  pivot_longer(everything(),
+               names_to = c(".value", "set"),
+               names_pattern = "(.)(.)")
+
+anscombe_long |>
+  group_by(set) |>
+  summarise(
+    mean_x = round(mean(x), 2),
+    mean_y = round(mean(y), 2),
+    sd_x = round(sd(x), 2),
+    sd_y = round(sd(y), 2),
+    cor = round(cor(x, y), 2)
+  ) |>
+  knitr::kable()
+```
+
+## But look at the plots!
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+ggplot(anscombe_long, aes(x, y)) +
+  geom_point(size = 3, color = "#3498db") +
+  geom_smooth(method = "lm", se = FALSE, color = "#e74c3c") +
+  facet_wrap(~set, labeller = labeller(set = c("1" = "Set 1", "2" = "Set 2",
+                                                "3" = "Set 3", "4" = "Set 4"))) +
+  theme_minimal(base_size = 16) +
+  labs(title = "Same statistics, very different data!")
+```
+
+**Always visualize your data before running statistics.**
+
+## The datasaurus dozen
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 6
+# Simulating the concept - in practice you'd use datasauRus package
+set.seed(42)
+# Just showing the concept with a simple example
+tibble(
+  x = c(rnorm(50, 50, 10), rnorm(50, 50, 10)),
+  y = c(rnorm(50, 50, 10), 50 + 0.5*(1:50 - 25)^2/25 + rnorm(50, 0, 5)),
+  dataset = rep(c("Random", "Parabola"), each = 50)
+) |>
+  ggplot(aes(x, y)) +
+  geom_point(color = "#9b59b6", size = 2) +
+  facet_wrap(~dataset) +
+  theme_minimal(base_size = 16) +
+  labs(title = "Different patterns can have similar summary stats")
+```
+
+# Introduction to ggplot2 {background-color="#2c3e50"}
+
+## What is ggplot2?
+
+- Created by Hadley Wickham (2005)
+- Based on the **Grammar of Graphics** by Leland Wilkinson
+- Most popular R visualization package
+- Part of the tidyverse
+
+. . .
+
+The "gg" stands for "Grammar of Graphics"
+
+## The grammar of graphics
+
+Every ggplot has three essential components:
+
+1. **Data** — what you want to visualize
+2. **Aesthetics (aes)** — how variables map to visual properties
+3. **Geoms** — what geometric shapes represent the data
+
+. . .
+
+```{r}
+#| eval: false
+# The basic template
+ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>()
+```
+
+## Our dataset: mpg
+
+```{r}
+# Fuel economy data for 234 cars
+glimpse(mpg)
+```
+
+## Your first plot
+
+```{r}
+#| output-location: slide
+#| fig-width: 8
+#| fig-height: 5
+# Relationship between engine size and highway mpg
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+## Breaking it down
+
+```{r}
+#| eval: false
+#| code-line-numbers: "1|2|3"
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
+  # ↑ Data and aesthetic mappings
+  geom_point()
+  # ↑ Geometric object (points = scatterplot)
+```
+
+- `data = mpg` — use the mpg dataset
+- `aes(x = displ, y = hwy)` — map displacement to x, highway mpg to y
+- `geom_point()` — represent data as points
+
+## A cleaner way to write it
+
+You can drop `data =` and `mapping =`:
+
+```{r}
+#| eval: false
+# These are equivalent
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + geom_point()
+
+ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+
+ggplot(mpg, aes(displ, hwy)) + geom_point()  # x and y are first args
+```
+
+I'll use the middle version — clear but not overly verbose.
+
+# Aesthetic mappings {background-color="#2c3e50"}
+
+## What are aesthetics?
+
+**Aesthetics** are visual properties of geoms:
+
+- `x`, `y` — position
+- `color` — outline color
+- `fill` — interior color
+- `size` — how big
+- `shape` — what shape
+- `alpha` — transparency
+
+## Mapping color to a variable
+
+What if we want to see which points are which car class?
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point()
+```
+
+## Mapping size to a variable
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Size by number of cylinders
+ggplot(mpg, aes(x = displ, y = hwy, size = cyl)) +
+  geom_point()
+```
+
+## Mapping alpha (transparency)
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy, alpha = cyl)) +
+  geom_point()
+```
+
+## Mapping shape
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Shape by drive type (front, rear, 4wd)
+ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) +
+  geom_point()
+```
+
+## Combining multiple aesthetics
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy, color = class, shape = drv)) +
+  geom_point(size = 3)
+```
+
+## Setting vs. mapping
+
+**Mapping** — aesthetic varies with data (inside `aes()`)
+```{r}
+#| eval: false
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point()
+```
+
+**Setting** — aesthetic is constant (outside `aes()`)
+```{r}
+#| eval: false
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "blue", size = 3)
+```
+
+## Setting aesthetics manually
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "steelblue", size = 3, alpha = 0.6)
+```
+
+## Common mistake!
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# What happens if you put a constant inside aes()?
+ggplot(mpg, aes(x = displ, y = hwy, color = "blue")) +
+  geom_point()
+```
+
+ggplot thinks "blue" is a category name!
+
+# Geoms {background-color="#2c3e50"}
+
+## Common geoms
+
+| Geom | What it makes |
+|------|---------------|
+| `geom_point()` | Scatterplot |
+| `geom_line()` | Line graph |
+| `geom_bar()` | Bar chart |
+| `geom_histogram()` | Histogram |
+| `geom_boxplot()` | Box plot |
+| `geom_smooth()` | Smoothed line |
+
+## geom_smooth()
+
+Add a trend line to your scatterplot:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth()  # Adds a smoothed trend line
+```
+
+## Linear trend line
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "lm")  # lm = linear model
+```
+
+## Layering geoms
+
+Each `+` adds a layer:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)  # se = FALSE removes confidence band
+```
+
+## geom_bar() — categorical data
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Counts of each car class
+ggplot(mpg, aes(x = class)) +
+  geom_bar()
+```
+
+## geom_histogram() — distributions
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Distribution of highway mpg
+ggplot(mpg, aes(x = hwy)) +
+  geom_histogram(binwidth = 2, fill = "steelblue", color = "white")
+```
+
+## geom_boxplot() — comparing groups
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Highway mpg by car class
+ggplot(mpg, aes(x = class, y = hwy)) +
+  geom_boxplot()
+```
+
+# Facets {background-color="#2c3e50"}
+
+## What are facets?
+
+**Facets** split your plot into small multiples based on a variable.
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~class)
+```
+
+## facet_wrap()
+
+Creates a ribbon of panels:
+
+```{r}
+#| eval: false
+# Syntax: facet_wrap(~variable)
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_wrap(~class)
+```
+
+- Use `ncol` or `nrow` to control layout
+- `scales = "free"` allows different axis ranges
+
+## facet_grid()
+
+Creates a grid of panels with two variables:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 6
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  facet_grid(drv ~ cyl)
+```
+
+## When to use facets
+
+Facets are great when:
+
+- You have too many colors/shapes to distinguish
+- You want to compare patterns across groups
+- You want each group to "stand alone"
+
+# Making it look good {background-color="#2c3e50"}
+
+## Adding labels
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = class)) +
+  labs(
+    title = "Fuel Efficiency vs Engine Size",
+    subtitle = "Larger engines tend to be less efficient",
+    x = "Engine displacement (liters)",
+    y = "Highway fuel efficiency (mpg)",
+    color = "Vehicle class"
+  )
+```
+
+## Themes
+
+Themes control the overall look:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = class)) +
+  theme_minimal()  # Clean, minimal theme
+```
+
+## Built-in themes
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 8
+library(patchwork)
+
+p1 <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_gray() + ggtitle("theme_gray() [default]")
+p2 <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_bw() + ggtitle("theme_bw()")
+p3 <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_minimal() + ggtitle("theme_minimal()")
+p4 <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_classic() + ggtitle("theme_classic()")
+
+(p1 + p2) / (p3 + p4)
+```
+
+## Saving plots
+
+Use `ggsave()` to save your plot:
+
+```{r}
+#| eval: false
+# Create the plot
+my_plot <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  theme_minimal()
+
+# Save it
+ggsave("my_plot.png", my_plot, width = 8, height = 6)
+```
+
+# Putting it together {background-color="#2c3e50"}
+
+## A complete example
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 6
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(aes(color = class), size = 2, alpha = 0.7) +
+  geom_smooth(method = "lm", color = "black", se = TRUE) +
+  labs(
+    title = "Fuel Efficiency Decreases with Engine Size",
+    subtitle = "Data from 234 vehicles (1999-2008)",
+    x = "Engine displacement (liters)",
+    y = "Highway MPG",
+    color = "Vehicle class",
+    caption = "Source: EPA fuel economy data"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Your turn!
+
+Using the `mpg` dataset, create a scatterplot that:
+
+1. Shows city mpg (`cty`) vs highway mpg (`hwy`)
+2. Colors points by fuel type (`fl`)
+3. Adds a linear trend line
+4. Has appropriate labels
+5. Uses `theme_bw()`
+
+# Wrapping up {background-color="#2c3e50"}
+
+## The ggplot2 template
+
+```{r}
+#| eval: false
+ggplot(<DATA>, aes(<MAPPINGS>)) +
+  <GEOM_FUNCTION>() +
+  <FACET_FUNCTION>() +
+  labs(<LABELS>) +
+  theme_<THEME>()
+```
+
+You can build almost any visualization with this template!
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (sections 3.1–3.4)
+
+✅ **Practice:**
+
+- Create 3 different plots with `mpg` or `diamonds`
+- Try different geoms, aesthetics, and facets
+- Save your favorite plot with `ggsave()`
+
+## Key takeaways
+
+1. **Always visualize your data** — summary stats can hide patterns
+2. **ggplot2 uses layers** — data + aesthetics + geoms
+3. **Aesthetics can be mapped or set** — `aes()` vs direct values
+4. **Facets are powerful** — split plots by categories
+5. **Labels and themes matter** — make your plots readable
+
+## Questions?
+
+Next time: **Data Transformation with dplyr**
+
+We'll learn to filter, sort, and create new variables!

@@ -1,0 +1,97 @@
+---
+title: "5: Data Tidying"
+date: "2026-04-13"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 5: Data tidying](https://r4ds.hadley.nz/data-tidy)
+
+## During class
+
+We'll cover:
+
+- What is tidy data? The three rules
+- Wide vs. long format
+- `pivot_longer()` — wide to long
+- `pivot_wider()` — long to wide
+- Extracting information from column names
+- `separate_*()` and `unite()` for splitting/combining columns
+
+### Slides
+
+```{=html}
+<a href="/slides/05-data-tidying.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/05-data-tidying.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/05-data-tidying.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Take this wide dataset and make it tidy:
+
+```r
+wide_data <- tibble(
+  participant = c("P1", "P2", "P3"),
+  pre_test = c(45, 52, 48),
+  post_test = c(62, 58, 71)
+)
+```
+
+2. Practice with survey data — pivot questionnaire items from columns to rows
+3. Create a summary table and use `pivot_wider()` to format it nicely
+4. Use `separate_wider_delim()` to split a column like "age_gender" into separate columns
+
+::: {.callout-important}
+## The three rules of tidy data
+
+1. Each **variable** is a column
+2. Each **observation** is a row
+3. Each **value** is a cell
+
+When your data follows these rules, tidyverse tools (ggplot2, dplyr) work seamlessly!
+:::
+
+### Common patterns in psychology data
+
+**Repeated measures:**
+```r
+# Wide (common in SPSS)
+data_wide <- tibble(
+  id = 1:3,
+  time1 = c(50, 55, 48),
+  time2 = c(55, 58, 52)
+)
+
+# Tidy version
+data_wide |>
+  pivot_longer(
+    cols = starts_with("time"),
+    names_to = "time",
+    values_to = "score"
+  )
+```
+
+**Questionnaire items:**
+```r
+# Calculate scale scores from long format
+survey |>
+  pivot_longer(cols = starts_with("bdi_")) |>
+  group_by(participant) |>
+  summarize(bdi_total = sum(value))
+```

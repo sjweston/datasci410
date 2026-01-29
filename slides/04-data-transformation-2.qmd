@@ -1,0 +1,555 @@
+---
+title: "Data Transformation II"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 8, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 4"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(nycflights13)
+```
+
+# Review {background-color="#2c3e50"}
+
+## The dplyr verbs so far
+
+| Verb | What it does |
+|------|--------------|
+| `filter()` | Pick rows by condition |
+| `arrange()` | Sort rows |
+| `select()` | Pick columns |
+| `mutate()` | Create new columns |
+
+Today we add the most powerful duo: **group_by()** + **summarize()**
+
+# summarize() {background-color="#2c3e50"}
+
+## summarize() collapses data
+
+Reduces a data frame to a single row of summary statistics:
+
+```{r}
+flights |>
+  summarize(
+    avg_delay = mean(dep_delay, na.rm = TRUE),
+    max_delay = max(dep_delay, na.rm = TRUE),
+    n_flights = n()
+  )
+```
+
+## Key summary functions
+
+| Function | What it computes |
+|----------|-----------------|
+| `mean()`, `median()` | Central tendency |
+| `sd()`, `var()` | Spread |
+| `min()`, `max()` | Extremes |
+| `sum()` | Total |
+| `n()` | Count of rows |
+| `n_distinct()` | Count of unique values |
+
+## The na.rm argument
+
+Most summary functions need `na.rm = TRUE` to handle missing values:
+
+```{r}
+x <- c(1, 2, NA, 4, 5)
+
+mean(x)                  # Returns NA
+mean(x, na.rm = TRUE)    # Returns 3
+```
+
+::: {.callout-tip}
+Always use `na.rm = TRUE` unless you specifically want NA propagation.
+:::
+
+## summarize() alone isn't very useful
+
+One row of summary stats? That's what `mean()` already does.
+
+```{r}
+mean(flights$dep_delay, na.rm = TRUE)
+```
+
+The power comes when we combine it with **group_by()**.
+
+# group_by() {background-color="#2c3e50"}
+
+## group_by() + summarize() = magic
+
+```{r}
+flights |>
+  group_by(month) |>
+  summarize(
+    avg_delay = mean(dep_delay, na.rm = TRUE),
+    n_flights = n()
+  )
+```
+
+## What happened?
+
+1. `group_by(month)` split the data into 12 groups (one per month)
+2. `summarize()` calculated statistics **within each group**
+3. Result: one row per group
+
+## Visualizing group_by()
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+tibble(
+  group = rep(c("A", "B", "C"), each = 4),
+  value = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+) |>
+  ggplot(aes(x = group, y = value, fill = group)) +
+  geom_col(position = "dodge") +
+  theme_minimal(base_size = 18) +
+  labs(title = "Data split by group", subtitle = "Each group gets summarized separately") +
+  theme(legend.position = "none")
+```
+
+## Group by multiple variables
+
+```{r}
+# Average delay by month AND carrier
+flights |>
+  group_by(month, carrier) |>
+  summarize(
+    avg_delay = mean(dep_delay, na.rm = TRUE),
+    n_flights = n()
+  )
+```
+
+## The .groups argument
+
+You may see this message:
+
+```
+`summarise()` has grouped output by 'month'. You can override using the `.groups` argument.
+```
+
+Control this with:
+
+```{r}
+#| eval: false
+# Keep grouping (default with multiple groups)
+summarize(..., .groups = "keep")
+
+# Drop all grouping
+summarize(..., .groups = "drop")
+
+# Drop last group level
+summarize(..., .groups = "drop_last")
+```
+
+## Group by for psychology
+
+```{r}
+#| eval: false
+# Means by condition
+data |>
+  group_by(condition) |>
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    sd_score = sd(score, na.rm = TRUE),
+    n = n()
+  )
+
+# Descriptives by condition AND gender
+data |>
+  group_by(condition, gender) |>
+  summarize(
+    m = mean(outcome),
+    se = sd(outcome) / sqrt(n())
+  )
+```
+
+## Multiple summaries at once
+
+```{r}
+flights |>
+  group_by(carrier) |>
+  summarize(
+    # Central tendency
+    mean_delay = mean(arr_delay, na.rm = TRUE),
+    median_delay = median(arr_delay, na.rm = TRUE),
+    # Spread
+    sd_delay = sd(arr_delay, na.rm = TRUE),
+    # Counts
+    n_flights = n(),
+    n_destinations = n_distinct(dest)
+  ) |>
+  arrange(mean_delay)  # Best to worst carriers
+```
+
+# count() — a shortcut {background-color="#2c3e50"}
+
+## Counting is common
+
+```{r}
+# How many flights per carrier?
+flights |>
+  group_by(carrier) |>
+  summarize(n = n())
+```
+
+## count() does this automatically
+
+```{r}
+flights |>
+  count(carrier)
+```
+
+Same result, less typing!
+
+## count() with multiple variables
+
+```{r}
+flights |>
+  count(carrier, origin)
+```
+
+## Adding weights
+
+```{r}
+#| eval: false
+# Total distance flown by each carrier
+flights |>
+  count(carrier, wt = distance, name = "total_miles")
+```
+
+# Combining operations {background-color="#2c3e50"}
+
+## The full dplyr toolkit
+
+Now you can combine everything:
+
+```{r}
+#| eval: false
+data |>
+  filter()    |>   # Subset rows
+  select()    |>   # Pick columns
+  mutate()    |>   # Create columns
+  group_by()  |>   # Define groups
+  summarize() |>   # Calculate summaries
+  arrange()        # Sort results
+```
+
+## A complete analysis pipeline
+
+```{r}
+# Which airlines were most delayed in summer?
+flights |>
+  filter(month %in% c(6, 7, 8)) |>    # Summer months only
+  filter(!is.na(arr_delay)) |>         # Remove missing
+  group_by(carrier) |>                 # Group by airline
+  summarize(
+    avg_delay = mean(arr_delay),
+    pct_delayed = mean(arr_delay > 0) * 100,  # % of flights delayed
+    n_flights = n()
+  ) |>
+  filter(n_flights > 1000) |>          # Only airlines with many flights
+  arrange(desc(avg_delay))             # Worst first
+```
+
+## Piping into ggplot
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+flights |>
+  filter(!is.na(arr_delay)) |>
+  group_by(month) |>
+  summarize(avg_delay = mean(arr_delay)) |>
+  ggplot(aes(x = factor(month), y = avg_delay)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Average Arrival Delay by Month",
+    x = "Month",
+    y = "Average delay (minutes)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## group_by() with mutate()
+
+`group_by()` also affects `mutate()` and `filter()`:
+
+```{r}
+# Add a column for mean delay PER CARRIER
+flights |>
+  group_by(carrier) |>
+  mutate(
+    carrier_mean_delay = mean(arr_delay, na.rm = TRUE),
+    delay_vs_carrier = arr_delay - carrier_mean_delay
+  ) |>
+  select(carrier, arr_delay, carrier_mean_delay, delay_vs_carrier)
+```
+
+## Filtering within groups
+
+```{r}
+# Find the 2 most delayed flights per month
+flights |>
+  group_by(month) |>
+  filter(!is.na(arr_delay)) |>
+  slice_max(arr_delay, n = 2) |>
+  select(month, carrier, arr_delay)
+```
+
+## slice() variants
+
+| Function | What it does |
+|----------|--------------|
+| `slice_head(n)` | First n rows |
+| `slice_tail(n)` | Last n rows |
+| `slice_max(var, n)` | n rows with highest var |
+| `slice_min(var, n)` | n rows with lowest var |
+| `slice_sample(n)` | Random n rows |
+
+All work within groups when preceded by `group_by()`.
+
+## ungroup()
+
+Sometimes you need to remove grouping:
+
+```{r}
+flights |>
+  group_by(carrier) |>
+  mutate(carrier_mean = mean(arr_delay, na.rm = TRUE)) |>
+  ungroup() |>                              # Remove grouping
+  mutate(grand_mean = mean(arr_delay, na.rm = TRUE)) |>  # Now uses ALL flights
+  select(carrier, arr_delay, carrier_mean, grand_mean)
+```
+
+# Code style {background-color="#2c3e50"}
+
+## Good style matters
+
+Code is read more often than it's written. Make it readable!
+
+```{r}
+#| eval: false
+# Bad: crammed together
+flights|>filter(month==1)|>group_by(carrier)|>summarize(n=n())
+
+# Good: spaced and readable
+flights |>
+  filter(month == 1) |>
+  group_by(carrier) |>
+  summarize(n = n())
+```
+
+## Spacing rules
+
+- Spaces around operators: `x == 1`, not `x==1`
+- Space after commas: `c(1, 2, 3)`, not `c(1,2,3)`
+- No space before parentheses: `mean(x)`, not `mean (x)`
+- Spaces around `|>` with line breaks
+
+## Line breaks
+
+- One verb per line for readability
+- Keep lines under ~80 characters
+- Indent continuation lines consistently
+
+```{r}
+#| eval: false
+# Long summarize calls
+data |>
+  group_by(condition) |>
+  summarize(
+    mean_score = mean(score, na.rm = TRUE),
+    sd_score = sd(score, na.rm = TRUE),
+    n = n()
+  )
+```
+
+## Naming conventions
+
+- Use `snake_case` for object names: `my_data`, `mean_score`
+- Use meaningful names: `delay_by_carrier`, not `x`
+- Be consistent!
+
+```{r}
+#| eval: false
+# Good
+participant_data <- read_csv("participants.csv")
+mean_reaction_time <- mean(participant_data$rt)
+
+# Bad
+pD <- read_csv("participants.csv")
+m <- mean(pD$rt)
+```
+
+## Comments
+
+Use comments to explain **why**, not **what**:
+
+```{r}
+#| eval: false
+# Bad: restates the obvious
+# Filter to January
+flights |> filter(month == 1)
+
+# Good: explains the reasoning
+# January only because weather patterns differ by season
+flights |> filter(month == 1)
+```
+
+# Practice: Psychology example {background-color="#2c3e50"}
+
+## Simulated experiment data
+
+```{r}
+set.seed(42)
+
+# Create a simulated experiment dataset
+experiment <- tibble(
+  participant_id = rep(1:60, each = 20),
+  condition = rep(rep(c("control", "treatment"), each = 10), 60),
+  trial = rep(1:20, 60),
+  reaction_time = rnorm(1200, mean = 500, sd = 100) +
+                  ifelse(rep(rep(c(0, 1), each = 10), 60) == 1, -30, 0),
+  accuracy = rbinom(1200, 1, prob = 0.85 +
+                    ifelse(rep(rep(c(0, 1), each = 10), 60) == 1, 0.05, 0))
+)
+```
+
+## Examine the data
+
+```{r}
+glimpse(experiment)
+```
+
+## Participant-level summaries
+
+```{r}
+# First, summarize BY PARTICIPANT
+participant_summaries <- experiment |>
+  group_by(participant_id, condition) |>
+  summarize(
+    mean_rt = mean(reaction_time),
+    accuracy = mean(accuracy) * 100,
+    n_trials = n(),
+    .groups = "drop"
+  )
+
+participant_summaries
+```
+
+## Condition-level summaries
+
+```{r}
+# Now summarize ACROSS PARTICIPANTS by condition
+condition_summaries <- participant_summaries |>
+  group_by(condition) |>
+  summarize(
+    M_rt = mean(mean_rt),
+    SD_rt = sd(mean_rt),
+    M_acc = mean(accuracy),
+    SD_acc = sd(accuracy),
+    n = n()
+  )
+
+condition_summaries
+```
+
+## Visualize the results
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+participant_summaries |>
+  ggplot(aes(x = condition, y = mean_rt, fill = condition)) +
+  geom_boxplot(alpha = 0.7) +
+  geom_jitter(width = 0.1, alpha = 0.5) +
+  labs(
+    title = "Reaction Time by Condition",
+    x = "Condition",
+    y = "Mean RT (ms)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
+
+## Your turn!
+
+Using the `experiment` data:
+
+1. Filter to only accurate trials (`accuracy == 1`)
+2. Calculate mean RT per participant per condition
+3. Find the 5 participants with the fastest mean RT in each condition
+4. Create a bar plot showing mean RT by condition with error bars
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Today's additions
+
+| Verb | What it does |
+|------|--------------|
+| `group_by()` | Define groups for operations |
+| `summarize()` | Calculate summary statistics |
+| `count()` | Quick frequency counts |
+| `ungroup()` | Remove grouping |
+| `slice_*()` | Select rows by position/rank |
+
+## The analysis workflow
+
+```{r}
+#| eval: false
+raw_data |>
+  filter(valid_data) |>           # Clean
+  select(relevant_vars) |>        # Focus
+  mutate(new_vars) |>             # Transform
+  group_by(conditions) |>         # Split
+  summarize(statistics) |>        # Aggregate
+  arrange(order) |>               # Sort
+  ggplot() + ...                  # Visualize
+```
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 5: Data tidying](https://r4ds.hadley.nz/data-tidy)
+
+✅ **Practice:**
+
+- Calculate descriptive statistics by group
+- Build complete analysis pipelines
+- Focus on writing clean, readable code
+
+## Key takeaways
+
+1. **group_by() + summarize()** is incredibly powerful
+2. **count()** is a quick shortcut for frequencies
+3. **Grouped operations** work with mutate() and filter() too
+4. **ungroup()** when you need to work with all data again
+5. **Code style matters** — write for your future self
+
+## Questions?
+
+Next time: **Data Tidying with tidyr**
+
+We'll learn to reshape data between wide and long formats!

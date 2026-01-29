@@ -1,0 +1,13 @@
+---
+title: "Assignments"
+---
+
+## Assignment Overview
+
+[Describe your assignment structure here]
+
+## Submission Guidelines
+
+- All assignments should be submitted through [Canvas/other platform]
+- [Add specific format requirements]
+- [Add deadline information]

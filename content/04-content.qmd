@@ -1,0 +1,78 @@
+---
+title: "4: Data Transformation II"
+date: "2026-04-08"
+---
+
+## Before class
+
+📖 **Readings:**
+
+- [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (section 3.5)
+- [R4DS Ch 4: Workflow: code style](https://r4ds.hadley.nz/workflow-style)
+
+## During class
+
+We'll cover:
+
+- `group_by()` — define groups for operations
+- `summarize()` — calculate summary statistics
+- Combining `group_by()` + `summarize()` for grouped statistics
+- `count()` — a quick shortcut for counting
+- Code style best practices
+- Building complete analysis pipelines
+
+### Slides
+
+```{=html}
+<a href="/slides/04-data-transformation-2.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/04-data-transformation-2.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/04-data-transformation-2.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+Using the `flights` dataset:
+
+1. Calculate the average departure delay by carrier
+2. Find which carrier has the most flights
+3. Calculate the percentage of flights that were delayed (arr_delay > 0) by month
+4. Find the top 5 destinations with the highest average arrival delay
+5. Create a complete pipeline that filters, groups, summarizes, and arranges
+
+::: {.callout-note}
+## The power of group_by()
+
+`group_by()` doesn't change how your data looks — it changes how other verbs work on it. Think of it as setting up the "behind the scenes" grouping structure.
+
+```r
+data |>
+  group_by(condition) |>
+  summarize(mean = mean(score))
+```
+:::
+
+### Psychology application
+
+```r
+# Calculate descriptive statistics by condition
+experiment_data |>
+  group_by(condition) |>
+  summarize(
+    M = mean(score, na.rm = TRUE),
+    SD = sd(score, na.rm = TRUE),
+    n = n()
+  )
+```

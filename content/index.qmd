@@ -1,0 +1,11 @@
+---
+title: "Course Content"
+---
+
+Each class session has materials that you should review. On each content page you'll find:
+
+- Lecture slides (if applicable)
+- Required readings
+- Additional resources
+
+Navigate through the sidebar to access each week's content.

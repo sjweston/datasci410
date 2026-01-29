@@ -1,0 +1,18 @@
+---
+title: "Assignment 1"
+date: "YYYY-MM-DD"
+---
+
+## Instructions
+
+[Provide assignment instructions here]
+
+## Questions
+
+1. Question 1
+
+2. Question 2
+
+## Submission
+
+Submit your completed assignment on [Canvas/other platform] by [deadline].

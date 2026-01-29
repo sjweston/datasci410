@@ -1,0 +1,68 @@
+---
+title: "3: Data Transformation I"
+date: "2026-04-06"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (sections 3.1–3.4)
+
+## During class
+
+We'll cover:
+
+- Introduction to dplyr
+- `filter()` — pick rows by their values
+- `arrange()` — reorder rows
+- `select()` — pick columns by name
+- `mutate()` — create new columns
+- The pipe operator (`|>`)
+
+### Slides
+
+```{=html}
+<a href="/slides/03-data-transformation-1.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/03-data-transformation-1.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/03-data-transformation-1.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+Using the `flights` dataset from the `nycflights13` package:
+
+1. Filter to flights departing in December
+2. Find all flights to Los Angeles (LAX)
+3. Create a new variable for flight speed (distance / air_time * 60)
+4. Select only the carrier, origin, destination, and your new speed variable
+5. Arrange by speed to find the fastest flights
+
+::: {.callout-tip}
+## Keyboard shortcut
+
+The pipe (`|>`) is so common that there's a keyboard shortcut:
+
+- **Windows/Linux:** Ctrl + Shift + M
+- **Mac:** Cmd + Shift + M
+:::
+
+### Installing the flights dataset
+
+```r
+install.packages("nycflights13")
+library(nycflights13)
+```

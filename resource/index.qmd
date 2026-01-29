@@ -1,0 +1,18 @@
+---
+title: "Resources"
+---
+
+This section contains helpful resources and tutorials for the course.
+
+## Recommended Resources
+
+- [Resource 1 title](https://example.com)
+- [Resource 2 title](https://example.com)
+
+## Software
+
+[Add software installation guides and links here]
+
+## Getting Help
+
+[Add information about how to get help]

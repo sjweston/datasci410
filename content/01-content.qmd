@@ -1,0 +1,61 @@
+---
+title: "1: Introduction & Setup"
+date: "2026-03-30"
+---
+
+## Before class
+
+📖 **Readings:**
+
+- [R4DS Ch 2: Workflow: basics](https://r4ds.hadley.nz/workflow-basics)
+- [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
+
+✅ **Setup tasks:**
+
+- Download and install [R](https://cloud.r-project.org)
+- Download and install [RStudio](https://posit.co/download/rstudio-desktop/)
+
+## During class
+
+We'll cover:
+
+- Why data science for psychology?
+- R vs RStudio: What's the difference?
+- The RStudio interface
+- Creating projects and scripts
+- Installing packages
+
+### Slides
+
+```{=html}
+<a href="/slides/01-intro-setup.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/01-intro-setup.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/01-intro-setup.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Complete these tasks:**
+
+1. Make sure R and RStudio are installed and working
+2. Create a new RStudio Project called "psy410"
+3. Install the tidyverse package: `install.packages("tidyverse")`
+4. Run `library(tidyverse)` and make sure it loads without errors
+5. Try `glimpse(mpg)` to see your first dataset!
+
+::: {.callout-tip}
+## Getting help
+
+If you run into installation issues, check out [R4DS Chapter 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help) or post in our class discussion forum.
+:::

@@ -1,0 +1,33 @@
+author: Sara Weston
+
+instructor:
+  name: "Dr. Sara Weston"
+  name_no_title: "Sara Weston"
+  email: "email@university.edu"
+  url: ""
+  twitter: ""
+  github: ""
+  office: ""
+  contact_policy: "Email is the best way to get in contact with me. I will try to respond to all course-related emails within one business day."
+  appointment_url: ""
+
+course:
+  number: "PSY 410"
+  crn: "35882"
+  title: "Data Science for Psychology"
+  description: "An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse."
+  semester: "Spring 2026"
+  days: "Mondays & Wednesdays"
+  time: "12:00–1:20 PM"
+  location: "16 PAC"
+  dates: "March 30 – June 3, 2026"
+  github: ""
+  url: ""
+  copyright_year: "2026"
+  slack: ""
+
+university:
+  name: "University Name"
+  department: "Department of Psychology"
+  school: "College/School Name"
+  url: ""
