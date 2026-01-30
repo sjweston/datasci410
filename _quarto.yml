@@ -76,9 +76,24 @@ website:
         - section: "Overview"
           contents:
             - assignment/index.qmd
-        - section: "Assignments"
+        - section: "Weekly Assignments"
           contents:
-            - assignment/01-assignment.qmd
+            - text: "1: Getting Started"
+              file: assignment/01-assignment.qmd
+            - text: "2: Data Transformation"
+              file: assignment/02-assignment.qmd
+            - text: "3: Tidying & Import"
+              file: assignment/03-assignment.qmd
+            - text: "4: Visualization Deep Dive"
+              file: assignment/04-assignment.qmd
+            - text: "5: Exploratory Data Analysis"
+              file: assignment/05-assignment.qmd
+            - text: "6: Data Types"
+              file: assignment/06-assignment.qmd
+            - text: "7: Joins & Missing Data"
+              file: assignment/07-assignment.qmd
+            - text: "8: Reproducible Report"
+              file: assignment/08-assignment.qmd
 
     - title: "Resources"
       contents:

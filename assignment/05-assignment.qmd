@@ -1,0 +1,101 @@
+---
+title: "Assignment 5: Exploratory Data Analysis"
+date: "2026-04-29"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, April 29 (Session 10)
+**Due:** Monday, May 4 before class
+**Submit:** R script (`.R` file) and 1-page EDA report (PDF) on Canvas
+:::
+
+## Overview
+
+This assignment practices exploratory data analysis (EDA). You'll explore distributions, identify outliers, investigate relationships, and generate questions from data. This is also good practice for your final project!
+
+## Setup
+
+```r
+# Assignment 5: Exploratory Data Analysis
+# Your Name
+# Date
+
+library(tidyverse)
+library(psych)  # For the bfi dataset
+
+# If you haven't installed psych:
+# install.packages("psych")
+```
+
+## The Dataset
+
+We'll use the Big Five Inventory (BFI) dataset from the `psych` package:
+
+```r
+data(bfi)
+bfi <- as_tibble(bfi)
+glimpse(bfi)
+```
+
+This contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age, gender, and education.
+
+## Part 1: Exploring Distributions (30 points)
+
+### Task 1.1
+Create histograms for age and at least one personality item. What do you notice about the distributions?
+
+### Task 1.2
+Are there any outliers or unusual values in age? How would you identify them programmatically? (Hint: consider values beyond 3 standard deviations, or use `filter()` with reasonable bounds)
+
+### Task 1.3
+How much missing data is there? Create a summary showing the percentage of NA values for each variable.
+
+## Part 2: Exploring Relationships (35 points)
+
+### Task 2.1
+Create a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?
+
+### Task 2.2
+Create boxplots showing how one personality item differs by gender. Do you see a difference?
+
+### Task 2.3
+Create a correlation matrix visualization for the 5 Extraversion items (E1-E5).
+
+Hint:
+```r
+bfi |>
+  select(E1:E5) |>
+  cor(use = "complete.obs") |>
+  # then visualize...
+```
+
+What do you notice? (Some items may be reverse-coded!)
+
+## Part 3: Generating Questions (20 points)
+
+### Task 3.1
+Based on your exploration, generate **3 interesting questions** that could be investigated with this data. Write them as comments.
+
+### Task 3.2
+For **one** of your questions, create a visualization that helps answer it. Explain your findings in a comment.
+
+## Part 4: EDA Report (15 points)
+
+Write a 1-page (approximately 300-400 words) EDA report summarizing:
+
+1. **The data:** Brief description of the dataset
+2. **Key findings:** 2-3 interesting patterns you discovered
+3. **Data quality issues:** Missing data, outliers, or concerns
+4. **Next steps:** What would you investigate further?
+
+Save this as a PDF (you can write it in Word, Google Docs, or even as comments in R and knit to PDF).
+
+## Submission
+
+Submit:
+
+- [ ] Your `.R` script with all code and comments
+- [ ] 1-page EDA report as PDF
+
+Make sure your script runs without errors.

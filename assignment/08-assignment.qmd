@@ -1,0 +1,135 @@
+---
+title: "Assignment 8: Reproducible Report"
+date: "2026-05-27"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, May 27 (Session 16)
+**Due:** Monday, June 1 before class
+**Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+## Overview
+
+This assignment brings together everything you've learned. You'll create a complete, reproducible Quarto report that imports data, conducts analysis, and presents findings with narrative text.
+
+## The Task
+
+Create a Quarto document that analyzes a dataset and tells a clear story. Your report should be something you'd be proud to share with a colleague or include in a portfolio.
+
+## Dataset Options
+
+Choose ONE of the following:
+
+1. **`palmerpenguins::penguins`** — Penguin measurements from Antarctica
+2. **`psych::bfi`** — Big Five personality inventory
+3. **`nycflights13::flights`** — NYC flight data (subset to a specific month/carrier)
+4. **Your final project dataset** — Get a head start on your project!
+
+## Required Elements
+
+Your Quarto document must include:
+
+### 1. YAML Header (5 points)
+
+```yaml
+---
+title: "Your Descriptive Title"
+author: "Your Name"
+date: today
+format:
+  html:
+    toc: true
+    code-fold: true
+---
+```
+
+### 2. Introduction (10 points)
+
+- Brief description of the dataset
+- Your research question(s)
+- Why this is interesting
+
+### 3. Data Import & Cleaning (15 points)
+
+- Load necessary packages
+- Import/load the data
+- Any cleaning or transformation needed
+- Use code chunks with appropriate options
+
+### 4. Exploratory Analysis (25 points)
+
+- At least 2 visualizations exploring your data
+- Appropriate use of ggplot2 features (labels, themes, etc.)
+- Brief interpretation of each visualization
+
+### 5. Main Analysis (25 points)
+
+- Address your research question(s)
+- At least 1 publication-quality figure
+- Summary statistics presented clearly (consider using `knitr::kable()` for tables)
+
+### 6. Inline Code (10 points)
+
+Use inline R code to report at least 3 statistics in your narrative text.
+
+Example:
+```markdown
+The dataset contains `r nrow(data)` observations...
+```
+
+### 7. Conclusion (10 points)
+
+- Summary of key findings
+- Limitations or caveats
+- What you would explore next
+
+## Formatting Requirements
+
+- Use appropriate headers to organize your document
+- Include alt-text for figures (accessibility)
+- Code should be visible but foldable (`code-fold: true`)
+- Document should render without errors
+
+## Reproducibility Check
+
+Before submitting:
+
+1. Restart R (Session → Restart R)
+2. Render your document from scratch
+3. Verify all code runs and output appears correctly
+
+## Grading Rubric
+
+| Component | Points |
+|-----------|--------|
+| YAML header correct | 5 |
+| Introduction clear and complete | 10 |
+| Data import/cleaning well-documented | 15 |
+| Exploratory visualizations | 25 |
+| Main analysis addresses question | 25 |
+| Inline code used effectively | 10 |
+| Conclusion thoughtful | 10 |
+| **Total** | **100** |
+
+**Bonus (up to 5 points):** Exceptional visualization design, creative analysis, or going beyond requirements.
+
+## Submission
+
+Submit both files on Canvas:
+
+- [ ] Your `.qmd` source file
+- [ ] The rendered `.html` file
+
+Both files are required! The `.qmd` shows your code, the `.html` shows it runs correctly.
+
+## Tips for Success
+
+- Start with an outline before coding
+- Write narrative as you go, not at the end
+- Test each code chunk as you write it
+- Keep visualizations simple and clear
+- Have a friend review your report — does it make sense to someone who hasn't seen your code?
+
+This assignment is excellent preparation for your final project!

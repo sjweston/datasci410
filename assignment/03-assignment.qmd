@@ -1,0 +1,109 @@
+---
+title: "Assignment 3: Tidying & Importing Data"
+date: "2026-04-15"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, April 15 (Session 6)
+**Due:** Monday, April 20 before class
+**Submit:** R script (`.R` file) on Canvas
+:::
+
+## Overview
+
+This assignment practices reshaping data with `pivot_longer()` and `pivot_wider()`, and importing data from CSV files. You'll work with psychology-style datasets.
+
+## Setup
+
+```r
+# Assignment 3: Tidying & Importing Data
+# Your Name
+# Date
+
+library(tidyverse)
+```
+
+## Part 1: Pivoting Wide to Long (35 points)
+
+A researcher collected anxiety scores at three time points. The data is in "wide" format:
+
+```r
+anxiety_wide <- tibble(
+  participant_id = 1:5,
+  condition = c("treatment", "treatment", "control", "control", "treatment"),
+  anxiety_t1 = c(45, 52, 48, 55, 42),
+  anxiety_t2 = c(38, 45, 47, 54, 35),
+  anxiety_t3 = c(32, 40, 46, 52, 30)
+)
+```
+
+### Task 1.1
+Pivot this data to long format so you have columns for:
+
+- `participant_id`
+- `condition`
+- `time` (values: "t1", "t2", "t3")
+- `anxiety` (the score)
+
+### Task 1.2
+Using your long dataset, calculate the mean anxiety score at each time point, separately for each condition.
+
+### Task 1.3
+Create a line plot showing anxiety over time, with separate lines for each condition. Add points for the individual observations.
+
+## Part 2: Pivoting Long to Wide (25 points)
+
+A survey measured different emotions. The data is in long format:
+
+```r
+emotions_long <- tibble(
+  participant = rep(1:4, each = 3),
+  emotion = rep(c("happy", "sad", "anxious"), 4),
+  rating = c(7, 2, 3, 5, 4, 6, 8, 1, 2, 6, 5, 4)
+)
+```
+
+### Task 2.1
+Pivot this to wide format so each emotion is its own column.
+
+### Task 2.2
+Using the wide format, create a new variable that is the sum of all three emotion ratings for each participant.
+
+## Part 3: Importing Data (40 points)
+
+Download the provided data files from Canvas:
+
+- `survey_data.csv` — Survey responses with some messy formatting
+- `demographics.xlsx` — Participant demographics in Excel format
+
+### Task 3.1
+Import `survey_data.csv` using `read_csv()`. Note any warnings or issues.
+
+### Task 3.2
+The CSV has some problems:
+
+- Missing values are coded as "N/A" instead of blank
+- Some columns have wrong types
+
+Re-import the data handling these issues using the appropriate `read_csv()` arguments (hint: `na = ` and `col_types = `).
+
+### Task 3.3
+Import `demographics.xlsx` using the `readxl` package. The data is on the second sheet.
+
+```r
+library(readxl)
+# Your code here
+```
+
+### Task 3.4
+Join the survey data with the demographics data by participant ID. How many participants have complete data in both files?
+
+## Submission
+
+- [ ] All pivot operations produce correct output
+- [ ] CSV and Excel files imported successfully
+- [ ] Data joined correctly
+- [ ] Script runs without errors
+
+Submit your `.R` file on Canvas.

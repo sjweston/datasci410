@@ -1,0 +1,102 @@
+---
+title: "Assignment 2: Data Transformation"
+date: "2026-04-08"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, April 8 (Session 4)
+**Due:** Monday, April 13 before class
+**Submit:** R script (`.R` file) on Canvas
+:::
+
+## Overview
+
+This assignment practices data transformation using dplyr verbs and the pipe operator. You'll work with the `nycflights13` dataset to answer questions about flight delays.
+
+## Setup
+
+```r
+# Assignment 2: Data Transformation
+# Your Name
+# Date
+
+library(tidyverse)
+library(nycflights13)
+
+# If you haven't installed nycflights13:
+# install.packages("nycflights13")
+```
+
+## Part 1: Filtering and Arranging (30 points)
+
+### Task 1.1
+Find all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?
+
+### Task 1.2
+Of those flights, which one had the longest departure delay? Use `arrange()` to find out. Report the carrier, destination, and delay time.
+
+### Task 1.3
+Find all flights to Los Angeles (LAX) or San Francisco (SFO) that departed on time or early. How many were there?
+
+## Part 2: Selecting and Mutating (35 points)
+
+### Task 2.1
+Create a new dataset that contains only:
+
+- `carrier`
+- `origin`
+- `dest`
+- `dep_delay`
+- `arr_delay`
+
+Call this dataset `flights_subset`.
+
+### Task 2.2
+Using `flights_subset`, create two new variables:
+
+- `delay_diff`: the difference between arrival delay and departure delay
+- `dep_delay_hrs`: the departure delay in hours (not minutes)
+
+### Task 2.3
+What does a positive `delay_diff` mean? What does a negative value mean? Answer in a comment, then find a flight that "made up time" (arrived less delayed than it departed).
+
+## Part 3: Grouped Summaries (35 points)
+
+### Task 3.1
+Calculate the average departure delay for each carrier. Which carrier has the worst average delay?
+
+### Task 3.2
+Calculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?
+
+### Task 3.3
+Create a summary table showing, for each carrier:
+
+- Average departure delay
+- Average arrival delay
+- Number of flights
+- Number of destinations served (`n_distinct()`)
+
+Arrange by number of flights (descending).
+
+## Putting It Together
+
+Write a single piped sequence that:
+
+1. Filters to United Airlines (UA) flights
+2. Removes rows with missing arrival delay
+3. Groups by destination
+4. Calculates mean arrival delay and number of flights
+5. Filters to destinations with at least 100 flights
+6. Arranges by mean delay (worst first)
+
+What are the top 3 worst destinations for United delays?
+
+## Submission
+
+- [ ] Script runs without errors
+- [ ] All tasks completed with clear comments
+- [ ] Answers to questions in comments
+- [ ] Your name at the top
+
+Submit your `.R` file on Canvas.

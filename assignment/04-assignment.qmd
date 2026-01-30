@@ -1,0 +1,102 @@
+---
+title: "Assignment 4: Visualization Deep Dive"
+date: "2026-04-22"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, April 22 (Session 8)
+**Due:** Monday, April 27 before class
+**Submit:** R script (`.R` file) and PNG files on Canvas
+:::
+
+## Overview
+
+This assignment focuses on creating publication-quality visualizations. You'll practice using different geoms, scales, themes, and design principles.
+
+## Setup
+
+```r
+# Assignment 4: Visualization Deep Dive
+# Your Name
+# Date
+
+library(tidyverse)
+```
+
+## Part 1: Bar Charts with Error Bars (30 points)
+
+Use the `palmerpenguins` dataset:
+
+```r
+# install.packages("palmerpenguins")
+library(palmerpenguins)
+```
+
+### Task 1.1
+Create a summary table showing mean flipper length by species, including standard error.
+
+```r
+# Hint: SE = sd / sqrt(n)
+```
+
+### Task 1.2
+Create a bar chart showing mean flipper length by species with error bars representing ±1 SE.
+
+Your plot should:
+
+- Have clear axis labels (not variable names)
+- Use a clean theme
+- Have a descriptive title
+- Use a colorblind-friendly palette (hint: `scale_fill_viridis_d()`)
+
+## Part 2: Distributions (25 points)
+
+### Task 2.1
+Create a histogram of penguin body mass. Experiment with different bin widths. In a comment, explain what bin width you chose and why.
+
+### Task 2.2
+Create overlapping density plots of body mass, colored by species. Set transparency so all distributions are visible.
+
+### Task 2.3
+Create a boxplot of body mass by species. Then recreate it as a violin plot. In a comment, discuss what each shows that the other doesn't.
+
+## Part 3: The "Bad" and "Good" Graph (30 points)
+
+Using any dataset of your choice (`mpg`, `penguins`, `diamonds`, etc.):
+
+### Task 3.1: The Bad Graph
+Create an intentionally bad visualization that violates at least 4 design principles. In comments, list what makes it bad.
+
+Examples of "bad" choices:
+
+- 3D effects
+- Pie chart with many categories
+- Rainbow color scheme
+- Missing labels
+- Misleading axis
+- Excessive chartjunk
+
+### Task 3.2: The Good Graph
+Create a good version of the same data. In comments, explain your design choices.
+
+## Part 4: Recreate a Figure (15 points)
+
+Using the provided image on Canvas, recreate the figure as closely as possible. Pay attention to:
+
+- Geom type
+- Colors
+- Labels
+- Theme elements
+
+You won't match it exactly, but get as close as you can.
+
+## Submission
+
+Submit:
+
+- [ ] Your `.R` script with all code and comments
+- [ ] `good_graph.png` — your good visualization from Part 3
+- [ ] `bad_graph.png` — your bad visualization from Part 3
+
+Make sure your script runs without errors and all files are saved correctly.

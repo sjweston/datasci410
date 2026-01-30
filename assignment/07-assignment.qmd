@@ -1,0 +1,124 @@
+---
+title: "Assignment 7: Joins & Missing Data"
+date: "2026-05-13"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, May 13 (Session 14)
+**Due:** Wednesday, May 20 before class
+**Submit:** R script (`.R` file) on Canvas
+:::
+
+## Overview
+
+This assignment practices joining multiple datasets and handling missing data — essential skills for working with real research data where information comes from multiple sources.
+
+## Setup
+
+```r
+# Assignment 7: Joins & Missing Data
+# Your Name
+# Date
+
+library(tidyverse)
+```
+
+## The Datasets
+
+A research study has data in three separate files:
+
+```r
+# Participant demographics
+demographics <- tibble(
+  participant_id = c(1, 2, 3, 4, 5, 6, 7, 8),
+  age = c(22, 35, 28, 41, 19, 33, 27, 45),
+  gender = c("F", "M", "F", "F", "M", "M", "F", "M"),
+  condition = c("A", "B", "A", "B", "A", "B", "A", "B")
+)
+
+# Survey responses (some participants didn't complete)
+survey_responses <- tibble(
+  participant_id = c(1, 2, 3, 4, 6, 7, 9, 10),  # Note: 5, 8 missing; 9, 10 extra
+  anxiety = c(45, 32, 38, 41, 28, 52, 35, 40),
+  depression = c(12, 8, NA, 15, 6, 18, NA, 11),
+  stress = c(28, 22, 25, NA, 18, 32, 24, NA)
+)
+
+# Behavioral task data
+task_data <- tibble(
+  participant_id = c(1, 1, 2, 2, 3, 3, 5, 5, 6, 6),
+  trial = rep(1:2, 5),
+  reaction_time = c(450, 420, 380, 390, 410, 405, 520, 480, 370, 365),
+  accuracy = c(1, 1, 1, 0, 1, 1, 0, 1, 1, 1)
+)
+```
+
+## Part 1: Understanding Your Data (15 points)
+
+### Task 1.1
+Before joining, explore each dataset. How many participants are in each? Are there any participants who appear in one dataset but not others?
+
+### Task 1.2
+Use `anti_join()` to find:
+
+- Participants in demographics but not in survey_responses
+- Participants in survey_responses but not in demographics
+
+What might explain these discrepancies in a real study?
+
+## Part 2: Joining Data (35 points)
+
+### Task 2.1
+Create a dataset that contains demographics and survey responses for **all participants who have both**. Use `inner_join()`. How many participants are in this dataset?
+
+### Task 2.2
+Create a dataset that keeps **all participants from demographics** and adds survey responses where available. Use `left_join()`. How many participants have missing survey data?
+
+### Task 2.3
+The task_data has multiple rows per participant (one per trial). First, summarize it to get mean reaction time and mean accuracy per participant. Then join this with your demographics + survey dataset.
+
+## Part 3: Missing Data Analysis (35 points)
+
+Using your joined dataset from Task 2.2:
+
+### Task 3.1
+Create a summary showing the number and percentage of missing values for each variable.
+
+### Task 3.2
+Is missingness related to condition? Calculate the percentage of missing `anxiety` scores in each condition. Do the same for `depression` and `stress`.
+
+### Task 3.3
+Create a visualization showing the pattern of missingness across variables. You might use:
+
+```r
+# One approach - missing data heatmap
+your_data |>
+  mutate(across(everything(), ~is.na(.))) |>
+  # ... continue to visualize
+```
+
+### Task 3.4
+Create two versions of a summary:
+
+1. **Complete cases only:** Mean anxiety by condition, excluding any participants with missing data
+2. **Available data:** Mean anxiety by condition, using `na.rm = TRUE`
+
+Do the results differ? What are the implications?
+
+## Part 4: Reflection (15 points)
+
+Answer in comments:
+
+1. What are the risks of analyzing only complete cases?
+2. When might it be appropriate to exclude participants with missing data?
+3. How would you report the missing data in a research paper?
+
+## Submission
+
+- [ ] All joins performed correctly
+- [ ] Missing data analysis complete
+- [ ] Reflection questions answered
+- [ ] Script runs without errors
+
+Submit your `.R` file on Canvas.

@@ -2,12 +2,45 @@
 title: "Assignments"
 ---
 
-## Assignment Overview
+## Overview
 
-[Describe your assignment structure here]
+Weekly coding assignments reinforce what you learn in each session. They're designed to take 1-2 hours outside of class, and you'll have time during class to get started and ask questions.
+
+**Grading:** 8 assignments total, lowest 1 dropped. Worth 35% of your final grade.
+
+## Assignment Schedule
+
+| Assignment | Topic | Assigned | Due |
+|------------|-------|----------|-----|
+| [1: Getting Started](01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Mon Apr 6 |
+| [2: Data Transformation](02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Mon Apr 13 |
+| [3: Tidying & Import](03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Mon Apr 20 |
+| [4: Visualization Deep Dive](04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Mon Apr 27 |
+| [5: Exploratory Data Analysis](05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Mon May 4 |
+| [6: Data Types](06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Mon May 11 |
+| [7: Joins & Missing Data](07-assignment.qmd) | joins, NA handling | Wed May 13 | Wed May 20 |
+| [8: Reproducible Report](08-assignment.qmd) | Quarto document | Wed May 27 | Mon Jun 1 |
 
 ## Submission Guidelines
 
-- All assignments should be submitted through [Canvas/other platform]
-- [Add specific format requirements]
-- [Add deadline information]
+- Submit all assignments through **Canvas** before class on the due date
+- Submit your `.R` script or `.qmd` file (depending on the assignment)
+- Include your name and the assignment number at the top of your file
+- Make sure your code runs without errors from a fresh R session
+
+## AI Tools Policy
+
+Weekly assignments are **AI-permitted with documentation**. You may use tools like ChatGPT or GitHub Copilot, but you must:
+
+1. **Cite your use** — Note which tool and for what purpose
+2. **Document the process** — Briefly reflect on what it got right/wrong
+3. **Understand your code** — Be prepared to explain it verbally
+
+See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy.
+
+## Getting Help
+
+- Start assignments during class work time — I'm there to help!
+- Attend office hours
+- Post questions on the Canvas discussion board
+- Work with classmates (but submit your own code)

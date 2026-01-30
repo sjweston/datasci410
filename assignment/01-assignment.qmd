@@ -1,18 +1,114 @@
 ---
-title: "Assignment 1"
-date: "YYYY-MM-DD"
+title: "Assignment 1: Getting Started with R"
+date: "2026-04-01"
 ---
 
-## Instructions
+```{r}
+#| include: false
+# This assignment covers Sessions 1-2
+```
 
-[Provide assignment instructions here]
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, April 1 (Session 2)
+**Due:** Monday, April 6 before class
+**Submit:** R script (`.R` file) on Canvas
+:::
 
-## Questions
+## Overview
 
-1. Question 1
+This assignment gets you comfortable with RStudio and introduces you to creating visualizations with ggplot2. You'll work with the built-in `mpg` dataset to create your first plots.
 
-2. Question 2
+## Setup
 
-## Submission
+1. Open RStudio and your `psy410` project
+2. Create a new R script: File → New File → R Script
+3. Save it as `assignment-01-YOURNAME.R`
+4. At the top of your script, add:
 
-Submit your completed assignment on [Canvas/other platform] by [deadline].
+```r
+# Assignment 1: Getting Started with R
+# Your Name
+# Date
+
+library(tidyverse)
+```
+
+## Tasks
+
+### Task 1: Explore the data (10 points)
+
+Use the `mpg` dataset (loaded automatically with tidyverse).
+
+a) Use `glimpse()` to look at the structure of `mpg`. In a comment, note how many rows and columns there are.
+
+b) Use `?mpg` to read the documentation. In a comment, explain what `displ` and `hwy` represent.
+
+### Task 2: Create a basic scatterplot (20 points)
+
+Create a scatterplot showing the relationship between engine displacement (`displ`) and highway fuel efficiency (`hwy`).
+
+Your plot should:
+
+- Have displacement on the x-axis
+- Have highway mpg on the y-axis
+- Include a clear title
+- Have labeled axes (not just variable names)
+
+### Task 3: Add color (20 points)
+
+Modify your scatterplot to color the points by vehicle class (`class`).
+
+- The legend should appear automatically
+- Give the legend a clear title (hint: use `labs()`)
+
+### Task 4: Create faceted plots (25 points)
+
+Create the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (`drv`).
+
+- Use `facet_wrap()`
+- Each panel should be clearly labeled
+
+### Task 5: Save your plot (15 points)
+
+Save your final faceted plot as a PNG file.
+
+```r
+ggsave("mpg_faceted_plot.png", width = 10, height = 6)
+```
+
+Verify the file was created in your project folder.
+
+### Task 6: Reflection (10 points)
+
+At the bottom of your script, answer these questions in comments:
+
+```r
+# Reflection Questions:
+# 1. What relationship do you observe between engine size and fuel efficiency?
+# 2. Do all vehicle classes follow the same pattern?
+# 3. What was the most challenging part of this assignment?
+```
+
+## Submission Checklist
+
+Before submitting, make sure:
+
+- [ ] Your script runs without errors from start to finish
+- [ ] All tasks are completed with code and comments
+- [ ] Your PNG file was created successfully
+- [ ] Your name is at the top of the script
+
+Submit your `.R` file on Canvas.
+
+## Grading Rubric
+
+| Task | Points |
+|------|--------|
+| Task 1: Data exploration | 10 |
+| Task 2: Basic scatterplot | 20 |
+| Task 3: Color mapping | 20 |
+| Task 4: Faceting | 25 |
+| Task 5: Saving plot | 15 |
+| Task 6: Reflection | 10 |
+| **Total** | **100** |

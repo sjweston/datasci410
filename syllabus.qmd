@@ -84,6 +84,32 @@ Regular attendance is expected. If you must miss class, please notify me in adva
 
 [Add academic integrity policy]
 
+### AI Tools Policy
+
+AI tools like ChatGPT, Claude, and GitHub Copilot are increasingly part of professional data science workflows, and learning to use them effectively is a valuable skill. However, this course focuses on building foundational skills that AI cannot replace: understanding *why* code works, debugging when it doesn't, and developing the judgment to know when output is correct.
+
+For this reason, assessments in this course fall into two categories:
+
+**AI-Restricted Assessments:**
+
+- In-class coding exercises
+- Timed reading quizzes (Canvas with Lockdown Browser)
+
+These must be completed without AI assistance. The goal is to build your mental models and muscle memory for R programming.
+
+**AI-Permitted Assessments (with documentation):**
+
+- Weekly coding assignments
+- Final project
+
+For these assessments, you may use AI tools, but you must:
+
+1. **Cite your use** — Note which tool you used and for what purpose
+2. **Document the process** — Include a brief reflection on what the AI got right, what it got wrong, and what you had to modify
+3. **Understand your code** — You should be able to explain every line. I may ask you to walk me through your code verbally.
+
+**Why this approach?** Learning to code is like learning a language — you need to struggle through the basics before a translator becomes useful rather than a crutch. Once you understand the fundamentals, AI becomes a powerful collaborator rather than a black box.
+
 ### Accessibility
 
 [Add accessibility statement]
@@ -94,4 +120,55 @@ Regular attendance is expected. If you must miss class, please notify me in adva
 
 ## Grading
 
-[Add grading breakdown]
+| Component | Weight | Details |
+|-----------|--------|---------|
+| Weekly Coding Assignments | 35% | 8 assignments, lowest 1 dropped |
+| Reading Quizzes | 15% | 10 quizzes, lowest 2 dropped |
+| In-Class Participation | 15% | Completion-based coding exercises |
+| Final Project | 35% | Includes proposal, draft, and final submission |
+
+### Weekly Coding Assignments (35%)
+
+Short, focused exercises that reinforce each session's content. These are due before the next class meeting and are designed to take 1-2 hours outside of class. You'll have time during class to start these and ask questions.
+
+### Reading Quizzes (15%)
+
+Brief Canvas quizzes on the R4DS readings, completed before class. These are timed and use Lockdown Browser. The goal is to ensure you come to class prepared.
+
+### In-Class Participation (15%)
+
+During each class, you'll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.
+
+### Final Project (35%)
+
+A capstone project where you'll apply everything you've learned to analyze a dataset of your choosing. The project has three checkpoints:
+
+- **Proposal** (Week 5): Dataset selection and research questions
+- **Draft** (Week 8): Working code and preliminary results
+- **Final Submission** (Week 10): Polished Quarto report with visualizations and narrative
+
+You'll also give a brief (5-minute) presentation during finals week.
+
+## Assignment Schedule
+
+### Weekly Assignments
+
+| Assignment | Topic | Assigned | Due |
+|------------|-------|----------|-----|
+| [1: Getting Started](/assignment/01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Mon Apr 6 |
+| [2: Data Transformation](/assignment/02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Mon Apr 13 |
+| [3: Tidying & Import](/assignment/03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Mon Apr 20 |
+| [4: Visualization Deep Dive](/assignment/04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Mon Apr 27 |
+| [5: Exploratory Data Analysis](/assignment/05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Mon May 4 |
+| [6: Data Types](/assignment/06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Mon May 11 |
+| [7: Joins & Missing Data](/assignment/07-assignment.qmd) | joins, NA handling | Wed May 13 | Wed May 20 |
+| [8: Reproducible Report](/assignment/08-assignment.qmd) | Quarto document | Wed May 27 | Mon Jun 1 |
+
+### Final Project Milestones
+
+| Milestone | Due Date | Description |
+|-----------|----------|-------------|
+| Proposal | Wed Apr 29 | Dataset selection, research questions, initial plan |
+| Draft | Wed May 20 | Working code, preliminary visualizations |
+| Final Report | Wed Jun 3 | Complete Quarto report |
+| Presentation | Finals Week | 5-minute share-out |

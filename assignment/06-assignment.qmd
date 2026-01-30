@@ -1,0 +1,118 @@
+---
+title: "Assignment 6: Data Types & Wrangling"
+date: "2026-05-06"
+---
+
+::: {.callout-note}
+## Assignment Details
+**Assigned:** Wednesday, May 6 (Session 12)
+**Due:** Monday, May 11 before class
+**Submit:** R script (`.R` file) on Canvas
+:::
+
+## Overview
+
+This assignment practices working with different data types: logical vectors, numbers, strings, and factors. These skills are essential for cleaning real-world psychology data.
+
+## Setup
+
+```r
+# Assignment 6: Data Types & Wrangling
+# Your Name
+# Date
+
+library(tidyverse)
+```
+
+## Part 1: Logical Vectors & Recoding (30 points)
+
+Here's a simulated survey dataset:
+
+```r
+set.seed(410)  # For reproducibility
+
+survey <- tibble(
+  id = 1:100,
+  age = round(rnorm(100, mean = 35, sd = 12)),
+  q1 = sample(1:7, 100, replace = TRUE),
+  q2 = sample(1:7, 100, replace = TRUE),
+  q3_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding
+  q4 = sample(1:7, 100, replace = TRUE),
+  q5_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding
+  attention_check = sample(c(4, 1:3, 5:7), 100, replace = TRUE,
+                           prob = c(0.85, rep(0.025, 6)))
+)
+```
+
+### Task 1.1
+Create a logical variable `passed_attention` that is `TRUE` if `attention_check == 4` and `FALSE` otherwise. How many participants passed?
+
+### Task 1.2
+Reverse-code `q3_reverse` and `q5_reverse`. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables `q3` and `q5` with the corrected values.
+
+### Task 1.3
+Create a `scale_mean` variable that is the mean of q1, q2, q3, q4, and q5 for each participant.
+
+### Task 1.4
+Create an `age_group` variable using `case_when()`:
+
+- "young" if age < 30
+- "middle" if age >= 30 and age < 50
+- "older" if age >= 50
+
+## Part 2: Strings (25 points)
+
+Here's some messy demographic data:
+
+```r
+messy_demo <- tibble(
+  id = 1:10,
+  gender = c("Male", "female", "FEMALE", "M", "F", "male", "Female", "m", "f", "Male"),
+  education = c("high school", "High School", "college", "College", "graduate",
+                "COLLEGE", "Graduate", "high school", "Graduate", "college")
+)
+```
+
+### Task 2.1
+Clean the `gender` variable so all values are standardized to "Male" or "Female".
+
+Hint: Use `str_to_lower()` first, then `case_when()` or `if_else()`.
+
+### Task 2.2
+Clean the `education` variable similarly. Standardize to "High School", "College", or "Graduate".
+
+## Part 3: Factors (30 points)
+
+### Task 3.1
+Convert your cleaned `education` variable to a factor with levels in logical order: "High School", "College", "Graduate".
+
+```r
+# Hint: factor(x, levels = c(...))
+```
+
+### Task 3.2
+Create a bar chart of education levels. What happens if you didn't set the factor levels? Show both versions.
+
+### Task 3.3
+Using the survey data, create a factor version of `age_group` with levels in order: "young", "middle", "older". Then create a boxplot of `scale_mean` by `age_group`. The x-axis should be in the correct order.
+
+## Part 4: Putting It Together (15 points)
+
+Create a complete data cleaning pipeline for the survey data that:
+
+1. Filters to participants who passed the attention check
+2. Reverse-codes the necessary items
+3. Creates the scale mean
+4. Creates the age group factor (in correct order)
+5. Selects only id, age, age_group, and scale_mean
+
+Use a single piped sequence.
+
+## Submission
+
+- [ ] Script runs without errors
+- [ ] All data cleaning operations work correctly
+- [ ] Factors are in correct order
+- [ ] Pipeline produces clean final dataset
+
+Submit your `.R` file on Canvas.
