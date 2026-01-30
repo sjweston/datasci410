@@ -64,11 +64,11 @@ The course is organized into 10 weeks with 18 class sessions. See the [Schedule]
 | 3 | Data Tidying & Import | 5, 7, 20 |
 | 4 | Data Visualization Deep Dive | 9 |
 | 5 | Exploratory Data Analysis | 10 |
-| 6 | Data Types (Logical, Numeric, Strings, Factors) | 12, 13, 14, 16 |
+| 6 | Data Types & Wrangling | 12, 13, 14, 16 |
 | 7 | Joins & Missing Data | 18, 19 |
 | 8 | Storytelling with Data | 11 |
 | 9 | Reproducible Research with Quarto | 28 |
-| 10 | Functions, Iteration, & Wrap-up | 25, 26, 8 |
+| 10 | Practice & Wrap-up | 8 |
 
 ## Course Policies
 

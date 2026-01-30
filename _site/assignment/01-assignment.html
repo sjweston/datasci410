@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>Assignment 1 – PSY 410: Data Science for Psychology</title>
+<title>Assignment 1: Getting Started with R – PSY 410: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,14 +108,14 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Assignment 1 – PSY 410: Data Science for Psychology">
+<meta property="og:title" content="Assignment 1: Getting Started with R – PSY 410: Data Science for Psychology">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://sjweston.github.io/datasci410//files/social-image.png">
+<meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Assignment 1 – PSY 410: Data Science for Psychology">
+<meta name="twitter:title" content="Assignment 1: Getting Started with R – PSY 410: Data Science for Psychology">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://sjweston.github.io/datasci410//files/social-image.png">
+<meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
 <meta name="twitter:card" content="summary_large_image">
 </head>
@@ -135,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Assignment 1</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Weekly Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">1: Getting Started</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -171,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Assignments</span></a>
+ <span class="menu-text">Weekly Assignments</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -180,7 +215,49 @@ ul.task-list li input[type="checkbox"] {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../assignment/01-assignment.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Assignment 1</span></a>
+ <span class="menu-text">1: Getting Started</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/02-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Data Transformation</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/03-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">3: Tidying &amp; Import</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/04-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Visualization Deep Dive</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/05-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">5: Exploratory Data Analysis</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/06-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">6: Data Types</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/07-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">7: Joins &amp; Missing Data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../assignment/08-assignment.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">8: Reproducible Report</span></a>
   </div>
 </li>
       </ul>
@@ -195,38 +272,168 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#tasks" id="toc-tasks" class="nav-link" data-scroll-target="#tasks">Tasks</a>
+  <ul class="collapse">
+  <li><a href="#task-1-explore-the-data-10-points" id="toc-task-1-explore-the-data-10-points" class="nav-link" data-scroll-target="#task-1-explore-the-data-10-points">Task 1: Explore the data (10 points)</a></li>
+  <li><a href="#task-2-create-a-basic-scatterplot-20-points" id="toc-task-2-create-a-basic-scatterplot-20-points" class="nav-link" data-scroll-target="#task-2-create-a-basic-scatterplot-20-points">Task 2: Create a basic scatterplot (20 points)</a></li>
+  <li><a href="#task-3-add-color-20-points" id="toc-task-3-add-color-20-points" class="nav-link" data-scroll-target="#task-3-add-color-20-points">Task 3: Add color (20 points)</a></li>
+  <li><a href="#task-4-create-faceted-plots-25-points" id="toc-task-4-create-faceted-plots-25-points" class="nav-link" data-scroll-target="#task-4-create-faceted-plots-25-points">Task 4: Create faceted plots (25 points)</a></li>
+  <li><a href="#task-5-save-your-plot-15-points" id="toc-task-5-save-your-plot-15-points" class="nav-link" data-scroll-target="#task-5-save-your-plot-15-points">Task 5: Save your plot (15 points)</a></li>
+  <li><a href="#task-6-reflection-10-points" id="toc-task-6-reflection-10-points" class="nav-link" data-scroll-target="#task-6-reflection-10-points">Task 6: Reflection (10 points)</a></li>
+  </ul></li>
+  <li><a href="#submission-checklist" id="toc-submission-checklist" class="nav-link" data-scroll-target="#submission-checklist">Submission Checklist</a></li>
+  <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading Rubric</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Assignment 1</a></li></ol></nav><h1 class="title display-7">Assignment 1</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Weekly Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">1: Getting Started</a></li></ol></nav><h1 class="title display-7">Assignment 1: Getting Started with R</h1></header>
 
 <header id="title-block-header">
 
 
 <div class="date-block bg-assignment text-white p-2">
-  <p class="date">Due by 11:59 PM on Invalid Date</p>
+  <p class="date">Due by 11:59 PM on Wednesday, April 1, 2026</p>
 </div>
 </header>
 
 
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<p>[Provide assignment instructions here]</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Assignment Details
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Assigned:</strong> Wednesday, April 1 (Session 2) <strong>Due:</strong> Monday, April 6 before class <strong>Submit:</strong> R script (<code>.R</code> file) on Canvas</p>
+</div>
+</div>
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>This assignment gets you comfortable with RStudio and introduces you to creating visualizations with ggplot2. You’ll work with the built-in <code>mpg</code> dataset to create your first plots.</p>
 </section>
-<section id="questions" class="level2">
-<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <ol type="1">
-<li><p>Question 1</p></li>
-<li><p>Question 2</p></li>
+<li>Open RStudio and your <code>psy410</code> project</li>
+<li>Create a new R script: File → New File → R Script</li>
+<li>Save it as <code>assignment-01-YOURNAME.R</code></li>
+<li>At the top of your script, add:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assignment 1: Getting Started with R</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Name</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="tasks" class="level2">
+<h2 class="anchored" data-anchor-id="tasks">Tasks</h2>
+<section id="task-1-explore-the-data-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-1-explore-the-data-10-points">Task 1: Explore the data (10 points)</h3>
+<p>Use the <code>mpg</code> dataset (loaded automatically with tidyverse).</p>
+<ol type="a">
+<li><p>Use <code>glimpse()</code> to look at the structure of <code>mpg</code>. In a comment, note how many rows and columns there are.</p></li>
+<li><p>Use <code>?mpg</code> to read the documentation. In a comment, explain what <code>displ</code> and <code>hwy</code> represent.</p></li>
 </ol>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<p>Submit your completed assignment on [Canvas/other platform] by [deadline].</p>
+<section id="task-2-create-a-basic-scatterplot-20-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-2-create-a-basic-scatterplot-20-points">Task 2: Create a basic scatterplot (20 points)</h3>
+<p>Create a scatterplot showing the relationship between engine displacement (<code>displ</code>) and highway fuel efficiency (<code>hwy</code>).</p>
+<p>Your plot should:</p>
+<ul>
+<li>Have displacement on the x-axis</li>
+<li>Have highway mpg on the y-axis</li>
+<li>Include a clear title</li>
+<li>Have labeled axes (not just variable names)</li>
+</ul>
+</section>
+<section id="task-3-add-color-20-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-3-add-color-20-points">Task 3: Add color (20 points)</h3>
+<p>Modify your scatterplot to color the points by vehicle class (<code>class</code>).</p>
+<ul>
+<li>The legend should appear automatically</li>
+<li>Give the legend a clear title (hint: use <code>labs()</code>)</li>
+</ul>
+</section>
+<section id="task-4-create-faceted-plots-25-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-4-create-faceted-plots-25-points">Task 4: Create faceted plots (25 points)</h3>
+<p>Create the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (<code>drv</code>).</p>
+<ul>
+<li>Use <code>facet_wrap()</code></li>
+<li>Each panel should be clearly labeled</li>
+</ul>
+</section>
+<section id="task-5-save-your-plot-15-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-5-save-your-plot-15-points">Task 5: Save your plot (15 points)</h3>
+<p>Save your final faceted plot as a PNG file.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"mpg_faceted_plot.png"</span>, <span class="at">width =</span> <span class="dv">10</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Verify the file was created in your project folder.</p>
+</section>
+<section id="task-6-reflection-10-points" class="level3">
+<h3 class="anchored" data-anchor-id="task-6-reflection-10-points">Task 6: Reflection (10 points)</h3>
+<p>At the bottom of your script, answer these questions in comments:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reflection Questions:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. What relationship do you observe between engine size and fuel efficiency?</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Do all vehicle classes follow the same pattern?</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. What was the most challenging part of this assignment?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="submission-checklist" class="level2">
+<h2 class="anchored" data-anchor-id="submission-checklist">Submission Checklist</h2>
+<p>Before submitting, make sure:</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Your script runs without errors from start to finish</label></li>
+<li><label><input type="checkbox">All tasks are completed with code and comments</label></li>
+<li><label><input type="checkbox">Your PNG file was created successfully</label></li>
+<li><label><input type="checkbox">Your name is at the top of the script</label></li>
+</ul>
+<p>Submit your <code>.R</code> file on Canvas.</p>
+</section>
+<section id="grading-rubric" class="level2">
+<h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Task</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Task 1: Data exploration</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>Task 2: Basic scatterplot</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>Task 3: Color mapping</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td>Task 4: Faceting</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>Task 5: Saving plot</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>Task 6: Reflection</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>100</strong></td>
+</tr>
+</tbody>
+</table>
 
 
 </section>
@@ -305,7 +512,7 @@ ul.task-list li input[type="checkbox"] {
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/sjweston\.github\.io\/datasci410\/");
+        var filterRegex = new RegExp("https:\/\/sarajweston\.com\/datasci410\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
