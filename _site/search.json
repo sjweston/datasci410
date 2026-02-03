@@ -46,7 +46,7 @@
     "href": "syllabus.html#course-schedule-overview",
     "title": "Syllabus",
     "section": "Course Schedule Overview",
-    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\nIntro, 1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types (Logical, Numeric, Strings, Factors)\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nFunctions, Iteration, & Wrap-up\n25, 26, 8"
+    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\nIntro, 1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types & Wrangling\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nPractice & Wrap-up\n8"
   },
   {
     "objectID": "syllabus.html#course-policies",
@@ -1221,83 +1221,104 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\nSchedule is subject to change based on course needs"
+    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
   },
   {
     "objectID": "schedule.html#course-schedule",
     "href": "schedule.html#course-schedule",
     "title": "Schedule",
     "section": "",
-    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\nSchedule is subject to change based on course needs"
+    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
   },
   {
     "objectID": "schedule.html#week-1",
     "href": "schedule.html#week-1",
     "title": "Schedule",
     "section": "Week 1: Getting Started",
-    "text": "Week 1: Getting Started\n\nSession 1: Introduction & Setup\nMonday, March 30\n\nCourse overview: Why data science for psychology?\nInstalling R and RStudio\nRStudio interface, projects, and workflow basics\n\n📖 Read: R4DS Ch 2: Workflow: basics | R4DS Ch 6: Workflow: scripts and projects\n\n\nSession 2: Your First Visualization\nWednesday, April 1\n\nIntroduction to ggplot2\nGrammar of graphics: aesthetics, geoms, facets\nMaking your first plots\n\n📖 Read: R4DS Ch 1: Data visualization"
+    "text": "Week 1: Getting Started\n\nSession 1: Introduction & Setup\nMonday, March 30\n\nCourse overview: Why data science for psychology?\nInstalling R and RStudio\nRStudio interface, projects, and workflow basics\n\n📖 Read: R4DS Ch 2: Workflow: basics | R4DS Ch 6: Workflow: scripts and projects\n\n\nSession 2: Your First Visualization\nWednesday, April 1\n\nIntroduction to ggplot2\nGrammar of graphics: aesthetics, geoms, facets\nMaking your first plots\n\n📖 Read: R4DS Ch 1: Data visualization\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 1: Getting Started"
   },
   {
     "objectID": "schedule.html#week-2",
     "href": "schedule.html#week-2",
     "title": "Schedule",
     "section": "Week 2: Data Transformation",
-    "text": "Week 2: Data Transformation\n\nSession 3: Data Transformation I\nMonday, April 6\n\nWorking with rows: filter(), arrange()\nWorking with columns: select(), mutate()\nThe pipe operator\n\n📖 Read: R4DS Ch 3: Data transformation (sections 3.1–3.4)\n\n\nSession 4: Data Transformation II\nWednesday, April 8\n\nWorking with groups: group_by(), summarize()\nCombining operations\nCode style best practices\n\n📖 Read: R4DS Ch 3: Data transformation (section 3.5) | R4DS Ch 4: Workflow: code style"
+    "text": "Week 2: Data Transformation\n\nSession 3: Data Transformation I\nMonday, April 6\n\nWorking with rows: filter(), arrange()\nWorking with columns: select(), mutate()\nThe pipe operator\n\n📖 Read: R4DS Ch 3: Data transformation (sections 3.1–3.4)\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 1: Getting Started\n\n\n\n\nSession 4: Data Transformation II\nWednesday, April 8\n\nWorking with groups: group_by(), summarize()\nCombining operations\nCode style best practices\n\n📖 Read: R4DS Ch 3: Data transformation (section 3.5) | R4DS Ch 4: Workflow: code style\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 2: Data Transformation"
   },
   {
     "objectID": "schedule.html#week-3",
     "href": "schedule.html#week-3",
     "title": "Schedule",
     "section": "Week 3: Working with Data",
-    "text": "Week 3: Working with Data\n\nSession 5: Data Tidying\nMonday, April 13\n\nTidy data principles\nReshaping data: pivot_longer(), pivot_wider()\nCommon tidying problems\n\n📖 Read: R4DS Ch 5: Data tidying\n\n\nSession 6: Data Import\nWednesday, April 15\n\nReading and writing CSV files\nWorking with Excel spreadsheets\nCommon import issues and solutions\n\n📖 Read: R4DS Ch 7: Data import | R4DS Ch 20: Spreadsheets"
+    "text": "Week 3: Working with Data\n\nSession 5: Data Tidying\nMonday, April 13\n\nTidy data principles\nReshaping data: pivot_longer(), pivot_wider()\nCommon tidying problems\n\n📖 Read: R4DS Ch 5: Data tidying\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 2: Data Transformation\n\n\n\n\nSession 6: Data Import\nWednesday, April 15\n\nReading and writing CSV files\nWorking with Excel spreadsheets\nCommon import issues and solutions\n\n📖 Read: R4DS Ch 7: Data import | R4DS Ch 20: Spreadsheets\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 3: Tidying & Import"
   },
   {
     "objectID": "schedule.html#week-4",
     "href": "schedule.html#week-4",
     "title": "Schedule",
-    "section": "Week 4: Data Visualization Deep Dive I",
-    "text": "Week 4: Data Visualization Deep Dive I\n\nSession 7: Layers & Aesthetics\nMonday, April 20\n\nGeoms, stats, and position adjustments\nCoordinate systems and scales\nChoosing the right plot for your data\n\n📖 Read: R4DS Ch 9: Layers\n\n\nSession 8: Perception & Design\nWednesday, April 22\n\nVisual perception principles\nColor theory and accessibility\nPsychology-specific visualizations: error bars, interaction plots, raincloud plots\n\n📖 Read: TBD (supplementary materials on visual perception)"
+    "section": "Week 4: Data Visualization Deep Dive",
+    "text": "Week 4: Data Visualization Deep Dive\n\nSession 7: Layers & Aesthetics\nMonday, April 20\n\nGeoms, stats, and position adjustments\nCoordinate systems and scales\nChoosing the right plot for your data\n\n📖 Read: R4DS Ch 9: Layers\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 3: Tidying & Import\n\n\n\n\nSession 8: Perception & Design\nWednesday, April 22\n\nVisual perception principles\nColor theory and accessibility\nPsychology-specific visualizations: error bars, interaction plots, raincloud plots\n\n📖 Read: TBD (supplementary materials on visual perception)\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 4: Visualization Deep Dive"
   },
   {
     "objectID": "schedule.html#week-5",
     "href": "schedule.html#week-5",
     "title": "Schedule",
     "section": "Week 5: Exploratory Data Analysis",
-    "text": "Week 5: Exploratory Data Analysis\n\nSession 9: EDA - Variation\nMonday, April 27\n\nExploring distributions\nIdentifying outliers and unusual values\nAsking good questions of your data\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\nSession 10: EDA - Covariation\nWednesday, April 29\n\nExploring relationships between variables\nPatterns and models\nHands-on: Explore a psychology dataset\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)"
+    "text": "Week 5: Exploratory Data Analysis\n\nSession 9: EDA - Variation\nMonday, April 27\n\nExploring distributions\nIdentifying outliers and unusual values\nAsking good questions of your data\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 4: Visualization Deep Dive\n\n\n\n\nSession 10: EDA - Covariation\nWednesday, April 29\n\nExploring relationships between variables\nPatterns and models\nHands-on: Explore a psychology dataset\n\n📖 Read: R4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 5: Exploratory Data Analysis\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Proposal Due — Dataset selection, research questions, initial plan"
   },
   {
     "objectID": "schedule.html#week-6",
     "href": "schedule.html#week-6",
     "title": "Schedule",
-    "section": "Week 6: Data Types in Depth",
-    "text": "Week 6: Data Types in Depth\n\nSession 11: Logical Vectors & Numbers\nMonday, May 4\n\nComparisons and Boolean operations\nWorking with numeric data\nRecoding and computing scale scores\n\n📖 Read: R4DS Ch 12: Logical vectors | R4DS Ch 13: Numbers\n\n\nSession 12: Strings & Factors\nWednesday, May 6\n\nBasic string manipulation\nWorking with categorical variables\nReleveling factors for analysis and visualization\n\n📖 Read: R4DS Ch 14: Strings | R4DS Ch 16: Factors"
+    "section": "Week 6: Data Types & Wrangling",
+    "text": "Week 6: Data Types & Wrangling\n\nSession 11: Data Types Grab Bag\nMonday, May 4\n\nLogical vectors: comparisons and Boolean operations\nWorking with numeric data: rounding, summarizing\nRecoding and computing scale scores\n\n📖 Read: R4DS Ch 12: Logical vectors | R4DS Ch 13: Numbers\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 5: Exploratory Data Analysis\n\n\n\n\nSession 12: Strings & Factors\nWednesday, May 6\n\nBasic string cleaning: str_to_lower(), str_trim(), str_replace()\nWorking with categorical variables (factors)\nReleveling factors for analysis and visualization\n\n📖 Read: R4DS Ch 14: Strings (sections 14.1–14.3) | R4DS Ch 16: Factors\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 6: Data Types"
   },
   {
     "objectID": "schedule.html#week-7",
     "href": "schedule.html#week-7",
     "title": "Schedule",
     "section": "Week 7: Combining & Cleaning Data",
-    "text": "Week 7: Combining & Cleaning Data\n\nSession 13: Joins\nMonday, May 11\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\nSession 14: Missing Data\nWednesday, May 13\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values"
+    "text": "Week 7: Combining & Cleaning Data\n\nSession 13: Joins\nMonday, May 11\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 6: Data Types\n\n\n\n\nSession 14: Missing Data\nWednesday, May 13\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 7: Joins & Missing Data"
   },
   {
     "objectID": "schedule.html#week-8",
     "href": "schedule.html#week-8",
     "title": "Schedule",
     "section": "Week 8: Storytelling with Data",
-    "text": "Week 8: Storytelling with Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\n\n\n\n\n\nSession 15: Storytelling with Data\nWednesday, May 20\nDrawing from Knaflic’s “Storytelling with Data”\n\nUnderstand the context — Audience, message, and the Big Idea; 3-minute story; storyboarding\nChoose appropriate visuals — Review: continuous → line/scatter; categorical → bars; avoid pies, 3D, dual axes\nEliminate clutter — Gestalt principles; strategic contrast; alignment and whitespace\nFocus attention — Preattentive attributes (color, size, position); “Where are your eyes drawn?” test\nThink like a designer — Visual affordances and hierarchy; accessibility; colorblind-friendly palettes\n\n📖 Read: R4DS Ch 11: Communication"
+    "text": "Week 8: Storytelling with Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\nUse this time to work on your final project draft!\n\n\n\n\nSession 15: Storytelling with Data\nWednesday, May 20\nDrawing from Knaflic’s “Storytelling with Data”\n\nUnderstand the context — Audience, message, and the Big Idea\nChoose appropriate visuals — Matching plot types to data and questions\nEliminate clutter — Gestalt principles; strategic contrast\nFocus attention — Preattentive attributes (color, size, position)\nThink like a designer — Visual hierarchy; accessibility; colorblind-friendly palettes\n\n📖 Read: R4DS Ch 11: Communication\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 7: Joins & Missing Data\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Draft Due — Working code, preliminary visualizations"
   },
   {
     "objectID": "schedule.html#week-9",
     "href": "schedule.html#week-9",
     "title": "Schedule",
     "section": "Week 9: Reproducible Research",
-    "text": "Week 9: Reproducible Research\n\nMonday, May 25\n\n\n\n\n\n\nWarningNo Class — Memorial Day\n\n\n\n\n\n\n\n\nSession 16: Quarto\nWednesday, May 27\n\nLiterate programming and reproducibility\nQuarto documents: YAML, markdown, code chunks\nInline code and output formats\n\n📖 Read: R4DS Ch 28: Quarto"
+    "text": "Week 9: Reproducible Research\n\nMonday, May 25\n\n\n\n\n\n\nWarningNo Class — Memorial Day\n\n\n\n\n\n\n\n\nSession 16: Quarto\nWednesday, May 27\n\nLiterate programming and reproducibility\nQuarto documents: YAML, markdown, code chunks\nInline code and output formats\nRendering to HTML and PDF\n\n📖 Read: R4DS Ch 28: Quarto\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 8: Reproducible Report"
   },
   {
     "objectID": "schedule.html#week-10",
     "href": "schedule.html#week-10",
     "title": "Schedule",
-    "section": "Week 10: Programming & Wrap-up",
-    "text": "Week 10: Programming & Wrap-up\n\nSession 17: Functions & Iteration\nMonday, June 1\n\nWriting reusable functions\nIteration with purrr: map() and friends\nAutomating common psychology workflows\n\n📖 Read: R4DS Ch 25: Functions | R4DS Ch 26: Iteration\n\n\nSession 18: Putting It All Together\nWednesday, June 3\n\nComplete analysis workflow demonstration\nGetting help: R4DS Ch 8\nCourse review and next steps\n\n📖 Read: R4DS Ch 8: Workflow: getting help"
+    "section": "Week 10: Practice & Wrap-up",
+    "text": "Week 10: Practice & Wrap-up\n\nSession 17: Practice & Review\nMonday, June 1\n\nGuided practice: Complete workflow from import to polished figure\nCommon pitfalls and debugging strategies\nQ&A and troubleshooting for final projects\nGetting help: R4DS Ch 8\n\n📖 Read: R4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\nImportant📋 Due Today\n\n\n\nAssignment 8: Reproducible Report\n\n\n\n\nSession 18: Putting It All Together\nWednesday, June 3\n\nComplete analysis workflow demonstration\nCourse review: What you’ve learned\nWhere to go from here: next steps for continued learning\nFinal project work time\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Report Due — Complete Quarto report with visualizations"
+  },
+  {
+    "objectID": "schedule.html#finals-week",
+    "href": "schedule.html#finals-week",
+    "title": "Schedule",
+    "section": "Finals Week",
+    "text": "Finals Week\n\n\n\n\n\n\nWarning📝 Final Presentations\n\n\n\n5-minute project presentations (date/time TBD based on finals schedule)"
+  },
+  {
+    "objectID": "schedule.html#assignment-summary",
+    "href": "schedule.html#assignment-summary",
+    "title": "Schedule",
+    "section": "Assignment Summary",
+    "text": "Assignment Summary\n\n\n\n\n\n\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1\nGetting Started\nSession 2 (Apr 1)\nSession 3 (Apr 6)\n\n\n2\nData Transformation\nSession 4 (Apr 8)\nSession 5 (Apr 13)\n\n\n3\nTidying & Import\nSession 6 (Apr 15)\nSession 7 (Apr 20)\n\n\n4\nVisualization Deep Dive\nSession 8 (Apr 22)\nSession 9 (Apr 27)\n\n\n5\nExploratory Data Analysis\nSession 10 (Apr 29)\nSession 11 (May 4)\n\n\n6\nData Types\nSession 12 (May 6)\nSession 13 (May 11)\n\n\n7\nJoins & Missing Data\nSession 14 (May 13)\nSession 15 (May 20)\n\n\n8\nReproducible Report\nSession 16 (May 27)\nSession 17 (Jun 1)"
+  },
+  {
+    "objectID": "schedule.html#final-project-milestones",
+    "href": "schedule.html#final-project-milestones",
+    "title": "Schedule",
+    "section": "Final Project Milestones",
+    "text": "Final Project Milestones\n\n\n\nMilestone\nDue Date\n\n\n\n\nProposal\nSession 10 (Apr 29)\n\n\nDraft\nSession 15 (May 20)\n\n\nFinal Report\nSession 18 (Jun 3)\n\n\nPresentation\nFinals Week"
   }
 ]
