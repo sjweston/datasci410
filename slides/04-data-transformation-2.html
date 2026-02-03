@@ -495,6 +495,20 @@ Dr.&nbsp;Sara Weston
 </div>
 </section></section>
 <section>
+<section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Pair coding break</h1>
+
+</section>
+<section id="your-turn-10-minutes" class="slide level2">
+<h2>Your turn: 10 minutes</h2>
+<p>With a partner, using the <code>flights</code> dataset:</p>
+<ol type="1">
+<li>Calculate the <strong>average departure delay</strong> for each carrier</li>
+<li>Which airline has the <strong>worst</strong> average delay?</li>
+<li><strong>Bonus:</strong> Also calculate the number of flights per carrier. Does the worst airline just have fewer flights?</li>
+</ol>
+</section></section>
+<section>
 <section id="count-a-shortcut" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>count() — a shortcut</h1>
 
@@ -661,7 +675,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -976,19 +990,31 @@ $ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="your-turn" class="slide level2">
-<h2>Your turn!</h2>
-<p>Using the <code>experiment</code> data:</p>
+</div></section><section id="get-a-head-start-assignment-2" class="slide level2">
+<h2>Get a head start: Assignment 2</h2>
+<p>Using the <code>experiment</code> data we just created:</p>
 <ol type="1">
 <li>Filter to only accurate trials (<code>accuracy == 1</code>)</li>
-<li>Calculate mean RT per participant per condition</li>
-<li>Find the 5 participants with the fastest mean RT in each condition</li>
-<li>Create a bar plot showing mean RT by condition with error bars</li>
+<li>Calculate mean RT <strong>per participant</strong> per condition</li>
+<li>Find the 5 participants with the <strong>fastest</strong> mean RT in each condition</li>
 </ol>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>This uses everything from today — <code>filter()</code>, <code>group_by()</code>, <code>summarize()</code>, and <code>slice_min()</code>. Work through it step by step.</p>
+</div>
+</div>
+</div>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
