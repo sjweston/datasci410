@@ -130,6 +130,62 @@
     ]
   },
   {
+    "objectID": "content/08-content.html",
+    "href": "content/08-content.html",
+    "title": "8: Perception & Design",
+    "section": "",
+    "text": "Content for Wednesday, April 22, 2026"
+  },
+  {
+    "objectID": "content/08-content.html#before-class",
+    "href": "content/08-content.html#before-class",
+    "title": "8: Perception & Design",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nSupplementary reading on visual perception principles (posted on Canvas)\nOptional: Knaflic, Storytelling with Data, Ch 1–3"
+  },
+  {
+    "objectID": "content/08-content.html#during-class",
+    "href": "content/08-content.html#during-class",
+    "title": "8: Perception & Design",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nWhy perception matters — how the brain processes visual information\nPreattentive attributes: color, size, position, shape\nGestalt principles and how they shape layout\nColor theory: sequential, diverging, and qualitative palettes\nColorblind-friendly design (and why it matters)\nDecluttering: removing the visual noise\nPsychology-specific figures: error bars, interaction plots, raincloud plots\nPutting it all together with theme() customization\n\n\n\n\n\n\n\nTipAssignment 4 is assigned today\n\n\n\nAssignment 4: Visualization Deep Dive — due before Session 9.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+  },
+  {
+    "objectID": "content/08-content.html#after-class",
+    "href": "content/08-content.html#after-class",
+    "title": "8: Perception & Design",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines in both directions? → Remove vertical ones\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed."
+  },
+  {
+    "objectID": "content/06-content.html",
+    "href": "content/06-content.html",
+    "title": "6: Data Import",
+    "section": "",
+    "text": "Content for Wednesday, April 15, 2026"
+  },
+  {
+    "objectID": "content/06-content.html#before-class",
+    "href": "content/06-content.html#before-class",
+    "title": "6: Data Import",
+    "section": "Before class",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 7: Data import\nR4DS Ch 20: Spreadsheets"
+  },
+  {
+    "objectID": "content/06-content.html#during-class",
+    "href": "content/06-content.html#during-class",
+    "title": "6: Data Import",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nThe data science workflow: where import fits in\nread_csv() — reading CSV files and handling common problems\nColumn types and how to fix them when R guesses wrong\nMissing value codes (-999, \"N/A\", etc.)\nreadxl::read_excel() — working with Excel files\nA quick look at SPSS files with haven::read_sav()\nPractical tips for importing Qualtrics exports\n\n\n\n\n\n\n\nTipAssignment 3 is assigned today\n\n\n\nAssignment 3: Tidying & Import — due before Session 7.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+  },
+  {
+    "objectID": "content/06-content.html#after-class",
+    "href": "content/06-content.html#after-class",
+    "title": "6: Data Import",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\n\nFind a CSV file on your computer (or download one) and import it with read_csv(). Run glimpse() — do the types look right?\nCheck problems() after importing. Does it flag anything?\nTry reading the messy CSV we created in class. Clean up the column names and missing values.\nIf you have an Excel file handy, try read_excel(). What happens with multiple sheets?\n\n\n\n\n\n\n\nNoteQualtrics import cheat sheet\n\n\n\nMost Qualtrics CSV exports have two extra description rows after the header. The standard fix:\nqualtrics_data &lt;- read_csv(\"my_export.csv\",\n  skip = 2,\n  na = c(\"\", \"N/A\", \"-999\")\n)\nAlways glimpse() right after — Qualtrics column names are ugly but fixable with rename().\n\n\n\nPackage check\nIf you haven’t already, make sure readxl is installed:\ninstall.packages(\"readxl\")\nIt’s not part of tidyverse, but it is part of the broader tidyverse ecosystem — library(tidyverse) does not load it automatically."
+  },
+  {
     "objectID": "content/04-content.html",
     "href": "content/04-content.html",
     "title": "4: Data Transformation II",
@@ -1208,6 +1264,62 @@
       "Course content",
       "5: Data Tidying"
     ]
+  },
+  {
+    "objectID": "content/07-content.html",
+    "href": "content/07-content.html",
+    "title": "7: Layers & Aesthetics",
+    "section": "",
+    "text": "Content for Monday, April 20, 2026"
+  },
+  {
+    "objectID": "content/07-content.html#before-class",
+    "href": "content/07-content.html#before-class",
+    "title": "7: Layers & Aesthetics",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 9: Layers\n\n\n\n\n\n\n\nImportantAssignment 3 is due today\n\n\n\nAssignment 3: Tidying & Import — submit before class."
+  },
+  {
+    "objectID": "content/07-content.html#during-class",
+    "href": "content/07-content.html#during-class",
+    "title": "7: Layers & Aesthetics",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nMatching geom to data type — a decision guide\nDistributions: geom_histogram() vs geom_density()\nComparing groups: geom_boxplot() vs geom_violin()\nstat_summary() — means, error bars, and custom functions\nWhat SE, SD, and CI error bars actually mean\nPosition adjustments: dodge, stack, fill, jitter\nScales: controlling axes, colors, and legends\ncoord_flip() vs coord_cartesian() — and why they’re different\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+  },
+  {
+    "objectID": "content/07-content.html#after-class",
+    "href": "content/07-content.html#after-class",
+    "title": "7: Layers & Aesthetics",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\n\nCreate a histogram and a density plot of the same variable. When does each one work better?\nMake a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?\nBuild a bar chart with error bars using stat_summary(). Try both mean_se and mean_cl_normal — what changes?\nPractice position = \"dodge\" with a grouped bar chart\nTry coord_flip() on a plot with long category labels — does it help readability?\n\n\n\n\n\n\n\nNotecoord_cartesian() vs scale limits\n\n\n\nThese do very different things:\n# This ZOOMS — all data is still used for calculations\ncoord_cartesian(ylim = c(400, 600))\n\n# This DROPS data outside the range — changes your summaries!\nscale_y_continuous(limits = c(400, 600))\nUse coord_cartesian() when you want to zoom in. Use scale limits only when you actually want to exclude data.\n\n\n\nPsychology application: error bars\n# The standard psych figure: mean + SE + individual points\ndata |&gt;\n  ggplot(aes(x = condition, y = score, fill = condition)) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  stat_summary(fun = mean, geom = \"bar\", alpha = 0.6, width = 0.5) +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2) +\n  labs(caption = \"Error bars = SE of the mean.\")"
+  },
+  {
+    "objectID": "content/09-content.html",
+    "href": "content/09-content.html",
+    "title": "9: EDA — Variation",
+    "section": "",
+    "text": "Content for Monday, April 27, 2026"
+  },
+  {
+    "objectID": "content/09-content.html#before-class",
+    "href": "content/09-content.html#before-class",
+    "title": "9: EDA — Variation",
+    "section": "Before class",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\n\nImportantAssignment 4 is due today\n\n\n\nAssignment 4: Visualization Deep Dive — submit before class."
+  },
+  {
+    "objectID": "content/09-content.html#during-class",
+    "href": "content/09-content.html#during-class",
+    "title": "9: EDA — Variation",
+    "section": "During class",
+    "text": "During class\nWe’ll cover:\n\nWhat is EDA? Exploratory vs. confirmatory thinking\nThe EDA mindset — curiosity, not confirmation\nExploring distributions: histograms, density plots, bar charts\nChoosing binwidth and when it matters\nSpotting outliers visually and programmatically\nWhat to do with outliers (investigate, don’t delete)\nA first look at missing data\nPutting it all together: a systematic EDA workflow\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+  },
+  {
+    "objectID": "content/09-content.html#after-class",
+    "href": "content/09-content.html#after-class",
+    "title": "9: EDA — Variation",
+    "section": "After class",
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package (loaded in class today):\n\nExplore the distribution of age. What shape is it? Is it skewed?\nCheck for outliers in age using both a histogram and a boxplot. Are any values suspicious?\nPick 3 personality items (e.g., E1, N2, A4) and plot their distributions. What do you notice?\nCount how many missing values each variable has. Which variables have the most?\nWrite down 2–3 questions that your exploration makes you want to answer\n\n\n\n\n\n\n\nNoteThe EDA loop\n\n\n\nEDA isn’t a linear checklist — it’s a cycle:\n\nAsk a question\nVisualize the data to answer it\nNotice something new\nAsk another question\nRepeat\n\nThere’s no “finished.” The goal is understanding, not a final answer.\n\n\n\nLoading the dataset\nlibrary(psych)\ndata(bfi)\nbfi &lt;- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility\n\n\nOutlier investigation template\n# Quick outlier check for any numeric variable\nvariable_name &lt;- \"age\"\n\nbfi |&gt;\n  summarize(\n    min = min(!!sym(variable_name), na.rm = TRUE),\n    max = max(!!sym(variable_name), na.rm = TRUE),\n    mean = mean(!!sym(variable_name), na.rm = TRUE),\n    sd = sd(!!sym(variable_name), na.rm = TRUE)\n  )\n\n# Flag values beyond 3 SD from the mean\nbfi |&gt;\n  filter(abs(age - mean(age, na.rm = TRUE)) &gt; 3 * sd(age, na.rm = TRUE))"
   },
   {
     "objectID": "index.html",
