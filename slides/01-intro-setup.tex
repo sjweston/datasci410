@@ -1,0 +1,835 @@
+% Options for packages loaded elsewhere
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames,x11names}{xcolor}
+%
+\documentclass[
+  letterpaper,
+  DIV=11,
+  numbers=noendperiod]{scrartcl}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+% Make \paragraph and \subparagraph free-standing
+\makeatletter
+\ifx\paragraph\undefined\else
+  \let\oldparagraph\paragraph
+  \renewcommand{\paragraph}{
+    \@ifstar
+      \xxxParagraphStar
+      \xxxParagraphNoStar
+  }
+  \newcommand{\xxxParagraphStar}[1]{\oldparagraph*{#1}\mbox{}}
+  \newcommand{\xxxParagraphNoStar}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+  \let\oldsubparagraph\subparagraph
+  \renewcommand{\subparagraph}{
+    \@ifstar
+      \xxxSubParagraphStar
+      \xxxSubParagraphNoStar
+  }
+  \newcommand{\xxxSubParagraphStar}[1]{\oldsubparagraph*{#1}\mbox{}}
+  \newcommand{\xxxSubParagraphNoStar}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+\makeatother
+
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{241,243,245}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.40,0.45,0.13}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\ExtensionTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.28,0.35,0.67}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.46,0.62}{#1}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.68,0.00,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{\textcolor[rgb]{0.00,0.23,0.31}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.07,0.07,0.07}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.13,0.47,0.30}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.37,0.37,0.37}{\textit{#1}}}
+
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
+% Set default figure placement to htbp
+\def\fps@figure{htbp}
+\makeatother
+
+
+
+
+
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+
+
+ 
+
+
+\KOMAoption{captions}{tableheading}
+\makeatletter
+\@ifpackageloaded{tcolorbox}{}{\usepackage[skins,breakable]{tcolorbox}}
+\@ifpackageloaded{fontawesome5}{}{\usepackage{fontawesome5}}
+\definecolor{quarto-callout-color}{HTML}{909090}
+\definecolor{quarto-callout-note-color}{HTML}{0758E5}
+\definecolor{quarto-callout-important-color}{HTML}{CC1914}
+\definecolor{quarto-callout-warning-color}{HTML}{EB9113}
+\definecolor{quarto-callout-tip-color}{HTML}{00A047}
+\definecolor{quarto-callout-caution-color}{HTML}{FC5300}
+\definecolor{quarto-callout-color-frame}{HTML}{acacac}
+\definecolor{quarto-callout-note-color-frame}{HTML}{4582ec}
+\definecolor{quarto-callout-important-color-frame}{HTML}{d9534f}
+\definecolor{quarto-callout-warning-color-frame}{HTML}{f0ad4e}
+\definecolor{quarto-callout-tip-color-frame}{HTML}{02b875}
+\definecolor{quarto-callout-caution-color-frame}{HTML}{fd7e14}
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\AtBeginDocument{%
+\ifdefined\contentsname
+  \renewcommand*\contentsname{Table of contents}
+\else
+  \newcommand\contentsname{Table of contents}
+\fi
+\ifdefined\listfigurename
+  \renewcommand*\listfigurename{List of Figures}
+\else
+  \newcommand\listfigurename{List of Figures}
+\fi
+\ifdefined\listtablename
+  \renewcommand*\listtablename{List of Tables}
+\else
+  \newcommand\listtablename{List of Tables}
+\fi
+\ifdefined\figurename
+  \renewcommand*\figurename{Figure}
+\else
+  \newcommand\figurename{Figure}
+\fi
+\ifdefined\tablename
+  \renewcommand*\tablename{Table}
+\else
+  \newcommand\tablename{Table}
+\fi
+}
+\@ifpackageloaded{float}{}{\usepackage{float}}
+\floatstyle{ruled}
+\@ifundefined{c@chapter}{\newfloat{codelisting}{h}{lop}}{\newfloat{codelisting}{h}{lop}[chapter]}
+\floatname{codelisting}{Listing}
+\newcommand*\listoflistings{\listof{codelisting}{List of Listings}}
+\makeatother
+\makeatletter
+\makeatother
+\makeatletter
+\@ifpackageloaded{caption}{}{\usepackage{caption}}
+\@ifpackageloaded{subcaption}{}{\usepackage{subcaption}}
+\makeatother
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+\hypersetup{
+  pdftitle={Introduction \& Setup},
+  pdfauthor={Dr.~Sara Weston},
+  colorlinks=true,
+  linkcolor={blue},
+  filecolor={Maroon},
+  citecolor={Blue},
+  urlcolor={Blue},
+  pdfcreator={LaTeX via pandoc}}
+
+
+\title{Introduction \& Setup}
+\usepackage{etoolbox}
+\makeatletter
+\providecommand{\subtitle}[1]{% add subtitle to \maketitle
+  \apptocmd{\@title}{\par {\large #1 \par}}{}{}
+}
+\makeatother
+\subtitle{PSY 410: Data Science for Psychology}
+\author{Dr.~Sara Weston}
+\date{2026-03-30}
+\begin{document}
+\maketitle
+
+
+\section{Welcome to PSY 410!}\label{welcome-to-psy-410}
+
+\subsection{About this course}\label{about-this-course}
+
+\textbf{What we'll learn:}
+
+\begin{itemize}
+\tightlist
+\item
+  Data visualization with ggplot2
+\item
+  Data transformation with dplyr
+\item
+  Data tidying with tidyr
+\item
+  Reproducible research with Quarto
+\end{itemize}
+
+\textbf{Why it matters:}
+
+\begin{itemize}
+\tightlist
+\item
+  Psychology is increasingly data-driven
+\item
+  Reproducibility crisis demands better practices
+\item
+  These skills are transferable everywhere
+\end{itemize}
+
+\subsection{Why data science for
+psychology?}\label{why-data-science-for-psychology}
+
+Psychology research involves:
+
+\begin{itemize}
+\tightlist
+\item
+  Collecting data from experiments, surveys, observations
+\item
+  Cleaning messy real-world data
+\item
+  Visualizing patterns and relationships
+\item
+  Communicating findings clearly
+\end{itemize}
+
+. . .
+
+\textbf{Data science gives us tools to do all of this better.}
+
+\subsection{The old way vs.~the new
+way}\label{the-old-way-vs.-the-new-way}
+
+\textbf{Point-and-click (SPSS, Excel)}
+
+\begin{itemize}
+\tightlist
+\item
+  Hard to reproduce
+\item
+  Error-prone
+\item
+  Limited visualizations
+\item
+  Doesn't scale
+\end{itemize}
+
+\textbf{Code-based (R)}
+
+\begin{itemize}
+\tightlist
+\item
+  Fully reproducible
+\item
+  Transparent \& shareable
+\item
+  Unlimited customization
+\item
+  Handles any data size
+\end{itemize}
+
+\subsection{Why R specifically?}\label{why-r-specifically}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Free and open source} --- no expensive licenses
+\item
+  \textbf{Designed for statistics} --- built by statisticians for data
+  analysis
+\item
+  \textbf{Massive community} --- packages for everything
+\item
+  \textbf{Psychology-friendly} --- \texttt{psych}, \texttt{lavaan},
+  \texttt{lme4}, \texttt{brms}\ldots{}
+\item
+  \textbf{Beautiful visualizations} --- ggplot2 is industry-leading
+\item
+  \textbf{Reproducible research} --- Quarto/RMarkdown integration
+\end{itemize}
+
+\section{Getting set up}\label{getting-set-up}
+
+\subsection{What you need to install}\label{what-you-need-to-install}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{R} --- the programming language
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Download from
+    \href{https://cloud.r-project.org}{cloud.r-project.org}
+  \end{itemize}
+\item
+  \textbf{RStudio} --- the interface we'll use to write R
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Download from
+    \href{https://posit.co/download/rstudio-desktop/}{posit.co/download/rstudio-desktop}
+  \end{itemize}
+\end{enumerate}
+
+. . .
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacitybacktitle=0.6, leftrule=.75mm, colback=white, title=\textcolor{quarto-callout-important-color}{\faExclamation}\hspace{0.5em}{Important}, opacityback=0, colbacktitle=quarto-callout-important-color!10!white, bottomtitle=1mm, colframe=quarto-callout-important-color-frame, rightrule=.15mm, toprule=.15mm, titlerule=0mm, toptitle=1mm, arc=.35mm, breakable, bottomrule=.15mm]
+
+Install R \textbf{first}, then RStudio. RStudio needs R to work!
+
+\end{tcolorbox}
+
+\subsection{R vs RStudio}\label{r-vs-rstudio}
+
+Think of it like this:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{R} is the engine of a car
+\item
+  \textbf{RStudio} is the dashboard, steering wheel, and GPS
+\end{itemize}
+
+You \emph{could} drive with just an engine\ldots{} but why would you?
+
+\subsection{The RStudio interface}\label{the-rstudio-interface}
+
+\includegraphics[width=0.8\linewidth,height=\textheight,keepaspectratio]{img/rstudio-panes.png}
+
+The four panes: Source (top-left), Console (bottom-left), Environment
+(top-right), Files/Plots/Help (bottom-right)
+
+\subsection{The four panes}\label{the-four-panes}
+
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.7000}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+Pane
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+What it does
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\textbf{Source} (top-left) & Write and edit your code files \\
+\textbf{Console} (bottom-left) & Run code interactively, see output \\
+\textbf{Environment} (top-right) & See your data and objects \\
+\textbf{Files/Plots/Help} (bottom-right) & Navigate files, view plots,
+get help \\
+\end{longtable}
+
+\subsection{Let's try it: The Console}\label{lets-try-it-the-console}
+
+Type in the Console and press Enter:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+. . .
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\DecValTok{2} \SpecialCharTok{+} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+[1] 4
+\end{verbatim}
+
+Congrats --- you just ran R code!
+
+\subsection{More console experiments}\label{more-console-experiments}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# R can do math}
+\DecValTok{10} \SpecialCharTok{*} \DecValTok{5}
+\FunctionTok{sqrt}\NormalTok{(}\DecValTok{144}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# R has built{-}in functions}
+\FunctionTok{mean}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{4}\NormalTok{, }\DecValTok{5}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# R can store things in objects}
+\NormalTok{my\_number }\OtherTok{\textless{}{-}} \DecValTok{42}
+\NormalTok{my\_number }\SpecialCharTok{*} \DecValTok{2}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{The assignment operator}\label{the-assignment-operator}
+
+In R, we use \texttt{\textless{}-} to assign values to objects:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{10}
+\end{Highlighting}
+\end{Shaded}
+
+Think of it as an arrow pointing left: ``put 10 into x''
+
+. . .
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacitybacktitle=0.6, leftrule=.75mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, rightrule=.15mm, toprule=.15mm, titlerule=0mm, toptitle=1mm, arc=.35mm, breakable, bottomrule=.15mm]
+
+\textbf{Keyboard shortcut:} Alt + - (Windows) or Option + - (Mac)
+
+\end{tcolorbox}
+
+\section{Projects \& workflow}\label{projects-workflow}
+
+\subsection{Why use RStudio Projects?}\label{why-use-rstudio-projects}
+
+\textbf{Without projects:}
+
+\begin{itemize}
+\tightlist
+\item
+  Files scattered everywhere
+\item
+  \texttt{setwd()} nightmares
+\item
+  ``It works on my computer''
+\item
+  Lost work when switching tasks
+\end{itemize}
+
+\textbf{With projects:}
+
+\begin{itemize}
+\tightlist
+\item
+  Everything in one folder
+\item
+  Paths just work
+\item
+  Share the whole folder
+\item
+  Easy to switch between projects
+\end{itemize}
+
+\subsection{Creating a project}\label{creating-a-project}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  File → New Project\ldots{}
+\item
+  Choose ``New Directory'' → ``New Project''
+\item
+  Name it (e.g., ``psy410'')
+\item
+  Pick a location (Documents folder is fine)
+\item
+  Click ``Create Project''
+\end{enumerate}
+
+. . .
+
+You'll see a \texttt{.Rproj} file appear --- this is your project file.
+
+\subsection{Project folder structure}\label{project-folder-structure}
+
+A good project folder might look like:
+
+\begin{verbatim}
+psy410/
+├── psy410.Rproj
+├── data/
+│   └── survey_data.csv
+├── scripts/
+│   └── analysis.R
+└── output/
+    └── figures/
+\end{verbatim}
+
+Keep your work organized from the start!
+
+\subsection{R Scripts}\label{r-scripts}
+
+R scripts (\texttt{.R} files) are where you write and save your code.
+
+To create one:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  File → New File → R Script
+\item
+  Or press Ctrl/Cmd + Shift + N
+\end{enumerate}
+
+. . .
+
+\textbf{Always save your scripts!} The console history disappears.
+
+\subsection{Running code from a
+script}\label{running-code-from-a-script}
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Run one line:} Put cursor on line, press Ctrl/Cmd + Enter
+\item
+  \textbf{Run selection:} Highlight code, press Ctrl/Cmd + Enter
+\item
+  \textbf{Run entire script:} Ctrl/Cmd + Shift + Enter
+\end{itemize}
+
+. . .
+
+\begin{tcolorbox}[enhanced jigsaw, coltitle=black, left=2mm, opacitybacktitle=0.6, leftrule=.75mm, colback=white, title=\textcolor{quarto-callout-tip-color}{\faLightbulb}\hspace{0.5em}{Tip}, opacityback=0, colbacktitle=quarto-callout-tip-color!10!white, bottomtitle=1mm, colframe=quarto-callout-tip-color-frame, rightrule=.15mm, toprule=.15mm, titlerule=0mm, toptitle=1mm, arc=.35mm, breakable, bottomrule=.15mm]
+
+You'll use Ctrl/Cmd + Enter constantly. Memorize it!
+
+\end{tcolorbox}
+
+\subsection{Comments}\label{comments}
+
+Use \texttt{\#} to write comments --- notes for yourself and others:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# This calculates the mean age of participants}
+\NormalTok{mean\_age }\OtherTok{\textless{}{-}} \FunctionTok{mean}\NormalTok{(ages)}
+
+\CommentTok{\# Anything after \# is ignored by R}
+\NormalTok{x }\OtherTok{\textless{}{-}} \DecValTok{10}  \CommentTok{\# this assigns 10 to x}
+\end{Highlighting}
+\end{Shaded}
+
+Comments are essential. Your future self will thank you.
+
+\section{Your first real task}\label{your-first-real-task}
+
+\subsection{Installing packages}\label{installing-packages}
+
+R's power comes from \textbf{packages} --- bundles of functions others
+have written.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Install a package (do this once)}
+\FunctionTok{install.packages}\NormalTok{(}\StringTok{"tidyverse"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load a package (do this every session)}
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{The tidyverse}\label{the-tidyverse}
+
+The \texttt{tidyverse} is actually a collection of packages:
+
+\begin{longtable}[]{@{}ll@{}}
+\toprule\noalign{}
+Package & Purpose \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+\texttt{ggplot2} & Data visualization \\
+\texttt{dplyr} & Data manipulation \\
+\texttt{tidyr} & Data tidying \\
+\texttt{readr} & Reading data files \\
+\texttt{tibble} & Modern data frames \\
+\texttt{stringr} & String manipulation \\
+\texttt{forcats} & Working with factors \\
+\texttt{purrr} & Functional programming \\
+\end{longtable}
+
+We'll use most of these throughout the course.
+
+\subsection{Let's look at some data}\label{lets-look-at-some-data}
+
+After loading tidyverse, you have access to built-in datasets:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(tidyverse)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+-- Attaching core tidyverse packages ------------------------ tidyverse 2.0.0 --
+v dplyr     1.1.4     v readr     2.1.5
+v forcats   1.0.1     v stringr   1.5.2
+v ggplot2   4.0.0     v tibble    3.3.0
+v lubridate 1.9.4     v tidyr     1.3.1
+v purrr     1.1.0     
+-- Conflicts ------------------------------------------ tidyverse_conflicts() --
+x dplyr::filter() masks stats::filter()
+x dplyr::lag()    masks stats::lag()
+i Use the conflicted package (<http://conflicted.r-lib.org/>) to force all conflicts to become errors
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# mpg is a dataset about fuel economy}
+\FunctionTok{glimpse}\NormalTok{(mpg)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Rows: 234
+Columns: 11
+$ manufacturer <chr> "audi", "audi", "audi", "audi", "audi", "audi", "audi", "~
+$ model        <chr> "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "~
+$ displ        <dbl> 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.~
+$ year         <int> 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200~
+$ cyl          <int> 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, ~
+$ trans        <chr> "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto~
+$ drv          <chr> "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4~
+$ cty          <int> 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1~
+$ hwy          <int> 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2~
+$ fl           <chr> "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p~
+$ class        <chr> "compact", "compact", "compact", "compact", "compact", "c~
+\end{verbatim}
+
+\subsection{Your turn!}\label{your-turn}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Create a new RStudio Project called ``psy410''
+\item
+  Create a new R script
+\item
+  Install and load the tidyverse
+\item
+  Run \texttt{glimpse(mpg)} and \texttt{glimpse(diamonds)}
+\item
+  Save your script!
+\end{enumerate}
+
+\section{Getting help}\label{getting-help}
+
+\subsection{When you're stuck}\label{when-youre-stuck}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{Use \texttt{?}} --- e.g., \texttt{?mean} opens the help page
+\item
+  \textbf{Google it} --- seriously, everyone does this
+\item
+  \textbf{Stack Overflow} --- most R questions are answered there
+\item
+  \textbf{R4DS book} --- \href{https://r4ds.hadley.nz}{r4ds.hadley.nz}
+\item
+  \textbf{Ask me} --- that's what I'm here for!
+\end{enumerate}
+
+\subsection{Reading help pages}\label{reading-help-pages}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{?mean}
+\end{Highlighting}
+\end{Shaded}
+
+Help pages include:
+
+\begin{itemize}
+\tightlist
+\item
+  \textbf{Description} --- what the function does
+\item
+  \textbf{Usage} --- how to call it
+\item
+  \textbf{Arguments} --- what inputs it takes
+\item
+  \textbf{Examples} --- working code you can run
+\end{itemize}
+
+The examples section is gold --- run them!
+
+\subsection{Error messages}\label{error-messages}
+
+Errors will happen. A lot. That's normal.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# This will error {-} can you spot why?}
+\FunctionTok{maen}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{, }\DecValTok{2}\NormalTok{, }\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+Error in maen(c(1, 2, 3)): could not find function "maen"
+\end{verbatim}
+
+. . .
+
+Read the error message carefully --- R is trying to help you.
+
+\section{Wrapping up}\label{wrapping-up}
+
+\subsection{Before next class}\label{before-next-class}
+
+📖 \textbf{Read:}
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://r4ds.hadley.nz/workflow-basics}{R4DS Ch 2: Workflow
+  basics}
+\item
+  \href{https://r4ds.hadley.nz/workflow-scripts}{R4DS Ch 6: Workflow:
+  scripts and projects}
+\end{itemize}
+
+✅ \textbf{Do:}
+
+\begin{itemize}
+\tightlist
+\item
+  Install R and RStudio
+\item
+  Create your psy410 project
+\item
+  Install the tidyverse package
+\item
+  Poke around! Try things! Break stuff!
+\end{itemize}
+
+\subsection{Key takeaways}\label{key-takeaways}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{R is a tool} --- like learning any tool, it takes practice
+\item
+  \textbf{RStudio makes R usable} --- learn the interface
+\item
+  \textbf{Projects keep you organized} --- always use them
+\item
+  \textbf{Scripts save your work} --- never just type in the console
+\item
+  \textbf{Errors are learning opportunities} --- read them, Google them
+\end{enumerate}
+
+\subsection{Questions?}\label{questions}
+
+\includegraphics[width=0.3\linewidth,height=\textheight,keepaspectratio]{img/questions.png}
+
+See you Wednesday for your first visualization!
+
+
+
+
+\end{document}
