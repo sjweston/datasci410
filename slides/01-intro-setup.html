@@ -597,22 +597,32 @@ Dr.&nbsp;Sara Weston
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># mpg is a dataset about fuel economy</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>mpg</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 234
-Columns: 11
-$ manufacturer &lt;chr&gt; "audi", "audi", "audi", "audi", "audi", "audi", "audi", "…
-$ model        &lt;chr&gt; "a4", "a4", "a4", "a4", "a4", "a4", "a4", "a4 quattro", "…
-$ displ        &lt;dbl&gt; 1.8, 1.8, 2.0, 2.0, 2.8, 2.8, 3.1, 1.8, 1.8, 2.0, 2.0, 2.…
-$ year         &lt;int&gt; 1999, 1999, 2008, 2008, 1999, 1999, 2008, 1999, 1999, 200…
-$ cyl          &lt;int&gt; 4, 4, 4, 4, 6, 6, 6, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 8, 8, …
-$ trans        &lt;chr&gt; "auto(l5)", "manual(m5)", "manual(m6)", "auto(av)", "auto…
-$ drv          &lt;chr&gt; "f", "f", "f", "f", "f", "f", "f", "4", "4", "4", "4", "4…
-$ cty          &lt;int&gt; 18, 21, 20, 21, 16, 18, 18, 18, 16, 20, 19, 15, 17, 17, 1…
-$ hwy          &lt;int&gt; 29, 29, 31, 30, 26, 26, 27, 26, 25, 28, 27, 25, 25, 25, 2…
-$ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p…
-$ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
+<pre><code># A tibble: 234 × 11
+   manufacturer model      displ  year   cyl trans drv     cty   hwy fl    class
+   &lt;chr&gt;        &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 audi         a4           1.8  1999     4 auto… f        18    29 p     comp…
+ 2 audi         a4           1.8  1999     4 manu… f        21    29 p     comp…
+ 3 audi         a4           2    2008     4 manu… f        20    31 p     comp…
+ 4 audi         a4           2    2008     4 auto… f        21    30 p     comp…
+ 5 audi         a4           2.8  1999     6 auto… f        16    26 p     comp…
+ 6 audi         a4           2.8  1999     6 manu… f        18    26 p     comp…
+ 7 audi         a4           3.1  2008     6 auto… f        18    27 p     comp…
+ 8 audi         a4 quattro   1.8  1999     4 manu… 4        18    26 p     comp…
+ 9 audi         a4 quattro   1.8  1999     4 auto… 4        16    25 p     comp…
+10 audi         a4 quattro   2    2008     4 manu… 4        20    28 p     comp…
+# ℹ 224 more rows</code></pre>
 </div>
+</div>
+</section>
+<section id="other-ways-to-look-at-data-frames" class="slide level2">
+<h2>Other ways to look at data frames</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># get the type of variable and the first few instances</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># how many rows and columns?</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="your-turn" class="slide level2">
@@ -643,7 +653,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="reading-help-pages" class="slide level2">
 <h2>Reading help pages</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Help pages include:</p>
 <ul>
@@ -658,8 +668,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Error messages</h2>
 <p>Errors will happen. A lot. That’s normal.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This will error - can you spot why?</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">maen</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This will error - can you spot why?</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">maen</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in maen(c(1, 2, 3)): could not find function "maen"</code></pre>
 </div>
@@ -667,10 +677,12 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="fragment">
 <p>Read the error message carefully — R is trying to help you.</p>
 </div>
-</section>
-<section class="slide level2">
-
 </section></section>
+<section id="class-expectations-and-structure" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Class expectations and structure</h1>
+
+</section>
+
 <section>
 <section id="why-no-ai-yet" class="title-slide slide level1 center">
 <h1>Why No AI? (Yet)</h1>
@@ -713,14 +725,13 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li><strong>Debugging Resilience:</strong> Emotional regulation when things break.</li>
 <li><strong>Strategic Friction:</strong> The ability to break a big problem into small pieces.</li>
 </ol></li>
-<li><em>Source: Dr.&nbsp;Cat Hicks, Engineering Psychologist</em></li>
 </ul>
 </section>
 <section class="slide level2">
 
 <h3 id="course-structure-building-the-helmet">Course Structure: Building the Helmet</h3>
 <ul>
-<li><strong>Why so many short assignments?</strong>
+<li><strong>Many short assignments</strong>
 <ul>
 <li>This is <strong>“Desirable Difficulty.”</strong></li>
 <li>We are building the neural pathways for code syntax.</li>
@@ -749,11 +760,6 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </section>
 <section class="slide level2">
 
-<h3 id="summary">Summary</h3>
-<blockquote>
-<p>“It is not about winning against another participant in an abstract lab task. It is about your real life, and your real life is a complex set of decisions… Use the friction to build your strategy.” — Dr.&nbsp;Cat Hicks</p>
-</blockquote>
-<p><strong>We are doing things “the hard way” now so you can do them “the fast way” safely later.</strong></p>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
