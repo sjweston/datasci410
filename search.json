@@ -134,168 +134,288 @@
     "href": "content/17-content.html",
     "title": "17: Practice & Review",
     "section": "",
-    "text": "Content for Monday, June 1, 2026"
+    "text": "Content for Monday, June 1, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Practice & Review"
+    ]
   },
   {
     "objectID": "content/17-content.html#before-class",
     "href": "content/17-content.html#before-class",
     "title": "17: Practice & Review",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\n\nImportantAssignment 8 is due today\n\n\n\nAssignment 8: Reproducible Report — submit before class."
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\n\nImportantAssignment 8 is due today\n\n\n\nAssignment 8: Reproducible Report — submit before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Practice & Review"
+    ]
   },
   {
     "objectID": "content/17-content.html#during-class",
     "href": "content/17-content.html#during-class",
     "title": "17: Practice & Review",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nGuided practice: a complete workflow from import to polished figure\n\nImport a messy dataset\nClean and tidy\nExplore and visualize\nCreate a polished figure\nDocument in Quarto\n\nCommon errors and how to read them\n\n“Object not found”\n“Could not find function”\n“Unexpected symbol”\n“Non-numeric argument to binary operator”\n\nDebugging strategies\n\nRead the error message (really read it)\nRun code line by line\nGoogle the error — everyone does this\nMinimal reproducible examples\n\nGetting help effectively\nQ&A for final projects\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nGuided practice: a complete workflow from import to polished figure\n\nImport a messy dataset\nClean and tidy\nExplore and visualize\nCreate a polished figure\nDocument in Quarto\n\nCommon errors and how to read them\n\n“Object not found”\n“Could not find function”\n“Unexpected symbol”\n“Non-numeric argument to binary operator”\n\nDebugging strategies\n\nRead the error message (really read it)\nRun code line by line\nGoogle the error — everyone does this\nMinimal reproducible examples\n\nGetting help effectively\nQ&A for final projects\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Practice & Review"
+    ]
   },
   {
     "objectID": "content/17-content.html#after-class",
     "href": "content/17-content.html#after-class",
     "title": "17: Practice & Review",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nPick a dataset you haven’t worked with before. Walk through the full workflow: import, glimpse, tidy, explore, visualize\nIntentionally break your code in 3 different ways. Practice reading the error messages\nCreate a minimal reproducible example (reprex) for a problem you’ve encountered\nSpend time polishing your final project — this is your last chance to ask questions!\n\n\n\n\n\n\n\nNoteThe debugging checklist\n\n\n\nWhen your code doesn’t work, go through this list:\n\nRead the error message — it usually tells you exactly what’s wrong\nCheck spelling and capitalization — R is case-sensitive\nCheck your parentheses and pipes — missing ) or |&gt; breaks everything\nDid you load the package? — library(tidyverse) needs to run first\nRun code line by line — find where it breaks\nGoogle the error — someone has had this exact problem before\nAsk for help — but bring a reprex!\n\n\n\n\nHow to ask a good question\n# A good question includes:\n# 1. What you're trying to do\n# 2. What you expected to happen\n# 3. What actually happened (the error message)\n# 4. A minimal example that reproduces the problem\n\n# Example reprex:\nlibrary(tidyverse)\ndata &lt;- tibble(x = c(1, 2, \"three\"))\nmean(data$x)\n# Error: argument is not numeric or logical\n\n# Question: \"I'm trying to calculate the mean of a column,\n# but one value is text. How do I handle this?\""
+    "text": "After class\n✅ Practice:\n\nPick a dataset you haven’t worked with before. Walk through the full workflow: import, glimpse, tidy, explore, visualize\nIntentionally break your code in 3 different ways. Practice reading the error messages\nCreate a minimal reproducible example (reprex) for a problem you’ve encountered\nSpend time polishing your final project — this is your last chance to ask questions!\n\n\n\n\n\n\n\nNoteThe debugging checklist\n\n\n\nWhen your code doesn’t work, go through this list:\n\nRead the error message — it usually tells you exactly what’s wrong\nCheck spelling and capitalization — R is case-sensitive\nCheck your parentheses and pipes — missing ) or |&gt; breaks everything\nDid you load the package? — library(tidyverse) needs to run first\nRun code line by line — find where it breaks\nGoogle the error — someone has had this exact problem before\nAsk for help — but bring a reprex!\n\n\n\n\nHow to ask a good question\n# A good question includes:\n# 1. What you're trying to do\n# 2. What you expected to happen\n# 3. What actually happened (the error message)\n# 4. A minimal example that reproduces the problem\n\n# Example reprex:\nlibrary(tidyverse)\ndata &lt;- tibble(x = c(1, 2, \"three\"))\nmean(data$x)\n# Error: argument is not numeric or logical\n\n# Question: \"I'm trying to calculate the mean of a column,\n# but one value is text. How do I handle this?\"",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "17: Practice & Review"
+    ]
   },
   {
     "objectID": "content/15-content.html",
     "href": "content/15-content.html",
     "title": "15: Storytelling with Data",
     "section": "",
-    "text": "Content for Wednesday, May 20, 2026"
+    "text": "Content for Wednesday, May 20, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "15: Storytelling with Data"
+    ]
   },
   {
     "objectID": "content/15-content.html#before-class",
     "href": "content/15-content.html#before-class",
     "title": "15: Storytelling with Data",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 11: Communication\nDykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)\n\n\n\n\n\n\n\nImportantAssignment 7 is due today\n\n\n\nAssignment 7: Joins & Missing Data — submit before class.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class."
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 11: Communication\nDykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)\n\n\n\n\n\n\n\nImportantAssignment 7 is due today\n\n\n\nAssignment 7: Joins & Missing Data — submit before class.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "15: Storytelling with Data"
+    ]
   },
   {
     "objectID": "content/15-content.html#during-class",
     "href": "content/15-content.html#during-class",
     "title": "15: Storytelling with Data",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy storytelling? Data + visuals + narrative = change\nThe Knaflic framework:\n\nUnderstand the context — who is your audience?\nChoose appropriate visuals — match plot type to message\nEliminate clutter — less is more\nFocus attention — use preattentive attributes strategically\nThink like a designer — visual hierarchy, accessibility\n\nCritical evaluation of figures:\n\nMisleading figures — truncated axes, cherry-picked ranges, 3D charts\nBoring figures — no title, too many colors, wrong plot type\nThe “so what?” test\n\nApplying storytelling to your final project\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhy storytelling? Data + visuals + narrative = change\nThe Knaflic framework:\n\nUnderstand the context — who is your audience?\nChoose appropriate visuals — match plot type to message\nEliminate clutter — less is more\nFocus attention — use preattentive attributes strategically\nThink like a designer — visual hierarchy, accessibility\n\nCritical evaluation of figures:\n\nMisleading figures — truncated axes, cherry-picked ranges, 3D charts\nBoring figures — no title, too many colors, wrong plot type\nThe “so what?” test\n\nApplying storytelling to your final project\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "15: Storytelling with Data"
+    ]
   },
   {
     "objectID": "content/15-content.html#after-class",
     "href": "content/15-content.html#after-class",
     "title": "15: Storytelling with Data",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nPick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?\nDeclutter that figure: remove unnecessary gridlines, legends, and default styling\nAdd a clear, informative title that tells the reader what to see (not just what the axes are)\nTry annotate() to add a text label highlighting the key finding\nShow your figure to someone who hasn’t seen your data. Can they understand the point without explanation?\n\n\n\n\n\n\n\nNoteThe “so what?” test\n\n\n\nEvery figure should answer a question. If you can’t complete this sentence, the figure needs work:\n\n“This figure shows that _______________.”\n\nIf you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.\n\n\n\nHandout\nThe APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere."
+    "text": "After class\n✅ Practice:\n\nPick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?\nDeclutter that figure: remove unnecessary gridlines, legends, and default styling\nAdd a clear, informative title that tells the reader what to see (not just what the axes are)\nTry annotate() to add a text label highlighting the key finding\nShow your figure to someone who hasn’t seen your data. Can they understand the point without explanation?\n\n\n\n\n\n\n\nNoteThe “so what?” test\n\n\n\nEvery figure should answer a question. If you can’t complete this sentence, the figure needs work:\n\n“This figure shows that _______________.”\n\nIf you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.\n\n\n\nHandout\nThe APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "15: Storytelling with Data"
+    ]
   },
   {
     "objectID": "content/13-content.html",
     "href": "content/13-content.html",
     "title": "13: Joins",
     "section": "",
-    "text": "Content for Monday, May 11, 2026"
+    "text": "Content for Monday, May 11, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Joins"
+    ]
   },
   {
     "objectID": "content/13-content.html#before-class",
     "href": "content/13-content.html#before-class",
     "title": "13: Joins",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins\n\n\n\n\n\n\n\nImportantAssignment 6 is due today\n\n\n\nAssignment 6: Data Types — submit before class."
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins\n\n\n\n\n\n\n\nImportantAssignment 6 is due today\n\n\n\nAssignment 6: Data Types — submit before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Joins"
+    ]
   },
   {
     "objectID": "content/13-content.html#during-class",
     "href": "content/13-content.html#during-class",
     "title": "13: Joins",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Joins"
+    ]
   },
   {
     "objectID": "content/13-content.html#after-class",
     "href": "content/13-content.html#after-class",
     "title": "13: Joins",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  gender = c(\"Woman\", \"Man\", \"Woman\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")"
+    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  gender = c(\"Woman\", \"Man\", \"Woman\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "13: Joins"
+    ]
   },
   {
     "objectID": "content/11-content.html",
     "href": "content/11-content.html",
     "title": "11: Data Types Grab Bag",
     "section": "",
-    "text": "Content for Monday, May 4, 2026"
+    "text": "Content for Monday, May 4, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "11: Data Types Grab Bag"
+    ]
   },
   {
     "objectID": "content/11-content.html#before-class",
     "href": "content/11-content.html#before-class",
     "title": "11: Data Types Grab Bag",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 12: Logical vectors\nR4DS Ch 13: Numbers\n\n\n\n\n\n\n\nImportantAssignment 5 is due today\n\n\n\nAssignment 5: Exploratory Data Analysis — submit before class."
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 12: Logical vectors\nR4DS Ch 13: Numbers\n\n\n\n\n\n\n\nImportantAssignment 5 is due today\n\n\n\nAssignment 5: Exploratory Data Analysis — submit before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "11: Data Types Grab Bag"
+    ]
   },
   {
     "objectID": "content/11-content.html#during-class",
     "href": "content/11-content.html#during-class",
     "title": "11: Data Types Grab Bag",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nLogical vectors — TRUE/FALSE and how to use them\nComparisons and Boolean operations (&, |, !)\nif_else() and case_when() for conditional values\nNumbers — integer vs. double, rounding, summarizing\nHandling NA in calculations with na.rm = TRUE\nPractical application: computing scale scores in psychology data\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nLogical vectors — TRUE/FALSE and how to use them\nComparisons and Boolean operations (&, |, !)\nif_else() and case_when() for conditional values\nNumbers — integer vs. double, rounding, summarizing\nHandling NA in calculations with na.rm = TRUE\nPractical application: computing scale scores in psychology data\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "11: Data Types Grab Bag"
+    ]
   },
   {
     "objectID": "content/11-content.html#after-class",
     "href": "content/11-content.html#after-class",
     "title": "11: Data Types Grab Bag",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nUse if_else() to create a new column that labels participants as “young” (under 25) or “older” (25+)\nUse case_when() to recode a Likert scale (1 = “Strongly Disagree”, 2 = “Disagree”, etc.)\nCalculate scale scores by averaging across items — remember na.rm = TRUE\nUse any() and all() to check if any/all values in a column meet a condition\nPractice rounding with round(), floor(), and ceiling() — when would you use each?\n\n\n\n\n\n\n\nNotecase_when() is your friend\n\n\n\ncase_when() is the tidyverse version of “if… else if… else.” It’s especially useful for recoding variables:\ndata |&gt;\n  mutate(\n    age_group = case_when(\n      age &lt; 18 ~ \"Minor\",\n      age &lt; 25 ~ \"Young adult\",\n      age &lt; 65 ~ \"Adult\",\n      .default = \"Senior\"\n    )\n  )\nThe .default argument catches everything that doesn’t match a previous condition.\n\n\n\nPsychology application: scale scores\n# Computing a scale score from individual items\nsurvey_data |&gt;\n  mutate(\n    # Reverse code item 3 (on a 1-5 scale)\n    item3_r = 6 - item3,\n    # Calculate mean score across items\n    scale_score = rowMeans(\n      pick(item1, item2, item3_r, item4, item5),\n      na.rm = TRUE\n    )\n  )"
+    "text": "After class\n✅ Practice:\n\nUse if_else() to create a new column that labels participants as “young” (under 25) or “older” (25+)\nUse case_when() to recode a Likert scale (1 = “Strongly Disagree”, 2 = “Disagree”, etc.)\nCalculate scale scores by averaging across items — remember na.rm = TRUE\nUse any() and all() to check if any/all values in a column meet a condition\nPractice rounding with round(), floor(), and ceiling() — when would you use each?\n\n\n\n\n\n\n\nNotecase_when() is your friend\n\n\n\ncase_when() is the tidyverse version of “if… else if… else.” It’s especially useful for recoding variables:\ndata |&gt;\n  mutate(\n    age_group = case_when(\n      age &lt; 18 ~ \"Minor\",\n      age &lt; 25 ~ \"Young adult\",\n      age &lt; 65 ~ \"Adult\",\n      .default = \"Senior\"\n    )\n  )\nThe .default argument catches everything that doesn’t match a previous condition.\n\n\n\nPsychology application: scale scores\n# Computing a scale score from individual items\nsurvey_data |&gt;\n  mutate(\n    # Reverse code item 3 (on a 1-5 scale)\n    item3_r = 6 - item3,\n    # Calculate mean score across items\n    scale_score = rowMeans(\n      pick(item1, item2, item3_r, item4, item5),\n      na.rm = TRUE\n    )\n  )",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "11: Data Types Grab Bag"
+    ]
   },
   {
     "objectID": "content/09-content.html",
     "href": "content/09-content.html",
     "title": "9: EDA — Variation",
     "section": "",
-    "text": "Content for Monday, April 27, 2026"
+    "text": "Content for Monday, April 27, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: EDA — Variation"
+    ]
   },
   {
     "objectID": "content/09-content.html#before-class",
     "href": "content/09-content.html#before-class",
     "title": "9: EDA — Variation",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\n\nImportantAssignment 4 is due today\n\n\n\nAssignment 4: Visualization Deep Dive — submit before class."
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\n\nImportantAssignment 4 is due today\n\n\n\nAssignment 4: Visualization Deep Dive — submit before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: EDA — Variation"
+    ]
   },
   {
     "objectID": "content/09-content.html#during-class",
     "href": "content/09-content.html#during-class",
     "title": "9: EDA — Variation",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhat is EDA? Exploratory vs. confirmatory thinking\nThe EDA mindset — curiosity, not confirmation\nExploring distributions: histograms, density plots, bar charts\nChoosing binwidth and when it matters\nSpotting outliers visually and programmatically\nWhat to do with outliers (investigate, don’t delete)\nA first look at missing data\nPutting it all together: a systematic EDA workflow\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhat is EDA? Exploratory vs. confirmatory thinking\nThe EDA mindset — curiosity, not confirmation\nExploring distributions: histograms, density plots, bar charts\nChoosing binwidth and when it matters\nSpotting outliers visually and programmatically\nWhat to do with outliers (investigate, don’t delete)\nA first look at missing data\nPutting it all together: a systematic EDA workflow\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: EDA — Variation"
+    ]
   },
   {
     "objectID": "content/09-content.html#after-class",
     "href": "content/09-content.html#after-class",
     "title": "9: EDA — Variation",
     "section": "After class",
-    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package (loaded in class today):\n\nExplore the distribution of age. What shape is it? Is it skewed?\nCheck for outliers in age using both a histogram and a boxplot. Are any values suspicious?\nPick 3 personality items (e.g., E1, N2, A4) and plot their distributions. What do you notice?\nCount how many missing values each variable has. Which variables have the most?\nWrite down 2–3 questions that your exploration makes you want to answer\n\n\n\n\n\n\n\nNoteThe EDA loop\n\n\n\nEDA isn’t a linear checklist — it’s a cycle:\n\nAsk a question\nVisualize the data to answer it\nNotice something new\nAsk another question\nRepeat\n\nThere’s no “finished.” The goal is understanding, not a final answer.\n\n\n\nLoading the dataset\nlibrary(psych)\ndata(bfi)\nbfi &lt;- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility\n\n\nOutlier investigation template\n# Quick outlier check for any numeric variable\nvariable_name &lt;- \"age\"\n\nbfi |&gt;\n  summarize(\n    min = min(!!sym(variable_name), na.rm = TRUE),\n    max = max(!!sym(variable_name), na.rm = TRUE),\n    mean = mean(!!sym(variable_name), na.rm = TRUE),\n    sd = sd(!!sym(variable_name), na.rm = TRUE)\n  )\n\n# Flag values beyond 3 SD from the mean\nbfi |&gt;\n  filter(abs(age - mean(age, na.rm = TRUE)) &gt; 3 * sd(age, na.rm = TRUE))"
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package (loaded in class today):\n\nExplore the distribution of age. What shape is it? Is it skewed?\nCheck for outliers in age using both a histogram and a boxplot. Are any values suspicious?\nPick 3 personality items (e.g., E1, N2, A4) and plot their distributions. What do you notice?\nCount how many missing values each variable has. Which variables have the most?\nWrite down 2–3 questions that your exploration makes you want to answer\n\n\n\n\n\n\n\nNoteThe EDA loop\n\n\n\nEDA isn’t a linear checklist — it’s a cycle:\n\nAsk a question\nVisualize the data to answer it\nNotice something new\nAsk another question\nRepeat\n\nThere’s no “finished.” The goal is understanding, not a final answer.\n\n\n\nLoading the dataset\nlibrary(psych)\ndata(bfi)\nbfi &lt;- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility\n\n\nOutlier investigation template\n# Quick outlier check for any numeric variable\nvariable_name &lt;- \"age\"\n\nbfi |&gt;\n  summarize(\n    min = min(!!sym(variable_name), na.rm = TRUE),\n    max = max(!!sym(variable_name), na.rm = TRUE),\n    mean = mean(!!sym(variable_name), na.rm = TRUE),\n    sd = sd(!!sym(variable_name), na.rm = TRUE)\n  )\n\n# Flag values beyond 3 SD from the mean\nbfi |&gt;\n  filter(abs(age - mean(age, na.rm = TRUE)) &gt; 3 * sd(age, na.rm = TRUE))",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "9: EDA — Variation"
+    ]
   },
   {
     "objectID": "content/07-content.html",
     "href": "content/07-content.html",
     "title": "7: Layers & Aesthetics",
     "section": "",
-    "text": "Content for Monday, April 20, 2026"
+    "text": "Content for Monday, April 20, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Layers & Aesthetics"
+    ]
   },
   {
     "objectID": "content/07-content.html#before-class",
     "href": "content/07-content.html#before-class",
     "title": "7: Layers & Aesthetics",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 9: Layers\n\n\n\n\n\n\n\nImportantAssignment 3 is due today\n\n\n\nAssignment 3: Tidying & Import — submit before class."
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 9: Layers\n\n\n\n\n\n\n\nImportantAssignment 3 is due today\n\n\n\nAssignment 3: Tidying & Import — submit before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Layers & Aesthetics"
+    ]
   },
   {
     "objectID": "content/07-content.html#during-class",
     "href": "content/07-content.html#during-class",
     "title": "7: Layers & Aesthetics",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nMatching geom to data type — a decision guide\nDistributions: geom_histogram() vs geom_density()\nComparing groups: geom_boxplot() vs geom_violin()\nstat_summary() — means, error bars, and custom functions\nWhat SE, SD, and CI error bars actually mean\nPosition adjustments: dodge, stack, fill, jitter\nScales: controlling axes, colors, and legends\ncoord_flip() vs coord_cartesian() — and why they’re different\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nMatching geom to data type — a decision guide\nDistributions: geom_histogram() vs geom_density()\nComparing groups: geom_boxplot() vs geom_violin()\nstat_summary() — means, error bars, and custom functions\nWhat SE, SD, and CI error bars actually mean\nPosition adjustments: dodge, stack, fill, jitter\nScales: controlling axes, colors, and legends\ncoord_flip() vs coord_cartesian() — and why they’re different\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Layers & Aesthetics"
+    ]
   },
   {
     "objectID": "content/07-content.html#after-class",
     "href": "content/07-content.html#after-class",
     "title": "7: Layers & Aesthetics",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate a histogram and a density plot of the same variable. When does each one work better?\nMake a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?\nBuild a bar chart with error bars using stat_summary(). Try both mean_se and mean_cl_normal — what changes?\nPractice position = \"dodge\" with a grouped bar chart\nTry coord_flip() on a plot with long category labels — does it help readability?\n\n\n\n\n\n\n\nNotecoord_cartesian() vs scale limits\n\n\n\nThese do very different things:\n# This ZOOMS — all data is still used for calculations\ncoord_cartesian(ylim = c(400, 600))\n\n# This DROPS data outside the range — changes your summaries!\nscale_y_continuous(limits = c(400, 600))\nUse coord_cartesian() when you want to zoom in. Use scale limits only when you actually want to exclude data.\n\n\n\nPsychology application: error bars\n# The standard psych figure: mean + SE + individual points\ndata |&gt;\n  ggplot(aes(x = condition, y = score, fill = condition)) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  stat_summary(fun = mean, geom = \"bar\", alpha = 0.6, width = 0.5) +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2) +\n  labs(caption = \"Error bars = SE of the mean.\")"
+    "text": "After class\n✅ Practice:\n\nCreate a histogram and a density plot of the same variable. When does each one work better?\nMake a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?\nBuild a bar chart with error bars using stat_summary(). Try both mean_se and mean_cl_normal — what changes?\nPractice position = \"dodge\" with a grouped bar chart\nTry coord_flip() on a plot with long category labels — does it help readability?\n\n\n\n\n\n\n\nNotecoord_cartesian() vs scale limits\n\n\n\nThese do very different things:\n# This ZOOMS — all data is still used for calculations\ncoord_cartesian(ylim = c(400, 600))\n\n# This DROPS data outside the range — changes your summaries!\nscale_y_continuous(limits = c(400, 600))\nUse coord_cartesian() when you want to zoom in. Use scale limits only when you actually want to exclude data.\n\n\n\nPsychology application: error bars\n# The standard psych figure: mean + SE + individual points\ndata |&gt;\n  ggplot(aes(x = condition, y = score, fill = condition)) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  stat_summary(fun = mean, geom = \"bar\", alpha = 0.6, width = 0.5) +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2) +\n  labs(caption = \"Error bars = SE of the mean.\")",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "7: Layers & Aesthetics"
+    ]
   },
   {
     "objectID": "content/05-content.html",
@@ -1382,196 +1502,336 @@
     "href": "content/06-content.html",
     "title": "6: Data Import",
     "section": "",
-    "text": "Content for Wednesday, April 15, 2026"
+    "text": "Content for Wednesday, April 15, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Data Import"
+    ]
   },
   {
     "objectID": "content/06-content.html#before-class",
     "href": "content/06-content.html#before-class",
     "title": "6: Data Import",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 7: Data import\nR4DS Ch 20: Spreadsheets"
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 7: Data import\nR4DS Ch 20: Spreadsheets",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Data Import"
+    ]
   },
   {
     "objectID": "content/06-content.html#during-class",
     "href": "content/06-content.html#during-class",
     "title": "6: Data Import",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nThe data science workflow: where import fits in\nread_csv() — reading CSV files and handling common problems\nColumn types and how to fix them when R guesses wrong\nMissing value codes (-999, \"N/A\", etc.)\nreadxl::read_excel() — working with Excel files\nA quick look at SPSS files with haven::read_sav()\nPractical tips for importing Qualtrics exports\n\n\n\n\n\n\n\nTipAssignment 3 is assigned today\n\n\n\nAssignment 3: Tidying & Import — due before Session 7.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nThe data science workflow: where import fits in\nread_csv() — reading CSV files and handling common problems\nColumn types and how to fix them when R guesses wrong\nMissing value codes (-999, \"N/A\", etc.)\nreadxl::read_excel() — working with Excel files\nA quick look at SPSS files with haven::read_sav()\nPractical tips for importing Qualtrics exports\n\n\n\n\n\n\n\nTipAssignment 3 is assigned today\n\n\n\nAssignment 3: Tidying & Import — due before Session 7.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Data Import"
+    ]
   },
   {
     "objectID": "content/06-content.html#after-class",
     "href": "content/06-content.html#after-class",
     "title": "6: Data Import",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nFind a CSV file on your computer (or download one) and import it with read_csv(). Run glimpse() — do the types look right?\nCheck problems() after importing. Does it flag anything?\nTry reading the messy CSV we created in class. Clean up the column names and missing values.\nIf you have an Excel file handy, try read_excel(). What happens with multiple sheets?\n\n\n\n\n\n\n\nNoteQualtrics import cheat sheet\n\n\n\nMost Qualtrics CSV exports have two extra description rows after the header. The standard fix:\nqualtrics_data &lt;- read_csv(\"my_export.csv\",\n  skip = 2,\n  na = c(\"\", \"N/A\", \"-999\")\n)\nAlways glimpse() right after — Qualtrics column names are ugly but fixable with rename().\n\n\n\nPackage check\nIf you haven’t already, make sure readxl is installed:\ninstall.packages(\"readxl\")\nIt’s not part of tidyverse, but it is part of the broader tidyverse ecosystem — library(tidyverse) does not load it automatically."
+    "text": "After class\n✅ Practice:\n\nFind a CSV file on your computer (or download one) and import it with read_csv(). Run glimpse() — do the types look right?\nCheck problems() after importing. Does it flag anything?\nTry reading the messy CSV we created in class. Clean up the column names and missing values.\nIf you have an Excel file handy, try read_excel(). What happens with multiple sheets?\n\n\n\n\n\n\n\nNoteQualtrics import cheat sheet\n\n\n\nMost Qualtrics CSV exports have two extra description rows after the header. The standard fix:\nqualtrics_data &lt;- read_csv(\"my_export.csv\",\n  skip = 2,\n  na = c(\"\", \"N/A\", \"-999\")\n)\nAlways glimpse() right after — Qualtrics column names are ugly but fixable with rename().\n\n\n\nPackage check\nIf you haven’t already, make sure readxl is installed:\ninstall.packages(\"readxl\")\nIt’s not part of tidyverse, but it is part of the broader tidyverse ecosystem — library(tidyverse) does not load it automatically.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "6: Data Import"
+    ]
   },
   {
     "objectID": "content/08-content.html",
     "href": "content/08-content.html",
     "title": "8: Perception & Design",
     "section": "",
-    "text": "Content for Wednesday, April 22, 2026"
+    "text": "Content for Wednesday, April 22, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Perception & Design"
+    ]
   },
   {
     "objectID": "content/08-content.html#before-class",
     "href": "content/08-content.html#before-class",
     "title": "8: Perception & Design",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nSupplementary reading on visual perception principles (posted on Canvas)\nOptional: Knaflic, Storytelling with Data, Ch 1–3"
+    "text": "Before class\n📖 Reading:\n\nSupplementary reading on visual perception principles (posted on Canvas)\nOptional: Knaflic, Storytelling with Data, Ch 1–3",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Perception & Design"
+    ]
   },
   {
     "objectID": "content/08-content.html#during-class",
     "href": "content/08-content.html#during-class",
     "title": "8: Perception & Design",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy perception matters — how the brain processes visual information\nPreattentive attributes: color, size, position, shape\nGestalt principles and how they shape layout\nColor theory: sequential, diverging, and qualitative palettes\nColorblind-friendly design (and why it matters)\nDecluttering: removing the visual noise\nPsychology-specific figures: error bars, interaction plots, raincloud plots\nPutting it all together with theme() customization\n\n\n\n\n\n\n\nTipAssignment 4 is assigned today\n\n\n\nAssignment 4: Visualization Deep Dive — due before Session 9.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhy perception matters — how the brain processes visual information\nPreattentive attributes: color, size, position, shape\nGestalt principles and how they shape layout\nColor theory: sequential, diverging, and qualitative palettes\nColorblind-friendly design (and why it matters)\nDecluttering: removing the visual noise\nPsychology-specific figures: error bars, interaction plots, raincloud plots\nPutting it all together with theme() customization\n\n\n\n\n\n\n\nTipAssignment 4 is assigned today\n\n\n\nAssignment 4: Visualization Deep Dive — due before Session 9.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Perception & Design"
+    ]
   },
   {
     "objectID": "content/08-content.html#after-class",
     "href": "content/08-content.html#after-class",
     "title": "8: Perception & Design",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines in both directions? → Remove vertical ones\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed."
+    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines in both directions? → Remove vertical ones\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "8: Perception & Design"
+    ]
   },
   {
     "objectID": "content/10-content.html",
     "href": "content/10-content.html",
     "title": "10: EDA — Covariation",
     "section": "",
-    "text": "Content for Wednesday, April 29, 2026"
+    "text": "Content for Wednesday, April 29, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: EDA — Covariation"
+    ]
   },
   {
     "objectID": "content/10-content.html#before-class",
     "href": "content/10-content.html#before-class",
     "title": "10: EDA — Covariation",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)"
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: EDA — Covariation"
+    ]
   },
   {
     "objectID": "content/10-content.html#during-class",
     "href": "content/10-content.html#during-class",
     "title": "10: EDA — Covariation",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nExploring covariation — relationships between variables\nCategorical + continuous: boxplots, violin plots, geom_freqpoly() with color\nCategorical + categorical: geom_count(), geom_tile() with counts\nContinuous + continuous: scatterplots and trend lines\nDealing with overplotting: alpha, jitter, binning\nPatterns, models, and the correlation vs. causation reminder\nHands-on: Explore a real psychology dataset\n\n\n\n\n\n\n\nTipAssignment 5 is assigned today\n\n\n\nAssignment 5: Exploratory Data Analysis — due before Session 11.\n\n\n\n\n\n\n\n\nWarningFinal Project Proposal is due today\n\n\n\nSubmit your dataset selection, research questions, and initial plan before class.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nExploring covariation — relationships between variables\nCategorical + continuous: boxplots, violin plots, geom_freqpoly() with color\nCategorical + categorical: geom_count(), geom_tile() with counts\nContinuous + continuous: scatterplots and trend lines\nDealing with overplotting: alpha, jitter, binning\nPatterns, models, and the correlation vs. causation reminder\nHands-on: Explore a real psychology dataset\n\n\n\n\n\n\n\nTipAssignment 5 is assigned today\n\n\n\nAssignment 5: Exploratory Data Analysis — due before Session 11.\n\n\n\n\n\n\n\n\nWarningFinal Project Proposal is due today\n\n\n\nSubmit your dataset selection, research questions, and initial plan before class.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: EDA — Covariation"
+    ]
   },
   {
     "objectID": "content/10-content.html#after-class",
     "href": "content/10-content.html#after-class",
     "title": "10: EDA — Covariation",
     "section": "After class",
-    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and gender\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()"
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and gender\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "10: EDA — Covariation"
+    ]
   },
   {
     "objectID": "content/12-content.html",
     "href": "content/12-content.html",
     "title": "12: Strings & Factors",
     "section": "",
-    "text": "Content for Wednesday, May 6, 2026"
+    "text": "Content for Wednesday, May 6, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Strings & Factors"
+    ]
   },
   {
     "objectID": "content/12-content.html#before-class",
     "href": "content/12-content.html#before-class",
     "title": "12: Strings & Factors",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 14: Strings (sections 14.1–14.3 only)\nR4DS Ch 16: Factors"
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 14: Strings (sections 14.1–14.3 only)\nR4DS Ch 16: Factors",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Strings & Factors"
+    ]
   },
   {
     "objectID": "content/12-content.html#during-class",
     "href": "content/12-content.html#during-class",
     "title": "12: Strings & Factors",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nStrings — creating, combining, and basic cleaning\nstr_to_lower(), str_to_upper(), str_trim() for cleanup\nstr_detect() and str_replace() for simple pattern matching\nFactors — categorical data with a fixed set of levels\nWhy factor order matters for plots and tables\nReordering factors: fct_relevel(), fct_reorder(), fct_infreq()\nRecoding factors: fct_recode(), fct_collapse()\nPractical application: cleaning demographic variables\n\n\n\n\n\n\n\nTipAssignment 6 is assigned today\n\n\n\nAssignment 6: Data Types — due before Session 13.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nStrings — creating, combining, and basic cleaning\nstr_to_lower(), str_to_upper(), str_trim() for cleanup\nstr_detect() and str_replace() for simple pattern matching\nFactors — categorical data with a fixed set of levels\nWhy factor order matters for plots and tables\nReordering factors: fct_relevel(), fct_reorder(), fct_infreq()\nRecoding factors: fct_recode(), fct_collapse()\nPractical application: cleaning demographic variables\n\n\n\n\n\n\n\nTipAssignment 6 is assigned today\n\n\n\nAssignment 6: Data Types — due before Session 13.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Strings & Factors"
+    ]
   },
   {
     "objectID": "content/12-content.html#after-class",
     "href": "content/12-content.html#after-class",
     "title": "12: Strings & Factors",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey demographics\nsurvey |&gt;\n  mutate(\n    gender = str_to_lower(str_trim(gender)),\n    gender = fct_recode(as_factor(gender),\n      \"Man\" = \"male\",\n      \"Man\" = \"m\",\n      \"Woman\" = \"female\",\n      \"Woman\" = \"f\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )"
+    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey demographics\nsurvey |&gt;\n  mutate(\n    gender = str_to_lower(str_trim(gender)),\n    gender = fct_recode(as_factor(gender),\n      \"Man\" = \"male\",\n      \"Man\" = \"m\",\n      \"Woman\" = \"female\",\n      \"Woman\" = \"f\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "12: Strings & Factors"
+    ]
   },
   {
     "objectID": "content/14-content.html",
     "href": "content/14-content.html",
     "title": "14: Missing Data",
     "section": "",
-    "text": "Content for Wednesday, May 13, 2026"
+    "text": "Content for Wednesday, May 13, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "14: Missing Data"
+    ]
   },
   {
     "objectID": "content/14-content.html#before-class",
     "href": "content/14-content.html#before-class",
     "title": "14: Missing Data",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values"
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "14: Missing Data"
+    ]
   },
   {
     "objectID": "content/14-content.html#during-class",
     "href": "content/14-content.html#during-class",
     "title": "14: Missing Data",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due before Session 15.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due before Session 15.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "14: Missing Data"
+    ]
   },
   {
     "objectID": "content/14-content.html#after-class",
     "href": "content/14-content.html#after-class",
     "title": "14: Missing Data",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))"
+    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "14: Missing Data"
+    ]
   },
   {
     "objectID": "content/16-content.html",
     "href": "content/16-content.html",
     "title": "16: Quarto",
     "section": "",
-    "text": "Content for Wednesday, May 27, 2026"
+    "text": "Content for Wednesday, May 27, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Quarto"
+    ]
   },
   {
     "objectID": "content/16-content.html#before-class",
     "href": "content/16-content.html#before-class",
     "title": "16: Quarto",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 28: Quarto"
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 28: Quarto",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Quarto"
+    ]
   },
   {
     "objectID": "content/16-content.html#during-class",
     "href": "content/16-content.html#during-class",
     "title": "16: Quarto",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhat is literate programming? Code + narrative in one document\nWhy reproducibility matters\nQuarto basics: YAML header, Markdown text, code chunks\nCode chunk options: echo, eval, include, message, warning\nFigure options: fig-width, fig-height, fig-cap\nInline code — embedding results in text (never hard-code statistics!)\nOutput formats: HTML, PDF, Word\nTables with knitr::kable()\n\n\n\n\n\n\n\nTipAssignment 8 is assigned today\n\n\n\nAssignment 8: Reproducible Report — due before Session 17.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nWhat is literate programming? Code + narrative in one document\nWhy reproducibility matters\nQuarto basics: YAML header, Markdown text, code chunks\nCode chunk options: echo, eval, include, message, warning\nFigure options: fig-width, fig-height, fig-cap\nInline code — embedding results in text (never hard-code statistics!)\nOutput formats: HTML, PDF, Word\nTables with knitr::kable()\n\n\n\n\n\n\n\nTipAssignment 8 is assigned today\n\n\n\nAssignment 8: Reproducible Report — due before Session 17.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Quarto"
+    ]
   },
   {
     "objectID": "content/16-content.html#after-class",
     "href": "content/16-content.html#after-class",
     "title": "16: Quarto",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate a new Quarto document (.qmd). Add a title, your name, and today’s date in the YAML header\nWrite a short introduction in Markdown — use headers, bold, italic, and a bulleted list\nAdd a code chunk that loads a dataset and creates a plot. Try #| echo: false to hide the code\nUse inline code to report a summary statistic in a sentence (e.g., “The mean age was `r knitr::inline_expr(\"mean(data$age)\")`”)\nRender your document to HTML. Then try PDF (you may need to install tinytex)\n\n\n\n\n\n\n\nNoteThe golden rule of reproducibility\n\n\n\nNever hard-code a number in your text. If your data changes, your text should update automatically.\nInstead of: &gt; “The mean score was 4.2.”\nWrite: &gt; “The mean score was `r knitr::inline_expr(\"round(mean(data$score, na.rm = TRUE), 1)\")`.”\nThis way, if you add more data or fix an error, everything stays in sync.\n\n\n\nUseful chunk options\n#| label: fig-results\n#| echo: false\n#| fig-cap: \"Mean anxiety scores by condition\"\n#| fig-width: 8\n#| fig-height: 5\n\nggplot(data, aes(x = condition, y = anxiety)) +\n  stat_summary(fun = mean, geom = \"bar\") +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2)"
+    "text": "After class\n✅ Practice:\n\nCreate a new Quarto document (.qmd). Add a title, your name, and today’s date in the YAML header\nWrite a short introduction in Markdown — use headers, bold, italic, and a bulleted list\nAdd a code chunk that loads a dataset and creates a plot. Try #| echo: false to hide the code\nUse inline code to report a summary statistic in a sentence (e.g., “The mean age was `r knitr::inline_expr(\"mean(data$age)\")`”)\nRender your document to HTML. Then try PDF (you may need to install tinytex)\n\n\n\n\n\n\n\nNoteThe golden rule of reproducibility\n\n\n\nNever hard-code a number in your text. If your data changes, your text should update automatically.\nInstead of: &gt; “The mean score was 4.2.”\nWrite: &gt; “The mean score was `r knitr::inline_expr(\"round(mean(data$score, na.rm = TRUE), 1)\")`.”\nThis way, if you add more data or fix an error, everything stays in sync.\n\n\n\nUseful chunk options\n#| label: fig-results\n#| echo: false\n#| fig-cap: \"Mean anxiety scores by condition\"\n#| fig-width: 8\n#| fig-height: 5\n\nggplot(data, aes(x = condition, y = anxiety)) +\n  stat_summary(fun = mean, geom = \"bar\") +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2)",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "16: Quarto"
+    ]
   },
   {
     "objectID": "content/18-content.html",
     "href": "content/18-content.html",
     "title": "18: Putting It All Together",
     "section": "",
-    "text": "Content for Wednesday, June 3, 2026"
+    "text": "Content for Wednesday, June 3, 2026",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Putting It All Together"
+    ]
   },
   {
     "objectID": "content/18-content.html#before-class",
     "href": "content/18-content.html#before-class",
     "title": "18: Putting It All Together",
     "section": "Before class",
-    "text": "Before class\nNo new reading today — focus on finishing your final project report!\n\n\n\n\n\n\nImportantFinal Project Report is due today\n\n\n\nSubmit your complete Quarto report with visualizations before class."
+    "text": "Before class\nNo new reading today — focus on finishing your final project report!\n\n\n\n\n\n\nImportantFinal Project Report is due today\n\n\n\nSubmit your complete Quarto report with visualizations before class.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Putting It All Together"
+    ]
   },
   {
     "objectID": "content/18-content.html#during-class",
     "href": "content/18-content.html#during-class",
     "title": "18: Putting It All Together",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nThe complete data science workflow (review): Import → Tidy → Transform → Visualize → Communicate\nLive demonstration: a real psychology analysis from start to finish\nWhat you’ve learned — celebrating how far you’ve come\nWhere to go from here:\n\nStatistics in R (t-tests, ANOVA, regression)\nAdvanced R (functions, iteration, packages)\nVersion control (Git and GitHub)\nInteractive visualizations (Shiny)\nMachine learning (tidymodels)\n\nResources for continued learning\nFinal project work time and Q&A\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides"
+    "text": "During class\nWe’ll cover:\n\nThe complete data science workflow (review): Import → Tidy → Transform → Visualize → Communicate\nLive demonstration: a real psychology analysis from start to finish\nWhat you’ve learned — celebrating how far you’ve come\nWhere to go from here:\n\nStatistics in R (t-tests, ANOVA, regression)\nAdvanced R (functions, iteration, packages)\nVersion control (Git and GitHub)\nInteractive visualizations (Shiny)\nMachine learning (tidymodels)\n\nResources for continued learning\nFinal project work time and Q&A\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Putting It All Together"
+    ]
   },
   {
     "objectID": "content/18-content.html#after-class",
     "href": "content/18-content.html#after-class",
     "title": "18: Putting It All Together",
     "section": "After class",
-    "text": "After class\n✅ What’s next:\n\nPrepare your presentation — 5 minutes, focus on your key finding and one or two polished figures\nPractice explaining your work to someone outside the class. Can they follow your story?\nFinalize your Quarto report — make sure it renders cleanly from scratch\n\n\n\n\n\n\n\nNoteContinued learning resources\n\n\n\n\nR for Data Science — keep this bookmarked; revisit chapters as you need them\nPosit Recipes — quick how-to guides for common tasks\n#TidyTuesday — weekly community data visualization challenge\nR-Ladies — global community for gender minorities in R\nPosit Community — friendly Q&A forum\n\n\n\n\nThe skills you’ve built\n# You started here:\n1 + 1\n\n# Now you can do this:\nraw_data |&gt;\n  read_csv() |&gt;\n  pivot_longer(cols = starts_with(\"time\"),\n               names_to = \"timepoint\",\n               values_to = \"score\") |&gt;\n  left_join(demographics, by = \"participant_id\") |&gt;\n  group_by(condition, timepoint) |&gt;\n  summarize(M = mean(score, na.rm = TRUE),\n            SE = sd(score, na.rm = TRUE) / sqrt(n())) |&gt;\n  ggplot(aes(x = timepoint, y = M, fill = condition)) +\n  geom_col(position = \"dodge\") +\n  geom_errorbar(aes(ymin = M - SE, ymax = M + SE),\n                position = position_dodge(0.9), width = 0.2) +\n  scale_fill_viridis_d() +\n  theme_minimal() +\n  labs(title = \"Score improvement across conditions\",\n       y = \"Mean score\", x = \"Timepoint\")\nThat’s a real accomplishment. Be proud of it."
+    "text": "After class\n✅ What’s next:\n\nPrepare your presentation — 5 minutes, focus on your key finding and one or two polished figures\nPractice explaining your work to someone outside the class. Can they follow your story?\nFinalize your Quarto report — make sure it renders cleanly from scratch\n\n\n\n\n\n\n\nNoteContinued learning resources\n\n\n\n\nR for Data Science — keep this bookmarked; revisit chapters as you need them\nPosit Recipes — quick how-to guides for common tasks\n#TidyTuesday — weekly community data visualization challenge\nR-Ladies — global community for gender minorities in R\nPosit Community — friendly Q&A forum\n\n\n\n\nThe skills you’ve built\n# You started here:\n1 + 1\n\n# Now you can do this:\nraw_data |&gt;\n  read_csv() |&gt;\n  pivot_longer(cols = starts_with(\"time\"),\n               names_to = \"timepoint\",\n               values_to = \"score\") |&gt;\n  left_join(demographics, by = \"participant_id\") |&gt;\n  group_by(condition, timepoint) |&gt;\n  summarize(M = mean(score, na.rm = TRUE),\n            SE = sd(score, na.rm = TRUE) / sqrt(n())) |&gt;\n  ggplot(aes(x = timepoint, y = M, fill = condition)) +\n  geom_col(position = \"dodge\") +\n  geom_errorbar(aes(ymin = M - SE, ymax = M + SE),\n                position = position_dodge(0.9), width = 0.2) +\n  scale_fill_viridis_d() +\n  theme_minimal() +\n  labs(title = \"Score improvement across conditions\",\n       y = \"Mean score\", x = \"Timepoint\")\nThat’s a real accomplishment. Be proud of it.",
+    "crumbs": [
+      "Content",
+      "Course content",
+      "18: Putting It All Together"
+    ]
   },
   {
     "objectID": "index.html",
