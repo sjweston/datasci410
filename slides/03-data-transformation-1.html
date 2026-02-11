@@ -753,6 +753,9 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 # ℹ 336,766 more rows</code></pre>
 </div>
 </div>
+</section>
+<section id="using-select-helpers-1" class="slide level2">
+<h2>Using select helpers</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All time columns</span></span>
 <span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">ends_with</span>(<span class="st">"time"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -826,6 +829,9 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
+</section>
+<section id="exclude-columns-1" class="slide level2">
+<h2>Exclude columns</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove multiple columns</span></span>
 <span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>year, <span class="sc">-</span>month, <span class="sc">-</span>day)</span>
@@ -992,12 +998,15 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </section>
 <section id="the-problem-with-nested-functions" class="slide level2">
 <h2>The problem with nested functions</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
 <p>What if we want to:</p>
 <ol type="1">
 <li>Filter to January flights</li>
 <li>Select departure time and delay</li>
 <li>Arrange by delay</li>
 </ol>
+</div><div class="column" style="width:50%;">
 <p>Nested approach:</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
@@ -1008,6 +1017,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  dep_delay</span>
 <span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div></div>
 <p>This is hard to read!</p>
 </section>
 <section id="intermediate-objects-approach" class="slide level2">
@@ -1023,12 +1033,17 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="the-pipe-1" class="slide level2">
 <h2>The pipe: |&gt;</h2>
 <p>The pipe takes the result of one function and passes it as the first argument to the next:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same result, much cleaner!</span></span>
 <span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span></span>
 <span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 27,004 × 2
    dep_time dep_delay
@@ -1046,6 +1061,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 # ℹ 26,994 more rows</code></pre>
 </div>
 </div>
+</div></div>
 </section>
 <section id="reading-piped-code" class="slide level2">
 <h2>Reading piped code</h2>

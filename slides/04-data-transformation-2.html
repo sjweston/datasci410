@@ -444,53 +444,62 @@ Dr.&nbsp;Sara Weston
 <span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptives by condition AND gender</span></span>
-<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb15-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, gender) <span class="sc">|&gt;</span></span>
-<span id="cb15-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb15-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">m =</span> <span class="fu">mean</span>(outcome),</span>
-<span id="cb15-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(outcome) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
-<span id="cb15-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="group-by-for-psychology-1" class="slide level2">
+<h2>Group by for psychology</h2>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Descriptives by condition AND gender</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, gender) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">m =</span> <span class="fu">mean</span>(outcome),</span>
+<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(outcome) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
+<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="multiple-summaries-at-once" class="slide level2">
 <h2>Multiple summaries at once</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Central tendency</span></span>
-<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_delay =</span> <span class="fu">median</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Spread</span></span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_delay =</span> <span class="fu">sd</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Counts</span></span>
-<span id="cb16-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>(),</span>
-<span id="cb16-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_destinations =</span> <span class="fu">n_distinct</span>(dest)</span>
-<span id="cb16-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb16-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_delay)  <span class="co"># Best to worst carriers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Central tendency</span></span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">median_delay =</span> <span class="fu">median</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Spread</span></span>
+<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_delay =</span> <span class="fu">sd</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Counts</span></span>
+<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_dest =</span> <span class="fu">n_distinct</span>(dest)</span>
+<span id="cb17-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_delay)  <span class="co"># Best to worst carriers</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="multiple-summaries-at-once-1" class="slide level2">
+<h2>Multiple summaries at once</h2>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 6
-   carrier mean_delay median_delay sd_delay n_flights n_destinations
-   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;          &lt;int&gt;
- 1 AS          -9.93           -17     36.5       714              1
- 2 HA          -6.92           -13     75.1       342              1
- 3 AA           0.364           -9     42.5     32729             19
- 4 DL           1.64            -8     44.4     48110             40
- 5 VX           1.76            -9     50.0      5162              5
- 6 US           2.13            -6     33.1     20536              6
- 7 UA           3.56            -6     41.0     58665             47
- 8 9E           7.38            -7     50.1     18460             49
- 9 B6           9.46            -3     42.8     54635             42
-10 WN           9.65            -3     46.9     12275             11
-11 MQ          10.8             -1     43.2     26397             20
-12 OO          11.9             -7     48.6        32              5
-13 YV          15.6             -2     52.9       601              3
-14 EV          15.8             -1     49.9     54173             61
-15 FL          20.1              5     54.1      3260              3
-16 F9          21.9              6     61.6       685              1</code></pre>
+   carrier mean_delay median_delay sd_delay n_flights n_dest
+   &lt;chr&gt;        &lt;dbl&gt;        &lt;dbl&gt;    &lt;dbl&gt;     &lt;int&gt;  &lt;int&gt;
+ 1 AS          -9.93           -17     36.5       714      1
+ 2 HA          -6.92           -13     75.1       342      1
+ 3 AA           0.364           -9     42.5     32729     19
+ 4 DL           1.64            -8     44.4     48110     40
+ 5 VX           1.76            -9     50.0      5162      5
+ 6 US           2.13            -6     33.1     20536      6
+ 7 UA           3.56            -6     41.0     58665     47
+ 8 9E           7.38            -7     50.1     18460     49
+ 9 B6           9.46            -3     42.8     54635     42
+10 WN           9.65            -3     46.9     12275     11
+11 MQ          10.8             -1     43.2     26397     20
+12 OO          11.9             -7     48.6        32      5
+13 YV          15.6             -2     52.9       601      3
+14 EV          15.8             -1     49.9     54173     61
+15 FL          20.1              5     54.1      3260      3
+16 F9          21.9              6     61.6       685      1</code></pre>
 </div>
 </div>
 </section></section>
@@ -520,10 +529,10 @@ Dr.&nbsp;Sara Weston
 <section id="counting-is-common" class="slide level2">
 <h2>Counting is common</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How many flights per carrier?</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How many flights per carrier?</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 2
    carrier     n
@@ -550,8 +559,8 @@ Dr.&nbsp;Sara Weston
 <section id="count-does-this-automatically" class="slide level2">
 <h2>count() does this automatically</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 2
    carrier     n
@@ -579,8 +588,8 @@ Dr.&nbsp;Sara Weston
 <section id="count-with-multiple-variables" class="slide level2">
 <h2>count() with multiple variables</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier, origin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier, origin)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 35 × 3
    carrier origin     n
@@ -602,9 +611,30 @@ Dr.&nbsp;Sara Weston
 <section id="adding-weights" class="slide level2">
 <h2>Adding weights</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Total distance flown by each carrier</span></span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier, <span class="at">wt =</span> distance, <span class="at">name =</span> <span class="st">"total_miles"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Total distance flown by each carrier</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(carrier, <span class="at">wt =</span> distance, <span class="at">name =</span> <span class="st">"total_miles"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier total_miles
+   &lt;chr&gt;         &lt;dbl&gt;
+ 1 9E          9788152
+ 2 AA         43864584
+ 3 AS          1715028
+ 4 B6         58384137
+ 5 DL         59507317
+ 6 EV         30498951
+ 7 F9          1109700
+ 8 FL          2167344
+ 9 HA          1704186
+10 MQ         15033955
+11 OO            16026
+12 UA         89705524
+13 US         11365778
+14 VX         12902327
+15 WN         12229203
+16 YV           225395</code></pre>
+</div>
 </div>
 </section></section>
 <section>
@@ -616,30 +646,35 @@ Dr.&nbsp;Sara Weston
 <h2>The full dplyr toolkit</h2>
 <p>Now you can combine everything:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>()    <span class="sc">|&gt;</span>   <span class="co"># Subset rows</span></span>
-<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>()    <span class="sc">|&gt;</span>   <span class="co"># Pick columns</span></span>
-<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>()    <span class="sc">|&gt;</span>   <span class="co"># Create columns</span></span>
-<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>()  <span class="sc">|&gt;</span>   <span class="co"># Define groups</span></span>
-<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>() <span class="sc">|&gt;</span>   <span class="co"># Calculate summaries</span></span>
-<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>()        <span class="co"># Sort results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>()    <span class="sc">|&gt;</span>   <span class="co"># Subset rows</span></span>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>()    <span class="sc">|&gt;</span>   <span class="co"># Pick columns</span></span>
+<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>()    <span class="sc">|&gt;</span>   <span class="co"># Create columns</span></span>
+<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>()  <span class="sc">|&gt;</span>   <span class="co"># Define groups</span></span>
+<span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>() <span class="sc">|&gt;</span>   <span class="co"># Calculate summaries</span></span>
+<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>()        <span class="co"># Sort results</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="a-complete-analysis-pipeline" class="slide level2">
 <h2>A complete analysis pipeline</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines were most delayed in summer?</span></span>
-<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span>    <span class="co"># Summer months only</span></span>
-<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span>         <span class="co"># Remove missing</span></span>
-<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span>                 <span class="co"># Group by airline</span></span>
-<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay),</span>
-<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_delayed =</span> <span class="fu">mean</span>(arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">*</span> <span class="dv">100</span>,  <span class="co"># % of flights delayed</span></span>
-<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>()</span>
-<span id="cb26-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb26-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_flights <span class="sc">&gt;</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span>          <span class="co"># Only airlines with many flights</span></span>
-<span id="cb26-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_delay))             <span class="co"># Worst first</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines were most delayed in summer?</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span>    <span class="co"># Summer months only</span></span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span>         <span class="co"># Remove missing</span></span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span>                 <span class="co"># Group by airline</span></span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay),</span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_delayed =</span> <span class="fu">mean</span>(arr_delay <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">*</span> <span class="dv">100</span>,  <span class="co"># % of flights delayed</span></span>
+<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>()</span>
+<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_flights <span class="sc">&gt;</span> <span class="dv">1000</span>) <span class="sc">|&gt;</span>          <span class="co"># Only airlines with many flights</span></span>
+<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_delay))             <span class="co"># Worst first</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="a-complete-analysis-pipeline-1" class="slide level2">
+<h2>A complete analysis pipeline</h2>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
    carrier avg_delay pct_delayed n_flights
@@ -660,18 +695,18 @@ Dr.&nbsp;Sara Weston
 <section id="piping-into-ggplot" class="slide level2">
 <h2>Piping into ggplot</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
-<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span></span>
-<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay)) <span class="sc">|&gt;</span></span>
-<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> avg_delay)) <span class="sc">+</span></span>
-<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Arrival Delay by Month"</span>,</span>
-<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Month"</span>,</span>
-<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average delay (minutes)"</span></span>
-<span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_delay =</span> <span class="fu">mean</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(month), <span class="at">y =</span> avg_delay)) <span class="sc">+</span></span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Average Arrival Delay by Month"</span>,</span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Month"</span>,</span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average delay (minutes)"</span></span>
+<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -679,7 +714,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -687,14 +722,20 @@ Dr.&nbsp;Sara Weston
 <h2>group_by() with mutate()</h2>
 <p><code>group_by()</code> also affects <code>mutate()</code> and <code>filter()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a column for mean delay PER CARRIER</span></span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">carrier_mean_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay_vs_carrier =</span> arr_delay <span class="sc">-</span> carrier_mean_delay</span>
-<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, arr_delay, carrier_mean_delay, delay_vs_carrier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a column for mean delay PER CARRIER</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">carrier_mean_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay_vs_carrier =</span> arr_delay <span class="sc">-</span> carrier_mean_delay</span>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, arr_delay, carrier_mean_delay, delay_vs_carrier)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="group_by-with-mutate-1" class="slide level2">
+<h2>group_by() with mutate()</h2>
+<p><code>group_by()</code> also affects <code>mutate()</code> and <code>filter()</code>:</p>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 4
 # Groups:   carrier [16]
@@ -717,12 +758,12 @@ Dr.&nbsp;Sara Weston
 <section id="filtering-within-groups" class="slide level2">
 <h2>Filtering within groups</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the 2 most delayed flights per month</span></span>
-<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span></span>
-<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
-<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(arr_delay, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
-<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(month, carrier, arr_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find the 2 most delayed flights per month</span></span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(month) <span class="sc">|&gt;</span></span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(arr_delay, <span class="at">n =</span> <span class="dv">2</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(month, carrier, arr_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 24 × 3
 # Groups:   month [12]
@@ -780,12 +821,12 @@ Dr.&nbsp;Sara Weston
 <h2>ungroup()</h2>
 <p>Sometimes you need to remove grouping:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">carrier_mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span>                              <span class="co"># Remove grouping</span></span>
-<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grand_mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span>  <span class="co"># Now uses ALL flights</span></span>
-<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, arr_delay, carrier_mean, grand_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">carrier_mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span>                              <span class="co"># Remove grouping</span></span>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">grand_mean =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span>  <span class="co"># Now uses ALL flights</span></span>
+<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, arr_delay, carrier_mean, grand_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 4
    carrier arr_delay carrier_mean grand_mean
@@ -813,14 +854,14 @@ Dr.&nbsp;Sara Weston
 <h2>Good style matters</h2>
 <p>Code is read more often than it’s written. Make it readable!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: crammed together</span></span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">|&gt;</span><span class="fu">filter</span>(month<span class="sc">==</span><span class="dv">1</span>)<span class="sc">|&gt;</span><span class="fu">group_by</span>(carrier)<span class="sc">|&gt;</span><span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: spaced and readable</span></span>
-<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: crammed together</span></span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">|&gt;</span><span class="fu">filter</span>(month<span class="sc">==</span><span class="dv">1</span>)<span class="sc">|&gt;</span><span class="fu">group_by</span>(carrier)<span class="sc">|&gt;</span><span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: spaced and readable</span></span>
+<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="spacing-rules" class="slide level2">
@@ -840,14 +881,14 @@ Dr.&nbsp;Sara Weston
 <li>Indent continuation lines consistently</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long summarize calls</span></span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
-<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long summarize calls</span></span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="naming-conventions" class="slide level2">
@@ -858,26 +899,26 @@ Dr.&nbsp;Sara Weston
 <li>Be consistent!</li>
 </ul>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
-<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
-<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>mean_reaction_time <span class="ot">&lt;-</span> <span class="fu">mean</span>(participant_data<span class="sc">$</span>rt)</span>
-<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
-<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a>pD <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
-<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(pD<span class="sc">$</span>rt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
+<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
+<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>mean_reaction_time <span class="ot">&lt;-</span> <span class="fu">mean</span>(participant_data<span class="sc">$</span>rt)</span>
+<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
+<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>pD <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
+<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(pD<span class="sc">$</span>rt)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="comments" class="slide level2">
 <h2>Comments</h2>
 <p>Use comments to explain <strong>why</strong>, not <strong>what</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: restates the obvious</span></span>
-<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to January</span></span>
-<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: explains the reasoning</span></span>
-<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># January only because weather patterns differ by season</span></span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: restates the obvious</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to January</span></span>
+<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: explains the reasoning</span></span>
+<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># January only because weather patterns differ by season</span></span>
+<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section></section>
 <section>
@@ -888,49 +929,61 @@ Dr.&nbsp;Sara Weston
 <section id="simulated-experiment-data" class="slide level2">
 <h2>Simulated experiment data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simulated experiment dataset</span></span>
-<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>, <span class="at">each =</span> <span class="dv">20</span>),</span>
-<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>),</span>
-<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">60</span>),</span>
-<span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="fu">rnorm</span>(<span class="dv">1200</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="dv">0</span>),</span>
-<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">rbinom</span>(<span class="dv">1200</span>, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.85</span> <span class="sc">+</span></span>
-<span id="cb39-11"><a href="" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="fl">0.05</span>, <span class="dv">0</span>))</span>
-<span id="cb39-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simulated experiment dataset</span></span>
+<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>, <span class="at">each =</span> <span class="dv">20</span>),</span>
+<span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>),</span>
+<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">60</span>),</span>
+<span id="cb41-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="fu">rnorm</span>(<span class="dv">1200</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb41-9"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="dv">0</span>),</span>
+<span id="cb41-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">rbinom</span>(<span class="dv">1200</span>, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.85</span> <span class="sc">+</span></span>
+<span id="cb41-11"><a href="" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="fl">0.05</span>, <span class="dv">0</span>))</span>
+<span id="cb41-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="examine-the-data" class="slide level2">
 <h2>Examine the data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(experiment)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 1,200
-Columns: 5
-$ participant_id &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
-$ condition      &lt;chr&gt; "control", "control", "control", "control", "control", …
-$ trial          &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, …
-$ reaction_time  &lt;dbl&gt; 637.0958, 443.5302, 536.3128, 563.2863, 540.4268, 489.3…
-$ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1…</code></pre>
+<pre><code># A tibble: 1,200 × 5
+   participant_id condition trial reaction_time accuracy
+            &lt;int&gt; &lt;chr&gt;     &lt;int&gt;         &lt;dbl&gt;    &lt;int&gt;
+ 1              1 control       1          637.        1
+ 2              1 control       2          444.        1
+ 3              1 control       3          536.        1
+ 4              1 control       4          563.        1
+ 5              1 control       5          540.        1
+ 6              1 control       6          489.        0
+ 7              1 control       7          651.        1
+ 8              1 control       8          491.        1
+ 9              1 control       9          702.        1
+10              1 control      10          494.        1
+# ℹ 1,190 more rows</code></pre>
 </div>
 </div>
 </section>
 <section id="participant-level-summaries" class="slide level2">
 <h2>Participant-level summaries</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># First, summarize BY PARTICIPANT</span></span>
-<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="ot">&lt;-</span> experiment <span class="sc">|&gt;</span></span>
-<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant_id, condition) <span class="sc">|&gt;</span></span>
-<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_rt =</span> <span class="fu">mean</span>(reaction_time),</span>
-<span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy =</span> <span class="fu">mean</span>(accuracy) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trials =</span> <span class="fu">n</span>(),</span>
-<span id="cb42-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb42-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-11"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># First, summarize BY PARTICIPANT</span></span>
+<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="ot">&lt;-</span> experiment <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant_id, condition) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_rt =</span> <span class="fu">mean</span>(reaction_time),</span>
+<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy =</span> <span class="fu">mean</span>(accuracy) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trials =</span> <span class="fu">n</span>(),</span>
+<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="participant-level-summaries-1" class="slide level2">
+<h2>Participant-level summaries</h2>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 120 × 5
    participant_id condition mean_rt accuracy n_trials
@@ -952,18 +1005,18 @@ $ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 
 <section id="condition-level-summaries" class="slide level2">
 <h2>Condition-level summaries</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Now summarize ACROSS PARTICIPANTS by condition</span></span>
-<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries <span class="ot">&lt;-</span> participant_summaries <span class="sc">|&gt;</span></span>
-<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
-<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_rt =</span> <span class="fu">mean</span>(mean_rt),</span>
-<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_rt =</span> <span class="fu">sd</span>(mean_rt),</span>
-<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_acc =</span> <span class="fu">mean</span>(accuracy),</span>
-<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_acc =</span> <span class="fu">sd</span>(accuracy),</span>
-<span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-12"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Now summarize ACROSS PARTICIPANTS by condition</span></span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries <span class="ot">&lt;-</span> participant_summaries <span class="sc">|&gt;</span></span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_rt =</span> <span class="fu">mean</span>(mean_rt),</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_rt =</span> <span class="fu">sd</span>(mean_rt),</span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_acc =</span> <span class="fu">mean</span>(accuracy),</span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_acc =</span> <span class="fu">sd</span>(accuracy),</span>
+<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   condition  M_rt SD_rt M_acc SD_acc     n
@@ -976,17 +1029,17 @@ $ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 
 <section id="visualize-the-results" class="slide level2">
 <h2>Visualize the results</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="sc">|&gt;</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
-<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb48-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb48-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
+<span id="cb48-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
+<span id="cb48-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
+<span id="cb48-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb48-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb48-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 
 </section>
@@ -994,7 +1047,7 @@ $ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1061,14 +1114,14 @@ $ accuracy       &lt;int&gt; 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 
 <section id="the-analysis-workflow" class="slide level2">
 <h2>The analysis workflow</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span></span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valid_data) <span class="sc">|&gt;</span>           <span class="co"># Clean</span></span>
-<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(relevant_vars) <span class="sc">|&gt;</span>        <span class="co"># Focus</span></span>
-<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(new_vars) <span class="sc">|&gt;</span>             <span class="co"># Transform</span></span>
-<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(conditions) <span class="sc">|&gt;</span>         <span class="co"># Split</span></span>
-<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(statistics) <span class="sc">|&gt;</span>        <span class="co"># Aggregate</span></span>
-<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(order) <span class="sc">|&gt;</span>               <span class="co"># Sort</span></span>
-<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> ...                  <span class="co"># Visualize</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valid_data) <span class="sc">|&gt;</span>           <span class="co"># Clean</span></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(relevant_vars) <span class="sc">|&gt;</span>        <span class="co"># Focus</span></span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(new_vars) <span class="sc">|&gt;</span>             <span class="co"># Transform</span></span>
+<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(conditions) <span class="sc">|&gt;</span>         <span class="co"># Split</span></span>
+<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(statistics) <span class="sc">|&gt;</span>        <span class="co"># Aggregate</span></span>
+<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(order) <span class="sc">|&gt;</span>               <span class="co"># Sort</span></span>
+<span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> ...                  <span class="co"># Visualize</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="before-next-class" class="slide level2">

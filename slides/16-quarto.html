@@ -240,34 +240,35 @@ Dr.&nbsp;Sara Weston
 </div><div class="column" style="width:50%;">
 <p><strong>Step 2:</strong> Copy to Word &gt; “The mean depression score was 18.5 (SD = 5.2).”</p>
 </div></div>
-<div class="fragment">
-<p><strong>Problems:</strong></p>
+</section>
+<section id="what-goes-wrong" class="slide level2">
+<h2>What goes wrong?</h2>
 <ul>
 <li>Typos when copying numbers</li>
 <li>If data changes, you have to update manually</li>
 <li>No record of what code produced what result</li>
 <li>Can’t reproduce your own analysis in 6 months</li>
 </ul>
-</div>
 </section>
 <section id="literate-programming-approach" class="slide level2">
 <h2>Literate programming approach</h2>
+<div class="columns">
+<div class="column" style="width:45%;">
 <p><strong>One document</strong> contains:</p>
 <ul>
 <li>The code</li>
 <li>The results (automatically generated)</li>
 <li>The narrative (your interpretation)</li>
 </ul>
-<div class="fragment">
+</div><div class="column" style="width:55%;">
 <p><strong>Benefits:</strong></p>
 <ul>
-<li>✅ No copy-paste errors</li>
-<li>✅ Update data → results update automatically</li>
-<li>✅ Complete record of what you did</li>
-<li>✅ Easy to share with collaborators</li>
-<li>✅ Future you will thank you</li>
+<li>No copy-paste errors</li>
+<li>Data changes → results update automatically</li>
+<li>Complete record of what you did</li>
+<li>Easy to share with collaborators</li>
 </ul>
-</div>
+</div></div>
 </section>
 <section id="introducing-quarto" class="slide level2">
 <h2>Introducing Quarto</h2>
@@ -315,44 +316,56 @@ Dr.&nbsp;Sara Weston
 <section id="markdown-basics" class="slide level2">
 <h2>Markdown basics</h2>
 <p>Markdown is a simple way to format text:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu"># Heading 1</span></span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Heading 2</span></span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">### Heading 3</span></span>
 <span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>**bold text**</span>
-<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>*italic text*</span>
-<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet point</span>
-<span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Another bullet</span>
-<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Numbered list</span>
-<span id="cb3-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
-<span id="cb3-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Link text</span><span class="co">](https://example.com)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>*italic text*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bullet point</span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Another bullet</span>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Numbered list</span>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Second item</span>
+<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Link text</span><span class="co">](https://example.com)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
 </section>
 <section id="markdown-in-action" class="slide level2">
 <h2>Markdown in action</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>**Depression** is a common mental health condition. According to</span>
-<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>*Smith et al. (2024)*, approximately 20% of adults experience</span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>depression at some point.</span>
-<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>Our research questions:</span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Does CBT reduce depression?</span>
-<span id="cb4-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Do effects persist at 6-month follow-up?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>You write:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>**Depression** is a common</span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>mental health condition.</span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>Our research questions:</span>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Does CBT reduce depression?</span>
+<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Do effects persist?</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<p><strong>You get:</strong></p>
+<p><strong>Depression</strong> is a common mental health condition.</p>
+<p>Our research questions:</p>
+<ol type="1">
+<li>Does CBT reduce depression?</li>
+<li>Do effects persist?</li>
+</ol>
+</div></div>
 </section>
 <section id="code-chunks" class="slide level2">
 <h2>Code chunks</h2>
 <p>Surround R code with three backticks:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"depression_data.csv"</span>)</span>
-<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean</span></span>
-<span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>depression)</span>
-<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"depression_data.csv"</span>)</span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute mean</span></span>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>depression)</span>
+<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>When you render, both the code <strong>and</strong> output appear in the document.</p>
 </div>
@@ -390,13 +403,13 @@ Dr.&nbsp;Sara Weston
 <section id="controlling-output" class="slide level2">
 <h2>Controlling output</h2>
 <p>Add options with <code>#|</code> at the top of a chunk:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This code runs but doesn't show in the output</span></span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(depression_scores)</span>
-<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: true</span></span>
+<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This code runs but doesn't show in the output</span></span>
+<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(depression_scores)</span>
+<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="common-chunk-options" class="slide level2">
 <h2>Common chunk options</h2>
@@ -439,40 +452,33 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="figure-options" class="slide level2">
 <h2>Figure options</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
-<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Depression scores by condition"</span></span>
-<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression)) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
-<span id="cb7-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 6</span></span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Depression scores by condition"</span></span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li><code>fig-width</code> and <code>fig-height</code> control size (in inches)</li>
-<li><code>fig-cap</code> adds a caption</li>
-<li><code>label</code> gives the chunk a name (for cross-references)</li>
+<li><code>fig-width</code> / <code>fig-height</code> — size in inches</li>
+<li><code>fig-cap</code> — adds a caption below the figure</li>
 </ul>
-</div>
 </section>
 <section id="example-setup-chunk" class="slide level2">
 <h2>Example: Setup chunk</h2>
 <p>Every document should start with a setup chunk:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Set default chunk options</span></span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(</span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">echo =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">message =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb8-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">warning =</span> <span class="cn">FALSE</span></span>
-<span id="cb8-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>This loads packages but doesn’t clutter your report.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: setup</span></span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| include: false</span></span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li><code>include: false</code> means the chunk <strong>runs</strong> but nothing shows in the output</li>
+<li>Load all your packages here so they’re available throughout</li>
+</ul>
 </section></section>
 <section>
 <section id="inline-code" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -483,51 +489,54 @@ Dr.&nbsp;Sara Weston
 <h2>Embedding results in text</h2>
 <p><strong>Never hard-code numbers!</strong></p>
 <p>❌ <strong>Bad:</strong></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean depression score was 18.5 (SD = 5.2).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean depression score was 18.5 (SD = 5.2).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>✅ <strong>Good:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean depression score was <span class="in">`r mean(data$depression)`</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>(SD = <span class="in">`r sd(data$depression)`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean depression score was <span class="in">`r mean(data$depression)`</span></span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>(SD = <span class="in">`r sd(data$depression)`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
 <section id="why-inline-code-matters" class="slide level2">
 <h2>Why inline code matters</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample data</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>depression_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">21</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create sample data</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>depression_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">21</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="fragment">
 <p><strong>In your text, you write</strong> <code>r expression</code> <strong>and Quarto fills in the result.</strong></p>
-</div>
-<div class="fragment">
+</section>
+<section id="inline-code-before-and-after" class="slide level2">
+<h2>Inline code: before and after</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>You write:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean depression score was <span class="in">`r mean(data$depression)`</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>(SD = <span class="in">`r sd(data$depression)`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>The mean score was</span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r mean(depression_scores)`</span></span>
+<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>(SD = <span class="in">`r round(sd(depression_scores), 2)`</span>).</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><strong>Renders as:</strong></p>
-<blockquote>
-<p>The mean depression score was 19 (SD = 4.07).</p>
-</blockquote>
-</div>
+</div><div class="column" style="width:50%;">
+<p><strong>Quarto renders:</strong></p>
+<p>The mean score was 19 (SD = 4.07).</p>
+</div></div>
 </section>
 <section id="formatting-inline-results" class="slide level2">
 <h2>Formatting inline results</h2>
 <p>Use <code>round()</code> to control decimal places:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r round(cor(x,y), 2)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r round(cor(x,y), 2)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <p>Use <code>scales::percent()</code> for percentages:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::percent(0.653)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::percent(0.653)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 <div class="fragment">
 <p>Use <code>scales::comma()</code> for large numbers:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::comma(15234)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::comma(15234)`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section></section>
@@ -538,15 +547,14 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-create-a-mini-report" class="slide level2">
 <h2>Your turn: Create a mini-report</h2>
-<p>Create a new Quarto document:</p>
+<p>Create a new Quarto document (File → New File → Quarto Document):</p>
 <ol type="1">
-<li>File → New File → Quarto Document</li>
 <li>Add a YAML header with your name and title</li>
-<li>Write a short introduction (2-3 sentences) about a dataset</li>
-<li>Create a code chunk that loads tidyverse and a dataset (use <code>mpg</code> or <code>palmerpenguins::penguins</code>)</li>
+<li>Write a short introduction (2-3 sentences)</li>
+<li>Create a code chunk that loads <code>tidyverse</code> and a dataset (try <code>mpg</code>)</li>
 <li>Create a visualization</li>
 <li>Write a sentence with inline code reporting a summary statistic</li>
-<li>Render it to HTML</li>
+<li>Render to HTML</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
 </section></section>
@@ -557,10 +565,10 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="html-default" class="slide level2">
 <h2>HTML (default)</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> html</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Pros:</strong></p>
 <ul>
 <li>Interactive (can include interactive plots)</li>
@@ -575,10 +583,10 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="pdf" class="slide level2">
 <h2>PDF</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span>
-<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> pdf</span></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Pros:</strong></p>
 <ul>
 <li>Print-ready</li>
@@ -594,10 +602,10 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="word" class="slide level2">
 <h2>Word</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> docx</span></span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span><span class="at"> docx</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><strong>Pros:</strong></p>
 <ul>
 <li>Collaborators can edit with Track Changes</li>
@@ -613,15 +621,15 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-formats" class="slide level2">
 <h2>Multiple formats</h2>
 <p>You can render to multiple formats:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span>
-<span id="cb19-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">"My Report"</span></span>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">format</span><span class="kw">:</span></span>
+<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">html</span><span class="kw">:</span></span>
+<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">pdf</span><span class="kw">:</span></span>
+<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">toc</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">docx</span><span class="kw">:</span><span class="at"> default</span></span>
+<span id="cb20-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="fragment">
 <p>Then choose which to render in RStudio dropdown.</p>
 </div>
@@ -634,14 +642,19 @@ Dr.&nbsp;Sara Weston
 <section id="simple-tables-with-kable" class="slide level2">
 <h2>Simple tables with kable()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CBT"</span>, <span class="st">"Mindfulness"</span>),</span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">30</span>),</span>
-<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mean =</span> <span class="fu">c</span>(<span class="fl">18.2</span>, <span class="fl">12.4</span>, <span class="fl">14.1</span>),</span>
-<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">SD =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.8</span>, <span class="fl">5.3</span>)</span>
-<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(therapy_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CBT"</span>, <span class="st">"Mindfulness"</span>),</span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">N =</span> <span class="fu">c</span>(<span class="dv">30</span>, <span class="dv">30</span>, <span class="dv">30</span>),</span>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Mean =</span> <span class="fu">c</span>(<span class="fl">18.2</span>, <span class="fl">12.4</span>, <span class="fl">14.1</span>),</span>
+<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">SD =</span> <span class="fu">c</span>(<span class="fl">5.1</span>, <span class="fl">4.8</span>, <span class="fl">5.3</span>)</span>
+<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(therapy_summary)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+</section>
+<section id="simple-tables-with-kable-output" class="slide level2 output-location-slide"><h2>Simple tables with kable()</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -674,17 +687,15 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 </div>
-</div>
-</section>
-<section id="kable-options" class="slide level2">
+</div></section><section id="kable-options" class="slide level2">
 <h2>Kable options</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
-<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  therapy_summary,</span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span>,</span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Depression scores by treatment condition"</span>,</span>
-<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Condition"</span>, <span class="st">"N"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>)</span>
-<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(</span>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a>  therapy_summary,</span>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">caption =</span> <span class="st">"Depression scores by treatment condition"</span>,</span>
+<span id="cb23-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Condition"</span>, <span class="st">"N"</span>, <span class="st">"M"</span>, <span class="st">"SD"</span>)</span>
+<span id="cb23-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <caption>Depression scores by treatment condition</caption>
@@ -724,31 +735,15 @@ Dr.&nbsp;Sara Weston
 <h2>Fancier tables: gt package</h2>
 <p>For publication-ready tables:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(</span>
-<span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment Outcomes"</span>,</span>
-<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Post-intervention BDI-II scores"</span></span>
-<span id="cb22-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb22-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(Mean, SD), <span class="at">decimals =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gt)</span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gt</span>() <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tab_header</span>(<span class="at">title =</span> <span class="st">"Treatment Outcomes"</span>,</span>
+<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">subtitle =</span> <span class="st">"Post-intervention BDI-II scores"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(Mean, SD), <span class="at">decimals =</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<div class="fragment">
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p><code>gt</code> is powerful but beyond our scope. Use <code>kable()</code> for now, explore <code>gt</code> when you need fancy tables.</p>
-</div>
-</div>
-</div>
-</div>
+<p><code>gt</code> is powerful but beyond our scope — use <code>kable()</code> for now.</p>
 </section></section>
 <section>
 <section id="workflow-tips" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -758,35 +753,39 @@ Dr.&nbsp;Sara Weston
 <section id="best-practices" class="slide level2">
 <h2>Best practices</h2>
 <ol type="1">
-<li><p><strong>Name your chunks</strong> — easier to find errors</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r load-data}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
-<li><p><strong>One setup chunk at the top</strong> — load all packages there</p></li>
-<li><p><strong>Render often</strong> — catch errors early</p></li>
-<li><p><strong>Use relative paths</strong> — <code>here::here("data/file.csv")</code></p></li>
-<li><p><strong>Cache expensive computations</strong> — <code>#| cache: true</code></p></li>
+<li><strong>Name your chunks</strong> — easier to find errors (<code>#| label: load-data</code>)</li>
+<li><strong>One setup chunk at the top</strong> — load all packages there</li>
+<li><strong>Render often</strong> — catch errors early</li>
 </ol>
+<div class="fragment">
+<ol start="4" type="1">
+<li><strong>Use relative paths</strong> — <code>here::here("data/file.csv")</code></li>
+<li><strong>Cache expensive computations</strong> — <code>#| cache: true</code></li>
+</ol>
+</div>
 </section>
 <section id="structuring-a-psychology-report" class="slide level2">
 <h2>Structuring a psychology report</h2>
-<p>Typical structure:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Background</span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Research question</span>
-<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Method</span></span>
-<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Participants</span>
-<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Measures</span>
-<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Procedure</span>
-<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb24-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Descriptive statistics</span>
-<span id="cb24-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Main analyses</span>
-<span id="cb24-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Figures</span>
-<span id="cb24-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb24-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion</span></span>
-<span id="cb24-16"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Interpretation</span>
-<span id="cb24-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Limitations</span>
-<span id="cb24-18"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Conclusions</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Background</span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Research question</span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Method</span></span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Participants</span>
+<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Measures</span>
+<span id="cb25-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Procedure</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div><div class="column" style="width:50%;">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Descriptive statistics</span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Main analyses</span>
+<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Figures</span>
+<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion</span></span>
+<span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Interpretation</span>
+<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Limitations</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div></div>
 </section>
 <section id="project-organization" class="slide level2">
 <h2>Project organization</h2>
@@ -810,18 +809,12 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="create-your-final-project-draft" class="slide level2">
 <h2>Create your final project draft</h2>
-<p>Convert your final project draft to a Quarto document:</p>
+<p>Convert your final project draft to a Quarto document (<code>.qmd</code>):</p>
 <ol type="1">
-<li>Create a new <code>.qmd</code> file for your final project</li>
-<li>Structure it with proper sections (Introduction, Method, Results, Discussion)</li>
-<li>Include at least:
-<ul>
-<li>A setup chunk loading packages</li>
-<li>Code to import and clean your data</li>
-<li>2-3 visualizations with captions</li>
-<li>Summary statistics reported with inline code</li>
-<li>A table of descriptive statistics</li>
-</ul></li>
+<li>Structure it with sections: Introduction, Method, Results, Discussion</li>
+<li>Include a setup chunk, data import code, and 2-3 captioned visualizations</li>
+<li>Report at least one summary statistic with inline code</li>
+<li>Add a table of descriptive statistics with <code>kable()</code></li>
 <li>Render to HTML and review</li>
 </ol>
 <p><strong>This will become your final project report!</strong></p>
@@ -864,15 +857,14 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
-<ol type="1">
-<li><strong>Literate programming</strong> combines code, results, and narrative</li>
-<li><strong>Quarto documents</strong> have three parts: YAML, markdown, code chunks</li>
-<li><strong>Chunk options</strong> control what appears in the output</li>
-<li><strong>Inline code</strong> embeds results in text (never hard-code!)</li>
-<li><strong>Output formats</strong> — HTML, PDF, Word all from the same source</li>
-<li><strong>Tables</strong> — use <code>knitr::kable()</code> for simple, <code>gt</code> for fancy</li>
+<ul>
+<li><strong>Quarto documents</strong> = YAML + markdown + code chunks</li>
+<li><strong>Chunk options</strong> (<code>echo</code>, <code>eval</code>, <code>include</code>) control what appears</li>
+<li><strong>Inline code</strong> embeds results in text — never hard-code numbers!</li>
+<li><strong>Output formats</strong> — HTML, PDF, Word from the same source</li>
+<li><strong>Tables</strong> — <code>knitr::kable()</code> for simple, <code>gt</code> for fancy</li>
 <li><strong>Reproducibility</strong> — future you will thank you</li>
-</ol>
+</ul>
 </section>
 <section id="resources" class="slide level2">
 <h2>Resources</h2>
