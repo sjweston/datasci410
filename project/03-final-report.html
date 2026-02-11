@@ -6,9 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="dcterms.date" content="2026-06-03">
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>Assignment 6: Data Types &amp; Wrangling – PSY 410: Data Science for Psychology</title>
+<title>Milestone 3: Final Report – PSY 410: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -108,12 +74,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="Assignment 6: Data Types &amp; Wrangling – PSY 410: Data Science for Psychology">
+<meta property="og:title" content="Milestone 3: Final Report – PSY 410: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Assignment 6: Data Types &amp; Wrangling – PSY 410: Data Science for Psychology">
+<meta name="twitter:title" content="Milestone 3: Final Report – PSY 410: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -152,11 +118,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Content</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="../assignment/index.html" aria-current="page"> 
+    <a class="nav-link" href="../assignment/index.html"> 
 <span class="menu-text">Assignments</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../project/index.html"> 
+    <a class="nav-link active" href="../project/index.html" aria-current="page"> 
 <span class="menu-text">Project</span></a>
   </li>  
   <li class="nav-item">
@@ -174,7 +140,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Weekly Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/06-assignment.html">6: Data Types</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project/01-proposal.html">Milestones</a></li><li class="breadcrumb-item"><a href="../project/03-final-report.html">3: Final Report</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -201,8 +167,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Assignments</span></a>
+  <a href="../project/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Final Project</span></a>
   </div>
 </li>
       </ul>
@@ -210,7 +176,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Weekly Assignments</span></a>
+ <span class="menu-text">Milestones</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -218,50 +184,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/01-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">1: Getting Started</span></a>
+  <a href="../project/01-proposal.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">1: Proposal</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/02-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">2: Data Transformation</span></a>
+  <a href="../project/02-draft.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2: Draft Analysis</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/03-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">3: Tidying &amp; Import</span></a>
+  <a href="../project/03-final-report.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">3: Final Report</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../assignment/04-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">4: Visualization Deep Dive</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/05-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">5: Exploratory Data Analysis</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/06-assignment.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">6: Data Types</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/07-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">7: Joins &amp; Missing Data</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../assignment/08-assignment.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">8: Reproducible Report</span></a>
+  <a href="../project/04-presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">4: Presentation</span></a>
   </div>
 </li>
       </ul>
@@ -277,38 +219,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#part-1-logical-vectors-recoding-30-points" id="toc-part-1-logical-vectors-recoding-30-points" class="nav-link" data-scroll-target="#part-1-logical-vectors-recoding-30-points">Part 1: Logical Vectors &amp; Recoding (30 points)</a>
+  <li><a href="#what-to-submit" id="toc-what-to-submit" class="nav-link" data-scroll-target="#what-to-submit">What to submit</a></li>
+  <li><a href="#report-structure" id="toc-report-structure" class="nav-link" data-scroll-target="#report-structure">Report structure</a>
   <ul class="collapse">
-  <li><a href="#task-1.1" id="toc-task-1.1" class="nav-link" data-scroll-target="#task-1.1">Task 1.1</a></li>
-  <li><a href="#task-1.2" id="toc-task-1.2" class="nav-link" data-scroll-target="#task-1.2">Task 1.2</a></li>
-  <li><a href="#task-1.3" id="toc-task-1.3" class="nav-link" data-scroll-target="#task-1.3">Task 1.3</a></li>
-  <li><a href="#task-1.4" id="toc-task-1.4" class="nav-link" data-scroll-target="#task-1.4">Task 1.4</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">1. Introduction</a></li>
+  <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">2. Data description</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">3. Results</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">4. Discussion</a></li>
+  <li><a href="#process-documentation" id="toc-process-documentation" class="nav-link" data-scroll-target="#process-documentation">5. Process documentation</a></li>
   </ul></li>
-  <li><a href="#part-2-strings-25-points" id="toc-part-2-strings-25-points" class="nav-link" data-scroll-target="#part-2-strings-25-points">Part 2: Strings (25 points)</a>
-  <ul class="collapse">
-  <li><a href="#task-2.1" id="toc-task-2.1" class="nav-link" data-scroll-target="#task-2.1">Task 2.1</a></li>
-  <li><a href="#task-2.2" id="toc-task-2.2" class="nav-link" data-scroll-target="#task-2.2">Task 2.2</a></li>
-  </ul></li>
-  <li><a href="#part-3-factors-30-points" id="toc-part-3-factors-30-points" class="nav-link" data-scroll-target="#part-3-factors-30-points">Part 3: Factors (30 points)</a>
-  <ul class="collapse">
-  <li><a href="#task-3.1" id="toc-task-3.1" class="nav-link" data-scroll-target="#task-3.1">Task 3.1</a></li>
-  <li><a href="#task-3.2" id="toc-task-3.2" class="nav-link" data-scroll-target="#task-3.2">Task 3.2</a></li>
-  <li><a href="#task-3.3" id="toc-task-3.3" class="nav-link" data-scroll-target="#task-3.3">Task 3.3</a></li>
-  </ul></li>
-  <li><a href="#part-4-putting-it-together-15-points" id="toc-part-4-putting-it-together-15-points" class="nav-link" data-scroll-target="#part-4-putting-it-together-15-points">Part 4: Putting It Together (15 points)</a></li>
-  <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#technical-requirements" id="toc-technical-requirements" class="nav-link" data-scroll-target="#technical-requirements">Technical requirements</a></li>
+  <li><a href="#how-this-will-be-graded" id="toc-how-this-will-be-graded" class="nav-link" data-scroll-target="#how-this-will-be-graded">How this will be graded</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../assignment/01-assignment.html">Weekly Assignments</a></li><li class="breadcrumb-item"><a href="../assignment/06-assignment.html">6: Data Types</a></li></ol></nav><h1 class="title display-7">Assignment 6: Data Types &amp; Wrangling</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../project/01-proposal.html">Milestones</a></li><li class="breadcrumb-item"><a href="../project/03-final-report.html">3: Final Report</a></li></ol></nav><h1 class="title display-7">Milestone 3: Final Report</h1></header>
 
 <header id="title-block-header">
 
 
-<div class="date-block bg-assignment text-white p-2">
-  <p class="date">Due by 11:59 PM on Wednesday, May 6, 2026</p>
+<div class="date-block  text-white p-2">
+  <p class="date"> June 3, 2026</p>
 </div>
 </header>
 
@@ -319,119 +251,163 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Assignment Details
+<span class="screen-reader-only">Note</span>Milestone Details
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Assigned:</strong> Wednesday, May 6 (Session 12) <strong>Due:</strong> Monday, May 11 before class <strong>Submit:</strong> R script (<code>.R</code> file) on Canvas</p>
+<p><strong>Due:</strong> Wednesday, June 3 before class (Session 18) <strong>Submit:</strong> <code>.qmd</code> file + rendered <code>.html</code> file on Canvas <strong>Points:</strong> 60</p>
 </div>
 </div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>This assignment practices working with different data types: logical vectors, numbers, strings, and factors. These skills are essential for cleaning real-world psychology data.</p>
+<p>The final report is the culmination of your project. It’s a polished, reproducible Quarto document that imports your data, explores your research questions through visualizations, and tells a clear story about what you found. This is meant to be something you could show to a future employer, a graduate admissions committee, or a research advisor.</p>
 </section>
-<section id="setup" class="level2">
-<h2 class="anchored" data-anchor-id="setup">Setup</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Assignment 6: Data Types &amp; Wrangling</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Name</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="part-1-logical-vectors-recoding-30-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-logical-vectors-recoding-30-points">Part 1: Logical Vectors &amp; Recoding (30 points)</h2>
-<p>Here’s a simulated survey dataset:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">410</span>)  <span class="co"># For reproducibility</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="dv">12</span>)),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">q1 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">q2 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">q3_reverse =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),  <span class="co"># Needs reverse coding</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">q4 =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">q5_reverse =</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>, <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),  <span class="co"># Needs reverse coding</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">attention_check =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">5</span><span class="sc">:</span><span class="dv">7</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                           <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.85</span>, <span class="fu">rep</span>(<span class="fl">0.025</span>, <span class="dv">6</span>)))</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="task-1.1" class="level3">
-<h3 class="anchored" data-anchor-id="task-1.1">Task 1.1</h3>
-<p>Create a logical variable <code>passed_attention</code> that is <code>TRUE</code> if <code>attention_check == 4</code> and <code>FALSE</code> otherwise. How many participants passed?</p>
-</section>
-<section id="task-1.2" class="level3">
-<h3 class="anchored" data-anchor-id="task-1.2">Task 1.2</h3>
-<p>Reverse-code <code>q3_reverse</code> and <code>q5_reverse</code>. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables <code>q3</code> and <code>q5</code> with the corrected values.</p>
-</section>
-<section id="task-1.3" class="level3">
-<h3 class="anchored" data-anchor-id="task-1.3">Task 1.3</h3>
-<p>Create a <code>scale_mean</code> variable that is the mean of q1, q2, q3, q4, and q5 for each participant.</p>
-</section>
-<section id="task-1.4" class="level3">
-<h3 class="anchored" data-anchor-id="task-1.4">Task 1.4</h3>
-<p>Create an <code>age_group</code> variable using <code>case_when()</code>:</p>
-<ul>
-<li>“young” if age &lt; 30</li>
-<li>“middle” if age &gt;= 30 and age &lt; 50</li>
-<li>“older” if age &gt;= 50</li>
-</ul>
-</section>
-</section>
-<section id="part-2-strings-25-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-2-strings-25-points">Part 2: Strings (25 points)</h2>
-<p>Here’s some messy demographic data:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>messy_demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"female"</span>, <span class="st">"FEMALE"</span>, <span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"male"</span>, <span class="st">"Female"</span>, <span class="st">"m"</span>, <span class="st">"f"</span>, <span class="st">"Male"</span>),</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">education =</span> <span class="fu">c</span>(<span class="st">"high school"</span>, <span class="st">"High School"</span>, <span class="st">"college"</span>, <span class="st">"College"</span>, <span class="st">"graduate"</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                <span class="st">"COLLEGE"</span>, <span class="st">"Graduate"</span>, <span class="st">"high school"</span>, <span class="st">"Graduate"</span>, <span class="st">"college"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="task-2.1" class="level3">
-<h3 class="anchored" data-anchor-id="task-2.1">Task 2.1</h3>
-<p>Clean the <code>gender</code> variable so all values are standardized to “Male” or “Female”.</p>
-<p>Hint: Use <code>str_to_lower()</code> first, then <code>case_when()</code> or <code>if_else()</code>.</p>
-</section>
-<section id="task-2.2" class="level3">
-<h3 class="anchored" data-anchor-id="task-2.2">Task 2.2</h3>
-<p>Clean the <code>education</code> variable similarly. Standardize to “High School”, “College”, or “Graduate”.</p>
-</section>
-</section>
-<section id="part-3-factors-30-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-factors-30-points">Part 3: Factors (30 points)</h2>
-<section id="task-3.1" class="level3">
-<h3 class="anchored" data-anchor-id="task-3.1">Task 3.1</h3>
-<p>Convert your cleaned <code>education</code> variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: factor(x, levels = c(...))</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="task-3.2" class="level3">
-<h3 class="anchored" data-anchor-id="task-3.2">Task 3.2</h3>
-<p>Create a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.</p>
-</section>
-<section id="task-3.3" class="level3">
-<h3 class="anchored" data-anchor-id="task-3.3">Task 3.3</h3>
-<p>Using the survey data, create a factor version of <code>age_group</code> with levels in order: “young”, “middle”, “older”. Then create a boxplot of <code>scale_mean</code> by <code>age_group</code>. The x-axis should be in the correct order.</p>
-</section>
-</section>
-<section id="part-4-putting-it-together-15-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-4-putting-it-together-15-points">Part 4: Putting It Together (15 points)</h2>
-<p>Create a complete data cleaning pipeline for the survey data that:</p>
+<section id="what-to-submit" class="level2">
+<h2 class="anchored" data-anchor-id="what-to-submit">What to submit</h2>
+<p>Submit <strong>two files</strong> on Canvas:</p>
 <ol type="1">
-<li>Filters to participants who passed the attention check</li>
-<li>Reverse-codes the necessary items</li>
-<li>Creates the scale mean</li>
-<li>Creates the age group factor (in correct order)</li>
-<li>Selects only id, age, age_group, and scale_mean</li>
+<li>Your <strong>Quarto source file</strong> (<code>.qmd</code>)</li>
+<li>The <strong>rendered HTML output</strong> (<code>.html</code>)</li>
 </ol>
-<p>Use a single piped sequence.</p>
+<p>Your <code>.qmd</code> file must render cleanly from a fresh R session. I will re-render it to verify.</p>
 </section>
-<section id="submission" class="level2">
-<h2 class="anchored" data-anchor-id="submission">Submission</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Script runs without errors</label></li>
-<li><label><input type="checkbox">All data cleaning operations work correctly</label></li>
-<li><label><input type="checkbox">Factors are in correct order</label></li>
-<li><label><input type="checkbox">Pipeline produces clean final dataset</label></li>
+<section id="report-structure" class="level2">
+<h2 class="anchored" data-anchor-id="report-structure">Report structure</h2>
+<p>Your report should include the following sections:</p>
+<section id="introduction" class="level3">
+<h3 class="anchored" data-anchor-id="introduction">1. Introduction</h3>
+<ul>
+<li>What is your dataset? Where does it come from?</li>
+<li>What research questions are you exploring?</li>
+<li>Why are these questions interesting or important?</li>
 </ul>
-<p>Submit your <code>.R</code> file on Canvas.</p>
+<p><strong>Length:</strong> 2-3 paragraphs.</p>
+</section>
+<section id="data-description" class="level3">
+<h3 class="anchored" data-anchor-id="data-description">2. Data description</h3>
+<ul>
+<li>How many observations and variables?</li>
+<li>What are the key variables and what do they represent?</li>
+<li>Describe any cleaning or tidying steps you performed (and why)</li>
+<li>Include a summary table of descriptive statistics using <code>knitr::kable()</code></li>
+</ul>
+</section>
+<section id="results" class="level3">
+<h3 class="anchored" data-anchor-id="results">3. Results</h3>
+<p>This is the core of your report. For each research question:</p>
+<ul>
+<li>Present <strong>1-2 polished visualizations</strong> that address the question</li>
+<li>Write <strong>1-2 paragraphs</strong> interpreting what the figure shows</li>
+<li>Use <strong>inline code</strong> to report key numbers (means, counts, etc.) — never hard-code statistics</li>
+</ul>
+<p>Your report should include <strong>4-6 publication-ready figures</strong> total. Each figure should:</p>
+<ul>
+<li>Use an appropriate geom for the data type</li>
+<li>Have a clear, informative title (tells the reader <em>what to see</em>, not just what the axes are)</li>
+<li>Have labeled axes with units where appropriate</li>
+<li>Use a clean theme (<code>theme_minimal()</code>, <code>theme_classic()</code>, etc.)</li>
+<li>Use a colorblind-friendly palette when color is meaningful</li>
+<li>Include a caption (using <code>#| fig-cap</code>)</li>
+</ul>
+</section>
+<section id="discussion" class="level3">
+<h3 class="anchored" data-anchor-id="discussion">4. Discussion</h3>
+<ul>
+<li>What did you learn from your data?</li>
+<li>Were there any surprises or unexpected findings?</li>
+<li>What are the limitations of your analysis?</li>
+<li>What would you do next if you had more time?</li>
+</ul>
+<p><strong>Length:</strong> 2-3 paragraphs.</p>
+</section>
+<section id="process-documentation" class="level3">
+<h3 class="anchored" data-anchor-id="process-documentation">5. Process documentation</h3>
+<ul>
+<li>Did you use AI tools? If so, which ones and for what?</li>
+<li>What did the AI get right? What did it get wrong?</li>
+<li>What was the most challenging part of this project?</li>
+<li>What are you most proud of?</li>
+</ul>
+<p><strong>Length:</strong> 1-2 paragraphs.</p>
+</section>
+</section>
+<section id="technical-requirements" class="level2">
+<h2 class="anchored" data-anchor-id="technical-requirements">Technical requirements</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Report renders to HTML without errors from a fresh R session</label></li>
+<li><label><input type="checkbox">All packages are loaded in a single setup chunk with <code>#| include: false</code></label></li>
+<li><label><input type="checkbox">Data is imported using a relative path (not an absolute path like <code>C:/Users/...</code>)</label></li>
+<li><label><input type="checkbox">Summary statistics are reported with inline code (not hard-coded numbers)</label></li>
+<li><label><input type="checkbox">Figures include captions using <code>#| fig-cap</code></label></li>
+<li><label><input type="checkbox">Code is organized, commented, and uses the pipe operator where appropriate</label></li>
+<li><label><input type="checkbox">YAML header includes your name, a title, and the date</label></li>
+</ul>
+</section>
+<section id="how-this-will-be-graded" class="level2">
+<h2 class="anchored" data-anchor-id="how-this-will-be-graded">How this will be graded</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 57%">
+<col style="width: 42%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Points</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Introduction</strong> — clear, well-motivated</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td><strong>Data description</strong> — complete, includes summary table</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><strong>Visualizations</strong> — 4-6 figures, polished, appropriate</td>
+<td>20</td>
+</tr>
+<tr class="even">
+<td><strong>Narrative</strong> — interpretation is clear, connected to questions</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td><strong>Discussion</strong> — thoughtful reflection on findings and limitations</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td><strong>Process documentation</strong> — honest, reflective</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><strong>Reproducibility</strong> — renders cleanly, inline code, relative paths</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td><strong>Code quality</strong> — organized, readable, well-commented</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>60</strong></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>What makes an A-level report?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>An excellent report doesn’t just show data — it tells a <strong>story</strong>. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.</p>
+</div>
+</div>
 
 
 </section>
