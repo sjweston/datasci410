@@ -15,7 +15,7 @@ By the end of the quarter, you'll have:
 - A **dataset** relevant to psychology or the social sciences
 - **2-3 research questions** that can be explored through visualization
 - A **polished Quarto report** (`.qmd` rendered to HTML) with 4-6 publication-ready figures
-- A **5-minute presentation** sharing your key findings with the class
+- A **5-minute recorded video** presenting your key findings (shared with the class)
 
 ## Milestones
 
@@ -26,7 +26,7 @@ The project is broken into four milestones so you get feedback along the way:
 | [Proposal](01-proposal.qmd) | Wed Apr 29 (Session 10) | Dataset, research questions, initial plan |
 | [Draft](02-draft.qmd) | Wed May 20 (Session 15) | Working code, preliminary visualizations |
 | [Final Report](03-final-report.qmd) | Wed Jun 3 (Session 18) | Complete Quarto report |
-| [Presentation](04-presentation.qmd) | Finals Week | 5-minute share-out |
+| [Presentation](04-presentation.qmd) | Finals Week | 5-minute recorded video |
 
 ## Grading breakdown
 
@@ -62,7 +62,7 @@ Come to office hours and we can browse datasets together. It's much easier to st
 
 ## AI tools policy
 
-The final project follows the same AI policy as weekly assignments: **AI-permitted with documentation.** You must include a process documentation section in your final report describing how you used AI tools (if at all) and what you learned from the process. See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy.
+AI tools (ChatGPT, Claude, GitHub Copilot, etc.) are **not permitted** on the final project. All code, visualizations, and writing must be your own work. See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy and rationale.
 
 ## Getting help
 

@@ -30,13 +30,7 @@ Weekly coding assignments reinforce what you learn in each session. They're desi
 
 ## AI Tools Policy
 
-Weekly assignments are **AI-permitted with documentation**. You may use tools like ChatGPT or GitHub Copilot, but you must:
-
-1. **Cite your use** — Note which tool and for what purpose
-2. **Document the process** — Briefly reflect on what it got right/wrong
-3. **Understand your code** — Be prepared to explain it verbally
-
-See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy.
+AI tools (ChatGPT, Claude, GitHub Copilot, etc.) are **not permitted** on any assignments in this course. The goal is to build your own foundational skills — AI is most useful once you already understand what you're doing. See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy and rationale.
 
 ## Getting Help
 

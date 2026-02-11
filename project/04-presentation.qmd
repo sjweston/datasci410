@@ -5,22 +5,34 @@ date: "2026-06-08"
 
 ::: {.callout-note}
 ## Milestone Details
-**Due:** Finals Week (exact date/time TBD based on finals schedule)
-**Format:** 5-minute in-class presentation
+**Due:** Finals Week (exact date TBD)
+**Submit:** Video file (`.mp4` or similar) uploaded to Canvas
 **Points:** 15
 :::
 
 ## Overview
 
-The presentation is a brief share-out where you tell the class about your project. The goal is to practice communicating data findings to a general audience — a skill that's valuable whether you go into research, industry, or any field that uses data.
+The presentation is a short recorded video where you walk through your project findings. The goal is to practice communicating data findings to a general audience — a skill that's valuable whether you go into research, industry, or any field that uses data.
+
+All videos will be shared with the class so everyone can see what their classmates discovered.
 
 This is **not** a formal academic talk. Think of it as showing a friend something cool you found in your data.
 
 ## Format
 
-- **5 minutes** — I will time you; practice beforehand so you don't run over
-- **2-3 slides or figures** — you don't need a full slide deck; screen-sharing your report and walking through key figures is fine
-- **Brief Q&A** — the class may ask 1-2 questions
+- **5 minutes maximum** — videos over 5 minutes will lose points; practice beforehand
+- **Screen recording with voiceover** — walk through your figures while narrating (you don't need to be on camera, but you can be if you'd like)
+- **No fancy editing required** — a simple screen recording is fine
+
+### How to record
+
+Any of these tools work:
+
+- **Zoom** — start a meeting by yourself, share screen, hit record
+- **QuickTime** (Mac) — File → New Screen Recording
+- **PowerPoint** — Record Slide Show (if you make slides)
+- **OBS** — free, works on all platforms
+- **Loom** — free tier available, easy screen + voice recording
 
 ## What to cover
 
@@ -47,13 +59,14 @@ Share **one** of the following:
 - Something you'd do differently next time
 - What you're most proud of
 
-## Tips for a great presentation
+## Tips for a great video
 
-- **Practice out loud** — 5 minutes goes fast
+- **Practice out loud before you record** — 5 minutes goes fast
 - **Don't read from a script** — know your figures well enough to talk about them naturally
-- **Make your figures legible** — increase font sizes if needed; the back of the room needs to see too
+- **Make your figures fill the screen** — viewers need to read axis labels and titles
 - **Tell a story** — start with the question, show the answer, explain why it matters
 - **It's okay to show something that didn't work** — failed analyses and dead ends are part of data science
+- **One take is fine** — don't over-produce it; authenticity beats polish
 
 ## How this will be graded
 
@@ -63,10 +76,10 @@ Share **one** of the following:
 | Figures are well-chosen and clearly explained | 5 |
 | Narrative is engaging and easy to follow | 3 |
 | Reflection shows genuine thought | 2 |
-| Stayed within time limit | 2 |
+| Within 5-minute time limit | 2 |
 | **Total** | **15** |
 
 ::: {.callout-tip}
 ## No need to be nervous
-Everyone in this class started the quarter at the same place. Your classmates will be impressed by what you've built — and you should be too.
+Everyone in this class started the quarter at the same place. Your classmates will be impressed by what you've built — and you should be too. And the nice thing about video: you can re-record if you want to!
 :::

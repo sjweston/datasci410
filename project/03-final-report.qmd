@@ -6,7 +6,7 @@ date: "2026-06-03"
 ::: {.callout-note}
 ## Milestone Details
 **Due:** Wednesday, June 3 before class (Session 18)
-**Submit:** `.qmd` file + rendered `.html` file on Canvas
+**Submit:** Zip file containing `.qmd`, rendered `.html`, and dataset(s) on Canvas
 **Points:** 60
 :::
 
@@ -16,12 +16,18 @@ The final report is the culmination of your project. It's a polished, reproducib
 
 ## What to submit
 
-Submit **two files** on Canvas:
+Upload a **zip file** to Canvas containing:
 
 1. Your **Quarto source file** (`.qmd`)
 2. The **rendered HTML output** (`.html`)
+3. Your **dataset file(s)** (`.csv`, `.xlsx`, etc.)
 
-Your `.qmd` file must render cleanly from a fresh R session. I will re-render it to verify.
+Everything needed to reproduce your report should be in the zip. Your `.qmd` file must render cleanly from a fresh R session — I will re-render it to verify, so if I don't have your data, I can't confirm it works.
+
+::: {.callout-important}
+## Include your data!
+If your `.qmd` calls `read_csv("my_data.csv")`, that file needs to be in your submission. The easiest approach: put your `.qmd` and data file(s) in the same folder, zip the whole folder, and upload it.
+:::
 
 ## Report structure
 
@@ -68,12 +74,12 @@ Your report should include **4-6 publication-ready figures** total. Each figure 
 
 **Length:** 2-3 paragraphs.
 
-### 5. Process documentation
+### 5. Reflection
 
-- Did you use AI tools? If so, which ones and for what?
-- What did the AI get right? What did it get wrong?
 - What was the most challenging part of this project?
+- What would you do differently if you started over?
 - What are you most proud of?
+- What skills from this course were most useful?
 
 **Length:** 1-2 paragraphs.
 
@@ -96,7 +102,7 @@ Your report should include **4-6 publication-ready figures** total. Each figure 
 | **Visualizations** — 4-6 figures, polished, appropriate | 20 |
 | **Narrative** — interpretation is clear, connected to questions | 10 |
 | **Discussion** — thoughtful reflection on findings and limitations | 5 |
-| **Process documentation** — honest, reflective | 5 |
+| **Reflection** — honest, thoughtful | 5 |
 | **Reproducibility** — renders cleanly, inline code, relative paths | 5 |
 | **Code quality** — organized, readable, well-commented | 5 |
 | **Total** | **60** |
