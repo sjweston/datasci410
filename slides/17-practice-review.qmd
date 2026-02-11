@@ -1,0 +1,728 @@
+---
+title: "Practice & Review"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "June 1, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 17"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Today's plan {background-color="#2c3e50"}
+
+## Where we've been
+
+Over 17 sessions, you've learned:
+
+✅ Data visualization with ggplot2
+✅ Data transformation with dplyr
+✅ Data tidying with tidyr
+✅ Working with strings, factors, dates
+✅ Joining datasets
+✅ Handling missing data
+✅ Creating reproducible reports with Quarto
+
+. . .
+
+**Today:** Put it all together with guided practice
+
+## What we'll cover
+
+1. **Complete workflow walkthrough** — import to final figure
+2. **Common errors** — and how to fix them
+3. **Debugging strategies** — when you're stuck
+4. **Getting help effectively** — online and in-person
+5. **Q&A for final projects**
+
+# A complete workflow {background-color="#2c3e50"}
+
+## The data science workflow
+
+![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png){width="80%"}
+
+. . .
+
+**Today's example:** Analyzing therapy effectiveness data
+
+## Step 1: Import
+
+```{r}
+# Simulated therapy study data
+therapy_data <- tibble(
+  participant_id = 1:100,
+  condition = sample(c("CBT", "Control", "Mindfulness"), 100, replace = TRUE),
+  age = sample(18:65, 100, replace = TRUE),
+  gender = sample(c("Male", "Female", "Non-binary"), 100, replace = TRUE),
+  depression_baseline = rnorm(100, 22, 5),
+  depression_post = rnorm(100, 18, 5),
+  completed_followup = sample(c(TRUE, FALSE), 100, replace = TRUE, prob = c(0.8, 0.2))
+)
+
+glimpse(therapy_data)
+```
+
+## Step 2: Tidy & Clean
+
+```{r}
+# Check for issues
+therapy_data |>
+  summarize(
+    missing_baseline = sum(is.na(depression_baseline)),
+    missing_post = sum(is.na(depression_post)),
+    n_participants = n()
+  )
+```
+
+. . .
+
+```{r}
+# Clean: create change score, filter to completers
+therapy_clean <- therapy_data |>
+  filter(completed_followup) |>
+  mutate(
+    change = depression_baseline - depression_post,
+    condition = factor(condition, levels = c("Control", "CBT", "Mindfulness"))
+  )
+```
+
+## Step 3: Transform & Summarize
+
+```{r}
+therapy_summary <- therapy_clean |>
+  group_by(condition) |>
+  summarize(
+    n = n(),
+    mean_baseline = mean(depression_baseline),
+    mean_post = mean(depression_post),
+    mean_change = mean(change),
+    sd_change = sd(change)
+  )
+
+therapy_summary
+```
+
+## Step 4: Visualize
+
+```{r}
+#| output-location: slide
+ggplot(therapy_clean, aes(x = condition, y = change)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  geom_jitter(width = 0.1, alpha = 0.3) +
+  labs(
+    title = "CBT shows largest reduction in depression",
+    subtitle = "Change in BDI-II scores from baseline to post-treatment",
+    x = NULL,
+    y = "Depression reduction (points)"
+  ) +
+  theme_minimal()
+```
+
+## Step 5: Communicate
+
+Put it all together in a Quarto report:
+
+````markdown
+## Results
+
+We analyzed data from `r nrow(therapy_clean)` participants who
+completed the study. The CBT condition showed the largest mean
+reduction in depression scores (M = `r round(therapy_summary$mean_change[2], 1)`,
+SD = `r round(therapy_summary$sd_change[2], 1)`), compared to
+control (M = `r round(therapy_summary$mean_change[1], 1)`) and
+mindfulness (M = `r round(therapy_summary$mean_change[3], 1)`).
+
+```{{r}}
+#| echo: false
+#| fig-cap: "Depression change by treatment condition"
+
+# [visualization code here]
+```
+````
+
+# Common errors {background-color="#2c3e50"}
+
+## Error 1: "Object not found"
+
+```{r}
+#| error: true
+mean(Depression)  # Capitalization matters!
+```
+
+. . .
+
+**What it means:** R can't find an object with that name
+
+**Common causes:**
+
+- Typo or wrong capitalization
+- Haven't created the object yet
+- Forgot to load the package
+- Object is in a different environment
+
+. . .
+
+**Fix:** Check spelling, run the code that creates the object
+
+## Error 2: "Could not find function"
+
+```{r}
+#| error: true
+therapy_data |>
+  select(participant_id, condition)  # Works
+
+therapy_data |>
+  selet(participant_id, condition)  # Typo!
+```
+
+. . .
+
+**Common causes:**
+
+- Typo in function name
+- Package not loaded (`library()`)
+- Wrong package (e.g., `filter()` exists in multiple packages)
+
+. . .
+
+**Fix:** Check spelling, load the right package
+
+## Error 3: "Unexpected symbol"
+
+```{r}
+#| error: true
+therapy_data |>
+  filter(condition == "CBT")
+  select(participant_id)  # Missing pipe!
+```
+
+. . .
+
+**What it means:** R found something it didn't expect
+
+**Common causes:**
+
+- Missing `|>` or `+`
+- Missing comma
+- Unmatched parentheses or quotes
+- Missing assignment operator `<-`
+
+## Error 4: "Non-numeric argument"
+
+```{r}
+#| error: true
+mean(therapy_data$condition)  # Can't take mean of text!
+```
+
+. . .
+
+**What it means:** You're trying to do math on non-numbers
+
+**Common causes:**
+
+- Variable is character/factor when you thought it was numeric
+- Wrong variable name
+- Data import issue (numbers stored as text)
+
+. . .
+
+**Fix:** Check the data type with `class()` or `glimpse()`
+
+## Error 5: "Subscript out of bounds"
+
+```{r}
+#| error: true
+my_vector <- c(1, 2, 3)
+my_vector[5]  # Only 3 elements!
+```
+
+. . .
+
+**What it means:** You're trying to access an element that doesn't exist
+
+**Common causes:**
+
+- Index is too large
+- Empty data frame
+- Wrong dimension reference
+
+## Error 6: ggplot errors
+
+```{r}
+#| error: true
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_boxplot()
+  labs(title = "My plot")  # Missing + !
+```
+
+. . .
+
+With ggplot, **every line needs `+`** except the last one.
+
+## Error 7: Unmatched quotes/parentheses
+
+```{r}
+#| error: true
+filter(therapy_data, condition == "CBT"
+```
+
+. . .
+
+**Look for red X** in RStudio margin — shows where the problem is.
+
+. . .
+
+**Pro tip:** RStudio auto-completes quotes and parentheses. If you type `(`, it adds `)` automatically.
+
+# Debugging strategies {background-color="#2c3e50"}
+
+## Step 1: Read the error message
+
+**Actually read it!** Don't just panic.
+
+```
+Error in filter(therapy_data, condition == "cbt") :
+  object 'therapy_data' not found
+```
+
+. . .
+
+Key information:
+
+- **Where:** `filter(therapy_data, ...)`
+- **What:** `object 'therapy_data' not found`
+
+. . .
+
+This tells you: R can't find `therapy_data`. Did you create it? Typo?
+
+## Step 2: Check the basics
+
+Before diving deep, verify:
+
+1. ✅ Is the package loaded? (`library(tidyverse)`)
+2. ✅ Did you run the code that creates the object?
+3. ✅ Is your spelling/capitalization correct?
+4. ✅ Are you in the right working directory?
+
+. . .
+
+**90% of errors** are one of these four things.
+
+## Step 3: Isolate the problem
+
+**Run code line by line:**
+
+```{r}
+#| eval: false
+therapy_data |>                         # Run this line
+  filter(completed_followup) |>         # Then this
+  mutate(change = depression_baseline - depression_post) |>  # Then this
+  group_by(condition) |>                # Then this
+  summarize(mean_change = mean(change)) # Then this
+```
+
+. . .
+
+Find exactly which line breaks.
+
+## Step 4: Simplify
+
+Create a minimal example:
+
+```{r}
+# Instead of your full complex pipeline
+simple_test <- tibble(
+  x = c(1, 2, 3),
+  y = c("a", "b", "c")
+)
+
+mean(simple_test$x)  # Does this work?
+```
+
+. . .
+
+If this works, the problem is in your data/code, not your understanding.
+
+## Step 5: Google it
+
+**Everyone Googles errors. Everyone.**
+
+. . .
+
+Good search:
+
+- Include "R" in your search
+- Copy the error message (exact quote)
+- Include package name if relevant
+
+. . .
+
+Example:
+
+> `R dplyr "object not found" filter`
+
+## Step 6: Read Stack Overflow carefully
+
+Look for:
+
+- ✅ Green checkmark = accepted answer
+- ✅ High upvotes = community approved
+- ✅ Recent date = still relevant
+
+. . .
+
+**Don't just copy-paste** — understand *why* the solution works.
+
+## Step 7: Create a reprex
+
+**Reprex** = **repr**oducible **ex**ample
+
+When asking for help, provide:
+
+1. **Minimal data** — small sample of your data
+2. **Code to recreate the error**
+3. **The actual error message**
+4. **What you expected to happen**
+
+## Reprex example
+
+**Bad:**
+
+> "My code doesn't work. Help!"
+
+. . .
+
+**Good:**
+
+> "I'm trying to filter my data but getting 'object not found'. Here's a minimal example:
+>
+> ```r
+> library(tidyverse)
+> data <- tibble(x = 1:3, y = c("a", "b", "c"))
+> filter(data, x > 1)
+> # Error: object 'data' not found
+> ```
+>
+> I expected to get rows where x > 1."
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Debug this code
+
+This code has several errors. Find and fix them:
+
+```{r}
+#| eval: false
+library(tidyverse)
+
+# Load data
+Study_data <- tibble(
+  id = 1:5,
+  Score = c(10, 15, 12, 18, 14),
+  Group = c("A", "B", "A", "B", "A")
+)
+
+# Analyze
+study_data |>
+  filter(Group = "A") |>
+  summarize(
+    mean_score = mean(score)
+    sd_score = sd(score)
+  )
+```
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+library(tidyverse)
+
+# Load data (capital S in Study_data)
+study_data <- tibble(  # Changed to lowercase to match later use
+  id = 1:5,
+  Score = c(10, 15, 12, 18, 14),  # Capital S in Score
+  Group = c("A", "B", "A", "B", "A")
+)
+
+# Analyze
+study_data |>
+  filter(Group == "A") |>  # Fixed: == not =
+  summarize(
+    mean_score = mean(Score),  # Fixed: capital S, added comma
+    sd_score = sd(Score)       # Fixed: capital S
+  )
+```
+
+# Getting help effectively {background-color="#2c3e50"}
+
+## Where to get help
+
+**During this course:**
+
+- Office hours
+- Class time
+- Email (for specific questions)
+
+. . .
+
+**After this course:**
+
+- [Stack Overflow](https://stackoverflow.com) — searchable Q&A
+- [Posit Community](https://community.rstudio.com) — friendly forum
+- [R4DS Slack](https://r4ds.io/join) — real-time chat
+- [R-Ladies](https://rladies.org) — supportive community
+
+## How to ask a good question
+
+1. **Search first** — your question has probably been asked
+
+2. **Be specific** — "How do I make a bar chart?" vs "How do I make a grouped bar chart with custom colors?"
+
+3. **Show what you tried** — demonstrates effort
+
+4. **Provide a reprex** — make it easy for others to help you
+
+5. **Be respectful** — people are volunteering their time
+
+## What to include
+
+✅ **Include:**
+
+- Your R version
+- Relevant packages loaded
+- Sample data (use `dput()` to share)
+- Expected output
+- What you've tried
+
+. . .
+
+❌ **Don't include:**
+
+- Screenshots of code (copy-paste text instead)
+- Your entire dataset (create a small example)
+- "It doesn't work" without details
+
+## Using dput() to share data
+
+```{r}
+# Create small example
+my_data <- tibble(x = 1:3, y = c("a", "b", "c"))
+
+# Generate shareable code
+dput(my_data)
+```
+
+. . .
+
+Someone can now recreate your exact data:
+
+```{r}
+# They run this:
+structure(list(x = 1:3, y = c("a", "b", "c")),
+          class = c("tbl_df", "tbl", "data.frame"),
+          row.names = c(NA, -3L))
+```
+
+## R help documentation
+
+```{r}
+#| eval: false
+# Open help page
+?mean
+help(mean)
+
+# Search all help
+??regression
+help.search("regression")
+
+# Run examples from help
+example(mean)
+```
+
+. . .
+
+Help pages include:
+
+- **Description** — what it does
+- **Usage** — syntax
+- **Arguments** — inputs
+- **Examples** — working code
+
+# Final project Q&A {background-color="#2c3e50"}
+
+## Common final project questions
+
+**"My dataset is too messy — should I find a new one?"**
+
+. . .
+
+- Real data is messy! This is good practice.
+- Document your cleaning steps clearly.
+- If it's *impossibly* messy, ask me for help finding an alternative.
+
+. . .
+
+**"I can't find a 'psychology' dataset — is that okay?"**
+
+. . .
+
+- Broadly defined: health, education, social science all fine
+- Focus on *human behavior* in some form
+- If unsure, ask!
+
+## More common questions
+
+**"How long should my final report be?"**
+
+. . .
+
+- Quality > quantity
+- ~5-10 pages is typical (including figures)
+- Focus on telling a clear story
+
+. . .
+
+**"Can I use the same dataset for multiple visualizations?"**
+
+. . .
+
+- Yes! That's encouraged.
+- Show different aspects/relationships in your data
+- Each figure should make a distinct point
+
+## Final project checklist
+
+Your final report should include:
+
+- [ ] **Introduction** — research question & why it matters
+- [ ] **Method** — data source, variables, cleaning steps
+- [ ] **Results** — descriptive stats + visualizations
+- [ ] **Discussion** — interpretation & implications
+- [ ] **Reproducible** — all code included, uses Quarto
+- [ ] **Polished figures** — clear labels, good design
+- [ ] **Inline code** — no hard-coded statistics
+
+## Timeline reminder
+
+- **Today (June 1):** Assignment 8 due
+- **Wednesday (June 3):** Final report due
+- **Finals week:** 5-minute presentations
+
+. . .
+
+**You have 2 days** to polish your final project. Use them wisely!
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+## Practice: Complete mini-analysis
+
+Choose one of these datasets and complete a full analysis:
+
+- `palmerpenguins::penguins`
+- `ggplot2::diamonds`
+- `dplyr::starwars`
+
+Create a Quarto report with:
+
+1. A research question
+2. Data cleaning/preparation
+3. Summary statistics table
+4. 2 visualizations
+5. Brief interpretation
+
+**This is practice for your final project!**
+
+# Wrapping up {background-color="#2c3e50"}
+
+## The learning curve
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+tibble(
+  time = c(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10),
+  skill = c(0, 15, 25, 40, 52, 60, 66, 71, 75, 78, 80),
+  frustration = c(10, 60, 75, 70, 50, 40, 30, 25, 20, 15, 10)
+) |>
+  pivot_longer(cols = c(skill, frustration), names_to = "measure", values_to = "value") |>
+  ggplot(aes(x = time, y = value, color = measure)) +
+  geom_line(size = 1.5) +
+  scale_color_manual(values = c("skill" = "steelblue", "frustration" = "coral")) +
+  labs(
+    title = "Learning R: Frustration decreases, skill increases",
+    x = "Weeks into course",
+    y = NULL,
+    color = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+## You've come so far
+
+**Week 1:** "What's a pipe?"
+
+**Now:** Creating complete reproducible analyses with joins, factors, missing data handling, and publication-ready figures.
+
+. . .
+
+::: {.callout-tip}
+## Growth mindset
+
+You didn't know R 10 weeks ago. You know it now. That's proof you can keep learning.
+:::
+
+## Key takeaways
+
+1. **The workflow** — import, tidy, transform, visualize, communicate
+2. **Errors are normal** — read them, Google them, ask for help
+3. **Debug systematically** — isolate, simplify, test
+4. **Ask good questions** — include a reprex
+5. **Keep practicing** — the only way to improve
+6. **You can do this!** — you've already proven it
+
+## Resources for continued learning
+
+- **R4DS book** — comprehensive reference
+- **Posit primers** — interactive tutorials
+- **#TidyTuesday** — weekly data viz challenges on Twitter/Mastodon
+- **R-Ladies** — supportive community, many local chapters
+- **Stat 545** (UBC) — free online course materials
+- **Data Science in a Box** — full course materials online
+
+## Before next class
+
+📖 **No new reading** — final push on projects!
+
+✅ **Do:**
+
+- **Submit Assignment 8** (due today)
+- **Finish your final project** (due Wednesday)
+- Practice, practice, practice
+
+## Questions?
+
+See you Wednesday for our final session!

@@ -1,0 +1,108 @@
+---
+title: "Milestone 3: Final Report"
+date: "2026-06-03"
+---
+
+::: {.callout-note}
+## Milestone Details
+**Due:** Wednesday, June 3 before class (Session 18)
+**Submit:** `.qmd` file + rendered `.html` file on Canvas
+**Points:** 60
+:::
+
+## Overview
+
+The final report is the culmination of your project. It's a polished, reproducible Quarto document that imports your data, explores your research questions through visualizations, and tells a clear story about what you found. This is meant to be something you could show to a future employer, a graduate admissions committee, or a research advisor.
+
+## What to submit
+
+Submit **two files** on Canvas:
+
+1. Your **Quarto source file** (`.qmd`)
+2. The **rendered HTML output** (`.html`)
+
+Your `.qmd` file must render cleanly from a fresh R session. I will re-render it to verify.
+
+## Report structure
+
+Your report should include the following sections:
+
+### 1. Introduction
+
+- What is your dataset? Where does it come from?
+- What research questions are you exploring?
+- Why are these questions interesting or important?
+
+**Length:** 2-3 paragraphs.
+
+### 2. Data description
+
+- How many observations and variables?
+- What are the key variables and what do they represent?
+- Describe any cleaning or tidying steps you performed (and why)
+- Include a summary table of descriptive statistics using `knitr::kable()`
+
+### 3. Results
+
+This is the core of your report. For each research question:
+
+- Present **1-2 polished visualizations** that address the question
+- Write **1-2 paragraphs** interpreting what the figure shows
+- Use **inline code** to report key numbers (means, counts, etc.) — never hard-code statistics
+
+Your report should include **4-6 publication-ready figures** total. Each figure should:
+
+- Use an appropriate geom for the data type
+- Have a clear, informative title (tells the reader *what to see*, not just what the axes are)
+- Have labeled axes with units where appropriate
+- Use a clean theme (`theme_minimal()`, `theme_classic()`, etc.)
+- Use a colorblind-friendly palette when color is meaningful
+- Include a caption (using `#| fig-cap`)
+
+### 4. Discussion
+
+- What did you learn from your data?
+- Were there any surprises or unexpected findings?
+- What are the limitations of your analysis?
+- What would you do next if you had more time?
+
+**Length:** 2-3 paragraphs.
+
+### 5. Process documentation
+
+- Did you use AI tools? If so, which ones and for what?
+- What did the AI get right? What did it get wrong?
+- What was the most challenging part of this project?
+- What are you most proud of?
+
+**Length:** 1-2 paragraphs.
+
+## Technical requirements
+
+- [ ] Report renders to HTML without errors from a fresh R session
+- [ ] All packages are loaded in a single setup chunk with `#| include: false`
+- [ ] Data is imported using a relative path (not an absolute path like `C:/Users/...`)
+- [ ] Summary statistics are reported with inline code (not hard-coded numbers)
+- [ ] Figures include captions using `#| fig-cap`
+- [ ] Code is organized, commented, and uses the pipe operator where appropriate
+- [ ] YAML header includes your name, a title, and the date
+
+## How this will be graded
+
+| Component | Points |
+|-----------|--------|
+| **Introduction** — clear, well-motivated | 5 |
+| **Data description** — complete, includes summary table | 5 |
+| **Visualizations** — 4-6 figures, polished, appropriate | 20 |
+| **Narrative** — interpretation is clear, connected to questions | 10 |
+| **Discussion** — thoughtful reflection on findings and limitations | 5 |
+| **Process documentation** — honest, reflective | 5 |
+| **Reproducibility** — renders cleanly, inline code, relative paths | 5 |
+| **Code quality** — organized, readable, well-commented | 5 |
+| **Total** | **60** |
+
+::: {.callout-tip}
+## What makes an A-level report?
+
+An excellent report doesn't just show data — it tells a **story**. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.
+:::

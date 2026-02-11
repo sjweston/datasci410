@@ -1,0 +1,586 @@
+---
+title: "Exploratory Data Analysis: Covariation"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 29, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 10"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# From variation to covariation {background-color="#2c3e50"}
+
+## Recap: Variation
+
+Last session we explored **variation** — how values vary within a single variable:
+
+- Distributions of continuous variables (histograms, density plots)
+- Counts of categorical variables (bar charts)
+- Identifying typical values and outliers
+
+## Today: Covariation
+
+**Covariation** is the tendency for values of two or more variables to vary together in a related way.
+
+. . .
+
+In psychology, we care deeply about covariation:
+
+- Does anxiety vary with depression?
+- Do reaction times vary across different conditions?
+- Does age relate to memory performance?
+
+# Categorical + Continuous {background-color="#2c3e50"}
+
+## Example: Mental health by treatment group
+
+```{r}
+# Simulated therapy outcome data
+therapy_data <- tibble(
+  condition = rep(c("Control", "CBT", "Mindfulness"), each = 50),
+  depression_post = c(
+    rnorm(50, mean = 18, sd = 5),  # Control
+    rnorm(50, mean = 12, sd = 5),  # CBT
+    rnorm(50, mean = 14, sd = 5)   # Mindfulness
+  )
+)
+
+glimpse(therapy_data)
+```
+
+## Boxplots: The classic choice
+
+```{r}
+#| output-location: slide
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_boxplot() +
+  labs(
+    title = "Post-treatment depression scores by condition",
+    x = "Treatment condition",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+```
+
+## What boxplots show
+
+:::: {.columns}
+::: {.column width="40%"}
+![](https://r4ds.hadley.nz/diagrams/EDA-boxplot.png)
+:::
+
+::: {.column width="60%"}
+- **Line in middle:** median
+- **Box:** 25th to 75th percentile (IQR)
+- **Whiskers:** extend to 1.5 × IQR
+- **Dots:** outliers beyond whiskers
+:::
+::::
+
+. . .
+
+Great for comparing distributions, but they hide the actual data points.
+
+## Violin plots: See the distribution
+
+```{r}
+#| output-location: slide
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_violin() +
+  labs(
+    title = "Post-treatment depression scores by condition",
+    x = "Treatment condition",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+```
+
+## Combining: Violin + boxplot
+
+```{r}
+#| output-location: slide
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_violin() +
+  geom_boxplot(width = 0.2, alpha = 0.5) +
+  labs(
+    title = "Post-treatment depression scores by condition",
+    x = "Treatment condition",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+```
+
+## Even better: Show the actual data
+
+```{r}
+#| output-location: slide
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_violin() +
+  geom_jitter(width = 0.1, alpha = 0.3, size = 2) +
+  labs(
+    title = "Post-treatment depression scores by condition",
+    x = "Treatment condition",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+```
+
+## Another approach: Frequency polygons
+
+```{r}
+#| output-location: slide
+ggplot(therapy_data, aes(x = depression_post, color = condition)) +
+  geom_freqpoly(binwidth = 2) +
+  labs(
+    title = "Distribution of depression scores by condition",
+    x = "Depression score (BDI-II)",
+    y = "Count",
+    color = "Condition"
+  ) +
+  theme_minimal()
+```
+
+## When to use which
+
+| Plot type | Best for |
+|-----------|----------|
+| **Boxplot** | Quick comparison of medians and spread |
+| **Violin** | Seeing the shape of distributions |
+| **Violin + points** | Small to medium datasets, show individual cases |
+| **Frequency polygon** | Comparing distributions across many groups |
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Compare by gender
+
+Using the therapy data, explore whether depression scores differ by gender:
+
+1. Add a `gender` variable to the data (use `sample()` to randomly assign "Male", "Female", "Non-binary")
+2. Create a visualization showing depression scores by gender
+3. Try at least two different geom types
+4. Add appropriate labels
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+therapy_data_gender <- therapy_data |>
+  mutate(gender = sample(c("Male", "Female", "Non-binary"),
+                         size = n(),
+                         replace = TRUE))
+
+# Boxplot version
+ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
+  geom_boxplot() +
+  labs(
+    title = "Depression scores by gender",
+    x = "Gender",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+
+# Violin + jitter version
+ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
+  geom_violin() +
+  geom_jitter(width = 0.1, alpha = 0.3) +
+  labs(
+    title = "Depression scores by gender",
+    x = "Gender",
+    y = "Depression score (BDI-II)"
+  ) +
+  theme_minimal()
+```
+
+# Categorical + Categorical {background-color="#2c3e50"}
+
+## Example: Diagnosis by gender
+
+```{r}
+# Simulated diagnostic data
+diagnosis_data <- tibble(
+  gender = sample(c("Male", "Female", "Non-binary"), 200, replace = TRUE),
+  diagnosis = sample(c("Depression", "Anxiety", "Both", "Other"),
+                     200, replace = TRUE)
+)
+
+head(diagnosis_data)
+```
+
+## Option 1: Stacked bar chart
+
+```{r}
+#| output-location: slide
+ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+  geom_bar() +
+  labs(
+    title = "Diagnosis by gender",
+    x = "Gender",
+    y = "Count",
+    fill = "Diagnosis"
+  ) +
+  theme_minimal()
+```
+
+## Option 2: Side-by-side bars
+
+```{r}
+#| output-location: slide
+ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Diagnosis by gender",
+    x = "Gender",
+    y = "Count",
+    fill = "Diagnosis"
+  ) +
+  theme_minimal()
+```
+
+## Option 3: Proportions
+
+```{r}
+#| output-location: slide
+ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Diagnosis distribution by gender",
+    x = "Gender",
+    y = "Proportion",
+    fill = "Diagnosis"
+  ) +
+  theme_minimal()
+```
+
+## Option 4: geom_count()
+
+Shows the *size* of overlaps:
+
+```{r}
+#| output-location: slide
+ggplot(diagnosis_data, aes(x = gender, y = diagnosis)) +
+  geom_count() +
+  labs(
+    title = "Diagnosis by gender",
+    x = "Gender",
+    y = "Diagnosis",
+    size = "Count"
+  ) +
+  theme_minimal()
+```
+
+## Option 5: Tile with counts
+
+```{r}
+#| output-location: slide
+diagnosis_counts <- diagnosis_data |>
+  count(gender, diagnosis)
+
+ggplot(diagnosis_counts, aes(x = gender, y = diagnosis, fill = n)) +
+  geom_tile() +
+  scale_fill_viridis_c() +
+  labs(
+    title = "Diagnosis by gender",
+    x = "Gender",
+    y = "Diagnosis",
+    fill = "Count"
+  ) +
+  theme_minimal()
+```
+
+# Continuous + Continuous {background-color="#2c3e50"}
+
+## The classic: Scatterplots
+
+```{r}
+# Simulated reaction time data
+rt_data <- tibble(
+  age = runif(100, 18, 70),
+  reaction_time = 200 + age * 3 + rnorm(100, 0, 40)
+)
+
+glimpse(rt_data)
+```
+
+## Basic scatterplot
+
+```{r}
+#| output-location: slide
+ggplot(rt_data, aes(x = age, y = reaction_time)) +
+  geom_point() +
+  labs(
+    title = "Reaction time by age",
+    x = "Age (years)",
+    y = "Reaction time (ms)"
+  ) +
+  theme_minimal()
+```
+
+## Add a trend line
+
+```{r}
+#| output-location: slide
+ggplot(rt_data, aes(x = age, y = reaction_time)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Reaction time increases with age",
+    x = "Age (years)",
+    y = "Reaction time (ms)"
+  ) +
+  theme_minimal()
+```
+
+## The problem: Overplotting
+
+With lots of data, points overlap and hide the true density:
+
+```{r}
+# Lots of data
+big_rt_data <- tibble(
+  age = runif(5000, 18, 70),
+  reaction_time = 200 + age * 3 + rnorm(5000, 0, 40)
+)
+```
+
+## Overplotting problem demonstrated
+
+```{r}
+#| output-location: slide
+ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
+  geom_point() +
+  labs(title = "Hard to see where the data is dense") +
+  theme_minimal()
+```
+
+## Solution 1: Transparency (alpha)
+
+```{r}
+#| output-location: slide
+ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
+  geom_point(alpha = 0.1) +
+  labs(title = "Using alpha = 0.1 to show density") +
+  theme_minimal()
+```
+
+## Solution 2: geom_bin2d()
+
+```{r}
+#| output-location: slide
+ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
+  geom_bin2d() +
+  scale_fill_viridis_c() +
+  labs(
+    title = "2D bins show density",
+    fill = "Count"
+  ) +
+  theme_minimal()
+```
+
+## Solution 3: geom_hex()
+
+```{r}
+#| output-location: slide
+ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
+  geom_hex() +
+  scale_fill_viridis_c() +
+  labs(
+    title = "Hexagonal bins",
+    fill = "Count"
+  ) +
+  theme_minimal()
+```
+
+## Correlation coefficient
+
+A single number summary of the linear relationship:
+
+```{r}
+cor(rt_data$age, rt_data$reaction_time)
+```
+
+. . .
+
+::: {.callout-note}
+- **r = 1:** perfect positive relationship
+- **r = 0:** no linear relationship
+- **r = -1:** perfect negative relationship
+:::
+
+. . .
+
+But always plot your data first! (See: Anscombe's Quartet)
+
+# Patterns and models {background-color="#2c3e50"}
+
+## What patterns tell us
+
+When you see covariation, ask:
+
+1. **Could it be coincidence?** (Maybe, especially with small samples)
+2. **What's the mechanism?** (How are these variables related?)
+3. **Is there a confound?** (Could a third variable explain both?)
+
+. . .
+
+::: {.callout-warning}
+**Correlation ≠ Causation**
+
+Covariation suggests a relationship, but doesn't prove one variable *causes* the other.
+:::
+
+## Real psychology example
+
+Let's explore a real dataset: `mpg` (fuel economy data)
+
+```{r}
+glimpse(mpg)
+```
+
+## Question 1: Does engine size affect fuel economy?
+
+```{r}
+#| output-location: slide
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Larger engines are less fuel efficient",
+    x = "Engine displacement (liters)",
+    y = "Highway MPG"
+  ) +
+  theme_minimal()
+```
+
+## Question 2: Does this vary by car type?
+
+```{r}
+#| output-location: slide
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  labs(
+    title = "Engine size vs fuel economy by car type",
+    x = "Engine displacement (liters)",
+    y = "Highway MPG",
+    color = "Car type"
+  ) +
+  theme_minimal()
+```
+
+## Question 3: Which car types are most common?
+
+```{r}
+#| output-location: slide
+ggplot(mpg, aes(y = fct_infreq(class))) +
+  geom_bar() +
+  labs(
+    title = "SUVs are the most common vehicle type",
+    x = "Count",
+    y = "Car type"
+  ) +
+  theme_minimal()
+```
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+## Your final project proposal
+
+For your final project, you'll need to:
+
+1. Choose a dataset with at least 2-3 variables of interest
+2. Formulate 2-3 research questions about relationships in the data
+3. Plan visualizations to explore those relationships
+
+**Exercise:** Start exploring potential datasets. Find one that interests you and create 2-3 exploratory visualizations showing different types of covariation (categorical + continuous, continuous + continuous, etc.).
+
+This will form the basis of your proposal, **due today!**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION (example using palmerpenguins)
+library(palmerpenguins)
+
+# Continuous + continuous
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species)) +
+  geom_smooth(method = "lm") +
+  labs(
+    title = "Penguins with longer flippers tend to be heavier",
+    x = "Flipper length (mm)",
+    y = "Body mass (g)"
+  ) +
+  theme_minimal()
+
+# Categorical + continuous
+ggplot(penguins, aes(x = species, y = bill_length_mm)) +
+  geom_violin() +
+  geom_jitter(width = 0.1, alpha = 0.3) +
+  labs(
+    title = "Bill length varies by species",
+    x = "Species",
+    y = "Bill length (mm)"
+  ) +
+  theme_minimal()
+
+# Categorical + categorical
+ggplot(penguins, aes(x = species, fill = island)) +
+  geom_bar(position = "fill") +
+  labs(
+    title = "Penguin species are found on different islands",
+    x = "Species",
+    y = "Proportion",
+    fill = "Island"
+  ) +
+  theme_minimal()
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Key takeaways
+
+1. **Covariation = relationships** between variables
+2. **Different plot types** for different variable combinations:
+   - Categorical + continuous: boxplot, violin, frequency polygon
+   - Categorical + categorical: bar charts, tiles, geom_count()
+   - Continuous + continuous: scatterplot, 2D bins, hex
+3. **Watch for overplotting** — use alpha, jitter, or binning
+4. **Always visualize first** before computing correlations
+5. **Patterns suggest but don't prove** causation
+
+## Before next class
+
+📖 **Read:**
+
+- R4DS Ch 12: Logical vectors
+- R4DS Ch 13: Numbers
+
+✅ **Do:**
+
+- Submit Assignment 5
+- Submit your Final Project Proposal (due today!)
+- Start thinking about how you'll compute scale scores (next session)
+
+## Questions?
+
+See you Monday for data types and scale scoring!

@@ -1,0 +1,100 @@
+---
+title: "9: EDA — Variation"
+date: "2026-04-27"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
+
+::: {.callout-important}
+## Assignment 4 is due today
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — submit before class.
+:::
+
+## During class
+
+We'll cover:
+
+- What is EDA? Exploratory vs. confirmatory thinking
+- The EDA mindset — curiosity, not confirmation
+- Exploring distributions: histograms, density plots, bar charts
+- Choosing binwidth and when it matters
+- Spotting outliers visually and programmatically
+- What to do with outliers (investigate, don't delete)
+- A first look at missing data
+- Putting it all together: a systematic EDA workflow
+
+### Slides
+
+```{=html}
+<a href="/slides/09-eda-variation.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/09-eda-variation.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/09-eda-variation.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+Using the `bfi` dataset from the `psych` package (loaded in class today):
+
+1. Explore the distribution of `age`. What shape is it? Is it skewed?
+2. Check for outliers in `age` using both a histogram and a boxplot. Are any values suspicious?
+3. Pick 3 personality items (e.g., `E1`, `N2`, `A4`) and plot their distributions. What do you notice?
+4. Count how many missing values each variable has. Which variables have the most?
+5. Write down 2–3 questions that your exploration makes you want to answer
+
+::: {.callout-note}
+## The EDA loop
+
+EDA isn't a linear checklist — it's a cycle:
+
+1. **Ask** a question
+2. **Visualize** the data to answer it
+3. **Notice** something new
+4. **Ask** another question
+5. Repeat
+
+There's no "finished." The goal is understanding, not a final answer.
+:::
+
+### Loading the dataset
+
+```r
+library(psych)
+data(bfi)
+bfi <- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility
+```
+
+### Outlier investigation template
+
+```r
+# Quick outlier check for any numeric variable
+variable_name <- "age"
+
+bfi |>
+  summarize(
+    min = min(!!sym(variable_name), na.rm = TRUE),
+    max = max(!!sym(variable_name), na.rm = TRUE),
+    mean = mean(!!sym(variable_name), na.rm = TRUE),
+    sd = sd(!!sym(variable_name), na.rm = TRUE)
+  )
+
+# Flag values beyond 3 SD from the mean
+bfi |>
+  filter(abs(age - mean(age, na.rm = TRUE)) > 3 * sd(age, na.rm = TRUE))
+```

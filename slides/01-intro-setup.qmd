@@ -313,7 +313,16 @@ After loading tidyverse, you have access to built-in datasets:
 library(tidyverse)
 
 # mpg is a dataset about fuel economy
+mpg
+```
+
+## Other ways to look at data frames
+
+```{r}
+# get the type of variable and the first few instances
 glimpse(mpg)
+# how many rows and columns?
+dim(mpg)
 ```
 
 ## Your turn!
@@ -363,6 +372,66 @@ maen(c(1, 2, 3))
 . . .
 
 Read the error message carefully — R is trying to help you.
+
+# Class expectations and structure {background-color="#2c3e50"}
+
+# Why No AI? (Yet)
+
+I encourage you to read ["Cognitive helmets for AI bicycles"](https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/) by Cat Hicks.
+
+*   **Steve Jobs (1980):** The computer is a "Bicycle for the mind."
+    *   *It amplifies your pedaling.*
+    *   *You still provide the balance and direction.*
+*   **Generative AI (2024):** It's more like a **Motorcycle**.
+    *   *It provides the engine/speed.*
+    *   *If you don't know how to ride, you crash faster and harder.*
+
+---
+
+### The Problem: The "Illusion of Competence"
+
+*   **Psychological Concept:** *Metacognition* (Monitoring your own understanding).
+*   **The Trap:**
+    *   AI gives you a working answer immediately.
+    *   It *feels* like you solved it (Dopamine hit!).
+    *   But you didn't build the **Mental Model** of *why* it works.
+*   **The Result:** When the AI hallucinates (which it will), you cannot debug it. You are stranded.
+
+---
+
+### The Solution: "Cognitive Helmets"
+
+*   Before we get on the AI motorcycle, we need a **Cognitive Helmet**.
+*   **What is the Helmet?**
+    1.  **Syntax Literacy:** Reading code as fluently as English.
+    2.  **Debugging Resilience:** Emotional regulation when things break.
+    3.  **Strategic Friction:** The ability to break a big problem into small pieces.
+
+
+---
+
+### Course Structure: Building the Helmet
+
+*   **Many short assignments**
+    *   This is **"Desirable Difficulty."**
+    *   We are building the neural pathways for code syntax.
+    *   Small wins build the "Mental Model" of how data is structured.
+*   **Why "Maladaptive Easy"?**
+    *   Using AI now = Skipping the gym but expecting to get strong.
+    *   It bypasses the *encoding process* in your brain.
+
+---
+
+### The Future: When Do We Use AI?
+
+*   We **will** use AI in this field (and perhaps this course later).
+*   **But only when you have your Helmet.**
+*   **The Goal:** You should be the **Pilot**, not the Passenger.
+    *   *You* define the problem.
+    *   *You* verify the code.
+    *   *You* catch the errors.
+
+---
 
 # Wrapping up {background-color="#2c3e50"}
 

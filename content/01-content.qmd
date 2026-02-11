@@ -25,6 +25,8 @@ We'll cover:
 - The RStudio interface
 - Creating projects and scripts
 - Installing packages
+- Class structure and expectation
+  - [Cognitive helmets](https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/)
 
 ### Slides
 

@@ -1,0 +1,6 @@
+Participant ID,Age (years),Gender,Score_1,Score_2,Notes
+P001,22,Female,4,3,
+P002,25,Male,3,N/A,transfer student
+P003,-999,Female,5,4,
+P004,28,N/A,2,3,
+P005,31,Male,N/A,2,

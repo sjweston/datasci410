@@ -1,0 +1,90 @@
+---
+title: "10: EDA — Covariation"
+date: "2026-04-29"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.5–10.6)
+
+## During class
+
+We'll cover:
+
+- Exploring covariation — relationships between variables
+- Categorical + continuous: boxplots, violin plots, `geom_freqpoly()` with color
+- Categorical + categorical: `geom_count()`, `geom_tile()` with counts
+- Continuous + continuous: scatterplots and trend lines
+- Dealing with overplotting: alpha, jitter, binning
+- Patterns, models, and the correlation vs. causation reminder
+- Hands-on: Explore a real psychology dataset
+
+::: {.callout-tip}
+## Assignment 5 is assigned today
+[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd) — due before Session 11.
+:::
+
+::: {.callout-warning}
+## Final Project Proposal is due today
+Submit your dataset selection, research questions, and initial plan before class.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/10-eda-covariation.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/10-eda-covariation.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/10-eda-covariation.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+Using the `bfi` dataset from the `psych` package:
+
+1. Pick two personality items (e.g., `E1` and `A1`). Make a scatterplot — is there a relationship?
+2. Create boxplots of `age` grouped by `education`. What patterns do you see?
+3. Use `geom_count()` to visualize the relationship between `education` and `gender`
+4. Try adding `alpha = 0.3` to a crowded scatterplot. Does it help?
+5. Calculate the correlation between two continuous variables using `cor(x, y, use = "complete.obs")`
+
+::: {.callout-note}
+## Correlation vs. causation
+
+Finding a relationship between two variables does **not** mean one causes the other. Always ask:
+
+- Could there be a confounding variable?
+- Does the direction of causation make sense?
+- Is this a meaningful effect or just a large sample?
+
+In psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.
+:::
+
+### Overplotting solutions
+
+```r
+# Too many points? Try these:
+
+# 1. Transparency
+ggplot(data, aes(x, y)) + geom_point(alpha = 0.3)
+
+# 2. Jitter (adds random noise)
+ggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)
+
+# 3. 2D binning (heatmap-style)
+ggplot(data, aes(x, y)) + geom_bin2d()
+```

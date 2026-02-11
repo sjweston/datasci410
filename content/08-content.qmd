@@ -1,0 +1,85 @@
+---
+title: "8: Perception & Design"
+date: "2026-04-22"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- Supplementary reading on visual perception principles (posted on Canvas)
+- Optional: Knaflic, *Storytelling with Data*, Ch 1–3
+
+## During class
+
+We'll cover:
+
+- Why perception matters — how the brain processes visual information
+- Preattentive attributes: color, size, position, shape
+- Gestalt principles and how they shape layout
+- Color theory: sequential, diverging, and qualitative palettes
+- Colorblind-friendly design (and why it matters)
+- Decluttering: removing the visual noise
+- Psychology-specific figures: error bars, interaction plots, raincloud plots
+- Putting it all together with `theme()` customization
+
+::: {.callout-tip}
+## Assignment 4 is assigned today
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — due before Session 9.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/08-perception-design.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/08-perception-design.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/08-perception-design.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Take a plot you made earlier in the course. Identify 3 things that could be decluttered.
+2. Recreate it using only `theme_minimal()` — what disappears? What stays?
+3. Try switching your color palette to `scale_fill_viridis_d()`. Does it change the story?
+4. Create a raincloud plot (violin + boxplot + jitter) for any grouped data you have
+5. Make a "bad" version of a figure on purpose — violate as many design principles as you can. Then fix it.
+
+::: {.callout-note}
+## The decluttering checklist
+
+Before you call a figure "done," ask:
+
+- Is the background gray? → Switch to `theme_minimal()` or `theme_classic()`
+- Are there gridlines in both directions? → Remove vertical ones
+- Is there a legend when there's only one group? → Remove it
+- Do the axis labels say something meaningful? → If not, rename them
+- Can someone understand the point without reading the caption? → If not, the title needs work
+:::
+
+### Colorblind-friendly palettes
+
+```r
+# Viridis — works for continuous and discrete
+scale_fill_viridis_d()   # discrete categories
+scale_fill_viridis_c()   # continuous values
+
+# ColorBrewer — curated palettes
+scale_fill_brewer(palette = "Set2")      # qualitative
+scale_fill_brewer(palette = "RdBu")      # diverging
+scale_fill_brewer(palette = "Blues")     # sequential
+```
+
+These are all built into ggplot2 — no extra packages needed.

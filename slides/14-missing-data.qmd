@@ -1,0 +1,695 @@
+---
+title: "Missing Data"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "May 13, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 14"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Why missing data matters {background-color="#2c3e50"}
+
+## Missing data is everywhere in psychology
+
+- Participants skip survey questions
+- People drop out of longitudinal studies
+- Equipment fails during behavioral tasks
+- Participants don't consent to share certain information
+
+. . .
+
+**The problem:** Missing data can bias your results if not handled properly.
+
+## Today's agenda
+
+1. **Types of missing data** — explicit vs implicit
+2. **Exploring missingness** — how much? where? patterns?
+3. **Handling missing data** — when to drop, when to fill, when to leave alone
+4. **Making implicit missing explicit** — the `complete()` function
+
+# Types of missing data {background-color="#2c3e50"}
+
+## Explicit missing: NA
+
+**Explicit missing** means you can see the `NA`:
+
+```{r}
+survey <- tibble(
+  participant = 1:5,
+  age = c(25, NA, 30, 22, NA),
+  depression = c(12, 18, NA, 10, 15)
+)
+
+survey
+```
+
+The `NA` values are obvious.
+
+## Implicit missing: Rows don't exist
+
+**Implicit missing** means entire rows are absent:
+
+```{r}
+appointments <- tibble(
+  name = c("Alice", "Bob", "Alice", "Carol"),
+  day = c("Mon", "Mon", "Wed", "Wed"),
+  attended = c(TRUE, TRUE, TRUE, TRUE)
+)
+
+appointments
+```
+
+. . .
+
+Who didn't show up? You can't tell because they're not in the data!
+
+## Why implicit missing matters
+
+In longitudinal studies, missing rows often mean dropout:
+
+```{r}
+# Three-wave study
+longitudinal <- tibble(
+  id = c(1, 1, 1, 2, 2, 3),  # Person 2 missing wave 3, person 3 missing waves 2 and 3
+  wave = c(1, 2, 3, 1, 2, 1),
+  depression = c(20, 15, 12, 25, 22, 18)
+)
+
+longitudinal
+```
+
+Person 2 and 3's missing waves are **implicit** — they're not `NA`, they're just absent.
+
+# Exploring missing data {background-color="#2c3e50"}
+
+## Checking for NAs
+
+```{r}
+survey <- tibble(
+  id = 1:6,
+  age = c(25, NA, 30, 22, NA, 28),
+  depression = c(12, 18, NA, 10, 15, NA),
+  anxiety = c(15, 20, 12, NA, 18, 16)
+)
+
+# Check if any NAs exist
+any(is.na(survey))
+```
+
+. . .
+
+```{r}
+# Count total NAs
+sum(is.na(survey))
+```
+
+## NAs by column
+
+```{r}
+# Count NAs in each column
+survey |>
+  summarize(
+    age_missing = sum(is.na(age)),
+    depression_missing = sum(is.na(depression)),
+    anxiety_missing = sum(is.na(anxiety))
+  )
+```
+
+## Better approach: across()
+
+```{r}
+survey |>
+  summarize(
+    across(
+      everything(),
+      ~sum(is.na(.x))
+    )
+  )
+```
+
+. . .
+
+Or as proportions:
+
+```{r}
+survey |>
+  summarize(
+    across(
+      everything(),
+      ~mean(is.na(.x))
+    )
+  )
+```
+
+## Which rows have missing data?
+
+```{r}
+# Show only rows with any NA
+survey |>
+  filter(if_any(everything(), is.na))
+```
+
+. . .
+
+```{r}
+# Show only complete cases
+survey |>
+  filter(if_all(everything(), ~!is.na(.x)))
+```
+
+## Visualizing missingness
+
+The `naniar` package provides great visualization tools:
+
+```{r}
+library(naniar)
+
+# Visual summary
+vis_miss(survey)
+```
+
+## Patterns of missingness
+
+```{r}
+# Are certain combinations of variables missing together?
+gg_miss_upset(survey)
+```
+
+. . .
+
+This shows which combinations of variables are missing in the same rows.
+
+# Handling missing data {background-color="#2c3e50"}
+
+## Strategy 1: Complete case analysis
+
+**Complete case analysis** (listwise deletion) removes any row with *any* `NA`:
+
+```{r}
+# Base R way
+na.omit(survey)
+```
+
+. . .
+
+```{r}
+# tidyverse way
+survey |>
+  drop_na()
+```
+
+## Dangers of complete case analysis
+
+```{r}
+# Started with 6 participants
+nrow(survey)
+
+# Only 2 complete cases
+survey |>
+  drop_na() |>
+  nrow()
+```
+
+. . .
+
+::: {.callout-warning}
+You just lost 67% of your data!
+:::
+
+## Selective dropping
+
+Only drop rows missing *specific* variables:
+
+```{r}
+# Drop only if depression is missing
+survey |>
+  drop_na(depression)
+```
+
+. . .
+
+```{r}
+# Drop only if depression OR anxiety is missing
+survey |>
+  drop_na(depression, anxiety)
+```
+
+## When is dropping okay?
+
+**Dropping is fine when:**
+
+- Missing data is rare (< 5-10%)
+- Missingness is truly random
+- You have adequate sample size
+
+. . .
+
+**Be cautious when:**
+
+- Missing data is common (> 20%)
+- Certain groups have more missingness (systematic bias)
+- Sample size is small
+
+## Strategy 2: Filling values
+
+Sometimes you can **reasonably fill** missing values:
+
+```{r}
+# Carry forward the last observation
+time_series <- tibble(
+  day = 1:5,
+  mood = c(5, NA, NA, 4, 6)
+)
+
+time_series |>
+  fill(mood)  # Fills downward by default
+```
+
+## Fill directions
+
+```{r}
+# Fill upward
+time_series |>
+  fill(mood, .direction = "up")
+```
+
+. . .
+
+```{r}
+# Fill both ways
+time_series |>
+  fill(mood, .direction = "updown")
+```
+
+## When is filling okay?
+
+**Filling makes sense for:**
+
+- Time series with repeated measures (carry forward last observation)
+- Grouping variables that apply to multiple rows
+- Values that don't change often
+
+. . .
+
+::: {.callout-warning}
+**NEVER fill** when it means making up data you don't have!
+:::
+
+## Strategy 3: Replace with a specific value
+
+```{r}
+# Replace NAs with a value
+survey |>
+  mutate(
+    age = replace_na(age, 99),  # Code 99 = "no response"
+    depression = replace_na(depression, -999)  # Obvious invalid code
+  )
+```
+
+. . .
+
+::: {.callout-important}
+If you use placeholder codes, **document them clearly** and make sure they can't be mistaken for real data.
+:::
+
+## Strategy 4: Leave them as NA
+
+Often the best approach is to **keep NAs** and handle them in analysis:
+
+```{r}
+# Most functions have na.rm argument
+survey |>
+  summarize(
+    mean_age = mean(age, na.rm = TRUE),
+    mean_depression = mean(depression, na.rm = TRUE)
+  )
+```
+
+. . .
+
+This is transparent about what data you have.
+
+# Implicit missing → Explicit missing {background-color="#2c3e50"}
+
+## The problem with implicit missing
+
+```{r}
+study_completion <- tibble(
+  participant = c(1, 1, 1, 2, 2, 3, 3),
+  timepoint = c(1, 2, 3, 1, 2, 1, 3),
+  depression = c(20, 15, 12, 25, 22, 18, 14)
+)
+
+study_completion
+```
+
+. . .
+
+Who's missing which timepoints? Hard to tell.
+
+## complete(): Make implicit missing explicit
+
+```{r}
+study_completion |>
+  complete(participant, timepoint)
+```
+
+. . .
+
+Now we can see: Participant 2 missing timepoint 3, Participant 3 missing timepoint 2.
+
+## Why this matters
+
+Makes dropout visible for analysis:
+
+```{r}
+study_completion |>
+  complete(participant, timepoint) |>
+  group_by(timepoint) |>
+  summarize(
+    n_completed = sum(!is.na(depression)),
+    n_missing = sum(is.na(depression))
+  )
+```
+
+## Filling after completing
+
+Common pattern: make implicit explicit, then fill with a value:
+
+```{r}
+study_completion |>
+  complete(participant, timepoint) |>
+  mutate(
+    completed = if_else(is.na(depression), FALSE, TRUE)
+  )
+```
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Analyze missing data patterns
+
+You have survey data from a therapy study:
+
+```{r}
+therapy_survey <- tibble(
+  id = 1:8,
+  age = c(25, 30, NA, 22, 28, NA, 35, 26),
+  baseline_depression = c(22, 25, 18, 20, 24, 19, NA, 21),
+  followup_depression = c(12, 23, NA, 15, NA, NA, NA, 16),
+  satisfaction = c(4, 3, NA, 5, 4, NA, NA, 5)
+)
+```
+
+1. How many participants are missing baseline data? Followup data?
+2. How many participants have **complete data** (no NAs anywhere)?
+3. Create a version that drops rows missing followup data
+4. What percentage of participants completed the followup?
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+# 1. Count missing by variable
+therapy_survey |>
+  summarize(
+    across(everything(), ~sum(is.na(.x)))
+  )
+
+# 2. Complete cases
+therapy_survey |>
+  drop_na() |>
+  nrow()
+
+# 3. Drop if missing followup
+therapy_survey |>
+  drop_na(followup_depression)
+
+# 4. Completion rate
+therapy_survey |>
+  summarize(
+    completion_rate = mean(!is.na(followup_depression))
+  )
+```
+
+# Psychology-specific considerations {background-color="#2c3e50"}
+
+## Missing data mechanisms
+
+Statisticians distinguish three types:
+
+1. **MCAR (Missing Completely At Random)** — Missingness unrelated to anything
+2. **MAR (Missing At Random)** — Missingness related to observed variables
+3. **MNAR (Missing Not At Random)** — Missingness related to the missing value itself
+
+## Example: Depression study
+
+**MCAR:** Computer randomly failed to save 5% of responses
+
+- No bias introduced
+
+. . .
+
+**MAR:** Older participants more likely to skip online surveys
+
+- Can account for this by including age as a predictor
+
+. . .
+
+**MNAR:** People with severe depression skip the depression questionnaire
+
+- **This is a problem** — missing values are related to what you're measuring
+
+## Why it matters
+
+- **MCAR:** Complete case analysis is fine (but you lose power)
+- **MAR:** More sophisticated methods can help (beyond this course)
+- **MNAR:** No easy fix — missing data is fundamentally informative
+
+. . .
+
+::: {.callout-tip}
+**Your job:** Always **document and report** how much data is missing and why you think it's missing.
+:::
+
+## Attrition analysis
+
+In longitudinal studies, always check *who* drops out:
+
+```{r}
+baseline <- tibble(
+  id = 1:10,
+  condition = rep(c("Treatment", "Control"), each = 5),
+  baseline_depression = rnorm(10, 20, 5)
+)
+
+completers <- tibble(
+  id = c(1, 2, 3, 7, 8, 9, 10)  # 4, 5, 6 dropped out
+)
+
+# Who dropped out?
+baseline |>
+  anti_join(completers, by = "id")
+```
+
+## Attrition by condition
+
+```{r}
+baseline |>
+  anti_join(completers, by = "id") |>
+  count(condition)
+```
+
+. . .
+
+All 3 dropouts from Treatment condition — this could bias results!
+
+## Reporting missing data
+
+In your write-up, report:
+
+1. **How much data is missing** (by variable)
+2. **Patterns of missingness** (related to other variables?)
+3. **How you handled it** (dropped? kept as NA?)
+4. **Potential biases** (who's missing? does it matter?)
+
+. . .
+
+Example:
+
+> "Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24) or treatment condition (χ² = 0.8, p = .37). Analyses used complete case analysis (N = 60)."
+
+# Advanced topic: Multiple imputation {background-color="#2c3e50"}
+
+## Beyond this course
+
+More sophisticated approaches exist for handling missing data:
+
+- **Multiple imputation** — create multiple plausible versions of missing data
+- **Maximum likelihood** — estimate parameters using all available data
+- **Bayesian methods** — incorporate uncertainty about missing values
+
+. . .
+
+Packages in R: `mice`, `Amelia`, `missForest`
+
+. . .
+
+::: {.callout-note}
+We won't cover these methods, but know they exist for when you need them in future research!
+:::
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+## Practice: Longitudinal missing data
+
+You have a three-wave study:
+
+```{r}
+longitudinal_study <- tibble(
+  participant = c(1, 1, 1, 2, 2, 3, 3, 3, 4, 4),
+  wave = c(1, 2, 3, 1, 2, 1, 2, 3, 1, 3),
+  depression = c(25, 20, 15, 30, 28, 22, 18, 16, 20, NA),
+  anxiety = c(28, 25, 22, 32, NA, 24, 20, 18, 22, 19)
+)
+
+demographics <- tibble(
+  participant = 1:4,
+  age = c(22, 30, 25, 28),
+  condition = c("Treatment", "Control", "Treatment", "Control")
+)
+```
+
+## Your tasks
+
+1. Make implicit missing waves **explicit** using `complete()`
+2. Join the demographics data
+3. Count how many assessments each participant completed
+4. Check if completion differs by treatment condition
+5. Compute mean depression change (wave 1 to wave 3) for participants with complete data on those waves
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+# 1. Make implicit missing explicit
+long_complete <- longitudinal_study |>
+  complete(participant, wave)
+
+long_complete
+
+# 2. Join demographics
+long_with_demo <- long_complete |>
+  left_join(demographics, by = "participant")
+
+# 3. Count assessments per participant
+long_with_demo |>
+  group_by(participant) |>
+  summarize(
+    n_assessments = sum(!is.na(depression))
+  )
+
+# 4. Completion by condition
+long_with_demo |>
+  group_by(participant, condition) |>
+  summarize(
+    n_complete = sum(!is.na(depression)),
+    .groups = "drop"
+  ) |>
+  group_by(condition) |>
+  summarize(
+    mean_completed = mean(n_complete)
+  )
+
+# 5. Depression change for complete cases
+longitudinal_study |>
+  filter(wave %in% c(1, 3)) |>
+  group_by(participant) |>
+  filter(n() == 2 & all(!is.na(depression))) |>  # Both waves present and non-missing
+  summarize(
+    change = depression[wave == 1] - depression[wave == 3]
+  ) |>
+  left_join(demographics, by = "participant")
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Decision tree for missing data
+
+1. **How much is missing?**
+   - < 5%: Usually safe to drop
+   - 5-20%: Investigate patterns
+   - > 20%: Be very careful
+
+2. **Why is it missing?**
+   - Random: Less concerning
+   - Systematic: Potentially biasing
+
+3. **What's your plan?**
+   - Drop complete cases?
+   - Drop specific variables?
+   - Keep as NA and use `na.rm`?
+   - Fill (carefully)?
+
+4. **Document everything!**
+
+## Key takeaways
+
+1. **Missing data is normal** in psychology research
+2. **Explicit vs implicit** missing — make implicit explicit with `complete()`
+3. **Explore patterns** before deciding how to handle
+4. **Complete case analysis** (dropping rows) is simple but can lose power
+5. **Never make up data** — be transparent about missingness
+6. **Document your decisions** — report what's missing and why
+7. **Check for bias** — does missingness relate to key variables?
+
+## Functions cheat sheet
+
+| Function | Purpose |
+|----------|---------|
+| `is.na()` | Check if values are missing |
+| `drop_na()` | Remove rows with NAs |
+| `replace_na()` | Replace NAs with a value |
+| `fill()` | Fill NAs with nearby values |
+| `complete()` | Make implicit missing explicit |
+| `na.omit()` | Remove rows with NAs (base R) |
+| `naniar::vis_miss()` | Visualize missing data |
+
+## Before next class
+
+📖 **Read:**
+
+- R4DS Ch 11: Communication
+
+✅ **Do:**
+
+- Submit Assignment 7
+- Check your final project for missing data
+- Draft your final project report
+
+## Questions?
+
+See you Wednesday for storytelling with data!

@@ -1,0 +1,96 @@
+---
+title: "12: Strings & Factors"
+date: "2026-05-06"
+---
+
+## Before class
+
+📖 **Readings:**
+
+- [R4DS Ch 14: Strings](https://r4ds.hadley.nz/strings) (sections 14.1–14.3 only)
+- [R4DS Ch 16: Factors](https://r4ds.hadley.nz/factors)
+
+## During class
+
+We'll cover:
+
+- Strings — creating, combining, and basic cleaning
+- `str_to_lower()`, `str_to_upper()`, `str_trim()` for cleanup
+- `str_detect()` and `str_replace()` for simple pattern matching
+- Factors — categorical data with a fixed set of levels
+- Why factor order matters for plots and tables
+- Reordering factors: `fct_relevel()`, `fct_reorder()`, `fct_infreq()`
+- Recoding factors: `fct_recode()`, `fct_collapse()`
+- Practical application: cleaning demographic variables
+
+::: {.callout-tip}
+## Assignment 6 is assigned today
+[Assignment 6: Data Types](/assignment/06-assignment.qmd) — due before Session 13.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/12-strings-factors.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/12-strings-factors.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/12-strings-factors.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Clean up a messy text column using `str_trim()` and `str_to_lower()` — try it on free-response demographic data
+2. Use `str_detect()` to filter rows where a column contains a specific word
+3. Convert a character column to a factor with `factor()`. What happens to the levels?
+4. Reorder bars in a bar chart using `fct_infreq()` — most common category first
+5. Use `fct_recode()` to combine similar categories (e.g., "Male" and "male" and "M")
+
+::: {.callout-note}
+## Why factors matter for plots
+
+By default, R orders categories alphabetically. That's rarely what you want in a plot. Factors let you control the order:
+
+```r
+# Alphabetical (default) — not great
+ggplot(data, aes(x = condition)) + geom_bar()
+
+# Ordered by frequency — much better
+ggplot(data, aes(x = fct_infreq(condition))) + geom_bar()
+
+# Custom order — you decide
+data |>
+  mutate(condition = fct_relevel(condition, "Control", "Low", "High")) |>
+  ggplot(aes(x = condition)) + geom_bar()
+```
+:::
+
+### Psychology application: cleaning demographics
+
+```r
+# Common cleanup pipeline for survey demographics
+survey |>
+  mutate(
+    gender = str_to_lower(str_trim(gender)),
+    gender = fct_recode(as_factor(gender),
+      "Man" = "male",
+      "Man" = "m",
+      "Woman" = "female",
+      "Woman" = "f"
+    ),
+    education = fct_relevel(education,
+      "High school", "Some college", "Bachelor's", "Graduate"
+    )
+  )
+```

@@ -1,0 +1,402 @@
+---
+title: "Perception & Design"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 22, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 8"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(patchwork)
+
+# Reuse the reaction time dataset
+set.seed(123)
+reaction_data <- tibble(
+  participant = rep(1:40, each = 2),
+  condition = rep(c("Control", "Treatment"), 40),
+  rt = c(rnorm(40, mean = 520, sd = 60), rnorm(40, mean = 480, sd = 55)),
+  accuracy = c(rbinom(40, 1, 0.82), rbinom(40, 1, 0.88)),
+  age_group = rep(c("Young", "Young", "Older", "Older"), 20)
+) |>
+  mutate(rt = round(rt, 1))
+```
+
+# How we see data {background-color="#2c3e50"}
+
+## Why perception matters
+
+You can have perfect data and a correct analysis — but if the visualization doesn't communicate, it fails.
+
+Visualization design isn't about aesthetics. It's about **how the human visual system processes information.**
+
+## Preattentive attributes
+
+Some visual features are processed almost instantly — before conscious attention kicks in:
+
+| Attribute | Example |
+|-----------|---------|
+| **Color** | A red dot among blue dots |
+| **Size** | A large circle among small ones |
+| **Position** | A point far from the others |
+| **Shape** | A triangle among circles |
+| **Orientation** | A tilted bar among vertical bars |
+
+These are your tools for drawing the viewer's eye.
+
+## Preattentive in action
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+
+# Color draws attention
+p1 <- tibble(x = 1:10, y = rnorm(10), highlight = c(rep("other", 7), rep("target", 3))) |>
+  ggplot(aes(x, y, color = highlight)) +
+  geom_point(size = 4) +
+  scale_color_manual(values = c("other" = "gray70", "target" = "#e74c3c"), guide = "none") +
+  labs(title = "Color") + theme_minimal(base_size = 14)
+
+# Size draws attention
+p2 <- tibble(x = 1:10, y = rnorm(10), sz = c(rep(3, 8), 8, 8)) |>
+  ggplot(aes(x, y, size = sz)) +
+  geom_point(color = "steelblue") +
+  scale_size(guide = "none") +
+  labs(title = "Size") + theme_minimal(base_size = 14)
+
+# Position draws attention
+p3 <- tibble(x = c(rnorm(9, 0, 0.5), 3), y = c(rnorm(9, 0, 0.5), 2.5)) |>
+  ggplot(aes(x, y)) +
+  geom_point(size = 4, color = "steelblue") +
+  labs(title = "Position") + theme_minimal(base_size = 14)
+
+p1 + p2 + p3
+```
+
+Your eye goes to the red points, the big points, and the outlier — instantly.
+
+## Gestalt principles (brief)
+
+The brain groups things automatically:
+
+- **Proximity** — things close together feel like a group
+- **Similarity** — things that look alike feel like a group
+- **Enclosure** — things inside a border feel like a group
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+# Proximity example
+tibble(
+  x = c(1, 1.2, 1.1, 3, 3.2, 3.1),
+  y = c(1, 1.3, 0.8, 1, 1.2, 0.9),
+  group = c("A","A","A","B","B","B")
+) |>
+  ggplot(aes(x, y, color = group)) +
+  geom_point(size = 6) +
+  scale_color_manual(values = c("A" = "steelblue", "B" = "coral")) +
+  labs(title = "Proximity: two clusters feel like two groups") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none", axis.text = element_blank(), axis.title = element_blank())
+```
+
+# Color theory {background-color="#2c3e50"}
+
+## Three types of color palettes
+
+| Type | When to use | Example |
+|------|-------------|---------|
+| **Sequential** | One continuous variable (low → high) | Blues, viridis |
+| **Diverging** | Values relative to a midpoint | Red–white–blue |
+| **Qualitative** | Categorical groups (no order) | Set1, tab10 |
+
+Using the wrong type is one of the most common visualization mistakes.
+
+## Sequential palettes
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+tibble(x = 1:10, y = rep(1, 10), val = 1:10) |>
+  ggplot(aes(x, y, fill = val)) +
+  geom_tile(width = 0.9) +
+  scale_fill_viridis_c() +
+  labs(title = "viridis (sequential) — great for continuous data") +
+  theme_minimal(base_size = 14) +
+  theme(axis.text = element_blank(), axis.title = element_blank(), legend.position = "bottom")
+```
+
+## Qualitative palettes
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+tibble(x = 1:8, y = rep(1, 8), cat = letters[1:8]) |>
+  ggplot(aes(x, y, fill = cat)) +
+  geom_tile(width = 0.9) +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "Set2 (qualitative) — for categorical groups") +
+  theme_minimal(base_size = 14) +
+  theme(axis.text = element_blank(), axis.title = element_blank(), legend.position = "bottom")
+```
+
+## Colorblind-friendly choices
+
+About 8% of men have some form of color vision deficiency. Red-green is the most common.
+
+```{r}
+#| eval: false
+# viridis is colorblind-safe AND sequential
+scale_fill_viridis_d()   # discrete
+scale_fill_viridis_c()   # continuous
+
+# ColorBrewer palettes designed for colorblindness
+scale_fill_brewer(palette = "Set2")
+
+# Or set colors manually with safe choices
+scale_fill_manual(values = c("#0072B2", "#E69F00", "#009E73"))
+# (blue, orange, green — distinguishable for most color vision types)
+```
+
+## A bad color choice vs a good one
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+
+p1 <- reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_manual(values = c("Control" = "#ff0000", "Treatment" = "#00aa00")) +
+  labs(title = "Red vs Green — bad for colorblind viewers", x = "Condition", y = "RT (ms)") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+
+p2 <- reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
+  labs(title = "Blue vs Orange — works for everyone", x = "Condition", y = "RT (ms)") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+
+p1 + p2
+```
+
+# Decluttering {background-color="#2c3e50"}
+
+## The default is cluttered
+
+ggplot2's default theme adds a lot of visual noise. Compare:
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 5
+
+p1 <- reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  geom_boxplot() +
+  labs(title = "Default theme (theme_gray)", x = "Condition", y = "RT (ms)")
+
+p2 <- reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  geom_boxplot() +
+  labs(title = "Cleaned up (theme_minimal)", x = "Condition", y = "RT (ms)") +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+
+p1 + p2
+```
+
+## What to remove
+
+Ask yourself: does this element help the reader understand the data?
+
+- ❌ Gray background — adds noise, no information
+- ❌ Gridlines (especially vertical) — usually unnecessary
+- ❌ Legend when there's only one group — redundant
+- ❌ Legend when the x-axis already tells you — redundant
+- ❌ Axis labels that just repeat the variable name — add units or context
+- ✅ Horizontal gridlines — help read values
+- ✅ Title and subtitle — orient the reader
+- ✅ Caption — source, sample size, what error bars mean
+
+## theme() for fine control
+
+```{r}
+#| eval: false
+theme(
+  legend.position = "none",                    # Remove legend
+  axis.ticks = element_blank(),                # Remove tick marks
+  panel.grid.major.x = element_blank(),        # Remove vertical gridlines
+  panel.grid.minor = element_blank(),          # Remove minor gridlines
+  plot.title = element_text(face = "bold"),    # Bold the title
+  axis.text = element_text(size = 10),         # Font size
+  plot.caption = element_text(hjust = 0)       # Left-align caption
+)
+```
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: 10 minutes
+
+I'll put a cluttered graph on screen. With a partner, **rewrite it** to follow the design principles we just covered.
+
+```{r}
+# The cluttered version — fix this!
+reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition, color = condition, size = accuracy)) +
+  geom_point() +
+  geom_boxplot(alpha = 0.3) +
+  scale_fill_manual(values = c("Control" = "red", "Treatment" = "green")) +
+  scale_color_manual(values = c("Control" = "red", "Treatment" = "green")) +
+  labs(x = "condition", y = "rt") +
+  ggtitle("data") +
+  theme_gray()
+```
+
+Remove at least 5 unnecessary elements. Make it tell a clear story.
+
+::: {.callout-tip}
+Think about: colors, legend, labels, theme, size mapping, and whether every aesthetic is adding information.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  geom_jitter(width = 0.15, alpha = 0.3, size = 2, color = "gray50") +
+  geom_boxplot(alpha = 0.5, width = 0.4, outlier.shape = NA) +
+  scale_fill_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
+  labs(
+    title = "Treatment Reduces Reaction Time",
+    x = "Condition",
+    y = "Reaction time (ms)",
+    caption = "N = 40 per condition. Points = individual observations."
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
+
+---
+
+## Before we move on
+
+📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+
+# Raincloud plots {background-color="#2c3e50"}
+
+## The modern psych visualization
+
+Raincloud plots combine three elements:
+1. **Violin** (distribution shape)
+2. **Boxplot** (summary stats)
+3. **Jittered points** (individual data)
+
+They're increasingly popular in psychology publications.
+
+## Building a raincloud
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 6
+reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = condition, color = condition)) +
+  # The "rain" — individual points
+  geom_jitter(width = 0.15, alpha = 0.4, size = 2) +
+  # The "cloud" — violin (half width)
+  geom_violin(alpha = 0.3, width = 0.5, trim = FALSE) +
+  # The "bow" — boxplot
+  geom_boxplot(width = 0.15, alpha = 0.8, outlier.shape = NA,
+               color = "black", fill = "white") +
+  # The mean
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
+  scale_fill_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
+  scale_color_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
+  labs(
+    title = "Reaction Time by Condition",
+    subtitle = "Diamond = mean. Violin = distribution. Box = IQR.",
+    x = "Condition",
+    y = "Reaction time (ms)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
+
+# Get a head start {background-color="#2c3e50"}
+
+## Assignment 4 preview
+
+Assignment 4 will ask you to:
+
+1. Create a **"bad" version** of a figure — deliberately violate design principles
+2. Create a **"good" version** following what we covered today
+3. Create a **colorblind-accessible version**
+
+Start experimenting now:
+
+- Take the `reaction_data` dataset
+- Make the worst possible version of a figure
+- Then make it great
+- What did you change?
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Design principles checklist
+
+- [ ] Is the geom appropriate for the data type?
+- [ ] Are colors colorblind-friendly?
+- [ ] Is the legend necessary? (Remove if redundant)
+- [ ] Are axis labels informative (not just variable names)?
+- [ ] Is there a title that states the main point?
+- [ ] Is there visual clutter to remove?
+- [ ] Do error bars have a caption explaining what they show?
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
+
+✅ **Practice:**
+
+- Create a raincloud plot with a dataset of your choosing
+- Try the "bad vs good" exercise on your own
+
+## Key takeaways
+
+1. **Preattentive attributes** guide the eye — use them intentionally
+2. **Match your palette type** to your data (sequential, diverging, qualitative)
+3. **Design for colorblindness** — always
+4. **Declutter ruthlessly** — every element must earn its place
+5. **Raincloud plots** show everything: distribution, summary, and raw data
+
+## Questions?
+
+Next time: **Exploratory Data Analysis**
+
+We'll learn to systematically explore data and ask good questions!

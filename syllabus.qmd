@@ -86,37 +86,25 @@ Regular attendance is expected. If you must miss class, please notify me in adva
 
 ### AI Tools Policy
 
-AI tools like ChatGPT, Claude, and GitHub Copilot are increasingly part of professional data science workflows, and learning to use them effectively is a valuable skill. However, this course focuses on building foundational skills that AI cannot replace: understanding *why* code works, debugging when it doesn't, and developing the judgment to know when output is correct.
+**TL;DR: No AI tools in this course. But plan to use AI extensively in your future career.**
 
-For this reason, assessments in this course fall into two categories:
-
-**AI-Restricted Assessments:**
-
-- In-class coding exercises
-- Timed reading quizzes (Canvas with Lockdown Browser)
-
-These must be completed without AI assistance. The goal is to build your mental models and muscle memory for R programming.
-
-**AI-Permitted Assessments (with documentation):**
+AI tools like ChatGPT, Claude, and GitHub Copilot are transforming data science work. You *should* learn to use them effectively — but not yet. This course prohibits AI assistance on all assessments:
 
 - Weekly coding assignments
+- In-class coding exercises
+- Reading quizzes
 - Final project
 
-For these assessments, you may use AI tools, but you must:
+**Why no AI?**
 
-1. **Cite your use** — Note which tool you used and for what purpose
-2. **Document the process** — Include a brief reflection on what the AI got right, what it got wrong, and what you had to modify
-3. **Understand your code** — You should be able to explain every line. I may ask you to walk me through your code verbally.
+Think of it like going to the gym. You don't hire someone to lift the weights for you — the struggle *is* the point. The goal is to build mental muscle: understanding why code works, debugging when it doesn't, and developing intuition about data structures.
 
-**Why this approach?** Learning to code is like learning a language — you need to struggle through the basics before a translator becomes useful rather than a crutch. Once you understand the fundamentals, AI becomes a powerful collaborator rather than a black box.
+Using AI before you have these foundations creates an "illusion of competence." The code works, so it *feels* like you understand it. But when the AI hallucinates (and it will), you can't debug it. You're stranded.
 
-### Accessibility
+Research shows that AI coding tools are most effective when used for *augmentation* (enhancing what you already know) rather than *automation* (doing what you don't understand). In [Anthropic's Economic Index (January 2026)](https://www.anthropic.com/research/anthropic-economic-index-january-2026-report), AI output quality was strongly correlated with the user's education level and domain expertise — AI amplifies your existing skills, it doesn't replace them (Anthropic, 2026).
 
-[Add accessibility statement]
+By building a strong foundation now, you'll be in a far better position to leverage AI as a collaborator in your future work.
 
-### Basic Needs
-
-[Add basic needs resources]
 
 ## Grading
 

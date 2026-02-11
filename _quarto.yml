@@ -46,6 +46,8 @@ website:
         file: content/index.qmd
       - text: "Assignments"
         file: assignment/index.qmd
+      - text: "Project"
+        file: project/index.qmd
       - text: "Resources"
         file: resource/index.qmd
 
@@ -70,6 +72,32 @@ website:
               file: content/04-content.qmd
             - text: "5: Data Tidying"
               file: content/05-content.qmd
+            - text: "6: Data Import"
+              file: content/06-content.qmd
+            - text: "7: Layers & Aesthetics"
+              file: content/07-content.qmd
+            - text: "8: Perception & Design"
+              file: content/08-content.qmd
+            - text: "9: EDA — Variation"
+              file: content/09-content.qmd
+            - text: "10: EDA — Covariation"
+              file: content/10-content.qmd
+            - text: "11: Data Types Grab Bag"
+              file: content/11-content.qmd
+            - text: "12: Strings & Factors"
+              file: content/12-content.qmd
+            - text: "13: Joins"
+              file: content/13-content.qmd
+            - text: "14: Missing Data"
+              file: content/14-content.qmd
+            - text: "15: Storytelling with Data"
+              file: content/15-content.qmd
+            - text: "16: Quarto"
+              file: content/16-content.qmd
+            - text: "17: Practice & Review"
+              file: content/17-content.qmd
+            - text: "18: Putting It All Together"
+              file: content/18-content.qmd
 
     - title: "Assignments"
       contents:
@@ -94,6 +122,22 @@ website:
               file: assignment/07-assignment.qmd
             - text: "8: Reproducible Report"
               file: assignment/08-assignment.qmd
+
+    - title: "Final Project"
+      contents:
+        - section: "Overview"
+          contents:
+            - project/index.qmd
+        - section: "Milestones"
+          contents:
+            - text: "1: Proposal"
+              file: project/01-proposal.qmd
+            - text: "2: Draft Analysis"
+              file: project/02-draft.qmd
+            - text: "3: Final Report"
+              file: project/03-final-report.qmd
+            - text: "4: Presentation"
+              file: project/04-presentation.qmd
 
     - title: "Resources"
       contents:

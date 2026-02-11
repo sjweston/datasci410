@@ -1,0 +1,96 @@
+---
+title: "13: Joins"
+date: "2026-05-11"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
+
+::: {.callout-important}
+## Assignment 6 is due today
+[Assignment 6: Data Types](/assignment/06-assignment.qmd) — submit before class.
+:::
+
+## During class
+
+We'll cover:
+
+- Why join data? Psychology data often lives in multiple tables
+- Keys — primary keys and foreign keys
+- Mutating joins (add columns from another table):
+  - `left_join()` — keep all rows from the left table
+  - `inner_join()` — keep only matching rows
+  - `right_join()` and `full_join()`
+- Filtering joins (use one table to filter another):
+  - `semi_join()` — keep rows that have a match
+  - `anti_join()` — keep rows that *don't* have a match
+- Common issues: many-to-many, missing keys, duplicates
+
+### Slides
+
+```{=html}
+<a href="/slides/13-joins.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/13-joins.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/13-joins.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Create two small tibbles with a shared key column. Practice `left_join()`, `inner_join()`, and `full_join()` — what's different about the output?
+2. Use `anti_join()` to find participants who are in one dataset but not another (a common quality check)
+3. Try joining by multiple keys using `by = c("id", "timepoint")`
+4. What happens when a key isn't unique? Try it and see
+5. Think about your final project: do you need to combine multiple tables?
+
+::: {.callout-note}
+## Which join do you need?
+
+Most of the time, you want `left_join()` — it keeps everything in your main table and adds columns from the second table where there's a match.
+
+| Join | Keeps |
+|------|-------|
+| `left_join(x, y)` | All rows from `x`, matching rows from `y` |
+| `inner_join(x, y)` | Only rows that match in both |
+| `full_join(x, y)` | All rows from both tables |
+| `anti_join(x, y)` | Rows in `x` with no match in `y` |
+:::
+
+### Psychology application: combining data sources
+
+```r
+# Participant demographics + survey responses
+demographics <- tibble(
+  participant_id = c("P01", "P02", "P03"),
+  age = c(19, 22, 20),
+  gender = c("Woman", "Man", "Woman")
+)
+
+survey_scores <- tibble(
+  participant_id = c("P01", "P02", "P04"),
+  anxiety_score = c(34, 28, 41)
+)
+
+# Keep all participants, add scores where available
+demographics |>
+  left_join(survey_scores, by = "participant_id")
+
+# Find who's missing survey data
+demographics |>
+  anti_join(survey_scores, by = "participant_id")
+```

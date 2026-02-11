@@ -159,11 +159,14 @@ You can drop `data =` and `mapping =`:
 ```{r}
 #| eval: false
 # These are equivalent
-ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + geom_point()
+ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) + 
+  geom_point()
 
-ggplot(mpg, aes(x = displ, y = hwy)) + geom_point()
+ggplot(mpg, aes(x = displ, y = hwy)) + 
+  geom_point()
 
-ggplot(mpg, aes(displ, hwy)) + geom_point()  # x and y are first args
+ggplot(mpg, aes(displ, hwy)) + 
+  geom_point()  # x and y are first args
 ```
 
 I'll use the middle version — clear but not overly verbose.
@@ -273,6 +276,45 @@ ggplot(mpg, aes(x = displ, y = hwy, color = "blue")) +
 ```
 
 ggplot thinks "blue" is a category name!
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: 10 minutes
+
+With a partner, create a scatterplot using the `mpg` dataset:
+
+1. Plot `cty` (x-axis) vs `hwy` (y-axis)
+2. Color points by **fuel type** (`fl`)
+3. Add a smooth trend line
+4. Give it a title and axis labels
+5. Who can make theirs look the best?
+
+::: {.callout-tip}
+You have everything you need from the last few slides. Start with the basic template and build from there.
+:::
+
+---
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
+  geom_point() +
+  geom_smooth() +
+  labs(
+    title = "City vs Highway MPG by Fuel Type",
+    x = "City MPG",
+    y = "Highway MPG",
+    color = "Fuel type"
+  )
+```
+
+
+
+## Before we move on
+
+📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
 # Geoms {background-color="#2c3e50"}
 
@@ -493,15 +535,16 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   theme_minimal(base_size = 14)
 ```
 
-## Your turn!
+## Get a head start: Assignment 1
 
-Using the `mpg` dataset, create a scatterplot that:
+Open a new R script in your project. Try these on your own:
 
-1. Shows city mpg (`cty`) vs highway mpg (`hwy`)
-2. Colors points by fuel type (`fl`)
-3. Adds a linear trend line
-4. Has appropriate labels
-5. Uses `theme_bw()`
+1. Make a scatterplot of `displ` vs `hwy` from `mpg`
+2. Color it by `class`
+3. Facet by `drv` (drive type)
+4. Save it with `ggsave()`
+
+This is the first part of Assignment 1 — finish it before next class.
 
 # Wrapping up {background-color="#2c3e50"}
 

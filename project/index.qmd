@@ -1,0 +1,71 @@
+---
+title: "Final Project"
+---
+
+## Overview
+
+The final project is your chance to apply everything you've learned in this course to a dataset that interests you. You'll choose a dataset, develop research questions, explore the data with visualizations, and communicate your findings in a polished Quarto report.
+
+**Weight:** 35% of your final grade.
+
+## What you'll produce
+
+By the end of the quarter, you'll have:
+
+- A **dataset** relevant to psychology or the social sciences
+- **2-3 research questions** that can be explored through visualization
+- A **polished Quarto report** (`.qmd` rendered to HTML) with 4-6 publication-ready figures
+- A **5-minute presentation** sharing your key findings with the class
+
+## Milestones
+
+The project is broken into four milestones so you get feedback along the way:
+
+| Milestone | Due Date | What you submit |
+|-----------|----------|-----------------|
+| [Proposal](01-proposal.qmd) | Wed Apr 29 (Session 10) | Dataset, research questions, initial plan |
+| [Draft](02-draft.qmd) | Wed May 20 (Session 15) | Working code, preliminary visualizations |
+| [Final Report](03-final-report.qmd) | Wed Jun 3 (Session 18) | Complete Quarto report |
+| [Presentation](04-presentation.qmd) | Finals Week | 5-minute share-out |
+
+## Grading breakdown
+
+| Component | Points |
+|-----------|--------|
+| Proposal | 10 |
+| Draft | 15 |
+| Final Report | 60 |
+| Presentation | 15 |
+| **Total** | **100** |
+
+## Choosing a dataset
+
+Your dataset should:
+
+- Be relevant to **psychology or the social sciences** (broadly defined)
+- Have at least **100 observations** and **5 variables** (ideally a mix of numeric and categorical)
+- Be something you find **genuinely interesting** — you'll spend several weeks with it
+
+### Good sources for datasets
+
+- **Open Science Framework (OSF):** [osf.io](https://osf.io) — published research datasets
+- **ICPSR:** [icpsr.umich.edu](https://www.icpsr.umich.edu/) — social science data archive
+- **General Social Survey (GSS):** [gss.norc.org](https://gss.norc.org/)
+- **World Values Survey:** [worldvaluessurvey.org](https://www.worldvaluessurvey.org/)
+- **Kaggle:** [kaggle.com/datasets](https://www.kaggle.com/datasets) — search for psychology-related datasets
+- **Your own research data** — with your advisor's permission
+
+::: {.callout-tip}
+## Not sure where to start?
+Come to office hours and we can browse datasets together. It's much easier to stay motivated when you're working with data you care about.
+:::
+
+## AI tools policy
+
+The final project follows the same AI policy as weekly assignments: **AI-permitted with documentation.** You must include a process documentation section in your final report describing how you used AI tools (if at all) and what you learned from the process. See the [syllabus](/syllabus.qmd#ai-tools-policy) for the full policy.
+
+## Getting help
+
+- **Office hours** are the best place to get feedback on your project
+- **Class work time** in Sessions 17 and 18 is dedicated to project questions
+- You're welcome to **discuss ideas with classmates**, but each person submits their own project

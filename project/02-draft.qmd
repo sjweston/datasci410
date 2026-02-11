@@ -1,0 +1,72 @@
+---
+title: "Milestone 2: Draft Analysis"
+date: "2026-05-20"
+---
+
+::: {.callout-note}
+## Milestone Details
+**Due:** Wednesday, May 20 before class (Session 15)
+**Submit:** `.R` script or `.qmd` file + any output files, on Canvas
+**Points:** 15
+:::
+
+## Overview
+
+The draft is a working checkpoint — it shows that you can import and clean your data, and that you've started exploring your research questions with visualizations. It does **not** need to be polished. Think of it as showing your work-in-progress so I can give you feedback before the final push.
+
+## What to submit
+
+### 1. Working code
+
+Your script or Quarto document should:
+
+- **Import** your dataset (using `read_csv()`, `read_excel()`, or similar)
+- **Clean** the data as needed (handle column types, missing value codes, variable names)
+- **Tidy** the data if necessary (pivot, separate, etc.)
+- **Run without errors** from a fresh R session
+
+::: {.callout-tip}
+## Test this before submitting
+Restart R (Session → Restart R), then run your entire script from top to bottom. If it breaks, fix it before submitting.
+:::
+
+### 2. At least 2 preliminary visualizations
+
+Create at least **2 plots** that start to address your research questions. These don't need to be publication-ready — they're exploratory. But they should:
+
+- Use appropriate geoms for the data type
+- Have labeled axes and a title
+- Show something meaningful (not just `geom_point(aes(x, y))` with no context)
+
+### 3. Bullet-point outline of findings
+
+After your code, include a brief section (in comments or markdown) with:
+
+- What patterns or trends do you see so far?
+- Were there any surprises?
+- Did your research questions change based on what you found?
+
+### 4. List of remaining tasks
+
+What still needs to be done? Be specific:
+
+- Which visualizations do you still need to create?
+- What cleaning or tidying remains?
+- Are there any problems you're stuck on?
+
+This helps me give you targeted feedback.
+
+## How this will be graded
+
+| Component | Points |
+|-----------|--------|
+| Working code (imports, cleans, runs without errors) | 5 |
+| Preliminary visualizations (at least 2, appropriate choices) | 5 |
+| Outline of findings (thoughtful, shows engagement with data) | 3 |
+| Remaining tasks (specific, realistic plan for completion) | 2 |
+| **Total** | **15** |
+
+::: {.callout-important}
+## This is a checkpoint, not a final product
+I'm not expecting polish here. I'm looking for evidence that you've made real progress and have a clear path to the finish line. If you're struggling, this is the time to ask for help — not Week 10.
+:::

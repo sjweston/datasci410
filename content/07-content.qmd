@@ -1,0 +1,85 @@
+---
+title: "7: Layers & Aesthetics"
+date: "2026-04-20"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 9: Layers](https://r4ds.hadley.nz/layers)
+
+::: {.callout-important}
+## Assignment 3 is due today
+[Assignment 3: Tidying & Import](/assignment/03-assignment.qmd) — submit before class.
+:::
+
+## During class
+
+We'll cover:
+
+- Matching geom to data type — a decision guide
+- Distributions: `geom_histogram()` vs `geom_density()`
+- Comparing groups: `geom_boxplot()` vs `geom_violin()`
+- `stat_summary()` — means, error bars, and custom functions
+- What SE, SD, and CI error bars actually mean
+- Position adjustments: dodge, stack, fill, jitter
+- Scales: controlling axes, colors, and legends
+- `coord_flip()` vs `coord_cartesian()` — and why they're different
+
+### Slides
+
+```{=html}
+<a href="/slides/07-layers-aesthetics.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/07-layers-aesthetics.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/07-layers-aesthetics.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Create a histogram and a density plot of the same variable. When does each one work better?
+2. Make a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?
+3. Build a bar chart with error bars using `stat_summary()`. Try both `mean_se` and `mean_cl_normal` — what changes?
+4. Practice `position = "dodge"` with a grouped bar chart
+5. Try `coord_flip()` on a plot with long category labels — does it help readability?
+
+::: {.callout-note}
+## coord_cartesian() vs scale limits
+
+These do very different things:
+
+```r
+# This ZOOMS — all data is still used for calculations
+coord_cartesian(ylim = c(400, 600))
+
+# This DROPS data outside the range — changes your summaries!
+scale_y_continuous(limits = c(400, 600))
+```
+
+Use `coord_cartesian()` when you want to zoom in. Use `scale limits` only when you actually want to exclude data.
+:::
+
+### Psychology application: error bars
+
+```r
+# The standard psych figure: mean + SE + individual points
+data |>
+  ggplot(aes(x = condition, y = score, fill = condition)) +
+  geom_jitter(width = 0.2, alpha = 0.4) +
+  stat_summary(fun = mean, geom = "bar", alpha = 0.6, width = 0.5) +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  labs(caption = "Error bars = SE of the mean.")
+```

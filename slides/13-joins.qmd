@@ -1,0 +1,710 @@
+---
+title: "Joins"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "May 11, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 13"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Why join data? {background-color="#2c3e50"}
+
+## The problem: Data lives in multiple tables
+
+In psychology research, information is often spread across multiple files:
+
+- **Participant demographics** (age, gender, condition)
+- **Survey responses** (depression scores, anxiety scores)
+- **Behavioral data** (reaction times, accuracy)
+- **Longitudinal data** (Time 1, Time 2, Time 3)
+
+. . .
+
+To analyze relationships, we need to **combine** these tables.
+
+## Example scenario
+
+```{r}
+# Participant information
+participants <- tibble(
+  participant_id = 1:4,
+  age = c(22, 25, 19, 31),
+  condition = c("Control", "Treatment", "Treatment", "Control")
+)
+
+# Survey responses (collected separately)
+survey <- tibble(
+  participant_id = c(1, 2, 3, 5),  # Note: 4 is missing, 5 is extra
+  depression = c(12, 18, 10, 25),
+  anxiety = c(15, 20, 12, 30)
+)
+```
+
+## The two tables
+
+:::: {.columns}
+::: {.column width="50%"}
+**Participants:**
+```{r}
+participants
+```
+:::
+
+::: {.column width="50%"}
+**Survey:**
+```{r}
+survey
+```
+:::
+::::
+
+. . .
+
+How do we combine these based on `participant_id`?
+
+# Keys {background-color="#2c3e50"}
+
+## What are keys?
+
+**Keys** are variables that uniquely identify observations and connect tables.
+
+. . .
+
+**Primary key:** Uniquely identifies each observation in a table
+
+- `participant_id` in the participants table
+- Each participant appears only once
+
+. . .
+
+**Foreign key:** References the primary key of another table
+
+- `participant_id` in the survey table
+- Links back to the participants table
+
+## Checking for unique keys
+
+Before joining, verify that your key truly identifies each row:
+
+```{r}
+# Check if participant_id is unique
+participants |>
+  count(participant_id) |>
+  filter(n > 1)
+```
+
+. . .
+
+Empty result = good! Each participant appears only once.
+
+## When keys aren't unique
+
+Sometimes keys aren't unique (e.g., longitudinal data):
+
+```{r}
+longitudinal <- tibble(
+  participant_id = c(1, 1, 2, 2, 3, 3),
+  timepoint = c(1, 2, 1, 2, 1, 2),
+  depression = c(20, 15, 18, 12, 25, 22)
+)
+```
+
+. . .
+
+Here, the **combination** of `participant_id` + `timepoint` is the key:
+
+```{r}
+longitudinal |>
+  count(participant_id, timepoint) |>
+  filter(n > 1)
+```
+
+# Mutating joins {background-color="#2c3e50"}
+
+## The join family
+
+**Mutating joins** add columns from one table to another:
+
+| Function | Keeps rows from... |
+|----------|-------------------|
+| `left_join()` | Left table (all rows) |
+| `right_join()` | Right table (all rows) |
+| `inner_join()` | Both tables (only matches) |
+| `full_join()` | Both tables (all rows) |
+
+## left_join(): Most common
+
+Keep **all** rows from the left table, add matching data from the right:
+
+```{r}
+participants |>
+  left_join(survey, by = "participant_id")
+```
+
+. . .
+
+- Participant 4 has no survey data → `NA`
+- Participant 5 from survey isn't in participants → excluded
+
+## Visualizing left_join()
+
+![](https://r4ds.hadley.nz/diagrams/join/left.png){width="60%"}
+
+All rows from the left (blue) table are kept.
+
+## right_join(): The mirror
+
+Keep **all** rows from the right table:
+
+```{r}
+participants |>
+  right_join(survey, by = "participant_id")
+```
+
+. . .
+
+Now participant 5 is included (with `NA` for age/condition), but participant 4 is excluded.
+
+## inner_join(): Only matches
+
+Keep **only** rows that exist in both tables:
+
+```{r}
+participants |>
+  inner_join(survey, by = "participant_id")
+```
+
+. . .
+
+- Participant 4 excluded (no survey data)
+- Participant 5 excluded (not in participants)
+
+## Visualizing inner_join()
+
+![](https://r4ds.hadley.nz/diagrams/join/inner.png){width="60%"}
+
+Only matching rows are kept.
+
+## full_join(): Everything
+
+Keep **all** rows from both tables:
+
+```{r}
+participants |>
+  full_join(survey, by = "participant_id")
+```
+
+. . .
+
+Every participant appears, with `NA` where data is missing.
+
+## Visualizing full_join()
+
+![](https://r4ds.hadley.nz/diagrams/join/full.png){width="60%"}
+
+All rows from both tables are kept.
+
+## Which join should I use?
+
+**Most common in psychology: `left_join()`**
+
+. . .
+
+Use when:
+
+- You have a main participant table
+- You want to add additional data (surveys, behavioral tasks)
+- You want to keep all participants, even those with missing data
+
+. . .
+
+::: {.callout-tip}
+Start with `left_join()` unless you have a specific reason to use another type.
+:::
+
+## Psychology example: Adding demographics
+
+```{r}
+# Task data
+task_data <- tibble(
+  participant_id = c(1, 2, 3, 1, 2, 3),
+  trial = c(1, 1, 1, 2, 2, 2),
+  reaction_time = c(450, 380, 520, 430, 395, 510)
+)
+
+# Add participant info to each trial
+task_data |>
+  left_join(participants, by = "participant_id")
+```
+
+## Joining by multiple keys
+
+For longitudinal data, join on multiple columns:
+
+```{r}
+# Time 1 scores
+time1 <- tibble(
+  id = c(1, 2, 3),
+  time = 1,
+  depression = c(20, 18, 25)
+)
+
+# Time 2 scores
+time2 <- tibble(
+  id = c(1, 2, 3),
+  time = 2,
+  depression = c(15, 12, 22)
+)
+```
+
+## Combining longitudinal data
+
+```{r}
+# Combine into one table
+all_times <- bind_rows(time1, time2)
+
+# Add baseline demographics
+all_times |>
+  left_join(
+    participants |> select(participant_id, age, condition),
+    by = c("id" = "participant_id")  # Keys have different names
+  )
+```
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Combine study data
+
+You have three tables from a therapy study:
+
+```{r}
+baseline <- tibble(
+  id = 1:5,
+  age = c(25, 30, 22, 35, 28),
+  baseline_depression = c(22, 25, 18, 30, 20)
+)
+
+treatment <- tibble(
+  id = c(1, 2, 3, 4),  # Missing id 5
+  condition = c("CBT", "Control", "CBT", "Control")
+)
+
+followup <- tibble(
+  id = c(1, 2, 3, 5),  # Missing id 4, but has id 5
+  followup_depression = c(12, 23, 10, 18)
+)
+```
+
+1. Create a dataset with baseline info and treatment condition (keep all participants)
+2. Add followup data (keep all from step 1)
+3. How many participants are missing followup data?
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+# Step 1: Add treatment to baseline
+baseline_treatment <- baseline |>
+  left_join(treatment, by = "id")
+
+# Step 2: Add followup
+complete_data <- baseline_treatment |>
+  left_join(followup, by = "id")
+
+complete_data
+
+# Step 3: Count missing followup
+sum(is.na(complete_data$followup_depression))
+```
+
+# Filtering joins {background-color="#2c3e50"}
+
+## A different purpose
+
+**Filtering joins** don't add columns — they filter rows based on whether matches exist:
+
+- `semi_join()` — Keep rows that **have** a match
+- `anti_join()` — Keep rows that **don't have** a match
+
+## semi_join(): Has a match
+
+Keep rows from the left table that exist in the right table:
+
+```{r}
+# Which participants completed the survey?
+participants |>
+  semi_join(survey, by = "participant_id")
+```
+
+. . .
+
+Only participants 1, 2, and 3 completed the survey.
+
+## anti_join(): No match
+
+Keep rows from the left table that **don't** exist in the right table:
+
+```{r}
+# Which participants didn't complete the survey?
+participants |>
+  anti_join(survey, by = "participant_id")
+```
+
+. . .
+
+Participant 4 didn't complete the survey.
+
+## Psychology use case: Attrition analysis
+
+```{r}
+# Who was enrolled
+enrolled <- tibble(
+  participant_id = 1:10,
+  condition = rep(c("Treatment", "Control"), each = 5)
+)
+
+# Who completed
+completed <- tibble(
+  participant_id = c(1, 2, 3, 4, 7, 8, 9, 10)  # Missing 5 and 6
+)
+
+# Who dropped out?
+enrolled |>
+  anti_join(completed, by = "participant_id")
+```
+
+## Attrition by condition
+
+```{r}
+dropout <- enrolled |>
+  anti_join(completed, by = "participant_id")
+
+dropout |>
+  count(condition)
+```
+
+. . .
+
+::: {.callout-warning}
+Both dropouts were from the Treatment condition — this could bias results!
+:::
+
+# Common join problems {background-color="#2c3e50"}
+
+## Problem 1: Keys with different names
+
+```{r}
+demographics <- tibble(
+  subj_id = 1:3,
+  age = c(25, 30, 22)
+)
+
+scores <- tibble(
+  participant = c(1, 2, 3),
+  depression = c(18, 22, 15)
+)
+```
+
+. . .
+
+**Solution:** Use named vector in `by`:
+
+```{r}
+demographics |>
+  left_join(scores, by = c("subj_id" = "participant"))
+```
+
+## Problem 2: Duplicate keys
+
+```{r}
+# Duplicate in left table
+participants_dup <- tibble(
+  id = c(1, 1, 2, 3),  # ID 1 appears twice!
+  age = c(25, 25, 30, 22)
+)
+
+task_scores <- tibble(
+  id = c(1, 2, 3),
+  score = c(85, 90, 88)
+)
+```
+
+## What happens with duplicates?
+
+```{r}
+participants_dup |>
+  left_join(task_scores, by = "id")
+```
+
+. . .
+
+Each duplicate gets matched → creates extra rows!
+
+. . .
+
+::: {.callout-important}
+Always check for duplicate keys before joining.
+:::
+
+## Problem 3: Missing keys
+
+```{r}
+# Some participants have NA for id
+messy_data <- tibble(
+  id = c(1, 2, NA, 3),
+  response = c("Yes", "No", "Yes", "No")
+)
+
+demographics <- tibble(
+  id = 1:3,
+  age = c(25, 30, 22)
+)
+```
+
+## Joining with NAs
+
+```{r}
+messy_data |>
+  left_join(demographics, by = "id")
+```
+
+. . .
+
+Row with `NA` id can't match → gets `NA` for age.
+
+Fix the data before joining!
+
+## Problem 4: Many-to-many relationships
+
+```{r}
+# Multiple trials per participant
+trials <- tibble(
+  id = c(1, 1, 2, 2),
+  trial = c(1, 2, 1, 2),
+  rt = c(450, 430, 380, 390)
+)
+
+# Multiple sessions per participant
+sessions <- tibble(
+  id = c(1, 1, 2, 2),
+  session = c(1, 2, 1, 2),
+  mood = c(5, 6, 4, 5)
+)
+```
+
+## Many-to-many result
+
+```{r}
+trials |>
+  left_join(sessions, by = "id")
+```
+
+. . .
+
+Creates all combinations — probably not what you want!
+
+**Solution:** Be more specific about what you're joining on, or reshape first.
+
+# Practical psychology examples {background-color="#2c3e50"}
+
+## Example 1: Qualtrics + demographics
+
+```{r}
+# Survey responses exported from Qualtrics
+qualtrics <- tibble(
+  ResponseId = c("R_1", "R_2", "R_3"),
+  PHQ9_total = c(12, 18, 8),
+  GAD7_total = c(10, 15, 6)
+)
+
+# Demographics collected separately
+demo <- tibble(
+  ResponseId = c("R_1", "R_2", "R_3"),
+  age = c(25, 30, 22),
+  gender = c("Female", "Male", "Female")
+)
+
+# Combine
+qualtrics |>
+  left_join(demo, by = "ResponseId")
+```
+
+## Example 2: Pre-post intervention
+
+```{r}
+pre_test <- tibble(
+  participant = 1:4,
+  depression_pre = c(22, 25, 18, 20)
+)
+
+post_test <- tibble(
+  participant = c(1, 2, 4),  # 3 dropped out
+  depression_post = c(12, 23, 15)
+)
+
+# Combine and compute change
+pre_test |>
+  left_join(post_test, by = "participant") |>
+  mutate(change = depression_pre - depression_post)
+```
+
+## Example 3: Item-level to scale-level
+
+```{r}
+# Individual items
+items <- tibble(
+  id = rep(1:3, each = 5),
+  item = rep(1:5, times = 3),
+  response = c(3,4,3,4,3, 2,3,2,3,2, 4,5,4,5,4)
+)
+
+# Participant info
+participants_info <- tibble(
+  id = 1:3,
+  condition = c("Control", "Treatment", "Treatment")
+)
+
+# Compute scale scores then join
+items |>
+  group_by(id) |>
+  summarize(scale_mean = mean(response)) |>
+  left_join(participants_info, by = "id")
+```
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+## Practice: Longitudinal study
+
+You have data from a three-wave longitudinal study:
+
+```{r}
+# Baseline demographics
+baseline_demo <- tibble(
+  pid = 1:6,
+  age = c(20, 22, 25, 19, 24, 21),
+  condition = rep(c("Intervention", "Control"), each = 3)
+)
+
+# Time 1 assessment
+time1_scores <- tibble(
+  pid = 1:6,
+  depression_t1 = c(22, 25, 18, 20, 24, 19)
+)
+
+# Time 2 assessment (2 dropouts)
+time2_scores <- tibble(
+  pid = c(1, 2, 3, 4, 6),  # Missing 5
+  depression_t2 = c(15, 24, 12, 18, 17)
+)
+
+# Time 3 assessment (1 more dropout)
+time3_scores <- tibble(
+  pid = c(1, 2, 3, 6),  # Missing 4 and 5
+  depression_t3 = c(12, 22, 10, 15)
+)
+```
+
+## Your tasks
+
+1. Create a complete dataset with all timepoints
+2. Compute change scores (T1 to T3)
+3. Identify who dropped out at each wave
+4. Check if dropout differs by condition
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+# 1. Complete dataset
+complete <- baseline_demo |>
+  left_join(time1_scores, by = "pid") |>
+  left_join(time2_scores, by = "pid") |>
+  left_join(time3_scores, by = "pid")
+
+complete
+
+# 2. Change scores
+complete |>
+  mutate(change_t1_t3 = depression_t1 - depression_t3)
+
+# 3. Who dropped out at T2?
+baseline_demo |>
+  anti_join(time2_scores, by = "pid")
+
+# Who dropped out at T3 (but completed T2)?
+time2_scores |>
+  anti_join(time3_scores, by = "pid")
+
+# 4. Dropout by condition
+baseline_demo |>
+  anti_join(time3_scores, by = "pid") |>
+  count(condition)
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Join decision flowchart
+
+Ask yourself:
+
+1. **Do I want to add columns?**
+   - Yes → Use a mutating join
+   - No → Use a filtering join
+
+2. **Which rows do I want to keep?**
+   - All from left → `left_join()`
+   - All from right → `right_join()`
+   - Only matches → `inner_join()`
+   - Everything → `full_join()`
+
+3. **Am I filtering rows?**
+   - Keep matches → `semi_join()`
+   - Keep non-matches → `anti_join()`
+
+## Key takeaways
+
+1. **Joins combine data** from multiple tables using key variables
+2. **Check your keys** for uniqueness before joining
+3. **`left_join()` is your workhorse** — keeps all rows from your main table
+4. **Filtering joins** help identify completers vs. dropouts
+5. **Watch for common problems:** duplicate keys, different key names, NAs
+6. **Always inspect** the result to ensure it matches expectations
+
+## Before next class
+
+📖 **Read:**
+
+- R4DS Ch 18: Missing values
+
+✅ **Do:**
+
+- Submit Assignment 6
+- Check if your final project needs joins
+- Practice joining your own data files
+
+## Questions?
+
+See you Wednesday for handling missing data!

@@ -1,0 +1,95 @@
+---
+title: "18: Putting It All Together"
+date: "2026-06-03"
+---
+
+## Before class
+
+No new reading today — focus on finishing your final project report!
+
+::: {.callout-important}
+## Final Project Report is due today
+Submit your complete Quarto report with visualizations before class.
+:::
+
+## During class
+
+We'll cover:
+
+- The complete data science workflow (review):
+  Import → Tidy → Transform → Visualize → Communicate
+- Live demonstration: a real psychology analysis from start to finish
+- What you've learned — celebrating how far you've come
+- Where to go from here:
+  - Statistics in R (t-tests, ANOVA, regression)
+  - Advanced R (functions, iteration, packages)
+  - Version control (Git and GitHub)
+  - Interactive visualizations (Shiny)
+  - Machine learning (tidymodels)
+- Resources for continued learning
+- Final project work time and Q&A
+
+### Slides
+
+```{=html}
+<a href="/slides/18-putting-it-together.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/18-putting-it-together.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/18-putting-it-together.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **What's next:**
+
+1. **Prepare your presentation** — 5 minutes, focus on your key finding and one or two polished figures
+2. Practice explaining your work to someone outside the class. Can they follow your story?
+3. Finalize your Quarto report — make sure it renders cleanly from scratch
+
+::: {.callout-note}
+## Continued learning resources
+
+- [R for Data Science](https://r4ds.hadley.nz/) — keep this bookmarked; revisit chapters as you need them
+- [Posit Recipes](https://posit.cloud/learn/recipes) — quick how-to guides for common tasks
+- [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) — weekly community data visualization challenge
+- [R-Ladies](https://rladies.org/) — global community for gender minorities in R
+- [Posit Community](https://community.rstudio.com/) — friendly Q&A forum
+:::
+
+### The skills you've built
+
+```r
+# You started here:
+1 + 1
+
+# Now you can do this:
+raw_data |>
+  read_csv() |>
+  pivot_longer(cols = starts_with("time"),
+               names_to = "timepoint",
+               values_to = "score") |>
+  left_join(demographics, by = "participant_id") |>
+  group_by(condition, timepoint) |>
+  summarize(M = mean(score, na.rm = TRUE),
+            SE = sd(score, na.rm = TRUE) / sqrt(n())) |>
+  ggplot(aes(x = timepoint, y = M, fill = condition)) +
+  geom_col(position = "dodge") +
+  geom_errorbar(aes(ymin = M - SE, ymax = M + SE),
+                position = position_dodge(0.9), width = 0.2) +
+  scale_fill_viridis_d() +
+  theme_minimal() +
+  labs(title = "Score improvement across conditions",
+       y = "Mean score", x = "Timepoint")
+```
+
+That's a real accomplishment. Be proud of it.

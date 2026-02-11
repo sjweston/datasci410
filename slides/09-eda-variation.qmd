@@ -1,0 +1,461 @@
+---
+title: "EDA — Variation"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "April 27, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 9"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(psych)
+
+# Load the Big Five personality dataset — this is our EDA playground
+data(bfi)
+bfi <- as_tibble(bfi)
+```
+
+# What is EDA? {background-color="#2c3e50"}
+
+## Exploratory vs. confirmatory
+
+| | Exploratory (EDA) | Confirmatory |
+|---|---|---|
+| **Goal** | Discover patterns | Test hypotheses |
+| **Attitude** | Curiosity | Rigor |
+| **Questions** | Open-ended | Pre-specified |
+| **Output** | Visualizations, hunches | p-values, conclusions |
+
+EDA comes **first.** You can't test a hypothesis you didn't notice.
+
+## The EDA mindset
+
+> "EDA is an attitude, not a technique."  
+> — John Tukey
+
+- Ask questions
+- Answer them by visualizing data
+- Use what you learn to ask new questions
+- Repeat
+
+There is no single "right" way to do EDA. The goal is **understanding.**
+
+## What we're doing today
+
+Exploring **variation** — what does a single variable look like?
+
+- Distribution shape
+- Center and spread
+- Outliers and unusual values
+- Missing data
+
+Tomorrow: **covariation** — how do variables relate to each other?
+
+## Our dataset: Big Five Personality
+
+```{r}
+glimpse(bfi)
+```
+
+25 items measuring five personality factors (Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness) + demographics.
+
+## What's in here
+
+```{r}
+#| echo: false
+tibble(
+  Variable = c("A1–A5", "C1–C5", "E1–E5", "N1–N5", "O1–O5", "gender", "education", "age"),
+  Description = c(
+    "Agreeableness items (1–6 scale)",
+    "Conscientiousness items (1–6 scale)",
+    "Extraversion items (1–6 scale)",
+    "Neuroticism items (1–6 scale)",
+    "Openness items (1–6 scale)",
+    "1 = male, 2 = female",
+    "1–5 (HS incomplete through graduate)",
+    "Age in years"
+  )
+) |> knitr::kable()
+```
+
+# Exploring distributions {background-color="#2c3e50"}
+
+## Start simple: summary statistics
+
+```{r}
+bfi |>
+  select(age, gender, education) |>
+  summary()
+```
+
+But summary stats can hide a lot. Always visualize.
+
+## Histograms: the workhorse
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+bfi |>
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(
+    title = "Distribution of Age",
+    x = "Age (years)",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Choosing binwidth
+
+The binwidth matters a lot:
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 4
+library(patchwork)
+
+p1 <- bfi |> ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
+  labs(title = "binwidth = 1 (too narrow)", x = "Age") +
+  theme_minimal(base_size = 13)
+
+p2 <- bfi |> ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(title = "binwidth = 5 (good)", x = "Age") +
+  theme_minimal(base_size = 13)
+
+p3 <- bfi |> ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 20, fill = "steelblue", color = "white") +
+  labs(title = "binwidth = 20 (too wide)", x = "Age") +
+  theme_minimal(base_size = 13)
+
+p1 + p2 + p3
+```
+
+There's no "right" answer — try a few and pick the one that shows the shape clearly.
+
+## Density plots: smooth alternative
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+bfi |>
+  ggplot(aes(x = age)) +
+  geom_density(fill = "steelblue", alpha = 0.5) +
+  labs(
+    title = "Distribution of Age (Density)",
+    x = "Age (years)",
+    y = "Density"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Exploring survey items
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# All Extraversion items
+bfi |>
+  select(E1:E5) |>
+  pivot_longer(everything(), names_to = "item", values_to = "response") |>
+  ggplot(aes(x = response, fill = item)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Extraversion Item Responses",
+    x = "Response (1–6)",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Categorical variables
+
+```{r}
+#| output-location: slide
+#| fig-width: 8
+#| fig-height: 5
+bfi |>
+  mutate(gender = ifelse(gender == 1, "Male", "Female")) |>
+  ggplot(aes(x = gender)) +
+  geom_bar(fill = "steelblue") +
+  labs(
+    title = "Gender Distribution",
+    x = "Gender",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Counts and proportions
+
+```{r}
+# Counts
+bfi |>
+  mutate(gender = ifelse(gender == 1, "Male", "Female")) |>
+  count(gender)
+```
+
+```{r}
+# Proportions
+bfi |>
+  mutate(gender = ifelse(gender == 1, "Male", "Female")) |>
+  count(gender) |>
+  mutate(proportion = round(n / sum(n), 3))
+```
+
+# Outliers {background-color="#2c3e50"}
+
+## What are outliers?
+
+Values that are unusual compared to the rest of the data. They might be:
+
+- **Real** — genuinely extreme values (a 95-year-old in a college study)
+- **Errors** — data entry mistakes (age = 999)
+- **Interesting** — worth investigating
+
+**Never delete an outlier without understanding it.**
+
+## Spotting outliers visually
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+bfi |>
+  ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(
+    title = "Age Distribution — Any Outliers?",
+    x = "Age (years)",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Spotting outliers with boxplots
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 4
+bfi |>
+  ggplot(aes(x = age)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(
+    title = "Age — Boxplot Shows Outliers as Points",
+    x = "Age (years)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+Points beyond the whiskers are flagged as outliers by the 1.5×IQR rule.
+
+## Investigating outliers programmatically
+
+```{r}
+# Find unusually old or young participants
+bfi |>
+  filter(age > 60 | age < 18) |>
+  select(age, gender, education)
+```
+
+## What to do with outliers
+
+| Outlier type | What to do |
+|---|---|
+| Likely error (age = 999) | Fix or set to NA |
+| Real but extreme | Note it, keep it, mention in write-up |
+| Suspicious | Investigate further |
+| Doesn't affect conclusions | Keep it, move on |
+
+**Document your decisions.** Future you will want to know.
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: 10 minutes
+
+Using the `bfi` dataset (already loaded):
+
+1. Plot the distribution of **age** — does it look normal? What shape is it?
+2. Check for **outliers** in age. Are any values suspicious?
+3. Pick **one personality item** (e.g., E1) and explore its distribution
+4. What do you notice? Write down 2 observations.
+
+::: {.callout-tip}
+Try both a histogram and a boxplot for age. They show different things. Use `summary()` first to get oriented.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+# Age distribution
+bfi |> ggplot(aes(x = age)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  theme_minimal()
+
+# Outlier check
+bfi |> ggplot(aes(x = age)) + geom_boxplot() + theme_minimal()
+bfi |> filter(age > 60)
+
+# One item
+bfi |> ggplot(aes(x = E1)) + geom_bar(fill = "steelblue") + theme_minimal()
+```
+
+---
+
+## Before we move on
+
+📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+
+# Missing data — a first look {background-color="#2c3e50"}
+
+## Missing data is everywhere
+
+```{r}
+# How much missing data do we have?
+bfi |>
+  summarize(across(everything(), ~ sum(is.na(.)))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "n_missing") |>
+  arrange(desc(n_missing))
+```
+
+## Visualizing missingness
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+bfi |>
+  summarize(across(everything(), ~ mean(is.na(.)))) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "pct_missing") |>
+  mutate(pct_missing = pct_missing * 100) |>
+  filter(pct_missing > 0) |>
+  arrange(desc(pct_missing)) |>
+  ggplot(aes(x = reorder(variable, pct_missing), y = pct_missing)) +
+  geom_col(fill = "steelblue") +
+  coord_flip() +
+  labs(
+    title = "Percentage of Missing Values by Variable",
+    x = "Variable",
+    y = "% Missing"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+## Why it matters for EDA
+
+Missing data can bias your exploration:
+
+- If missingness is related to the variables you're studying, your distributions are wrong
+- If certain groups are more likely to have missing data, you might miss important patterns
+
+We'll cover this in depth in Session 14. For now: **always check for missing data before exploring.**
+
+# The EDA workflow {background-color="#2c3e50"}
+
+## A systematic approach
+
+1. **Look at the structure** — `glimpse()`, `summary()`
+2. **Check for missing data** — how much? Which variables?
+3. **Explore each variable** — histograms, bar charts, summaries
+4. **Look for outliers** — boxplots, programmatic checks
+5. **Ask questions** — what surprised you? What do you want to know more about?
+6. **Repeat** — EDA is iterative
+
+## Putting it together: a mini-EDA
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 6
+# Education distribution — what does it look like?
+bfi |>
+  filter(!is.na(education)) |>
+  mutate(education = factor(education, labels = c(
+    "HS incomplete", "HS grad", "Some college",
+    "College grad", "Graduate degree"
+  ))) |>
+  ggplot(aes(x = education)) +
+  geom_bar(fill = "steelblue") +
+  labs(
+    title = "Education Level in the BFI Sample",
+    x = "Education level",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+## Get a head start: Assignment 5
+
+Assignment 5 will have you do a full EDA on a psychology dataset. Start now:
+
+1. Load `bfi` and run `glimpse()` and `summary()`
+2. Pick **3 variables** and create distributions for each
+3. For each one: What shape is it? Any outliers? Any missing data?
+4. Write down **one question** each distribution makes you want to ask
+
+That's the core of EDA — noticing things and getting curious.
+
+# Wrapping up {background-color="#2c3e50"}
+
+## EDA toolkit so far
+
+| Tool | When to use |
+|------|-------------|
+| `glimpse()` | First look at structure |
+| `summary()` | Quick numeric summaries |
+| `geom_histogram()` | Continuous distributions |
+| `geom_density()` | Smooth distribution shape |
+| `geom_bar()` | Categorical distributions |
+| `geom_boxplot()` | Outlier detection |
+| `count()` | Frequency tables |
+| `is.na()` / `sum(is.na())` | Missing data check |
+
+## Before next class
+
+📖 **Read:**
+
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.5–10.6)
+
+✅ **Practice:**
+
+- Explore at least 3 variables in `bfi`
+- Look for outliers and missing data
+- Start generating questions
+
+## Key takeaways
+
+1. **EDA is an attitude** — curiosity, not confirmation
+2. **Always visualize** — summary stats hide patterns
+3. **Outliers are information** — investigate, don't delete
+4. **Check missing data first** — it affects everything
+5. **Ask questions, then answer them** — that's the loop
+
+## Questions?
+
+Next time: **EDA — Covariation**
+
+We'll explore relationships between variables — the really interesting stuff!

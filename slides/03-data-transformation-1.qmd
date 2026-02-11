@@ -20,6 +20,7 @@ execute:
   message: false
 ---
 
+
 ```{r}
 #| include: false
 library(tidyverse)
@@ -109,6 +110,7 @@ filter(flights, carrier == "UA")
 Conditions separated by `,` are combined with AND:
 
 ```{r}
+#| eval: false
 # January 1st flights (both must be true)
 filter(flights, month == 1, day == 1)
 ```
@@ -189,6 +191,41 @@ is.na(x)
 filter(flights, !is.na(dep_delay))
 ```
 
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: 10 minutes
+
+With a partner, using the `flights` dataset:
+
+1. Find all **United Airlines** (`"UA"`) flights
+2. that were **more than 2 hours late** arriving
+3. and were flying **to Los Angeles** (`"LAX"`)
+
+How many flights match? Which origin airport had the most?
+
+::: {.callout-tip}
+You'll need `filter()` with multiple conditions. Think about which operators you need.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+flights |>
+  filter(carrier == "UA", arr_delay > 120, dest == "LAX")
+
+# Bonus: count by origin
+flights |>
+  filter(carrier == "UA", arr_delay > 120, dest == "LAX") |>
+  count(origin)
+```
+
+---
+
+## Before we move on
+
+📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+
 # arrange() {background-color="#2c3e50"}
 
 ## arrange() reorders rows
@@ -259,6 +296,8 @@ select(flights, year:day)
 select(flights, contains("delay"))
 ```
 
+## Using select helpers
+
 ```{r}
 # All time columns
 select(flights, ends_with("time"))
@@ -279,6 +318,8 @@ Use `-` to remove columns:
 # Remove year column
 select(flights, -year)
 ```
+
+## Exclude columns
 
 ```{r}
 #| eval: false
@@ -395,12 +436,16 @@ mutate(survey,
 
 ## The problem with nested functions
 
+:::: {.columns}
+::: {.column width="50%"}
 What if we want to:
 
 1. Filter to January flights
 2. Select departure time and delay
 3. Arrange by delay
+:::
 
+::: {.column width="50%"}
 Nested approach:
 
 ```{r}
@@ -413,6 +458,8 @@ arrange(
   dep_delay
 )
 ```
+:::
+::::
 
 This is hard to read!
 
@@ -432,13 +479,32 @@ Works, but clutters your environment with objects.
 
 The pipe takes the result of one function and passes it as the first argument to the next:
 
+:::: {.columns}
+::: {.column width="50%"}
 ```{r}
+#| label: pipe-example
+#| eval: false
 # Same result, much cleaner!
 flights |>
   filter(month == 1) |>
   select(dep_time, dep_delay) |>
   arrange(dep_delay)
 ```
+
+:::
+
+::: {.column width="50%"}
+```{r}
+#| echo: false
+# Same result, much cleaner!
+flights |>
+  filter(month == 1) |>
+  select(dep_time, dep_delay) |>
+  arrange(dep_delay)
+```
+
+:::
+::::
 
 ## Reading piped code
 

@@ -1,0 +1,653 @@
+---
+title: "Putting It All Together"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "June 3, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 18"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Looking back {background-color="#2c3e50"}
+
+## The data science workflow
+
+![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png){width="80%"}
+
+. . .
+
+You now have the tools for every part of this workflow.
+
+## What you've learned
+
+**Weeks 1-2: Visualization & Transformation**
+
+- ggplot2: aesthetics, geoms, scales
+- dplyr: filter, select, mutate, arrange, summarize, group_by
+
+. . .
+
+**Weeks 3-4: Tidying & Deep Dive**
+
+- tidyr: pivot_longer, pivot_wider
+- readr: read_csv, parsing
+- Advanced ggplot: layers, facets, themes, design
+
+## What you've learned (continued)
+
+**Weeks 5-6: EDA & Data Types**
+
+- Distributions and relationships
+- Logicals, numbers, strings, factors
+- Scale scoring and reverse coding
+
+. . .
+
+**Weeks 7-8: Combining & Communicating**
+
+- Joins: left, right, inner, full, semi, anti
+- Missing data: detection, handling, imputation awareness
+- Storytelling with data
+
+. . .
+
+**Weeks 9-10: Reproducibility & Polish**
+
+- Quarto: literate programming
+- Practice: debugging, getting help
+
+# Live demonstration {background-color="#2c3e50"}
+
+## A real analysis: Start to finish
+
+Let's analyze a complete psychology dataset together.
+
+**Research question:** Does social media use predict anxiety in college students?
+
+. . .
+
+I'll demonstrate the full workflow:
+
+1. Import messy data
+2. Clean and tidy
+3. Explore with visualizations
+4. Create publication-ready figures
+5. Build a Quarto report
+
+## The dataset
+
+```{r}
+# Simulated college student survey data
+set.seed(2026)
+social_media <- tibble(
+  id = 1:200,
+  age = sample(18:24, 200, replace = TRUE),
+  gender = sample(c("Male", "Female", "Non-binary", "Prefer not to say"),
+                  200, replace = TRUE),
+  hours_social_media = rnorm(200, 4, 2),
+  gad7_total = rnorm(200, 8, 5),  # Generalized Anxiety Disorder scale
+  phq9_total = rnorm(200, 10, 6),  # Depression scale
+  academic_year = sample(c("Freshman", "Sophomore", "Junior", "Senior"),
+                        200, replace = TRUE)
+) |>
+  mutate(
+    # Make anxiety correlate with social media use
+    gad7_total = gad7_total + hours_social_media * 0.8,
+    # Add some missing data
+    hours_social_media = if_else(runif(200) < 0.05, NA_real_, hours_social_media),
+    gad7_total = if_else(runif(200) < 0.08, NA_real_, gad7_total)
+  )
+```
+
+## Step 1: Explore the data
+
+```{r}
+glimpse(social_media)
+```
+
+. . .
+
+```{r}
+# Check for missing data
+social_media |>
+  summarize(across(everything(), ~sum(is.na(.x))))
+```
+
+## Step 2: Clean the data
+
+```{r}
+social_media_clean <- social_media |>
+  # Remove rows with missing outcome
+  drop_na(gad7_total) |>
+  # Create anxiety categories
+  mutate(
+    anxiety_category = case_when(
+      gad7_total < 5 ~ "Minimal",
+      gad7_total < 10 ~ "Mild",
+      gad7_total < 15 ~ "Moderate",
+      gad7_total >= 15 ~ "Severe"
+    ),
+    anxiety_category = factor(anxiety_category,
+                              levels = c("Minimal", "Mild", "Moderate", "Severe")),
+    # Reorder academic year
+    academic_year = factor(academic_year,
+                          levels = c("Freshman", "Sophomore", "Junior", "Senior"))
+  )
+```
+
+## Step 3: Descriptive statistics
+
+```{r}
+social_media_clean |>
+  summarize(
+    n = n(),
+    mean_age = mean(age),
+    mean_hours = mean(hours_social_media, na.rm = TRUE),
+    sd_hours = sd(hours_social_media, na.rm = TRUE),
+    mean_anxiety = mean(gad7_total),
+    sd_anxiety = sd(gad7_total)
+  )
+```
+
+## Step 4: Initial visualization
+
+```{r}
+#| output-location: slide
+ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "Social media use predicts higher anxiety",
+    subtitle = "Self-reported daily hours and GAD-7 scores",
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)"
+  ) +
+  theme_minimal()
+```
+
+## Step 5: Compute correlation
+
+```{r}
+# Clean data for correlation (remove NAs)
+correlation_data <- social_media_clean |>
+  drop_na(hours_social_media, gad7_total)
+
+cor_value <- cor(correlation_data$hours_social_media,
+                 correlation_data$gad7_total)
+
+cor_value
+```
+
+. . .
+
+**Finding:** Moderate positive correlation (r = `r round(cor_value, 2)`)
+
+## Step 6: Explore by gender
+
+```{r}
+#| output-location: slide
+ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = gender)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(
+    title = "Social media-anxiety relationship holds across genders",
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)",
+    color = "Gender"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "top")
+```
+
+## Step 7: Anxiety categories
+
+```{r}
+#| output-location: slide
+social_media_clean |>
+  count(anxiety_category) |>
+  mutate(anxiety_category = fct_rev(anxiety_category)) |>
+  ggplot(aes(x = n, y = anxiety_category, fill = anxiety_category)) +
+  geom_col() +
+  scale_fill_manual(values = c(
+    "Minimal" = "#2ecc71",
+    "Mild" = "#f39c12",
+    "Moderate" = "#e67e22",
+    "Severe" = "#e74c3c"
+  )) +
+  labs(
+    title = "Most students report mild to moderate anxiety",
+    subtitle = "Distribution of GAD-7 severity categories (N = 184)",
+    x = "Number of students",
+    y = NULL
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+## Step 8: Create summary table
+
+```{r}
+summary_table <- social_media_clean |>
+  group_by(anxiety_category) |>
+  summarize(
+    N = n(),
+    Mean_Hours = mean(hours_social_media, na.rm = TRUE),
+    SD_Hours = sd(hours_social_media, na.rm = TRUE),
+    Mean_Age = mean(age),
+    .groups = "drop"
+  )
+
+knitr::kable(summary_table, digits = 1,
+             col.names = c("Anxiety Category", "N", "M Hours", "SD Hours", "M Age"))
+```
+
+## Step 9: Write it up in Quarto
+
+````markdown
+## Results
+
+We analyzed data from `r nrow(social_media_clean)` college students
+(M age = `r round(mean(social_media_clean$age), 1)` years).
+Students reported using social media an average of
+`r round(mean(social_media_clean$hours_social_media, na.rm = TRUE), 1)`
+hours per day (SD = `r round(sd(social_media_clean$hours_social_media, na.rm = TRUE), 1)`).
+
+Social media use was positively correlated with anxiety scores
+(r = `r round(cor_value, 2)`, p < .001), such that students who
+used social media more reported higher anxiety levels.
+
+```{{r}}
+#| echo: false
+#| fig-cap: "Relationship between social media use and anxiety"
+# [Insert scatterplot code]
+```
+````
+
+## What this demonstrates
+
+✅ **Complete workflow** — import to interpretation
+✅ **Data cleaning** — handling missing data, creating factors
+✅ **Multiple visualizations** — exploring from different angles
+✅ **Summary statistics** — both numerical and tabular
+✅ **Inline reporting** — no hard-coded numbers
+✅ **Clear narrative** — telling the story
+
+# Where to go from here {background-color="#2c3e50"}
+
+## You have the foundation
+
+This course covered **data wrangling and visualization** — the foundation of data science.
+
+. . .
+
+What's next?
+
+- **Statistics in R** — inference, hypothesis testing
+- **Advanced R programming** — functions, iteration
+- **Version control** — Git and GitHub
+- **Interactive tools** — Shiny dashboards
+- **Machine learning** — tidymodels framework
+
+## Statistics in R
+
+You can now learn inferential statistics:
+
+```{r}
+#| eval: false
+# t-test
+t.test(gad7_total ~ gender, data = social_media_clean)
+
+# ANOVA
+aov(gad7_total ~ academic_year, data = social_media_clean)
+
+# Regression
+lm(gad7_total ~ hours_social_media + age, data = social_media_clean)
+```
+
+. . .
+
+**Courses to consider:**
+
+- PSY 420: Advanced Statistics
+- STAT 510: Applied Regression
+- Online: [Learning Statistics with R](https://learningstatisticswithr.com/)
+
+## Writing functions
+
+Automate repetitive tasks:
+
+```{r, eval=FALSE}
+# Instead of copying this code multiple times...
+compute_scale_score <- function(data, items) {
+  data |>
+    rowwise() |>
+    mutate(score = mean(c_across(all_of(items)), na.rm = TRUE)) |>
+    ungroup()
+}
+
+# Use it anywhere
+phq9_scored <- compute_scale_score(my_data, c("phq1", "phq2", "phq3"))
+```
+
+## Version control with Git
+
+Track changes to your code over time:
+
+- **Never lose work** — full history of changes
+- **Collaborate easily** — merge changes from multiple people
+- **Professional standard** — expected in industry and academia
+
+. . .
+
+**Resources:**
+
+- [Happy Git with R](https://happygitwithr.com/)
+- [GitHub Learning Lab](https://lab.github.com/)
+
+## Interactive visualizations with Shiny
+
+Create web apps for your data:
+
+```{r}
+#| eval: false
+library(shiny)
+
+ui <- fluidPage(
+  selectInput("condition", "Choose condition:", choices = c("CBT", "Control")),
+  plotOutput("plot")
+)
+
+server <- function(input, output) {
+  output$plot <- renderPlot({
+    data |> filter(condition == input$condition) |> ggplot(...)
+  })
+}
+
+shinyApp(ui, server)
+```
+
+## Machine learning with tidymodels
+
+Predictive modeling with tidy syntax:
+
+```{r}
+#| eval: false
+library(tidymodels)
+
+# Split data
+data_split <- initial_split(social_media_clean)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+
+# Fit model
+lm_fit <- linear_reg() |>
+  fit(gad7_total ~ hours_social_media + age, data = train_data)
+
+# Make predictions
+predict(lm_fit, test_data)
+```
+
+# Learning resources {background-color="#2c3e50"}
+
+## Free online resources
+
+**Books:**
+
+- [R for Data Science (2e)](https://r4ds.hadley.nz/) — your textbook
+- [Learning Statistics with R](https://learningstatisticswithr.com/)
+- [Advanced R](https://adv-r.hadley.nz/)
+- [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+
+. . .
+
+**Interactive learning:**
+
+- [Posit Primers](https://posit.cloud/learn/primers)
+- [R-Bootcamp](https://r-bootcamp.netlify.app/)
+- [swirl](https://swirlstats.com/) — learn R in R
+
+## Community resources
+
+**Weekly challenges:**
+
+- [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) — practice data viz
+- [Advent of Code](https://adventofcode.com/) — programming puzzles
+
+. . .
+
+**Communities:**
+
+- [R-Ladies](https://rladies.org/) — inclusive R community
+- [R for Data Science Slack](https://r4ds.io/join)
+- [Posit Community](https://community.rstudio.com/)
+- Local R user groups (search Meetup.com)
+
+## Keep practicing
+
+**The only way to maintain skills: use them**
+
+. . .
+
+Ideas:
+
+- Analyze data from your own research
+- Replicate figures from published papers
+- Join #TidyTuesday
+- Help friends/labmates with their data
+- Create a personal website with Quarto
+- Build a data visualization portfolio
+
+. . .
+
+::: {.callout-tip}
+Aim for 1 hour per week — consistency matters more than intensity
+:::
+
+# Final reflections {background-color="#2c3e50"}
+
+## What makes a good data scientist?
+
+It's not about knowing every function or memorizing syntax.
+
+. . .
+
+**Good data scientists:**
+
+1. **Ask good questions** — what story is the data telling?
+2. **Stay curious** — always learning new tools and techniques
+3. **Communicate clearly** — make complex findings accessible
+4. **Work reproducibly** — others can verify and build on your work
+5. **Think critically** — question assumptions, check for bias
+6. **Persist through errors** — debugging is part of the job
+
+. . .
+
+You've developed all of these skills this quarter.
+
+## The growth mindset
+
+Ten weeks ago, many of you had never written a line of code.
+
+. . .
+
+Now you can:
+
+- Import and clean messy data
+- Create publication-quality visualizations
+- Wrangle complex datasets with joins and pivots
+- Handle missing data appropriately
+- Build reproducible reports
+
+. . .
+
+**That's incredible growth.**
+
+## Errors are part of the process
+
+Remember:
+
+- Everyone gets errors — even experienced programmers
+- Errors mean you're learning
+- Each error you solve makes you better
+- The frustration is temporary; the skills are permanent
+
+. . .
+
+::: {.callout-important}
+If you take one thing from this course: **You can learn hard things.**
+:::
+
+## Thank you
+
+**Thank you for:**
+
+- Showing up and participating
+- Helping each other
+- Asking questions
+- Persisting through challenges
+- Trusting the process
+
+. . .
+
+You've been a great class. I'm excited to see what you do with these skills.
+
+# Final project presentations {background-color="#2c3e50"}
+
+## Presentation guidelines
+
+**Format:** 5 minutes per person
+
+**What to include:**
+
+1. Research question (1 min)
+2. Dataset description (1 min)
+3. Key finding with visualization (2 min)
+4. Implications/what you learned (1 min)
+
+. . .
+
+**Tips:**
+
+- Show 1-2 of your best figures
+- Focus on the story, not technical details
+- Practice timing!
+
+## Presentation order
+
+We'll go alphabetically by last name.
+
+. . .
+
+**Remember:**
+
+- This is a supportive environment
+- Everyone is nervous — that's normal
+- We want to hear about your work
+- Questions are signs of interest, not criticism
+
+# Course evaluations {background-color="#2c3e50"}
+
+## Please fill out course evaluations
+
+Your feedback helps me improve the course for future students.
+
+. . .
+
+**What's helpful:**
+
+- Specific examples (this assignment, that lecture)
+- Constructive suggestions
+- What worked well (so I keep doing it)
+- What didn't work (so I can change it)
+
+. . .
+
+**I read every evaluation carefully.**
+
+# Final words {background-color="#2c3e50"}
+
+## Keep learning
+
+The field of data science is constantly evolving:
+
+- New packages are released every day
+- Best practices change
+- Tools improve
+
+. . .
+
+**Stay curious. Stay connected. Keep coding.**
+
+## You're now a data scientist
+
+You have the skills to:
+
+- Answer questions with data
+- Create compelling visualizations
+- Conduct reproducible research
+- Teach yourself new tools
+
+. . .
+
+**Use them.**
+
+Make psychology more reproducible, transparent, and data-driven.
+
+## Final final words
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 5
+tibble(
+  x = seq(0, 10, 0.1),
+  y = log(x + 1) * 2
+) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_line(color = "steelblue", size = 2) +
+  annotate("text", x = 5, y = 4,
+           label = "Your learning journey continues...",
+           size = 6, color = "steelblue") +
+  labs(
+    x = "Time",
+    y = "Skills"
+  ) +
+  theme_minimal() +
+  theme(
+    axis.text = element_blank(),
+    axis.ticks = element_blank(),
+    panel.grid = element_blank()
+  )
+```
+
+## Thank you! {background-color="#2c3e50"}
+
+Good luck with your final projects and future data science adventures!
+
+**Stay in touch:**
+
+- {{< var instructor.email >}}
+- Office hours (through finals week)
+
+. . .
+
+**Now let's see your final projects!** 🎉

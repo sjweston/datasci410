@@ -138,6 +138,7 @@ flights |>
   )
 ```
 
+
 ## The .groups argument
 
 You may see this message:
@@ -172,7 +173,12 @@ data |>
     sd_score = sd(score, na.rm = TRUE),
     n = n()
   )
+```
 
+## Group by for psychology
+
+```{r}
+#| eval: false
 # Descriptives by condition AND gender
 data |>
   group_by(condition, gender) |>
@@ -185,6 +191,8 @@ data |>
 ## Multiple summaries at once
 
 ```{r}
+#| label: test
+#| eval: false
 flights |>
   group_by(carrier) |>
   summarize(
@@ -195,10 +203,46 @@ flights |>
     sd_delay = sd(arr_delay, na.rm = TRUE),
     # Counts
     n_flights = n(),
-    n_destinations = n_distinct(dest)
+    n_dest = n_distinct(dest)
   ) |>
   arrange(mean_delay)  # Best to worst carriers
 ```
+
+## Multiple summaries at once
+
+```{r}
+#| ref.label: test
+#| echo: false
+```
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: 10 minutes
+
+With a partner, using the `flights` dataset:
+
+1. Calculate the **average departure delay** for each carrier
+2. Which airline has the **worst** average delay?
+3. **Bonus:** Also calculate the number of flights per carrier. Does the worst airline just have fewer flights?
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+flights |>
+  group_by(carrier) |>
+  summarize(
+    avg_delay = mean(dep_delay, na.rm = TRUE),
+    n_flights = n()
+  ) |>
+  arrange(desc(avg_delay))
+```
+
+---
+
+## Before we move on
+
+📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
 # count() — a shortcut {background-color="#2c3e50"}
 
@@ -230,7 +274,6 @@ flights |>
 ## Adding weights
 
 ```{r}
-#| eval: false
 # Total distance flown by each carrier
 flights |>
   count(carrier, wt = distance, name = "total_miles")
@@ -256,6 +299,8 @@ data |>
 ## A complete analysis pipeline
 
 ```{r}
+#| label: complete
+#| eval: false
 # Which airlines were most delayed in summer?
 flights |>
   filter(month %in% c(6, 7, 8)) |>    # Summer months only
@@ -268,6 +313,13 @@ flights |>
   ) |>
   filter(n_flights > 1000) |>          # Only airlines with many flights
   arrange(desc(avg_delay))             # Worst first
+```
+
+## A complete analysis pipeline
+
+```{r}
+#| ref.label: complete
+#| echo: false
 ```
 
 ## Piping into ggplot
@@ -295,6 +347,8 @@ flights |>
 `group_by()` also affects `mutate()` and `filter()`:
 
 ```{r}
+#| label: mix-group-mutate
+#| eval: false
 # Add a column for mean delay PER CARRIER
 flights |>
   group_by(carrier) |>
@@ -303,6 +357,16 @@ flights |>
     delay_vs_carrier = arr_delay - carrier_mean_delay
   ) |>
   select(carrier, arr_delay, carrier_mean_delay, delay_vs_carrier)
+```
+
+## group_by() with mutate()
+
+`group_by()` also affects `mutate()` and `filter()`:
+
+```{r}
+#| ref.label: mix-group-mutate
+#| echo: false
+
 ```
 
 ## Filtering within groups
@@ -438,12 +502,14 @@ experiment <- tibble(
 ## Examine the data
 
 ```{r}
-glimpse(experiment)
+experiment
 ```
 
 ## Participant-level summaries
 
 ```{r}
+#| label: part-sum
+#| eval: false
 # First, summarize BY PARTICIPANT
 participant_summaries <- experiment |>
   group_by(participant_id, condition) |>
@@ -455,6 +521,13 @@ participant_summaries <- experiment |>
   )
 
 participant_summaries
+```
+
+## Participant-level summaries
+
+```{r}
+#| ref.label: part-sum
+#| echo: false
 ```
 
 ## Condition-level summaries
@@ -493,14 +566,29 @@ participant_summaries |>
   theme(legend.position = "none")
 ```
 
-## Your turn!
+## Get a head start: Assignment 2
 
-Using the `experiment` data:
+Using the `experiment` data we just created:
 
 1. Filter to only accurate trials (`accuracy == 1`)
-2. Calculate mean RT per participant per condition
-3. Find the 5 participants with the fastest mean RT in each condition
-4. Create a bar plot showing mean RT by condition with error bars
+2. Calculate mean RT **per participant** per condition
+3. Find the 5 participants with the **fastest** mean RT in each condition
+
+::: {.callout-tip}
+This uses everything from today — `filter()`, `group_by()`, `summarize()`, and `slice_min()`. Work through it step by step.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution (reveal after time is up)
+experiment |>
+  filter(accuracy == 1) |>
+  group_by(participant_id, condition) |>
+  summarize(mean_rt = mean(reaction_time), .groups = "drop") |>
+  group_by(condition) |>
+  slice_min(mean_rt, n = 5)
+```
 
 # Wrapping up {background-color="#2c3e50"}
 

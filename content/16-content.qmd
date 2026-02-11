@@ -1,0 +1,85 @@
+---
+title: "16: Quarto"
+date: "2026-05-27"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 28: Quarto](https://r4ds.hadley.nz/quarto)
+
+## During class
+
+We'll cover:
+
+- What is literate programming? Code + narrative in one document
+- Why reproducibility matters
+- Quarto basics: YAML header, Markdown text, code chunks
+- Code chunk options: `echo`, `eval`, `include`, `message`, `warning`
+- Figure options: `fig-width`, `fig-height`, `fig-cap`
+- Inline code — embedding results in text (never hard-code statistics!)
+- Output formats: HTML, PDF, Word
+- Tables with `knitr::kable()`
+
+::: {.callout-tip}
+## Assignment 8 is assigned today
+[Assignment 8: Reproducible Report](/assignment/08-assignment.qmd) — due before Session 17.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/16-quarto.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/16-quarto.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/16-quarto.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Create a new Quarto document (`.qmd`). Add a title, your name, and today's date in the YAML header
+2. Write a short introduction in Markdown — use headers, bold, italic, and a bulleted list
+3. Add a code chunk that loads a dataset and creates a plot. Try `#| echo: false` to hide the code
+4. Use inline code to report a summary statistic in a sentence (e.g., "The mean age was `` `r knitr::inline_expr("mean(data$age)")` ``")
+5. Render your document to HTML. Then try PDF (you may need to install `tinytex`)
+
+::: {.callout-note}
+## The golden rule of reproducibility
+
+**Never hard-code a number in your text.** If your data changes, your text should update automatically.
+
+Instead of:
+> "The mean score was 4.2."
+
+Write:
+> "The mean score was `` `r knitr::inline_expr("round(mean(data$score, na.rm = TRUE), 1)")` ``."
+
+This way, if you add more data or fix an error, everything stays in sync.
+:::
+
+### Useful chunk options
+
+```r
+#| label: fig-results
+#| echo: false
+#| fig-cap: "Mean anxiety scores by condition"
+#| fig-width: 8
+#| fig-height: 5
+
+ggplot(data, aes(x = condition, y = anxiety)) +
+  stat_summary(fun = mean, geom = "bar") +
+  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2)
+```

@@ -1,0 +1,661 @@
+---
+title: "Strings & Factors"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "May 6, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 12"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+```
+
+# Strings: The basics {background-color="#2c3e50"}
+
+## What are strings?
+
+**Strings** are text data — anything in quotes:
+
+```{r}
+participant_name <- "Jane Doe"
+diagnosis <- "Major Depressive Disorder"
+feedback <- "The task was confusing"
+```
+
+. . .
+
+In R, the `stringr` package (part of tidyverse) provides tools for working with strings.
+
+All `stringr` functions start with `str_`.
+
+## Creating and combining strings
+
+```{r}
+first <- "Jane"
+last <- "Doe"
+
+# Combine strings
+str_c(first, last)           # No space
+str_c(first, last, sep = " ")  # With space
+```
+
+. . .
+
+```{r}
+# Combine with other text
+str_c("Participant: ", first, " ", last)
+
+# Glue is even easier (from the glue package)
+library(glue)
+glue("Participant: {first} {last}")
+```
+
+## String length
+
+```{r}
+responses <- c("Yes", "No", "Maybe", "I don't know")
+
+str_length(responses)
+```
+
+. . .
+
+Useful for checking free-response data quality:
+
+```{r}
+# Flag very short responses
+tibble(responses) |>
+  mutate(too_short = str_length(responses) < 3)
+```
+
+## Changing case
+
+```{r}
+messy_data <- c("MALE", "Female", "male", "FEMALE", "Male")
+
+str_to_lower(messy_data)
+str_to_upper(messy_data)
+str_to_title(messy_data)
+```
+
+. . .
+
+Essential for cleaning demographic data!
+
+## Trimming whitespace
+
+Survey data often has extra spaces:
+
+```{r}
+messy_responses <- c("  Yes", "No  ", "  Maybe  ")
+
+str_trim(messy_responses)         # Remove leading/trailing
+str_squish(messy_responses)       # Also reduce internal spaces
+```
+
+## Psychology example: Cleaning demographics
+
+```{r}
+survey <- tibble(
+  gender = c("  Female", "MALE  ", "female", "Male", "  non-binary")
+)
+
+survey |>
+  mutate(
+    gender_clean = str_to_lower(str_trim(gender))
+  )
+```
+
+## Detecting patterns
+
+`str_detect()` checks if a pattern is present:
+
+```{r}
+feedback <- c(
+  "The task was clear",
+  "I found it confusing",
+  "Very clear instructions",
+  "Somewhat confusing"
+)
+
+str_detect(feedback, "clear")
+```
+
+. . .
+
+Use in `filter()`:
+
+```{r}
+tibble(feedback) |>
+  filter(str_detect(feedback, "clear"))
+```
+
+## Case-insensitive detection
+
+Patterns are case-sensitive by default:
+
+```{r}
+str_detect("Clear instructions", "clear")  # FALSE
+```
+
+. . .
+
+Make them case-insensitive with `regex(ignore_case = TRUE)`:
+
+```{r}
+str_detect("Clear instructions", regex("clear", ignore_case = TRUE))
+```
+
+## Replacing text
+
+```{r}
+responses <- c("Strongly Disagree", "Disagree", "Strongly Agree", "Agree")
+
+# Replace first match
+str_replace(responses, "Strongly ", "Very ")
+
+# Replace all matches
+str_replace_all(responses, "Strongly ", "Very ")
+```
+
+## Multiple replacements
+
+```{r}
+diagnosis <- c("MDD", "GAD", "MDD", "OCD", "GAD")
+
+# Replace multiple patterns at once
+str_replace_all(diagnosis, c(
+  "MDD" = "Major Depressive Disorder",
+  "GAD" = "Generalized Anxiety Disorder",
+  "OCD" = "Obsessive-Compulsive Disorder"
+))
+```
+
+## Extracting parts of strings
+
+```{r}
+participant_ids <- c("PSY001", "PSY002", "PSY010", "PSY123")
+
+# Extract substring by position
+str_sub(participant_ids, start = 4)  # Get everything after position 3
+```
+
+. . .
+
+```{r}
+# Extract numbers
+str_extract(participant_ids, "\\d+")  # \d+ means "one or more digits"
+```
+
+## When you need more: Regular expressions
+
+**Regular expressions (regex)** are powerful pattern matching tools.
+
+. . .
+
+Examples:
+
+- `\\d` matches digits
+- `\\s` matches whitespace
+- `.` matches any character
+- `+` means "one or more"
+- `*` means "zero or more"
+
+. . .
+
+::: {.callout-note}
+Regex is powerful but complex. For this course, stick to simple patterns. When you need more, check [R4DS Ch 14](https://r4ds.hadley.nz/strings) or [regex101.com](https://regex101.com).
+:::
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Clean text data
+
+You have messy survey responses:
+
+```{r}
+messy_survey <- tibble(
+  id = 1:5,
+  gender = c("  FEMALE", "male  ", "Female", "MALE", "non-binary  "),
+  comment = c(
+    "Great study!",
+    "too long",
+    "  Very interesting  ",
+    "CONFUSING INSTRUCTIONS",
+    "I enjoyed this"
+  )
+)
+```
+
+1. Clean `gender` to lowercase with no extra spaces
+2. Clean `comment` to title case with no extra spaces
+3. Create a logical column `is_negative` that is TRUE if the comment contains "long" or "confusing" (case-insensitive)
+4. Filter to only negative comments
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+messy_survey |>
+  mutate(
+    gender_clean = str_to_lower(str_trim(gender)),
+    comment_clean = str_to_title(str_trim(comment)),
+    is_negative = str_detect(
+      comment,
+      regex("long|confusing", ignore_case = TRUE)
+    )
+  ) |>
+  filter(is_negative)
+```
+
+# Factors {background-color="#2c3e50"}
+
+## What are factors?
+
+**Factors** are R's way of representing categorical data with a fixed set of possible values.
+
+. . .
+
+```{r}
+# A character vector
+gender_char <- c("Male", "Female", "Female", "Male")
+
+# A factor
+gender_fct <- factor(gender_char)
+gender_fct
+```
+
+. . .
+
+Notice the **Levels** line — those are the possible categories.
+
+## Why use factors?
+
+1. **Memory efficient** — R stores categories once, not repeatedly
+2. **Prevent typos** — Can't accidentally add invalid categories
+3. **Control order** — Specify the order for plots and tables
+4. **Model requirements** — Many statistical models require factors
+
+## Creating factors
+
+```{r}
+condition <- c("Control", "Treatment", "Treatment", "Control")
+
+# Let R choose levels (alphabetical)
+factor(condition)
+```
+
+. . .
+
+```{r}
+# Specify levels explicitly
+factor(condition, levels = c("Control", "Treatment"))
+```
+
+## Order matters!
+
+```{r}
+likert <- c("Agree", "Disagree", "Strongly Agree", "Agree", "Strongly Disagree")
+
+# Alphabetical order (default)
+factor(likert)
+```
+
+. . .
+
+```{r}
+# Logical order
+factor(likert, levels = c(
+  "Strongly Disagree", "Disagree", "Agree", "Strongly Agree"
+))
+```
+
+## Why order matters: Example
+
+```{r}
+#| output-location: slide
+survey_data <- tibble(
+  response = c("Agree", "Disagree", "Strongly Agree", "Agree",
+               "Strongly Disagree", "Agree", "Disagree")
+)
+
+# Without factor ordering
+ggplot(survey_data, aes(x = response)) +
+  geom_bar() +
+  labs(title = "Alphabetical order (confusing!)") +
+  theme_minimal()
+```
+
+## Fixed with factor ordering
+
+```{r}
+#| output-location: slide
+survey_data <- survey_data |>
+  mutate(
+    response = factor(response, levels = c(
+      "Strongly Disagree", "Disagree", "Agree", "Strongly Agree"
+    ))
+  )
+
+ggplot(survey_data, aes(x = response)) +
+  geom_bar() +
+  labs(title = "Logical order (much better!)") +
+  theme_minimal()
+```
+
+## Forcats: Factor tools
+
+The `forcats` package (part of tidyverse) provides functions for working with factors.
+
+All `forcats` functions start with `fct_`.
+
+Key functions:
+
+- `fct_relevel()` — manually reorder levels
+- `fct_reorder()` — reorder by another variable
+- `fct_infreq()` — order by frequency
+- `fct_recode()` — rename levels
+- `fct_collapse()` — combine levels
+
+## fct_relevel(): Manual reordering
+
+```{r}
+education <- factor(c("High School", "Bachelor's", "Master's", "High School"))
+education
+```
+
+. . .
+
+```{r}
+# Put in logical order
+fct_relevel(education, "High School", "Bachelor's", "Master's")
+```
+
+## fct_reorder(): Order by another variable
+
+Extremely useful for plots!
+
+```{r}
+therapy <- tibble(
+  condition = c("CBT", "Control", "Mindfulness", "Medication"),
+  mean_improvement = c(12, 3, 8, 10)
+)
+
+therapy |>
+  mutate(condition = fct_reorder(condition, mean_improvement))
+```
+
+## fct_reorder() in action
+
+```{r}
+#| output-location: slide
+therapy |>
+  mutate(condition = fct_reorder(condition, mean_improvement)) |>
+  ggplot(aes(x = mean_improvement, y = condition)) +
+  geom_col() +
+  labs(
+    title = "Treatment effectiveness (ordered by improvement)",
+    x = "Mean improvement",
+    y = "Treatment condition"
+  ) +
+  theme_minimal()
+```
+
+## fct_infreq(): Order by frequency
+
+```{r}
+diagnosis <- c("Depression", "Anxiety", "Depression", "Other",
+               "Depression", "Anxiety", "Anxiety", "Depression")
+
+# Order from most to least common
+fct_infreq(factor(diagnosis))
+```
+
+## fct_infreq() in plots
+
+```{r}
+#| output-location: slide
+tibble(diagnosis = factor(diagnosis)) |>
+  mutate(diagnosis = fct_infreq(diagnosis)) |>
+  ggplot(aes(y = diagnosis)) +  # Note: y instead of x to read easily
+  geom_bar() +
+  labs(
+    title = "Most common diagnoses first",
+    x = "Count",
+    y = "Diagnosis"
+  ) +
+  theme_minimal()
+```
+
+## fct_recode(): Rename levels
+
+```{r}
+gender <- factor(c("M", "F", "F", "M", "NB"))
+
+fct_recode(gender,
+  "Male" = "M",
+  "Female" = "F",
+  "Non-binary" = "NB"
+)
+```
+
+## fct_collapse(): Combine levels
+
+Useful for grouping rare categories:
+
+```{r}
+diagnosis <- factor(c("MDD", "GAD", "OCD", "PTSD", "Panic Disorder",
+                      "MDD", "GAD", "Social Anxiety"))
+
+fct_collapse(diagnosis,
+  Depression = "MDD",
+  Anxiety = c("GAD", "OCD", "PTSD", "Panic Disorder", "Social Anxiety")
+)
+```
+
+## Psychology example: Recoding demographics
+
+```{r}
+demo_data <- tibble(
+  age_group = c("18-25", "26-35", "18-25", "36-45", "26-35", "46+"),
+  education = c("HS", "BA", "BA", "MA", "HS", "PhD")
+)
+
+demo_data |>
+  mutate(
+    # Order age groups logically
+    age_group = factor(age_group, levels = c("18-25", "26-35", "36-45", "46+")),
+
+    # Expand education codes
+    education = fct_recode(factor(education),
+      "High School" = "HS",
+      "Bachelor's" = "BA",
+      "Master's" = "MA",
+      "Doctorate" = "PhD"
+    )
+  )
+```
+
+## Dropping unused levels
+
+After filtering, factors keep old levels:
+
+```{r}
+all_diagnoses <- factor(c("Depression", "Anxiety", "Other"))
+just_depression <- all_diagnoses[all_diagnoses == "Depression"]
+just_depression
+```
+
+. . .
+
+Use `fct_drop()` to remove them:
+
+```{r}
+fct_drop(just_depression)
+```
+
+## Common factor issues
+
+**Problem 1:** Factors created from numbers
+
+```{r}
+age_factor <- factor(c(25, 30, 25, 40))
+mean(age_factor)  # Error! It's not numeric anymore
+```
+
+. . .
+
+**Solution:** Convert back to numeric carefully:
+
+```{r}
+as.numeric(as.character(age_factor))  # Correct way
+```
+
+## Common factor issues
+
+**Problem 2:** Factors behave differently than strings
+
+```{r}
+colors <- factor(c("red", "blue"))
+
+# Can't just add new values
+colors[3] <- "green"  # This creates NA!
+colors
+```
+
+. . .
+
+**Solution:** Convert to character first, or use `fct_expand()` to add levels.
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+## Practice: Clean and visualize survey data
+
+You have messy Likert scale data:
+
+```{r}
+likert_data <- tibble(
+  question = rep(c("Q1", "Q2", "Q3"), each = 10),
+  response = sample(c("strongly agree", "Agree", "NEUTRAL",
+                      "disagree", "Strongly Disagree"), 30, replace = TRUE)
+)
+```
+
+1. Clean the `response` variable to title case
+2. Convert `response` to a factor with logical ordering
+3. Create a bar chart showing response counts for each question
+4. Use `facet_wrap()` to make separate panels for each question
+5. Bonus: Use `fct_infreq()` to order responses by overall frequency
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+likert_data_clean <- likert_data |>
+  mutate(
+    # Clean to title case
+    response = str_to_title(response),
+
+    # Convert to factor with logical order
+    response = factor(response, levels = c(
+      "Strongly Disagree", "Disagree", "Neutral", "Agree", "Strongly Agree"
+    ))
+  )
+
+# Basic plot
+ggplot(likert_data_clean, aes(x = response)) +
+  geom_bar() +
+  facet_wrap(~question) +
+  labs(
+    title = "Survey responses by question",
+    x = "Response",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Bonus: order by frequency
+likert_data_clean |>
+  mutate(response = fct_infreq(response)) |>
+  ggplot(aes(x = response)) +
+  geom_bar() +
+  facet_wrap(~question) +
+  labs(
+    title = "Survey responses (ordered by frequency)",
+    x = "Response",
+    y = "Count"
+  ) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## String functions cheat sheet
+
+| Function | Purpose |
+|----------|---------|
+| `str_c()` | Combine strings |
+| `str_length()` | Get string length |
+| `str_to_lower()`, `str_to_upper()` | Change case |
+| `str_trim()`, `str_squish()` | Remove whitespace |
+| `str_detect()` | Find pattern |
+| `str_replace()`, `str_replace_all()` | Replace pattern |
+| `str_sub()` | Extract substring |
+
+## Factor functions cheat sheet
+
+| Function | Purpose |
+|----------|---------|
+| `factor()` | Create a factor |
+| `fct_relevel()` | Manually reorder levels |
+| `fct_reorder()` | Order by another variable |
+| `fct_infreq()` | Order by frequency |
+| `fct_recode()` | Rename levels |
+| `fct_collapse()` | Combine levels |
+| `fct_drop()` | Remove unused levels |
+
+## Key takeaways
+
+1. **Strings** are text — use `stringr::str_*()` functions to manipulate
+2. **Always clean string data** — case, whitespace, typos
+3. **Factors** are categorical data with fixed levels
+4. **Factor order matters** for plots and tables
+5. **Use forcats** (`fct_*()`) to manipulate factors
+6. **Order factors logically** — not alphabetically
+7. When in doubt, **check the data type** with `class()` or `glimpse()`
+
+## Before next class
+
+📖 **Read:**
+
+- R4DS Ch 19: Joins
+
+✅ **Do:**
+
+- Submit Assignment 6
+- Check your final project data for string/factor issues
+- Practice cleaning demographic variables
+
+## Questions?
+
+See you Monday for joins!

@@ -1,0 +1,85 @@
+---
+title: "14: Missing Data"
+date: "2026-05-13"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
+
+## During class
+
+We'll cover:
+
+- Why missing data matters in psychology — attrition, non-response, skip patterns
+- Explicit vs. implicit missing values
+- Counting and exploring missingness patterns
+- `drop_na()` — complete case analysis (listwise deletion)
+- `replace_na()` — filling in known values
+- `fill()` — carrying values forward/backward
+- `complete()` — making implicit missing values explicit
+- When **not** to fill — don't make up data!
+- Brief mention: multiple imputation exists (beyond this course)
+
+::: {.callout-tip}
+## Assignment 7 is assigned today
+[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — due before Session 15.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/14-missing-data.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/14-missing-data.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/14-missing-data.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Count the number of `NA`s in each column of a dataset using `summarize(across(everything(), ~sum(is.na(.x))))`
+2. Use `drop_na()` on a specific column vs. the whole dataset — what's the difference in rows lost?
+3. Try `replace_na()` to fill missing values with a sensible default (e.g., 0 for "no response")
+4. Use `complete()` to make implicit missing values explicit in a longitudinal dataset
+5. Think critically: when is it okay to drop missing data? When is it dangerous?
+
+::: {.callout-note}
+## Missing data is information
+
+Missing values aren't just annoying — they can tell you something. Before dropping or filling `NA`s, ask:
+
+- **Why** is this value missing? (Didn't answer? Wasn't asked? Data entry error?)
+- **Is the missingness random?** If participants who dropped out were systematically different, dropping them biases your results
+- **How much is missing?** A few values vs. 40% of a column require different strategies
+
+Document your decisions about missing data — your future self (and reviewers) will thank you.
+:::
+
+### Counting missing values
+
+```r
+# Quick summary of missingness across all columns
+data |>
+  summarize(
+    across(everything(), ~sum(is.na(.x)))
+  ) |>
+  pivot_longer(everything(),
+    names_to = "variable",
+    values_to = "n_missing"
+  ) |>
+  arrange(desc(n_missing))
+```

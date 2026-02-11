@@ -1,0 +1,99 @@
+---
+title: "17: Practice & Review"
+date: "2026-06-01"
+---
+
+## Before class
+
+📖 **Reading:**
+
+- [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)
+
+::: {.callout-important}
+## Assignment 8 is due today
+[Assignment 8: Reproducible Report](/assignment/08-assignment.qmd) — submit before class.
+:::
+
+## During class
+
+We'll cover:
+
+- Guided practice: a complete workflow from import to polished figure
+  - Import a messy dataset
+  - Clean and tidy
+  - Explore and visualize
+  - Create a polished figure
+  - Document in Quarto
+- Common errors and how to read them
+  - "Object not found"
+  - "Could not find function"
+  - "Unexpected symbol"
+  - "Non-numeric argument to binary operator"
+- Debugging strategies
+  - Read the error message (really read it)
+  - Run code line by line
+  - Google the error — everyone does this
+  - Minimal reproducible examples
+- Getting help effectively
+- Q&A for final projects
+
+### Slides
+
+```{=html}
+<a href="/slides/17-practice-review.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/17-practice-review.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/17-practice-review.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Pick a dataset you haven't worked with before. Walk through the full workflow: import, glimpse, tidy, explore, visualize
+2. Intentionally break your code in 3 different ways. Practice reading the error messages
+3. Create a minimal reproducible example (reprex) for a problem you've encountered
+4. Spend time polishing your final project — this is your last chance to ask questions!
+
+::: {.callout-note}
+## The debugging checklist
+
+When your code doesn't work, go through this list:
+
+1. **Read the error message** — it usually tells you exactly what's wrong
+2. **Check spelling and capitalization** — R is case-sensitive
+3. **Check your parentheses and pipes** — missing `)` or `|>` breaks everything
+4. **Did you load the package?** — `library(tidyverse)` needs to run first
+5. **Run code line by line** — find where it breaks
+6. **Google the error** — someone has had this exact problem before
+7. **Ask for help** — but bring a reprex!
+:::
+
+### How to ask a good question
+
+```r
+# A good question includes:
+# 1. What you're trying to do
+# 2. What you expected to happen
+# 3. What actually happened (the error message)
+# 4. A minimal example that reproduces the problem
+
+# Example reprex:
+library(tidyverse)
+data <- tibble(x = c(1, 2, "three"))
+mean(data$x)
+# Error: argument is not numeric or logical
+
+# Question: "I'm trying to calculate the mean of a column,
+# but one value is text. How do I handle this?"
+```

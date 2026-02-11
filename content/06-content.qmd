@@ -1,0 +1,81 @@
+---
+title: "6: Data Import"
+date: "2026-04-15"
+---
+
+## Before class
+
+📖 **Readings:**
+
+- [R4DS Ch 7: Data import](https://r4ds.hadley.nz/data-import)
+- [R4DS Ch 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets)
+
+## During class
+
+We'll cover:
+
+- The data science workflow: where import fits in
+- `read_csv()` — reading CSV files and handling common problems
+- Column types and how to fix them when R guesses wrong
+- Missing value codes (`-999`, `"N/A"`, etc.)
+- `readxl::read_excel()` — working with Excel files
+- A quick look at SPSS files with `haven::read_sav()`
+- Practical tips for importing Qualtrics exports
+
+::: {.callout-tip}
+## Assignment 3 is assigned today
+[Assignment 3: Tidying & Import](/assignment/03-assignment.qmd) — due before Session 7.
+:::
+
+### Slides
+
+```{=html}
+<a href="/slides/06-data-import.html" target="_blank" class="btn btn-primary">
+  <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
+</a>
+<a href="/slides/06-data-import.pdf" class="btn btn-secondary">
+  <i class="fa-solid fa-file-pdf"></i> Download PDF
+</a>
+```
+
+### Embedded slides
+
+```{=html}
+<div class="ratio ratio-16x9">
+  <iframe src="/slides/06-data-import.html"></iframe>
+</div>
+```
+
+## After class
+
+✅ **Practice:**
+
+1. Find a CSV file on your computer (or download one) and import it with `read_csv()`. Run `glimpse()` — do the types look right?
+2. Check `problems()` after importing. Does it flag anything?
+3. Try reading the messy CSV we created in class. Clean up the column names and missing values.
+4. If you have an Excel file handy, try `read_excel()`. What happens with multiple sheets?
+
+::: {.callout-note}
+## Qualtrics import cheat sheet
+
+Most Qualtrics CSV exports have two extra description rows after the header. The standard fix:
+
+```r
+qualtrics_data <- read_csv("my_export.csv",
+  skip = 2,
+  na = c("", "N/A", "-999")
+)
+```
+
+Always `glimpse()` right after — Qualtrics column names are ugly but fixable with `rename()`.
+:::
+
+### Package check
+
+If you haven't already, make sure `readxl` is installed:
+
+```r
+install.packages("readxl")
+```
+
+It's not part of tidyverse, but it is part of the broader tidyverse ecosystem — `library(tidyverse)` does *not* load it automatically.

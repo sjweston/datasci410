@@ -1,0 +1,73 @@
+---
+title: "Milestone 1: Proposal"
+date: "2026-04-29"
+---
+
+::: {.callout-note}
+## Milestone Details
+**Due:** Wednesday, April 29 before class (Session 10)
+**Submit:** PDF or Word document on Canvas
+**Points:** 10
+:::
+
+## Overview
+
+The proposal is a short document that tells me what you plan to do for your final project. The goal is to make sure you have a viable dataset and clear questions *before* you invest hours of work. I'll give you feedback within a few days so you can adjust if needed.
+
+## What to submit
+
+Your proposal should be **1-2 pages** and include the following sections:
+
+### 1. Dataset description
+
+- What is the dataset? Where does it come from?
+- How many observations and variables does it have?
+- What do the key variables represent?
+- Include a link to the dataset source or a description of how you obtained it
+
+### 2. Research questions
+
+Write **2-3 research questions** that you plan to explore through visualization. These don't need to be formal hypotheses — they're the questions that will guide your exploration.
+
+Good research questions are:
+
+- **Specific** enough to answer with the data you have
+- **Visual** — they suggest a plot or comparison
+- **Interesting** — they have a "so what?" answer
+
+::: {.callout-tip}
+## Examples of good research questions
+
+- "Do anxiety levels differ by gender and age group?"
+- "Is there a relationship between social media use and well-being, and does it depend on the type of platform?"
+- "How do response times change across experimental conditions and trial blocks?"
+:::
+
+### 3. Visualization plan
+
+For each research question, briefly describe what type of plot you think would be appropriate:
+
+- What variables will be on each axis?
+- What geom(s) might you use?
+- Will you need to facet or use color to show groups?
+
+This doesn't need to be final — it's a starting plan that will evolve.
+
+### 4. Justification
+
+Write **1 paragraph** explaining why this dataset and these questions are interesting to you. What do you hope to learn? How does it connect to psychology?
+
+## How this will be graded
+
+| Component | Points |
+|-----------|--------|
+| Dataset description (clear, complete, viable) | 3 |
+| Research questions (specific, visual, interesting) | 3 |
+| Visualization plan (reasonable match of plot type to question) | 2 |
+| Justification (thoughtful, shows genuine interest) | 2 |
+| **Total** | **10** |
+
+::: {.callout-important}
+## I need to approve your dataset
+If your dataset has issues (too small, too messy, not enough variables), I'll let you know and we'll find a solution together. That's the whole point of this milestone — getting feedback early.
+:::
