@@ -219,14 +219,17 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">Format</a></li>
+  <li><a href="#format" id="toc-format" class="nav-link" data-scroll-target="#format">Format</a>
+  <ul class="collapse">
+  <li><a href="#how-to-record" id="toc-how-to-record" class="nav-link" data-scroll-target="#how-to-record">How to record</a></li>
+  </ul></li>
   <li><a href="#what-to-cover" id="toc-what-to-cover" class="nav-link" data-scroll-target="#what-to-cover">What to cover</a>
   <ul class="collapse">
   <li><a href="#the-setup-about-1-minute" id="toc-the-setup-about-1-minute" class="nav-link" data-scroll-target="#the-setup-about-1-minute">1. The setup (about 1 minute)</a></li>
   <li><a href="#your-key-findings-about-3-minutes" id="toc-your-key-findings-about-3-minutes" class="nav-link" data-scroll-target="#your-key-findings-about-3-minutes">2. Your key findings (about 3 minutes)</a></li>
   <li><a href="#one-reflection-about-1-minute" id="toc-one-reflection-about-1-minute" class="nav-link" data-scroll-target="#one-reflection-about-1-minute">3. One reflection (about 1 minute)</a></li>
   </ul></li>
-  <li><a href="#tips-for-a-great-presentation" id="toc-tips-for-a-great-presentation" class="nav-link" data-scroll-target="#tips-for-a-great-presentation">Tips for a great presentation</a></li>
+  <li><a href="#tips-for-a-great-video" id="toc-tips-for-a-great-video" class="nav-link" data-scroll-target="#tips-for-a-great-video">Tips for a great video</a></li>
   <li><a href="#how-this-will-be-graded" id="toc-how-this-will-be-graded" class="nav-link" data-scroll-target="#how-this-will-be-graded">How this will be graded</a></li>
   </ul>
 </nav>
@@ -253,21 +256,33 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Due:</strong> Finals Week (exact date/time TBD based on finals schedule) <strong>Format:</strong> 5-minute in-class presentation <strong>Points:</strong> 15</p>
+<p><strong>Due:</strong> Finals Week (exact date TBD) <strong>Submit:</strong> Video file (<code>.mp4</code> or similar) uploaded to Canvas <strong>Points:</strong> 15</p>
 </div>
 </div>
 <section id="overview" class="level2">
 <h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The presentation is a brief share-out where you tell the class about your project. The goal is to practice communicating data findings to a general audience — a skill that’s valuable whether you go into research, industry, or any field that uses data.</p>
+<p>The presentation is a short recorded video where you walk through your project findings. The goal is to practice communicating data findings to a general audience — a skill that’s valuable whether you go into research, industry, or any field that uses data.</p>
+<p>All videos will be shared with the class so everyone can see what their classmates discovered.</p>
 <p>This is <strong>not</strong> a formal academic talk. Think of it as showing a friend something cool you found in your data.</p>
 </section>
 <section id="format" class="level2">
 <h2 class="anchored" data-anchor-id="format">Format</h2>
 <ul>
-<li><strong>5 minutes</strong> — I will time you; practice beforehand so you don’t run over</li>
-<li><strong>2-3 slides or figures</strong> — you don’t need a full slide deck; screen-sharing your report and walking through key figures is fine</li>
-<li><strong>Brief Q&amp;A</strong> — the class may ask 1-2 questions</li>
+<li><strong>5 minutes maximum</strong> — videos over 5 minutes will lose points; practice beforehand</li>
+<li><strong>Screen recording with voiceover</strong> — walk through your figures while narrating (you don’t need to be on camera, but you can be if you’d like)</li>
+<li><strong>No fancy editing required</strong> — a simple screen recording is fine</li>
 </ul>
+<section id="how-to-record" class="level3">
+<h3 class="anchored" data-anchor-id="how-to-record">How to record</h3>
+<p>Any of these tools work:</p>
+<ul>
+<li><strong>Zoom</strong> — start a meeting by yourself, share screen, hit record</li>
+<li><strong>QuickTime</strong> (Mac) — File → New Screen Recording</li>
+<li><strong>PowerPoint</strong> — Record Slide Show (if you make slides)</li>
+<li><strong>OBS</strong> — free, works on all platforms</li>
+<li><strong>Loom</strong> — free tier available, easy screen + voice recording</li>
+</ul>
+</section>
 </section>
 <section id="what-to-cover" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-cover">What to cover</h2>
@@ -302,14 +317,15 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
-<section id="tips-for-a-great-presentation" class="level2">
-<h2 class="anchored" data-anchor-id="tips-for-a-great-presentation">Tips for a great presentation</h2>
+<section id="tips-for-a-great-video" class="level2">
+<h2 class="anchored" data-anchor-id="tips-for-a-great-video">Tips for a great video</h2>
 <ul>
-<li><strong>Practice out loud</strong> — 5 minutes goes fast</li>
+<li><strong>Practice out loud before you record</strong> — 5 minutes goes fast</li>
 <li><strong>Don’t read from a script</strong> — know your figures well enough to talk about them naturally</li>
-<li><strong>Make your figures legible</strong> — increase font sizes if needed; the back of the room needs to see too</li>
+<li><strong>Make your figures fill the screen</strong> — viewers need to read axis labels and titles</li>
 <li><strong>Tell a story</strong> — start with the question, show the answer, explain why it matters</li>
 <li><strong>It’s okay to show something that didn’t work</strong> — failed analyses and dead ends are part of data science</li>
+<li><strong>One take is fine</strong> — don’t over-produce it; authenticity beats polish</li>
 </ul>
 </section>
 <section id="how-this-will-be-graded" class="level2">
@@ -339,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 <td>2</td>
 </tr>
 <tr class="odd">
-<td>Stayed within time limit</td>
+<td>Within 5-minute time limit</td>
 <td>2</td>
 </tr>
 <tr class="even">
@@ -358,7 +374,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Everyone in this class started the quarter at the same place. Your classmates will be impressed by what you’ve built — and you should be too.</p>
+<p>Everyone in this class started the quarter at the same place. Your classmates will be impressed by what you’ve built — and you should be too. And the nice thing about video: you can re-record if you want to!</p>
 </div>
 </div>
 
