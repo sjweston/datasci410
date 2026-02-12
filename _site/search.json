@@ -134,7 +134,7 @@
     "href": "project/04-presentation.html#overview",
     "title": "Milestone 4: Presentation",
     "section": "Overview",
-    "text": "Overview\nThe presentation is a brief share-out where you tell the class about your project. The goal is to practice communicating data findings to a general audience — a skill that’s valuable whether you go into research, industry, or any field that uses data.\nThis is not a formal academic talk. Think of it as showing a friend something cool you found in your data.",
+    "text": "Overview\nThe presentation is a short recorded video where you walk through your project findings. The goal is to practice communicating data findings to a general audience — a skill that’s valuable whether you go into research, industry, or any field that uses data.\nAll videos will be shared with the class so everyone can see what their classmates discovered.\nThis is not a formal academic talk. Think of it as showing a friend something cool you found in your data.",
     "crumbs": [
       "Project",
       "Milestones",
@@ -146,7 +146,7 @@
     "href": "project/04-presentation.html#format",
     "title": "Milestone 4: Presentation",
     "section": "Format",
-    "text": "Format\n\n5 minutes — I will time you; practice beforehand so you don’t run over\n2-3 slides or figures — you don’t need a full slide deck; screen-sharing your report and walking through key figures is fine\nBrief Q&A — the class may ask 1-2 questions",
+    "text": "Format\n\n5 minutes maximum — videos over 5 minutes will lose points; practice beforehand\nScreen recording with voiceover — walk through your figures while narrating (you don’t need to be on camera, but you can be if you’d like)\nNo fancy editing required — a simple screen recording is fine\n\n\nHow to record\nAny of these tools work:\n\nZoom — start a meeting by yourself, share screen, hit record\nQuickTime (Mac) — File → New Screen Recording\nPowerPoint — Record Slide Show (if you make slides)\nOBS — free, works on all platforms\nLoom — free tier available, easy screen + voice recording",
     "crumbs": [
       "Project",
       "Milestones",
@@ -166,11 +166,11 @@
     ]
   },
   {
-    "objectID": "project/04-presentation.html#tips-for-a-great-presentation",
-    "href": "project/04-presentation.html#tips-for-a-great-presentation",
+    "objectID": "project/04-presentation.html#tips-for-a-great-video",
+    "href": "project/04-presentation.html#tips-for-a-great-video",
     "title": "Milestone 4: Presentation",
-    "section": "Tips for a great presentation",
-    "text": "Tips for a great presentation\n\nPractice out loud — 5 minutes goes fast\nDon’t read from a script — know your figures well enough to talk about them naturally\nMake your figures legible — increase font sizes if needed; the back of the room needs to see too\nTell a story — start with the question, show the answer, explain why it matters\nIt’s okay to show something that didn’t work — failed analyses and dead ends are part of data science",
+    "section": "Tips for a great video",
+    "text": "Tips for a great video\n\nPractice out loud before you record — 5 minutes goes fast\nDon’t read from a script — know your figures well enough to talk about them naturally\nMake your figures fill the screen — viewers need to read axis labels and titles\nTell a story — start with the question, show the answer, explain why it matters\nIt’s okay to show something that didn’t work — failed analyses and dead ends are part of data science\nOne take is fine — don’t over-produce it; authenticity beats polish",
     "crumbs": [
       "Project",
       "Milestones",
@@ -182,7 +182,7 @@
     "href": "project/04-presentation.html#how-this-will-be-graded",
     "title": "Milestone 4: Presentation",
     "section": "How this will be graded",
-    "text": "How this will be graded\n\n\n\nComponent\nPoints\n\n\n\n\nClear introduction of dataset and questions\n3\n\n\nFigures are well-chosen and clearly explained\n5\n\n\nNarrative is engaging and easy to follow\n3\n\n\nReflection shows genuine thought\n2\n\n\nStayed within time limit\n2\n\n\nTotal\n15\n\n\n\n\n\n\n\n\n\nTipNo need to be nervous\n\n\n\nEveryone in this class started the quarter at the same place. Your classmates will be impressed by what you’ve built — and you should be too.",
+    "text": "How this will be graded\n\n\n\nComponent\nPoints\n\n\n\n\nClear introduction of dataset and questions\n3\n\n\nFigures are well-chosen and clearly explained\n5\n\n\nNarrative is engaging and easy to follow\n3\n\n\nReflection shows genuine thought\n2\n\n\nWithin 5-minute time limit\n2\n\n\nTotal\n15\n\n\n\n\n\n\n\n\n\nTipNo need to be nervous\n\n\n\nEveryone in this class started the quarter at the same place. Your classmates will be impressed by what you’ve built — and you should be too. And the nice thing about video: you can re-record if you want to!",
     "crumbs": [
       "Project",
       "Milestones",
@@ -717,7 +717,7 @@
     "href": "assignment/index.html#ai-tools-policy",
     "title": "Assignments",
     "section": "AI Tools Policy",
-    "text": "AI Tools Policy\nWeekly assignments are AI-permitted with documentation. You may use tools like ChatGPT or GitHub Copilot, but you must:\n\nCite your use — Note which tool and for what purpose\nDocument the process — Briefly reflect on what it got right/wrong\nUnderstand your code — Be prepared to explain it verbally\n\nSee the syllabus for the full policy.",
+    "text": "AI Tools Policy\nAI tools (ChatGPT, Claude, GitHub Copilot, etc.) are not permitted on any assignments in this course. The goal is to build your own foundational skills — AI is most useful once you already understand what you’re doing. See the syllabus for the full policy and rationale.",
     "crumbs": [
       "Assignments",
       "Overview",
@@ -2037,7 +2037,7 @@
     "href": "project/03-final-report.html#what-to-submit",
     "title": "Milestone 3: Final Report",
     "section": "What to submit",
-    "text": "What to submit\nSubmit two files on Canvas:\n\nYour Quarto source file (.qmd)\nThe rendered HTML output (.html)\n\nYour .qmd file must render cleanly from a fresh R session. I will re-render it to verify.",
+    "text": "What to submit\nUpload a zip file to Canvas containing:\n\nYour Quarto source file (.qmd)\nThe rendered HTML output (.html)\nYour dataset file(s) (.csv, .xlsx, etc.)\n\nEverything needed to reproduce your report should be in the zip. Your .qmd file must render cleanly from a fresh R session — I will re-render it to verify, so if I don’t have your data, I can’t confirm it works.\n\n\n\n\n\n\nImportantInclude your data!\n\n\n\nIf your .qmd calls read_csv(\"my_data.csv\"), that file needs to be in your submission. The easiest approach: put your .qmd and data file(s) in the same folder, zip the whole folder, and upload it.",
     "crumbs": [
       "Project",
       "Milestones",
@@ -2049,7 +2049,7 @@
     "href": "project/03-final-report.html#report-structure",
     "title": "Milestone 3: Final Report",
     "section": "Report structure",
-    "text": "Report structure\nYour report should include the following sections:\n\n1. Introduction\n\nWhat is your dataset? Where does it come from?\nWhat research questions are you exploring?\nWhy are these questions interesting or important?\n\nLength: 2-3 paragraphs.\n\n\n2. Data description\n\nHow many observations and variables?\nWhat are the key variables and what do they represent?\nDescribe any cleaning or tidying steps you performed (and why)\nInclude a summary table of descriptive statistics using knitr::kable()\n\n\n\n3. Results\nThis is the core of your report. For each research question:\n\nPresent 1-2 polished visualizations that address the question\nWrite 1-2 paragraphs interpreting what the figure shows\nUse inline code to report key numbers (means, counts, etc.) — never hard-code statistics\n\nYour report should include 4-6 publication-ready figures total. Each figure should:\n\nUse an appropriate geom for the data type\nHave a clear, informative title (tells the reader what to see, not just what the axes are)\nHave labeled axes with units where appropriate\nUse a clean theme (theme_minimal(), theme_classic(), etc.)\nUse a colorblind-friendly palette when color is meaningful\nInclude a caption (using #| fig-cap)\n\n\n\n4. Discussion\n\nWhat did you learn from your data?\nWere there any surprises or unexpected findings?\nWhat are the limitations of your analysis?\nWhat would you do next if you had more time?\n\nLength: 2-3 paragraphs.\n\n\n5. Process documentation\n\nDid you use AI tools? If so, which ones and for what?\nWhat did the AI get right? What did it get wrong?\nWhat was the most challenging part of this project?\nWhat are you most proud of?\n\nLength: 1-2 paragraphs.",
+    "text": "Report structure\nYour report should include the following sections:\n\n1. Introduction\n\nWhat is your dataset? Where does it come from?\nWhat research questions are you exploring?\nWhy are these questions interesting or important?\n\nLength: 2-3 paragraphs.\n\n\n2. Data description\n\nHow many observations and variables?\nWhat are the key variables and what do they represent?\nDescribe any cleaning or tidying steps you performed (and why)\nInclude a summary table of descriptive statistics using knitr::kable()\n\n\n\n3. Results\nThis is the core of your report. For each research question:\n\nPresent 1-2 polished visualizations that address the question\nWrite 1-2 paragraphs interpreting what the figure shows\nUse inline code to report key numbers (means, counts, etc.) — never hard-code statistics\n\nYour report should include 4-6 publication-ready figures total. Each figure should:\n\nUse an appropriate geom for the data type\nHave a clear, informative title (tells the reader what to see, not just what the axes are)\nHave labeled axes with units where appropriate\nUse a clean theme (theme_minimal(), theme_classic(), etc.)\nUse a colorblind-friendly palette when color is meaningful\nInclude a caption (using #| fig-cap)\n\n\n\n4. Discussion\n\nWhat did you learn from your data?\nWere there any surprises or unexpected findings?\nWhat are the limitations of your analysis?\nWhat would you do next if you had more time?\n\nLength: 2-3 paragraphs.\n\n\n5. Reflection\n\nWhat was the most challenging part of this project?\nWhat would you do differently if you started over?\nWhat are you most proud of?\nWhat skills from this course were most useful?\n\nLength: 1-2 paragraphs.",
     "crumbs": [
       "Project",
       "Milestones",
@@ -2073,7 +2073,7 @@
     "href": "project/03-final-report.html#how-this-will-be-graded",
     "title": "Milestone 3: Final Report",
     "section": "How this will be graded",
-    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nProcess documentation — honest, reflective\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.",
+    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nReflection — honest, thoughtful\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.",
     "crumbs": [
       "Project",
       "Milestones",
@@ -2097,7 +2097,7 @@
     "href": "project/index.html#what-youll-produce",
     "title": "Final Project",
     "section": "What you’ll produce",
-    "text": "What you’ll produce\nBy the end of the quarter, you’ll have:\n\nA dataset relevant to psychology or the social sciences\n2-3 research questions that can be explored through visualization\nA polished Quarto report (.qmd rendered to HTML) with 4-6 publication-ready figures\nA 5-minute presentation sharing your key findings with the class",
+    "text": "What you’ll produce\nBy the end of the quarter, you’ll have:\n\nA dataset relevant to psychology or the social sciences\n2-3 research questions that can be explored through visualization\nA polished Quarto report (.qmd rendered to HTML) with 4-6 publication-ready figures\nA 5-minute recorded video presenting your key findings (shared with the class)",
     "crumbs": [
       "Project",
       "Overview",
@@ -2109,7 +2109,7 @@
     "href": "project/index.html#milestones",
     "title": "Final Project",
     "section": "Milestones",
-    "text": "Milestones\nThe project is broken into four milestones so you get feedback along the way:\n\n\n\nMilestone\nDue Date\nWhat you submit\n\n\n\n\nProposal\nWed Apr 29 (Session 10)\nDataset, research questions, initial plan\n\n\nDraft\nWed May 20 (Session 15)\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3 (Session 18)\nComplete Quarto report\n\n\nPresentation\nFinals Week\n5-minute share-out",
+    "text": "Milestones\nThe project is broken into four milestones so you get feedback along the way:\n\n\n\nMilestone\nDue Date\nWhat you submit\n\n\n\n\nProposal\nWed Apr 29 (Session 10)\nDataset, research questions, initial plan\n\n\nDraft\nWed May 20 (Session 15)\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3 (Session 18)\nComplete Quarto report\n\n\nPresentation\nFinals Week\n5-minute recorded video",
     "crumbs": [
       "Project",
       "Overview",
@@ -2145,7 +2145,7 @@
     "href": "project/index.html#ai-tools-policy",
     "title": "Final Project",
     "section": "AI tools policy",
-    "text": "AI tools policy\nThe final project follows the same AI policy as weekly assignments: AI-permitted with documentation. You must include a process documentation section in your final report describing how you used AI tools (if at all) and what you learned from the process. See the syllabus for the full policy.",
+    "text": "AI tools policy\nAI tools (ChatGPT, Claude, GitHub Copilot, etc.) are not permitted on the final project. All code, visualizations, and writing must be your own work. See the syllabus for the full policy and rationale.",
     "crumbs": [
       "Project",
       "Overview",

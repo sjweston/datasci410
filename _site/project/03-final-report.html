@@ -226,7 +226,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#data-description" id="toc-data-description" class="nav-link" data-scroll-target="#data-description">2. Data description</a></li>
   <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">3. Results</a></li>
   <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">4. Discussion</a></li>
-  <li><a href="#process-documentation" id="toc-process-documentation" class="nav-link" data-scroll-target="#process-documentation">5. Process documentation</a></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">5. Reflection</a></li>
   </ul></li>
   <li><a href="#technical-requirements" id="toc-technical-requirements" class="nav-link" data-scroll-target="#technical-requirements">Technical requirements</a></li>
   <li><a href="#how-this-will-be-graded" id="toc-how-this-will-be-graded" class="nav-link" data-scroll-target="#how-this-will-be-graded">How this will be graded</a></li>
@@ -255,7 +255,7 @@ ul.task-list li input[type="checkbox"] {
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Due:</strong> Wednesday, June 3 before class (Session 18) <strong>Submit:</strong> <code>.qmd</code> file + rendered <code>.html</code> file on Canvas <strong>Points:</strong> 60</p>
+<p><strong>Due:</strong> Wednesday, June 3 before class (Session 18) <strong>Submit:</strong> Zip file containing <code>.qmd</code>, rendered <code>.html</code>, and dataset(s) on Canvas <strong>Points:</strong> 60</p>
 </div>
 </div>
 <section id="overview" class="level2">
@@ -264,12 +264,26 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="what-to-submit" class="level2">
 <h2 class="anchored" data-anchor-id="what-to-submit">What to submit</h2>
-<p>Submit <strong>two files</strong> on Canvas:</p>
+<p>Upload a <strong>zip file</strong> to Canvas containing:</p>
 <ol type="1">
 <li>Your <strong>Quarto source file</strong> (<code>.qmd</code>)</li>
 <li>The <strong>rendered HTML output</strong> (<code>.html</code>)</li>
+<li>Your <strong>dataset file(s)</strong> (<code>.csv</code>, <code>.xlsx</code>, etc.)</li>
 </ol>
-<p>Your <code>.qmd</code> file must render cleanly from a fresh R session. I will re-render it to verify.</p>
+<p>Everything needed to reproduce your report should be in the zip. Your <code>.qmd</code> file must render cleanly from a fresh R session — I will re-render it to verify, so if I don’t have your data, I can’t confirm it works.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Include your data!
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If your <code>.qmd</code> calls <code>read_csv("my_data.csv")</code>, that file needs to be in your submission. The easiest approach: put your <code>.qmd</code> and data file(s) in the same folder, zip the whole folder, and upload it.</p>
+</div>
+</div>
 </section>
 <section id="report-structure" class="level2">
 <h2 class="anchored" data-anchor-id="report-structure">Report structure</h2>
@@ -320,13 +334,13 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p><strong>Length:</strong> 2-3 paragraphs.</p>
 </section>
-<section id="process-documentation" class="level3">
-<h3 class="anchored" data-anchor-id="process-documentation">5. Process documentation</h3>
+<section id="reflection" class="level3">
+<h3 class="anchored" data-anchor-id="reflection">5. Reflection</h3>
 <ul>
-<li>Did you use AI tools? If so, which ones and for what?</li>
-<li>What did the AI get right? What did it get wrong?</li>
 <li>What was the most challenging part of this project?</li>
+<li>What would you do differently if you started over?</li>
 <li>What are you most proud of?</li>
+<li>What skills from this course were most useful?</li>
 </ul>
 <p><strong>Length:</strong> 1-2 paragraphs.</p>
 </section>
@@ -378,7 +392,7 @@ ul.task-list li input[type="checkbox"] {
 <td>5</td>
 </tr>
 <tr class="even">
-<td><strong>Process documentation</strong> — honest, reflective</td>
+<td><strong>Reflection</strong> — honest, thoughtful</td>
 <td>5</td>
 </tr>
 <tr class="odd">
