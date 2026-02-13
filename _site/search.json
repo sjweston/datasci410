@@ -4,14 +4,14 @@
     "href": "syllabus.html",
     "title": "Syllabus",
     "section": "",
-    "text": "Course: PSY 410: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: email@university.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
+    "text": "Course: PSY 410/510: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: sweston2@uoregon.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
   },
   {
     "objectID": "syllabus.html#course-information",
     "href": "syllabus.html#course-information",
     "title": "Syllabus",
     "section": "",
-    "text": "Course: PSY 410: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: email@university.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
+    "text": "Course: PSY 410/510: Data Science for Psychology (CRN: 35882)\nInstructor: Dr. Sara Weston\nEmail: sweston2@uoregon.edu\nClass Meetings: Mondays & Wednesdays, 12:00–1:20 PM\nLocation: 16 PAC\nDates: March 30 – June 3, 2026"
   },
   {
     "objectID": "syllabus.html#course-description",
@@ -242,7 +242,7 @@
     "href": "index.html",
     "title": "\n            Data Science for Psychology\n        ",
     "section": "",
-    "text": "Course subtitle here\n        \n        \n            PSY 410 • Spring 2026 Department of Psychology University Name\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Sara Weston\n   \n   email@university.edu\n   Schedule an appointment\n\n\n\nCourse details\n\n   Mondays & Wednesdays\n   March 30 – June 3, 2026\n   12:00–1:20 PM\n   16 PAC\n\n\n\nContacting me\nEmail is the best way to get in contact with me. I will try to respond to all course-related emails within one business day."
+    "text": "PSY 410/510 • Spring 2026 Department of Psychology University of Oregon\n        \n    \n    \n      \n        \n        \n        \n      \n    \n\n\n\n\n\n\nInstructor\n\n   Dr. Sara Weston\n   Straub 325\n   sweston2@uoregon.edu\n   Schedule an appointment\n\n\n\nGE\n\n   Amala Someshwar\n   asomeshw@uoregon.edu\n   \n   \n\n\n\nCourse details\n\n   Mondays & Wednesdays\n   March 30 – June 3, 2026\n   12:00–1:20 PM\n   16 PAC\n\n\n\nContacting me\nEmail is the best way to get in contact with me. I will try to respond to all course-related emails within one business day."
   },
   {
     "objectID": "content/18-content.html",
@@ -501,7 +501,7 @@
     "href": "content/08-content.html#before-class",
     "title": "8: Perception & Design",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nSupplementary reading on visual perception principles (posted on Canvas)\nOptional: Knaflic, Storytelling with Data, Ch 1–3",
+    "text": "Before class\n📖 Reading:\n\nKang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?\nRowe, S. (2022, May 24) Don’t hide the crucial findings.\nCisneros, M. (2022, June 14). Showing off the insights vs. showing off.\nEsselman, A. (2022, June 23) Declutter a dual y-axis chart.\nRowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.\nOptional: Knaflic, Storytelling with Data, Ch 1–3",
     "crumbs": [
       "Content",
       "Course content",
@@ -525,7 +525,7 @@
     "href": "content/08-content.html#after-class",
     "title": "8: Perception & Design",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines in both directions? → Remove vertical ones\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed.",
+    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines? → Remove them\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed.",
     "crumbs": [
       "Content",
       "Course content",
@@ -2169,14 +2169,14 @@
     "href": "schedule.html",
     "title": "Schedule",
     "section": "",
-    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
+    "text": "Below is the schedule for PSY 410/510: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
   },
   {
     "objectID": "schedule.html#course-schedule",
     "href": "schedule.html#course-schedule",
     "title": "Schedule",
     "section": "",
-    "text": "Below is the schedule for PSY 410: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
+    "text": "Below is the schedule for PSY 410/510: Data Science for Psychology.\n\n\n\n\n\n\nNoteSchedule Notes\n\n\n\n\nAll readings should be completed before the class session\nR4DS = R for Data Science (2nd ed.)\n📋 = Assignment due | 📝 = Project milestone\nSchedule is subject to change based on course needs"
   },
   {
     "objectID": "schedule.html#week-1",

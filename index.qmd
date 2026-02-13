@@ -1,6 +1,5 @@
 ---
 title: "{{< var course.title >}}"
-subtitle: "Course subtitle here"
 details: |
   {{< var course.number >}} • {{< var course.semester >}}<br>
   {{< var university.department >}}<br>
@@ -26,6 +25,15 @@ course-logo: /files/img/course-logo.png
 - {{< fa university >}} &nbsp; {{< var instructor.office >}}
 - {{< fa envelope >}} &nbsp; {{< var instructor.email >}}
 - {{< fa calendar-check >}} &nbsp; [Schedule an appointment]({{< var instructor.appointment_url >}})
+:::
+
+::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
+### GE
+
+- {{< fa user >}} &nbsp; {{< var ta.name >}}
+- {{< fa envelope >}} &nbsp; {{< var ta.email >}}
+- {{< fa university >}} &nbsp; {{< var ta.office >}}
+- {{< fa clock >}} &nbsp; {{< var ta.office_hours >}}
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}
