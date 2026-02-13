@@ -183,20 +183,7 @@ Save intermediate cleaned files — don't re-clean every time you start R.
 
 ## Your turn: 10 minutes
 
-I've created a messy CSV file for you. With a partner:
-
-```{r}
-# Create the messy CSV for practice
-messy_survey <- tibble(
-  `Participant ID` = c("P001", "P002", "P003", "P004", "P005"),
-  `Age (years)` = c(22, 25, -999, 28, 31),
-  `Gender` = c("Female", "Male", "Female", "N/A", "Male"),
-  `Score_1` = c(4, 3, 5, 2, "N/A"),
-  `Score_2` = c(3, "N/A", 4, 3, 2),
-  `Notes` = c("", "transfer student", "", "", "")
-)
-write_csv(messy_survey, "messy_survey.csv")
-```
+I've created a messy CSV file for you. [Download it here.](https://github.com/sjweston/datasci410/blob/main/messy_survey.csv) With a partner:
 
 1. Read it back in with `read_csv()` — what types does R guess?
 2. Fix the missing values: `-999` and `"N/A"` should be `NA`
@@ -208,7 +195,7 @@ write_csv(messy_survey, "messy_survey.csv")
 #| eval: false
 # Solution (reveal after time is up)
 messy <- read_csv("messy_survey.csv", na = c("N/A", "-999", ""))
-messy |>
+mess = messy |>
   rename(
     participant_id = `Participant ID`,
     age = `Age (years)`,

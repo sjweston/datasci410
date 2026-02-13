@@ -63,7 +63,10 @@ The wrong geom doesn't just look bad — it can actively mislead.
 #| fig-height: 5
 reaction_data |>
   ggplot(aes(x = rt)) +
-  geom_histogram(binwidth = 30, fill = "steelblue", color = "white") +
+  geom_histogram(
+    binwidth = 30, 
+    fill = "steelblue", 
+    color = "white") +
   labs(
     title = "Distribution of Reaction Times",
     x = "Reaction time (ms)"
@@ -171,8 +174,14 @@ In psych papers, you'll see this constantly: a bar chart showing group means wit
 #| fig-height: 5
 reaction_data |>
   ggplot(aes(x = condition, y = rt)) +
-  stat_summary(fun = mean, geom = "bar", fill = "steelblue", width = 0.5) +
-  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.3) +
+  stat_summary(
+    fun = mean, 
+    geom = "bar", 
+    fill = "steelblue", width = 0.5) +
+  stat_summary(
+    fun.data = mean_cl_normal, 
+    geom = "errorbar", 
+    width = 0.3) +
   labs(
     title = "Mean Reaction Time by Condition",
     x = "Condition",
@@ -188,12 +197,12 @@ reaction_data |>
 # The bar (mean)
 stat_summary(fun = mean, geom = "bar")
 
-# The error bars (standard error)
-stat_summary(fun.data = mean_se, geom = "errorbar")
+# The error bars (95% confidence interval)
+stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
 ```
 
 - `fun` = the function to calculate (mean, median, etc.)
-- `fun.data` = a function that returns ymin, y, ymax (like `mean_se`)
+- `fun.data` = a function that returns ymin, y, ymax (like `mean_cl_normal`)
 - `geom` = what shape to use to show the result
 
 ## What are error bars showing?
@@ -208,10 +217,10 @@ This matters! Always state it in your figure caption.
 
 ```{r}
 #| eval: false
-# SE (most common in psych)
+# SE 
 stat_summary(fun.data = mean_se, geom = "errorbar")
 
-# 95% CI
+# 95% CI (most common in psych)
 stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
 ```
 
@@ -224,13 +233,13 @@ Error bars alone hide the data. Show the points too:
 #| fig-width: 8
 #| fig-height: 5
 reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
+  ggplot(aes(x = condition, y = rt, color = condition)) +
   geom_jitter(width = 0.15, alpha = 0.4, size = 2) +
   stat_summary(fun = mean, geom = "point", size = 4, color = "black") +
-  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2, color = "black") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2, color = "black") +
   labs(
     title = "Reaction Time by Condition",
-    subtitle = "Error bars = SE. Individual points shown.",
+    subtitle = "Error bars = 95%CI. Individual points shown.",
     x = "Condition",
     y = "Reaction time (ms)"
   ) +
@@ -242,12 +251,12 @@ reaction_data |>
 
 ## Your turn: 10 minutes
 
-Using the `reaction_data` dataset (already in your environment):
+Using the `reaction_data` dataset:
 
 1. Create a **bar chart with error bars** showing mean RT by condition
 2. Add **individual data points** (jittered) behind the bars
 3. Color the bars by condition
-4. Add a caption noting that error bars show SE
+4. Add a caption noting that error bars show the 95% CI.
 
 ::: {.callout-tip}
 You'll need `stat_summary()` twice — once for the bar, once for the error bars. Look at the examples from the last few slides.
@@ -261,12 +270,12 @@ reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
   geom_jitter(width = 0.15, alpha = 0.4) +
   stat_summary(fun = mean, geom = "bar", alpha = 0.6, width = 0.5) +
-  stat_summary(fun.data = mean_se, geom = "errorbar", width = 0.2) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
   labs(
     title = "Mean Reaction Time by Condition",
     x = "Condition",
     y = "Reaction time (ms)",
-    caption = "Error bars represent standard error of the mean (SE)."
+    caption = "Error bars represent 95% confidence intervals."
   ) +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
@@ -300,7 +309,7 @@ When geoms overlap, position adjustments fix it:
 reaction_data |>
   ggplot(aes(x = age_group, y = rt, fill = condition)) +
   stat_summary(fun = mean, geom = "bar", position = "dodge", width = 0.6) +
-  stat_summary(fun.data = mean_se, geom = "errorbar",
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
                position = position_dodge(0.6), width = 0.2) +
   labs(
     title = "Reaction Time by Age Group and Condition",
@@ -365,6 +374,8 @@ reaction_data |>
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
 ```
+
+Use a website like [HTML color codes](https://htmlcolorcodes.com/color-picker/) to find the appropriate HEX code for your color. 
 
 ## Coordinate systems
 

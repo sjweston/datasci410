@@ -441,19 +441,7 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
-<p>I’ve created a messy CSV file for you. With a partner:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the messy CSV for practice</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Participant ID</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"P001"</span>, <span class="st">"P002"</span>, <span class="st">"P003"</span>, <span class="st">"P004"</span>, <span class="st">"P005"</span>),</span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="sc">-</span><span class="dv">999</span>, <span class="dv">28</span>, <span class="dv">31</span>),</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Gender</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>, <span class="st">"N/A"</span>, <span class="st">"Male"</span>),</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Score_1</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>, <span class="st">"N/A"</span>),</span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Score_2</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="st">"N/A"</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Notes</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"transfer student"</span>, <span class="st">""</span>, <span class="st">""</span>, <span class="st">""</span>)</span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(messy_survey, <span class="st">"messy_survey.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
+<p>I’ve created a messy CSV file for you. <a href="https://github.com/sjweston/datasci410/blob/main/messy_survey.csv">Download it here.</a> With a partner:</p>
 <ol type="1">
 <li>Read it back in with <code>read_csv()</code> — what types does R guess?</li>
 <li>Fix the missing values: <code>-999</code> and <code>"N/A"</code> should be <code>NA</code></li>
@@ -474,19 +462,19 @@ Dr.&nbsp;Sara Weston
 <h2>readxl::read_excel()</h2>
 <p>Excel is everywhere in psychology. The <code>readxl</code> package handles it:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)  <span class="co"># Or just use readxl:: directly</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet</span></span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>)</span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific sheet</span></span>
-<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Demographics"</span>)</span>
-<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific range</span></span>
-<span id="cb10-10"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>,</span>
-<span id="cb10-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Scores"</span>,</span>
-<span id="cb10-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"A1:F50"</span></span>
-<span id="cb10-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)  <span class="co"># Or just use readxl:: directly</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet</span></span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>)</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific sheet</span></span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Demographics"</span>)</span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific range</span></span>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>,</span>
+<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Scores"</span>,</span>
+<span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"A1:F50"</span></span>
+<span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="excel-pitfalls" class="slide level2">
@@ -515,8 +503,8 @@ Dr.&nbsp;Sara Weston
 <section id="listing-sheet-names" class="slide level2">
 <h2>Listing sheet names</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in a file</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheet_names</span>(<span class="st">"survey_results.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in a file</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheet_names</span>(<span class="st">"survey_results.xlsx"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Useful when you don’t know the file structure yet.</p>
 </section></section>
@@ -529,13 +517,13 @@ Dr.&nbsp;Sara Weston
 <h2>SPSS and SAS files</h2>
 <p>Psychology labs often have data in SPSS (<code>.sav</code>) or SAS formats:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SPSS</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"study.sav"</span>)</span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SAS</span></span>
-<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>sas_data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"study.sas"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SPSS</span></span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"study.sav"</span>)</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SAS</span></span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>sas_data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"study.sas"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>These return tibbles, just like <code>read_csv()</code>.</p>
 </section>
@@ -543,13 +531,13 @@ Dr.&nbsp;Sara Weston
 <h2>A note about SPSS labels</h2>
 <p>SPSS files often have <strong>variable labels</strong> and <strong>value labels</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are stored as attributes</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>gender, <span class="st">"label"</span>)   <span class="co"># "Participant Gender"</span></span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>gender, <span class="st">"levels"</span>)  <span class="co"># 1="Male", 2="Female"</span></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># To drop labels and work with plain values:</span></span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">zap_labels</span>(spss_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are stored as attributes</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>gender, <span class="st">"label"</span>)   <span class="co"># "Participant Gender"</span></span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>gender, <span class="st">"levels"</span>)  <span class="co"># 1="Male", 2="Female"</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># To drop labels and work with plain values:</span></span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">zap_labels</span>(spss_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="getting-data-out-of-qualtrics" class="slide level2">
@@ -560,8 +548,8 @@ Dr.&nbsp;Sara Weston
 <li>The export includes metadata rows at the top — skip them:</li>
 </ol>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Qualtrics CSVs typically have 3 header rows</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"my_survey_export.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Qualtrics CSVs typically have 3 header rows</span></span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"my_survey_export.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <ol start="3" type="1">
 <li>Clean up the automatic column names (they’re ugly)</li>
@@ -589,33 +577,33 @@ Dr.&nbsp;Sara Weston
 <section id="a-realistic-import-workflow" class="slide level2">
 <h2>A realistic import workflow</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Read the file</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qualtrics_export.csv"</span>,</span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span>,</span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>)</span>
-<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check what you got</span></span>
-<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_data)</span>
-<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(raw_data)</span>
-<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Rename columns</span></span>
-<span id="cb15-12"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span></span>
-<span id="cb15-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb15-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> ResponseId,</span>
-<span id="cb15-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> Q1,</span>
-<span id="cb15-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> Q2</span>
-<span id="cb15-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fix types if needed</span></span>
-<span id="cb15-20"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> clean_data <span class="sc">|&gt;</span></span>
-<span id="cb15-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb15-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">as.character</span>(id),</span>
-<span id="cb15-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">as.numeric</span>(age)</span>
-<span id="cb15-24"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb15-25"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Save the cleaned version</span></span>
-<span id="cb15-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean_data, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Read the file</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qualtrics_export.csv"</span>,</span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span>,</span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>)</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check what you got</span></span>
+<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_data)</span>
+<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(raw_data)</span>
+<span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Rename columns</span></span>
+<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span></span>
+<span id="cb14-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb14-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> ResponseId,</span>
+<span id="cb14-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> Q1,</span>
+<span id="cb14-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> Q2</span>
+<span id="cb14-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fix types if needed</span></span>
+<span id="cb14-20"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> clean_data <span class="sc">|&gt;</span></span>
+<span id="cb14-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb14-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">as.character</span>(id),</span>
+<span id="cb14-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">as.numeric</span>(age)</span>
+<span id="cb14-24"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-25"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Save the cleaned version</span></span>
+<span id="cb14-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean_data, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="get-a-head-start-assignment-3" class="slide level2">

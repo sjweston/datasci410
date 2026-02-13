@@ -7,7 +7,11 @@ date: "2026-04-22"
 
 📖 **Reading:**
 
-- Supplementary reading on visual perception principles (posted on Canvas)
+- [Kang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?](https://mediashift.org/2016/02/checklist-does-your-data-visualization-say-what-you-think-it-says/)
+- [Rowe, S. (2022, May 24) Don't hide the crucial findings.](https://www.storytellingwithdata.com/blog/dont-hide-the-crucial-findings)
+- [Cisneros, M. (2022, June 14). Showing off the insights vs. showing off.](https://www.storytellingwithdata.com/blog/showing-the-insights-vs-showing-off)
+- [Esselman, A. (2022, June 23) Declutter a dual y-axis chart.](https://www.storytellingwithdata.com/blog/declutter-a-dual-y-axis-chart)
+- [Rowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.](https://www.storytellingwithdata.com/blog/a-diverging-bar-makeover-how-to-tackle-the-challenge-of-scope-creep)
 - Optional: Knaflic, *Storytelling with Data*, Ch 1–3
 
 ## During class
@@ -63,7 +67,7 @@ We'll cover:
 Before you call a figure "done," ask:
 
 - Is the background gray? → Switch to `theme_minimal()` or `theme_classic()`
-- Are there gridlines in both directions? → Remove vertical ones
+- Are there gridlines? → Remove them
 - Is there a legend when there's only one group? → Remove it
 - Do the axis labels say something meaningful? → If not, rename them
 - Can someone understand the point without reading the caption? → If not, the title needs work

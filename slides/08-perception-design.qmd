@@ -234,11 +234,15 @@ p1 + p2
 Ask yourself: does this element help the reader understand the data?
 
 - ❌ Gray background — adds noise, no information
-- ❌ Gridlines (especially vertical) — usually unnecessary
+- ❌ Gridlines  — usually unnecessary
 - ❌ Legend when there's only one group — redundant
 - ❌ Legend when the x-axis already tells you — redundant
 - ❌ Axis labels that just repeat the variable name — add units or context
-- ✅ Horizontal gridlines — help read values
+
+## What to keep
+
+Ask yourself: does this element help the reader understand the data?
+
 - ✅ Title and subtitle — orient the reader
 - ✅ Caption — source, sample size, what error bars mean
 
@@ -249,8 +253,7 @@ Ask yourself: does this element help the reader understand the data?
 theme(
   legend.position = "none",                    # Remove legend
   axis.ticks = element_blank(),                # Remove tick marks
-  panel.grid.major.x = element_blank(),        # Remove vertical gridlines
-  panel.grid.minor = element_blank(),          # Remove minor gridlines
+  panel.grid = element_blank(),                # Remove gridlines
   plot.title = element_text(face = "bold"),    # Bold the title
   axis.text = element_text(size = 10),         # Font size
   plot.caption = element_text(hjust = 0)       # Left-align caption
@@ -262,6 +265,14 @@ theme(
 ## Your turn: 10 minutes
 
 I'll put a cluttered graph on screen. With a partner, **rewrite it** to follow the design principles we just covered.
+
+Remove at least 5 unnecessary elements. Make it tell a clear story.
+
+::: {.callout-tip}
+Think about: colors, legend, labels, theme, size mapping, and whether every aesthetic is adding information.
+:::
+
+## Your turn: 10 minutes
 
 ```{r}
 # The cluttered version — fix this!
@@ -276,11 +287,7 @@ reaction_data |>
   theme_gray()
 ```
 
-Remove at least 5 unnecessary elements. Make it tell a clear story.
 
-::: {.callout-tip}
-Think about: colors, legend, labels, theme, size mapping, and whether every aesthetic is adding information.
-:::
 
 ```{r}
 #| echo: false
@@ -298,7 +305,9 @@ reaction_data |>
     caption = "N = 40 per condition. Points = individual observations."
   ) +
   theme_minimal(base_size = 14) +
-  theme(legend.position = "none")
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank())
 ```
 
 ---
@@ -312,11 +321,14 @@ reaction_data |>
 ## The modern psych visualization
 
 Raincloud plots combine three elements:
-1. **Violin** (distribution shape)
-2. **Boxplot** (summary stats)
-3. **Jittered points** (individual data)
+
+  1. **Violin** (distribution shape)
+  2. **Boxplot** (summary stats)
+  3. **Jittered points** (individual data)
 
 They're increasingly popular in psychology publications.
+
+Use the `ggrain` package. ([More details here.](https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html))
 
 ## Building a raincloud
 
@@ -324,15 +336,14 @@ They're increasingly popular in psychology publications.
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
+
+library(ggrain)
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition, color = condition)) +
-  # The "rain" — individual points
-  geom_jitter(width = 0.15, alpha = 0.4, size = 2) +
-  # The "cloud" — violin (half width)
-  geom_violin(alpha = 0.3, width = 0.5, trim = FALSE) +
-  # The "bow" — boxplot
-  geom_boxplot(width = 0.15, alpha = 0.8, outlier.shape = NA,
-               color = "black", fill = "white") +
+  # geom_rain gets all parts of your raincloud
+  geom_rain(
+    alpha = .6,
+    boxplot.args = list(color = "black")) + # change just the boxplot part
   # The mean
   stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
   scale_fill_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
@@ -343,8 +354,11 @@ reaction_data |>
     x = "Condition",
     y = "Reaction time (ms)"
   ) +
+  coord_flip() +
   theme_minimal(base_size = 14) +
-  theme(legend.position = "none")
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank())
 ```
 
 # Get a head start {background-color="#2c3e50"}
@@ -356,6 +370,8 @@ Assignment 4 will ask you to:
 1. Create a **"bad" version** of a figure — deliberately violate design principles
 2. Create a **"good" version** following what we covered today
 3. Create a **colorblind-accessible version**
+
+## Assignment 4 preview
 
 Start experimenting now:
 
