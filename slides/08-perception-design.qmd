@@ -316,50 +316,24 @@ reaction_data |>
 
 📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
-# Raincloud plots {background-color="#2c3e50"}
+# Critiquing bad graphs {background-color="#2c3e50"}
 
-## The modern psych visualization
+## Your turn: Fix these graphs
 
-Raincloud plots combine three elements:
+**Placeholder for in-class activity:**
 
-  1. **Violin** (distribution shape)
-  2. **Boxplot** (summary stats)
-  3. **Jittered points** (individual data)
+I'll show you several poorly designed graphs. With a partner, identify what's wrong and suggest specific improvements.
 
-They're increasingly popular in psychology publications.
+::: {.callout-note}
+## TODO (Sara)
+Add 2-3 examples of bad graphs here. Good candidates:
+- Misleading y-axis (truncated or reversed)
+- Poor color choices (red-green, rainbow for categories)
+- Unnecessary 3D or chart junk
+- Misleading pie chart or dual y-axis
 
-Use the `ggrain` package. ([More details here.](https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html))
-
-## Building a raincloud
-
-```{r}
-#| output-location: slide
-#| fig-width: 10
-#| fig-height: 6
-
-library(ggrain)
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition, color = condition)) +
-  # geom_rain gets all parts of your raincloud
-  geom_rain(
-    alpha = .6,
-    boxplot.args = list(color = "black")) + # change just the boxplot part
-  # The mean
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
-  scale_fill_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
-  scale_color_manual(values = c("Control" = "#0072B2", "Treatment" = "#E69F00")) +
-  labs(
-    title = "Reaction Time by Condition",
-    subtitle = "Diamond = mean. Violin = distribution. Box = IQR.",
-    x = "Condition",
-    y = "Reaction time (ms)"
-  ) +
-  coord_flip() +
-  theme_minimal(base_size = 14) +
-  theme(
-    legend.position = "none",
-    panel.grid = element_blank())
-```
+For each: have students identify problems, then reveal a better version.
+:::
 
 # Get a head start {background-color="#2c3e50"}
 
@@ -400,8 +374,8 @@ Start experimenting now:
 
 ✅ **Practice:**
 
-- Create a raincloud plot with a dataset of your choosing
 - Try the "bad vs good" exercise on your own
+- Find a graph online and identify ways to improve it
 
 ## Key takeaways
 
@@ -409,7 +383,7 @@ Start experimenting now:
 2. **Match your palette type** to your data (sequential, diverging, qualitative)
 3. **Design for colorblindness** — always
 4. **Declutter ruthlessly** — every element must earn its place
-5. **Raincloud plots** show everything: distribution, summary, and raw data
+5. **Critical evaluation** — always ask whether each element adds information
 
 ## Questions?
 

@@ -216,6 +216,8 @@ bfi |>
   count(gender)
 ```
 
+## Counts and proportions
+
 ```{r}
 # Proportions
 bfi |>
@@ -276,7 +278,7 @@ Points beyond the whiskers are flagged as outliers by the 1.5×IQR rule.
 ```{r}
 # Find unusually old or young participants
 bfi |>
-  filter(age > 60 | age < 18) |>
+  filter(age > 60) |>
   select(age, gender, education)
 ```
 
@@ -295,32 +297,26 @@ bfi |>
 
 ## Your turn: 10 minutes
 
-Using the `bfi` dataset (already loaded):
+Using the `penguins` dataset (from the `palmerpenguins` package):
 
-1. Plot the distribution of **age** — does it look normal? What shape is it?
-2. Check for **outliers** in age. Are any values suspicious?
-3. Pick **one personality item** (e.g., E1) and explore its distribution
-4. What do you notice? Write down 2 observations.
+1. Plot the distribution of **flipper_length_mm** — what shape is it?
+2. Check for **outliers** in flipper length. Are any values suspicious?
 
 ::: {.callout-tip}
-Try both a histogram and a boxplot for age. They show different things. Use `summary()` first to get oriented.
+Try both a histogram and a boxplot. They show different things. Use `summary()` first to get oriented.
 :::
 
 ```{r}
 #| echo: false
 #| eval: false
 # Solution (reveal after time is up)
-# Age distribution
-bfi |> ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+library(palmerpenguins)
+penguins |> ggplot(aes(x = flipper_length_mm)) +
+  geom_histogram(fill = "steelblue", color = "white") +
   theme_minimal()
 
 # Outlier check
-bfi |> ggplot(aes(x = age)) + geom_boxplot() + theme_minimal()
-bfi |> filter(age > 60)
-
-# One item
-bfi |> ggplot(aes(x = E1)) + geom_bar(fill = "steelblue") + theme_minimal()
+penguins |> ggplot(aes(x = flipper_length_mm)) + geom_boxplot() + theme_minimal()
 ```
 
 ---

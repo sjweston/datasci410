@@ -25,6 +25,8 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(ggrain)
+library(patchwork)
 ```
 
 # From variation to covariation {background-color="#2c3e50"}
@@ -64,12 +66,18 @@ therapy_data <- tibble(
   )
 )
 
+```
+
+## Example: Mental health by treatment group
+
+```{r}
 glimpse(therapy_data)
 ```
 
 ## Boxplots: The classic choice
 
 ```{r}
+#| label: boxplot
 #| output-location: slide
 ggplot(therapy_data, aes(x = condition, y = depression_post)) +
   geom_boxplot() +
@@ -85,7 +93,12 @@ ggplot(therapy_data, aes(x = condition, y = depression_post)) +
 
 :::: {.columns}
 ::: {.column width="40%"}
-![](https://r4ds.hadley.nz/diagrams/EDA-boxplot.png)
+
+```{r}
+#| ref.label: boxplot
+#| echo: false
+```
+
 :::
 
 ::: {.column width="60%"}
@@ -100,73 +113,116 @@ ggplot(therapy_data, aes(x = condition, y = depression_post)) +
 
 Great for comparing distributions, but they hide the actual data points.
 
-## Violin plots: See the distribution
+## The problem with boxplots
+
+Boxplots summarize, but they hide important information:
+
+- **The actual distribution shape** (is it bimodal? skewed?)
+- **Individual data points** (how many observations are there?)
+- **The raw data** (where do specific values fall?)
+
+. . .
+
+We can do better.
+
+# Raincloud plots {background-color="#2c3e50"}
+
+## The modern psych visualization
+
+Raincloud plots combine three elements:
+
+  1. **Violin** (distribution shape)
+  2. **Boxplot** (summary stats)
+  3. **Jittered points** (individual data)
+
+They're increasingly popular in psychology publications because they show **everything**.
+
+Use the `ggrain` package. ([More details here.](https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html))
+
+## Building a raincloud
 
 ```{r}
-#| output-location: slide
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_violin() +
+#| label: raincloud
+#| fig-width: 10
+#| fig-height: 6
+#| echo: false
+
+library(ggrain)
+therapy_data |>
+  ggplot(aes(
+    x = condition, 
+    y = depression_post, 
+    fill = condition, 
+    color = condition)) +
+  # geom_rain creates all parts of your raincloud
+  geom_rain(
+    alpha = .6,
+    # change just the boxplot part
+    boxplot.args = list(color = "black")) + 
+  # The mean
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
+  scale_fill_manual(
+    values = c("Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
+  scale_color_manual(
+    values = c("Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
   labs(
-    title = "Post-treatment depression scores by condition",
+    title = "Post-Treatment Depression by Condition",
+    subtitle = "Diamond = mean. Violin = distribution. Box = IQR. Dots = individual scores.",
     x = "Treatment condition",
     y = "Depression score (BDI-II)"
   ) +
-  theme_minimal()
+  coord_flip() +
+  theme_minimal(base_size = 14) +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank())
 ```
 
-## Combining: Violin + boxplot
+---
 
 ```{r}
-#| output-location: slide
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_violin() +
-  geom_boxplot(width = 0.2, alpha = 0.5) +
-  labs(
-    title = "Post-treatment depression scores by condition",
-    x = "Treatment condition",
-    y = "Depression score (BDI-II)"
-  ) +
-  theme_minimal()
+#| ref.label: raincloud
+#| eval: false
 ```
 
-## Even better: Show the actual data
+## Why rainclouds are great
+
+Compare these three views of the **same data**:
 
 ```{r}
-#| output-location: slide
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_violin() +
-  geom_jitter(width = 0.1, alpha = 0.3, size = 2) +
-  labs(
-    title = "Post-treatment depression scores by condition",
-    x = "Treatment condition",
-    y = "Depression score (BDI-II)"
-  ) +
-  theme_minimal()
-```
+#| echo: false
+#| fig-width: 12
+#| fig-height: 7
+library(patchwork)
 
-## Another approach: Frequency polygons
-
-```{r}
-#| output-location: slide
-ggplot(therapy_data, aes(x = depression_post, color = condition)) +
-  geom_freqpoly(binwidth = 2) +
-  labs(
-    title = "Distribution of depression scores by condition",
-    x = "Depression score (BDI-II)",
-    y = "Count",
-    color = "Condition"
-  ) +
+p1 <- ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_boxplot(fill = "lightblue") +
+  labs(title = "Boxplot only", y = "Depression score") +
   theme_minimal()
+
+p2 <- ggplot(therapy_data, aes(x = condition, y = depression_post)) +
+  geom_violin(fill = "lightblue") +
+  labs(title = "Violin only", y = "Depression score") +
+  theme_minimal()
+
+p3 <- ggplot(therapy_data, aes(x = condition, y = depression_post, fill = condition)) +
+  geom_rain(alpha = 0.6) +
+  scale_fill_manual(values = c("Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
+  labs(title = "Raincloud: all the information", y = "Depression score") +
+  coord_flip() +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+p1 + p2 + p3 + plot_layout(ncol = 1)
 ```
 
 ## When to use which
 
-| Plot type | Best for |
-|-----------|----------|
-| **Boxplot** | Quick comparison of medians and spread |
-| **Violin** | Seeing the shape of distributions |
-| **Violin + points** | Small to medium datasets, show individual cases |
-| **Frequency polygon** | Comparing distributions across many groups |
+| Plot type | Shows | Best for |
+|-----------|-------|----------|
+| **Boxplot** | Median, IQR, outliers | Quick comparison, large datasets |
+| **Raincloud** | Distribution + summary + raw data | Psychology papers, presentations, publications |
+| **Violin + jitter** | Distribution + raw data | Alternative to raincloud, simpler to code |
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -449,7 +505,7 @@ When you see covariation, ask:
 Covariation suggests a relationship, but doesn't prove one variable *causes* the other.
 :::
 
-## Real psychology example
+## Real data example
 
 Let's explore a real dataset: `mpg` (fuel economy data)
 
@@ -561,12 +617,13 @@ ggplot(penguins, aes(x = species, fill = island)) +
 
 1. **Covariation = relationships** between variables
 2. **Different plot types** for different variable combinations:
-   - Categorical + continuous: boxplot, violin, frequency polygon
+   - Categorical + continuous: boxplot, raincloud plots
    - Categorical + categorical: bar charts, tiles, geom_count()
    - Continuous + continuous: scatterplot, 2D bins, hex
-3. **Watch for overplotting** — use alpha, jitter, or binning
-4. **Always visualize first** before computing correlations
-5. **Patterns suggest but don't prove** causation
+3. **Raincloud plots** are the gold standard for psychology — they show distribution, summary stats, and raw data
+4. **Watch for overplotting** — use alpha, jitter, or binning
+5. **Always visualize first** before computing correlations
+6. **Patterns suggest but don't prove** causation
 
 ## Before next class
 

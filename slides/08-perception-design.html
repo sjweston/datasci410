@@ -423,57 +423,29 @@ Dr.&nbsp;Sara Weston
 <p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
 </section></section>
 <section>
-<section id="raincloud-plots" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Raincloud plots</h1>
+<section id="critiquing-bad-graphs" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Critiquing bad graphs</h1>
 
 </section>
-<section id="the-modern-psych-visualization" class="slide level2">
-<h2>The modern psych visualization</h2>
-<p>Raincloud plots combine three elements:</p>
-<ol type="1">
-<li><strong>Violin</strong> (distribution shape)</li>
-<li><strong>Boxplot</strong> (summary stats)</li>
-<li><strong>Jittered points</strong> (individual data)</li>
-</ol>
-<p>They’re increasingly popular in psychology publications.</p>
-<p>Use the <code>ggrain</code> package. (<a href="https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html">More details here.</a>)</p>
-</section>
-<section id="building-a-raincloud" class="slide level2">
-<h2>Building a raincloud</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain)</span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
-<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># geom_rain gets all parts of your raincloud</span></span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_rain</span>(</span>
-<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> .<span class="dv">6</span>,</span>
-<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">boxplot.args =</span> <span class="fu">list</span>(<span class="at">color =</span> <span class="st">"black"</span>)) <span class="sc">+</span> <span class="co"># change just the boxplot part</span></span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># The mean</span></span>
-<span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb4-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#E69F00"</span>)) <span class="sc">+</span></span>
-<span id="cb4-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#0072B2"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#E69F00"</span>)) <span class="sc">+</span></span>
-<span id="cb4-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
-<span id="cb4-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Diamond = mean. Violin = distribution. Box = IQR."</span>,</span>
-<span id="cb4-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb4-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
-<span id="cb4-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb4-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb4-20"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb4-21"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb4-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="your-turn-fix-these-graphs" class="slide level2">
+<h2>Your turn: Fix these graphs</h2>
+<p><strong>Placeholder for in-class activity:</strong></p>
+<p>I’ll show you several poorly designed graphs. With a partner, identify what’s wrong and suggest specific improvements.</p>
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-
-</section><section id="building-a-raincloud-output" class="slide level2 output-location-slide"><h2>Building a raincloud</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
-</figure>
+<p><strong>TODO (Sara)</strong></p>
+</div>
+<div class="callout-content">
+<p>Add 2-3 examples of bad graphs here. Good candidates: - Misleading y-axis (truncated or reversed) - Poor color choices (red-green, rainbow for categories) - Unnecessary 3D or chart junk - Misleading pie chart or dual y-axis</p>
+<p>For each: have students identify problems, then reveal a better version.</p>
 </div>
 </div>
-</div></section></section>
+</div>
+</section></section>
 <section>
 <section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Get a head start</h1>
@@ -523,8 +495,8 @@ Dr.&nbsp;Sara Weston
 </ul>
 <p>✅ <strong>Practice:</strong></p>
 <ul>
-<li>Create a raincloud plot with a dataset of your choosing</li>
 <li>Try the “bad vs good” exercise on your own</li>
+<li>Find a graph online and identify ways to improve it</li>
 </ul>
 </section>
 <section id="key-takeaways" class="slide level2">
@@ -534,7 +506,7 @@ Dr.&nbsp;Sara Weston
 <li><strong>Match your palette type</strong> to your data (sequential, diverging, qualitative)</li>
 <li><strong>Design for colorblindness</strong> — always</li>
 <li><strong>Declutter ruthlessly</strong> — every element must earn its place</li>
-<li><strong>Raincloud plots</strong> show everything: distribution, summary, and raw data</li>
+<li><strong>Critical evaluation</strong> — always ask whether each element adds information</li>
 </ol>
 </section>
 <section id="questions" class="slide level2">
