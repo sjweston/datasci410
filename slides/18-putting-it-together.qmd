@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true

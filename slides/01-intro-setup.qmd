@@ -12,13 +12,56 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
   eval: false
 ---
 
-# Welcome to PSY 410! {background-color="#2c3e50"}
+# Why are we here? {background-color="#2c3e50"}
+
+## Psychology has a data problem
+
+In 2015, a team of 270 researchers tried to replicate 100 published psychology studies.
+
+. . .
+
+**Only 36% produced the same results.**
+
+. . .
+
+This wasn't fraud. These were real labs, following published methods, using real data.
+
+So what went wrong?
+
+## Many things went wrong
+
+- Analyses that couldn't be reproduced (even by the original authors)
+- Data that was cleaned by hand with no record of what changed
+- Figures that obscured rather than revealed patterns
+- Code that only worked on one person's laptop
+
+. . .
+
+The replication crisis isn't just a statistics problem. It's a **workflow** problem.
+
+## This course is about the workflow
+
+Every technical skill we learn this quarter serves the same goal:
+
+. . .
+
+> Start with raw data. End with a clear, honest, reproducible story.
+
+. . .
+
+That means learning to:
+
+- **Import** data without breaking it
+- **Transform** it transparently (with code, not clicks)
+- **Visualize** it to find patterns — and catch errors
+- **Communicate** what you found so others can verify it
 
 ## About this course
 
@@ -29,30 +72,17 @@ execute:
 - Data visualization with ggplot2
 - Data transformation with dplyr
 - Data tidying with tidyr
-- Reproducible research with Quarto
+- Reproducible reports with Quarto
 :::
 
 ::: {.column width="50%"}
 **Why it matters:**
 
 - Psychology is increasingly data-driven
-- Reproducibility crisis demands better practices
-- These skills are transferable everywhere
+- These skills make your work reproducible
+- They transfer to any career that touches data
 :::
 ::::
-
-## Why data science for psychology?
-
-Psychology research involves:
-
-- Collecting data from experiments, surveys, observations
-- Cleaning messy real-world data
-- Visualizing patterns and relationships
-- Communicating findings clearly
-
-. . .
-
-**Data science gives us tools to do all of this better.**
 
 ## The old way vs. the new way
 
@@ -79,11 +109,11 @@ Psychology research involves:
 ## Why R specifically?
 
 - **Free and open source** — no expensive licenses
-- **Designed for statistics** — built by statisticians for data analysis
+- **Designed for data analysis** — built by statisticians
 - **Massive community** — packages for everything
 - **Psychology-friendly** — `psych`, `lavaan`, `lme4`, `brms`...
 - **Beautiful visualizations** — ggplot2 is industry-leading
-- **Reproducible research** — Quarto/RMarkdown integration
+- **Reproducible research** — Quarto integration
 
 # Getting set up {background-color="#2c3e50"}
 
@@ -144,25 +174,6 @@ Type in the Console and press Enter:
 
 Congrats — you just ran R code!
 
-## More console experiments
-
-```{r}
-# R can do math
-10 * 5
-sqrt(144)
-```
-
-```{r}
-# R has built-in functions
-mean(c(1, 2, 3, 4, 5))
-```
-
-```{r}
-# R can store things in objects
-my_number <- 42
-my_number * 2
-```
-
 ## The assignment operator
 
 In R, we use `<-` to assign values to objects:
@@ -174,11 +185,81 @@ Think of it as an arrow pointing left: "put 10 into x"
 
 . . .
 
+```{r}
+# You can use objects in calculations
+x * 2
+x + x
+```
+
+. . .
+
 ::: {.callout-tip}
 **Keyboard shortcut:** Alt + - (Windows) or Option + - (Mac)
 :::
 
-# Projects & workflow {background-color="#2c3e50"}
+# Organizing your work {background-color="#2c3e50"}
+
+## Two mental models
+
+:::: {.columns}
+::: {.column width="50%"}
+
+### The filing cabinet
+
+Every piece of paper has a **place** where it *lives*.
+
+You navigate **to** that place to find it.
+
+```
+Documents/
+├── psy410/
+│   ├── data/
+│   └── scripts/
+└── thesis/
+    ├── data/
+    └── drafts/
+```
+
+:::
+
+::: {.column width="50%"}
+
+### The laundry basket
+
+Everything is in **one pile**.
+
+You **search** to find it.
+
+<br>
+
+*Google, Spotlight, Finder search, "Recent files"...*
+
+:::
+::::
+
+. . .
+
+Neither is wrong for daily life. But **coding requires the filing cabinet.**
+
+## Why coding requires the filing cabinet
+
+When you write:
+
+```{r}
+survey <- read.csv("data/raw/survey_responses.csv")
+```
+
+You're giving directions: "Start here. Go into `data`. Then into `raw`. Find `survey_responses.csv`."
+
+. . .
+
+If the file isn't exactly there, the code **breaks**. No fuzzy matching. No "did you mean...?"
+
+. . .
+
+::: {.callout-important}
+This is why we need to learn directory structure — even if it feels foreign.
+:::
 
 ## Why use RStudio Projects?
 
@@ -202,6 +283,12 @@ Think of it as an arrow pointing left: "put 10 into x"
 :::
 ::::
 
+. . .
+
+::: {.callout-tip}
+**The golden rule:** Someone else should be able to run your code and get the same results. That "someone else" includes Future You — who has forgotten everything.
+:::
+
 ## Creating a project
 
 1. File → New Project...
@@ -212,24 +299,58 @@ Think of it as an arrow pointing left: "put 10 into x"
 
 . . .
 
-You'll see a `.Rproj` file appear — this is your project file.
+You'll see a `.Rproj` file appear — this is your project file. From now on, double-click it to open your project.
 
-## Project folder structure
-
-A good project folder might look like:
+## A standard project structure
 
 ```
 psy410/
 ├── psy410.Rproj
 ├── data/
-│   └── survey_data.csv
+│   ├── raw/           # Original data (READ ONLY)
+│   └── clean/         # Processed data
 ├── scripts/
-│   └── analysis.R
+│   ├── 01_clean.R     # Data cleaning
+│   ├── 02_analyze.R   # Main analysis
+│   └── 03_visualize.R # Figures
 └── output/
-    └── figures/
+    └── figures/       # Saved plots
 ```
 
-Keep your work organized from the start!
+. . .
+
+Two principles:
+
+1. **Raw data is sacred** — never modify original files
+2. **Outputs are disposable** — you can always regenerate them from code
+
+## Naming things
+
+Good names make code **self-documenting**. Bad names create confusion and bugs.
+
+:::: {.columns}
+::: {.column width="50%"}
+**Do this:**
+
+- `reaction_time`
+- `mean_anxiety`
+- `survey_clean.csv`
+- `01_clean_data.R`
+:::
+
+::: {.column width="50%"}
+**Not this:**
+
+- `x1`, `temp`, `foo`
+- `AvgAnx` (hard to read)
+- `data_final_v2_REAL.csv`
+- `stuff.R`, `untitled3.R`
+:::
+::::
+
+. . .
+
+The test: Can someone unfamiliar with your project understand what a variable contains or what a file does?
 
 ## R Scripts
 
@@ -316,22 +437,14 @@ library(tidyverse)
 mpg
 ```
 
-## Other ways to look at data frames
-
-```{r}
-# get the type of variable and the first few instances
-glimpse(mpg)
-# how many rows and columns?
-dim(mpg)
-```
-
 ## Your turn!
 
 1. Create a new RStudio Project called "psy410"
-2. Create a new R script
-3. Install and load the tidyverse
-4. Run `glimpse(mpg)` and `glimpse(diamonds)`
-5. Save your script!
+2. Inside it, create three folders: `data`, `scripts`, `output`
+3. Create a new R script in `scripts/` and save it as `01_practice.R`
+4. Install and load the tidyverse
+5. Run `glimpse(mpg)` and `glimpse(diamonds)`
+6. Save your script!
 
 # Getting help {background-color="#2c3e50"}
 
@@ -373,9 +486,9 @@ maen(c(1, 2, 3))
 
 Read the error message carefully — R is trying to help you.
 
-# Class expectations and structure {background-color="#2c3e50"}
+# Why no AI? (Yet) {background-color="#2c3e50"}
 
-# Why No AI? (Yet)
+---
 
 I encourage you to read ["Cognitive helmets for AI bicycles"](https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/) by Cat Hicks.
 
@@ -388,45 +501,45 @@ I encourage you to read ["Cognitive helmets for AI bicycles"](https://www.fightf
 
 ---
 
-### The Problem: The "Illusion of Competence"
+### The problem: The "illusion of competence"
 
-*   **Psychological Concept:** *Metacognition* (Monitoring your own understanding).
-*   **The Trap:**
+*   **Psychological concept:** *Metacognition* (monitoring your own understanding).
+*   **The trap:**
     *   AI gives you a working answer immediately.
-    *   It *feels* like you solved it (Dopamine hit!).
-    *   But you didn't build the **Mental Model** of *why* it works.
-*   **The Result:** When the AI hallucinates (which it will), you cannot debug it. You are stranded.
+    *   It *feels* like you solved it (dopamine hit!).
+    *   But you didn't build the **mental model** of *why* it works.
+*   **The result:** When the AI hallucinates (which it will), you cannot debug it. You are stranded.
 
 ---
 
-### The Solution: "Cognitive Helmets"
+### The solution: "Cognitive helmets"
 
-*   Before we get on the AI motorcycle, we need a **Cognitive Helmet**.
-*   **What is the Helmet?**
-    1.  **Syntax Literacy:** Reading code as fluently as English.
-    2.  **Debugging Resilience:** Emotional regulation when things break.
-    3.  **Strategic Friction:** The ability to break a big problem into small pieces.
+*   Before we get on the AI motorcycle, we need a **cognitive helmet**.
+*   **What is the helmet?**
+    1.  **Syntax literacy:** Reading code as fluently as English.
+    2.  **Debugging resilience:** Emotional regulation when things break.
+    3.  **Strategic friction:** The ability to break a big problem into small pieces.
 
 
 ---
 
-### Course Structure: Building the Helmet
+### Course structure: Building the helmet
 
 *   **Many short assignments**
-    *   This is **"Desirable Difficulty."**
+    *   This is **"desirable difficulty."**
     *   We are building the neural pathways for code syntax.
-    *   Small wins build the "Mental Model" of how data is structured.
-*   **Why "Maladaptive Easy"?**
-    *   Using AI now = Skipping the gym but expecting to get strong.
+    *   Small wins build the mental model of how data is structured.
+*   **Why "maladaptive easy"?**
+    *   Using AI now = skipping the gym but expecting to get strong.
     *   It bypasses the *encoding process* in your brain.
 
 ---
 
-### The Future: When Do We Use AI?
+### The future: When do we use AI?
 
 *   We **will** use AI in this field (and perhaps this course later).
-*   **But only when you have your Helmet.**
-*   **The Goal:** You should be the **Pilot**, not the Passenger.
+*   **But only when you have your helmet.**
+*   **The goal:** You should be the **pilot**, not the passenger.
     *   *You* define the problem.
     *   *You* verify the code.
     *   *You* catch the errors.
@@ -437,28 +550,28 @@ I encourage you to read ["Cognitive helmets for AI bicycles"](https://www.fightf
 
 ## Before next class
 
-📖 **Read:**
+**Read:**
 
 - [R4DS Ch 2: Workflow basics](https://r4ds.hadley.nz/workflow-basics)
 - [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
 
-✅ **Do:**
+**Do:**
 
 - Install R and RStudio
-- Create your psy410 project
+- Create your psy410 project with `data/`, `scripts/`, and `output/` folders
 - Install the tidyverse package
 - Poke around! Try things! Break stuff!
 
 ## Key takeaways
 
-1. **R is a tool** — like learning any tool, it takes practice
-2. **RStudio makes R usable** — learn the interface
-3. **Projects keep you organized** — always use them
-4. **Scripts save your work** — never just type in the console
+1. **Psychology needs better data practices** — that's what this course builds
+2. **R is a tool** — like learning any tool, it takes practice
+3. **Organization matters** — filing cabinet, not laundry basket
+4. **Name things clearly** — your future self will thank you
 5. **Errors are learning opportunities** — read them, Google them
 
-## Questions?
+## The one thing to remember
 
-![](img/questions.png){fig-alt="Question mark" width="30%"}
+Every skill you learn in this course is a brick in a wall between you and the replication crisis.
 
 See you Wednesday for your first visualization!

@@ -27,9 +27,10 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 ### Session 1: Introduction & Setup
 **Monday, March 30**
 
-- Course overview: Why data science for psychology?
+- Why data science for psychology? The replication crisis as motivation
 - Installing R and RStudio
-- RStudio interface, projects, and workflow basics
+- RStudio interface, projects, and organizing your work
+- File and variable naming conventions
 
 📖 **Read:** [R4DS Ch 2: Workflow: basics](https://r4ds.hadley.nz/workflow-basics) | [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
 
@@ -106,17 +107,27 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 7: Data import](https://r4ds.hadley.nz/data-import) | [R4DS Ch 20: Spreadsheets](https://r4ds.hadley.nz/spreadsheets)
 
-::: {.callout-tip}
-## Assigned
-[Assignment 3: Tidying & Import](/assignment/03-assignment.qmd)
-:::
-
 ---
 
-## Week 4: Data Visualization Deep Dive {#week-4}
+## Week 4: Reproducibility & Visualization {#week-4}
 
-### Session 7: Layers & Aesthetics
+### Session 7: Quarto & Reproducibility
 **Monday, April 20**
+
+- Literate programming: code + narrative in one document
+- Quarto documents: YAML, markdown, code chunks
+- Inline code and output formats
+- Rendering to HTML and PDF
+
+📖 **Read:** [R4DS Ch 28: Quarto](https://r4ds.hadley.nz/quarto)
+
+::: {.callout-tip}
+## Assigned
+[Assignment 3: Tidying, Import & Quarto](/assignment/03-assignment.qmd)
+:::
+
+### Session 8: Layers & Aesthetics
+**Wednesday, April 22**
 
 - Geoms, stats, and position adjustments
 - Coordinate systems and scales
@@ -124,13 +135,12 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 9: Layers](https://r4ds.hadley.nz/layers)
 
-::: {.callout-important}
-## 📋 Due Today
-[Assignment 3: Tidying & Import](/assignment/03-assignment.qmd)
-:::
+---
 
-### Session 8: Perception & Design
-**Wednesday, April 22**
+## Week 5: Visualization & EDA {#week-5}
+
+### Session 9: Perception & Design
+**Monday, April 27**
 
 - Visual perception principles
 - Color theory and accessibility
@@ -143,12 +153,13 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 [Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd)
 :::
 
----
+::: {.callout-important}
+## 📋 Due Today
+[Assignment 3: Tidying, Import & Quarto](/assignment/03-assignment.qmd)
+:::
 
-## Week 5: Exploratory Data Analysis {#week-5}
-
-### Session 9: EDA - Variation
-**Monday, April 27**
+### Session 10: EDA — Variation
+**Wednesday, April 29**
 
 - Exploring distributions
 - Identifying outliers and unusual values
@@ -156,13 +167,17 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
 
-::: {.callout-important}
-## 📋 Due Today
-[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd)
+::: {.callout-warning}
+## 📝 Project Milestone
+**Final Project Proposal Due** — Dataset selection, research questions, initial plan
 :::
 
-### Session 10: EDA - Covariation
-**Wednesday, April 29**
+---
+
+## Week 6: Exploratory Data Analysis {#week-6}
+
+### Session 11: EDA — Covariation
+**Monday, May 4**
 
 - Exploring relationships between variables
 - Patterns and models
@@ -175,17 +190,13 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 [Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd)
 :::
 
-::: {.callout-warning}
-## 📝 Project Milestone
-**Final Project Proposal Due** — Dataset selection, research questions, initial plan
+::: {.callout-important}
+## 📋 Due Today
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd)
 :::
 
----
-
-## Week 6: Data Types & Wrangling {#week-6}
-
-### Session 11: Data Types Grab Bag
-**Monday, May 4**
+### Session 12: Data Types Grab Bag
+**Wednesday, May 6**
 
 - Logical vectors: comparisons and Boolean operations
 - Working with numeric data: rounding, summarizing
@@ -193,31 +204,31 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 12: Logical vectors](https://r4ds.hadley.nz/logicals) | [R4DS Ch 13: Numbers](https://r4ds.hadley.nz/numbers)
 
-::: {.callout-important}
-## 📋 Due Today
-[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd)
-:::
+---
 
-### Session 12: Strings & Factors
-**Wednesday, May 6**
+## Week 7: Data Wrangling {#week-7}
+
+### Session 13: Strings, Factors & Text
+**Monday, May 11**
 
 - Basic string cleaning: `str_to_lower()`, `str_trim()`, `str_replace()`
 - Working with categorical variables (factors)
-- Releveling factors for analysis and visualization
+- Light text analysis: tokenizing and counting open-ended survey responses
 
 📖 **Read:** [R4DS Ch 14: Strings](https://r4ds.hadley.nz/strings) (sections 14.1–14.3) | [R4DS Ch 16: Factors](https://r4ds.hadley.nz/factors)
 
 ::: {.callout-tip}
 ## Assigned
-[Assignment 6: Data Types](/assignment/06-assignment.qmd)
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd)
 :::
 
----
+::: {.callout-important}
+## 📋 Due Today
+[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd)
+:::
 
-## Week 7: Combining & Cleaning Data {#week-7}
-
-### Session 13: Joins
-**Monday, May 11**
+### Session 14: Joins
+**Wednesday, May 13**
 
 - Primary keys and foreign keys
 - Mutating joins: `left_join()`, `inner_join()`, etc.
@@ -225,13 +236,19 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
 
-::: {.callout-important}
-## 📋 Due Today
-[Assignment 6: Data Types](/assignment/06-assignment.qmd)
+---
+
+## Week 8: Missing Data {#week-8}
+
+### Monday, May 18
+
+::: {.callout-warning}
+## No Class
+Use this time to work on your final project draft!
 :::
 
-### Session 14: Missing Data
-**Wednesday, May 13**
+### Session 15: Missing Data
+**Wednesday, May 20**
 
 - Implicit vs. explicit missing values
 - Patterns of missingness
@@ -244,33 +261,9 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 [Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
 :::
 
----
-
-## Week 8: Storytelling with Data {#week-8}
-
-### Monday, May 18
-
-::: {.callout-warning}
-## No Class
-Use this time to work on your final project draft!
-:::
-
-### Session 15: Storytelling with Data
-**Wednesday, May 20**
-
-*Drawing from Knaflic's "Storytelling with Data"*
-
-1. **Understand the context** — Audience, message, and the Big Idea
-2. **Choose appropriate visuals** — Matching plot types to data and questions
-3. **Eliminate clutter** — Gestalt principles; strategic contrast
-4. **Focus attention** — Preattentive attributes (color, size, position)
-5. **Think like a designer** — Visual hierarchy; accessibility; colorblind-friendly palettes
-
-📖 **Read:** [R4DS Ch 11: Communication](https://r4ds.hadley.nz/communication)
-
 ::: {.callout-important}
 ## 📋 Due Today
-[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd)
 :::
 
 ::: {.callout-warning}
@@ -280,7 +273,7 @@ Use this time to work on your final project draft!
 
 ---
 
-## Week 9: Reproducible Research {#week-9}
+## Week 9: Storytelling with Data {#week-9}
 
 ### Monday, May 25
 
@@ -288,47 +281,60 @@ Use this time to work on your final project draft!
 ## No Class — Memorial Day
 :::
 
-### Session 16: Quarto
+### Session 16: Storytelling with Data
 **Wednesday, May 27**
 
-- Literate programming and reproducibility
-- Quarto documents: YAML, markdown, code chunks
-- Inline code and output formats
-- Rendering to HTML and PDF
+*Drawing from Knaflic's "Storytelling with Data"*
 
-📖 **Read:** [R4DS Ch 28: Quarto](https://r4ds.hadley.nz/quarto)
+1. **Understand the context** — Audience, message, and the Big Idea
+2. **Choose appropriate visuals** — Matching plot types to data and questions
+3. **Eliminate clutter** — Gestalt principles; strategic contrast
+4. **Focus attention** — Preattentive attributes (color, size, position)
+5. **Think like a designer** — Visual hierarchy; accessibility; colorblind-friendly palettes
+
+Plus: Data integrity, the replication crisis, and why reproducible workflows matter
+
+📖 **Read:** [R4DS Ch 11: Communication](https://r4ds.hadley.nz/communication)
 
 ::: {.callout-tip}
 ## Assigned
-[Assignment 8: Reproducible Report](/assignment/08-assignment.qmd)
+[Assignment 8: Storytelling Report](/assignment/08-assignment.qmd)
+:::
+
+::: {.callout-important}
+## 📋 Due Today
+[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
 :::
 
 ---
 
-## Week 10: Practice & Wrap-up {#week-10}
+## Week 10: Modeling & Wrap-up {#week-10}
 
-### Session 17: Practice & Review
+### Session 17: Correlation & Simple Regression
 **Monday, June 1**
 
-- Guided practice: Complete workflow from import to polished figure
-- Common pitfalls and debugging strategies
-- Q&A and troubleshooting for final projects
-- Getting help: [R4DS Ch 8](https://r4ds.hadley.nz/workflow-help)
+- Quantifying relationships: `cor()` and `cor.test()`
+- Introduction to `lm()`: fitting and interpreting a simple linear model
+- Connecting EDA to inference: "is this pattern real?"
+- A preview of what's next in your stats courses
 
-📖 **Read:** [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)
+📖 **Read:** TBD (supplementary intro to correlation and regression in R)
 
 ::: {.callout-important}
 ## 📋 Due Today
-[Assignment 8: Reproducible Report](/assignment/08-assignment.qmd)
+[Assignment 8: Storytelling Report](/assignment/08-assignment.qmd)
 :::
 
 ### Session 18: Putting It All Together
 **Wednesday, June 3**
 
 - Complete analysis workflow demonstration
+- Common errors and debugging strategies
 - Course review: What you've learned
 - Where to go from here: next steps for continued learning
-- Final project work time
+- Final project Q&A
+
+📖 **Read:** [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)
 
 ::: {.callout-warning}
 ## 📝 Project Milestone
@@ -352,12 +358,12 @@ Use this time to work on your final project draft!
 |------------|-------|----------|-----|
 | 1 | Getting Started | Session 2 (Apr 1) | Session 3 (Apr 6) |
 | 2 | Data Transformation | Session 4 (Apr 8) | Session 5 (Apr 13) |
-| 3 | Tidying & Import | Session 6 (Apr 15) | Session 7 (Apr 20) |
-| 4 | Visualization Deep Dive | Session 8 (Apr 22) | Session 9 (Apr 27) |
-| 5 | Exploratory Data Analysis | Session 10 (Apr 29) | Session 11 (May 4) |
-| 6 | Data Types | Session 12 (May 6) | Session 13 (May 11) |
-| 7 | Joins & Missing Data | Session 14 (May 13) | Session 15 (May 20) |
-| 8 | Reproducible Report | Session 16 (May 27) | Session 17 (Jun 1) |
+| 3 | Tidying, Import & Quarto | Session 7 (Apr 20) | Session 9 (Apr 27) |
+| 4 | Visualization Deep Dive | Session 9 (Apr 27) | Session 11 (May 4) |
+| 5 | Exploratory Data Analysis | Session 11 (May 4) | Session 13 (May 11) |
+| 6 | Data Types & Wrangling | Session 13 (May 11) | Session 15 (May 20) |
+| 7 | Joins & Missing Data | Session 15 (May 20) | Session 16 (May 27) |
+| 8 | Storytelling Report | Session 16 (May 27) | Session 17 (Jun 1) |
 
 ## Final Project Milestones
 

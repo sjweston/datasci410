@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -25,31 +26,19 @@ execute:
 library(tidyverse)
 ```
 
-# The data science workflow {background-color="#2c3e50"}
+# Getting real data into R {background-color="#2c3e50"}
 
-## Where we are
+## Your data isn't inside a package
 
-```{r}
-#| echo: false
-tibble(
-  Step = c("**Import**", "Tidy", "Transform", "Visualize", "Communicate"),
-  Status = c("← Today", "✓ Session 5", "✓ Sessions 3–4", "✓ Sessions 2, 7–8", "Later")
-) |>
-  knitr::kable()
-```
+So far we've used datasets that were already loaded in R — `mpg`, `flights`, `bfi`.
 
-Import is step one — but we saved it for now because we needed tidy data concepts first.
+. . .
 
-## What importing looks like in practice
+But your thesis data isn't sitting inside a package. It's a CSV on your desktop, an Excel file from your advisor, or a Qualtrics export with 200 columns named `Q1`, `Q2`, `Q3`...
 
-You have data somewhere. You need it in R.
+. . .
 
-- A CSV file from a study
-- An Excel spreadsheet from a collaborator
-- A Qualtrics export
-- A dataset from another statistical program
-
-**Goal:** Get it into R as a tibble, with the right column types.
+Today we learn how to get it into R — and what to check when things don't import cleanly.
 
 # Reading CSV files {background-color="#2c3e50"}
 
@@ -390,8 +379,8 @@ Try importing the messy CSV we created during the pair exercise and cleaning it 
 4. **Excel is tricky** — use `readxl` and be suspicious of formatting
 5. **Save cleaned files** — don't re-clean every time
 
-## Questions?
+## The one thing to remember
 
-Next time: **Layers & Aesthetics**
+Your analysis is only as good as your import. Check it before you trust it.
 
-We're diving deeper into ggplot2 — more geoms, scales, and stat transformations!
+Next time: Layers & Aesthetics

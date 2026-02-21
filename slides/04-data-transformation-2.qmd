@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -26,18 +27,21 @@ library(tidyverse)
 library(nycflights13)
 ```
 
-# Review {background-color="#2c3e50"}
+# From rows to statistics {background-color="#2c3e50"}
 
-## The dplyr verbs so far
+## Your advisor's first question
 
-| Verb | What it does |
-|------|--------------|
-| `filter()` | Pick rows by condition |
-| `arrange()` | Sort rows |
-| `select()` | Pick columns |
-| `mutate()` | Create new columns |
+Last time, you learned to pick rows, sort them, and create new columns.
 
-Today we add the most powerful duo: **group_by()** + **summarize()**
+. . .
+
+But your advisor doesn't want rows. They want a number:
+
+*"What's the average depression score by condition?"*
+
+. . .
+
+Today we learn to answer that — with **group_by()** + **summarize()**.
 
 # summarize() {background-color="#2c3e50"}
 
@@ -636,8 +640,8 @@ raw_data |>
 4. **ungroup()** when you need to work with all data again
 5. **Code style matters** — write for your future self
 
-## Questions?
+## The one thing to remember
 
-Next time: **Data Tidying with tidyr**
+`group_by()` + `summarize()` is how you go from raw data to the descriptive statistics table in every published paper.
 
-We'll learn to reshape data between wide and long formats!
+Next time: Data Tidying with tidyr

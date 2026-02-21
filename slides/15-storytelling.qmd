@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -643,6 +644,8 @@ Before finalizing any figure, ask:
 - Revise your figures based on today's principles
 - Review feedback on your draft
 
-## Questions?
+## The one thing to remember
+
+A figure without a story is just a picture. Ask "so what?" until you have the answer.
 
 See you next week for Quarto and reproducible reports!

@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -39,13 +40,30 @@ reaction_data <- tibble(
 
 # How we see data {background-color="#2c3e50"}
 
-## Why perception matters
+## What's wrong with this?
 
-You can have perfect data and a correct analysis — but if the visualization doesn't communicate, it fails.
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+ggplot(reaction_data, aes(x = condition, y = rt, fill = condition)) +
+  geom_bar(stat = "summary", fun = mean) +
+  scale_fill_manual(values = c("Control" = "red", "Treatment" = "green")) +
+  labs(title = "Results", y = "rt", x = "condition") +
+  theme(
+    panel.background = element_rect(fill = "lightyellow"),
+    panel.grid = element_line(color = "grey50"),
+    text = element_text(size = 10)
+  )
+```
 
-Visualization design isn't about aesthetics. It's about **how the human visual system processes information.**
+. . .
 
-## Preattentive attributes
+Red-green palette (colorblind-unfriendly). No informative title. Tiny text. Gridline noise. Bars hiding the data.
+
+Today we learn **why your brain rejects bad figures** — and how to design ones that work.
+
+## Your brain processes some visual features before you even think
 
 Some visual features are processed almost instantly — before conscious attention kicks in:
 
@@ -318,22 +336,77 @@ reaction_data |>
 
 # Critiquing bad graphs {background-color="#2c3e50"}
 
-## Your turn: Fix these graphs
+## What's wrong here? (1 of 3)
 
-**Placeholder for in-class activity:**
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+# Bad: Truncated y-axis exaggerates difference
+reaction_data |>
+  group_by(condition) |>
+  summarize(mean_rt = mean(rt)) |>
+  ggplot(aes(x = condition, y = mean_rt, fill = condition)) +
+  geom_col() +
+  scale_fill_manual(values = c("Control" = "grey60", "Treatment" = "grey40")) +
+  coord_cartesian(ylim = c(470, 530)) +
+  labs(title = "Treatment Reduces Reaction Time",
+       y = "Mean RT (ms)", x = NULL) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
 
-I'll show you several poorly designed graphs. With a partner, identify what's wrong and suggest specific improvements.
+. . .
 
-::: {.callout-note}
-## TODO (Sara)
-Add 2-3 examples of bad graphs here. Good candidates:
-- Misleading y-axis (truncated or reversed)
-- Poor color choices (red-green, rainbow for categories)
-- Unnecessary 3D or chart junk
-- Misleading pie chart or dual y-axis
+**The problem:** The y-axis starts at 470, not 0. The difference looks massive — but it's only ~40 ms. A truncated axis exaggerates the effect.
 
-For each: have students identify problems, then reveal a better version.
-:::
+## What's wrong here? (2 of 3)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+# Bad: Rainbow color + too many gridlines + no informative title
+reaction_data |>
+  ggplot(aes(x = condition, y = rt, fill = age_group)) +
+  geom_boxplot() +
+  scale_fill_manual(values = c("Young" = "red", "Older" = "green")) +
+  labs(title = "Boxplot", y = "rt", x = "condition") +
+  theme(
+    panel.background = element_rect(fill = "lightyellow"),
+    panel.grid.major = element_line(color = "grey50"),
+    panel.grid.minor = element_line(color = "grey70")
+  )
+```
+
+. . .
+
+**The problems:** Red-green palette (colorblind-unfriendly). Title says "Boxplot" (a label, not a finding). Variable names as labels. Distracting background color and gridlines.
+
+## What's wrong here? (3 of 3)
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+# Bad: Pie chart of continuous data categories
+reaction_data |>
+  mutate(speed = case_when(
+    rt < 450 ~ "Fast",
+    rt < 550 ~ "Medium",
+    TRUE ~ "Slow"
+  )) |>
+  count(speed) |>
+  ggplot(aes(x = "", y = n, fill = speed)) +
+  geom_col(width = 1) +
+  coord_polar("y") +
+  labs(title = "Speed Categories") +
+  theme_void()
+```
+
+. . .
+
+**The problems:** Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.
 
 # Get a head start {background-color="#2c3e50"}
 
@@ -385,8 +458,8 @@ Start experimenting now:
 4. **Declutter ruthlessly** — every element must earn its place
 5. **Critical evaluation** — always ask whether each element adds information
 
-## Questions?
+## The one thing to remember
 
-Next time: **Exploratory Data Analysis**
+You're not designing for yourself. You're designing for a reader who will look at your figure for five seconds.
 
-We'll learn to systematically explore data and ask good questions!
+Next time: Exploratory Data Analysis

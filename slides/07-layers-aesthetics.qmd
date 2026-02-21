@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -38,9 +39,32 @@ reaction_data <- tibble(
 
 # Choosing the right geom {background-color="#2c3e50"}
 
-## Back to the grammar of graphics
+## Same data, two stories
 
-We covered the basics in Session 2. Now we go deeper: **matching plot type to data type.**
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 3.5
+#| output-location: slide
+library(patchwork)
+
+p1 <- ggplot(reaction_data, aes(x = condition, y = rt)) +
+  geom_bar(stat = "summary", fun = mean, fill = "grey70") +
+  labs(title = "Version A", y = "Mean RT (ms)", x = NULL) +
+  theme_minimal(base_size = 14)
+
+p2 <- ggplot(reaction_data, aes(x = condition, y = rt, color = condition)) +
+  geom_jitter(width = 0.2, alpha = 0.5, size = 2) +
+  geom_boxplot(alpha = 0.3, width = 0.4, outlier.shape = NA) +
+  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
+  labs(title = "Version B", y = "Mean RT (ms)", x = NULL) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+
+p1 + p2
+```
+
+Both use the same data. The difference is **layers** — and the right layers tell the right story.
 
 The wrong geom doesn't just look bad — it can actively mislead.
 
@@ -474,8 +498,8 @@ Assignment 4 will ask you to create "bad" and "good" versions of figures. Start 
 4. **Scales control** axes, colors, and legends
 5. **coord_cartesian() zooms; scale limits drop data** — know the difference
 
-## Questions?
+## The one thing to remember
 
-Next time: **Perception & Design**
+The difference between a chart and a figure is intention — every layer should earn its place.
 
-We'll learn why some visualizations work and others don't — and how to make yours better!
+Next time: Perception & Design

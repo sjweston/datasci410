@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,16 +30,17 @@ library(nycflights13)  # For the flights dataset
 
 # Data transformation {background-color="#2c3e50"}
 
-## Why transform data?
+## A question you can't answer yet
 
-Real data rarely comes in the exact form you need:
+You collected survey data from 500 participants. You only want women over 25 who passed the attention check.
 
-- Filter to specific participants or conditions
-- Create new variables (e.g., scale scores, dummy codes)
-- Sort to find extreme values
-- Select relevant columns from wide datasets
+. . .
 
-**dplyr** makes all of this straightforward.
+How do you get to *just those rows?*
+
+. . .
+
+That's what `filter()` does. And it's just the beginning — today we learn four verbs that turn raw data into exactly what you need.
 
 ## The dplyr verbs
 
@@ -432,7 +434,7 @@ mutate(survey,
 )
 ```
 
-# The pipe: |> {background-color="#2c3e50"}
+# The pipe makes your code read like a sentence {background-color="#2c3e50"}
 
 ## The problem with nested functions
 
@@ -627,8 +629,8 @@ The pipe (`|>`) connects these verbs into a readable workflow.
 4. **mutate()** creates new columns
 5. **The pipe |>** makes code readable and elegant
 
-## Questions?
+## The one thing to remember
 
-Next time: **group_by() and summarize()**
+The pipe turns a wall of nested code into a sentence you can read aloud.
 
-We'll learn to calculate statistics by group!
+Next time: group_by() and summarize()

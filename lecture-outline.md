@@ -1,7 +1,7 @@
 # PSY 410: Lecture Outline
 
 ## Course Philosophy
-This outline maps every lecture with specific topics, functions, and readings. The goal is to build confident, independent data analysts who can wrangle real psychology data and communicate findings effectively.
+This outline maps every lecture with specific topics, functions, and readings. The goal is to build confident, independent data analysts who can wrangle real psychology data, communicate findings effectively, and get a taste of statistical modeling in R.
 
 ---
 
@@ -10,20 +10,21 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ### Topics
 - Welcome & introductions
-- **[PLACEHOLDER] Teaching philosophy** — how I approach this class, what to expect, how to succeed
-- Why data science for psychology?
-  - Reproducibility crisis
-  - Data is everywhere in modern research
+- **Why data science for psychology?**
+  - The replication crisis as a workflow problem (Open Science Collaboration, 2015)
+  - Start with raw data → end with a clear, honest, reproducible story
   - These skills transfer to industry, grad school, everywhere
-- **[PLACEHOLDER] AI in data science & this class** — AI is a powerful tool in professional settings, but building fundamentals requires struggle; explain the AI policy
+- **AI in data science & this class** — cognitive helmets framework (Cat Hicks); AI is a powerful tool but building fundamentals requires struggle; explain the AI policy
 - The R ecosystem: R vs RStudio vs tidyverse
 - Installing R and RStudio (should be done before class)
 - The RStudio interface: four panes
-- **Project-oriented workflow** (Jenny Bryan's philosophy)
-  - Why `setwd()` is a bad habit
-  - Why `rm(list=ls())` doesn't actually clean your environment
-  - RStudio Projects as the solution
-  - Relative paths, not absolute paths
+- **Organizing your work**
+  - Two mental models: filing cabinet vs laundry basket (inspired by Cunningham, Gov 51)
+  - Why coding requires the filing cabinet model — `read.csv("data/raw/survey.csv")` gives directions, not a search
+  - RStudio Projects as the solution (Jenny Bryan's philosophy)
+  - Why `setwd()` is a bad habit; relative paths, not absolute paths
+  - Standard project structure: `data/raw/`, `data/clean/`, `scripts/`, `output/`
+  - Naming conventions: files and variables (good names vs bad names)
 - Creating your first project
 
 ### Key Functions/Concepts
@@ -199,13 +200,52 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - R4DS Ch 7: Data import
 - R4DS Ch 20: Spreadsheets
 
+---
+
+## Session 7: Quarto & Reproducibility
+**Monday, April 20**
+
+### Topics
+- What is literate programming?
+  - Code + narrative in one document
+  - Why this matters for reproducibility
+  - Connect back to Session 1: reproducibility crisis
+- Quarto basics
+  - YAML header (metadata)
+  - Markdown for text (headers, bold, italic, lists, links)
+  - Code chunks for R
+- Code chunk options
+  - `echo`, `eval`, `include`, `message`, `warning`
+  - `fig-width`, `fig-height`, `fig-cap`
+  - `code-fold` for interactive documents
+- Inline code
+  - Embedding results in text
+  - Never hard-code statistics!
+- Output formats
+  - HTML (interactive, web-friendly)
+  - PDF (print-ready, requires LaTeX)
+  - Word (for collaborators who need it)
+- Tables
+  - `knitr::kable()` for simple tables
+  - Mention `gt` package for fancier tables
+
+### Key Functions/Concepts
+- YAML: `title`, `author`, `date`, `format`
+- Code chunks: `{r}`
+- Chunk options: `#| echo: false`, `#| fig-cap: "..."`
+- Inline code: `` `r expression` ``
+- `knitr::kable()`
+
+### Readings (before class)
+- R4DS Ch 28: Quarto
+
 ### Assignment
-- **Assigned:** Assignment 3 (Tidying & Import)
+- **Assigned:** Assignment 3 (Tidying, Import & Quarto)
 
 ---
 
-## Session 7: Layers & Aesthetics
-**Monday, April 20**
+## Session 8: Layers & Aesthetics
+**Wednesday, April 22**
 
 ### Topics
 - Review: the grammar of graphics
@@ -233,13 +273,10 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 9: Layers
 
-### Assignment
-- **Due:** Assignment 3
-
 ---
 
-## Session 8: Perception & Design
-**Wednesday, April 22**
+## Session 9: Perception & Design
+**Monday, April 27**
 
 ### Topics
 - Visual perception principles
@@ -270,11 +307,12 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ### Assignment
 - **Assigned:** Assignment 4 (Visualization Deep Dive)
+- **Due:** Assignment 3
 
 ---
 
-## Session 9: EDA — Variation
-**Monday, April 27**
+## Session 10: EDA — Variation
+**Wednesday, April 29**
 
 ### Topics
 - What is Exploratory Data Analysis?
@@ -301,13 +339,13 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)
 
-### Assignment
-- **Due:** Assignment 4
+### Assignments
+- **Due:** Final Project Proposal
 
 ---
 
-## Session 10: EDA — Covariation
-**Wednesday, April 29**
+## Session 11: EDA — Covariation
+**Monday, May 4**
 
 ### Topics
 - Exploring covariation (relationships)
@@ -335,14 +373,14 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)
 
-### Assignments
+### Assignment
 - **Assigned:** Assignment 5 (EDA)
-- **Due:** Final Project Proposal
+- **Due:** Assignment 4
 
 ---
 
-## Session 11: Data Types Grab Bag
-**Monday, May 4**
+## Session 12: Data Types Grab Bag
+**Wednesday, May 6**
 
 ### Topics
 - Logical vectors
@@ -371,13 +409,10 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - R4DS Ch 12: Logical vectors
 - R4DS Ch 13: Numbers
 
-### Assignment
-- **Due:** Assignment 5
-
 ---
 
-## Session 12: Strings & Factors
-**Wednesday, May 6**
+## Session 13: Strings, Factors & Text
+**Monday, May 11**
 
 ### Topics
 - Strings (light coverage)
@@ -392,6 +427,12 @@ This outline maps every lecture with specific topics, functions, and readings. T
   - Why factor order matters for plots and models
   - Reordering: `fct_relevel()`, `fct_reorder()`, `fct_infreq()`
   - Recoding: `fct_recode()`, `fct_collapse()`
+- **Light text analysis** (new)
+  - Tokenizing open-ended survey responses with `tidytext::unnest_tokens()`
+  - Word frequency counts — what are participants saying?
+  - Simple visualization: word frequency bar charts
+  - Psychology application: coding free-text responses, identifying themes
+  - This is a taste — point to `tidytext` package for students who want more
 - Practical application: Cleaning demographic variables
 
 ### Key Functions/Concepts
@@ -399,18 +440,20 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - `factor()`, `as_factor()`
 - `fct_relevel()`, `fct_reorder()`, `fct_infreq()`
 - `fct_recode()`, `fct_collapse()`
+- `tidytext::unnest_tokens()` (brief intro)
 
 ### Readings (before class)
 - R4DS Ch 14: Strings (sections 14.1–14.3 only)
 - R4DS Ch 16: Factors
 
 ### Assignment
-- **Assigned:** Assignment 6 (Data Types)
+- **Assigned:** Assignment 6 (Data Types & Wrangling)
+- **Due:** Assignment 5
 
 ---
 
-## Session 13: Joins
-**Monday, May 11**
+## Session 14: Joins
+**Wednesday, May 13**
 
 ### Topics
 - Why join data?
@@ -442,13 +485,10 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 19: Joins
 
-### Assignment
-- **Due:** Assignment 6
-
 ---
 
-## Session 14: Missing Data
-**Wednesday, May 13**
+## Session 15: Missing Data
+**Wednesday, May 20** *(no class Monday May 18)*
 
 ### Topics
 - Why missing data matters in psychology
@@ -480,13 +520,15 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 18: Missing values
 
-### Assignment
+### Assignments
 - **Assigned:** Assignment 7 (Joins & Missing Data)
+- **Due:** Assignment 6
+- **Due:** Final Project Draft
 
 ---
 
-## Session 15: Storytelling with Data
-**Wednesday, May 20**
+## Session 16: Storytelling with Data
+**Wednesday, May 27** *(no class Monday May 25 — Memorial Day)*
 
 ### Topics
 - Why storytelling? (Dykes article)
@@ -504,6 +546,13 @@ This outline maps every lecture with specific topics, functions, and readings. T
   3. Eliminate clutter — Less is more; Gestalt principles
   4. Focus attention — Use preattentive attributes strategically
   5. Think like a designer — Visual hierarchy, accessibility
+- **Data integrity and the replication crisis** (new segment, ~15 min)
+  - Connecting back to Session 1's opening
+  - Case study: the LaCour scandal — fabricated data in a high-profile study
+  - P-hacking and researcher degrees of freedom
+  - How visualization can catch errors (Scott Cunningham's "Women in Congress" planted-error example)
+  - The role of reproducible workflows in preventing and detecting fraud
+  - Why this matters for their careers as psychologists
 - Applying to your final project
   - What's the one thing you want your audience to remember?
   - Building a narrative arc with data
@@ -530,92 +579,56 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - Strategic use of color and emphasis
 - The "so what?" test
 - Recognizing misleading vs. just ineffective figures
+- Data integrity and reproducibility as professional ethics
 
 ### Readings (before class)
 - R4DS Ch 11: Communication
 - Dykes: [Data Storytelling: The Essential Data Science Skill](https://www.forbes.com/sites/brentdykes/2016/03/31/data-storytelling-the-essential-data-science-skill-everyone-needs/) (PDF provided)
 
-### Assignments
-- **Due:** Assignment 7
-- **Due:** Final Project Draft
-
----
-
-## Session 16: Quarto
-**Wednesday, May 27**
-
-### Topics
-- What is literate programming?
-  - Code + narrative in one document
-  - Why this matters for reproducibility
-- Quarto basics
-  - YAML header (metadata)
-  - Markdown for text (headers, bold, italic, lists, links)
-  - Code chunks for R
-- Code chunk options
-  - `echo`, `eval`, `include`, `message`, `warning`
-  - `fig-width`, `fig-height`, `fig-cap`
-  - `code-fold` for interactive documents
-- Inline code
-  - Embedding results in text
-  - Never hard-code statistics!
-- Output formats
-  - HTML (interactive, web-friendly)
-  - PDF (print-ready, requires LaTeX)
-  - Word (for collaborators who need it)
-- Tables
-  - `knitr::kable()` for simple tables
-  - Mention `gt` package for fancier tables
-
-### Key Functions/Concepts
-- YAML: `title`, `author`, `date`, `format`
-- Code chunks: `{r}`
-- Chunk options: `#| echo: false`, `#| fig-cap: "..."`
-- Inline code: `` `r expression` ``
-- `knitr::kable()`
-
-### Readings (before class)
-- R4DS Ch 28: Quarto
-
 ### Assignment
-- **Assigned:** Assignment 8 (Reproducible Report)
+- **Assigned:** Assignment 8 (Storytelling Report)
+- **Due:** Assignment 7
 
 ---
 
-## Session 17: Practice & Review
+## Session 17: Correlation & Simple Regression
 **Monday, June 1**
 
 ### Topics
-- Guided practice: A complete workflow
-  - Import a messy dataset
-  - Clean and tidy
-  - Explore and visualize
-  - Create a polished figure
-  - Document in Quarto
-- Common errors and how to read them
-  - "Object not found"
-  - "Could not find function"
-  - "Unexpected symbol"
-  - "Non-numeric argument to binary operator"
-- Debugging strategies
-  - Read the error message (really read it)
-  - Check your spelling and capitalization
-  - Run code line by line
-  - Google the error (everyone does this)
-  - Minimal reproducible examples
-- Getting help effectively
-  - How to ask a good question
-  - Stack Overflow, Posit Community, R4DS Slack
-- Q&A for final projects
+- Why add modeling to a data science course?
+  - You've been exploring patterns visually — now let's quantify them
+  - Connecting EDA to inference: "is this pattern real?"
+  - Psych students will encounter regression in stats courses — this is a preview
+- Correlation
+  - What correlation measures (strength and direction of linear relationship)
+  - `cor()` and `cor.test()`
+  - Visualizing correlation: scatterplots + trend lines (what `geom_smooth()` has been doing)
+  - Correlation matrices for multiple variables
+  - `corrplot` or `ggcorrplot` for visualization
+  - The mantra: correlation ≠ causation (with examples from psych)
+- Simple linear regression
+  - `lm()` — fitting a model
+  - Reading the output: `summary(lm_object)`
+  - Interpreting the slope and intercept in plain language
+  - R² — how much variation does the model explain?
+  - Visualizing the regression line
+- From EDA to modeling
+  - The pattern you see in a scatterplot → the numbers from `lm()`
+  - Using `broom::tidy()` and `broom::glance()` for clean model output
+  - Making a simple results table
+- What's next (brief, motivational)
+  - Multiple regression, ANOVA, mixed models — these all build on `lm()`
+  - You now have the R skills to learn these in your stats courses
 
-### Key Concepts
-- Error message interpretation
-- Debugging workflow
-- How to Google effectively
-- Creating reprex (reproducible examples)
+### Key Functions/Concepts
+- `cor()`, `cor.test()`
+- `lm()`, `summary()`
+- `broom::tidy()`, `broom::glance()`
+- Interpreting slope, intercept, R²
+- `geom_smooth(method = "lm")`
 
 ### Readings (before class)
-- R4DS Ch 8: Workflow: getting help
+- Supplementary: Brief intro to correlation and regression in R (TBD — consider excerpts from ModernDive or OpenIntro)
 
 ### Assignment
 - **Due:** Assignment 8
@@ -628,10 +641,26 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Topics
 - The complete data science workflow (review)
   - Import → Tidy → Transform → Visualize → Model → Communicate
-- Live demonstration: Real psychology analysis start to finish
+- Guided practice: A complete workflow
+  - Import a messy dataset
+  - Clean and tidy
+  - Explore and visualize
+  - Run a simple correlation/regression
+  - Create a polished Quarto report
+- Common errors and how to read them
+  - "Object not found"
+  - "Could not find function"
+  - "Unexpected symbol"
+  - "Non-numeric argument to binary operator"
+- Debugging strategies
+  - Read the error message (really read it)
+  - Check your spelling and capitalization
+  - Run code line by line
+  - Google the error (everyone does this)
+  - Minimal reproducible examples
 - What you've learned (celebrate!)
 - Where to go from here
-  - Statistics in R: t-tests, ANOVA, regression
+  - Statistics in R: multiple regression, ANOVA, mixed models
   - Advanced R: functions, iteration, packages
   - Version control: Git and GitHub
   - Interactive visualizations: Shiny
@@ -641,13 +670,18 @@ This outline maps every lecture with specific topics, functions, and readings. T
   - Posit primers
   - #TidyTuesday community
   - R-Ladies, local meetups
-- Final project work time
+- Final project work time & Q&A
 - Course evaluations
 
 ### Key Concepts
 - The full workflow
+- Error message interpretation
+- Debugging workflow
 - Growth mindset for continued learning
 - Community resources
+
+### Readings (before class)
+- R4DS Ch 8: Workflow: getting help
 
 ### Assignment
 - **Due:** Final Project Report
@@ -661,30 +695,36 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 # Potential Additions to Consider
 
-## Things I'd recommend adding:
+## Things we added in the Feb 2026 revision:
 
-1. **Common errors session content** — Already in Session 17, but could be woven throughout. Students need to see errors early and often so they're not scared of them.
+1. **Correlation & simple regression (Session 17)** — A one-session intro connecting EDA to modeling. Students see `cor()`, `lm()`, and learn to interpret output. This is a preview, not a full stats unit. Motivated by comparing our course to Scott Cunningham's Gov 51 at Harvard.
 
-2. **Dates and times (lubridate)** — Very common in psychology data (response timestamps, longitudinal studies). Could be a 15-minute addition to Session 11 or 12, but might be too much.
+2. **Light text analysis (Session 13)** — Added `tidytext::unnest_tokens()` and word frequency counts to the Strings & Factors session. Natural extension of string skills, directly relevant to analyzing open-ended survey responses.
 
-3. ~~**A few slides on "how to lie with charts"**~~ — Incorporated into Session 15 as a critical evaluation of figures section.
+3. **Data integrity and replication (Session 16)** — A ~15-minute segment in the Storytelling session connecting back to Session 1's opening. Case studies of data fraud, p-hacking, and how reproducible workflows help prevent and detect problems.
+
+4. **File organization & mental models (Session 1)** — Expanded the project setup section with the filing cabinet vs laundry basket framing and naming conventions. Inspired by Scott Cunningham's Gov 51 lecture on empirical workflow.
+
+5. **Quarto moved to Session 7** — Students learn Quarto earlier (Week 4 instead of Week 9) so all assignments from A3 onward are Quarto documents.
 
 ## Things that are probably fine to skip:
 
 1. **Regular expressions** — Too advanced for this audience. The basic string functions are enough.
 
-2. **Functions and iteration (purrr)** — You already cut this. Good call.
+2. **Functions and iteration (purrr)** — Already cut. Good call.
 
 3. **Git/GitHub** — Would be great but is a whole other course. Mention it as "where to go next."
 
-4. **Statistical modeling in R** — This is a data science / visualization course, not a stats course. They'll get that elsewhere.
+4. **Multiple regression and beyond** — Session 17 introduces simple regression only. Anything more (interaction terms, ANOVA, mixed models) is for stats courses.
 
 ## Psychology-specific additions to consider:
 
 1. **Getting data from Qualtrics** — Already mentioned in Session 6, but could be more explicit.
 
-2. **Reverse coding scale items** — Already in Session 11, good.
+2. **Reverse coding scale items** — Already in Session 12, good.
 
 3. **Computing reliability (Cronbach's alpha)** — Could mention `psych::alpha()` briefly, but might be scope creep.
 
-4. ~~**APA-style figures**~~ — Covered via a student handout distributed in Session 15. Not a lecture focus; journals have significant wiggle room in practice.
+4. ~~**APA-style figures**~~ — Covered via a student handout distributed in Session 16. Not a lecture focus; journals have significant wiggle room in practice.
+
+5. ~~**"How to lie with charts"**~~ — Incorporated into Session 16 as a critical evaluation of figures section.

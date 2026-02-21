@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -32,6 +33,14 @@ bfi <- as_tibble(bfi)
 
 # What is EDA? {background-color="#2c3e50"}
 
+## Know your data before you test it
+
+Before you run a single statistical test, you should know your data well enough to predict what the results will look like.
+
+. . .
+
+That's what EDA gives you — **no surprises**.
+
 ## Exploratory vs. confirmatory
 
 | | Exploratory (EDA) | Confirmatory |
@@ -43,7 +52,7 @@ bfi <- as_tibble(bfi)
 
 EDA comes **first.** You can't test a hypothesis you didn't notice.
 
-## The EDA mindset
+## Good EDA means looking before you test
 
 > "EDA is an attitude, not a technique."  
 > — John Tukey
@@ -450,8 +459,8 @@ That's the core of EDA — noticing things and getting curious.
 4. **Check missing data first** — it affects everything
 5. **Ask questions, then answer them** — that's the loop
 
-## Questions?
+## The one thing to remember
 
-Next time: **EDA — Covariation**
+EDA isn't a step you finish. It's the habit of looking at your data before you believe anything about it.
 
-We'll explore relationships between variables — the really interesting stuff!
+Next time: EDA — Covariation

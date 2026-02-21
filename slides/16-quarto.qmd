@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,20 +30,19 @@ library(tidyverse)
 
 # What is literate programming? {background-color="#2c3e50"}
 
-## The reproducibility crisis
+## Remember Session 1?
 
-Psychology is facing a problem:
-
-- Many published findings don't replicate
-- Analyses are hard to reproduce
-- Methods sections often lack detail
-- Data and code rarely shared
+We opened this course with a striking finding: only 36% of psychology studies replicated.
 
 . . .
 
-**Part of the solution:** Transparent, reproducible workflows
+Part of the problem was that analyses couldn't be reproduced — even by the original authors. Data was cleaned by hand. Numbers were copied into Word documents. Code only ran on one laptop.
 
-## Traditional workflow
+. . .
+
+**Quarto is part of the solution.** Today we learn to write documents where the analysis *is* the report.
+
+## Copy-paste workflows break when anything changes
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -675,6 +675,8 @@ You're learning a tool you'll use for years.
 - Continue working on your final project
 - Practice rendering to different formats
 
-## Questions?
+## The one thing to remember
+
+Quarto means your analysis and your report are the same document. Change one, the other updates. That's reproducibility.
 
 See you Monday for practice & review!

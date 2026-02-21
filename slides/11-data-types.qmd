@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,29 +30,35 @@ library(tidyverse)
 
 # Why data types matter {background-color="#2c3e50"}
 
-## Everything is a type
+## A published error
 
-In R, every value has a **type**:
-
-- `"hello"` is a **string** (character)
-- `42` is a **number** (double)
-- `TRUE` is a **logical** (boolean)
-- `"Female"` can be a **factor** (categorical)
+A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg Self-Esteem Scale. Item 3 is reverse-coded.
 
 . . .
 
-Understanding types helps you:
+What's their total score?
 
-- Choose the right functions
-- Avoid cryptic errors
-- Transform data correctly
+. . .
+
+If you said 15, you forgot to reverse-code — `2` should become `(5 + 1) - 2 = 4`, making the real total **17**. This kind of mistake happens in published papers, and it lives in how you handle data types.
+
+## Everything in R is a type
+
+In R, every value has a **type**:
+
+-   `"hello"` is a **string** (character)
+-   `42` is a **number** (double)
+-   `TRUE` is a **logical** (boolean)
+-   `"Female"` can be a **factor** (categorical)
+
+Understanding types helps you choose the right functions, avoid cryptic errors, and transform data correctly.
 
 ## Today's focus
 
 We'll dive into two fundamental types:
 
-1. **Logical vectors** — TRUE/FALSE values for filtering and conditional logic
-2. **Numbers** — integers and doubles for calculations and summaries
+1.  **Logical vectors** — TRUE/FALSE values for filtering and conditional logic
+2.  **Numbers** — integers and doubles for calculations and summaries
 
 . . .
 
@@ -79,25 +86,25 @@ ages >= 18  # Is each age 18 or older?
 
 ## Comparison operators (review)
 
-| Operator | Meaning |
-|----------|---------|
-| `==` | Equal to |
-| `!=` | Not equal to |
-| `<` | Less than |
-| `>` | Greater than |
-| `<=` | Less than or equal to |
-| `>=` | Greater than or equal to |
-| `%in%` | Is in a set |
+| Operator | Meaning                  |
+|----------|--------------------------|
+| `==`     | Equal to                 |
+| `!=`     | Not equal to             |
+| `<`      | Less than                |
+| `>`      | Greater than             |
+| `<=`     | Less than or equal to    |
+| `>=`     | Greater than or equal to |
+| `%in%`   | Is in a set              |
 
 ## Logical operators
 
 Combine comparisons with **Boolean operators**:
 
-| Operator | Meaning | Example |
-|----------|---------|---------|
-| `&` | AND | `age >= 18 & age < 65` |
-| `|` | OR | `diagnosis == "Depression" | diagnosis == "Anxiety"` |
-| `!` | NOT | `!is.na(response)` |
+| Operator | Meaning | Example                                              |
+|----------|---------|------------------------------------------------------|
+| `&`      | AND     | `age >= 18 & age < 65`                               |
+| `|`      | OR      | `diagnosis == "Depression" | diagnosis == "Anxiety"` |
+| `!`      | NOT     | `!is.na(response)`                                   |
 
 ## AND vs OR
 
@@ -214,9 +221,9 @@ survey_data |>
 
 ## case_when() rules
 
-- Conditions are checked **in order**
-- The first `TRUE` condition wins
-- If no condition matches, you get `NA`
+-   Conditions are checked **in order**
+-   The first `TRUE` condition wins
+-   If no condition matches, you get `NA`
 
 . . .
 
@@ -231,6 +238,10 @@ case_when(
   .default = NA  # Explicit about NAs
 )
 ```
+
+## Psychology example: Reverse coding
+
+![](img/rosenberg.png){fig-align="center" width="600"}
 
 ## Psychology example: Reverse coding
 
@@ -272,8 +283,8 @@ rosenberg |>
 
 General formula: `(max + min) - original_value`
 
-- 1-5 scale: `6 - x` (because 1 + 5 = 6)
-- 1-7 scale: `8 - x` (because 1 + 7 = 8)
+-   1-5 scale: `6 - x` (because 1 + 5 = 6)
+-   1-7 scale: `8 - x` (because 1 + 7 = 8)
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -288,9 +299,9 @@ attention_data <- tibble(
 )
 ```
 
-1. Create a new column `passed` that is `TRUE` if they answered 4, `FALSE` otherwise
-2. Create a column `status` with three values: "Passed", "Failed", or "No response" (for NA)
-3. What proportion of participants passed?
+1.  Create a new column `passed` that is `TRUE` if they answered 4, `FALSE` otherwise
+2.  Create a column `status` with three values: "Passed", "Failed", or "No response" (for NA)
+3.  What proportion of participants passed?
 
 **Time: 10 minutes**
 
@@ -319,8 +330,8 @@ attention_data |>
 
 R distinguishes two numeric types:
 
-- **Integers:** whole numbers (1, 2, 3)
-- **Doubles:** numbers with decimals (1.5, 2.718, 3.14159)
+-   **Integers:** whole numbers (1, 2, 3)
+-   **Doubles:** numbers with decimals (1.5, 2.718, 3.14159)
 
 . . .
 
@@ -373,7 +384,7 @@ mean(scores, na.rm = TRUE)  # Ignores NA
 
 . . .
 
-::: {.callout-warning}
+::: callout-warning
 **Think carefully** — Should you exclude missing values? Or is missingness meaningful?
 :::
 
@@ -458,7 +469,7 @@ scale_data |>
 
 . . .
 
-::: {.callout-tip}
+::: callout-tip
 **Mean vs Total:** Use means when participants might have different numbers of items answered.
 :::
 
@@ -488,9 +499,9 @@ Should you compute a scale score if someone only answered 1 out of 4 items?
 
 Common rules:
 
-- **Require ≥ 50%** of items answered
-- **Require ≥ 75%** for critical scales
-- **Document your decision** clearly
+-   **Require ≥ 50%** of items answered
+-   **Require ≥ 75%** for critical scales
+-   **Document your decision** clearly
 
 ## Implementing a missingness rule
 
@@ -560,9 +571,9 @@ phq_data <- tibble(
 )
 ```
 
-1. Compute a **total score** (sum of all 9 items)
-2. Only compute the score if **at least 7 items** are answered
-3. Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)
+1.  Compute a **total score** (sum of all 9 items)
+2.  Only compute the score if **at least 7 items** are answered
+3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)
 
 ```{r}
 #| echo: false
@@ -599,28 +610,30 @@ phq_data |>
 
 ## Key takeaways
 
-1. **Logical vectors** (TRUE/FALSE) are powerful for filtering and conditions
-2. **if_else()** for two-way decisions, **case_when()** for multiple outcomes
-3. **Reverse coding:** `(max + min) - value`
-4. **Scale scoring:**
-   - Use `rowwise()` + `sum()/mean()` with `na.rm = TRUE`
-   - Or pivot longer then group and summarize
-   - Decide how to handle missing items
-5. **Always document** your scoring decisions
+1.  **Logical vectors** (TRUE/FALSE) are powerful for filtering and conditions
+2.  **if_else()** for two-way decisions, **case_when()** for multiple outcomes
+3.  **Reverse coding:** `(max + min) - value`
+4.  **Scale scoring:**
+    -   Use `rowwise()` + `sum()/mean()` with `na.rm = TRUE`
+    -   Or pivot longer then group and summarize
+    -   Decide how to handle missing items
+5.  **Always document** your scoring decisions
 
 ## Before next class
 
 📖 **Read:**
 
-- R4DS Ch 14: Strings (sections 14.1–14.3 only)
-- R4DS Ch 16: Factors
+-   R4DS Ch 14: Strings (sections 14.1–14.3 only)
+-   R4DS Ch 16: Factors
 
 ✅ **Do:**
 
-- Submit Assignment 5
-- Practice computing scale scores with your own data
-- Think about categorical variables in your final project
+-   Submit Assignment 5
+-   Practice computing scale scores with your own data
+-   Think about categorical variables in your final project
 
-## Questions?
+## The one thing to remember
+
+Scoring a scale correctly is the most common data task in psychology — and the easiest place to introduce errors.
 
 See you Wednesday for strings and factors!

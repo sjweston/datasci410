@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -26,6 +27,28 @@ library(tidyverse)
 ```
 
 # What is tidy data? {background-color="#2c3e50"}
+
+## Can you plot this?
+
+```{r}
+#| echo: false
+tibble(
+  participant = c("P1", "P2", "P3"),
+  depression_pre = c(18, 22, 15),
+  depression_post = c(12, 14, 11),
+  anxiety_pre = c(24, 19, 28),
+  anxiety_post = c(20, 15, 22)
+) |>
+  knitr::kable()
+```
+
+. . .
+
+Not easily. The columns mix variables (depression vs anxiety) with time points (pre vs post). ggplot doesn't know what to put on each axis.
+
+. . .
+
+By the end of today, you'll be able to reshape this into a form that works — and understand *why* it needs reshaping.
 
 ## The tidyverse philosophy
 
@@ -551,7 +574,7 @@ students |>
   )
 ```
 
-# Common pitfalls {background-color="#2c3e50"}
+# pivot_longer() trips everyone up the first time {background-color="#2c3e50"}
 
 ## Pitfall 1: Forgetting what's a variable
 
@@ -587,7 +610,7 @@ Age, gender, and score are **different variables** — keep them as columns.
 4. **Test** with a small subset first
 5. **Verify** you haven't lost data
 
-# Get a head start {background-color="#2c3e50"}
+# Get a head start {background-color="#e67e22"}
 
 ## Try it yourself
 
@@ -656,8 +679,8 @@ When in doubt, ask: "What would make this easiest to plot/analyze?"
 4. **Think about your variables** before reshaping
 5. **Column names contain information** — extract it with `names_pattern`
 
-## Questions?
+## The one thing to remember
 
-Next time: **Data Import**
+If your data isn't tidy, your analysis can't start. `pivot_longer()` is the bridge.
 
-We'll learn to read CSV files, Excel spreadsheets, and more!
+Next time: Data Import

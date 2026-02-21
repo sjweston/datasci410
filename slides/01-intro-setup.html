@@ -210,9 +210,50 @@ Dr.&nbsp;Sara Weston
   <p class="date">2026-03-30</p>
 </section>
 <section>
-<section id="welcome-to-psy-410" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Welcome to PSY 410!</h1>
+<section id="why-are-we-here" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Why are we here?</h1>
 
+</section>
+<section id="psychology-has-a-data-problem" class="slide level2">
+<h2>Psychology has a data problem</h2>
+<p>In 2015, a team of 270 researchers tried to replicate 100 published psychology studies.</p>
+<div class="fragment">
+<p><strong>Only 36% produced the same results.</strong></p>
+</div>
+<div class="fragment">
+<p>This wasn’t fraud. These were real labs, following published methods, using real data.</p>
+<p>So what went wrong?</p>
+</div>
+</section>
+<section id="many-things-went-wrong" class="slide level2">
+<h2>Many things went wrong</h2>
+<ul>
+<li>Analyses that couldn’t be reproduced (even by the original authors)</li>
+<li>Data that was cleaned by hand with no record of what changed</li>
+<li>Figures that obscured rather than revealed patterns</li>
+<li>Code that only worked on one person’s laptop</li>
+</ul>
+<div class="fragment">
+<p>The replication crisis isn’t just a statistics problem. It’s a <strong>workflow</strong> problem.</p>
+</div>
+</section>
+<section id="this-course-is-about-the-workflow" class="slide level2">
+<h2>This course is about the workflow</h2>
+<p>Every technical skill we learn this quarter serves the same goal:</p>
+<div class="fragment">
+<blockquote>
+<p>Start with raw data. End with a clear, honest, reproducible story.</p>
+</blockquote>
+</div>
+<div class="fragment">
+<p>That means learning to:</p>
+<ul>
+<li><strong>Import</strong> data without breaking it</li>
+<li><strong>Transform</strong> it transparently (with code, not clicks)</li>
+<li><strong>Visualize</strong> it to find patterns — and catch errors</li>
+<li><strong>Communicate</strong> what you found so others can verify it</li>
+</ul>
+</div>
 </section>
 <section id="about-this-course" class="slide level2">
 <h2>About this course</h2>
@@ -223,29 +264,16 @@ Dr.&nbsp;Sara Weston
 <li>Data visualization with ggplot2</li>
 <li>Data transformation with dplyr</li>
 <li>Data tidying with tidyr</li>
-<li>Reproducible research with Quarto</li>
+<li>Reproducible reports with Quarto</li>
 </ul>
 </div><div class="column" style="width:50%;">
 <p><strong>Why it matters:</strong></p>
 <ul>
 <li>Psychology is increasingly data-driven</li>
-<li>Reproducibility crisis demands better practices</li>
-<li>These skills are transferable everywhere</li>
+<li>These skills make your work reproducible</li>
+<li>They transfer to any career that touches data</li>
 </ul>
 </div></div>
-</section>
-<section id="why-data-science-for-psychology" class="slide level2">
-<h2>Why data science for psychology?</h2>
-<p>Psychology research involves:</p>
-<ul>
-<li>Collecting data from experiments, surveys, observations</li>
-<li>Cleaning messy real-world data</li>
-<li>Visualizing patterns and relationships</li>
-<li>Communicating findings clearly</li>
-</ul>
-<div class="fragment">
-<p><strong>Data science gives us tools to do all of this better.</strong></p>
-</div>
 </section>
 <section id="the-old-way-vs.-the-new-way" class="slide level2">
 <h2>The old way vs.&nbsp;the new way</h2>
@@ -272,11 +300,11 @@ Dr.&nbsp;Sara Weston
 <h2>Why R specifically?</h2>
 <ul>
 <li><strong>Free and open source</strong> — no expensive licenses</li>
-<li><strong>Designed for statistics</strong> — built by statisticians for data analysis</li>
+<li><strong>Designed for data analysis</strong> — built by statisticians</li>
 <li><strong>Massive community</strong> — packages for everything</li>
 <li><strong>Psychology-friendly</strong> — <code>psych</code>, <code>lavaan</code>, <code>lme4</code>, <code>brms</code>…</li>
 <li><strong>Beautiful visualizations</strong> — ggplot2 is industry-leading</li>
-<li><strong>Reproducible research</strong> — Quarto/RMarkdown integration</li>
+<li><strong>Reproducible research</strong> — Quarto integration</li>
 </ul>
 </section></section>
 <section>
@@ -387,30 +415,20 @@ Dr.&nbsp;Sara Weston
 <p>Congrats — you just ran R code!</p>
 </div>
 </section>
-<section id="more-console-experiments" class="slide level2">
-<h2>More console experiments</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># R can do math</span></span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span> <span class="sc">*</span> <span class="dv">5</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(<span class="dv">144</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># R has built-in functions</span></span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># R can store things in objects</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_number <span class="ot">&lt;-</span> <span class="dv">42</span></span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>my_number <span class="sc">*</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
 <section id="the-assignment-operator" class="slide level2">
 <h2>The assignment operator</h2>
 <p>In R, we use <code>&lt;-</code> to assign values to objects:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">10</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Think of it as an arrow pointing left: “put 10 into x”</p>
+<div class="fragment">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># You can use objects in calculations</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="sc">+</span> x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <div class="fragment">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -428,9 +446,60 @@ Dr.&nbsp;Sara Weston
 </div>
 </section></section>
 <section>
-<section id="projects-workflow" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Projects &amp; workflow</h1>
+<section id="organizing-your-work" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Organizing your work</h1>
 
+</section>
+<section id="two-mental-models" class="slide level2">
+<h2>Two mental models</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<h3 id="the-filing-cabinet">The filing cabinet</h3>
+<p>Every piece of paper has a <strong>place</strong> where it <em>lives</em>.</p>
+<p>You navigate <strong>to</strong> that place to find it.</p>
+<pre><code>Documents/
+├── psy410/
+│   ├── data/
+│   └── scripts/
+└── thesis/
+    ├── data/
+    └── drafts/</code></pre>
+</div><div class="column" style="width:50%;">
+<h3 id="the-laundry-basket">The laundry basket</h3>
+<p>Everything is in <strong>one pile</strong>.</p>
+<p>You <strong>search</strong> to find it.</p>
+<p><br></p>
+<p><em>Google, Spotlight, Finder search, “Recent files”…</em></p>
+</div></div>
+<div class="fragment">
+<p>Neither is wrong for daily life. But <strong>coding requires the filing cabinet.</strong></p>
+</div>
+</section>
+<section id="why-coding-requires-the-filing-cabinet" class="slide level2">
+<h2>Why coding requires the filing cabinet</h2>
+<p>When you write:</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"data/raw/survey_responses.csv"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>You’re giving directions: “Start here. Go into <code>data</code>. Then into <code>raw</code>. Find <code>survey_responses.csv</code>.”</p>
+<div class="fragment">
+<p>If the file isn’t exactly there, the code <strong>breaks</strong>. No fuzzy matching. No “did you mean…?”</p>
+</div>
+<div class="fragment">
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>This is why we need to learn directory structure — even if it feels foreign.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="why-use-rstudio-projects" class="slide level2">
 <h2>Why use RStudio Projects?</h2>
@@ -452,6 +521,21 @@ Dr.&nbsp;Sara Weston
 <li>Easy to switch between projects</li>
 </ul>
 </div></div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>The golden rule:</strong> Someone else should be able to run your code and get the same results. That “someone else” includes Future You — who has forgotten everything.</p>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="creating-a-project" class="slide level2">
 <h2>Creating a project</h2>
@@ -463,21 +547,54 @@ Dr.&nbsp;Sara Weston
 <li>Click “Create Project”</li>
 </ol>
 <div class="fragment">
-<p>You’ll see a <code>.Rproj</code> file appear — this is your project file.</p>
+<p>You’ll see a <code>.Rproj</code> file appear — this is your project file. From now on, double-click it to open your project.</p>
 </div>
 </section>
-<section id="project-folder-structure" class="slide level2">
-<h2>Project folder structure</h2>
-<p>A good project folder might look like:</p>
+<section id="a-standard-project-structure" class="slide level2">
+<h2>A standard project structure</h2>
 <pre><code>psy410/
 ├── psy410.Rproj
 ├── data/
-│   └── survey_data.csv
+│   ├── raw/           # Original data (READ ONLY)
+│   └── clean/         # Processed data
 ├── scripts/
-│   └── analysis.R
+│   ├── 01_clean.R     # Data cleaning
+│   ├── 02_analyze.R   # Main analysis
+│   └── 03_visualize.R # Figures
 └── output/
-    └── figures/</code></pre>
-<p>Keep your work organized from the start!</p>
+    └── figures/       # Saved plots</code></pre>
+<div class="fragment">
+<p>Two principles:</p>
+<ol type="1">
+<li><strong>Raw data is sacred</strong> — never modify original files</li>
+<li><strong>Outputs are disposable</strong> — you can always regenerate them from code</li>
+</ol>
+</div>
+</section>
+<section id="naming-things" class="slide level2">
+<h2>Naming things</h2>
+<p>Good names make code <strong>self-documenting</strong>. Bad names create confusion and bugs.</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Do this:</strong></p>
+<ul>
+<li><code>reaction_time</code></li>
+<li><code>mean_anxiety</code></li>
+<li><code>survey_clean.csv</code></li>
+<li><code>01_clean_data.R</code></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong>Not this:</strong></p>
+<ul>
+<li><code>x1</code>, <code>temp</code>, <code>foo</code></li>
+<li><code>AvgAnx</code> (hard to read)</li>
+<li><code>data_final_v2_REAL.csv</code></li>
+<li><code>stuff.R</code>, <code>untitled3.R</code></li>
+</ul>
+</div></div>
+<div class="fragment">
+<p>The test: Can someone unfamiliar with your project understand what a variable contains or what a file does?</p>
+</div>
 </section>
 <section id="r-scripts" class="slide level2">
 <h2>R Scripts</h2>
@@ -616,20 +733,12 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </section>
-<section id="other-ways-to-look-at-data-frames" class="slide level2">
-<h2>Other ways to look at data frames</h2>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># get the type of variable and the first few instances</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># how many rows and columns?</span></span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
 <section id="your-turn" class="slide level2">
 <h2>Your turn!</h2>
 <ol type="1">
 <li>Create a new RStudio Project called “psy410”</li>
-<li>Create a new R script</li>
+<li>Inside it, create three folders: <code>data</code>, <code>scripts</code>, <code>output</code></li>
+<li>Create a new R script in <code>scripts/</code> and save it as <code>01_practice.R</code></li>
 <li>Install and load the tidyverse</li>
 <li>Run <code>glimpse(mpg)</code> and <code>glimpse(diamonds)</code></li>
 <li>Save your script!</li>
@@ -653,7 +762,7 @@ Dr.&nbsp;Sara Weston
 <section id="reading-help-pages" class="slide level2">
 <h2>Reading help pages</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>?mean</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <p>Help pages include:</p>
 <ul>
@@ -668,8 +777,8 @@ Dr.&nbsp;Sara Weston
 <h2>Error messages</h2>
 <p>Errors will happen. A lot. That’s normal.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This will error - can you spot why?</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">maen</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This will error - can you spot why?</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">maen</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in maen(c(1, 2, 3)): could not find function "maen"</code></pre>
 </div>
@@ -678,14 +787,13 @@ Dr.&nbsp;Sara Weston
 <p>Read the error message carefully — R is trying to help you.</p>
 </div>
 </section></section>
-<section id="class-expectations-and-structure" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Class expectations and structure</h1>
+<section>
+<section id="why-no-ai-yet" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Why no AI? (Yet)</h1>
 
 </section>
+<section class="slide level2">
 
-<section>
-<section id="why-no-ai-yet" class="title-slide slide level1 center">
-<h1>Why No AI? (Yet)</h1>
 <p>I encourage you to read <a href="https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/">“Cognitive helmets for AI bicycles”</a> by Cat Hicks.</p>
 <ul>
 <li><strong>Steve Jobs (1980):</strong> The computer is a “Bicycle for the mind.”
@@ -702,55 +810,55 @@ Dr.&nbsp;Sara Weston
 </section>
 <section class="slide level2">
 
-<h3 id="the-problem-the-illusion-of-competence">The Problem: The “Illusion of Competence”</h3>
+<h3 id="the-problem-the-illusion-of-competence">The problem: The “illusion of competence”</h3>
 <ul>
-<li><strong>Psychological Concept:</strong> <em>Metacognition</em> (Monitoring your own understanding).</li>
-<li><strong>The Trap:</strong>
+<li><strong>Psychological concept:</strong> <em>Metacognition</em> (monitoring your own understanding).</li>
+<li><strong>The trap:</strong>
 <ul>
 <li>AI gives you a working answer immediately.</li>
-<li>It <em>feels</em> like you solved it (Dopamine hit!).</li>
-<li>But you didn’t build the <strong>Mental Model</strong> of <em>why</em> it works.</li>
+<li>It <em>feels</em> like you solved it (dopamine hit!).</li>
+<li>But you didn’t build the <strong>mental model</strong> of <em>why</em> it works.</li>
 </ul></li>
-<li><strong>The Result:</strong> When the AI hallucinates (which it will), you cannot debug it. You are stranded.</li>
+<li><strong>The result:</strong> When the AI hallucinates (which it will), you cannot debug it. You are stranded.</li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="the-solution-cognitive-helmets">The Solution: “Cognitive Helmets”</h3>
+<h3 id="the-solution-cognitive-helmets">The solution: “Cognitive helmets”</h3>
 <ul>
-<li>Before we get on the AI motorcycle, we need a <strong>Cognitive Helmet</strong>.</li>
-<li><strong>What is the Helmet?</strong>
+<li>Before we get on the AI motorcycle, we need a <strong>cognitive helmet</strong>.</li>
+<li><strong>What is the helmet?</strong>
 <ol type="1">
-<li><strong>Syntax Literacy:</strong> Reading code as fluently as English.</li>
-<li><strong>Debugging Resilience:</strong> Emotional regulation when things break.</li>
-<li><strong>Strategic Friction:</strong> The ability to break a big problem into small pieces.</li>
+<li><strong>Syntax literacy:</strong> Reading code as fluently as English.</li>
+<li><strong>Debugging resilience:</strong> Emotional regulation when things break.</li>
+<li><strong>Strategic friction:</strong> The ability to break a big problem into small pieces.</li>
 </ol></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="course-structure-building-the-helmet">Course Structure: Building the Helmet</h3>
+<h3 id="course-structure-building-the-helmet">Course structure: Building the helmet</h3>
 <ul>
 <li><strong>Many short assignments</strong>
 <ul>
-<li>This is <strong>“Desirable Difficulty.”</strong></li>
+<li>This is <strong>“desirable difficulty.”</strong></li>
 <li>We are building the neural pathways for code syntax.</li>
-<li>Small wins build the “Mental Model” of how data is structured.</li>
+<li>Small wins build the mental model of how data is structured.</li>
 </ul></li>
-<li><strong>Why “Maladaptive Easy”?</strong>
+<li><strong>Why “maladaptive easy”?</strong>
 <ul>
-<li>Using AI now = Skipping the gym but expecting to get strong.</li>
+<li>Using AI now = skipping the gym but expecting to get strong.</li>
 <li>It bypasses the <em>encoding process</em> in your brain.</li>
 </ul></li>
 </ul>
 </section>
 <section class="slide level2">
 
-<h3 id="the-future-when-do-we-use-ai">The Future: When Do We Use AI?</h3>
+<h3 id="the-future-when-do-we-use-ai">The future: When do we use AI?</h3>
 <ul>
 <li>We <strong>will</strong> use AI in this field (and perhaps this course later).</li>
-<li><strong>But only when you have your Helmet.</strong></li>
-<li><strong>The Goal:</strong> You should be the <strong>Pilot</strong>, not the Passenger.
+<li><strong>But only when you have your helmet.</strong></li>
+<li><strong>The goal:</strong> You should be the <strong>pilot</strong>, not the passenger.
 <ul>
 <li><em>You</em> define the problem.</li>
 <li><em>You</em> verify the code.</li>
@@ -768,15 +876,15 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="before-next-class" class="slide level2">
 <h2>Before next class</h2>
-<p>📖 <strong>Read:</strong></p>
+<p><strong>Read:</strong></p>
 <ul>
 <li><a href="https://r4ds.hadley.nz/workflow-basics">R4DS Ch 2: Workflow basics</a></li>
 <li><a href="https://r4ds.hadley.nz/workflow-scripts">R4DS Ch 6: Workflow: scripts and projects</a></li>
 </ul>
-<p>✅ <strong>Do:</strong></p>
+<p><strong>Do:</strong></p>
 <ul>
 <li>Install R and RStudio</li>
-<li>Create your psy410 project</li>
+<li>Create your psy410 project with <code>data/</code>, <code>scripts/</code>, and <code>output/</code> folders</li>
 <li>Install the tidyverse package</li>
 <li>Poke around! Try things! Break stuff!</li>
 </ul>
@@ -784,10 +892,10 @@ Dr.&nbsp;Sara Weston
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ol type="1">
+<li><strong>Psychology needs better data practices</strong> — that’s what this course builds</li>
 <li><strong>R is a tool</strong> — like learning any tool, it takes practice</li>
-<li><strong>RStudio makes R usable</strong> — learn the interface</li>
-<li><strong>Projects keep you organized</strong> — always use them</li>
-<li><strong>Scripts save your work</strong> — never just type in the console</li>
+<li><strong>Organization matters</strong> — filing cabinet, not laundry basket</li>
+<li><strong>Name things clearly</strong> — your future self will thank you</li>
 <li><strong>Errors are learning opportunities</strong> — read them, Google them</li>
 </ol>
 </section>

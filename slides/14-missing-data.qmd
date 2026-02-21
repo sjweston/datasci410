@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,23 +30,17 @@ library(tidyverse)
 
 # Why missing data matters {background-color="#2c3e50"}
 
-## Missing data is everywhere in psychology
+## The data you don't have
 
-- Participants skip survey questions
-- People drop out of longitudinal studies
-- Equipment fails during behavioral tasks
-- Participants don't consent to share certain information
+In a typical longitudinal psychology study, 30–50% of participants drop out before the final wave.
 
 . . .
 
-**The problem:** Missing data can bias your results if not handled properly.
+If you just delete their data, you might be throwing away the most important part of the story — because **who drops out** is rarely random.
 
-## Today's agenda
+. . .
 
-1. **Types of missing data** — explicit vs implicit
-2. **Exploring missingness** — how much? where? patterns?
-3. **Handling missing data** — when to drop, when to fill, when to leave alone
-4. **Making implicit missing explicit** — the `complete()` function
+Today we learn to detect, explore, and handle missing data honestly.
 
 # Types of missing data {background-color="#2c3e50"}
 
@@ -690,6 +685,8 @@ longitudinal_study |>
 - Check your final project for missing data
 - Draft your final project report
 
-## Questions?
+## The one thing to remember
+
+Missing data isn't a problem to solve — it's information about your study. Treat it that way.
 
 See you Wednesday for storytelling with data!

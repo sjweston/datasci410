@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -27,7 +28,7 @@ execute:
 library(tidyverse)
 ```
 
-# Today's plan {background-color="#2c3e50"}
+# You already know more than you think {background-color="#2c3e50"}
 
 ## Where we've been
 
@@ -723,6 +724,8 @@ You didn't know R 10 weeks ago. You know it now. That's proof you can keep learn
 - **Finish your final project** (due Wednesday)
 - Practice, practice, practice
 
-## Questions?
+## The one thing to remember
+
+The only difference between you and someone who's "good at R" is time spent being frustrated and pushing through.
 
 See you Wednesday for our final session!

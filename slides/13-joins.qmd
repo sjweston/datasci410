@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,20 +30,19 @@ library(tidyverse)
 
 # Why join data? {background-color="#2c3e50"}
 
-## The problem: Data lives in multiple tables
+## Three files, one question
 
-In psychology research, information is often spread across multiple files:
-
-- **Participant demographics** (age, gender, condition)
-- **Survey responses** (depression scores, anxiety scores)
-- **Behavioral data** (reaction times, accuracy)
-- **Longitudinal data** (Time 1, Time 2, Time 3)
+Your participant took a survey on Monday and did a cognitive task on Tuesday. The survey data is in one CSV. The task data is in another. Their demographics are in a third.
 
 . . .
 
-To analyze relationships, we need to **combine** these tables.
+You want to ask: *"Did anxious participants respond more slowly?"*
 
-## Example scenario
+. . .
+
+You can't answer that from any single file. You need **joins** — the tool that connects separate tables through a shared key.
+
+## Two tables, one question
 
 ```{r}
 # Participant information
@@ -705,6 +705,8 @@ Ask yourself:
 - Check if your final project needs joins
 - Practice joining your own data files
 
-## Questions?
+## The one thing to remember
+
+If your data lives in separate files, joins are how you ask a question that spans all of them.
 
 See you Wednesday for handling missing data!

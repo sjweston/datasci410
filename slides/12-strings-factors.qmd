@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -29,6 +30,23 @@ library(tidyverse)
 
 # Strings: The basics {background-color="#2c3e50"}
 
+## How many genders are in this dataset?
+
+```{r}
+#| echo: false
+tibble(
+  id = 1:7,
+  gender = c("Male", "male", "M", "MALE", "Female", "female ", "F")
+) |>
+  knitr::kable()
+```
+
+. . .
+
+R says **7**. You meant **2**.
+
+The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.
+
 ## What are strings?
 
 **Strings** are text data — anything in quotes:
@@ -39,11 +57,7 @@ diagnosis <- "Major Depressive Disorder"
 feedback <- "The task was confusing"
 ```
 
-. . .
-
-In R, the `stringr` package (part of tidyverse) provides tools for working with strings.
-
-All `stringr` functions start with `str_`.
+The `stringr` package (part of tidyverse) gives you tools for working with strings. All `stringr` functions start with `str_`.
 
 ## Creating and combining strings
 
@@ -656,6 +670,8 @@ likert_data_clean |>
 - Check your final project data for string/factor issues
 - Practice cleaning demographic variables
 
-## Questions?
+## The one thing to remember
+
+Messy categories turn into messy results. `str_to_lower()` and `factor()` are your first line of defense.
 
 See you Monday for joins!

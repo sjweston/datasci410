@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -31,25 +32,21 @@ library(patchwork)
 
 # From variation to covariation {background-color="#2c3e50"}
 
-## Recap: Variation
+## Psychology is about relationships
 
-Last session we explored **variation** — how values vary within a single variable:
-
-- Distributions of continuous variables (histograms, density plots)
-- Counts of categorical variables (bar charts)
-- Identifying typical values and outliers
-
-## Today: Covariation
-
-**Covariation** is the tendency for values of two or more variables to vary together in a related way.
+Last time, you explored how individual variables behave — distributions, outliers, missing data.
 
 . . .
 
-In psychology, we care deeply about covariation:
+But psychology is about *relationships*:
 
-- Does anxiety vary with depression?
-- Do reaction times vary across different conditions?
-- Does age relate to memory performance?
+- Does **treatment** predict **depression**?
+- Does **age** relate to **reaction time**?
+- Does **anxiety** co-occur with **insomnia**?
+
+. . .
+
+Today we learn to **see** those relationships in data — before testing them statistically.
 
 # Categorical + Continuous {background-color="#2c3e50"}
 
@@ -638,6 +635,8 @@ ggplot(penguins, aes(x = species, fill = island)) +
 - Submit your Final Project Proposal (due today!)
 - Start thinking about how you'll compute scale scores (next session)
 
-## Questions?
+## The one thing to remember
+
+Relationships hide in data. Your job is to make them visible — carefully, honestly.
 
 See you Monday for data types and scale scoring!

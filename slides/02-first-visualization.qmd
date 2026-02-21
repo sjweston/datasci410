@@ -12,6 +12,7 @@ format:
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
+    code-copy: false
     incremental: false
 execute:
   echo: true
@@ -91,7 +92,7 @@ tibble(
 
 # Introduction to ggplot2 {background-color="#2c3e50"}
 
-## What is ggplot2?
+## ggplot2 builds plots in layers, like a grammar
 
 - Created by Hadley Wickham (2005)
 - Based on the **Grammar of Graphics** by Leland Wilkinson
@@ -316,7 +317,7 @@ ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
 
 📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
-# Geoms {background-color="#2c3e50"}
+# Different data types need different geoms {background-color="#2c3e50"}
 
 ## Common geoms
 
@@ -581,8 +582,8 @@ You can build almost any visualization with this template!
 4. **Facets are powerful** — split plots by categories
 5. **Labels and themes matter** — make your plots readable
 
-## Questions?
+## The one thing to remember
 
-Next time: **Data Transformation with dplyr**
+Never trust a summary statistic you haven't plotted.
 
-We'll learn to filter, sort, and create new variables!
+Next time: Data Transformation with dplyr
