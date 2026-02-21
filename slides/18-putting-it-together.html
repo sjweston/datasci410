@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="18-putting-it-together_files/libs/clipboard/clipboard.min.js"></script>
 <script src="18-putting-it-together_files/libs/quarto-html/tabby.min.js"></script>
 <script src="18-putting-it-together_files/libs/quarto-html/popper.min.js"></script>
 <script src="18-putting-it-together_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="18-putting-it-together_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="18-putting-it-together_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -285,7 +284,7 @@ Dr.&nbsp;Sara Weston
 <section id="the-dataset" class="slide level2">
 <h2>The dataset</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated college student survey data</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated college student survey data</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>social_media <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>,</span>
@@ -304,13 +303,13 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-17"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add some missing data</span></span>
 <span id="cb1-18"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">hours_social_media =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(<span class="dv">200</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="cn">NA_real_</span>, hours_social_media),</span>
 <span id="cb1-19"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">gad7_total =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(<span class="dv">200</span>) <span class="sc">&lt;</span> <span class="fl">0.08</span>, <span class="cn">NA_real_</span>, gad7_total)</span>
-<span id="cb1-20"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-20"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 </section>
 <section id="step-1-explore-the-data" class="slide level2">
 <h2>Step 1: Explore the data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(social_media)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(social_media)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 200
 Columns: 7
@@ -325,9 +324,9 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing data</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing data</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>social_media <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x))))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x))))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 7
      id   age gender hours_social_media gad7_total phq9_total academic_year
@@ -340,7 +339,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <section id="step-2-clean-the-data" class="slide level2">
 <h2>Step 2: Clean the data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="ot">&lt;-</span> social_media <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="ot">&lt;-</span> social_media <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows with missing outcome</span></span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(gad7_total) <span class="sc">|&gt;</span></span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create anxiety categories</span></span>
@@ -356,13 +355,13 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb6-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reorder academic year</span></span>
 <span id="cb6-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">academic_year =</span> <span class="fu">factor</span>(academic_year,</span>
 <span id="cb6-16"><a href="" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Freshman"</span>, <span class="st">"Sophomore"</span>, <span class="st">"Junior"</span>, <span class="st">"Senior"</span>))</span>
-<span id="cb6-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 </section>
 <section id="step-3-descriptive-statistics" class="slide level2">
 <h2>Step 3: Descriptive statistics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
 <span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
@@ -370,7 +369,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_hours =</span> <span class="fu">sd</span>(hours_social_media, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anxiety =</span> <span class="fu">mean</span>(gad7_total),</span>
 <span id="cb7-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_anxiety =</span> <span class="fu">sd</span>(gad7_total)</span>
-<span id="cb7-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 6
       n mean_age mean_hours sd_hours mean_anxiety sd_anxiety
@@ -382,7 +381,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <section id="step-4-initial-visualization" class="slide level2">
 <h2>Step 4: Initial visualization</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -391,7 +390,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Daily social media use (hours)"</span>,</span>
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (GAD-7)"</span></span>
 <span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -406,14 +405,14 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div></section><section id="step-5-compute-correlation" class="slide level2">
 <h2>Step 5: Compute correlation</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data for correlation (remove NAs)</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data for correlation (remove NAs)</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>correlation_data <span class="ot">&lt;-</span> social_media_clean <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(hours_social_media, gad7_total)</span>
 <span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value <span class="ot">&lt;-</span> <span class="fu">cor</span>(correlation_data<span class="sc">$</span>hours_social_media,</span>
 <span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>                 correlation_data<span class="sc">$</span>gad7_total)</span>
 <span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.3388387</code></pre>
 </div>
@@ -425,7 +424,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <section id="step-6-explore-by-gender" class="slide level2">
 <h2>Step 6: Explore by gender</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total, <span class="at">color =</span> gender)) <span class="sc">+</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
 <span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -435,7 +434,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Gender"</span></span>
 <span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -450,7 +449,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div></section><section id="step-7-anxiety-categories" class="slide level2">
 <h2>Step 7: Anxiety categories</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anxiety_category) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anxiety_category =</span> <span class="fu">fct_rev</span>(anxiety_category)) <span class="sc">|&gt;</span></span>
 <span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> anxiety_category, <span class="at">fill =</span> anxiety_category)) <span class="sc">+</span></span>
@@ -468,7 +467,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
 <span id="cb13-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb13-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -483,7 +482,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div></section><section id="step-8-create-summary-table" class="slide level2">
 <h2>Step 8: Create summary table</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> social_media_clean <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> social_media_clean <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anxiety_category) <span class="sc">|&gt;</span></span>
 <span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">n</span>(),</span>
@@ -494,7 +493,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summary_table, <span class="at">digits =</span> <span class="dv">1</span>,</span>
-<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Anxiety Category"</span>, <span class="st">"N"</span>, <span class="st">"M Hours"</span>, <span class="st">"SD Hours"</span>, <span class="st">"M Age"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Anxiety Category"</span>, <span class="st">"N"</span>, <span class="st">"M Hours"</span>, <span class="st">"SD Hours"</span>, <span class="st">"M Age"</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -542,7 +541,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </section>
 <section id="step-9-write-it-up-in-quarto" class="slide level2">
 <h2>Step 9: Write it up in Quarto</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
 <span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from 187 college students</span>
 <span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>(M age = 21 years).</span>
@@ -558,7 +557,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb15-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
 <span id="cb15-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Relationship between social media use and anxiety"</span></span>
 <span id="cb15-16"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># [Insert scatterplot code]</span></span>
-<span id="cb15-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </section>
 <section id="what-this-demonstrates" class="slide level2">
 <h2>What this demonstrates</h2>
@@ -587,14 +586,14 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Statistics in R</h2>
 <p>You can now learn inferential statistics:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(gad7_total <span class="sc">~</span> gender, <span class="at">data =</span> social_media_clean)</span>
 <span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
 <span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> academic_year, <span class="at">data =</span> social_media_clean)</span>
 <span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression</span></span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> social_media_clean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> social_media_clean)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Courses to consider:</strong></p>
@@ -609,7 +608,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Writing functions</h2>
 <p>Automate repetitive tasks:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
 <span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>compute_scale_score <span class="ot">&lt;-</span> <span class="cf">function</span>(data, items) {</span>
 <span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
 <span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
@@ -618,7 +617,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use it anywhere</span></span>
-<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div>
 </div>
 </section>
 <section id="version-control-with-git" class="slide level2">
@@ -641,7 +640,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Interactive visualizations with Shiny</h2>
 <p>Create web apps for your data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
 <span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
 <span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"condition"</span>, <span class="st">"Choose condition:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>)),</span>
@@ -654,14 +653,14 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a>  })</span>
 <span id="cb18-12"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb18-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 </div>
 </section>
 <section id="machine-learning-with-tidymodels" class="slide level2">
 <h2>Machine learning with tidymodels</h2>
 <p>Predictive modeling with tidy syntax:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data</span></span>
 <span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(social_media_clean)</span>
@@ -673,7 +672,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> train_data)</span>
 <span id="cb19-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
-<span id="cb19-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit, test_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit, test_data)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -1192,68 +1191,6 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

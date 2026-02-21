@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="13-joins_files/libs/clipboard/clipboard.min.js"></script>
 <script src="13-joins_files/libs/quarto-html/tabby.min.js"></script>
 <script src="13-joins_files/libs/quarto-html/popper.min.js"></script>
 <script src="13-joins_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="13-joins_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="13-joins_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="13-joins_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="13-joins_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="13-joins_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -215,23 +214,20 @@ Dr.&nbsp;Sara Weston
 <h1>Why join data?</h1>
 
 </section>
-<section id="the-problem-data-lives-in-multiple-tables" class="slide level2">
-<h2>The problem: Data lives in multiple tables</h2>
-<p>In psychology research, information is often spread across multiple files:</p>
-<ul>
-<li><strong>Participant demographics</strong> (age, gender, condition)</li>
-<li><strong>Survey responses</strong> (depression scores, anxiety scores)</li>
-<li><strong>Behavioral data</strong> (reaction times, accuracy)</li>
-<li><strong>Longitudinal data</strong> (Time 1, Time 2, Time 3)</li>
-</ul>
+<section id="three-files-one-question" class="slide level2">
+<h2>Three files, one question</h2>
+<p>Your participant took a survey on Monday and did a cognitive task on Tuesday. The survey data is in one CSV. The task data is in another. Their demographics are in a third.</p>
 <div class="fragment">
-<p>To analyze relationships, we need to <strong>combine</strong> these tables.</p>
+<p>You want to ask: <em>“Did anxious participants respond more slowly?”</em></p>
+</div>
+<div class="fragment">
+<p>You can’t answer that from any single file. You need <strong>joins</strong> — the tool that connects separate tables through a shared key.</p>
 </div>
 </section>
-<section id="example-scenario" class="slide level2">
-<h2>Example scenario</h2>
+<section id="two-tables-one-question" class="slide level2">
+<h2>Two tables, one question</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Participant information</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Participant information</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">19</span>, <span class="dv">31</span>),</span>
@@ -243,7 +239,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>),  <span class="co"># Note: 4 is missing, 5 is extra</span></span>
 <span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">10</span>, <span class="dv">25</span>),</span>
 <span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">12</span>, <span class="dv">30</span>)</span>
-<span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="the-two-tables" class="slide level2">
@@ -252,7 +248,7 @@ Dr.&nbsp;Sara Weston
 <div class="column" style="width:50%;">
 <p><strong>Participants:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   participant_id   age condition
@@ -266,7 +262,7 @@ Dr.&nbsp;Sara Weston
 </div><div class="column" style="width:50%;">
 <p><strong>Survey:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
   participant_id depression anxiety
@@ -309,10 +305,10 @@ Dr.&nbsp;Sara Weston
 <h2>Checking for unique keys</h2>
 <p>Before joining, verify that your key truly identifies each row:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if participant_id is unique</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if participant_id is unique</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(participant_id) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 2
 # ℹ 2 variables: participant_id &lt;int&gt;, n &lt;int&gt;</code></pre>
@@ -326,18 +322,18 @@ Dr.&nbsp;Sara Weston
 <h2>When keys aren’t unique</h2>
 <p>Sometimes keys aren’t unique (e.g., longitudinal data):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">timepoint =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">18</span>, <span class="dv">12</span>, <span class="dv">25</span>, <span class="dv">22</span>)</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p>Here, the <strong>combination</strong> of <code>participant_id</code> + <code>timepoint</code> is the key:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="sc">|&gt;</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(participant_id, timepoint) <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n <span class="sc">&gt;</span> <span class="dv">1</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 0 × 3
 # ℹ 3 variables: participant_id &lt;dbl&gt;, timepoint &lt;dbl&gt;, n &lt;int&gt;</code></pre>
@@ -384,8 +380,8 @@ Dr.&nbsp;Sara Weston
 <h2>left_join(): Most common</h2>
 <p>Keep <strong>all</strong> rows from the left table, add matching data from the right:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   participant_id   age condition depression anxiety
@@ -412,8 +408,8 @@ Dr.&nbsp;Sara Weston
 <h2>right_join(): The mirror</h2>
 <p>Keep <strong>all</strong> rows from the right table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">right_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   participant_id   age condition depression anxiety
@@ -432,8 +428,8 @@ Dr.&nbsp;Sara Weston
 <h2>inner_join(): Only matches</h2>
 <p>Keep <strong>only</strong> rows that exist in both tables:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   participant_id   age condition depression anxiety
@@ -459,8 +455,8 @@ Dr.&nbsp;Sara Weston
 <h2>full_join(): Everything</h2>
 <p>Keep <strong>all</strong> rows from both tables:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
   participant_id   age condition depression anxiety
@@ -511,7 +507,7 @@ Dr.&nbsp;Sara Weston
 <section id="psychology-example-adding-demographics" class="slide level2">
 <h2>Psychology example: Adding demographics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Task data</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Task data</span></span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>task_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
@@ -520,7 +516,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add participant info to each trial</span></span>
 <span id="cb19-9"><a href="" aria-hidden="true" tabindex="-1"></a>task_data <span class="sc">|&gt;</span></span>
-<span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(participants, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(participants, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
   participant_id trial reaction_time   age condition
@@ -538,7 +534,7 @@ Dr.&nbsp;Sara Weston
 <h2>Joining by multiple keys</h2>
 <p>For longitudinal data, join on multiple columns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Time 1 scores</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Time 1 scores</span></span>
 <span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>time1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">1</span>,</span>
@@ -550,13 +546,13 @@ Dr.&nbsp;Sara Weston
 <span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="dv">2</span>,</span>
 <span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">22</span>)</span>
-<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="combining-longitudinal-data" class="slide level2">
 <h2>Combining longitudinal data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into one table</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine into one table</span></span>
 <span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>all_times <span class="ot">&lt;-</span> <span class="fu">bind_rows</span>(time1, time2)</span>
 <span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add baseline demographics</span></span>
@@ -564,7 +560,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(</span>
 <span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>    participants <span class="sc">|&gt;</span> <span class="fu">select</span>(participant_id, age, condition),</span>
 <span id="cb22-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"id"</span> <span class="ot">=</span> <span class="st">"participant_id"</span>)  <span class="co"># Keys have different names</span></span>
-<span id="cb22-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 5
      id  time depression   age condition
@@ -587,7 +583,7 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Combine study data</h2>
 <p>You have three tables from a therapy study:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>, <span class="dv">35</span>, <span class="dv">28</span>),</span>
 <span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">18</span>, <span class="dv">30</span>, <span class="dv">20</span>)</span>
@@ -601,7 +597,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb24-12"><a href="" aria-hidden="true" tabindex="-1"></a>followup <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb24-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>),  <span class="co"># Missing id 4, but has id 5</span></span>
 <span id="cb24-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">23</span>, <span class="dv">10</span>, <span class="dv">18</span>)</span>
-<span id="cb24-15"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-15"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Create a dataset with baseline info and treatment condition (keep all participants)</li>
@@ -627,9 +623,9 @@ Dr.&nbsp;Sara Weston
 <h2>semi_join(): Has a match</h2>
 <p>Keep rows from the left table that exist in the right table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which participants completed the survey?</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which participants completed the survey?</span></span>
 <span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">semi_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   participant_id   age condition
@@ -647,9 +643,9 @@ Dr.&nbsp;Sara Weston
 <h2>anti_join(): No match</h2>
 <p>Keep rows from the left table that <strong>don’t</strong> exist in the right table:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which participants didn't complete the survey?</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which participants didn't complete the survey?</span></span>
 <span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>participants <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(survey, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   participant_id   age condition
@@ -664,7 +660,7 @@ Dr.&nbsp;Sara Weston
 <section id="psychology-use-case-attrition-analysis" class="slide level2">
 <h2>Psychology use case: Attrition analysis</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Who was enrolled</span></span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Who was enrolled</span></span>
 <span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>enrolled <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
 <span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>), <span class="at">each =</span> <span class="dv">5</span>)</span>
@@ -677,7 +673,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb29-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb29-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Who dropped out?</span></span>
 <span id="cb29-13"><a href="" aria-hidden="true" tabindex="-1"></a>enrolled <span class="sc">|&gt;</span></span>
-<span id="cb29-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(completed, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(completed, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   participant_id condition
@@ -690,11 +686,11 @@ Dr.&nbsp;Sara Weston
 <section id="attrition-by-condition" class="slide level2">
 <h2>Attrition by condition</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a>dropout <span class="ot">&lt;-</span> enrolled <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a>dropout <span class="ot">&lt;-</span> enrolled <span class="sc">|&gt;</span></span>
 <span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(completed, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span>
 <span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>dropout <span class="sc">|&gt;</span></span>
-<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   condition     n
@@ -727,7 +723,7 @@ Dr.&nbsp;Sara Weston
 <section id="problem-1-keys-with-different-names" class="slide level2">
 <h2>Problem 1: Keys with different names</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">subj_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>)</span>
 <span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -735,13 +731,13 @@ Dr.&nbsp;Sara Weston
 <span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb33-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb33-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">15</span>)</span>
-<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Solution:</strong> Use named vector in <code>by</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(scores, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"subj_id"</span> <span class="ot">=</span> <span class="st">"participant"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="sc">|&gt;</span></span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(scores, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"subj_id"</span> <span class="ot">=</span> <span class="st">"participant"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   subj_id   age depression
@@ -756,7 +752,7 @@ Dr.&nbsp;Sara Weston
 <section id="problem-2-duplicate-keys" class="slide level2">
 <h2>Problem 2: Duplicate keys</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Duplicate in left table</span></span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Duplicate in left table</span></span>
 <span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>participants_dup <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),  <span class="co"># ID 1 appears twice!</span></span>
 <span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>)</span>
@@ -765,14 +761,14 @@ Dr.&nbsp;Sara Weston
 <span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>task_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb36-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">90</span>, <span class="dv">88</span>)</span>
-<span id="cb36-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb36-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="what-happens-with-duplicates" class="slide level2">
 <h2>What happens with duplicates?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants_dup <span class="sc">|&gt;</span></span>
-<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(task_scores, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a>participants_dup <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(task_scores, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
      id   age score
@@ -805,7 +801,7 @@ Dr.&nbsp;Sara Weston
 <section id="problem-3-missing-keys" class="slide level2">
 <h2>Problem 3: Missing keys</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Some participants have NA for id</span></span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Some participants have NA for id</span></span>
 <span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">3</span>),</span>
 <span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Yes"</span>, <span class="st">"No"</span>)</span>
@@ -814,14 +810,14 @@ Dr.&nbsp;Sara Weston
 <span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>)</span>
-<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="joining-with-nas" class="slide level2">
 <h2>Joining with NAs</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="sc">|&gt;</span></span>
-<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demographics, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demographics, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
      id response   age
@@ -840,7 +836,7 @@ Dr.&nbsp;Sara Weston
 <section id="problem-4-many-to-many-relationships" class="slide level2">
 <h2>Problem 4: Many-to-many relationships</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple trials per participant</span></span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple trials per participant</span></span>
 <span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>trials <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
 <span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
@@ -852,14 +848,14 @@ Dr.&nbsp;Sara Weston
 <span id="cb42-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
 <span id="cb42-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">session =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
 <span id="cb42-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mood =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
-<span id="cb42-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb42-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="many-to-many-result" class="slide level2">
 <h2>Many-to-many result</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a>trials <span class="sc">|&gt;</span></span>
-<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sessions, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a>trials <span class="sc">|&gt;</span></span>
+<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(sessions, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 5
      id trial    rt session  mood
@@ -887,7 +883,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-1-qualtrics-demographics" class="slide level2">
 <h2>Example 1: Qualtrics + demographics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Survey responses exported from Qualtrics</span></span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Survey responses exported from Qualtrics</span></span>
 <span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ResponseId =</span> <span class="fu">c</span>(<span class="st">"R_1"</span>, <span class="st">"R_2"</span>, <span class="st">"R_3"</span>),</span>
 <span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">PHQ9_total =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">8</span>),</span>
@@ -903,7 +899,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb45-14"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine</span></span>
 <span id="cb45-16"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics <span class="sc">|&gt;</span></span>
-<span id="cb45-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demo, <span class="at">by =</span> <span class="st">"ResponseId"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb45-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demo, <span class="at">by =</span> <span class="st">"ResponseId"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   ResponseId PHQ9_total GAD7_total   age gender
@@ -917,7 +913,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-2-pre-post-intervention" class="slide level2">
 <h2>Example 2: Pre-post intervention</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>pre_test <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>pre_test <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
 <span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression_pre =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">18</span>, <span class="dv">20</span>)</span>
 <span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -930,7 +926,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb47-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine and compute change</span></span>
 <span id="cb47-12"><a href="" aria-hidden="true" tabindex="-1"></a>pre_test <span class="sc">|&gt;</span></span>
 <span id="cb47-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(post_test, <span class="at">by =</span> <span class="st">"participant"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb47-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> depression_pre <span class="sc">-</span> depression_post)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> depression_pre <span class="sc">-</span> depression_post)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
   participant depression_pre depression_post change
@@ -945,7 +941,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-3-item-level-to-scale-level" class="slide level2">
 <h2>Example 3: Item-level to scale-level</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Individual items</span></span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Individual items</span></span>
 <span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>items <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">5</span>),</span>
 <span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">item =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="at">times =</span> <span class="dv">3</span>),</span>
@@ -962,7 +958,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb49-15"><a href="" aria-hidden="true" tabindex="-1"></a>items <span class="sc">|&gt;</span></span>
 <span id="cb49-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
 <span id="cb49-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">scale_mean =</span> <span class="fu">mean</span>(response)) <span class="sc">|&gt;</span></span>
-<span id="cb49-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(participants_info, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb49-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(participants_info, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
      id scale_mean condition
@@ -982,7 +978,7 @@ Dr.&nbsp;Sara Weston
 <h2>Practice: Longitudinal study</h2>
 <p>You have data from a three-wave longitudinal study:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Baseline demographics</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Baseline demographics</span></span>
 <span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>baseline_demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pid =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
 <span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">19</span>, <span class="dv">24</span>, <span class="dv">21</span>),</span>
@@ -1005,7 +1001,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb51-21"><a href="" aria-hidden="true" tabindex="-1"></a>time3_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb51-22"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pid =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">6</span>),  <span class="co"># Missing 4 and 5</span></span>
 <span id="cb51-23"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression_t3 =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">22</span>, <span class="dv">10</span>, <span class="dv">15</span>)</span>
-<span id="cb51-24"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-24"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="your-tasks" class="slide level2">
@@ -1069,8 +1065,9 @@ Dr.&nbsp;Sara Weston
 <li>Practice joining your own data files</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>If your data lives in separate files, joins are how you ask a question that spans all of them.</p>
 <p>See you Wednesday for handling missing data!</p>
 
 </section></section>
@@ -1335,68 +1332,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

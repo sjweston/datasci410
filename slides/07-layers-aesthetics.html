@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="07-layers-aesthetics_files/libs/clipboard/clipboard.min.js"></script>
 <script src="07-layers-aesthetics_files/libs/quarto-html/tabby.min.js"></script>
 <script src="07-layers-aesthetics_files/libs/quarto-html/popper.min.js"></script>
 <script src="07-layers-aesthetics_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="07-layers-aesthetics_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="07-layers-aesthetics_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="07-layers-aesthetics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -214,9 +213,10 @@ Dr.&nbsp;Sara Weston
 <h1>Choosing the right geom</h1>
 
 </section>
-<section id="back-to-the-grammar-of-graphics" class="slide level2">
-<h2>Back to the grammar of graphics</h2>
-<p>We covered the basics in Session 2. Now we go deeper: <strong>matching plot type to data type.</strong></p>
+<section id="same-data-two-stories" class="slide level2">
+<h2>Same data, two stories</h2>
+
+<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p>Both use the same data. The difference is <strong>layers</strong> — and the right layers tell the right story.</p>
 <p>The wrong geom doesn’t just look bad — it can actively mislead.</p>
 </section>
 <section id="geom-selection-guide" class="slide level2">
@@ -271,7 +271,7 @@ Dr.&nbsp;Sara Weston
 <section id="one-variable-distributions" class="slide level2">
 <h2>One variable: distributions</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt)) <span class="sc">+</span></span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">30</span>, </span>
@@ -281,7 +281,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Reaction Times"</span>,</span>
 <span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -289,19 +289,19 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="histogram-vs-density" class="slide level2">
 <h2>histogram vs density</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
+<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
 </section>
 <section id="one-categorical-variable" class="slide level2">
 <h2>One categorical variable</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -309,7 +309,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
 <span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
 <span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -317,14 +317,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" width="768"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="one-continuous-one-categorical" class="slide level2">
 <h2>One continuous + one categorical</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -333,7 +333,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -341,14 +341,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="boxplot-vs-violin" class="slide level2">
 <h2>boxplot vs violin</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
+<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
 </section></section>
 <section>
 <section id="stat_summary" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -362,7 +362,7 @@ Dr.&nbsp;Sara Weston
 <section id="stat_summary-basics" class="slide level2">
 <h2>stat_summary() basics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt)) <span class="sc">+</span></span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> mean, </span>
@@ -377,7 +377,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb4-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
 <span id="cb4-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb4-15"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -385,18 +385,18 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" width="768"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-8-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="breaking-down-stat_summary" class="slide level2">
 <h2>Breaking down stat_summary()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The bar (mean)</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The bar (mean)</span></span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>)</span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The error bars (95% confidence interval)</span></span>
-<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
 </div>
 <ul>
 <li><code>fun</code> = the function to calculate (mean, median, etc.)</li>
@@ -434,18 +434,18 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># SE </span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># SE </span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI (most common in psych)</span></span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="adding-individual-data-points" class="slide level2">
 <h2>Adding individual data points</h2>
 <p>Error bars alone hide the data. Show the points too:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
 <span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
@@ -457,14 +457,14 @@ Dr.&nbsp;Sara Weston
 <span id="cb7-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb7-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb7-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section><section id="adding-individual-data-points-output" class="slide level2 output-location-slide"><h2>Adding individual data points</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-10-1.png" width="768"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-11-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -544,7 +544,7 @@ Dr.&nbsp;Sara Weston
 <section id="dodge-grouped-bar-charts" class="slide level2">
 <h2>dodge: grouped bar charts</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
@@ -554,7 +554,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>,</span>
 <span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
 <span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -562,19 +562,19 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="stack-and-fill" class="slide level2">
 <h2>stack and fill</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" width="1152" class="r-stretch"></section>
+<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" width="1152" class="r-stretch"></section>
 <section id="scales-controlling-axes-and-colors" class="slide level2">
 <h2>Scales: controlling axes and colors</h2>
 <p>Scales translate data values into visual properties:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis range</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis range</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>))</span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis breaks (tick marks)</span></span>
@@ -584,19 +584,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"lightblue"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"coral"</span>))</span>
 <span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a colorblind-friendly palette</span></span>
-<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()</span></code></pre></div>
 </div>
 </section>
 <section id="scale_fill_manual" class="slide level2">
 <h2>scale_fill_manual()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>)) <span class="sc">+</span></span>
 <span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Custom colors"</span>, <span class="at">x =</span> <span class="st">"Condition"</span>, <span class="at">y =</span> <span class="st">"RT (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 <p>Use a website like <a href="https://htmlcolorcodes.com/color-picker/">HTML color codes</a> to find the appropriate HEX code for your color.</p>
@@ -605,38 +605,38 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-15-1.png" width="768"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-16-1.png" width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="coordinate-systems" class="slide level2">
 <h2>Coordinate systems</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip x and y (great for long category labels)</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip x and y (great for long category labels)</span></span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_flip</span>()</span>
 <span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in without dropping data</span></span>
 <span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">600</span>))</span>
 <span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># vs</span></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">600</span>))  <span class="co"># This DROPS data outside the range!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">600</span>))  <span class="co"># This DROPS data outside the range!</span></span></code></pre></div>
 </div>
 </section>
 <section id="coord_flip-in-action" class="slide level2">
 <h2>coord_flip() in action</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> condition, <span class="at">x =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Flipped axes — better for category labels"</span>, <span class="at">y =</span> <span class="st">"Condition"</span>, <span class="at">x =</span> <span class="st">"RT (ms)"</span>) <span class="sc">+</span></span>
 <span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section><section id="coord_flip-in-action-output" class="slide level2 output-location-slide"><h2>coord_flip() in action</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-17-1.png" width="768"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" width="768"></p>
 </figure>
 </div>
 </div>
@@ -649,7 +649,7 @@ Dr.&nbsp;Sara Weston
 <section id="a-polished-psychology-figure" class="slide level2">
 <h2>A polished psychology figure</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
 <span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
@@ -664,7 +664,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb13-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"N = 40 per condition. Diamond = mean."</span></span>
 <span id="cb13-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb13-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -672,7 +672,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-19-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -759,10 +759,10 @@ Dr.&nbsp;Sara Weston
 <li><strong>coord_cartesian() zooms; scale limits drop data</strong> — know the difference</li>
 </ol>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p>Next time: <strong>Perception &amp; Design</strong></p>
-<p>We’ll learn why some visualizations work and others don’t — and how to make yours better!</p>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>The difference between a chart and a figure is intention — every layer should earn its place.</p>
+<p>Next time: Perception &amp; Design</p>
 
 </section></section>
     </div>
@@ -1026,68 +1026,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

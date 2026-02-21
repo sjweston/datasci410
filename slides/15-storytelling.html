@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="15-storytelling_files/libs/clipboard/clipboard.min.js"></script>
 <script src="15-storytelling_files/libs/quarto-html/tabby.min.js"></script>
 <script src="15-storytelling_files/libs/quarto-html/popper.min.js"></script>
 <script src="15-storytelling_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="15-storytelling_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="15-storytelling_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="15-storytelling_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="15-storytelling_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="15-storytelling_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -375,7 +374,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-cluttered-figure" class="slide level2">
 <h2>Example: Cluttered figure</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CBT"</span>, <span class="st">"Mindfulness"</span>), <span class="at">each =</span> <span class="dv">30</span>),</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">18</span>, <span class="dv">5</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">12</span>, <span class="dv">5</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="dv">14</span>, <span class="dv">5</span>))</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -388,7 +387,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>),</span>
 <span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"darkgray"</span>, <span class="at">size =</span> <span class="dv">1</span>),</span>
 <span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray"</span>, <span class="at">size =</span> <span class="fl">0.5</span>)</span>
-<span id="cb1-14"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-14"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
 </section>
@@ -403,7 +402,7 @@ Dr.&nbsp;Sara Weston
 </div></section><section id="example-decluttered-figure" class="slide level2">
 <h2>Example: Decluttered figure</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression)) <span class="sc">+</span></span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"CBT most effective at reducing depression"</span>,</span>
@@ -415,7 +414,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb2-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb2-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
 <span id="cb2-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb2-13"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-13"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
 </section>
@@ -456,7 +455,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-without-focus" class="slide level2">
 <h2>Example: Without focus</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_data <span class="sc">|&gt;</span></span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_depression =</span> <span class="fu">mean</span>(depression))</span>
 <span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -467,7 +466,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
 <span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean depression score"</span></span>
 <span id="cb3-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -482,7 +481,7 @@ Dr.&nbsp;Sara Weston
 </div></section><section id="example-with-focus" class="slide level2">
 <h2>Example: With focus</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_summary <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_summary <span class="sc">|&gt;</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">highlight =</span> <span class="fu">if_else</span>(condition <span class="sc">==</span> <span class="st">"CBT"</span>, <span class="st">"Highlight"</span>, <span class="st">"Normal"</span>))</span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_summary, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_depression, <span class="at">fill =</span> highlight)) <span class="sc">+</span></span>
@@ -495,7 +494,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb4-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score"</span></span>
 <span id="cb4-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
 <span id="cb4-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb4-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -550,7 +549,7 @@ Dr.&nbsp;Sara Weston
 <section id="color-example-before" class="slide level2">
 <h2>Color example: Before</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"36-45"</span>, <span class="st">"46+"</span>),</span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">count =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">67</span>, <span class="dv">52</span>, <span class="dv">23</span>)</span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -558,7 +557,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(demographics, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> count, <span class="at">fill =</span> age_group)) <span class="sc">+</span></span>
 <span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Participants by age group"</span>, <span class="at">x =</span> <span class="st">"Age group"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -573,14 +572,14 @@ Dr.&nbsp;Sara Weston
 </div></section><section id="color-example-after" class="slide level2">
 <h2>Color example: After</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(demographics, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> count)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(demographics, <span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> count)) <span class="sc">+</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most participants are between 26-35 years old"</span>,</span>
 <span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of participants"</span></span>
 <span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section><section id="color-example-after-output" class="slide level2 output-location-slide"><h2>Color example: After</h2><div class="cell output-location-slide">
@@ -611,7 +610,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-truncated-y-axis" class="slide level2">
 <h2>Example: Truncated y-axis</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>treatment_effect <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>treatment_effect <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>),</span>
 <span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">16</span>)</span>
 <span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -625,7 +624,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb7-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score"</span></span>
 <span id="cb7-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb7-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -640,7 +639,7 @@ Dr.&nbsp;Sara Weston
 </div></section><section id="fixed-full-y-axis" class="slide level2">
 <h2>Fixed: Full y-axis</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(treatment_effect, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> score)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(treatment_effect, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> score)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>)) <span class="sc">+</span>  <span class="co"># Full scale</span></span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -649,7 +648,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score"</span></span>
 <span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -691,7 +690,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-ineffective-figure" class="slide level2">
 <h2>Example: Ineffective figure</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">each =</span> <span class="dv">3</span>),</span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="st">"6 months"</span>, <span class="st">"12 months"</span>), <span class="dv">8</span>),</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">rnorm</span>(<span class="dv">24</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
@@ -699,7 +698,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(longitudinal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> depression, <span class="at">group =</span> participant)) <span class="sc">+</span></span>
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -714,7 +713,7 @@ Dr.&nbsp;Sara Weston
 </div></section><section id="fixed-clear-message" class="slide level2">
 <h2>Fixed: Clear message</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">|&gt;</span></span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_depression =</span> <span class="fu">mean</span>(depression)) <span class="sc">|&gt;</span></span>
 <span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="st">"6 months"</span>, <span class="st">"12 months"</span>))) <span class="sc">|&gt;</span></span>
@@ -727,7 +726,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb10-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb10-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score"</span></span>
 <span id="cb10-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -765,7 +764,7 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Improve a figure</h2>
 <p>Here’s a messy figure:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">profession =</span> <span class="fu">c</span>(<span class="st">"Teacher"</span>, <span class="st">"Nurse"</span>, <span class="st">"Engineer"</span>, <span class="st">"Retail"</span>, <span class="st">"Admin"</span>),</span>
 <span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">stress =</span> <span class="fu">c</span>(<span class="fl">7.2</span>, <span class="fl">8.1</span>, <span class="fl">5.5</span>, <span class="fl">6.8</span>, <span class="fl">6.2</span>),</span>
 <span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">burnout =</span> <span class="fu">c</span>(<span class="fl">6.8</span>, <span class="fl">7.9</span>, <span class="fl">4.8</span>, <span class="fl">6.5</span>, <span class="fl">5.9</span>)</span>
@@ -774,7 +773,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stress_data, <span class="fu">aes</span>(<span class="at">x =</span> profession, <span class="at">y =</span> stress, <span class="at">fill =</span> profession)) <span class="sc">+</span></span>
 <span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
 <span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Stress by Profession"</span>) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
 
 </div>
 <img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><ol type="1">
@@ -973,8 +972,9 @@ Dr.&nbsp;Sara Weston
 <li>Review feedback on your draft</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>A figure without a story is just a picture. Ask “so what?” until you have the answer.</p>
 <p>See you next week for Quarto and reproducible reports!</p>
 
 </section></section>
@@ -1239,68 +1239,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

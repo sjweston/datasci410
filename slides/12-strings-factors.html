@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="12-strings-factors_files/libs/clipboard/clipboard.min.js"></script>
 <script src="12-strings-factors_files/libs/quarto-html/tabby.min.js"></script>
 <script src="12-strings-factors_files/libs/quarto-html/popper.min.js"></script>
 <script src="12-strings-factors_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="12-strings-factors_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="12-strings-factors_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="12-strings-factors_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="12-strings-factors_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="12-strings-factors_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -215,45 +214,91 @@ Dr.&nbsp;Sara Weston
 <h1>Strings: The basics</h1>
 
 </section>
+<section id="how-many-genders-are-in-this-dataset" class="slide level2">
+<h2>How many genders are in this dataset?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th style="text-align: right;">id</th>
+<th style="text-align: left;">gender</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Male</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">male</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">M</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">MALE</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Female</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">female</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">F</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="fragment">
+<p>R says <strong>7</strong>. You meant <strong>2</strong>.</p>
+<p>The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.</p>
+</div>
+</section>
 <section id="what-are-strings" class="slide level2">
 <h2>What are strings?</h2>
 <p><strong>Strings</strong> are text data — anything in quotes:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_name <span class="ot">&lt;-</span> <span class="st">"Jane Doe"</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_name <span class="ot">&lt;-</span> <span class="st">"Jane Doe"</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="st">"Major Depressive Disorder"</span></span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>feedback <span class="ot">&lt;-</span> <span class="st">"The task was confusing"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>feedback <span class="ot">&lt;-</span> <span class="st">"The task was confusing"</span></span></code></pre></div>
 </div>
-<div class="fragment">
-<p>In R, the <code>stringr</code> package (part of tidyverse) provides tools for working with strings.</p>
-<p>All <code>stringr</code> functions start with <code>str_</code>.</p>
-</div>
+<p>The <code>stringr</code> package (part of tidyverse) gives you tools for working with strings. All <code>stringr</code> functions start with <code>str_</code>.</p>
 </section>
 <section id="creating-and-combining-strings" class="slide level2">
 <h2>Creating and combining strings</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>first <span class="ot">&lt;-</span> <span class="st">"Jane"</span></span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>first <span class="ot">&lt;-</span> <span class="st">"Jane"</span></span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>last <span class="ot">&lt;-</span> <span class="st">"Doe"</span></span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine strings</span></span>
-<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(first, last)           <span class="co"># No space</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(first, last)           <span class="co"># No space</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "JaneDoe"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(first, last, <span class="at">sep =</span> <span class="st">" "</span>)  <span class="co"># With space</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(first, last, <span class="at">sep =</span> <span class="st">" "</span>)  <span class="co"># With space</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Jane Doe"</code></pre>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine with other text</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"Participant: "</span>, first, <span class="st">" "</span>, last)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine with other text</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_c</span>(<span class="st">"Participant: "</span>, first, <span class="st">" "</span>, last)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Participant: Jane Doe"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Glue is even easier (from the glue package)</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Glue is even easier (from the glue package)</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(glue)</span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">"Participant: {first} {last}"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glue</span>(<span class="st">"Participant: {first} {last}"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Participant: Jane Doe</code></pre>
 </div>
@@ -263,9 +308,9 @@ Dr.&nbsp;Sara Weston
 <section id="string-length" class="slide level2">
 <h2>String length</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Maybe"</span>, <span class="st">"I don't know"</span>)</span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Yes"</span>, <span class="st">"No"</span>, <span class="st">"Maybe"</span>, <span class="st">"I don't know"</span>)</span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(responses)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_length</span>(responses)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  3  2  5 12</code></pre>
 </div>
@@ -273,9 +318,9 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Useful for checking free-response data quality:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag very short responses</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag very short responses</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(responses) <span class="sc">|&gt;</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">too_short =</span> <span class="fu">str_length</span>(responses) <span class="sc">&lt;</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">too_short =</span> <span class="fu">str_length</span>(responses) <span class="sc">&lt;</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   responses    too_short
@@ -291,17 +336,17 @@ Dr.&nbsp;Sara Weston
 <section id="changing-case" class="slide level2">
 <h2>Changing case</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MALE"</span>, <span class="st">"Female"</span>, <span class="st">"male"</span>, <span class="st">"FEMALE"</span>, <span class="st">"Male"</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MALE"</span>, <span class="st">"Female"</span>, <span class="st">"male"</span>, <span class="st">"FEMALE"</span>, <span class="st">"Male"</span>)</span>
 <span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_lower</span>(messy_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_lower</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "male"   "female" "male"   "female" "male"  </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(messy_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "MALE"   "FEMALE" "MALE"   "FEMALE" "MALE"  </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(messy_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Male"   "Female" "Male"   "Female" "Male"  </code></pre>
 </div>
@@ -314,13 +359,13 @@ Dr.&nbsp;Sara Weston
 <h2>Trimming whitespace</h2>
 <p>Survey data often has extra spaces:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"  Yes"</span>, <span class="st">"No  "</span>, <span class="st">"  Maybe  "</span>)</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"  Yes"</span>, <span class="st">"No  "</span>, <span class="st">"  Maybe  "</span>)</span>
 <span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_trim</span>(messy_responses)         <span class="co"># Remove leading/trailing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_trim</span>(messy_responses)         <span class="co"># Remove leading/trailing</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Yes"   "No"    "Maybe"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_squish</span>(messy_responses)       <span class="co"># Also reduce internal spaces</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_squish</span>(messy_responses)       <span class="co"># Also reduce internal spaces</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Yes"   "No"    "Maybe"</code></pre>
 </div>
@@ -329,14 +374,14 @@ Dr.&nbsp;Sara Weston
 <section id="psychology-example-cleaning-demographics" class="slide level2">
 <h2>Psychology example: Cleaning demographics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"  Female"</span>, <span class="st">"MALE  "</span>, <span class="st">"female"</span>, <span class="st">"Male"</span>, <span class="st">"  non-binary"</span>)</span>
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender_clean =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(gender))</span>
-<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   gender         gender_clean
@@ -353,14 +398,14 @@ Dr.&nbsp;Sara Weston
 <h2>Detecting patterns</h2>
 <p><code>str_detect()</code> checks if a pattern is present:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>feedback <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>feedback <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
 <span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"The task was clear"</span>,</span>
 <span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"I found it confusing"</span>,</span>
 <span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Very clear instructions"</span>,</span>
 <span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Somewhat confusing"</span></span>
 <span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(feedback, <span class="st">"clear"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(feedback, <span class="st">"clear"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE FALSE</code></pre>
 </div>
@@ -368,8 +413,8 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Use in <code>filter()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(feedback) <span class="sc">|&gt;</span></span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(feedback, <span class="st">"clear"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(feedback) <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">str_detect</span>(feedback, <span class="st">"clear"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 1
   feedback               
@@ -384,7 +429,7 @@ Dr.&nbsp;Sara Weston
 <h2>Case-insensitive detection</h2>
 <p>Patterns are case-sensitive by default:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"Clear instructions"</span>, <span class="st">"clear"</span>)  <span class="co"># FALSE</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"Clear instructions"</span>, <span class="st">"clear"</span>)  <span class="co"># FALSE</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -392,7 +437,7 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Make them case-insensitive with <code>regex(ignore_case = TRUE)</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"Clear instructions"</span>, <span class="fu">regex</span>(<span class="st">"clear"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_detect</span>(<span class="st">"Clear instructions"</span>, <span class="fu">regex</span>(<span class="st">"clear"</span>, <span class="at">ignore_case =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -402,15 +447,15 @@ Dr.&nbsp;Sara Weston
 <section id="replacing-text" class="slide level2">
 <h2>Replacing text</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>)</span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>)</span>
 <span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace first match</span></span>
-<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(responses, <span class="st">"Strongly "</span>, <span class="st">"Very "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace</span>(responses, <span class="st">"Strongly "</span>, <span class="st">"Very "</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Very Disagree" "Disagree"      "Very Agree"    "Agree"        </code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all matches</span></span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(responses, <span class="st">"Strongly "</span>, <span class="st">"Very "</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace all matches</span></span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(responses, <span class="st">"Strongly "</span>, <span class="st">"Very "</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Very Disagree" "Disagree"      "Very Agree"    "Agree"        </code></pre>
 </div>
@@ -419,14 +464,14 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-replacements" class="slide level2">
 <h2>Multiple replacements</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"MDD"</span>, <span class="st">"OCD"</span>, <span class="st">"GAD"</span>)</span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"MDD"</span>, <span class="st">"OCD"</span>, <span class="st">"GAD"</span>)</span>
 <span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace multiple patterns at once</span></span>
 <span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_replace_all</span>(diagnosis, <span class="fu">c</span>(</span>
 <span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"MDD"</span> <span class="ot">=</span> <span class="st">"Major Depressive Disorder"</span>,</span>
 <span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"GAD"</span> <span class="ot">=</span> <span class="st">"Generalized Anxiety Disorder"</span>,</span>
 <span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"OCD"</span> <span class="ot">=</span> <span class="st">"Obsessive-Compulsive Disorder"</span></span>
-<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Major Depressive Disorder"     "Generalized Anxiety Disorder" 
 [3] "Major Depressive Disorder"     "Obsessive-Compulsive Disorder"
@@ -437,18 +482,18 @@ Dr.&nbsp;Sara Weston
 <section id="extracting-parts-of-strings" class="slide level2">
 <h2>Extracting parts of strings</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PSY001"</span>, <span class="st">"PSY002"</span>, <span class="st">"PSY010"</span>, <span class="st">"PSY123"</span>)</span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PSY001"</span>, <span class="st">"PSY002"</span>, <span class="st">"PSY010"</span>, <span class="st">"PSY123"</span>)</span>
 <span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract substring by position</span></span>
-<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(participant_ids, <span class="at">start =</span> <span class="dv">4</span>)  <span class="co"># Get everything after position 3</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_sub</span>(participant_ids, <span class="at">start =</span> <span class="dv">4</span>)  <span class="co"># Get everything after position 3</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "001" "002" "010" "123"</code></pre>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract numbers</span></span>
-<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(participant_ids, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)  <span class="co"># \d+ means "one or more digits"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Extract numbers</span></span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_extract</span>(participant_ids, <span class="st">"</span><span class="sc">\\</span><span class="st">d+"</span>)  <span class="co"># \d+ means "one or more digits"</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "001" "002" "010" "123"</code></pre>
 </div>
@@ -493,7 +538,7 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Clean text data</h2>
 <p>You have messy survey responses:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"  FEMALE"</span>, <span class="st">"male  "</span>, <span class="st">"Female"</span>, <span class="st">"MALE"</span>, <span class="st">"non-binary  "</span>),</span>
 <span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="fu">c</span>(</span>
@@ -503,7 +548,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"CONFUSING INSTRUCTIONS"</span>,</span>
 <span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"I enjoyed this"</span></span>
 <span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Clean <code>gender</code> to lowercase with no extra spaces</li>
@@ -523,12 +568,12 @@ Dr.&nbsp;Sara Weston
 <p><strong>Factors</strong> are R’s way of representing categorical data with a fixed set of possible values.</p>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A character vector</span></span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A character vector</span></span>
 <span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>gender_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>)</span>
 <span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A factor</span></span>
 <span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>gender_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender_char)</span>
-<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>gender_fct</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>gender_fct</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Male   Female Female Male  
 Levels: Female Male</code></pre>
@@ -551,10 +596,10 @@ Levels: Female Male</code></pre>
 <section id="creating-factors" class="slide level2">
 <h2>Creating factors</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
 <span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Let R choose levels (alphabetical)</span></span>
-<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Control   Treatment Treatment Control  
 Levels: Control Treatment</code></pre>
@@ -562,8 +607,8 @@ Levels: Control Treatment</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify levels explicitly</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify levels explicitly</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Control   Treatment Treatment Control  
 Levels: Control Treatment</code></pre>
@@ -574,10 +619,10 @@ Levels: Control Treatment</code></pre>
 <section id="order-matters" class="slide level2">
 <h2>Order matters!</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Disagree"</span>)</span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Disagree"</span>)</span>
 <span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Alphabetical order (default)</span></span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Agree             Disagree          Strongly Agree    Agree            
 [5] Strongly Disagree
@@ -586,10 +631,10 @@ Levels: Agree Disagree Strongly Agree Strongly Disagree</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Logical order</span></span>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Logical order</span></span>
 <span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert, <span class="at">levels =</span> <span class="fu">c</span>(</span>
 <span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Agree             Disagree          Strongly Agree    Agree            
 [5] Strongly Disagree
@@ -601,7 +646,7 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <section id="why-order-matters-example" class="slide level2">
 <h2>Why order matters: Example</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>,</span>
 <span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Strongly Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Disagree"</span>)</span>
 <span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -610,7 +655,7 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <span id="cb55-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
 <span id="cb55-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb55-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Alphabetical order (confusing!)"</span>) <span class="sc">+</span></span>
-<span id="cb55-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb55-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -618,14 +663,14 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fixed-with-factor-ordering" class="slide level2">
 <h2>Fixed with factor ordering</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> survey_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> survey_data <span class="sc">|&gt;</span></span>
 <span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb56-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> <span class="fu">c</span>(</span>
 <span id="cb56-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
@@ -635,7 +680,7 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <span id="cb56-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
 <span id="cb56-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb56-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Logical order (much better!)"</span>) <span class="sc">+</span></span>
-<span id="cb56-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb56-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -643,7 +688,7 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-27-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -663,8 +708,8 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <section id="fct_relevel-manual-reordering" class="slide level2">
 <h2>fct_relevel(): Manual reordering</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>, <span class="st">"High School"</span>))</span>
-<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>education</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>, <span class="st">"High School"</span>))</span>
+<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>education</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] High School Bachelor's  Master's    High School
 Levels: Bachelor's High School Master's</code></pre>
@@ -672,8 +717,8 @@ Levels: Bachelor's High School Master's</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in logical order</span></span>
-<span id="cb59-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(education, <span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in logical order</span></span>
+<span id="cb59-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(education, <span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] High School Bachelor's  Master's    High School
 Levels: High School Bachelor's Master's</code></pre>
@@ -685,13 +730,13 @@ Levels: High School Bachelor's Master's</code></pre>
 <h2>fct_reorder(): Order by another variable</h2>
 <p>Extremely useful for plots!</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb61-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>, <span class="st">"Mindfulness"</span>, <span class="st">"Medication"</span>),</span>
 <span id="cb61-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_improvement =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
 <span id="cb61-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb61-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb61-6"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
-<span id="cb61-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb61-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   condition   mean_improvement
@@ -706,7 +751,7 @@ Levels: High School Bachelor's Master's</code></pre>
 <section id="fct_reorder-in-action" class="slide level2">
 <h2>fct_reorder() in action</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
 <span id="cb63-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement)) <span class="sc">|&gt;</span></span>
 <span id="cb63-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_improvement, <span class="at">y =</span> condition)) <span class="sc">+</span></span>
 <span id="cb63-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
@@ -715,7 +760,7 @@ Levels: High School Bachelor's Master's</code></pre>
 <span id="cb63-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean improvement"</span>,</span>
 <span id="cb63-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Treatment condition"</span></span>
 <span id="cb63-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb63-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb63-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -723,18 +768,18 @@ Levels: High School Bachelor's Master's</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fct_infreq-order-by-frequency" class="slide level2">
 <h2>fct_infreq(): Order by frequency</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>, <span class="st">"Other"</span>,</span>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>, <span class="st">"Other"</span>,</span>
 <span id="cb64-2"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>)</span>
 <span id="cb64-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb64-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Order from most to least common</span></span>
-<span id="cb64-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(<span class="fu">factor</span>(diagnosis))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb64-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(<span class="fu">factor</span>(diagnosis))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression Anxiety    Depression Other      Depression Anxiety    Anxiety   
 [8] Depression
@@ -745,7 +790,7 @@ Levels: Depression Anxiety Other</code></pre>
 <section id="fct_infreq-in-plots" class="slide level2">
 <h2>fct_infreq() in plots</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">diagnosis =</span> <span class="fu">factor</span>(diagnosis)) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">diagnosis =</span> <span class="fu">factor</span>(diagnosis)) <span class="sc">|&gt;</span></span>
 <span id="cb66-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diagnosis =</span> <span class="fu">fct_infreq</span>(diagnosis)) <span class="sc">|&gt;</span></span>
 <span id="cb66-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diagnosis)) <span class="sc">+</span>  <span class="co"># Note: y instead of x to read easily</span></span>
 <span id="cb66-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
@@ -754,7 +799,7 @@ Levels: Depression Anxiety Other</code></pre>
 <span id="cb66-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Count"</span>,</span>
 <span id="cb66-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb66-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb66-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb66-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -762,20 +807,20 @@ Levels: Depression Anxiety Other</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-32-1.png" width="960"></p>
+<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fct_recode-rename-levels" class="slide level2">
 <h2>fct_recode(): Rename levels</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"NB"</span>))</span>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"NB"</span>))</span>
 <span id="cb67-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb67-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(gender,</span>
 <span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"M"</span>,</span>
 <span id="cb67-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"F"</span>,</span>
 <span id="cb67-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Non-binary"</span> <span class="ot">=</span> <span class="st">"NB"</span></span>
-<span id="cb67-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb67-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Male       Female     Female     Male       Non-binary
 Levels: Female Male Non-binary</code></pre>
@@ -786,13 +831,13 @@ Levels: Female Male Non-binary</code></pre>
 <h2>fct_collapse(): Combine levels</h2>
 <p>Useful for grouping rare categories:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>,</span>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>,</span>
 <span id="cb69-2"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"Social Anxiety"</span>))</span>
 <span id="cb69-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb69-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_collapse</span>(diagnosis,</span>
 <span id="cb69-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Depression =</span> <span class="st">"MDD"</span>,</span>
 <span id="cb69-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Anxiety =</span> <span class="fu">c</span>(<span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>, <span class="st">"Social Anxiety"</span>)</span>
-<span id="cb69-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb69-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression Anxiety    Anxiety    Anxiety    Anxiety    Depression Anxiety   
 [8] Anxiety   
@@ -803,7 +848,7 @@ Levels: Anxiety Depression</code></pre>
 <section id="psychology-example-recoding-demographics" class="slide level2">
 <h2>Psychology example: Recoding demographics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb71-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"18-25"</span>, <span class="st">"36-45"</span>, <span class="st">"26-35"</span>, <span class="st">"46+"</span>),</span>
 <span id="cb71-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">education =</span> <span class="fu">c</span>(<span class="st">"HS"</span>, <span class="st">"BA"</span>, <span class="st">"BA"</span>, <span class="st">"MA"</span>, <span class="st">"HS"</span>, <span class="st">"PhD"</span>)</span>
 <span id="cb71-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -820,7 +865,7 @@ Levels: Anxiety Depression</code></pre>
 <span id="cb71-15"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Master's"</span> <span class="ot">=</span> <span class="st">"MA"</span>,</span>
 <span id="cb71-16"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Doctorate"</span> <span class="ot">=</span> <span class="st">"PhD"</span></span>
 <span id="cb71-17"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb71-18"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb71-18"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   age_group education  
@@ -838,9 +883,9 @@ Levels: Anxiety Depression</code></pre>
 <h2>Dropping unused levels</h2>
 <p>After filtering, factors keep old levels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>all_diagnoses <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Other"</span>))</span>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>all_diagnoses <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Other"</span>))</span>
 <span id="cb73-2"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression <span class="ot">&lt;-</span> all_diagnoses[all_diagnoses <span class="sc">==</span> <span class="st">"Depression"</span>]</span>
-<span id="cb73-3"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb73-3"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression
 Levels: Anxiety Depression Other</code></pre>
@@ -849,7 +894,7 @@ Levels: Anxiety Depression Other</code></pre>
 <div class="fragment">
 <p>Use <code>fct_drop()</code> to remove them:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_drop</span>(just_depression)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_drop</span>(just_depression)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression
 Levels: Depression</code></pre>
@@ -861,8 +906,8 @@ Levels: Depression</code></pre>
 <h2>Common factor issues</h2>
 <p><strong>Problem 1:</strong> Factors created from numbers</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>age_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>))</span>
-<span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_factor)  <span class="co"># Error! It's not numeric anymore</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>age_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>))</span>
+<span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_factor)  <span class="co"># Error! It's not numeric anymore</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -870,7 +915,7 @@ Levels: Depression</code></pre>
 <div class="fragment">
 <p><strong>Solution:</strong> Convert back to numeric carefully:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(age_factor))  <span class="co"># Correct way</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(age_factor))  <span class="co"># Correct way</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25 30 25 40</code></pre>
 </div>
@@ -881,11 +926,11 @@ Levels: Depression</code></pre>
 <h2>Common factor issues</h2>
 <p><strong>Problem 2:</strong> Factors behave differently than strings</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span>
 <span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb81-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Can't just add new values</span></span>
 <span id="cb81-4"><a href="" aria-hidden="true" tabindex="-1"></a>colors[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"green"</span>  <span class="co"># This creates NA!</span></span>
-<span id="cb81-5"><a href="" aria-hidden="true" tabindex="-1"></a>colors</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb81-5"><a href="" aria-hidden="true" tabindex="-1"></a>colors</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] red  blue &lt;NA&gt;
 Levels: blue red</code></pre>
@@ -904,11 +949,11 @@ Levels: blue red</code></pre>
 <h2>Practice: Clean and visualize survey data</h2>
 <p>You have messy Likert scale data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb83-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
 <span id="cb83-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"strongly agree"</span>, <span class="st">"Agree"</span>, <span class="st">"NEUTRAL"</span>,</span>
 <span id="cb83-4"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"disagree"</span>, <span class="st">"Strongly Disagree"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb83-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb83-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Clean the <code>response</code> variable to title case</li>
@@ -1030,8 +1075,9 @@ Levels: blue red</code></pre>
 <li>Practice cleaning demographic variables</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>Messy categories turn into messy results. <code>str_to_lower()</code> and <code>factor()</code> are your first line of defense.</p>
 <p>See you Monday for joins!</p>
 
 </section></section>
@@ -1296,68 +1342,6 @@ Levels: blue red</code></pre>
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');
