@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="02-first-visualization_files/libs/clipboard/clipboard.min.js"></script>
 <script src="02-first-visualization_files/libs/quarto-html/tabby.min.js"></script>
 <script src="02-first-visualization_files/libs/quarto-html/popper.min.js"></script>
 <script src="02-first-visualization_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="02-first-visualization_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="02-first-visualization_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="02-first-visualization_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="02-first-visualization_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="02-first-visualization_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -282,8 +281,8 @@ Dr.&nbsp;Sara Weston
 <h1>Introduction to ggplot2</h1>
 
 </section>
-<section id="what-is-ggplot2" class="slide level2">
-<h2>What is ggplot2?</h2>
+<section id="ggplot2-builds-plots-in-layers-like-a-grammar" class="slide level2">
+<h2>ggplot2 builds plots in layers, like a grammar</h2>
 <ul>
 <li>Created by Hadley Wickham (2005)</li>
 <li>Based on the <strong>Grammar of Graphics</strong> by Leland Wilkinson</li>
@@ -304,17 +303,17 @@ Dr.&nbsp;Sara Weston
 </ol>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The basic template</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The basic template</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>()</span></code></pre></div>
 </div>
 </div>
 </section>
 <section id="our-dataset-mpg" class="slide level2">
 <h2>Our dataset: mpg</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuel economy data for 234 cars</span></span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fuel economy data for 234 cars</span></span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 234
 Columns: 11
@@ -335,9 +334,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="your-first-plot" class="slide level2">
 <h2>Your first plot</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between engine size and highway mpg</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Relationship between engine size and highway mpg</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -352,10 +351,10 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="breaking-it-down" class="slide level2">
 <h2>Breaking it down</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1|2|3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="1|2|3"><pre class="sourceCode numberSource r number-lines"><code class="sourceCode r"><span id="cb5-1"><a href=""></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb5-2"><a href=""></a>  <span class="co"># ↑ Data and aesthetic mappings</span></span>
 <span id="cb5-3"><a href=""></a>  <span class="fu">geom_point</span>()</span>
-<span id="cb5-4"><a href=""></a>  <span class="co"># ↑ Geometric object (points = scatterplot)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-4"><a href=""></a>  <span class="co"># ↑ Geometric object (points = scatterplot)</span></span></code></pre></div>
 </div>
 <ul>
 <li><code>data = mpg</code> — use the mpg dataset</li>
@@ -367,7 +366,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>A cleaner way to write it</h2>
 <p>You can drop <code>data =</code> and <code>mapping =</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># These are equivalent</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> mpg, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span> </span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -375,7 +374,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(displ, hwy)) <span class="sc">+</span> </span>
-<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="co"># x and y are first args</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="co"># x and y are first args</span></span></code></pre></div>
 </div>
 <p>I’ll use the middle version — clear but not overly verbose.</p>
 </section></section>
@@ -400,8 +399,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Mapping color to a variable</h2>
 <p>What if we want to see which points are which car class?</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -416,9 +415,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="mapping-size-to-a-variable" class="slide level2">
 <h2>Mapping size to a variable</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Size by number of cylinders</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Size by number of cylinders</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">size =</span> cyl)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -433,8 +432,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="mapping-alpha-transparency" class="slide level2">
 <h2>Mapping alpha (transparency)</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">alpha =</span> cyl)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">alpha =</span> cyl)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -449,9 +448,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="mapping-shape" class="slide level2">
 <h2>Mapping shape</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Shape by drive type (front, rear, 4wd)</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Shape by drive type (front, rear, 4wd)</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">shape =</span> drv)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -466,8 +465,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="combining-multiple-aesthetics" class="slide level2">
 <h2>Combining multiple aesthetics</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class, <span class="at">shape =</span> drv)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class, <span class="at">shape =</span> drv)) <span class="sc">+</span></span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -483,20 +482,20 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Setting vs.&nbsp;mapping</h2>
 <p><strong>Mapping</strong> — aesthetic varies with data (inside <code>aes()</code>)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 <p><strong>Setting</strong> — aesthetic is constant (outside <code>aes()</code>)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="setting-aesthetics-manually" class="slide level2">
 <h2>Setting aesthetics manually</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -511,9 +510,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="common-mistake" class="slide level2">
 <h2>Common mistake!</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># What happens if you put a constant inside aes()?</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># What happens if you put a constant inside aes()?</span></span>
 <span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> <span class="st">"blue"</span>)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
 <p>ggplot thinks “blue” is a category name!</p>
@@ -560,8 +559,8 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
 </section></section>
 <section>
-<section id="geoms" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Geoms</h1>
+<section id="different-data-types-need-different-geoms" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Different data types need different geoms</h1>
 
 </section>
 <section id="common-geoms" class="slide level2">
@@ -605,9 +604,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>geom_smooth()</h2>
 <p>Add a trend line to your scatterplot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="co"># Adds a smoothed trend line</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()  <span class="co"># Adds a smoothed trend line</span></span></code></pre></div>
 </div>
 
 </section>
@@ -622,9 +621,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="linear-trend-line" class="slide level2">
 <h2>Linear trend line</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)  <span class="co"># lm = linear model</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)  <span class="co"># lm = linear model</span></span></code></pre></div>
 </div>
 
 </section>
@@ -640,9 +639,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Layering geoms</h2>
 <p>Each <code>+</code> adds a layer:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> drv)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)  <span class="co"># se = FALSE removes confidence band</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)  <span class="co"># se = FALSE removes confidence band</span></span></code></pre></div>
 </div>
 
 </section>
@@ -657,9 +656,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="geom_bar-categorical-data" class="slide level2">
 <h2>geom_bar() — categorical data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts of each car class</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts of each car class</span></span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class)) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -674,9 +673,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="geom_histogram-distributions" class="slide level2">
 <h2>geom_histogram() — distributions</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of highway mpg</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Distribution of highway mpg</span></span>
 <span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -691,9 +690,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="geom_boxplot-comparing-groups" class="slide level2">
 <h2>geom_boxplot() — comparing groups</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Highway mpg by car class</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Highway mpg by car class</span></span>
 <span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> class, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 </div>
 
 </section><section id="geom_boxplot-comparing-groups-output" class="slide level2 output-location-slide"><h2>geom_boxplot() — comparing groups</h2><div class="cell output-location-slide">
@@ -714,9 +713,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>What are facets?</h2>
 <p><strong>Facets</strong> split your plot into small multiples based on a variable.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
 </div>
 
 </section>
@@ -732,10 +731,10 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>facet_wrap()</h2>
 <p>Creates a ribbon of panels:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax: facet_wrap(~variable)</span></span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Syntax: facet_wrap(~variable)</span></span>
 <span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
 </div>
 <ul>
 <li>Use <code>ncol</code> or <code>nrow</code> to control layout</li>
@@ -746,9 +745,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>facet_grid()</h2>
 <p>Creates a grid of panels with two variables:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(drv <span class="sc">~</span> cyl)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(drv <span class="sc">~</span> cyl)</span></code></pre></div>
 </div>
 
 </section>
@@ -777,7 +776,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="adding-labels" class="slide level2">
 <h2>Adding labels</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
 <span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fuel Efficiency vs Engine Size"</span>,</span>
@@ -785,7 +784,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Engine displacement (liters)"</span>,</span>
 <span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Highway fuel efficiency (mpg)"</span>,</span>
 <span id="cb25-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Vehicle class"</span></span>
-<span id="cb25-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb25-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
 </section>
@@ -801,9 +800,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Themes</h2>
 <p>Themes control the overall look:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class)) <span class="sc">+</span></span>
-<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean, minimal theme</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()  <span class="co"># Clean, minimal theme</span></span></code></pre></div>
 </div>
 
 </section>
@@ -823,13 +822,13 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Saving plots</h2>
 <p>Use <code>ggsave()</code> to save your plot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
 <span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
 <span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
 <span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save it</span></span>
-<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"my_plot.png"</span>, my_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"my_plot.png"</span>, my_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -840,7 +839,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="a-complete-example" class="slide level2">
 <h2>A complete example</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -851,7 +850,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Vehicle class"</span>,</span>
 <span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: EPA fuel economy data"</span></span>
 <span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -882,11 +881,11 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="the-ggplot2-template" class="slide level2">
 <h2>The ggplot2 template</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
 <span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
 <span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
 <span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="sc">&lt;</span>LABELS<span class="sc">&gt;</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>THEME<span class="sc">&gt;</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>THEME<span class="sc">&gt;</span>()</span></code></pre></div>
 </div>
 <p>You can build almost any visualization with this template!</p>
 </section>
@@ -913,10 +912,10 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li><strong>Labels and themes matter</strong> — make your plots readable</li>
 </ol>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p>Next time: <strong>Data Transformation with dplyr</strong></p>
-<p>We’ll learn to filter, sort, and create new variables!</p>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>Never trust a summary statistic you haven’t plotted.</p>
+<p>Next time: Data Transformation with dplyr</p>
 
 </section></section>
     </div>
@@ -1180,68 +1179,6 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

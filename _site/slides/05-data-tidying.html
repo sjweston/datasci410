@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="05-data-tidying_files/libs/clipboard/clipboard.min.js"></script>
 <script src="05-data-tidying_files/libs/quarto-html/tabby.min.js"></script>
 <script src="05-data-tidying_files/libs/quarto-html/popper.min.js"></script>
 <script src="05-data-tidying_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="05-data-tidying_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="05-data-tidying_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="05-data-tidying_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="05-data-tidying_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="05-data-tidying_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -214,6 +213,60 @@ Dr.&nbsp;Sara Weston
 <h1>What is tidy data?</h1>
 
 </section>
+<section id="can-you-plot-this" class="slide level2">
+<h2>Can you plot this?</h2>
+<div class="cell">
+<div class="cell-output-display">
+<table class="caption-top">
+<colgroup>
+<col style="width: 17%">
+<col style="width: 22%">
+<col style="width: 23%">
+<col style="width: 17%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">participant</th>
+<th style="text-align: right;">depression_pre</th>
+<th style="text-align: right;">depression_post</th>
+<th style="text-align: right;">anxiety_pre</th>
+<th style="text-align: right;">anxiety_post</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">P1</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">24</td>
+<td style="text-align: right;">20</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">P2</td>
+<td style="text-align: right;">22</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">19</td>
+<td style="text-align: right;">15</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">P3</td>
+<td style="text-align: right;">15</td>
+<td style="text-align: right;">11</td>
+<td style="text-align: right;">28</td>
+<td style="text-align: right;">22</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="fragment">
+<p>Not easily. The columns mix variables (depression vs anxiety) with time points (pre vs post). ggplot doesn’t know what to put on each axis.</p>
+</div>
+<div class="fragment">
+<p>By the end of today, you’ll be able to reshape this into a form that works — and understand <em>why</em> it needs reshaping.</p>
+</div>
+</section>
 <section id="the-tidyverse-philosophy" class="slide level2">
 <h2>The tidyverse philosophy</h2>
 <blockquote>
@@ -323,14 +376,14 @@ Dr.&nbsp;Sara Weston
 <h2>Why does it matter?</h2>
 <p><strong>Tidy data works with tidyverse tools:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Easy to visualize</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Easy to visualize</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> score, <span class="at">color =</span> participant)) <span class="sc">+</span></span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Easy to analyze</span></span>
 <span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
 <span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">|&gt;</span></span>
-<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(score))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean =</span> <span class="fu">mean</span>(score))</span></code></pre></div>
 </div>
 </section>
 <section id="wide-vs.-long" class="slide level2">
@@ -361,13 +414,13 @@ Dr.&nbsp;Sara Weston
 <section id="pattern-1-column-headers-are-values" class="slide level2">
 <h2>Pattern 1: Column headers are values</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="fu">c</span>(<span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Carol"</span>),</span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">fall_2024 =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">78</span>, <span class="dv">92</span>),</span>
 <span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">spring_2025 =</span> <span class="fu">c</span>(<span class="dv">88</span>, <span class="dv">82</span>, <span class="dv">95</span>),</span>
 <span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">fall_2025 =</span> <span class="fu">c</span>(<span class="dv">91</span>, <span class="dv">85</span>, <span class="dv">94</span>)</span>
 <span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
   student fall_2024 spring_2025 fall_2025
@@ -382,11 +435,11 @@ Dr.&nbsp;Sara Weston
 <section id="pattern-2-multiple-variables-in-one-column" class="slide level2">
 <h2>Pattern 2: Multiple variables in one column</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_sex =</span> <span class="fu">c</span>(<span class="st">"25_M"</span>, <span class="st">"32_F"</span>, <span class="st">"28_F"</span>)</span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
      id age_sex
@@ -401,14 +454,14 @@ Dr.&nbsp;Sara Weston
 <section id="pattern-3-variables-in-rows-and-columns" class="slide level2">
 <h2>Pattern 3: Variables in rows and columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>weather <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="st">"MX001"</span>, <span class="st">"MX001"</span>, <span class="st">"MX002"</span>, <span class="st">"MX002"</span>),</span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2020</span>, <span class="dv">2020</span>, <span class="dv">2020</span>, <span class="dv">2020</span>),</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
 <span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">element =</span> <span class="fu">c</span>(<span class="st">"tmax"</span>, <span class="st">"tmax"</span>, <span class="st">"tmin"</span>, <span class="st">"tmin"</span>),</span>
 <span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">87</span>, <span class="dv">32</span>, <span class="dv">35</span>)</span>
 <span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>weather</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>weather</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   id     year month element value
@@ -425,14 +478,14 @@ Dr.&nbsp;Sara Weston
 <h2>Psychology-specific patterns</h2>
 <p>Surveys often look like:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
 <span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_3 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
 <span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_4 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
 <span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   participant bdi_1 bdi_2 bdi_3 bdi_4
@@ -453,12 +506,12 @@ Dr.&nbsp;Sara Weston
 <h2>The most common tidying operation</h2>
 <p><code>pivot_longer()</code> takes wide data and makes it long:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="sc">|&gt;</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> fall_2024<span class="sc">:</span>fall_2025,  <span class="co"># Which columns to pivot</span></span>
 <span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"semester"</span>,        <span class="co"># New column for old column names</span></span>
 <span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span>           <span class="co"># New column for values</span></span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   student semester    score
@@ -478,18 +531,18 @@ Dr.&nbsp;Sara Weston
 <section id="breaking-it-down" class="slide level2">
 <h2>Breaking it down</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(</span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> ...,        <span class="co"># Columns to reshape (use select helpers!)</span></span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"..."</span>,  <span class="co"># Name for the new "names" column</span></span>
 <span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"..."</span>  <span class="co"># Name for the new "values" column</span></span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="selecting-columns-to-pivot" class="slide level2">
 <h2>Selecting columns to pivot</h2>
 <p>Use any of the <code>select()</code> helpers:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By name</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By name</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(fall_2024, spring_2025, fall_2025))</span>
 <span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By range</span></span>
@@ -500,18 +553,18 @@ Dr.&nbsp;Sara Weston
 <span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"202"</span>))</span>
 <span id="cb13-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Everything except</span></span>
-<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>student)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>student)</span></code></pre></div>
 </div>
 </section>
 <section id="psychology-example-survey-items" class="slide level2">
 <h2>Psychology example: Survey items</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
 <span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
 <span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
 <span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    participant item  response
@@ -536,14 +589,14 @@ Dr.&nbsp;Sara Weston
 <h2>Extracting information from names</h2>
 <p>What if column names contain useful info? We want to extract the time point (t1, t2, t3).</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores at different time points</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores at different time points</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t1 =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">95</span>, <span class="dv">110</span>),</span>
 <span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t2 =</span> <span class="fu">c</span>(<span class="dv">105</span>, <span class="dv">100</span>, <span class="dv">115</span>),</span>
 <span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t3 =</span> <span class="fu">c</span>(<span class="dv">108</span>, <span class="dv">102</span>, <span class="dv">120</span>)</span>
 <span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id score_t1 score_t2 score_t3
@@ -557,13 +610,13 @@ Dr.&nbsp;Sara Weston
 <section id="names_prefix-argument" class="slide level2">
 <h2>names_prefix argument</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="sc">|&gt;</span></span>
 <span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"score"</span>),</span>
 <span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
 <span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"score_"</span>,  <span class="co"># Remove this prefix from names</span></span>
 <span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
      id time  score
@@ -584,13 +637,13 @@ Dr.&nbsp;Sara Weston
 <h2>names_pattern argument</h2>
 <p>For more complex parsing:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names like "bdi_1", "anxiety_1", etc.</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names like "bdi_1", "anxiety_1", etc.</span></span>
 <span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
 <span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), <span class="at">bdi_2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
 <span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="at">anxiety_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
 <span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
      id bdi_1 bdi_2 anxiety_1 anxiety_2
@@ -604,13 +657,13 @@ Dr.&nbsp;Sara Weston
 <h2>names_pattern argument</h2>
 <p>For more complex parsing:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="sc">|&gt;</span></span>
 <span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>id,</span>
 <span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"item"</span>),</span>
 <span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.+)_(.+)"</span>,  <span class="co"># Regex: anything_anything</span></span>
 <span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
      id scale   item  response
@@ -629,7 +682,7 @@ Dr.&nbsp;Sara Weston
 <section id="pivoting-to-calculate-scale-scores" class="slide level2">
 <h2>Pivoting to calculate scale scores</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BDI total from long format</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BDI total from long format</span></span>
 <span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
@@ -637,7 +690,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
 <span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant) <span class="sc">|&gt;</span></span>
-<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">bdi_total =</span> <span class="fu">sum</span>(response))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">bdi_total =</span> <span class="fu">sum</span>(response))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   participant bdi_total
@@ -657,7 +710,7 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: 10 minutes</h2>
 <p>We defined <code>survey_wide</code> earlier in this deck:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   participant bdi_1 bdi_2 bdi_3 bdi_4
@@ -695,12 +748,12 @@ Dr.&nbsp;Sara Weston
 <h2>The opposite operation</h2>
 <p>Sometimes you need to go from long to wide:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
 <span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">3</span>),</span>
 <span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>, <span class="dv">48</span>, <span class="dv">71</span>)</span>
 <span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>long_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>long_data</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   participant time  score
@@ -717,11 +770,11 @@ Dr.&nbsp;Sara Weston
 <section id="pivot_wider-syntax" class="slide level2">
 <h2>pivot_wider() syntax</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">|&gt;</span></span>
 <span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
 <span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,   <span class="co"># Column to get new column names from</span></span>
 <span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> score  <span class="co"># Column to get values from</span></span>
-<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   participant   pre  post
@@ -744,14 +797,14 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-value-columns" class="slide level2">
 <h2>Multiple value columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long data with multiple measures</span></span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long data with multiple measures</span></span>
 <span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
 <span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">2</span>),</span>
 <span id="cb32-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>),</span>
 <span id="cb32-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">480</span>, <span class="dv">520</span>, <span class="dv">490</span>)</span>
 <span id="cb32-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-8"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-8"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
      id time  score    rt
@@ -766,11 +819,11 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-value-columns-1" class="slide level2">
 <h2>Multiple value columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="sc">|&gt;</span></span>
 <span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
 <span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,</span>
 <span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(score, rt)  <span class="co"># Multiple columns!</span></span>
-<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
      id score_pre score_post rt_pre rt_post
@@ -789,14 +842,14 @@ Dr.&nbsp;Sara Weston
 <h2>separate_wider_delim()</h2>
 <p>Split one column into multiple:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_sex =</span> <span class="fu">c</span>(<span class="st">"25_M"</span>, <span class="st">"32_F"</span>, <span class="st">"28_F"</span>))<span class="sc">|&gt;</span></span>
 <span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(</span>
 <span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> age_sex,</span>
 <span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">"_"</span>,</span>
 <span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"sex"</span>)</span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
      id age   sex  
@@ -811,13 +864,13 @@ Dr.&nbsp;Sara Weston
 <h2>separate_wider_regex()</h2>
 <p>For complex patterns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">code =</span> <span class="fu">c</span>(<span class="st">"A123"</span>, <span class="st">"B456"</span>, <span class="st">"C789"</span>)</span>
 <span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
 <span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_regex</span>(</span>
 <span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> code,</span>
 <span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">patterns =</span> <span class="fu">c</span>(<span class="at">letter =</span> <span class="st">"[A-Z]"</span>, <span class="at">number =</span> <span class="st">"[0-9]+"</span>)</span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   letter number
@@ -832,7 +885,7 @@ Dr.&nbsp;Sara Weston
 <h2>unite()</h2>
 <p>The opposite — combine columns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
 <span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2024</span>, <span class="dv">2024</span>, <span class="dv">2025</span>),</span>
 <span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>),</span>
 <span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">day =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>)</span>
@@ -841,7 +894,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"date"</span>,       <span class="co"># New column name</span></span>
 <span id="cb40-8"><a href="" aria-hidden="true" tabindex="-1"></a>    year, month, day,   <span class="co"># Columns to combine</span></span>
 <span id="cb40-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">"-"</span>           <span class="co"># Separator</span></span>
-<span id="cb40-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb40-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 1
   date     
@@ -860,7 +913,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-1-repeated-measures-experiment" class="slide level2">
 <h2>Example 1: Repeated measures experiment</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Data as you might receive it from SPSS</span></span>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Data as you might receive it from SPSS</span></span>
 <span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
 <span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time1 =</span> <span class="fu">c</span>(<span class="dv">450</span>, <span class="dv">520</span>, <span class="dv">480</span>, <span class="dv">510</span>),</span>
@@ -868,7 +921,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time1 =</span> <span class="fu">c</span>(<span class="dv">480</span>, <span class="dv">540</span>, <span class="dv">500</span>, <span class="dv">530</span>),</span>
 <span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time2 =</span> <span class="fu">c</span>(<span class="dv">440</span>, <span class="dv">510</span>, <span class="dv">470</span>, <span class="dv">500</span>)</span>
 <span id="cb42-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   subject cond_a_time1 cond_a_time2 cond_b_time1 cond_b_time2
@@ -883,14 +936,14 @@ Dr.&nbsp;Sara Weston
 <section id="tidying-repeated-measures" class="slide level2">
 <h2>Tidying repeated measures</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="ot">&lt;-</span> wide_rm <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="ot">&lt;-</span> wide_rm <span class="sc">|&gt;</span></span>
 <span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>subject,</span>
 <span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"time"</span>),</span>
 <span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"cond_(.+)_time(.+)"</span>,</span>
 <span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rt"</span></span>
 <span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 4
    subject condition time     rt
@@ -917,7 +970,7 @@ Dr.&nbsp;Sara Weston
 <section id="now-we-can-analyze-it" class="slide level2">
 <h2>Now we can analyze it!</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="sc">|&gt;</span></span>
 <span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> rt, <span class="at">color =</span> condition, <span class="at">group =</span> condition)) <span class="sc">+</span></span>
 <span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
 <span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span></span>
@@ -927,7 +980,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time Point"</span>,</span>
 <span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction Time (ms)"</span></span>
 <span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -935,21 +988,21 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="05-data-tidying_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="05-data-tidying_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="example-2-questionnaire-with-subscales" class="slide level2">
 <h2>Example 2: Questionnaire with subscales</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw questionnaire data</span></span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw questionnaire data</span></span>
 <span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pid =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anx_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">anx_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>), <span class="at">anx_3 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
 <span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dep_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="at">dep_2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dep_3 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
 <span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>quest</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>quest</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 7
     pid anx_1 anx_2 anx_3 dep_1 dep_2 dep_3
@@ -963,7 +1016,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-2-questionnaire-with-subscales-1" class="slide level2">
 <h2>Example 2: Questionnaire with subscales</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy and calculate subscales</span></span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy and calculate subscales</span></span>
 <span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="sc">|&gt;</span></span>
 <span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>pid,</span>
@@ -973,7 +1026,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb49-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(pid, scale) <span class="sc">|&gt;</span></span>
 <span id="cb49-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">subscale_mean =</span> <span class="fu">mean</span>(response), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb49-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> scale, <span class="at">values_from =</span> subscale_mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb49-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> scale, <span class="at">values_from =</span> subscale_mean)</span></code></pre></div>
 </div>
 </section>
 <section id="example-2-questionnaire-with-subscales-2" class="slide level2">
@@ -992,7 +1045,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-3-multilevelnested-data" class="slide level2">
 <h2>Example 3: Multilevel/nested data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Students nested in classrooms</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Students nested in classrooms</span></span>
 <span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">classroom =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
 <span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
@@ -1000,13 +1053,30 @@ Dr.&nbsp;Sara Weston
 <span id="cb51-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">posttest =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">78</span>, <span class="dv">75</span>, <span class="dv">79</span>, <span class="dv">77</span>)</span>
 <span id="cb51-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb51-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy for analysis</span></span>
-<span id="cb51-10"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="sc">|&gt;</span></span>
-<span id="cb51-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb51-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(pretest, posttest),</span>
-<span id="cb51-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
-<span id="cb51-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
-<span id="cb51-15"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-9"><a href="" aria-hidden="true" tabindex="-1"></a>students</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  classroom student pretest posttest
+  &lt;chr&gt;       &lt;int&gt;   &lt;dbl&gt;    &lt;dbl&gt;
+1 A               1      70       80
+2 A               2      75       82
+3 A               3      72       78
+4 B               4      68       75
+5 B               5      71       79
+6 B               6      69       77</code></pre>
+</div>
+</div>
+</section>
+<section id="example-3-multilevelnested-data-1" class="slide level2">
+<h2>Example 3: Multilevel/nested data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy for analysis</span></span>
+<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(pretest, posttest),</span>
+<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
    classroom student time     score
@@ -1027,8 +1097,8 @@ Dr.&nbsp;Sara Weston
 </div>
 </section></section>
 <section>
-<section id="common-pitfalls" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Common pitfalls</h1>
+<section id="pivot_longer-trips-everyone-up-the-first-time" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>pivot_longer() trips everyone up the first time</h1>
 
 </section>
 <section id="pitfall-1-forgetting-whats-a-variable" class="slide level2">
@@ -1045,49 +1115,15 @@ Dr.&nbsp;Sara Weston
 <h2>Pitfall 2: Over-pivoting</h2>
 <p>Not everything needs to be long:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe this is fine as-is?</span></span>
-<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">28</span>),</span>
-<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>),</span>
-<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">88</span>)</span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe this is fine as-is?</span></span>
+<span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">28</span>),</span>
+<span id="cb55-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>),</span>
+<span id="cb55-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">88</span>)</span>
+<span id="cb55-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Age, gender, and score are <strong>different variables</strong> — keep them as columns.</p>
-</section>
-<section id="pitfall-3-losing-information" class="slide level2">
-<h2>Pitfall 3: Losing information</h2>
-<p>Make sure your pivot preserves all data:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Before pivoting: 3 rows</span></span>
-<span id="cb54-2"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 4
-  student fall_2024 spring_2025 fall_2025
-  &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-1 Alice          85          88        91
-2 Bob            78          82        85
-3 Carol          92          95        94</code></pre>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># After pivoting: 9 rows (3 students × 3 semesters)</span></span>
-<span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="sc">|&gt;</span></span>
-<span id="cb56-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>student, <span class="at">names_to =</span> <span class="st">"semester"</span>, <span class="at">values_to =</span> <span class="st">"score"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 9 × 3
-  student semester    score
-  &lt;chr&gt;   &lt;chr&gt;       &lt;dbl&gt;
-1 Alice   fall_2024      85
-2 Alice   spring_2025    88
-3 Alice   fall_2025      91
-4 Bob     fall_2024      78
-5 Bob     spring_2025    82
-6 Bob     fall_2025      85
-7 Carol   fall_2024      92
-8 Carol   spring_2025    95
-9 Carol   fall_2025      94</code></pre>
-</div>
-</div>
-<p>Check: <code>nrow(original) × ncol(pivoted_columns) = nrow(result)</code></p>
 </section>
 <section id="general-tidying-strategy" class="slide level2">
 <h2>General tidying strategy</h2>
@@ -1100,25 +1136,13 @@ Dr.&nbsp;Sara Weston
 </ol>
 </section></section>
 <section>
-<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
 <h1>Get a head start</h1>
 
 </section>
 <section id="try-it-yourself" class="slide level2">
 <h2>Try it yourself</h2>
 <p>We created <code>wide_rm</code> earlier — a repeated measures dataset:</p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 4 × 5
-  subject cond_a_time1 cond_a_time2 cond_b_time1 cond_b_time2
-    &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
-1       1          450          420          480          440
-2       2          520          490          540          510
-3       3          480          460          500          470
-4       4          510          480          530          500</code></pre>
-</div>
-</div>
 <p>On your own:</p>
 <ol type="1">
 <li>Pivot it to long format, extracting <strong>condition</strong> and <strong>time</strong> from the column names</li>
@@ -1194,10 +1218,10 @@ Dr.&nbsp;Sara Weston
 <li><strong>Column names contain information</strong> — extract it with <code>names_pattern</code></li>
 </ol>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p>Next time: <strong>Data Import</strong></p>
-<p>We’ll learn to read CSV files, Excel spreadsheets, and more!</p>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>If your data isn’t tidy, your analysis can’t start. <code>pivot_longer()</code> is the bridge.</p>
+<p>Next time: Data Import</p>
 
 </section></section>
     </div>
@@ -1461,68 +1485,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

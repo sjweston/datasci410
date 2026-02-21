@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="08-perception-design_files/libs/clipboard/clipboard.min.js"></script>
 <script src="08-perception-design_files/libs/quarto-html/tabby.min.js"></script>
 <script src="08-perception-design_files/libs/quarto-html/popper.min.js"></script>
 <script src="08-perception-design_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="08-perception-design_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="08-perception-design_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="08-perception-design_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="08-perception-design_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="08-perception-design_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -214,13 +213,16 @@ Dr.&nbsp;Sara Weston
 <h1>How we see data</h1>
 
 </section>
-<section id="why-perception-matters" class="slide level2">
-<h2>Why perception matters</h2>
-<p>You can have perfect data and a correct analysis — but if the visualization doesn’t communicate, it fails.</p>
-<p>Visualization design isn’t about aesthetics. It’s about <strong>how the human visual system processes information.</strong></p>
+<section id="whats-wrong-with-this" class="slide level2">
+<h2>What’s wrong with this?</h2>
+
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><div class="fragment">
+<p>Red-green palette (colorblind-unfriendly). No informative title. Tiny text. Gridline noise. Bars hiding the data.</p>
+<p>Today we learn <strong>why your brain rejects bad figures</strong> — and how to design ones that work.</p>
+</div>
 </section>
-<section id="preattentive-attributes" class="slide level2">
-<h2>Preattentive attributes</h2>
+<section id="your-brain-processes-some-visual-features-before-you-even-think" class="slide level2">
+<h2>Your brain processes some visual features before you even think</h2>
 <p>Some visual features are processed almost instantly — before conscious attention kicks in:</p>
 <table class="caption-top">
 <thead>
@@ -257,7 +259,7 @@ Dr.&nbsp;Sara Weston
 <section id="preattentive-in-action" class="slide level2">
 <h2>Preattentive in action</h2>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-2-1.png" width="1152" class="r-stretch"><p>Your eye goes to the red points, the big points, and the outlier — instantly.</p>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-3-1.png" width="1152" class="r-stretch"><p>Your eye goes to the red points, the big points, and the outlier — instantly.</p>
 </section>
 <section id="gestalt-principles-brief" class="slide level2">
 <h2>Gestalt principles (brief)</h2>
@@ -268,7 +270,7 @@ Dr.&nbsp;Sara Weston
 <li><strong>Enclosure</strong> — things inside a border feel like a group</li>
 </ul>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" class="r-stretch"></section></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"></section></section>
 <section>
 <section id="color-theory" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Color theory</h1>
@@ -312,16 +314,16 @@ Dr.&nbsp;Sara Weston
 <section id="sequential-palettes" class="slide level2">
 <h2>Sequential palettes</h2>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
 <section id="qualitative-palettes" class="slide level2">
 <h2>Qualitative palettes</h2>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-5-1.png" width="960" class="r-stretch"></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="colorblind-friendly-choices" class="slide level2">
 <h2>Colorblind-friendly choices</h2>
 <p>About 8% of men have some form of color vision deficiency. Red-green is the most common.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># viridis is colorblind-safe AND sequential</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># viridis is colorblind-safe AND sequential</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()   <span class="co"># discrete</span></span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_c</span>()   <span class="co"># continuous</span></span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -330,13 +332,13 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Or set colors manually with safe choices</span></span>
 <span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#0072B2"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#009E73"</span>))</span>
-<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># (blue, orange, green — distinguishable for most color vision types)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># (blue, orange, green — distinguishable for most color vision types)</span></span></code></pre></div>
 </div>
 </section>
 <section id="a-bad-color-choice-vs-a-good-one" class="slide level2">
 <h2>A bad color choice vs a good one</h2>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152" class="r-stretch"></section></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"></section></section>
 <section>
 <section id="decluttering" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Decluttering</h1>
@@ -346,7 +348,7 @@ Dr.&nbsp;Sara Weston
 <h2>The default is cluttered</h2>
 <p>ggplot2’s default theme adds a lot of visual noise. Compare:</p>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-9-1.png" width="1152" class="r-stretch"></section>
 <section id="what-to-remove" class="slide level2">
 <h2>What to remove</h2>
 <p>Ask yourself: does this element help the reader understand the data?</p>
@@ -369,14 +371,14 @@ Dr.&nbsp;Sara Weston
 <section id="theme-for-fine-control" class="slide level2">
 <h2>theme() for fine control</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(</span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"none"</span>,                    <span class="co"># Remove legend</span></span>
 <span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),                <span class="co"># Remove tick marks</span></span>
 <span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),                <span class="co"># Remove gridlines</span></span>
 <span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),    <span class="co"># Bold the title</span></span>
 <span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),         <span class="co"># Font size</span></span>
 <span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)       <span class="co"># Left-align caption</span></span>
-<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -405,7 +407,7 @@ Dr.&nbsp;Sara Weston
 <section id="your-turn-10-minutes-1" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The cluttered version — fix this!</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The cluttered version — fix this!</span></span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition, <span class="at">size =</span> accuracy)) <span class="sc">+</span></span>
 <span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -414,10 +416,10 @@ Dr.&nbsp;Sara Weston
 <span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
 <span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"condition"</span>, <span class="at">y =</span> <span class="st">"rt"</span>) <span class="sc">+</span></span>
 <span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"data"</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
 
 </div>
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
 <p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
@@ -427,23 +429,25 @@ Dr.&nbsp;Sara Weston
 <h1>Critiquing bad graphs</h1>
 
 </section>
-<section id="your-turn-fix-these-graphs" class="slide level2">
-<h2>Your turn: Fix these graphs</h2>
-<p><strong>Placeholder for in-class activity:</strong></p>
-<p>I’ll show you several poorly designed graphs. With a partner, identify what’s wrong and suggest specific improvements.</p>
-<div class="callout callout-note callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
+<section id="whats-wrong-here-1-of-3" class="slide level2">
+<h2>What’s wrong here? (1 of 3)</h2>
+
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-13-1.png" width="672" class="r-stretch"><div class="fragment">
+<p><strong>The problem:</strong> The y-axis starts at 470, not 0. The difference looks massive — but it’s only ~40 ms. A truncated axis exaggerates the effect.</p>
 </div>
-<p><strong>TODO (Sara)</strong></p>
+</section>
+<section id="whats-wrong-here-2-of-3" class="slide level2">
+<h2>What’s wrong here? (2 of 3)</h2>
+
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" class="r-stretch"><div class="fragment">
+<p><strong>The problems:</strong> Red-green palette (colorblind-unfriendly). Title says “Boxplot” (a label, not a finding). Variable names as labels. Distracting background color and gridlines.</p>
 </div>
-<div class="callout-content">
-<p>Add 2-3 examples of bad graphs here. Good candidates: - Misleading y-axis (truncated or reversed) - Poor color choices (red-green, rainbow for categories) - Unnecessary 3D or chart junk - Misleading pie chart or dual y-axis</p>
-<p>For each: have students identify problems, then reveal a better version.</p>
-</div>
-</div>
+</section>
+<section id="whats-wrong-here-3-of-3" class="slide level2">
+<h2>What’s wrong here? (3 of 3)</h2>
+
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-15-1.png" width="672" class="r-stretch"><div class="fragment">
+<p><strong>The problems:</strong> Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.</p>
 </div>
 </section></section>
 <section>
@@ -509,10 +513,10 @@ Dr.&nbsp;Sara Weston
 <li><strong>Critical evaluation</strong> — always ask whether each element adds information</li>
 </ol>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p>Next time: <strong>Exploratory Data Analysis</strong></p>
-<p>We’ll learn to systematically explore data and ask good questions!</p>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>You’re not designing for yourself. You’re designing for a reader who will look at your figure for five seconds.</p>
+<p>Next time: Exploratory Data Analysis</p>
 
 </section></section>
     </div>
@@ -776,68 +780,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

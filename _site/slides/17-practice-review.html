@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="17-practice-review_files/libs/clipboard/clipboard.min.js"></script>
 <script src="17-practice-review_files/libs/quarto-html/tabby.min.js"></script>
 <script src="17-practice-review_files/libs/quarto-html/popper.min.js"></script>
 <script src="17-practice-review_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="17-practice-review_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="17-practice-review_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="17-practice-review_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="17-practice-review_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="17-practice-review_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -211,8 +210,8 @@ Dr.&nbsp;Sara Weston
 </section>
 
 <section>
-<section id="todays-plan" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Today’s plan</h1>
+<section id="you-already-know-more-than-you-think" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>You already know more than you think</h1>
 
 </section>
 <section id="where-weve-been" class="slide level2">
@@ -248,7 +247,7 @@ Dr.&nbsp;Sara Weston
 <section id="step-1-import" class="slide level2">
 <h2>Step 1: Import</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated therapy study data</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated therapy study data</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>,</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>, <span class="st">"Mindfulness"</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
@@ -259,30 +258,30 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">completed_followup =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="dv">100</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="fl">0.2</span>))</span>
 <span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(therapy_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(therapy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 7
 $ participant_id      &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,…
-$ condition           &lt;chr&gt; "CBT", "Mindfulness", "Mindfulness", "CBT", "Contr…
-$ age                 &lt;int&gt; 53, 63, 22, 46, 24, 22, 55, 27, 34, 53, 64, 43, 44…
-$ gender              &lt;chr&gt; "Female", "Female", "Non-binary", "Non-binary", "N…
-$ depression_baseline &lt;dbl&gt; 27.446975, 13.204566, 23.000438, 21.329446, 21.158…
-$ depression_post     &lt;dbl&gt; 21.44051, 16.60702, 22.27150, 10.54386, 20.72971, …
-$ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FALSE,…</code></pre>
+$ condition           &lt;chr&gt; "Mindfulness", "CBT", "Control", "CBT", "CBT", "CB…
+$ age                 &lt;int&gt; 57, 48, 28, 64, 23, 65, 54, 42, 27, 37, 62, 30, 58…
+$ gender              &lt;chr&gt; "Male", "Non-binary", "Non-binary", "Female", "Mal…
+$ depression_baseline &lt;dbl&gt; 15.251559, 28.497993, 21.503613, 24.270762, 21.051…
+$ depression_post     &lt;dbl&gt; 19.411802, 23.689227, 17.621148, 13.345553, 16.783…
+$ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, …</code></pre>
 </div>
 </div>
 </section>
 <section id="step-2-tidy-clean" class="slide level2">
 <h2>Step 2: Tidy &amp; Clean</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for issues</span></span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for issues</span></span>
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_baseline =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(depression_baseline)),</span>
 <span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">missing_post =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(depression_post)),</span>
 <span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_participants =</span> <span class="fu">n</span>()</span>
-<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   missing_baseline missing_post n_participants
@@ -292,20 +291,20 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean: create change score, filter to completers</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean: create change score, filter to completers</span></span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_clean <span class="ot">&lt;-</span> therapy_data <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(completed_followup) <span class="sc">|&gt;</span></span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">change =</span> depression_baseline <span class="sc">-</span> depression_post,</span>
 <span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> <span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CBT"</span>, <span class="st">"Mindfulness"</span>))</span>
-<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 </div>
 </section>
 <section id="step-3-transform-summarize" class="slide level2">
 <h2>Step 3: Transform &amp; Summarize</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_clean <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary <span class="ot">&lt;-</span> therapy_clean <span class="sc">|&gt;</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
@@ -315,21 +314,21 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_change =</span> <span class="fu">sd</span>(change)</span>
 <span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb6-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-11"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_summary</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 6
   condition       n mean_baseline mean_post mean_change sd_change
   &lt;fct&gt;       &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-1 Control        29          21.8      17.1        4.74      7.20
-2 CBT            19          22.0      17.6        4.34      7.07
-3 Mindfulness    31          22.2      17.7        4.41      6.62</code></pre>
+1 Control        22          23.0      18.8        4.17      9.14
+2 CBT            25          20.4      17.6        2.74      8.36
+3 Mindfulness    32          21.8      19.2        2.60      7.69</code></pre>
 </div>
 </div>
 </section>
 <section id="step-4-visualize" class="slide level2">
 <h2>Step 4: Visualize</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_clean, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> change)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_clean, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> change)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -338,7 +337,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
 <span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression reduction (points)"</span></span>
 <span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -353,21 +352,21 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 </div></section><section id="step-5-communicate" class="slide level2">
 <h2>Step 5: Communicate</h2>
 <p>Put it all together in a Quarto report:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from 79 participants who</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>completed the study. The CBT condition showed the largest mean</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>reduction in depression scores (M = 4.3,</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>SD = 7.1), compared to</span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>control (M = 4.7) and</span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>mindfulness (M = 4.4).</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>reduction in depression scores (M = 2.7,</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>SD = 8.4), compared to</span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>control (M = 4.2) and</span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>mindfulness (M = 2.6).</span>
 <span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
 <span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Depression change by treatment condition"</span></span>
 <span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># [visualization code here]</span></span>
-<span id="cb9-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 </section></section>
 <section>
 <section id="common-errors" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -377,7 +376,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-1-object-not-found" class="slide level2">
 <h2>Error 1: “Object not found”</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Depression)  <span class="co"># Capitalization matters!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(Depression)  <span class="co"># Capitalization matters!</span></span></code></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'Depression' not found</code></pre>
 </div>
@@ -399,26 +398,26 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-2-could-not-find-function" class="slide level2">
 <h2>Error 2: “Could not find function”</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant_id, condition)  <span class="co"># Works</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant_id, condition)  <span class="co"># Works</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 100 × 2
    participant_id condition  
             &lt;int&gt; &lt;chr&gt;      
- 1              1 CBT        
- 2              2 Mindfulness
- 3              3 Mindfulness
+ 1              1 Mindfulness
+ 2              2 CBT        
+ 3              3 Control    
  4              4 CBT        
- 5              5 Control    
+ 5              5 CBT        
  6              6 CBT        
- 7              7 Control    
- 8              8 Mindfulness
- 9              9 Control    
+ 7              7 Mindfulness
+ 8              8 CBT        
+ 9              9 CBT        
 10             10 Control    
 # ℹ 90 more rows</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selet</span>(participant_id, condition)  <span class="co"># Typo!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selet</span>(participant_id, condition)  <span class="co"># Typo!</span></span></code></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in selet(therapy_data, participant_id, condition): could not find function "selet"</code></pre>
 </div>
@@ -438,26 +437,26 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-3-unexpected-symbol" class="slide level2">
 <h2>Error 3: “Unexpected symbol”</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">"CBT"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">"CBT"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 26 × 7
+<pre><code># A tibble: 31 × 7
    participant_id condition   age gender     depression_baseline depression_post
             &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                    &lt;dbl&gt;           &lt;dbl&gt;
- 1              1 CBT          53 Female                   27.4             21.4
- 2              4 CBT          46 Non-binary               21.3             10.5
- 3              6 CBT          22 Male                     20.8             21.9
- 4             14 CBT          39 Non-binary                7.42            12.8
- 5             22 CBT          31 Female                   18.8             15.2
- 6             27 CBT          51 Non-binary               16.2             24.0
- 7             30 CBT          20 Male                     22.6             20.4
- 8             31 CBT          30 Non-binary               26.1             18.9
- 9             33 CBT          45 Male                     22.3             14.3
-10             34 CBT          39 Non-binary               30.8             17.0
-# ℹ 16 more rows
+ 1              2 CBT          48 Non-binary               28.5             23.7
+ 2              4 CBT          64 Female                   24.3             13.3
+ 3              5 CBT          23 Male                     21.1             16.8
+ 4              6 CBT          65 Male                     21.9             14.4
+ 5              8 CBT          42 Female                    8.95            20.8
+ 6              9 CBT          27 Male                     16.7             24.8
+ 7             20 CBT          43 Female                   17.6             19.4
+ 8             23 CBT          47 Non-binary               32.3             16.8
+ 9             25 CBT          41 Male                     19.3             14.7
+10             30 CBT          49 Male                     20.0             22.5
+# ℹ 21 more rows
 # ℹ 1 more variable: completed_followup &lt;lgl&gt;</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant_id)  <span class="co"># Missing pipe!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant_id)  <span class="co"># Missing pipe!</span></span></code></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error: object 'participant_id' not found</code></pre>
 </div>
@@ -476,7 +475,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-4-non-numeric-argument" class="slide level2">
 <h2>Error 4: “Non-numeric argument”</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(therapy_data<span class="sc">$</span>condition)  <span class="co"># Can't take mean of text!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(therapy_data<span class="sc">$</span>condition)  <span class="co"># Can't take mean of text!</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -497,8 +496,8 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-5-subscript-out-of-bounds" class="slide level2">
 <h2>Error 5: “Subscript out of bounds”</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_vector[<span class="dv">5</span>]  <span class="co"># Only 3 elements!</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>my_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_vector[<span class="dv">5</span>]  <span class="co"># Only 3 elements!</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -516,10 +515,10 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-6-ggplot-errors" class="slide level2">
 <h2>Error 6: ggplot errors</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression_post)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression_post)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"My plot"</span>)  <span class="co"># Missing + !</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"My plot"</span>)  <span class="co"># Missing + !</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>&lt;ggplot2::labels&gt; List of 1
  $ title: chr "My plot"</code></pre>
@@ -532,7 +531,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="error-7-unmatched-quotesparentheses" class="slide level2">
 <h2>Error 7: Unmatched quotes/parentheses</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(therapy_data, condition <span class="sc">==</span> <span class="st">"CBT"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(therapy_data, condition <span class="sc">==</span> <span class="st">"CBT"</span></span></code></pre></div>
 <div class="cell-output cell-output-error">
 <pre><code>Error in parse(text = input): &lt;text&gt;:2:0: unexpected end of input
 1: filter(therapy_data, condition == "CBT"
@@ -584,11 +583,11 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <h2>Step 3: Isolate the problem</h2>
 <p><strong>Run code line by line:</strong></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span>                         <span class="co"># Run this line</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span>                         <span class="co"># Run this line</span></span>
 <span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(completed_followup) <span class="sc">|&gt;</span>         <span class="co"># Then this</span></span>
 <span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> depression_baseline <span class="sc">-</span> depression_post) <span class="sc">|&gt;</span>  <span class="co"># Then this</span></span>
 <span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span>                <span class="co"># Then this</span></span>
-<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_change =</span> <span class="fu">mean</span>(change)) <span class="co"># Then this</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_change =</span> <span class="fu">mean</span>(change)) <span class="co"># Then this</span></span></code></pre></div>
 </div>
 <div class="fragment">
 <p>Find exactly which line breaks.</p>
@@ -598,13 +597,13 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <h2>Step 4: Simplify</h2>
 <p>Create a minimal example:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of your full complex pipeline</span></span>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of your full complex pipeline</span></span>
 <span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>simple_test <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
 <span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)</span>
 <span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(simple_test<span class="sc">$</span>x)  <span class="co"># Does this work?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(simple_test<span class="sc">$</span>x)  <span class="co"># Does this work?</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2</code></pre>
 </div>
@@ -664,10 +663,10 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <p><strong>Good:</strong></p>
 <blockquote>
 <p>“I’m trying to filter my data but getting ‘object not found’. Here’s a minimal example:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
 <span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, x <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: object 'data' not found</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: object 'data' not found</span></span></code></pre></div>
 <p>I expected to get rows where x &gt; 1.”</p>
 </blockquote>
 </div>
@@ -681,7 +680,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <h2>Your turn: Debug this code</h2>
 <p>This code has several errors. Find and fix them:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
 <span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>Study_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -696,7 +695,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <span id="cb34-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb34-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score)</span>
 <span id="cb34-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score)</span>
-<span id="cb34-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <p><strong>Time: 10 minutes</strong></p>
 </section></section>
@@ -755,11 +754,11 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="using-dput-to-share-data" class="slide level2">
 <h2>Using dput() to share data</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create small example</span></span>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create small example</span></span>
 <span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
 <span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate shareable code</span></span>
-<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(my_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dput</span>(my_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>structure(list(x = 1:3, y = c("a", "b", "c")), class = c("tbl_df", 
 "tbl", "data.frame"), row.names = c(NA, -3L))</code></pre>
@@ -768,10 +767,10 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <div class="fragment">
 <p>Someone can now recreate your exact data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># They run this:</span></span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># They run this:</span></span>
 <span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">structure</span>(<span class="fu">list</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)),</span>
 <span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">class =</span> <span class="fu">c</span>(<span class="st">"tbl_df"</span>, <span class="st">"tbl"</span>, <span class="st">"data.frame"</span>),</span>
-<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span><span class="dv">3</span>L))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">row.names =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="sc">-</span><span class="dv">3</span>L))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
       x y    
@@ -786,7 +785,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <section id="r-help-documentation" class="slide level2">
 <h2>R help documentation</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Open help page</span></span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Open help page</span></span>
 <span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>?mean</span>
 <span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(mean)</span>
 <span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -795,7 +794,7 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">help.search</span>(<span class="st">"regression"</span>)</span>
 <span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Run examples from help</span></span>
-<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">example</span>(mean)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">example</span>(mean)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p>Help pages include:</p>
@@ -962,8 +961,9 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
 <li>Practice, practice, practice</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>The only difference between you and someone who’s “good at R” is time spent being frustrated and pushing through.</p>
 <p>See you Wednesday for our final session!</p>
 
 </section></section>
@@ -1228,68 +1228,6 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE, FA
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

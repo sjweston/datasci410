@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="11-data-types_files/libs/clipboard/clipboard.min.js"></script>
 <script src="11-data-types_files/libs/quarto-html/tabby.min.js"></script>
 <script src="11-data-types_files/libs/quarto-html/popper.min.js"></script>
 <script src="11-data-types_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="11-data-types_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="11-data-types_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="11-data-types_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="11-data-types_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="11-data-types_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -215,8 +214,18 @@ Dr.&nbsp;Sara Weston
 <h1>Why data types matter</h1>
 
 </section>
-<section id="everything-is-a-type" class="slide level2">
-<h2>Everything is a type</h2>
+<section id="a-published-error" class="slide level2">
+<h2>A published error</h2>
+<p>A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg Self-Esteem Scale. Item 3 is reverse-coded.</p>
+<div class="fragment">
+<p>What’s their total score?</p>
+</div>
+<div class="fragment">
+<p>If you said 15, you forgot to reverse-code — <code>2</code> should become <code>(5 + 1) - 2 = 4</code>, making the real total <strong>17</strong>. This kind of mistake happens in published papers, and it lives in how you handle data types.</p>
+</div>
+</section>
+<section id="everything-in-r-is-a-type" class="slide level2">
+<h2>Everything in R is a type</h2>
 <p>In R, every value has a <strong>type</strong>:</p>
 <ul>
 <li><code>"hello"</code> is a <strong>string</strong> (character)</li>
@@ -224,15 +233,7 @@ Dr.&nbsp;Sara Weston
 <li><code>TRUE</code> is a <strong>logical</strong> (boolean)</li>
 <li><code>"Female"</code> can be a <strong>factor</strong> (categorical)</li>
 </ul>
-</section>
-<section id="everything-is-a-type-1" class="slide level2">
-<h2>Everything is a type</h2>
-<p>Understanding types helps you:</p>
-<ul>
-<li>Choose the right functions</li>
-<li>Avoid cryptic errors</li>
-<li>Transform data correctly</li>
-</ul>
+<p>Understanding types helps you choose the right functions, avoid cryptic errors, and transform data correctly.</p>
 </section>
 <section id="todays-focus" class="slide level2">
 <h2>Today’s focus</h2>
@@ -254,8 +255,8 @@ Dr.&nbsp;Sara Weston
 <h2>What are logicals?</h2>
 <p>Logical vectors contain only <code>TRUE</code>, <code>FALSE</code>, or <code>NA</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>)</span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">NA</span>, <span class="cn">FALSE</span>)</span>
+<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>x</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE FALSE  TRUE    NA FALSE</code></pre>
 </div>
@@ -263,8 +264,8 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>They’re the result of comparisons:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">45</span>, <span class="dv">17</span>, <span class="dv">30</span>)</span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>ages <span class="sc">&gt;=</span> <span class="dv">18</span>  <span class="co"># Is each age 18 or older?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>ages <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">45</span>, <span class="dv">17</span>, <span class="dv">30</span>)</span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>ages <span class="sc">&gt;=</span> <span class="dv">18</span>  <span class="co"># Is each age 18 or older?</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
@@ -350,19 +351,19 @@ Dr.&nbsp;Sara Weston
 <section id="and-vs-or" class="slide level2">
 <h2>AND vs OR</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">22</span>, <span class="dv">45</span>, <span class="dv">70</span>)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">22</span>, <span class="dv">45</span>, <span class="dv">70</span>)</span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Other"</span>, <span class="st">"Depression"</span>)</span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># AND: Both conditions must be TRUE</span></span>
-<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">65</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> age <span class="sc">&lt;</span> <span class="dv">65</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE  TRUE  TRUE FALSE</code></pre>
 </div>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># OR: At least one condition must be TRUE</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="sc">==</span> <span class="st">"Depression"</span> <span class="sc">|</span> diagnosis <span class="sc">==</span> <span class="st">"Anxiety"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># OR: At least one condition must be TRUE</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="sc">==</span> <span class="st">"Depression"</span> <span class="sc">|</span> diagnosis <span class="sc">==</span> <span class="st">"Anxiety"</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
@@ -372,7 +373,7 @@ Dr.&nbsp;Sara Weston
 <section id="using-logicals-in-filter" class="slide level2">
 <h2>Using logicals in filter()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">17</span>, <span class="dv">22</span>, <span class="dv">45</span>, <span class="dv">70</span>, <span class="dv">30</span>),</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">consent =</span> <span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>),</span>
@@ -381,7 +382,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only consenting adults with high depression</span></span>
 <span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="sc">|&gt;</span></span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(consent <span class="sc">&amp;</span> age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> depression <span class="sc">&gt;=</span> <span class="dv">20</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(consent <span class="sc">&amp;</span> age <span class="sc">&gt;=</span> <span class="dv">18</span> <span class="sc">&amp;</span> depression <span class="sc">&gt;=</span> <span class="dv">20</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
      id   age consent depression
@@ -395,13 +396,13 @@ Dr.&nbsp;Sara Weston
 <h2>any() and all()</h2>
 <p>Check if <strong>any</strong> or <strong>all</strong> values are TRUE:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(responses)   <span class="co"># Is at least one TRUE?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(responses)   <span class="co"># Is at least one TRUE?</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(responses)   <span class="co"># Are all TRUE?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">all</span>(responses)   <span class="co"># Are all TRUE?</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
@@ -409,8 +410,8 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Useful for checking data quality:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Did anyone fail the attention check?</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(survey_data<span class="sc">$</span>consent <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Did anyone fail the attention check?</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(survey_data<span class="sc">$</span>consent <span class="sc">==</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -421,13 +422,13 @@ Dr.&nbsp;Sara Weston
 <h2>Counting with logicals</h2>
 <p>Remember: <code>TRUE = 1</code> and <code>FALSE = 0</code></p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How many adults?</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(survey_data<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How many adults?</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(survey_data<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># What proportion are adults?</span></span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey_data<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># What proportion are adults?</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(survey_data<span class="sc">$</span>age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8</code></pre>
 </div>
@@ -442,10 +443,10 @@ Dr.&nbsp;Sara Weston
 <h2>if_else(): Two-way decisions</h2>
 <p><code>if_else()</code> creates new values based on a condition:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="sc">|&gt;</span></span>
 <span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">if_else</span>(age <span class="sc">&gt;=</span> <span class="dv">18</span>, <span class="st">"Adult"</span>, <span class="st">"Minor"</span>)</span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
      id   age consent depression age_group
@@ -463,9 +464,9 @@ Dr.&nbsp;Sara Weston
 <h2>Handling NA with if_else()</h2>
 <p>By default, <code>if_else()</code> keeps <code>NA</code> values:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a>responses <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">5</span>)</span>
 <span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(responses <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="st">"High"</span>, <span class="st">"Low"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(responses <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="st">"High"</span>, <span class="st">"Low"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Low"  "Low"  NA     "High" "High"</code></pre>
 </div>
@@ -473,7 +474,7 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>You can specify what to do with <code>NA</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(responses <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="st">"High"</span>, <span class="st">"Low"</span>, <span class="at">missing =</span> <span class="st">"No response"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">if_else</span>(responses <span class="sc">&gt;=</span> <span class="dv">3</span>, <span class="st">"High"</span>, <span class="st">"Low"</span>, <span class="at">missing =</span> <span class="st">"No response"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Low"         "Low"         "No response" "High"        "High"       </code></pre>
 </div>
@@ -484,7 +485,7 @@ Dr.&nbsp;Sara Weston
 <h2>case_when(): Multiple conditions</h2>
 <p>For more than two outcomes, use <code>case_when()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="sc">|&gt;</span></span>
 <span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression_category =</span> <span class="fu">case_when</span>(</span>
 <span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>      depression <span class="sc">&lt;</span> <span class="dv">14</span> <span class="sc">~</span> <span class="st">"Minimal"</span>,</span>
@@ -492,7 +493,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>      depression <span class="sc">&lt;</span> <span class="dv">29</span> <span class="sc">~</span> <span class="st">"Moderate"</span>,</span>
 <span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>      depression <span class="sc">&gt;=</span> <span class="dv">29</span> <span class="sc">~</span> <span class="st">"Severe"</span></span>
 <span id="cb27-8"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 5
      id   age consent depression depression_category
@@ -515,12 +516,12 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Always include a catch-all:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">case_when</span>(</span>
 <span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">18</span> <span class="sc">~</span> <span class="st">"Minor"</span>,</span>
 <span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"Adult"</span>,</span>
 <span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&gt;=</span> <span class="dv">65</span> <span class="sc">~</span> <span class="st">"Senior"</span>,</span>
 <span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="cn">NA</span>  <span class="co"># Explicit about NAs</span></span>
-<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div>
 </section>
@@ -532,7 +533,7 @@ Dr.&nbsp;Sara Weston
 <h2>Psychology example: Reverse coding</h2>
 <p>Many scales have reverse-coded items:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Original responses (1-5 scale)</span></span>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Original responses (1-5 scale)</span></span>
 <span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>rosenberg <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">item1 =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>),  <span class="co"># Regular item</span></span>
@@ -549,7 +550,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb30-15"><a href="" aria-hidden="true" tabindex="-1"></a>      item2 <span class="sc">==</span> <span class="dv">4</span> <span class="sc">~</span> <span class="dv">2</span>,</span>
 <span id="cb30-16"><a href="" aria-hidden="true" tabindex="-1"></a>      item2 <span class="sc">==</span> <span class="dv">5</span> <span class="sc">~</span> <span class="dv">1</span></span>
 <span id="cb30-17"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb30-18"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb30-18"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id item1 item2 item2_reversed
@@ -564,10 +565,10 @@ Dr.&nbsp;Sara Weston
 <h2>Easier reverse coding</h2>
 <p>For scales, use arithmetic:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>rosenberg <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>rosenberg <span class="sc">|&gt;</span></span>
 <span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">item2_reversed =</span> <span class="dv">6</span> <span class="sc">-</span> item2  <span class="co"># For 1-5 scale: 6 - x</span></span>
-<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id item1 item2 item2_reversed
@@ -594,10 +595,10 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Recode responses</h2>
 <p>You have survey data with a 1-7 attention check item where the correct answer is 4:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>attention_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>attention_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
 <span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">attention_check =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">7</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
-<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Create a new column <code>passed</code> that is <code>TRUE</code> if they answered 4, <code>FALSE</code> otherwise</li>
@@ -621,11 +622,11 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Most of the time, R uses doubles automatically:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "double"</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>L)  <span class="co"># The L forces it to be an integer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">typeof</span>(<span class="dv">42</span>L)  <span class="co"># The L forces it to be an integer</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "integer"</code></pre>
 </div>
@@ -638,21 +639,21 @@ Dr.&nbsp;Sara Weston
 <section id="rounding" class="slide level2">
 <h2>Rounding</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_times <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">245.678</span>, <span class="fl">198.234</span>, <span class="fl">312.891</span>)</span>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_times <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">245.678</span>, <span class="fl">198.234</span>, <span class="fl">312.891</span>)</span>
 <span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(reaction_times)        <span class="co"># Round to nearest integer</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(reaction_times)        <span class="co"># Round to nearest integer</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 246 198 313</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(reaction_times, <span class="dv">1</span>)     <span class="co"># Round to 1 decimal place</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">round</span>(reaction_times, <span class="dv">1</span>)     <span class="co"># Round to 1 decimal place</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 245.7 198.2 312.9</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(reaction_times)        <span class="co"># Round down</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">floor</span>(reaction_times)        <span class="co"># Round down</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 245 198 312</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(reaction_times)      <span class="co"># Round up</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ceiling</span>(reaction_times)      <span class="co"># Round up</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 246 199 313</code></pre>
 </div>
@@ -662,25 +663,25 @@ Dr.&nbsp;Sara Weston
 <h2>Summary functions (review)</h2>
 <p>Common calculations you’ve been using:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">15</span>, <span class="cn">NA</span>)</span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="dv">15</span>, <span class="cn">NA</span>)</span>
 <span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20.33333</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sd</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6.65332</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">min</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 12</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">max</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 30</code></pre>
 </div>
@@ -690,13 +691,13 @@ Dr.&nbsp;Sara Weston
 <h2>The na.rm argument</h2>
 <p>Most summary functions need <code>na.rm = TRUE</code> to handle missing data:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">30</span>)</span>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">30</span>)</span>
 <span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores)              <span class="co"># Returns NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores)              <span class="co"># Returns NA</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># Ignores NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)  <span class="co"># Ignores NA</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 20.5</code></pre>
 </div>
@@ -720,9 +721,9 @@ Dr.&nbsp;Sara Weston
 <section id="counting-non-missing-values" class="slide level2">
 <h2>Counting non-missing values</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="cn">NA</span>)</span>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">30</span>, <span class="cn">NA</span>)</span>
 <span id="cb61-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb61-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(scores))  <span class="co"># Count non-missing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb61-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(scores))  <span class="co"># Count non-missing</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 4</code></pre>
 </div>
@@ -730,11 +731,11 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Or in a summary:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(scores) <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(scores) <span class="sc">|&gt;</span></span>
 <span id="cb63-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb63-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(scores)),</span>
 <span id="cb63-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(scores, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb63-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb63-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
       n mean_score
@@ -753,7 +754,7 @@ Dr.&nbsp;Sara Weston
 <h2>Real psychology task: Scale scoring</h2>
 <p>You’ve collected survey data with multiple items per scale:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb65-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
 <span id="cb65-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="cn">NA</span>),</span>
 <span id="cb65-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">2</span>),</span>
@@ -761,7 +762,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb65-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety4 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">2</span>)</span>
 <span id="cb65-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb65-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-9"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb65-9"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
      id anxiety1 anxiety2 anxiety3 anxiety4
@@ -777,10 +778,10 @@ Dr.&nbsp;Sara Weston
 <section id="option-1-manual-addition" class="slide level2">
 <h2>Option 1: Manual addition</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
 <span id="cb67-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb67-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> anxiety1 <span class="sc">+</span> anxiety2 <span class="sc">+</span> anxiety3 <span class="sc">+</span> anxiety4</span>
-<span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
      id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_total
@@ -799,13 +800,13 @@ Dr.&nbsp;Sara Weston
 <h2>Option 2: Sum with na.rm</h2>
 <p>We can’t use <code>na.rm</code> directly in <code>mutate()</code> with <code>+</code>, but we can use <code>sum()</code>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
 <span id="cb69-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span>  <span class="co"># Work row-by-row</span></span>
 <span id="cb69-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb69-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
 <span id="cb69-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb69-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb69-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb69-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
      id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_total
@@ -820,13 +821,13 @@ Dr.&nbsp;Sara Weston
 <section id="computing-mean-scores" class="slide level2">
 <h2>Computing mean scores</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
 <span id="cb71-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
 <span id="cb71-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb71-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
 <span id="cb71-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb71-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb71-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb71-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
      id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_mean
@@ -856,7 +857,7 @@ Dr.&nbsp;Sara Weston
 <section id="cleaner-approach-pivot-then-summarize" class="slide level2">
 <h2>Cleaner approach: pivot then summarize</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
 <span id="cb73-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
 <span id="cb73-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"anxiety"</span>),</span>
 <span id="cb73-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
@@ -867,7 +868,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb73-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb73-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb73-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_items =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(response))</span>
-<span id="cb73-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb73-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
 </section>
@@ -896,7 +897,7 @@ Dr.&nbsp;Sara Weston
 <section id="implementing-a-missingness-rule" class="slide level2">
 <h2>Implementing a missingness rule</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
 <span id="cb75-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
 <span id="cb75-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb75-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_answered =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4))),</span>
@@ -906,7 +907,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb75-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span>  <span class="co"># NA if too many missing</span></span>
 <span id="cb75-9"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb75-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb75-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb75-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 7
      id anxiety1 anxiety2 anxiety3 anxiety4 n_answered anxiety_mean
@@ -922,7 +923,7 @@ Dr.&nbsp;Sara Weston
 <h2>More complex scales: Subscales</h2>
 <p>Some measures have multiple subscales:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
 <span id="cb77-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Depression items</span></span>
 <span id="cb77-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_d1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="at">dass_d2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
@@ -930,13 +931,13 @@ Dr.&nbsp;Sara Weston
 <span id="cb77-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_a1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="at">dass_a2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>),</span>
 <span id="cb77-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stress items</span></span>
 <span id="cb77-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_s1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dass_s2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb77-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb77-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="computing-subscales" class="slide level2">
 <h2>Computing subscales</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="sc">|&gt;</span></span>
 <span id="cb78-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
 <span id="cb78-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
 <span id="cb78-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_d1, dass_d2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
@@ -944,7 +945,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb78-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">stress =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_s1, dass_s2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb78-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
 <span id="cb78-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb78-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, depression, anxiety, stress)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb78-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, depression, anxiety, stress)</span></code></pre></div>
 </div>
 
 </section><section id="computing-subscales-output" class="slide level2 output-location-slide"><h2>Computing subscales</h2><div class="cell output-location-slide">
@@ -966,7 +967,7 @@ Dr.&nbsp;Sara Weston
 <h2>Practice: Score the PHQ-9</h2>
 <p>The PHQ-9 is a 9-item depression screener (0-3 scale):</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="" aria-hidden="true" tabindex="-1"></a>phq_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="" aria-hidden="true" tabindex="-1"></a>phq_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb80-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
 <span id="cb80-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
 <span id="cb80-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="cn">NA</span>),</span>
@@ -977,7 +978,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb80-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq7 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
 <span id="cb80-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq8 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
 <span id="cb80-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq9 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
-<span id="cb80-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb80-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Compute a <strong>total score</strong> (sum of all 9 items)</li>
@@ -1019,8 +1020,9 @@ Dr.&nbsp;Sara Weston
 <li>Think about categorical variables in your final project</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>Scoring a scale correctly is the most common data task in psychology — and the easiest place to introduce errors.</p>
 <p>See you Wednesday for strings and factors!</p>
 
 </section></section>
@@ -1285,68 +1287,6 @@ Dr.&nbsp;Sara Weston
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

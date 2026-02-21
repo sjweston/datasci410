@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="10-eda-covariation_files/libs/clipboard/clipboard.min.js"></script>
 <script src="10-eda-covariation_files/libs/quarto-html/tabby.min.js"></script>
 <script src="10-eda-covariation_files/libs/quarto-html/popper.min.js"></script>
 <script src="10-eda-covariation_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -215,25 +214,19 @@ Dr.&nbsp;Sara Weston
 <h1>From variation to covariation</h1>
 
 </section>
-<section id="recap-variation" class="slide level2">
-<h2>Recap: Variation</h2>
-<p>Last session we explored <strong>variation</strong> — how values vary within a single variable:</p>
-<ul>
-<li>Distributions of continuous variables (histograms, density plots)</li>
-<li>Counts of categorical variables (bar charts)</li>
-<li>Identifying typical values and outliers</li>
-</ul>
-</section>
-<section id="today-covariation" class="slide level2">
-<h2>Today: Covariation</h2>
-<p><strong>Covariation</strong> is the tendency for values of two or more variables to vary together in a related way.</p>
+<section id="psychology-is-about-relationships" class="slide level2">
+<h2>Psychology is about relationships</h2>
+<p>Last time, you explored how individual variables behave — distributions, outliers, missing data.</p>
 <div class="fragment">
-<p>In psychology, we care deeply about covariation:</p>
+<p>But psychology is about <em>relationships</em>:</p>
 <ul>
-<li>Does anxiety vary with depression?</li>
-<li>Do reaction times vary across different conditions?</li>
-<li>Does age relate to memory performance?</li>
+<li>Does <strong>treatment</strong> predict <strong>depression</strong>?</li>
+<li>Does <strong>age</strong> relate to <strong>reaction time</strong>?</li>
+<li>Does <strong>anxiety</strong> co-occur with <strong>insomnia</strong>?</li>
 </ul>
+</div>
+<div class="fragment">
+<p>Today we learn to <strong>see</strong> those relationships in data — before testing them statistically.</p>
 </div>
 </section></section>
 <section>
@@ -244,7 +237,7 @@ Dr.&nbsp;Sara Weston
 <section id="example-mental-health-by-treatment-group" class="slide level2">
 <h2>Example: Mental health by treatment group</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated therapy outcome data</span></span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated therapy outcome data</span></span>
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"CBT"</span>, <span class="st">"Mindfulness"</span>), <span class="at">each =</span> <span class="dv">50</span>),</span>
 <span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression_post =</span> <span class="fu">c</span>(</span>
@@ -252,32 +245,32 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">12</span>, <span class="at">sd =</span> <span class="dv">5</span>),  <span class="co"># CBT</span></span>
 <span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rnorm</span>(<span class="dv">50</span>, <span class="at">mean =</span> <span class="dv">14</span>, <span class="at">sd =</span> <span class="dv">5</span>)   <span class="co"># Mindfulness</span></span>
 <span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="example-mental-health-by-treatment-group-1" class="slide level2">
 <h2>Example: Mental health by treatment group</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(therapy_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(therapy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201476,…</code></pre>
+$ depression_post &lt;dbl&gt; 19.095731, 11.696024, 20.152986, 12.653413, 15.755572,…</code></pre>
 </div>
 </div>
 </section>
 <section id="boxplots-the-classic-choice" class="slide level2">
 <h2>Boxplots: The classic choice</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression_post)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(therapy_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> depression_post)) <span class="sc">+</span></span>
 <span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Post-treatment depression scores by condition"</span>,</span>
 <span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Treatment condition"</span>,</span>
 <span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score (BDI-II)"</span></span>
 <span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -349,7 +342,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <section class="slide level2">
 
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain)</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrain)</span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(</span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> condition, </span>
@@ -377,7 +370,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb5-26"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
 <span id="cb5-27"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
 <span id="cb5-28"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb5-29"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-29"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
 </div>
 </section>
 <section id="why-rainclouds-are-great" class="slide level2">
@@ -443,31 +436,31 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <section id="example-diagnosis-by-gender" class="slide level2">
 <h2>Example: Diagnosis by gender</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated diagnostic data</span></span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated diagnostic data</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>, <span class="st">"Non-binary"</span>), <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">diagnosis =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Both"</span>, <span class="st">"Other"</span>),</span>
 <span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>                     <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diagnosis_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diagnosis_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   gender     diagnosis 
   &lt;chr&gt;      &lt;chr&gt;     
-1 Non-binary Anxiety   
-2 Non-binary Depression
+1 Female     Both      
+2 Male       Depression
 3 Female     Anxiety   
-4 Male       Depression
-5 Female     Anxiety   
-6 Non-binary Other     </code></pre>
+4 Non-binary Depression
+5 Female     Depression
+6 Female     Anxiety   </code></pre>
 </div>
 </div>
 </section>
 <section id="option-1-stacked-bar-chart" class="slide level2">
 <h2>Option 1: Stacked bar chart</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
@@ -475,7 +468,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
 <span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -490,7 +483,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 </div></section><section id="option-2-side-by-side-bars" class="slide level2">
 <h2>Option 2: Side-by-side bars</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
@@ -498,7 +491,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
 <span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -513,7 +506,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 </div></section><section id="option-3-proportions" class="slide level2">
 <h2>Option 3: Proportions</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis distribution by gender"</span>,</span>
@@ -521,7 +514,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
 <span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -537,7 +530,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <h2>Option 4: geom_count()</h2>
 <p>Shows the <em>size</em> of overlaps:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
 <span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
@@ -545,7 +538,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span>,</span>
 <span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"Count"</span></span>
 <span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -560,7 +553,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 </div></section><section id="option-5-tile-with-counts" class="slide level2">
 <h2>Option 5: Tile with counts</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_counts <span class="ot">&lt;-</span> diagnosis_data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_counts <span class="ot">&lt;-</span> diagnosis_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender, diagnosis)</span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_counts, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> diagnosis, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
@@ -572,7 +565,7 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span>,</span>
 <span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Count"</span></span>
 <span id="cb12-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section><section id="option-5-tile-with-counts-output" class="slide level2 output-location-slide"><h2>Option 5: Tile with counts</h2><div class="cell output-location-slide">
@@ -592,32 +585,32 @@ $ depression_post &lt;dbl&gt; 16.006611, 19.497922, 18.636397, 12.097077, 14.201
 <section id="the-classic-scatterplots" class="slide level2">
 <h2>The classic: Scatterplots</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated reaction time data</span></span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated reaction time data</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>rt_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">runif</span>(<span class="dv">100</span>, <span class="dv">18</span>, <span class="dv">70</span>),</span>
 <span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="dv">200</span> <span class="sc">+</span> age <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">100</span>, <span class="dv">0</span>, <span class="dv">40</span>)</span>
 <span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(rt_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(rt_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 56.43039, 24.81925, 22.00801, 65.11047, 47.96659, 38.984…
-$ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 314.74…</code></pre>
+$ age           &lt;dbl&gt; 55.38124, 31.64262, 33.21718, 37.35396, 43.88196, 42.597…
+$ reaction_time &lt;dbl&gt; 353.2280, 292.0132, 219.7933, 404.8057, 366.7305, 332.08…</code></pre>
 </div>
 </div>
 </section>
 <section id="basic-scatterplot" class="slide level2">
 <h2>Basic scatterplot</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction time by age"</span>,</span>
 <span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
 <span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -632,7 +625,7 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 </div></section><section id="add-a-trend-line" class="slide level2">
 <h2>Add a trend line</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
 <span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -640,7 +633,7 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 <span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
 <span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
 <span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -656,20 +649,20 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 <h2>The problem: Overplotting</h2>
 <p>With lots of data, points overlap and hide the true density:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Lots of data</span></span>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Lots of data</span></span>
 <span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>big_rt_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">runif</span>(<span class="dv">5000</span>, <span class="dv">18</span>, <span class="dv">70</span>),</span>
 <span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="dv">200</span> <span class="sc">+</span> age <span class="sc">*</span> <span class="dv">3</span> <span class="sc">+</span> <span class="fu">rnorm</span>(<span class="dv">5000</span>, <span class="dv">0</span>, <span class="dv">40</span>)</span>
-<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="overplotting-problem-demonstrated" class="slide level2">
 <h2>Overplotting problem demonstrated</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Hard to see where the data is dense"</span>) <span class="sc">+</span></span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -684,10 +677,10 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 </div></section><section id="solution-1-transparency-alpha" class="slide level2">
 <h2>Solution 1: Transparency (alpha)</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
 <span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Using alpha = 0.1 to show density"</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -702,14 +695,14 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 </div></section><section id="solution-2-geom_bin2d" class="slide level2">
 <h2>Solution 2: geom_bin2d()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bin2d</span>() <span class="sc">+</span></span>
 <span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"2D bins show density"</span>,</span>
 <span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Count"</span></span>
 <span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -724,14 +717,14 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 </div></section><section id="solution-3-geom_hex" class="slide level2">
 <h2>Solution 3: geom_hex()</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(big_rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hex</span>() <span class="sc">+</span></span>
 <span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Hexagonal bins"</span>,</span>
 <span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Count"</span></span>
 <span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -747,9 +740,9 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 <h2>Correlation coefficient</h2>
 <p>A single number summary of the linear relationship:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7920133</code></pre>
+<pre><code>[1] 0.7723005</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -805,11 +798,11 @@ $ reaction_time &lt;dbl&gt; 402.5356, 324.9255, 320.3351, 422.1141, 312.5042, 31
 </div>
 </div>
 </section>
-<section id="real-psychology-example" class="slide level2">
-<h2>Real psychology example</h2>
+<section id="real-data-example" class="slide level2">
+<h2>Real data example</h2>
 <p>Let’s explore a real dataset: <code>mpg</code> (fuel economy data)</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(mpg)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 234
 Columns: 11
@@ -830,7 +823,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="question-1-does-engine-size-affect-fuel-economy" class="slide level2">
 <h2>Question 1: Does engine size affect fuel economy?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
 <span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
@@ -838,7 +831,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Engine displacement (liters)"</span>,</span>
 <span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Highway MPG"</span></span>
 <span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -853,7 +846,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="question-2-does-this-vary-by-car-type" class="slide level2">
 <h2>Question 2: Does this vary by car type?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
 <span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
 <span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Engine size vs fuel economy by car type"</span>,</span>
@@ -861,7 +854,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Highway MPG"</span>,</span>
 <span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Car type"</span></span>
 <span id="cb27-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -876,14 +869,14 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></section><section id="question-3-which-car-types-are-most-common" class="slide level2">
 <h2>Question 3: Which car types are most common?</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">fct_infreq</span>(class))) <span class="sc">+</span></span>
 <span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
 <span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"SUVs are the most common vehicle type"</span>,</span>
 <span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Count"</span>,</span>
 <span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Car type"</span></span>
 <span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section><section id="question-3-which-car-types-are-most-common-output" class="slide level2 output-location-slide"><h2>Question 3: Which car types are most common?</h2><div class="cell output-location-slide">
@@ -946,8 +939,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li>Start thinking about how you’ll compute scale scores (next session)</li>
 </ul>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>Relationships hide in data. Your job is to make them visible — carefully, honestly.</p>
 <p>See you Monday for data types and scale scoring!</p>
 
 </section></section>
@@ -1212,68 +1206,6 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');

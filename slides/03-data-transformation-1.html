@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="03-data-transformation-1_files/libs/clipboard/clipboard.min.js"></script>
 <script src="03-data-transformation-1_files/libs/quarto-html/tabby.min.js"></script>
 <script src="03-data-transformation-1_files/libs/quarto-html/popper.min.js"></script>
 <script src="03-data-transformation-1_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -96,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="03-data-transformation-1_files/libs/revealjs/dist/theme/quarto-bc3dd877bd918a736a6377db48a00f0f.css">
+  <link rel="stylesheet" href="03-data-transformation-1_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
   <link href="03-data-transformation-1_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="03-data-transformation-1_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="03-data-transformation-1_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -214,16 +213,15 @@ Dr.&nbsp;Sara Weston
 <h1>Data transformation</h1>
 
 </section>
-<section id="why-transform-data" class="slide level2">
-<h2>Why transform data?</h2>
-<p>Real data rarely comes in the exact form you need:</p>
-<ul>
-<li>Filter to specific participants or conditions</li>
-<li>Create new variables (e.g., scale scores, dummy codes)</li>
-<li>Sort to find extreme values</li>
-<li>Select relevant columns from wide datasets</li>
-</ul>
-<p><strong>dplyr</strong> makes all of this straightforward.</p>
+<section id="a-question-you-cant-answer-yet" class="slide level2">
+<h2>A question you can’t answer yet</h2>
+<p>You collected survey data from 500 participants. You only want women over 25 who passed the attention check.</p>
+<div class="fragment">
+<p>How do you get to <em>just those rows?</em></p>
+</div>
+<div class="fragment">
+<p>That’s what <code>filter()</code> does. And it’s just the beginning — today we learn four verbs that turn raw data into exactly what you need.</p>
+</div>
 </section>
 <section id="the-dplyr-verbs" class="slide level2">
 <h2>The dplyr verbs</h2>
@@ -262,8 +260,8 @@ Dr.&nbsp;Sara Weston
 <section id="our-dataset-flights" class="slide level2">
 <h2>Our dataset: flights</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All 336,776 flights departing NYC in 2013</span></span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flights)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All 336,776 flights departing NYC in 2013</span></span>
+<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(flights)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 336,776
 Columns: 19
@@ -308,8 +306,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="filter-picks-rows" class="slide level2">
 <h2>filter() picks rows</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All flights on January 1st</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All flights on January 1st</span></span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 <div class="cell fragment">
 <div class="cell-output cell-output-stdout">
@@ -378,26 +376,26 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="filter-examples" class="slide level2">
 <h2>Filter examples</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights to Los Angeles</span></span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights to Los Angeles</span></span>
 <span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, dest <span class="sc">==</span> <span class="st">"LAX"</span>)</span>
 <span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights with arrival delay over 2 hours</span></span>
 <span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, arr_delay <span class="sc">&gt;</span> <span class="dv">120</span>)</span>
 <span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights by United Airlines</span></span>
-<span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, carrier <span class="sc">==</span> <span class="st">"UA"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, carrier <span class="sc">==</span> <span class="st">"UA"</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="multiple-conditions" class="slide level2">
 <h2>Multiple conditions</h2>
 <p>Conditions separated by <code>,</code> are combined with AND:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># January 1st flights (both must be true)</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># January 1st flights (both must be true)</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>, day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 <p>Equivalent to:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span> <span class="sc">&amp;</span> day <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="logical-operators" class="slide level2">
@@ -428,8 +426,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="using-or" class="slide level2">
 <h2>Using OR</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights in November OR December</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">11</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">12</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flights in November OR December</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">11</span> <span class="sc">|</span> month <span class="sc">==</span> <span class="dv">12</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 55,403 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -454,8 +452,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="a-useful-shortcut-in" class="slide level2">
 <h2>A useful shortcut: %in%</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same as above, but cleaner</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same as above, but cleaner</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">11</span>, <span class="dv">12</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 55,403 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -482,7 +480,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>filter() with psychology data</h2>
 <p>Imagine a survey dataset:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude participants who failed attention check</span></span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Exclude participants who failed attention check</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(survey, attention_check <span class="sc">==</span> <span class="st">"correct"</span>)</span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep only complete responses</span></span>
@@ -492,15 +490,15 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(survey, age <span class="sc">&gt;=</span> <span class="dv">18</span>)</span>
 <span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Specific conditions</span></span>
-<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(survey, condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"control"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(survey, condition <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"treatment"</span>, <span class="st">"control"</span>))</span></code></pre></div>
 </div>
 </section>
 <section id="missing-values-na" class="slide level2">
 <h2>Missing values: NA</h2>
 <p><code>NA</code> means “not available” — a missing value.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="sc">&gt;</span> <span class="dv">2</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE    NA  TRUE</code></pre>
 </div>
@@ -511,15 +509,15 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Checking for NA</h2>
 <p>Use <code>is.na()</code> to check for missing values:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">is.na</span>(x)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE FALSE  TRUE FALSE</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep rows where dep_delay is NOT missing</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, <span class="sc">!</span><span class="fu">is.na</span>(dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep rows where dep_delay is NOT missing</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, <span class="sc">!</span><span class="fu">is.na</span>(dep_delay))</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -562,8 +560,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="arrange-reorders-rows" class="slide level2">
 <h2>arrange() reorders rows</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by departure delay (smallest first)</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, dep_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by departure delay (smallest first)</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, dep_delay)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -588,8 +586,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="descending-order" class="slide level2">
 <h2>Descending order</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Most delayed flights first</span></span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Most delayed flights first</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, <span class="fu">desc</span>(dep_delay))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -614,8 +612,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="multiple-sort-columns" class="slide level2">
 <h2>Multiple sort columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by month, then by day, then by departure time</span></span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, month, day, dep_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Sort by month, then by day, then by departure time</span></span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, month, day, dep_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 19
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -640,7 +638,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="arrange-use-cases" class="slide level2">
 <h2>arrange() use cases</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Psychology examples:</span></span>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Psychology examples:</span></span>
 <span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find participants with highest scores</span></span>
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, <span class="fu">desc</span>(total_score))</span>
 <span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -648,7 +646,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, condition, participant_id)</span>
 <span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find earliest responses</span></span>
-<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, response_time)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, response_time)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -659,8 +657,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="select-picks-columns" class="slide level2">
 <h2>select() picks columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Just these three columns</span></span>
-<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year, month, day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Just these three columns</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year, month, day)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 3
     year month   day
@@ -682,8 +680,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="select-a-range" class="slide level2">
 <h2>Select a range</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All columns from year to day</span></span>
-<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year<span class="sc">:</span>day)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All columns from year to day</span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year<span class="sc">:</span>day)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 3
     year month   day
@@ -734,8 +732,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="using-select-helpers" class="slide level2">
 <h2>Using select helpers</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All delay-related columns</span></span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">"delay"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All delay-related columns</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">contains</span>(<span class="st">"delay"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 2
    dep_delay arr_delay
@@ -757,8 +755,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="using-select-helpers-1" class="slide level2">
 <h2>Using select helpers</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All time columns</span></span>
-<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">ends_with</span>(<span class="st">"time"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All time columns</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="fu">ends_with</span>(<span class="st">"time"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 5
    dep_time sched_dep_time arr_time sched_arr_time air_time
@@ -780,8 +778,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="reorder-columns" class="slide level2">
 <h2>Reorder columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Move air_time and distance to the front</span></span>
-<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, air_time, distance, <span class="fu">everything</span>())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Move air_time and distance to the front</span></span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, air_time, distance, <span class="fu">everything</span>())</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 19
    air_time distance  year month   day dep_time sched_dep_time dep_delay
@@ -807,8 +805,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Exclude columns</h2>
 <p>Use <code>-</code> to remove columns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove year column</span></span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>year)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove year column</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>year)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 18
    month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -833,15 +831,15 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="exclude-columns-1" class="slide level2">
 <h2>Exclude columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove multiple columns</span></span>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove multiple columns</span></span>
 <span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>year, <span class="sc">-</span>month, <span class="sc">-</span>day)</span>
-<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>(year<span class="sc">:</span>day))  <span class="co"># same thing</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, <span class="sc">-</span>(year<span class="sc">:</span>day))  <span class="co"># same thing</span></span></code></pre></div>
 </div>
 </section>
 <section id="select-in-psychology" class="slide level2">
 <h2>select() in psychology</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Select demographic columns</span></span>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Select demographic columns</span></span>
 <span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(survey, <span class="fu">starts_with</span>(<span class="st">"demo_"</span>))</span>
 <span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Select all BDI items</span></span>
@@ -851,7 +849,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(survey, <span class="sc">-</span>name, <span class="sc">-</span>email, <span class="sc">-</span>ip_address)</span>
 <span id="cb38-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb38-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder for analysis</span></span>
-<span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(survey, participant_id, condition, <span class="fu">starts_with</span>(<span class="st">"outcome"</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(survey, participant_id, condition, <span class="fu">starts_with</span>(<span class="st">"outcome"</span>))</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -862,8 +860,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="mutate-creates-new-columns" class="slide level2">
 <h2>mutate() creates new columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total delay</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights, <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total delay</span></span>
+<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights, <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 20
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -888,13 +886,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="multiple-new-columns" class="slide level2">
 <h2>Multiple new columns</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights,</span>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights,</span>
 <span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Create new variables</span></span>
 <span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
 <span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,  <span class="co"># mph</span></span>
 <span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Can reference columns you just created!</span></span>
 <span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">delay_per_mile =</span> total_delay <span class="sc">/</span> distance</span>
-<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 22
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -922,10 +920,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <p><code>mutate()</code> adds new columns while keeping existing ones.</p>
 <p>Use <code>transmute()</code> to <em>only</em> keep new columns:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(flights,</span>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(flights,</span>
 <span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
 <span id="cb43-3"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span></span>
-<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 2
    total_delay speed
@@ -955,7 +953,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="common-transformations" class="slide level2">
 <h2>Common transformations</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-score (standardize)</span></span>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-score (standardize)</span></span>
 <span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">score_z =</span> (score <span class="sc">-</span> <span class="fu">mean</span>(score)) <span class="sc">/</span> <span class="fu">sd</span>(score))</span>
 <span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Log transform (for skewed data)</span></span>
@@ -966,13 +964,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"young"</span>,</span>
 <span id="cb45-10"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"middle"</span>,</span>
 <span id="cb45-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"older"</span></span>
-<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 </div>
 </section>
 <section id="mutate-for-psychology" class="slide level2">
 <h2>mutate() for psychology</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scale scores (mean of items)</span></span>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scale scores (mean of items)</span></span>
 <span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
 <span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">bdi_total =</span> (bdi_1 <span class="sc">+</span> bdi_2 <span class="sc">+</span> bdi_3 <span class="sc">+</span> bdi_4) <span class="sc">/</span> <span class="dv">4</span>,</span>
 <span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Or rowwise if you have many items:</span></span>
@@ -988,12 +986,12 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb46-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse code items</span></span>
 <span id="cb46-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
 <span id="cb46-16"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">item_5r =</span> <span class="dv">8</span> <span class="sc">-</span> item_5  <span class="co"># For 1-7 scale</span></span>
-<span id="cb46-17"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb46-17"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section></section>
 <section>
-<section id="the-pipe" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>The pipe: |&gt;</h1>
+<section id="the-pipe-makes-your-code-read-like-a-sentence" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>The pipe makes your code read like a sentence</h1>
 
 </section>
 <section id="the-problem-with-nested-functions" class="slide level2">
@@ -1009,13 +1007,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div><div class="column" style="width:50%;">
 <p>Nested approach:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
 <span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
 <span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>),</span>
 <span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>    dep_time, dep_delay</span>
 <span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  ),</span>
 <span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  dep_delay</span>
-<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div></div>
 <p>This is hard to read!</p>
@@ -1023,24 +1021,24 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="intermediate-objects-approach" class="slide level2">
 <h2>Intermediate objects approach</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save each step</span></span>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save each step</span></span>
 <span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>jan_flights <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>)</span>
 <span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>jan_selected <span class="ot">&lt;-</span> <span class="fu">select</span>(jan_flights, dep_time, dep_delay)</span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>jan_arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(jan_selected, dep_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>jan_arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(jan_selected, dep_delay)</span></code></pre></div>
 </div>
 <p>Works, but clutters your environment with objects.</p>
 </section>
-<section id="the-pipe-1" class="slide level2">
+<section id="the-pipe" class="slide level2">
 <h2>The pipe: |&gt;</h2>
 <p>The pipe takes the result of one function and passes it as the first argument to the next:</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same result, much cleaner!</span></span>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same result, much cleaner!</span></span>
 <span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
 <span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span></span>
-<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -1067,10 +1065,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Reading piped code</h2>
 <p>Read <code>|&gt;</code> as <strong>“then”</strong>:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>                     <span class="co"># Start with flights, THEN</span></span>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>                     <span class="co"># Start with flights, THEN</span></span>
 <span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>        <span class="co"># filter to January, THEN</span></span>
 <span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span>  <span class="co"># select these columns, THEN</span></span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)           <span class="co"># arrange by delay</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)           <span class="co"># arrange by delay</span></span></code></pre></div>
 </div>
 </section>
 <section id="keyboard-shortcut" class="slide level2">
@@ -1109,11 +1107,11 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Piping into ggplot</h2>
 <p>The pipe works beautifully with ggplot:</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, carrier <span class="sc">==</span> <span class="st">"UA"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span></span>
 <span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb52-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"United Airlines Delays (January)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb52-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"United Airlines Delays (January)"</span>)</span></code></pre></div>
 </div>
 
 </section><section id="piping-into-ggplot-output" class="slide level2 output-location-slide"><h2>Piping into ggplot</h2><div class="cell output-location-slide">
@@ -1133,13 +1131,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="a-complete-workflow" class="slide level2">
 <h2>A complete workflow</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines have the longest delays in summer?</span></span>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines have the longest delays in summer?</span></span>
 <span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
 <span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span>           <span class="co"># Summer months</span></span>
 <span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span>               <span class="co"># Remove NAs</span></span>
 <span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delay_hours =</span> arr_delay <span class="sc">/</span> <span class="dv">60</span>) <span class="sc">|&gt;</span>    <span class="co"># Convert to hours</span></span>
 <span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, delay_hours) <span class="sc">|&gt;</span>            <span class="co"># Keep relevant columns</span></span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay_hours))                 <span class="co"># Longest delays first</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay_hours))                 <span class="co"># Longest delays first</span></span></code></pre></div>
 </div>
 
 </section>
@@ -1179,11 +1177,11 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="the-dplyr-workflow" class="slide level2">
 <h2>The dplyr workflow</h2>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
 <span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">&lt;</span>conditions<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>    <span class="co"># Pick rows</span></span>
 <span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">&lt;</span>columns<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>       <span class="co"># Pick columns</span></span>
 <span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="sc">&lt;</span>new vars<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>      <span class="co"># Create columns</span></span>
-<span id="cb55-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">&lt;</span>order<span class="sc">&gt;</span>)           <span class="co"># Sort rows</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb55-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">&lt;</span>order<span class="sc">&gt;</span>)           <span class="co"># Sort rows</span></span></code></pre></div>
 </div>
 <p>The pipe (<code>|&gt;</code>) connects these verbs into a readable workflow.</p>
 </section>
@@ -1211,10 +1209,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <li><strong>The pipe |&gt;</strong> makes code readable and elegant</li>
 </ol>
 </section>
-<section id="questions" class="slide level2">
-<h2>Questions?</h2>
-<p>Next time: <strong>group_by() and summarize()</strong></p>
-<p>We’ll learn to calculate statistics by group!</p>
+<section id="the-one-thing-to-remember" class="slide level2">
+<h2>The one thing to remember</h2>
+<p>The pipe turns a wall of nested code into a sentence you can read aloud.</p>
+<p>Next time: group_by() and summarize()</p>
 
 </section></section>
     </div>
@@ -1478,68 +1476,6 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
         tabsets.forEach(function(tabset) {
           const tabby = new Tabby('#' + tabset.id);
         });
-        const isCodeAnnotation = (el) => {
-          for (const clz of el.classList) {
-            if (clz.startsWith('code-annotation-')) {                     
-              return true;
-            }
-          }
-          return false;
-        }
-        const onCopySuccess = function(e) {
-          // button target
-          const button = e.trigger;
-          // don't keep focus
-          button.blur();
-          // flash "checked"
-          button.classList.add('code-copy-button-checked');
-          var currentTitle = button.getAttribute("title");
-          button.setAttribute("title", "Copied!");
-          let tooltip;
-          if (window.bootstrap) {
-            button.setAttribute("data-bs-toggle", "tooltip");
-            button.setAttribute("data-bs-placement", "left");
-            button.setAttribute("data-bs-title", "Copied!");
-            tooltip = new bootstrap.Tooltip(button, 
-              { trigger: "manual", 
-                customClass: "code-copy-button-tooltip",
-                offset: [0, -8]});
-            tooltip.show();    
-          }
-          setTimeout(function() {
-            if (tooltip) {
-              tooltip.hide();
-              button.removeAttribute("data-bs-title");
-              button.removeAttribute("data-bs-toggle");
-              button.removeAttribute("data-bs-placement");
-            }
-            button.setAttribute("title", currentTitle);
-            button.classList.remove('code-copy-button-checked');
-          }, 1000);
-          // clear code selection
-          e.clearSelection();
-        }
-        const getTextToCopy = function(trigger) {
-          const outerScaffold = trigger.parentElement.cloneNode(true);
-          const codeEl = outerScaffold.querySelector('code');
-          for (const childEl of codeEl.children) {
-            if (isCodeAnnotation(childEl)) {
-              childEl.remove();
-            }
-          }
-          return codeEl.innerText;
-        }
-        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
-          text: getTextToCopy
-        });
-        clipboard.on('success', onCopySuccess);
-        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
-            text: getTextToCopy,
-            container: window.document.getElementById('quarto-embedded-source-code-modal')
-          });
-          clipboardModal.on('success', onCopySuccess);
-        }
           var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
           var mailtoRegex = new RegExp(/^mailto:/);
             var filterRegex = new RegExp('/' + window.location.host + '/');
