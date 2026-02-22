@@ -500,6 +500,18 @@ Dr.&nbsp;Sara Weston
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
 <p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
+</section>
+<section id="what-you-can-already-do" class="slide level2">
+<h2>What you can already do</h2>
+<p>With <code>summarize()</code> + <code>group_by()</code>, you can answer questions like:</p>
+<ul>
+<li><em>“What’s the average depression score by condition?”</em></li>
+<li><em>“Which group had the most variability?”</em></li>
+<li><em>“How many participants completed each phase?”</em></li>
+</ul>
+<div class="fragment">
+<p>These are the building blocks of a results section. Next: some shortcuts.</p>
+</div>
 </section></section>
 <section>
 <section id="count-a-shortcut" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -826,107 +838,80 @@ Dr.&nbsp;Sara Weston
 </div>
 </section></section>
 <section>
-<section id="code-style" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Code style</h1>
+<section id="code-style-matters" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Code style matters</h1>
 
 </section>
-<section id="good-style-matters" class="slide level2">
-<h2>Good style matters</h2>
-<p>Code is read more often than it’s written. Make it readable!</p>
+<section id="spot-the-difference" class="slide level2">
+<h2>Spot the difference</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: crammed together</span></span>
-<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights<span class="sc">|&gt;</span><span class="fu">filter</span>(month<span class="sc">==</span><span class="dv">1</span>)<span class="sc">|&gt;</span><span class="fu">group_by</span>(carrier)<span class="sc">|&gt;</span><span class="fu">summarize</span>(<span class="at">n=</span><span class="fu">n</span>())</span>
-<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: spaced and readable</span></span>
-<span id="cb37-5"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb37-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb37-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
-<span id="cb37-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>())</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Version A</span></span>
+<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>pD<span class="ot">&lt;-</span><span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
+<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>m<span class="ot">&lt;-</span>pD<span class="sc">|&gt;</span><span class="fu">filter</span>(age<span class="sc">&gt;</span><span class="dv">25</span>)<span class="sc">|&gt;</span><span class="fu">group_by</span>(condition)<span class="sc">|&gt;</span><span class="fu">summarize</span>(<span class="at">m=</span><span class="fu">mean</span>(score,<span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="at">s=</span><span class="fu">sd</span>(score,<span class="at">na.rm=</span><span class="cn">TRUE</span>),<span class="at">n=</span><span class="fu">n</span>())</span></code></pre></div>
+</div>
+<div class="fragment">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Version B</span></span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
+<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Adults only — age cutoff matches preregistration</span></span>
+<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>participant_data <span class="sc">|&gt;</span></span>
+<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">25</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb38-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb38-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb38-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<p>Same code. One you can debug at midnight. One you can’t.</p>
 </div>
 </section>
-<section id="spacing-rules" class="slide level2">
-<h2>Spacing rules</h2>
+<section id="the-rules-behind-the-difference" class="slide level2">
+<h2>The rules behind the difference</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Spacing</strong></p>
 <ul>
-<li>Spaces around operators: <code>x == 1</code>, not <code>x==1</code></li>
-<li>Space after commas: <code>c(1, 2, 3)</code>, not <code>c(1,2,3)</code></li>
-<li>No space before parentheses: <code>mean(x)</code>, not <code>mean (x)</code></li>
-<li>Spaces around <code>|&gt;</code> with line breaks</li>
+<li>Spaces around <code>&lt;-</code>, <code>==</code>, <code>|&gt;</code></li>
+<li>Spaces after commas</li>
+<li>One verb per line</li>
 </ul>
-</section>
-<section id="line-breaks" class="slide level2">
-<h2>Line breaks</h2>
+</div><div class="column" style="width:50%;">
+<p><strong>Naming</strong></p>
 <ul>
-<li>One verb per line for readability</li>
-<li>Keep lines under ~80 characters</li>
-<li>Indent continuation lines consistently</li>
+<li><code>snake_case</code>: <code>mean_score</code>, not <code>m</code></li>
+<li>Meaningful: <code>participant_data</code>, not <code>pD</code></li>
+<li>Comments explain <strong>why</strong>, not what</li>
 </ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long summarize calls</span></span>
-<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-</div>
-</section>
-<section id="naming-conventions" class="slide level2">
-<h2>Naming conventions</h2>
-<ul>
-<li>Use <code>snake_case</code> for object names: <code>my_data</code>, <code>mean_score</code></li>
-<li>Use meaningful names: <code>delay_by_carrier</code>, not <code>x</code></li>
-<li>Be consistent!</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>mean_reaction_time <span class="ot">&lt;-</span> <span class="fu">mean</span>(participant_data<span class="sc">$</span>rt)</span>
-<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad</span></span>
-<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>pD <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"participants.csv"</span>)</span>
-<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>m <span class="ot">&lt;-</span> <span class="fu">mean</span>(pD<span class="sc">$</span>rt)</span></code></pre></div>
-</div>
-</section>
-<section id="comments" class="slide level2">
-<h2>Comments</h2>
-<p>Use comments to explain <strong>why</strong>, not <strong>what</strong>:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bad: restates the obvious</span></span>
-<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter to January</span></span>
-<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Good: explains the reasoning</span></span>
-<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># January only because weather patterns differ by season</span></span>
-<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span> <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>)</span></code></pre></div>
-</div>
+</div></div>
 </section></section>
 <section>
-<section id="practice-psychology-example" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<section id="practice-psychology-example" class="title-slide slide level1 center" data-background-color="#e67e22">
 <h1>Practice: Psychology example</h1>
 
 </section>
 <section id="simulated-experiment-data" class="slide level2">
 <h2>Simulated experiment data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simulated experiment dataset</span></span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>, <span class="at">each =</span> <span class="dv">20</span>),</span>
-<span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>),</span>
-<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">60</span>),</span>
-<span id="cb41-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="fu">rnorm</span>(<span class="dv">1200</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
-<span id="cb41-9"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="dv">0</span>),</span>
-<span id="cb41-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">rbinom</span>(<span class="dv">1200</span>, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.85</span> <span class="sc">+</span></span>
-<span id="cb41-11"><a href="" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="fl">0.05</span>, <span class="dv">0</span>))</span>
-<span id="cb41-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a simulated experiment dataset</span></span>
+<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a>experiment <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb39-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">60</span>, <span class="at">each =</span> <span class="dv">20</span>),</span>
+<span id="cb39-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"control"</span>, <span class="st">"treatment"</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>),</span>
+<span id="cb39-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">trial =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">60</span>),</span>
+<span id="cb39-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">reaction_time =</span> <span class="fu">rnorm</span>(<span class="dv">1200</span>, <span class="at">mean =</span> <span class="dv">500</span>, <span class="at">sd =</span> <span class="dv">100</span>) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="sc">-</span><span class="dv">30</span>, <span class="dv">0</span>),</span>
+<span id="cb39-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy =</span> <span class="fu">rbinom</span>(<span class="dv">1200</span>, <span class="dv">1</span>, <span class="at">prob =</span> <span class="fl">0.85</span> <span class="sc">+</span></span>
+<span id="cb39-11"><a href="" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">ifelse</span>(<span class="fu">rep</span>(<span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="at">each =</span> <span class="dv">10</span>), <span class="dv">60</span>) <span class="sc">==</span> <span class="dv">1</span>, <span class="fl">0.05</span>, <span class="dv">0</span>))</span>
+<span id="cb39-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="examine-the-data" class="slide level2">
 <h2>Examine the data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1,200 × 5
    participant_id condition trial reaction_time accuracy
@@ -948,17 +933,17 @@ Dr.&nbsp;Sara Weston
 <section id="participant-level-summaries" class="slide level2">
 <h2>Participant-level summaries</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># First, summarize BY PARTICIPANT</span></span>
-<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="ot">&lt;-</span> experiment <span class="sc">|&gt;</span></span>
-<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant_id, condition) <span class="sc">|&gt;</span></span>
-<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_rt =</span> <span class="fu">mean</span>(reaction_time),</span>
-<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy =</span> <span class="fu">mean</span>(accuracy) <span class="sc">*</span> <span class="dv">100</span>,</span>
-<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trials =</span> <span class="fu">n</span>(),</span>
-<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># First, summarize BY PARTICIPANT</span></span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="ot">&lt;-</span> experiment <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant_id, condition) <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_rt =</span> <span class="fu">mean</span>(reaction_time),</span>
+<span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">accuracy =</span> <span class="fu">mean</span>(accuracy) <span class="sc">*</span> <span class="dv">100</span>,</span>
+<span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trials =</span> <span class="fu">n</span>(),</span>
+<span id="cb42-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb42-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-11"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries</span></code></pre></div>
 </div>
 </section>
 <section id="participant-level-summaries-1" class="slide level2">
@@ -985,18 +970,18 @@ Dr.&nbsp;Sara Weston
 <section id="condition-level-summaries" class="slide level2">
 <h2>Condition-level summaries</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Now summarize ACROSS PARTICIPANTS by condition</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries <span class="ot">&lt;-</span> participant_summaries <span class="sc">|&gt;</span></span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_rt =</span> <span class="fu">mean</span>(mean_rt),</span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_rt =</span> <span class="fu">sd</span>(mean_rt),</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_acc =</span> <span class="fu">mean</span>(accuracy),</span>
-<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_acc =</span> <span class="fu">sd</span>(accuracy),</span>
-<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
-<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Now summarize ACROSS PARTICIPANTS by condition</span></span>
+<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries <span class="ot">&lt;-</span> participant_summaries <span class="sc">|&gt;</span></span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition) <span class="sc">|&gt;</span></span>
+<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_rt =</span> <span class="fu">mean</span>(mean_rt),</span>
+<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_rt =</span> <span class="fu">sd</span>(mean_rt),</span>
+<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">M_acc =</span> <span class="fu">mean</span>(accuracy),</span>
+<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_acc =</span> <span class="fu">sd</span>(accuracy),</span>
+<span id="cb44-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb44-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-12"><a href="" aria-hidden="true" tabindex="-1"></a>condition_summaries</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 6
   condition  M_rt SD_rt M_acc SD_acc     n
@@ -1009,17 +994,17 @@ Dr.&nbsp;Sara Weston
 <section id="visualize-the-results" class="slide level2">
 <h2>Visualize the results</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="sc">|&gt;</span></span>
-<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb48-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb48-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
-<span id="cb48-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb48-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
-<span id="cb48-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb48-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb48-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>participant_summaries <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.1</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
+<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -1027,7 +1012,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-31-1.png" width="960"></p>
+<p><img data-src="04-data-transformation-2_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1094,14 +1079,14 @@ Dr.&nbsp;Sara Weston
 <section id="the-analysis-workflow" class="slide level2">
 <h2>The analysis workflow</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valid_data) <span class="sc">|&gt;</span>           <span class="co"># Clean</span></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(relevant_vars) <span class="sc">|&gt;</span>        <span class="co"># Focus</span></span>
-<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(new_vars) <span class="sc">|&gt;</span>             <span class="co"># Transform</span></span>
-<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(conditions) <span class="sc">|&gt;</span>         <span class="co"># Split</span></span>
-<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(statistics) <span class="sc">|&gt;</span>        <span class="co"># Aggregate</span></span>
-<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(order) <span class="sc">|&gt;</span>               <span class="co"># Sort</span></span>
-<span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> ...                  <span class="co"># Visualize</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(valid_data) <span class="sc">|&gt;</span>           <span class="co"># Clean</span></span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(relevant_vars) <span class="sc">|&gt;</span>        <span class="co"># Focus</span></span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(new_vars) <span class="sc">|&gt;</span>             <span class="co"># Transform</span></span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(conditions) <span class="sc">|&gt;</span>         <span class="co"># Split</span></span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(statistics) <span class="sc">|&gt;</span>        <span class="co"># Aggregate</span></span>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(order) <span class="sc">|&gt;</span>               <span class="co"># Sort</span></span>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> ...                  <span class="co"># Visualize</span></span></code></pre></div>
 </div>
 </section>
 <section id="before-next-class" class="slide level2">

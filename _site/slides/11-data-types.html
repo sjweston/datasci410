@@ -525,6 +525,36 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </section>
+<section id="if_else-vs-case_when-when-to-use-which" class="slide level2">
+<h2>if_else() vs case_when() — when to use which</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Two outcomes (yes/no, pass/fail)</td>
+<td><code>if_else()</code></td>
+</tr>
+<tr class="even">
+<td>Three or more categories</td>
+<td><code>case_when()</code></td>
+</tr>
+<tr class="odd">
+<td>Recoding a Likert scale into groups</td>
+<td><code>case_when()</code></td>
+</tr>
+<tr class="even">
+<td>Flagging a single condition</td>
+<td><code>if_else()</code></td>
+</tr>
+</tbody>
+</table>
+<p>When in doubt, start with <code>if_else()</code>. Graduate to <code>case_when()</code> when you need more categories.</p>
+</section>
 <section id="psychology-example-reverse-coding" class="slide level2">
 <h2>Psychology example: Reverse coding</h2>
 

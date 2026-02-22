@@ -214,23 +214,18 @@ Dr.&nbsp;Sara Weston
 <h1>You already know more than you think</h1>
 
 </section>
-<section id="where-weve-been" class="slide level2">
-<h2>Where we’ve been</h2>
-<p>Over 17 sessions, you’ve learned:</p>
-<p>✅ Data visualization with ggplot2 ✅ Data transformation with dplyr ✅ Data tidying with tidyr ✅ Working with strings, factors, dates ✅ Joining datasets ✅ Handling missing data ✅ Creating reproducible reports with Quarto</p>
+<section id="youre-two-days-from-turning-in-your-final-project" class="slide level2">
+<h2>You’re two days from turning in your final project</h2>
+<p>Let’s make sure you have every tool you need — and know what to do when something breaks.</p>
 <div class="fragment">
-<p><strong>Today:</strong> Put it all together with guided practice</p>
-</div>
-</section>
-<section id="what-well-cover" class="slide level2">
-<h2>What we’ll cover</h2>
+<p><strong>Today:</strong></p>
 <ol type="1">
-<li><strong>Complete workflow walkthrough</strong> — import to final figure</li>
-<li><strong>Common errors</strong> — and how to fix them</li>
-<li><strong>Debugging strategies</strong> — when you’re stuck</li>
-<li><strong>Getting help effectively</strong> — online and in-person</li>
-<li><strong>Q&amp;A for final projects</strong></li>
+<li>Complete workflow walkthrough — import to final figure</li>
+<li>Common errors and how to fix them</li>
+<li>Debugging strategies when you’re stuck</li>
+<li>Q&amp;A for final projects</li>
 </ol>
+</div>
 </section></section>
 <section>
 <section id="a-complete-workflow" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -263,12 +258,12 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 100
 Columns: 7
 $ participant_id      &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,…
-$ condition           &lt;chr&gt; "Mindfulness", "CBT", "Control", "CBT", "CBT", "CB…
-$ age                 &lt;int&gt; 57, 48, 28, 64, 23, 65, 54, 42, 27, 37, 62, 30, 58…
-$ gender              &lt;chr&gt; "Male", "Non-binary", "Non-binary", "Female", "Mal…
-$ depression_baseline &lt;dbl&gt; 15.251559, 28.497993, 21.503613, 24.270762, 21.051…
-$ depression_post     &lt;dbl&gt; 19.411802, 23.689227, 17.621148, 13.345553, 16.783…
-$ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, …</code></pre>
+$ condition           &lt;chr&gt; "Mindfulness", "CBT", "CBT", "CBT", "Mindfulness",…
+$ age                 &lt;int&gt; 30, 61, 56, 31, 57, 56, 33, 31, 20, 48, 42, 21, 23…
+$ gender              &lt;chr&gt; "Female", "Male", "Male", "Male", "Male", "Non-bin…
+$ depression_baseline &lt;dbl&gt; 26.86145, 20.01839, 26.26528, 23.53020, 19.61199, …
+$ depression_post     &lt;dbl&gt; 18.46463, 23.81867, 17.74412, 26.00498, 12.24881, …
+$ completed_followup  &lt;lgl&gt; TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, TR…</code></pre>
 </div>
 </div>
 </section>
@@ -319,9 +314,9 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TR
 <pre><code># A tibble: 3 × 6
   condition       n mean_baseline mean_post mean_change sd_change
   &lt;fct&gt;       &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
-1 Control        22          23.0      18.8        4.17      9.14
-2 CBT            25          20.4      17.6        2.74      8.36
-3 Mindfulness    32          21.8      19.2        2.60      7.69</code></pre>
+1 Control        24          22.0      18.2        3.82      6.70
+2 CBT            30          21.5      19.3        2.20      7.17
+3 Mindfulness    33          22.4      18.7        3.72      6.34</code></pre>
 </div>
 </div>
 </section>
@@ -354,12 +349,12 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TR
 <p>Put it all together in a Quarto report:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from 79 participants who</span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from 87 participants who</span>
 <span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>completed the study. The CBT condition showed the largest mean</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>reduction in depression scores (M = 2.7,</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>SD = 8.4), compared to</span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>control (M = 4.2) and</span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>mindfulness (M = 2.6).</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>reduction in depression scores (M = 2.2,</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>SD = 7.2), compared to</span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>control (M = 3.8) and</span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>mindfulness (M = 3.7).</span>
 <span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
@@ -406,14 +401,14 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TR
             &lt;int&gt; &lt;chr&gt;      
  1              1 Mindfulness
  2              2 CBT        
- 3              3 Control    
+ 3              3 CBT        
  4              4 CBT        
- 5              5 CBT        
- 6              6 CBT        
- 7              7 Mindfulness
- 8              8 CBT        
- 9              9 CBT        
-10             10 Control    
+ 5              5 Mindfulness
+ 6              6 Mindfulness
+ 7              7 Control    
+ 8              8 Mindfulness
+ 9              9 Mindfulness
+10             10 Mindfulness
 # ℹ 90 more rows</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
@@ -440,20 +435,20 @@ $ completed_followup  &lt;lgl&gt; TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TR
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_data <span class="sc">|&gt;</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(condition <span class="sc">==</span> <span class="st">"CBT"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 31 × 7
+<pre><code># A tibble: 33 × 7
    participant_id condition   age gender     depression_baseline depression_post
             &lt;int&gt; &lt;chr&gt;     &lt;int&gt; &lt;chr&gt;                    &lt;dbl&gt;           &lt;dbl&gt;
- 1              2 CBT          48 Non-binary               28.5             23.7
- 2              4 CBT          64 Female                   24.3             13.3
- 3              5 CBT          23 Male                     21.1             16.8
- 4              6 CBT          65 Male                     21.9             14.4
- 5              8 CBT          42 Female                    8.95            20.8
- 6              9 CBT          27 Male                     16.7             24.8
- 7             20 CBT          43 Female                   17.6             19.4
- 8             23 CBT          47 Non-binary               32.3             16.8
- 9             25 CBT          41 Male                     19.3             14.7
-10             30 CBT          49 Male                     20.0             22.5
-# ℹ 21 more rows
+ 1              2 CBT          61 Male                      20.0            23.8
+ 2              3 CBT          56 Male                      26.3            17.7
+ 3              4 CBT          31 Male                      23.5            26.0
+ 4             12 CBT          21 Female                    25.5            19.6
+ 5             13 CBT          23 Male                      24.4            21.9
+ 6             17 CBT          34 Non-binary                16.7            19.6
+ 7             20 CBT          57 Non-binary                28.7            14.9
+ 8             23 CBT          20 Male                      21.8            24.7
+ 9             25 CBT          65 Male                      21.1            20.7
+10             26 CBT          39 Female                    20.7            23.2
+# ℹ 23 more rows
 # ℹ 1 more variable: completed_followup &lt;lgl&gt;</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant_id)  <span class="co"># Missing pipe!</span></span></code></pre></div>
