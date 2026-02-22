@@ -229,18 +229,18 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="the-data-storytelling-triad" class="slide level2">
 <h2>The data storytelling triad</h2>
-<p><img data-src="https://www.forbes.com/advisor/wp-content/uploads/2022/03/data_storytelling.jpeg.jpg" style="width:60.0%"></p>
-<div class="fragment">
-<ul>
-<li><strong>Data + Narrative</strong> = Explain</li>
-<li><strong>Data + Visuals</strong> = Enlighten</li>
-<li><strong>Narrative + Visuals</strong> = Engage</li>
-<li><strong>All three</strong> = <strong>Change</strong></li>
-</ul>
-
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center" width="672"></p>
+</figure>
 </div>
+</div>
+</div>
+
 <aside><div>
-<p>Source: Brent Dykes</p>
+<p>Adapted from Brent Dykes</p>
 </div></aside></section>
 <section id="why-stories-work" class="slide level2">
 <h2>Why stories work</h2>
@@ -395,7 +395,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -422,7 +422,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-3-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -474,7 +474,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-4-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -502,7 +502,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -565,7 +565,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -586,7 +586,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -632,7 +632,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -656,7 +656,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-9-1.png" width="960"></p>
+<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -676,69 +676,25 @@ Dr.&nbsp;Sara Weston
 </ul>
 </div>
 </section>
-<section id="boring-or-ineffective-figures" class="slide level2">
-<h2>Boring or ineffective figures</h2>
-<p>A figure can be <strong>honest</strong> but still <strong>useless</strong>:</p>
-<ol type="1">
-<li><strong>No title or labels</strong> — requires reading caption to understand</li>
-<li><strong>Wrong plot type</strong> — pie chart with 12 categories</li>
-<li><strong>Too many variables</strong> — can’t see patterns</li>
-<li><strong>No visual hierarchy</strong> — everything looks equally important</li>
-<li><strong>Default settings</strong> — looks like you didn’t try</li>
-</ol>
-</section>
-<section id="example-ineffective-figure" class="slide level2">
-<h2>Example: Ineffective figure</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>, <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="st">"6 months"</span>, <span class="st">"12 months"</span>), <span class="dv">8</span>),</span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">rnorm</span>(<span class="dv">24</span>, <span class="dv">15</span>, <span class="dv">5</span>)</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(longitudinal, <span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> depression, <span class="at">group =</span> participant)) <span class="sc">+</span></span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-</div>
+<section id="boring-spaghetti-plot-with-no-message" class="slide level2">
+<h2>Boring: Spaghetti plot with no message</h2>
 
+<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-11-1.png" width="768" class="r-stretch"><p>Eight lines going everywhere. What’s the takeaway?</p>
 </section>
-<section id="example-ineffective-figure-output" class="slide level2 output-location-slide"><h2>Example: Ineffective figure</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="fixed-clear-message" class="slide level2">
-<h2>Fixed: Clear message</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(time) <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_depression =</span> <span class="fu">mean</span>(depression)) <span class="sc">|&gt;</span></span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">time =</span> <span class="fu">factor</span>(time, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Baseline"</span>, <span class="st">"6 months"</span>, <span class="st">"12 months"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> mean_depression, <span class="at">group =</span> <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
-<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Depression decreases steadily over 12 months"</span>,</span>
-<span id="cb10-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean BDI-II scores (N = 8)"</span>,</span>
-<span id="cb10-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb10-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Depression score"</span></span>
-<span id="cb10-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb10-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-</div>
+<section id="fixed-one-clear-message" class="slide level2">
+<h2>Fixed: One clear message</h2>
 
+<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-12-1.png" width="768" class="r-stretch"></section>
+<section id="boring-default-pie-chart" class="slide level2">
+<h2>Boring: Default pie chart</h2>
+
+<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-13-1.png" width="672" class="r-stretch"><p>Eight slices. Which is biggest? By how much?</p>
 </section>
-<section id="fixed-clear-message-output" class="slide level2 output-location-slide"><h2>Fixed: Clear message</h2><div class="cell output-location-slide">
-<div class="cell-output-display">
-<div>
-<figure>
-<p><img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
-</figure>
-</div>
-</div>
-</div></section><section id="the-so-what-test" class="slide level2">
+<section id="fixed-ranked-bar-chart-tells-the-story" class="slide level2">
+<h2>Fixed: Ranked bar chart tells the story</h2>
+
+<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-14-1.png" width="768" class="r-stretch"></section>
+<section id="the-so-what-test" class="slide level2">
 <h2>The “so what?” test</h2>
 <p>Every figure should answer a question:</p>
 <ul>
@@ -764,19 +720,19 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Improve a figure</h2>
 <p>Here’s a messy figure:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">profession =</span> <span class="fu">c</span>(<span class="st">"Teacher"</span>, <span class="st">"Nurse"</span>, <span class="st">"Engineer"</span>, <span class="st">"Retail"</span>, <span class="st">"Admin"</span>),</span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">stress =</span> <span class="fu">c</span>(<span class="fl">7.2</span>, <span class="fl">8.1</span>, <span class="fl">5.5</span>, <span class="fl">6.8</span>, <span class="fl">6.2</span>),</span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">burnout =</span> <span class="fu">c</span>(<span class="fl">6.8</span>, <span class="fl">7.9</span>, <span class="fl">4.8</span>, <span class="fl">6.5</span>, <span class="fl">5.9</span>)</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stress_data, <span class="fu">aes</span>(<span class="at">x =</span> profession, <span class="at">y =</span> stress, <span class="at">fill =</span> profession)) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Stress by Profession"</span>) <span class="sc">+</span></span>
-<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>stress_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">profession =</span> <span class="fu">c</span>(<span class="st">"Teacher"</span>, <span class="st">"Nurse"</span>, <span class="st">"Engineer"</span>, <span class="st">"Retail"</span>, <span class="st">"Admin"</span>),</span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">stress =</span> <span class="fu">c</span>(<span class="fl">7.2</span>, <span class="fl">8.1</span>, <span class="fl">5.5</span>, <span class="fl">6.8</span>, <span class="fl">6.2</span>),</span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">burnout =</span> <span class="fu">c</span>(<span class="fl">6.8</span>, <span class="fl">7.9</span>, <span class="fl">4.8</span>, <span class="fl">6.5</span>, <span class="fl">5.9</span>)</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(stress_data, <span class="fu">aes</span>(<span class="at">x =</span> profession, <span class="at">y =</span> stress, <span class="at">fill =</span> profession)) <span class="sc">+</span></span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Stress by Profession"</span>) <span class="sc">+</span></span>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
 
 </div>
-<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><ol type="1">
+<img data-src="15-storytelling_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><ol type="1">
 <li>Remove the unnecessary legend</li>
 <li>Reorder professions by stress level</li>
 <li>Highlight the profession with highest stress</li>

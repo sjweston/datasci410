@@ -830,7 +830,36 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save it</span></span>
 <span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"my_plot.png"</span>, my_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
 </div>
-</section></section>
+</section>
+<section id="same-template-psychology-data" class="slide level2">
+<h2>Same template, psychology data</h2>
+<p>The ggplot template works the same way with any data:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated experiment: condition vs. anxiety score</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>psych_demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>), <span class="at">each =</span> <span class="dv">30</span>),</span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="dv">8</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">28</span>, <span class="at">sd =</span> <span class="dv">8</span>))</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(psych_demo, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> anxiety, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment Group Reports Lower Anxiety"</span>,</span>
+<span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (BAI)"</span></span>
+<span id="cb28-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+</div>
+
+</section><section id="same-template-psychology-data-output" class="slide level2 output-location-slide"><h2>Same template, psychology data</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
 <section>
 <section id="putting-it-together" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Putting it together</h1>
@@ -839,31 +868,36 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="a-complete-example" class="slide level2">
 <h2>A complete example</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fuel Efficiency Decreases with Engine Size"</span>,</span>
-<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Data from 234 vehicles (1999-2008)"</span>,</span>
-<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Engine displacement (liters)"</span>,</span>
-<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Highway MPG"</span>,</span>
-<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Vehicle class"</span>,</span>
-<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: EPA fuel economy data"</span></span>
-<span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb28-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">color =</span> class), <span class="at">size =</span> <span class="dv">2</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Fuel Efficiency Decreases with Engine Size"</span>,</span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Data from 234 vehicles (1999-2008)"</span>,</span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Engine displacement (liters)"</span>,</span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Highway MPG"</span>,</span>
+<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Vehicle class"</span>,</span>
+<span id="cb29-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Source: EPA fuel economy data"</span></span>
+<span id="cb29-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
-</section>
-<section id="a-complete-example-output" class="slide level2 output-location-slide"><h2>A complete example</h2><div class="cell output-location-slide">
+</section><section id="a-complete-example-output" class="slide level2 output-location-slide"><h2>A complete example</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="get-a-head-start-assignment-1" class="slide level2">
-<h2>Get a head start: Assignment 1</h2>
+</div></section></section>
+<section>
+<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Get a head start</h1>
+
+</section>
+<section id="assignment-1-preview" class="slide level2">
+<h2>Assignment 1 preview</h2>
 <p>Open a new R script in your project. Try these on your own:</p>
 <ol type="1">
 <li>Make a scatterplot of <code>displ</code> vs <code>hwy</code> from <code>mpg</code></li>
@@ -872,6 +906,9 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li>Save it with <code>ggsave()</code></li>
 </ol>
 <p>This is the first part of Assignment 1 — finish it before next class.</p>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -881,11 +918,11 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <section id="the-ggplot2-template" class="slide level2">
 <h2>The ggplot2 template</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
-<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
-<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="sc">&lt;</span>LABELS<span class="sc">&gt;</span>) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>THEME<span class="sc">&gt;</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>FACET_FUNCTION<span class="sc">&gt;</span>() <span class="sc">+</span></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="sc">&lt;</span>LABELS<span class="sc">&gt;</span>) <span class="sc">+</span></span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  theme_<span class="sc">&lt;</span>THEME<span class="sc">&gt;</span>()</span></code></pre></div>
 </div>
 <p>You can build almost any visualization with this template!</p>
 </section>

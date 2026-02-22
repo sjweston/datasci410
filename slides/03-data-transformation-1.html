@@ -648,6 +648,37 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find earliest responses</span></span>
 <span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(data, response_time)</span></code></pre></div>
 </div>
+</section>
+<section id="quick-mental-model" class="slide level2">
+<h2>Quick mental model</h2>
+<p>You’ve now seen three verbs. Each answers a different question:</p>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Verb</th>
+<th>Question it answers</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>filter()</code></td>
+<td>Which <strong>rows</strong> do I keep?</td>
+</tr>
+<tr class="even">
+<td><code>arrange()</code></td>
+<td>What <strong>order</strong> should they be in?</td>
+</tr>
+<tr class="odd">
+<td><code>select()</code></td>
+<td>Which <strong>columns</strong> do I need?</td>
+</tr>
+<tr class="even">
+<td><code>mutate()</code></td>
+<td>What <strong>new columns</strong> should I create?</td>
+</tr>
+</tbody>
+</table>
+<p>We’ve done the first two. Now let’s pick our columns.</p>
 </section></section>
 <section>
 <section id="select" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -851,6 +882,17 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb38-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Reorder for analysis</span></span>
 <span id="cb38-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(survey, participant_id, condition, <span class="fu">starts_with</span>(<span class="st">"outcome"</span>))</span></code></pre></div>
 </div>
+</section>
+<section id="the-pattern-so-far" class="slide level2">
+<h2>The pattern so far</h2>
+<p>Notice: every verb has the same shape.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># verb(data, what_you_want)</span></span>
+<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(flights, dep_delay)</span>
+<span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year, month, day)</span></code></pre></div>
+</div>
+<p>Data goes first. Then you describe what you want. This consistency is by design.</p>
 </section></section>
 <section>
 <section id="mutate" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -860,8 +902,8 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="mutate-creates-new-columns" class="slide level2">
 <h2>mutate() creates new columns</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total delay</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights, <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate total delay</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights, <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 20
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -886,13 +928,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="multiple-new-columns" class="slide level2">
 <h2>Multiple new columns</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights,</span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Create new variables</span></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,  <span class="co"># mph</span></span>
-<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Can reference columns you just created!</span></span>
-<span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">delay_per_mile =</span> total_delay <span class="sc">/</span> distance</span>
-<span id="cb41-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(flights,</span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Create new variables</span></span>
+<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
+<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span>,  <span class="co"># mph</span></span>
+<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Can reference columns you just created!</span></span>
+<span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">delay_per_mile =</span> total_delay <span class="sc">/</span> distance</span>
+<span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 22
     year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
@@ -920,10 +962,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <p><code>mutate()</code> adds new columns while keeping existing ones.</p>
 <p>Use <code>transmute()</code> to <em>only</em> keep new columns:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(flights,</span>
-<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
-<span id="cb43-3"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span></span>
-<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">transmute</span>(flights,</span>
+<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">total_delay =</span> dep_delay <span class="sc">+</span> arr_delay,</span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>          <span class="at">speed =</span> distance <span class="sc">/</span> air_time <span class="sc">*</span> <span class="dv">60</span></span>
+<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 336,776 × 2
    total_delay speed
@@ -953,40 +995,40 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="common-transformations" class="slide level2">
 <h2>Common transformations</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-score (standardize)</span></span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">score_z =</span> (score <span class="sc">-</span> <span class="fu">mean</span>(score)) <span class="sc">/</span> <span class="fu">sd</span>(score))</span>
-<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Log transform (for skewed data)</span></span>
-<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">rt_log =</span> <span class="fu">log</span>(reaction_time))</span>
-<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create categories from continuous</span></span>
-<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"young"</span>,</span>
-<span id="cb45-10"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"middle"</span>,</span>
-<span id="cb45-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"older"</span></span>
-<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Z-score (standardize)</span></span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">score_z =</span> (score <span class="sc">-</span> <span class="fu">mean</span>(score)) <span class="sc">/</span> <span class="fu">sd</span>(score))</span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Log transform (for skewed data)</span></span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">rt_log =</span> <span class="fu">log</span>(reaction_time))</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create categories from continuous</span></span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(data, <span class="at">age_group =</span> <span class="fu">case_when</span>(</span>
+<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">30</span> <span class="sc">~</span> <span class="st">"young"</span>,</span>
+<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  age <span class="sc">&lt;</span> <span class="dv">60</span> <span class="sc">~</span> <span class="st">"middle"</span>,</span>
+<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"older"</span></span>
+<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 </div>
 </section>
 <section id="mutate-for-psychology" class="slide level2">
 <h2>mutate() for psychology</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scale scores (mean of items)</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">bdi_total =</span> (bdi_1 <span class="sc">+</span> bdi_2 <span class="sc">+</span> bdi_3 <span class="sc">+</span> bdi_4) <span class="sc">/</span> <span class="dv">4</span>,</span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Or rowwise if you have many items:</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">anxiety =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(., anx_1<span class="sc">:</span>anx_20), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dummy codes</span></span>
-<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
-<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">female =</span> <span class="fu">if_else</span>(gender <span class="sc">==</span> <span class="st">"female"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">treatment =</span> <span class="fu">if_else</span>(condition <span class="sc">==</span> <span class="st">"treatment"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb46-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse code items</span></span>
-<span id="cb46-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
-<span id="cb46-16"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">item_5r =</span> <span class="dv">8</span> <span class="sc">-</span> item_5  <span class="co"># For 1-7 scale</span></span>
-<span id="cb46-17"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate scale scores (mean of items)</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">bdi_total =</span> (bdi_1 <span class="sc">+</span> bdi_2 <span class="sc">+</span> bdi_3 <span class="sc">+</span> bdi_4) <span class="sc">/</span> <span class="dv">4</span>,</span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="co"># Or rowwise if you have many items:</span></span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">anxiety =</span> <span class="fu">rowMeans</span>(<span class="fu">select</span>(., anx_1<span class="sc">:</span>anx_20), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Create dummy codes</span></span>
+<span id="cb47-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
+<span id="cb47-10"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">female =</span> <span class="fu">if_else</span>(gender <span class="sc">==</span> <span class="st">"female"</span>, <span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb47-11"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">treatment =</span> <span class="fu">if_else</span>(condition <span class="sc">==</span> <span class="st">"treatment"</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb47-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Reverse code items</span></span>
+<span id="cb47-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(survey,</span>
+<span id="cb47-16"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">item_5r =</span> <span class="dv">8</span> <span class="sc">-</span> item_5  <span class="co"># For 1-7 scale</span></span>
+<span id="cb47-17"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -1007,13 +1049,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div><div class="column" style="width:50%;">
 <p>Nested approach:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
-<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>),</span>
-<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>    dep_time, dep_delay</span>
-<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  dep_delay</span>
-<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(</span>
+<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(</span>
+<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>),</span>
+<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>    dep_time, dep_delay</span>
+<span id="cb48-5"><a href="" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb48-6"><a href="" aria-hidden="true" tabindex="-1"></a>  dep_delay</span>
+<span id="cb48-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </div></div>
 <p>This is hard to read!</p>
@@ -1021,10 +1063,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="intermediate-objects-approach" class="slide level2">
 <h2>Intermediate objects approach</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save each step</span></span>
-<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>jan_flights <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>)</span>
-<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a>jan_selected <span class="ot">&lt;-</span> <span class="fu">select</span>(jan_flights, dep_time, dep_delay)</span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a>jan_arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(jan_selected, dep_delay)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save each step</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>jan_flights <span class="ot">&lt;-</span> <span class="fu">filter</span>(flights, month <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>jan_selected <span class="ot">&lt;-</span> <span class="fu">select</span>(jan_flights, dep_time, dep_delay)</span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>jan_arranged <span class="ot">&lt;-</span> <span class="fu">arrange</span>(jan_selected, dep_delay)</span></code></pre></div>
 </div>
 <p>Works, but clutters your environment with objects.</p>
 </section>
@@ -1034,11 +1076,11 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same result, much cleaner!</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
-<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span></span>
-<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Same result, much cleaner!</span></span>
+<span id="cb50-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb50-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span></span>
+<span id="cb50-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)</span></code></pre></div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
@@ -1065,10 +1107,10 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Reading piped code</h2>
 <p>Read <code>|&gt;</code> as <strong>“then”</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>                     <span class="co"># Start with flights, THEN</span></span>
-<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>        <span class="co"># filter to January, THEN</span></span>
-<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span>  <span class="co"># select these columns, THEN</span></span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)           <span class="co"># arrange by delay</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span>                     <span class="co"># Start with flights, THEN</span></span>
+<span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span>        <span class="co"># filter to January, THEN</span></span>
+<span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span>  <span class="co"># select these columns, THEN</span></span>
+<span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)           <span class="co"># arrange by delay</span></span></code></pre></div>
 </div>
 </section>
 <section id="keyboard-shortcut" class="slide level2">
@@ -1107,18 +1149,18 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <h2>Piping into ggplot</h2>
 <p>The pipe works beautifully with ggplot:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, carrier <span class="sc">==</span> <span class="st">"UA"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span></span>
-<span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb52-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"United Airlines Delays (January)"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">==</span> <span class="dv">1</span>, carrier <span class="sc">==</span> <span class="st">"UA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_delay, <span class="at">y =</span> arr_delay)) <span class="sc">+</span></span>
+<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"United Airlines Delays (January)"</span>)</span></code></pre></div>
 </div>
 
 </section><section id="piping-into-ggplot-output" class="slide level2 output-location-slide"><h2>Piping into ggplot</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="03-data-transformation-1_files/figure-revealjs/unnamed-chunk-35-1.png" width="960"></p>
+<p><img data-src="03-data-transformation-1_files/figure-revealjs/unnamed-chunk-36-1.png" width="960"></p>
 </figure>
 </div>
 </div>
@@ -1131,17 +1173,16 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="a-complete-workflow" class="slide level2">
 <h2>A complete workflow</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines have the longest delays in summer?</span></span>
-<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
-<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span>           <span class="co"># Summer months</span></span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span>               <span class="co"># Remove NAs</span></span>
-<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delay_hours =</span> arr_delay <span class="sc">/</span> <span class="dv">60</span>) <span class="sc">|&gt;</span>    <span class="co"># Convert to hours</span></span>
-<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, delay_hours) <span class="sc">|&gt;</span>            <span class="co"># Keep relevant columns</span></span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay_hours))                 <span class="co"># Longest delays first</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Which airlines have the longest delays in summer?</span></span>
+<span id="cb54-2"><a href="" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb54-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(month <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">6</span>, <span class="dv">7</span>, <span class="dv">8</span>)) <span class="sc">|&gt;</span>           <span class="co"># Summer months</span></span>
+<span id="cb54-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span>               <span class="co"># Remove NAs</span></span>
+<span id="cb54-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">delay_hours =</span> arr_delay <span class="sc">/</span> <span class="dv">60</span>) <span class="sc">|&gt;</span>    <span class="co"># Convert to hours</span></span>
+<span id="cb54-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, delay_hours) <span class="sc">|&gt;</span>            <span class="co"># Keep relevant columns</span></span>
+<span id="cb54-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay_hours))                 <span class="co"># Longest delays first</span></span></code></pre></div>
 </div>
 
-</section>
-<section id="a-complete-workflow-output" class="slide level2 output-location-slide"><h2>A complete workflow</h2><div class="cell output-location-slide">
+</section><section id="a-complete-workflow-output" class="slide level2 output-location-slide"><h2>A complete workflow</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 84,124 × 2
    carrier delay_hours
@@ -1158,7 +1199,13 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 10 VX             10.5
 # ℹ 84,114 more rows</code></pre>
 </div>
-</div></section><section id="your-turn" class="slide level2">
+</div></section></section>
+<section>
+<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Get a head start</h1>
+
+</section>
+<section id="your-turn" class="slide level2">
 <h2>Your turn!</h2>
 <p>Using the <code>flights</code> dataset:</p>
 <ol type="1">
@@ -1177,11 +1224,11 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <section id="the-dplyr-workflow" class="slide level2">
 <h2>The dplyr workflow</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
-<span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">&lt;</span>conditions<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>    <span class="co"># Pick rows</span></span>
-<span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">&lt;</span>columns<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>       <span class="co"># Pick columns</span></span>
-<span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="sc">&lt;</span>new vars<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>      <span class="co"># Create columns</span></span>
-<span id="cb55-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">&lt;</span>order<span class="sc">&gt;</span>)           <span class="co"># Sort rows</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">&lt;</span>conditions<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>    <span class="co"># Pick rows</span></span>
+<span id="cb56-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">&lt;</span>columns<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>       <span class="co"># Pick columns</span></span>
+<span id="cb56-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="sc">&lt;</span>new vars<span class="sc">&gt;</span>) <span class="sc">|&gt;</span>      <span class="co"># Create columns</span></span>
+<span id="cb56-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="sc">&lt;</span>order<span class="sc">&gt;</span>)           <span class="co"># Sort rows</span></span></code></pre></div>
 </div>
 <p>The pipe (<code>|&gt;</code>) connects these verbs into a readable workflow.</p>
 </section>

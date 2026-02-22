@@ -568,13 +568,24 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="get-a-head-start-assignment-3" class="slide level2">
 <h2>Get a head start: Assignment 3</h2>
-<p>Assignment 3 will have you import and tidy real messy data. Start thinking about:</p>
-<ol type="1">
-<li>What happens when you <code>read_csv()</code> a file with missing values coded as strings?</li>
-<li>How do you combine importing with the tidying skills from last session?</li>
-<li>What does <code>problems()</code> actually tell you — and when should you worry?</li>
-</ol>
-<p>Try importing the messy CSV we created during the pair exercise and cleaning it up end to end.</p>
+<p>Try this mini-challenge before next class:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Import the messy CSV from the pair exercise</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/messy_survey.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"-999"</span>, <span class="st">"N/A"</span>))</span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check for problems</span></span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(messy)</span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Fix at least one column type issue with col_types or</span></span>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    readr::parse_number()</span></span>
+<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Save your cleaned version</span></span>
+<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div>
+</div>
+<p>Assignment 3 will have you do this end to end with real messy data.</p>
+</section>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
