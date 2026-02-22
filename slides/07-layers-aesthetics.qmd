@@ -248,6 +248,12 @@ stat_summary(fun.data = mean_se, geom = "errorbar")
 stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
 ```
 
+## Why does this matter?
+
+The APA Publication Manual (7th ed.) recommends showing individual data points alongside summary statistics whenever possible.
+
+Bar charts with error bars are ubiquitous in psychology — but they hide the *shape* of the data. Outliers, bimodality, and floor/ceiling effects all disappear behind a rectangle.
+
 ## Adding individual data points
 
 Error bars alone hide the data. Show the points too:
@@ -454,7 +460,9 @@ reaction_data |>
   theme(legend.position = "none")
 ```
 
-## Get a head start: Assignment 4
+# Get a head start {background-color="#e67e22"}
+
+## Assignment 4 preview
 
 Assignment 4 will ask you to create "bad" and "good" versions of figures. Start experimenting:
 

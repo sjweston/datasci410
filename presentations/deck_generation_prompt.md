@@ -1,13 +1,15 @@
 # Deck Generation Prompt
 
-A prompt for generating academic slide decks with Claude Code. This prompt encodes best practices for Quarto presentations with embedded code, figures, and multi-agent review.
+> **Note:** This prompt was originally written for a Beamer/LaTeX workflow. The PSY 410 course uses **Quarto/Reveal.js** (`.qmd` → `.html`), not Beamer. The core rhetoric principles, code-first workflow, and multi-agent review process apply regardless of format, but the LaTeX-specific steps (hbox/vbox warnings, `.tex` compilation, `.sty` themes) do not apply to our HTML slides. A Quarto-native version of this prompt is a future project.
+
+A prompt for generating academic slide decks with Claude Code. This prompt encodes best practices for presentations with embedded code, figures, and multi-agent review.
 
 ## Prerequisites
 
 - Claude Code opened in a local directory containing your course materials
 - Existing slides, notes, or content to restructure (optional but recommended)
 - R installed (or let Claude install it)
-- LaTeX/Beamer installed (or let Claude install it)
+- For Beamer: LaTeX installed; for Quarto/Reveal.js: Quarto installed
 
 ## The Prompt
 

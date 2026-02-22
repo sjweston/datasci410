@@ -248,6 +248,18 @@ flights |>
 
 📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
+## What you can already do
+
+With `summarize()` + `group_by()`, you can answer questions like:
+
+- *"What's the average depression score by condition?"*
+- *"Which group had the most variability?"*
+- *"How many participants completed each phase?"*
+
+. . .
+
+These are the building blocks of a results section. Next: some shortcuts.
+
 # count() — a shortcut {background-color="#2c3e50"}
 
 ## Counting is common
@@ -409,41 +421,27 @@ flights |>
   select(carrier, arr_delay, carrier_mean, grand_mean)
 ```
 
-# Code style {background-color="#2c3e50"}
+# Code style matters {background-color="#2c3e50"}
 
-## Good style matters
-
-Code is read more often than it's written. Make it readable!
+## Spot the difference
 
 ```{r}
 #| eval: false
-# Bad: crammed together
-flights|>filter(month==1)|>group_by(carrier)|>summarize(n=n())
-
-# Good: spaced and readable
-flights |>
-  filter(month == 1) |>
-  group_by(carrier) |>
-  summarize(n = n())
+# Version A
+pD<-read_csv("participants.csv")
+m<-pD|>filter(age>25)|>group_by(condition)|>summarize(m=mean(score,na.rm=TRUE),s=sd(score,na.rm=TRUE),n=n())
 ```
 
-## Spacing rules
-
-- Spaces around operators: `x == 1`, not `x==1`
-- Space after commas: `c(1, 2, 3)`, not `c(1,2,3)`
-- No space before parentheses: `mean(x)`, not `mean (x)`
-- Spaces around `|>` with line breaks
-
-## Line breaks
-
-- One verb per line for readability
-- Keep lines under ~80 characters
-- Indent continuation lines consistently
+. . .
 
 ```{r}
 #| eval: false
-# Long summarize calls
-data |>
+# Version B
+participant_data <- read_csv("participants.csv")
+
+# Adults only — age cutoff matches preregistration
+participant_data |>
+  filter(age > 25) |>
   group_by(condition) |>
   summarize(
     mean_score = mean(score, na.rm = TRUE),
@@ -452,39 +450,28 @@ data |>
   )
 ```
 
-## Naming conventions
+Same code. One you can debug at midnight. One you can't.
 
-- Use `snake_case` for object names: `my_data`, `mean_score`
-- Use meaningful names: `delay_by_carrier`, not `x`
-- Be consistent!
+## The rules behind the difference
 
-```{r}
-#| eval: false
-# Good
-participant_data <- read_csv("participants.csv")
-mean_reaction_time <- mean(participant_data$rt)
+::: {.columns}
+::: {.column width="50%"}
+**Spacing**
 
-# Bad
-pD <- read_csv("participants.csv")
-m <- mean(pD$rt)
-```
+- Spaces around `<-`, `==`, `|>`
+- Spaces after commas
+- One verb per line
+:::
+::: {.column width="50%"}
+**Naming**
 
-## Comments
+- `snake_case`: `mean_score`, not `m`
+- Meaningful: `participant_data`, not `pD`
+- Comments explain **why**, not what
+:::
+:::
 
-Use comments to explain **why**, not **what**:
-
-```{r}
-#| eval: false
-# Bad: restates the obvious
-# Filter to January
-flights |> filter(month == 1)
-
-# Good: explains the reasoning
-# January only because weather patterns differ by season
-flights |> filter(month == 1)
-```
-
-# Practice: Psychology example {background-color="#2c3e50"}
+# Practice: Psychology example {background-color="#e67e22"}
 
 ## Simulated experiment data
 

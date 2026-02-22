@@ -239,6 +239,17 @@ case_when(
 )
 ```
 
+## if_else() vs case_when() — when to use which
+
+| Situation | Use |
+|-----------|-----|
+| Two outcomes (yes/no, pass/fail) | `if_else()` |
+| Three or more categories | `case_when()` |
+| Recoding a Likert scale into groups | `case_when()` |
+| Flagging a single condition | `if_else()` |
+
+When in doubt, start with `if_else()`. Graduate to `case_when()` when you need more categories.
+
 ## Psychology example: Reverse coding
 
 ![](img/rosenberg.png){fig-align="center" width="600"}

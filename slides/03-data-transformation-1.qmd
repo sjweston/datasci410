@@ -266,6 +266,19 @@ arrange(data, condition, participant_id)
 arrange(data, response_time)
 ```
 
+## Quick mental model
+
+You've now seen three verbs. Each answers a different question:
+
+| Verb | Question it answers |
+|------|---------------------|
+| `filter()` | Which **rows** do I keep? |
+| `arrange()` | What **order** should they be in? |
+| `select()` | Which **columns** do I need? |
+| `mutate()` | What **new columns** should I create? |
+
+We've done the first two. Now let's pick our columns.
+
 # select() {background-color="#2c3e50"}
 
 ## select() picks columns
@@ -346,6 +359,20 @@ select(survey, -name, -email, -ip_address)
 # Reorder for analysis
 select(survey, participant_id, condition, starts_with("outcome"))
 ```
+
+## The pattern so far
+
+Notice: every verb has the same shape.
+
+```{r}
+#| eval: false
+# verb(data, what_you_want)
+filter(flights, month == 1)
+arrange(flights, dep_delay)
+select(flights, year, month, day)
+```
+
+Data goes first. Then you describe what you want. This consistency is by design.
 
 # mutate() {background-color="#2c3e50"}
 
@@ -571,6 +598,8 @@ flights |>
   select(carrier, delay_hours) |>            # Keep relevant columns
   arrange(desc(delay_hours))                 # Longest delays first
 ```
+
+# Get a head start {background-color="#e67e22"}
 
 ## Your turn!
 

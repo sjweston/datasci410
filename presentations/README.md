@@ -102,43 +102,42 @@
 
 ## The Silent Killers
 
+> **Note:** This section was written for a Beamer/LaTeX workflow. The PSY 410 course uses Quarto/Reveal.js, where the equivalent problems are text overflowing slide boundaries (no LaTeX warnings exist in HTML output). The ggplot2 visual errors section still applies. See the Quarto-specific notes below.
+
+### Beamer/LaTeX Warnings (for Beamer projects only)
+
 LaTeX compilation succeeds with two types of output: **warnings** and **errors**. Errors stop compilation; warnings don't. But warnings matter enormously for visual quality.
 
-### LaTeX Warnings You Must Fix
+- **Overfull `\hbox`**: Content too wide — text bleeds into margins
+- **Underfull `\hbox`**: Content too sparse — awkward whitespace stretching
+- **Overfull/Underfull `\vbox`**: Same problems, vertical
 
-**Overfull `\hbox`**: Content is too wide for its container. LaTeX pushes text into the margin. You'll see a black box in draft mode or text bleeding off the slide.
+### Quarto/Reveal.js Equivalent
 
-**Underfull `\hbox`**: Content is too sparse. LaTeX stretches whitespace awkwardly to fill the line, creating uneven spacing.
+Reveal.js slides don't produce LaTeX warnings, but the same *category* of problem exists:
 
-**Overfull/Underfull `\vbox`**: Same problems but vertical—content either overflows the page bottom or leaves awkward vertical gaps.
+- **Text overflow**: Content too long for the slide viewport — text runs off the bottom or right edge
+- **Code blocks too wide**: Long code lines extend past the slide boundary
+- **Figure sizing**: Plots rendered at sizes that don't fit the slide dimensions
 
-**Why these matter:** They indicate your layout doesn't fit. The visual artifact may be subtle (slightly uneven spacing) or obvious (text clipped at margins), but it always looks unprofessional.
+**How to check:** Render all decks and visually inspect, or use automated screenshot comparison. (This is a known gap in our workflow — a systematic check is planned.)
 
-### Visual Errors That Don't Warn
+### Visual Errors That Don't Warn (applies to both formats)
 
-LaTeX warnings catch box overflow issues but **NOT** coordinate or positioning problems in TikZ, ggplot2, or matplotlib. These compile silently but look wrong:
+Neither LaTeX nor Quarto catches coordinate or positioning problems in ggplot2. These render silently but look wrong:
 
-**TikZ:**
-- Labels not where you think they are (coordinates miscalculated)
-- Timeline endpoints misaligned with content
-- Arrows pointing to wrong nodes
-- Shape constraints forcing misplacement
-
-**ggplot2 / matplotlib:**
 - Axis labels cut off at figure boundary
 - Legends obscuring data points
 - Text sizing inconsistent across panels
 - Tick marks misaligned with gridlines
 
-**Why warnings don't catch these:** LaTeX doesn't know what you *intended*. If you specify `\node at (5,3)` but meant `(3,5)`, the code is syntactically valid—it just draws the wrong picture.
-
 ### The Two-Pass Workflow
 
-1. **Compile and fix all warnings** — No overfull/underfull boxes allowed
-2. **Visually inspect TikZ/figures** — Claude cannot verify coordinates from code alone; either look at the PDF or have Claude read the PDF and describe what it sees
-3. **Recompile after fixes** — New warnings may emerge
+1. **Render and check for overflow** — No text running off slides
+2. **Visually inspect figures** — Claude cannot verify layouts from code alone
+3. **Re-render after fixes** — Changes may introduce new issues
 
-The goal is zero warnings AND visual correctness. LaTeX warnings are necessary but not sufficient.
+The goal is zero overflow AND visual correctness.
 
 ---
 

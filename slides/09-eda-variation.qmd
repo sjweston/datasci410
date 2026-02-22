@@ -413,7 +413,9 @@ bfi |>
   theme(axis.text.x = element_text(angle = 30, hjust = 1))
 ```
 
-## Get a head start: Assignment 5
+# Get a head start {background-color="#e67e22"}
+
+## Assignment 5 preview
 
 Assignment 5 will have you do a full EDA on a psychology dataset. Start now:
 

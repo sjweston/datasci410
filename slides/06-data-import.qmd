@@ -338,13 +338,46 @@ write_csv(clean_data, "data/clean_survey.csv")
 
 ## Get a head start: Assignment 3
 
-Assignment 3 will have you import and tidy real messy data. Start thinking about:
+Try this mini-challenge before next class:
 
-1. What happens when you `read_csv()` a file with missing values coded as strings?
-2. How do you combine importing with the tidying skills from last session?
-3. What does `problems()` actually tell you — and when should you worry?
+```{r}
+#| eval: false
+# 1. Import the messy CSV from the pair exercise
+messy <- read_csv("data/messy_survey.csv", na = c("", "NA", "-999", "N/A"))
 
-Try importing the messy CSV we created during the pair exercise and cleaning it up end to end.
+# 2. Check for problems
+problems(messy)
+
+# 3. Fix at least one column type issue with col_types or
+#    readr::parse_number()
+
+# 4. Save your cleaned version
+write_csv(clean, "data/clean_survey.csv")
+```
+
+Assignment 3 will have you do this end to end with real messy data.
+
+## Solution
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution to end-of-deck exercise
+messy <- read_csv("data/messy_survey.csv",
+                  na = c("", "NA", "-999", "N/A"),
+                  col_types = cols(
+                    id = col_character(),
+                    age = col_double(),
+                    score = col_double()
+                  ))
+
+problems(messy)  # Check what readr flagged
+
+clean <- messy |>
+  mutate(age = parse_number(age))
+
+write_csv(clean, "data/clean_survey.csv")
+```
 
 # Wrapping up {background-color="#2c3e50"}
 

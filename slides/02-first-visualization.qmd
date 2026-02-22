@@ -514,6 +514,30 @@ my_plot <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 ggsave("my_plot.png", my_plot, width = 8, height = 6)
 ```
 
+## Same template, psychology data
+
+The ggplot template works the same way with any data:
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+# Simulated experiment: condition vs. anxiety score
+psych_demo <- tibble(
+  condition = rep(c("Control", "Treatment"), each = 30),
+  anxiety = c(rnorm(30, mean = 35, sd = 8), rnorm(30, mean = 28, sd = 8))
+)
+
+ggplot(psych_demo, aes(x = condition, y = anxiety, fill = condition)) +
+  geom_boxplot(alpha = 0.7, show.legend = FALSE) +
+  labs(
+    title = "Treatment Group Reports Lower Anxiety",
+    x = NULL,
+    y = "Anxiety score (BAI)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
 # Putting it together {background-color="#2c3e50"}
 
 ## A complete example
@@ -536,7 +560,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   theme_minimal(base_size = 14)
 ```
 
-## Get a head start: Assignment 1
+# Get a head start {background-color="#e67e22"}
+
+## Assignment 1 preview
 
 Open a new R script in your project. Try these on your own:
 
@@ -546,6 +572,28 @@ Open a new R script in your project. Try these on your own:
 4. Save it with `ggsave()`
 
 This is the first part of Assignment 1 — finish it before next class.
+
+## Solution
+
+```{r}
+#| echo: false
+#| eval: false
+# Solution to end-of-deck exercise
+my_plot <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  facet_wrap(~drv) +
+  labs(
+    title = "Highway Fuel Efficiency by Engine Size and Drive Type",
+    x = "Engine displacement (liters)",
+    y = "Highway MPG",
+    color = "Vehicle class"
+  ) +
+  theme_minimal()
+
+my_plot
+
+ggsave("my_plot.png", my_plot, width = 10, height = 6)
+```
 
 # Wrapping up {background-color="#2c3e50"}
 

@@ -247,22 +247,31 @@ p2 <- reaction_data |>
 p1 + p2
 ```
 
-## What to remove
+## The declutter checklist
 
-Ask yourself: does this element help the reader understand the data?
+Ask: does this element help the reader understand the data?
 
-- ❌ Gray background — adds noise, no information
-- ❌ Gridlines  — usually unnecessary
-- ❌ Legend when there's only one group — redundant
-- ❌ Legend when the x-axis already tells you — redundant
-- ❌ Axis labels that just repeat the variable name — add units or context
+::: {.columns}
+::: {.column width="50%"}
+**Remove**
 
-## What to keep
+| Element | Why |
+|---------|-----|
+| Gray background | Noise, no info |
+| Gridlines (most) | Distraction |
+| Redundant legend | X-axis says it |
+| Generic axis labels | Add units instead |
+:::
+::: {.column width="50%"}
+**Keep**
 
-Ask yourself: does this element help the reader understand the data?
-
-- ✅ Title and subtitle — orient the reader
-- ✅ Caption — source, sample size, what error bars mean
+| Element | Why |
+|---------|-----|
+| Title + subtitle | Orients the reader |
+| Caption | Source, N, error bar type |
+| Meaningful color | Highlights comparisons |
+:::
+:::
 
 ## theme() for fine control
 
@@ -408,7 +417,7 @@ reaction_data |>
 
 **The problems:** Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.
 
-# Get a head start {background-color="#2c3e50"}
+# Get a head start {background-color="#e67e22"}
 
 ## Assignment 4 preview
 

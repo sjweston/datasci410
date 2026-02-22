@@ -115,21 +115,21 @@ This doesn't need to happen on every slide — code-demo slides with titles like
 ## Deck-specific items
 
 ### Session 01: Introduction & Setup
-- [ ] **Bullet-heavy AI section (lines ~489–545):** The "Why no AI?" section has 5 dense slides with nested bullets. Consider condensing to 3 slides: (1) the bicycle/motorcycle framing, (2) the metacognition trap, (3) the helmet metaphor with the course structure payoff. Cut "The future: When do we use AI?" — it's speculative and can be mentioned verbally.
+- [x] **Bullet-heavy AI section:** Condensed from 5 slides to 3: (1) bicycle vs motorcycle framing, (2) metacognition trap, (3) building the helmet first. Cut "The future: When do we use AI?" — speculative content can be mentioned verbally.
 
 ### Session 02: Your First Visualization
-- [ ] **No psychology data:** This is the only deck that uses no psychology examples (all `mpg`). The opening Anscombe's Quartet is discipline-neutral, which is fine, but the first plot students build could use psychology data. Consider adding one slide after the `mpg` demo that shows the same `ggplot()` template with a simple psych dataset (e.g., `condition` vs `score`), even if brief.
-- [ ] **End-of-deck exercise has no hidden solution:** Add a solution block to the "Get a head start: Assignment 1" section (line 539) for consistency with other decks.
+- [x] **No psychology data:** Added "Same template, psychology data" slide after the `mpg` demo showing a boxplot of condition vs anxiety scores using simulated BAI data.
+- [x] **End-of-deck exercise has no hidden solution:** Added a hidden solution block to "Get a head start: Assignment 1" with scatterplot + facet + ggsave.
 
 ### Session 04: Data Transformation II
-- [ ] **Code style section (lines ~408–466):** Multiple text-heavy slides listing spacing rules and naming conventions. Consider replacing with 2 before/after code examples — one messy, one clean — and letting the contrast teach the rules rather than listing them.
+- [x] **Code style section:** Replaced 5 text-heavy slides with 2 slides: a "Spot the difference" before/after code comparison + a concise two-column summary of the rules.
 
 ### Session 05: Data Tidying
 - [x] **End-of-deck exercise section header color:** Changed from `#2c3e50` (dark blue) to `#e67e22` (orange) to match exercise convention.
 
 ### Session 06: Data Import
 - [x] **"Where we are" tracker table opening:** Replaced with new opening in Section B.
-- [ ] **End-of-deck exercise is conceptual, not code:** The "Get a head start: Assignment 3" section (line 350) asks students to think about questions rather than write code. Consider adding a small coding task (e.g., import a provided messy CSV and run `problems()` on it).
+- [x] **End-of-deck exercise is conceptual, not code:** Replaced thought questions with a concrete mini-challenge: import a messy CSV with `na` argument, run `problems()`, fix a column type, and save. Added hidden solution.
 
 ### Session 08: Perception & Design
 - [x] **Incomplete TODO (lines 323–337):** Replaced placeholder with 3 actual bad graph examples using `reaction_data`: (1) truncated y-axis bar chart, (2) red-green boxplot with label-style title and clutter, (3) pie chart of binned continuous data. Each includes a reveal explaining the problems.
@@ -138,8 +138,8 @@ This doesn't need to happen on every slide — code-demo slides with titles like
 - [x] **Recap slide is a full repeat:** Replaced with backward-link opening in Section B.
 
 ### Session 15: Storytelling with Data
-- [ ] **"Boring or ineffective figures" section (lines ~386–393):** This is a bulleted list of problems. More powerful as actual examples — show a boring figure, then a compelling one with the same data. The deck already does this well with the cluttered-vs-decluttered comparison; extend the pattern here.
-- [ ] **External image dependency (line 48):** The data storytelling triad loads from a Forbes URL. This could break. Save a local copy in `files/` or `slides/img/`.
+- [x] **"Boring or ineffective figures" section:** Replaced bulleted list with two before/after pairs: (1) spaghetti plot → clean trend line, (2) 8-slice pie chart → ranked horizontal bar chart. Each boring version shown with its problem stated, then the fixed version.
+- [x] **External image dependency:** Replaced Forbes URL for the data storytelling triad with a code-generated Venn diagram using `ggforce::geom_circle()`. No more external dependency.
 
 ### Session 16: Quarto
 - [x] **Callback to Session 1 is now explicit:** Opening rewritten to: *"Remember Session 1? We opened this course with a striking finding: only 36% of psychology studies replicated..."* then connects directly to Quarto as part of the solution.
@@ -147,11 +147,11 @@ This doesn't need to happen on every slide — code-demo slides with titles like
 ### Session 17: Practice & Review
 - [x] **Section header rewritten:** "Today's plan" → "You already know more than you think" (Section D).
 - [x] **"Questions?" slide replaced** with takeaway closing (Section A).
-- [ ] **Opening checklist could still be stronger:** "Over 17 sessions, you've learned: [checklist]" is reflective but doesn't open with tension. Consider replacing with: *"You're two days from turning in your final project. Let's make sure you have every tool you need — and know what to do when something breaks."*
+- [x] **Opening checklist replaced:** Removed the reflective checklist. New opening: *"You're two days from turning in your final project. Let's make sure you have every tool you need — and know what to do when something breaks."*
 
 ### Session 18: Putting It All Together
-- [ ] **Opening recap slides (lines 41–78):** Three slides of "What you've learned" bullet lists. These are the weakest part of a strong deck. Consider replacing with a single slide showing the R4DS workflow diagram (already present at line 35) and one sentence: *"Ten weeks ago, you couldn't do any of this. Now you can do all of it."* The detailed list can be a handout or verbal.
-- [ ] **Closing is strong — no changes needed.** The "You can learn hard things" callout and the learning journey curve are good rhetorical closes.
+- [x] **Opening recap slides consolidated:** Replaced 3 slides of "What you've learned" bullet lists with the R4DS workflow diagram + one sentence: *"Ten weeks ago, you couldn't do any of this. Now you can do all of it."*
+- [x] **Closing is strong — no changes needed.** The "You can learn hard things" callout and the learning journey curve are good rhetorical closes.
 
 ---
 
@@ -159,17 +159,43 @@ This doesn't need to happen on every slide — code-demo slides with titles like
 
 These are worth doing but less urgent than the items above.
 
-- [ ] **Add breathing slides between dense code stretches.** Several decks (03, 04, 07, 11) have long runs of code slide → code slide → code slide. The rhetoric framework says the deck should "breathe" — a lighter conceptual or visual slide between dense technical ones. Identify spots where a quick "Why does this matter?" or psychology-motivation slide could break up the code.
-- [ ] **Bullet slides that could be visual.** The rhetoric framework says bullets are "a confession of defeat." A few specific candidates:
-  - Session 01, "Why R specifically?" (lines 109–116) → comparison table or visual
-  - Session 08, "What to remove" / "What to keep" (lines 235–249) → before/after figure pair
-  - Session 14, "Today's agenda" (lines 44–49) → delete entirely; agenda slides are flagged as a common failure
-- [ ] **Consistent exercise header colors.** Most pair exercises use `{background-color="#e67e22"}` (orange). Verify all end-of-deck exercises also use orange consistently. Session 05's "Get a head start" uses dark blue.
+- [x] **Add breathing slides between dense code stretches.** Added conceptual "pause" slides in 4 decks:
+  - Session 03: "Quick mental model" table between `arrange()` and `select()`; "The pattern so far" showing verb consistency between `select()` and `mutate()`
+  - Session 04: "What you can already do" between `group_by()` section and `count()` shortcut
+  - Session 07: "Why does this matter?" APA note between `stat_summary()` code and individual data points
+  - Session 11: `if_else()` vs `case_when()` decision table between conditional values and reverse coding
+- [x] **Bullet slides that could be visual.**
+  - Session 01: "Why R specifically?" → converted from bullet list to two-column table
+  - Session 08: "What to remove" / "What to keep" → merged into one two-column "declutter checklist" slide with tables
+  - Session 14: "Today's agenda" → already removed in prior pass (replaced with opening hook)
+- [x] **Consistent exercise header colors.** Audited all 18 decks. Fixed:
+  - Session 04: `# Practice: Psychology example` changed from `#2c3e50` to `#e67e22`
+  - Session 08: `# Get a head start` changed from `#2c3e50` to `#e67e22`
+  - Sessions 02, 03, 07, 09: Promoted end-of-deck exercises from `##` headings (no color) to `# Get a head start {background-color="#e67e22"}` section headers for consistency
+  - All pair coding breaks already used `#e67e22` (orange) ✓
 
 ---
 
 ## presentations/ folder consistency
 
-- [ ] **`deck_generation_prompt.md` references Beamer/LaTeX throughout** but the course uses Quarto/Reveal.js. The entire document — including the LaTeX warnings section, the multi-agent review process targeting `.tex` compilation, and the example output structure showing `.tex`/`.sty` files — needs a Quarto-native version or a clear note that it was written for a different context.
-- [ ] **`README.md` "Silent Killers" section** is about LaTeX hbox/vbox warnings. Not applicable to Quarto/Reveal.js HTML output. Should be revised or labeled as Beamer-specific.
-- [ ] **The rhetoric principles themselves** (`rhetoric_of_decks.md`, `rhetoric_of_decks_full_essay.md`) are fully consistent with the course and don't need changes.
+- [x] **`deck_generation_prompt.md` references Beamer/LaTeX throughout** — added a note at the top clarifying this was written for Beamer and the PSY 410 course uses Quarto/Reveal.js. A full Quarto-native rewrite is a future project.
+- [x] **`README.md` "Silent Killers" section** — revised to include both Beamer-specific and Quarto/Reveal.js equivalent content (text overflow, code block width, figure sizing). ggplot visual errors section kept as universal.
+- [x] **The rhetoric principles themselves** (`rhetoric_of_decks.md`, `rhetoric_of_decks_full_essay.md`) are fully consistent with the course and don't need changes.
+
+---
+
+## Text overflow detection (future task)
+
+Some slides have text running off the slide boundary after the rhetoric revisions. This needs a systematic check-and-fix pass.
+
+**Possible approaches:**
+
+1. **Render + screenshot:** Render all 18 decks with `quarto render`, then use Puppeteer or Playwright to screenshot every slide and flag slides where content extends beyond the viewport. This could be automated with a script that checks each slide's scroll height vs. viewport height.
+
+2. **CSS guardrails:** Add CSS rules to `custom.scss` that prevent overflow — e.g., `overflow: hidden` on slide containers plus a visual debug mode (`outline: 2px solid red` on overflowing elements) that can be toggled during review.
+
+3. **Quarto render + browser dev tools:** Render each deck individually, open in browser, and use JavaScript (`document.querySelectorAll('.slide').forEach(s => { if (s.scrollHeight > s.clientHeight) console.warn(s.id) })`) to identify overflowing slides programmatically.
+
+4. **Preview tool approach:** Use Claude Code's preview tools to render each deck, take snapshots, and check for content that extends beyond the slide boundary.
+
+**Recommendation:** Approach 3 (JS-based overflow detection after render) is the most practical — it can be run as a one-liner after rendering each deck and produces a list of slide IDs to fix. Approach 2 (CSS guardrails) should be added as a permanent safeguard regardless.
