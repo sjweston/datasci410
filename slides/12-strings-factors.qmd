@@ -41,7 +41,7 @@ tibble(
   knitr::kable()
 ```
 
-. . .
+## How many genders are in this dataset?
 
 R says **7**. You meant **2**.
 

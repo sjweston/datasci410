@@ -1,0 +1,477 @@
+---
+title: "Correlation & Simple Regression"
+subtitle: "PSY 410: Data Science for Psychology"
+author: "Dr. Sara Weston"
+date: "June 1, 2026"
+format:
+  revealjs:
+    theme: [default, custom.scss]
+    slide-number: true
+    preview-links: auto
+    footer: "PSY 410 | Session 17"
+    chalkboard: true
+    code-line-numbers: false
+    highlight-style: github
+    code-copy: false
+    incremental: false
+execute:
+  echo: true
+  eval: true
+  warning: false
+  message: false
+---
+
+## Setup {visibility="hidden"}
+
+```{r}
+#| include: false
+library(tidyverse)
+library(broom)
+```
+
+# From patterns to numbers {background-color="#2c3e50"}
+
+## You've been eyeballing patterns for 16 sessions
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+set.seed(410)
+study_data <- tibble(
+  participant_id = 1:120,
+  hours_social_media = rnorm(120, 4, 1.5),
+  gad7_total = 3 + 1.2 * hours_social_media + rnorm(120, 0, 3),
+  phq9_total = 5 + 0.8 * hours_social_media + rnorm(120, 0, 4),
+  therapy_hours = rnorm(120, 12, 4),
+  depression_post = 25 - 0.9 * therapy_hours + rnorm(120, 0, 3)
+) |>
+  mutate(across(c(gad7_total, phq9_total, depression_post), ~ pmax(.x, 0)))
+
+ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
+  geom_point(alpha = 0.5, color = "gray50") +
+  labs(
+    title = "Does social media use predict anxiety?",
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+. . .
+
+Today you learn to put a **number** on that pattern.
+
+## The same plot — with a number
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+r_val <- cor(study_data$hours_social_media, study_data$gad7_total)
+
+ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
+  geom_point(alpha = 0.5, color = "gray50") +
+  geom_smooth(method = "lm", color = "steelblue", se = FALSE) +
+  annotate("text", x = 7, y = 5,
+           label = paste0("r = ", round(r_val, 2)),
+           size = 6, color = "steelblue", fontface = "bold") +
+  labs(
+    title = "Does social media use predict anxiety?",
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+**Correlation** measures the strength and direction. **Regression** draws the line.
+
+# Correlation {background-color="#2c3e50"}
+
+## What correlation measures
+
+**Correlation (r)** quantifies the **linear relationship** between two variables.
+
+| Value of r | Interpretation |
+|-----------|----------------|
+| r = 1.0   | Perfect positive |
+| r = 0.7   | Strong positive |
+| r = 0.3   | Weak positive |
+| r = 0.0   | No linear relationship |
+| r = -0.3  | Weak negative |
+| r = -0.7  | Strong negative |
+| r = -1.0  | Perfect negative |
+
+. . .
+
+**Key:** r tells you **direction** and **strength**, not causation.
+
+## cor() in R
+
+```{r}
+cor(study_data$hours_social_media, study_data$gad7_total)
+```
+
+. . .
+
+That's it. One function, two variables, one number.
+
+. . .
+
+```{r}
+# You can also use it inside a pipeline
+study_data |>
+  summarize(r = cor(hours_social_media, gad7_total))
+```
+
+## This is what geom_smooth() has been doing
+
+Every time you wrote `geom_smooth(method = "lm")`, you were fitting a line through the data.
+
+```{r}
+#| output-location: slide
+ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "Social media use and anxiety",
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)"
+  ) +
+  theme_minimal()
+```
+
+## cor.test() — is it statistically significant?
+
+```{r}
+cor.test(study_data$hours_social_media, study_data$gad7_total)
+```
+
+. . .
+
+**What to report:** r, p-value, and 95% confidence interval.
+
+## Correlation matrix: multiple variables at once
+
+```{r}
+study_data |>
+  select(hours_social_media, gad7_total, phq9_total, therapy_hours) |>
+  cor(use = "complete.obs") |>
+  round(2)
+```
+
+. . .
+
+Each cell is the correlation between the row variable and the column variable. The diagonal is always 1 (a variable correlates perfectly with itself).
+
+## Visualizing a correlation matrix
+
+```{r}
+#| output-location: slide
+#| fig-width: 6
+#| fig-height: 5
+cor_matrix <- study_data |>
+  select(hours_social_media, gad7_total, phq9_total, therapy_hours) |>
+  cor(use = "complete.obs")
+
+# Manual heatmap with ggplot
+cor_matrix |>
+  as.data.frame() |>
+  rownames_to_column("var1") |>
+  pivot_longer(-var1, names_to = "var2", values_to = "r") |>
+  ggplot(aes(x = var1, y = var2, fill = r)) +
+  geom_tile() +
+  geom_text(aes(label = round(r, 2)), size = 4) +
+  scale_fill_gradient2(low = "#e74c3c", mid = "white", high = "#2c3e50",
+                       midpoint = 0, limits = c(-1, 1)) +
+  labs(title = "Correlation matrix", x = NULL, y = NULL) +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Correlation does NOT mean causation
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.5
+tibble(
+  example = c("Ice cream sales & drowning deaths",
+              "Shoe size & reading ability",
+              "Social media & anxiety"),
+  explanation = c("Both increase in summer (confound: temperature)",
+                  "Both increase with age (confound: development)",
+                  "Anxious people may seek social media for comfort (reverse causation)")
+) |>
+  knitr::kable(col.names = c("Correlation", "Why it's not causal"))
+```
+
+. . .
+
+**To establish causation, you need an experiment** — random assignment, manipulation, control group. Correlation from observational data tells you variables are *related*, not that one *causes* the other.
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Explore correlations
+
+Using the `study_data` dataset (already loaded):
+
+1. Compute the correlation between `therapy_hours` and `depression_post`
+2. Is it positive or negative? What does that mean in plain language?
+3. Create a scatterplot of this relationship with a trend line
+4. Use `cor.test()` — is the correlation significant?
+
+**Time: 10 minutes**
+
+::: {.callout-tip}
+Negative correlation means as one variable goes up, the other goes down. Think about what that means for therapy and depression.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+cor(study_data$therapy_hours, study_data$depression_post)
+
+# It's negative — more therapy hours are associated with lower post-treatment depression.
+
+ggplot(study_data, aes(x = therapy_hours, y = depression_post)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "More therapy hours associated with lower depression",
+    x = "Hours of therapy",
+    y = "Post-treatment depression score"
+  ) +
+  theme_minimal()
+
+cor.test(study_data$therapy_hours, study_data$depression_post)
+```
+
+---
+
+## Before we move on
+
+Upload your code to Canvas for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+
+# Simple linear regression {background-color="#2c3e50"}
+
+## From correlation to regression
+
+**Correlation** tells you the relationship exists and how strong it is.
+
+**Regression** goes further — it gives you an equation to **predict** one variable from another.
+
+. . .
+
+The equation: **y = b0 + b1 * x**
+
+- **b0** (intercept) = predicted y when x = 0
+- **b1** (slope) = how much y changes for each 1-unit increase in x
+
+## lm() — fitting a model
+
+```{r}
+model <- lm(gad7_total ~ hours_social_media, data = study_data)
+```
+
+. . .
+
+Read this as: "Predict anxiety (`gad7_total`) from social media use (`hours_social_media`)."
+
+The `~` means "predicted by."
+
+## Reading the output
+
+```{r}
+summary(model)
+```
+
+## What the numbers mean
+
+```{r}
+#| echo: false
+tidy(model) |>
+  mutate(
+    meaning = c(
+      "Predicted anxiety when social media = 0 hours",
+      "For each additional hour of social media, anxiety increases by this much"
+    )
+  ) |>
+  select(term, estimate, p.value, meaning) |>
+  knitr::kable(digits = 3, col.names = c("Term", "Estimate", "p-value", "In plain language"))
+```
+
+. . .
+
+**In a sentence:** For each additional hour of daily social media use, anxiety scores increase by about `r round(tidy(model)$estimate[2], 1)` points on the GAD-7.
+
+## R-squared: How much does the model explain?
+
+```{r}
+glance(model)$r.squared
+```
+
+. . .
+
+**R-squared** tells you the proportion of variation in y explained by x.
+
+- R² = 0 → the model explains nothing
+- R² = 1 → the model explains everything
+- R² = `r round(glance(model)$r.squared, 2)` → social media use explains about `r round(glance(model)$r.squared * 100)`% of the variation in anxiety scores
+
+. . .
+
+The other `r 100 - round(glance(model)$r.squared * 100)`% is explained by other factors (genetics, life events, personality, etc.).
+
+## Visualizing the regression line
+
+```{r}
+#| output-location: slide
+ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "Social media use predicts higher anxiety",
+    subtitle = paste0("b = ", round(tidy(model)$estimate[2], 2),
+                      ", R² = ", round(glance(model)$r.squared, 2)),
+    x = "Daily social media use (hours)",
+    y = "Anxiety score (GAD-7)"
+  ) +
+  theme_minimal()
+```
+
+# From EDA to modeling {background-color="#2c3e50"}
+
+## broom::tidy() — clean coefficient tables
+
+The raw `summary()` output is hard to work with. `broom::tidy()` gives you a tidy data frame:
+
+```{r}
+tidy(model)
+```
+
+. . .
+
+Now you can use `knitr::kable()` to make a nice table:
+
+```{r}
+tidy(model) |>
+  knitr::kable(digits = 3)
+```
+
+## broom::glance() — model-level statistics
+
+```{r}
+glance(model) |>
+  select(r.squared, adj.r.squared, sigma, p.value) |>
+  knitr::kable(digits = 3)
+```
+
+. . .
+
+- **r.squared:** proportion of variance explained
+- **adj.r.squared:** adjusted for number of predictors
+- **sigma:** residual standard error (typical prediction error)
+- **p.value:** is the overall model significant?
+
+## The pattern: see it, then quantify it
+
+The workflow you now know:
+
+1. **Explore** — scatterplot to see the relationship
+2. **Correlate** — `cor()` to measure strength and direction
+3. **Model** — `lm()` to get the equation and test significance
+4. **Report** — `broom::tidy()` + `knitr::kable()` for clean tables
+
+. . .
+
+**This is what researchers do.** You now have the tools.
+
+# What's next {background-color="#2c3e50"}
+
+## This is just the beginning
+
+Today you learned **simple** regression — one predictor, one outcome.
+
+. . .
+
+Real research often uses:
+
+- **Multiple regression** — several predictors at once (`lm(y ~ x1 + x2 + x3)`)
+- **ANOVA** — comparing group means (`aov(y ~ group)`)
+- **Mixed models** — handling repeated measures and nested data
+- **Mediation/moderation** — testing how and when effects occur
+
+. . .
+
+**All of these build on `lm()`.** The syntax is nearly identical.
+
+## You have the R skills for all of this
+
+The hard part — learning R, wrangling data, making visualizations — is done.
+
+. . .
+
+Adding statistics is now just learning **new functions** in a language you already speak.
+
+```{r}
+#| eval: false
+# Multiple regression — same lm(), just add predictors
+lm(gad7_total ~ hours_social_media + age + gender, data = study_data)
+
+# ANOVA — same idea
+aov(gad7_total ~ condition, data = study_data)
+```
+
+# Get a head start {background-color="#e67e22"}
+
+## End-of-deck exercise
+
+Using the `study_data` dataset:
+
+1. Run a regression predicting `phq9_total` (depression) from `hours_social_media`
+2. What is the slope? Interpret it in a sentence.
+3. What is R²? Is social media use a good predictor of depression?
+4. Create a scatterplot with the regression line and report the key statistics in the subtitle
+5. **Bonus:** Use `broom::tidy()` to create a clean results table
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+model2 <- lm(phq9_total ~ hours_social_media, data = study_data)
+
+tidy(model2)
+glance(model2)$r.squared
+
+ggplot(study_data, aes(x = hours_social_media, y = phq9_total)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "Social media use predicts higher depression scores",
+    subtitle = paste0("b = ", round(tidy(model2)$estimate[2], 2),
+                      ", R² = ", round(glance(model2)$r.squared, 2)),
+    x = "Daily social media use (hours)",
+    y = "Depression score (PHQ-9)"
+  ) +
+  theme_minimal()
+
+tidy(model2) |> knitr::kable(digits = 3)
+```
+
+# Wrapping up {background-color="#2c3e50"}
+
+## Before next class
+
+No new reading — focus on your final project!
+
+**Do:**
+
+- Submit Assignment 8 (due today)
+- Finish your final project (due Wednesday)
+- Consider: could a correlation or regression strengthen your project?
+
+## The one thing to remember
+
+The pattern you see in a scatterplot and the numbers from `lm()` are telling you the same story — one with your eyes, one with math.

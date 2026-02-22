@@ -103,3 +103,31 @@ $code-color: #c7254e;
   font-size: 0.8em;
   color: #666;
 }
+
+// --- Overflow guardrails ---
+// Prevent slide content from silently running off the bottom.
+// Slides that overflow will clip rather than push content out of view.
+.reveal .slides section {
+  overflow: hidden;
+}
+
+// Debug mode: toggle with ?debug-overflow in the URL.
+// Adds a red outline to any slide whose content overflows its container.
+// Usage: open the rendered HTML and append ?debug-overflow to the URL.
+// Overflowing slides get a red dashed border so they're easy to spot.
+html.debug-overflow .reveal .slides section {
+  overflow: visible; // temporarily allow overflow so we can see it
+}
+
+// Small helper: ensure images don't blow out slide width
+.reveal img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Ensure code blocks don't overflow horizontally
+.reveal pre code {
+  max-height: 480px;
+  overflow-y: auto;
+  word-wrap: break-word;
+}

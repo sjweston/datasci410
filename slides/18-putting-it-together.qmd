@@ -254,6 +254,138 @@ used social media more reported higher anxiety levels.
 ✅ **Inline reporting** — no hard-coded numbers
 ✅ **Clear narrative** — telling the story
 
+# When things break {background-color="#2c3e50"}
+
+## The 6 errors you'll see most often
+
+| Error | What it means | Fix |
+|-------|---------------|-----|
+| `object 'x' not found` | Typo, wrong capitalization, or object not created yet | Check spelling; run the code that creates it |
+| `could not find function` | Typo in function name or package not loaded | Check spelling; run `library()` |
+| `unexpected symbol` | Missing `|>`, `+`, comma, or parenthesis | Check the line *before* the error |
+| `non-numeric argument` | Math on text — variable is character, not numeric | Check type with `class()` or `glimpse()` |
+| `did you mean '=='?` | Used `=` (assignment) instead of `==` (comparison) in `filter()` | Change `=` to `==` |
+| ggplot `+` error | Missing `+` between ggplot layers | Every line except the last needs `+` |
+
+## A 5-step debugging strategy
+
+1. **Read the error message** — actually read it. It tells you *where* and *what*.
+
+. . .
+
+2. **Check the basics** — package loaded? Object created? Spelling correct?
+
+. . .
+
+3. **Run line by line** — pipe chains: run from the top, adding one line at a time. Which line breaks?
+
+. . .
+
+4. **Simplify** — make a tiny test dataset (`tibble(x = 1:3)`) and try the same operation.
+
+. . .
+
+5. **Google it** — include "R", the package name, and the exact error message.
+
+## When you ask for help: make a reprex
+
+**Reprex** = **repr**oducible **ex**ample — the smallest code that recreates your error.
+
+. . .
+
+**Bad:** "My code doesn't work. Help!"
+
+. . .
+
+**Good:**
+
+> "I'm trying to filter my data but getting 'object not found':
+>
+> ```r
+> library(tidyverse)
+> data <- tibble(x = 1:3, y = c("a", "b", "c"))
+> filter(data, x > 1)
+> # Error: object 'data' not found
+> ```
+>
+> I expected rows where x > 1."
+
+. . .
+
+**Tip:** Use `dput()` to share a small slice of your real data so others can recreate it exactly.
+
+## Where to get help after this course
+
+- [Stack Overflow](https://stackoverflow.com) — searchable Q&A (look for green checkmark ✅)
+- [Posit Community](https://community.rstudio.com) — friendly R forum
+- [R4DS Slack](https://r4ds.io/join) — real-time chat
+- [R-Ladies](https://rladies.org) — supportive community with local chapters
+
+. . .
+
+**Before posting:** search first, be specific, show what you tried, and include a reprex.
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: Debug this code
+
+This code has several errors. Find and fix them all:
+
+```{r}
+#| eval: false
+library(tidyverse)
+
+# Load data
+Study_data <- tibble(
+  id = 1:5,
+  Score = c(10, 15, 12, 18, 14),
+  Group = c("A", "B", "A", "B", "A")
+)
+
+# Analyze
+study_data |>
+  filter(Group = "A") |>
+  summarize(
+    mean_score = mean(score)
+    sd_score = sd(score)
+  )
+```
+
+**Time: 10 minutes**
+
+::: {.callout-tip}
+There are at least 4 bugs. Read each line carefully and check: names, operators, punctuation.
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+library(tidyverse)
+
+# Load data
+study_data <- tibble(  # Bug 1: Changed Study_data to study_data
+  id = 1:5,
+  Score = c(10, 15, 12, 18, 14),
+  Group = c("A", "B", "A", "B", "A")
+)
+
+# Analyze
+study_data |>
+  filter(Group == "A") |>  # Bug 2: Changed = to ==
+  summarize(
+    mean_score = mean(Score),  # Bug 3: Changed score to Score; Bug 4: added comma
+    sd_score = sd(Score)       # Bug 3 again: Changed score to Score
+  )
+```
+
+---
+
+## Before we move on
+
+Upload your code to Canvas for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+
 # Where to go from here {background-color="#2c3e50"}
 
 ## You have the foundation

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Slide Overflow Checker</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 900px; margin: 2em auto; padding: 0 1em; }
+    h1 { border-bottom: 2px solid #2c3e50; padding-bottom: 0.3em; }
+    .deck { margin: 1em 0; padding: 1em; border: 1px solid #ddd; border-radius: 8px; }
+    .deck.ok { border-left: 4px solid #27ae60; }
+    .deck.problem { border-left: 4px solid #e74c3c; }
+    .deck.checking { border-left: 4px solid #f39c12; opacity: 0.6; }
+    .slide-issue { margin: 0.3em 0 0.3em 1.5em; color: #e74c3c; }
+    .status { color: #27ae60; font-weight: 600; }
+    .status.bad { color: #e74c3c; }
+    #progress { margin: 1em 0; padding: 0.5em; background: #f0f0f0; border-radius: 4px; }
+    #summary { margin-top: 2em; padding: 1em; background: #f8f9fa; border-radius: 8px; font-size: 1.1em; }
+    iframe { display: none; }
+  </style>
+</head>
+<body>
+  <h1>Slide Overflow Checker</h1>
+  <p id="progress">Starting...</p>
+  <div id="results"></div>
+  <div id="summary" style="display:none"></div>
+  <iframe id="checker" width="1280" height="720"></iframe>
+
+  <script>
+    // Slide deck files — populated by the server
+    const DECKS = DECK_LIST_PLACEHOLDER;
+
+    const iframe = document.getElementById('checker');
+    const resultsDiv = document.getElementById('results');
+    const progressEl = document.getElementById('progress');
+    const summaryEl = document.getElementById('summary');
+
+    const allResults = [];
+
+    function checkOverflow() {
+      return new Promise((resolve) => {
+        const iframeWin = iframe.contentWindow;
+
+        function waitForReveal(attempts) {
+          if (attempts > 100) {
+            resolve({ error: 'Reveal.js did not initialize' });
+            return;
+          }
+
+          try {
+            const Reveal = iframeWin.Reveal;
+            if (Reveal && Reveal.isReady && Reveal.isReady()) {
+              const slides = Reveal.getSlides();
+              const problems = [];
+
+              slides.forEach((slide, i) => {
+                const heading = slide.querySelector('h1, h2, h3');
+                const title = heading ? heading.textContent.trim() : '(no title)';
+                const contentHeight = slide.scrollHeight;
+                const visibleHeight = slide.clientHeight;
+                const overflowPx = contentHeight - visibleHeight;
+
+                if (overflowPx > 10) {
+                  problems.push({
+                    index: i + 1,
+                    title: title.substring(0, 80),
+                    overflowPx
+                  });
+                }
+              });
+
+              resolve({ total: slides.length, overflowing: problems });
+              return;
+            }
+          } catch(e) {}
+
+          setTimeout(() => waitForReveal(attempts + 1), 100);
+        }
+
+        waitForReveal(0);
+      });
+    }
+
+    async function checkAllDecks() {
+      for (let i = 0; i < DECKS.length; i++) {
+        const deck = DECKS[i];
+        progressEl.textContent = `Checking ${i + 1}/${DECKS.length}: ${deck}...`;
+
+        // Add placeholder
+        const div = document.createElement('div');
+        div.className = 'deck checking';
+        div.id = `deck-${i}`;
+        div.innerHTML = `<strong>${deck}</strong> — checking...`;
+        resultsDiv.appendChild(div);
+
+        // Load deck in iframe
+        await new Promise((resolve) => {
+          iframe.onload = resolve;
+          iframe.src = `/slides/${deck}`;
+        });
+
+        // Small delay for Reveal.js init
+        await new Promise(r => setTimeout(r, 500));
+
+        const result = await checkOverflow();
+        result.file = deck;
+        allResults.push(result);
+
+        // Update display
+        if (result.error) {
+          div.className = 'deck problem';
+          div.innerHTML = `<strong>${deck}</strong> — <span class="status bad">error: ${result.error}</span>`;
+        } else if (result.overflowing.length > 0) {
+          div.className = 'deck problem';
+          let html = `<strong>${deck}</strong> — <span class="status bad">${result.overflowing.length} overflowing / ${result.total} total</span>`;
+          result.overflowing.forEach(s => {
+            html += `<div class="slide-issue">Slide ${s.index}: "${s.title}" — overflows by ${s.overflowPx}px</div>`;
+          });
+          div.innerHTML = html;
+        } else {
+          div.className = 'deck ok';
+          div.innerHTML = `<strong>${deck}</strong> — <span class="status">${result.total} slides, no overflow</span>`;
+        }
+      }
+
+      // Summary
+      const problemDecks = allResults.filter(r => r.overflowing && r.overflowing.length > 0);
+      const totalProblems = problemDecks.reduce((sum, d) => sum + d.overflowing.length, 0);
+
+      progressEl.textContent = 'Done!';
+      summaryEl.style.display = 'block';
+
+      if (totalProblems === 0) {
+        summaryEl.innerHTML = '<strong>All clear!</strong> No overflowing slides found.';
+      } else {
+        summaryEl.innerHTML = `<strong>${totalProblems} overflowing slides</strong> across ${problemDecks.length} decks.`;
+      }
+
+      // Also log structured results for programmatic access
+      console.log('OVERFLOW_RESULTS=' + JSON.stringify(allResults));
+    }
+
+    checkAllDecks();
+  </script>
+</body>
+</html>

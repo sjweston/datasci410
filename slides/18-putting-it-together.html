@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="18-putting-it-together_files/libs/revealjs/dist/theme/quarto-6c64a245a934aae27b58a2c5c38063ba.css">
+  <link rel="stylesheet" href="18-putting-it-together_files/libs/revealjs/dist/theme/quarto-9100dc9ee5b6242d05f320b60746982d.css">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="18-putting-it-together_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -524,6 +524,164 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <p>✅ <strong>Complete workflow</strong> — import to interpretation ✅ <strong>Data cleaning</strong> — handling missing data, creating factors ✅ <strong>Multiple visualizations</strong> — exploring from different angles ✅ <strong>Summary statistics</strong> — both numerical and tabular ✅ <strong>Inline reporting</strong> — no hard-coded numbers ✅ <strong>Clear narrative</strong> — telling the story</p>
 </section></section>
 <section>
+<section id="when-things-break" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>When things break</h1>
+
+</section>
+<section id="the-6-errors-youll-see-most-often" class="slide level2">
+<h2>The 6 errors you’ll see most often</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 55%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>What it means</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>object 'x' not found</code></td>
+<td>Typo, wrong capitalization, or object not created yet</td>
+<td>Check spelling; run the code that creates it</td>
+</tr>
+<tr class="even">
+<td><code>could not find function</code></td>
+<td>Typo in function name or package not loaded</td>
+<td>Check spelling; run <code>library()</code></td>
+</tr>
+<tr class="odd">
+<td><code>unexpected symbol</code></td>
+<td>Missing <code>|&gt;</code>, <code>+</code>, comma, or parenthesis</td>
+<td>Check the line <em>before</em> the error</td>
+</tr>
+<tr class="even">
+<td><code>non-numeric argument</code></td>
+<td>Math on text — variable is character, not numeric</td>
+<td>Check type with <code>class()</code> or <code>glimpse()</code></td>
+</tr>
+<tr class="odd">
+<td><code>did you mean '=='?</code></td>
+<td>Used <code>=</code> (assignment) instead of <code>==</code> (comparison) in <code>filter()</code></td>
+<td>Change <code>=</code> to <code>==</code></td>
+</tr>
+<tr class="even">
+<td>ggplot <code>+</code> error</td>
+<td>Missing <code>+</code> between ggplot layers</td>
+<td>Every line except the last needs <code>+</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="a-5-step-debugging-strategy" class="slide level2">
+<h2>A 5-step debugging strategy</h2>
+<ol type="1">
+<li><strong>Read the error message</strong> — actually read it. It tells you <em>where</em> and <em>what</em>.</li>
+</ol>
+<div class="fragment">
+<ol start="2" type="1">
+<li><strong>Check the basics</strong> — package loaded? Object created? Spelling correct?</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="3" type="1">
+<li><strong>Run line by line</strong> — pipe chains: run from the top, adding one line at a time. Which line breaks?</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="4" type="1">
+<li><strong>Simplify</strong> — make a tiny test dataset (<code>tibble(x = 1:3)</code>) and try the same operation.</li>
+</ol>
+</div>
+<div class="fragment">
+<ol start="5" type="1">
+<li><strong>Google it</strong> — include “R”, the package name, and the exact error message.</li>
+</ol>
+</div>
+</section>
+<section id="when-you-ask-for-help-make-a-reprex" class="slide level2">
+<h2>When you ask for help: make a reprex</h2>
+<p><strong>Reprex</strong> = <strong>repr</strong>oducible <strong>ex</strong>ample — the smallest code that recreates your error.</p>
+<div class="fragment">
+<p><strong>Bad:</strong> “My code doesn’t work. Help!”</p>
+</div>
+<div class="fragment">
+<p><strong>Good:</strong></p>
+<blockquote>
+<p>“I’m trying to filter my data but getting ‘object not found’:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, x <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: object 'data' not found</span></span></code></pre></div>
+<p>I expected rows where x &gt; 1.”</p>
+</blockquote>
+</div>
+<div class="fragment">
+<p><strong>Tip:</strong> Use <code>dput()</code> to share a small slice of your real data so others can recreate it exactly.</p>
+</div>
+</section>
+<section id="where-to-get-help-after-this-course" class="slide level2">
+<h2>Where to get help after this course</h2>
+<ul>
+<li><a href="https://stackoverflow.com">Stack Overflow</a> — searchable Q&amp;A (look for green checkmark ✅)</li>
+<li><a href="https://community.rstudio.com">Posit Community</a> — friendly R forum</li>
+<li><a href="https://r4ds.io/join">R4DS Slack</a> — real-time chat</li>
+<li><a href="https://rladies.org">R-Ladies</a> — supportive community with local chapters</li>
+</ul>
+<div class="fragment">
+<p><strong>Before posting:</strong> search first, be specific, show what you tried, and include a reprex.</p>
+</div>
+</section></section>
+<section>
+<section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Pair coding break</h1>
+
+</section>
+<section id="your-turn-debug-this-code" class="slide level2">
+<h2>Your turn: Debug this code</h2>
+<p>This code has several errors. Find and fix them all:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>Study_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">14</span>),</span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Group =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>)</span>
+<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze</span></span>
+<span id="cb17-11"><a href="" aria-hidden="true" tabindex="-1"></a>study_data <span class="sc">|&gt;</span></span>
+<span id="cb17-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="at">Group =</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb17-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score)</span>
+<span id="cb17-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score)</span>
+<span id="cb17-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<p><strong>Time: 10 minutes</strong></p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>There are at least 4 bugs. Read each line carefully and check: names, operators, punctuation.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="before-we-move-on" class="slide level2">
+<h2>Before we move on</h2>
+<p>Upload your code to Canvas for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
+</section></section>
+<section>
 <section id="where-to-go-from-here" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Where to go from here</h1>
 
@@ -546,14 +704,14 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Statistics in R</h2>
 <p>You can now learn inferential statistics:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(gad7_total <span class="sc">~</span> gender, <span class="at">data =</span> social_media_clean)</span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
-<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> academic_year, <span class="at">data =</span> social_media_clean)</span>
-<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression</span></span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> social_media_clean)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(gad7_total <span class="sc">~</span> gender, <span class="at">data =</span> social_media_clean)</span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA</span></span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> academic_year, <span class="at">data =</span> social_media_clean)</span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression</span></span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> social_media_clean)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Courses to consider:</strong></p>
@@ -568,16 +726,16 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Writing functions</h2>
 <p>Automate repetitive tasks:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>compute_scale_score <span class="ot">&lt;-</span> <span class="cf">function</span>(data, items) {</span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">score =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(items)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use it anywhere</span></span>
-<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>compute_scale_score <span class="ot">&lt;-</span> <span class="cf">function</span>(data, items) {</span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">score =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(items)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use it anywhere</span></span>
+<span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div>
 </div>
 </section>
 <section id="version-control-with-git" class="slide level2">
@@ -600,39 +758,39 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <h2>Interactive visualizations with Shiny</h2>
 <p>Create web apps for your data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"condition"</span>, <span class="st">"Choose condition:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>)),</span>
-<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
-<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb18-10"><a href="" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span> <span class="fu">filter</span>(condition <span class="sc">==</span> input<span class="sc">$</span>condition) <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(...)</span>
-<span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb18-12"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb18-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"condition"</span>, <span class="st">"Choose condition:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>)),</span>
+<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb20-9"><a href="" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb20-10"><a href="" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span> <span class="fu">filter</span>(condition <span class="sc">==</span> input<span class="sc">$</span>condition) <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(...)</span>
+<span id="cb20-11"><a href="" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb20-12"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 </div>
 </section>
 <section id="machine-learning-with-tidymodels" class="slide level2">
 <h2>Machine learning with tidymodels</h2>
 <p>Predictive modeling with tidy syntax:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(social_media_clean)</span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model</span></span>
-<span id="cb19-9"><a href="" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> train_data)</span>
-<span id="cb19-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
-<span id="cb19-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit, test_data)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data</span></span>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(social_media_clean)</span>
+<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
+<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span>
+<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model</span></span>
+<span id="cb21-9"><a href="" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
+<span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> train_data)</span>
+<span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
+<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit, test_data)</span></code></pre></div>
 </div>
 </section></section>
 <section>
@@ -876,7 +1034,7 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <section id="final-final-words" class="slide level2">
 <h2>Final final words</h2>
 
-<img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-16-1.png" width="960" class="r-stretch"></section>
+<img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-18-1.png" width="960" class="r-stretch"></section>
 <section id="thank-you-1" class="slide level2" data-background-color="#2c3e50">
 <h2>Thank you!</h2>
 <p>Good luck with your final projects and future data science adventures!</p>
