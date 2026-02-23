@@ -94,7 +94,7 @@ website:
               file: content/15-content.qmd
             - text: "16: Quarto"
               file: content/16-content.qmd
-            - text: "17: Practice & Review"
+            - text: "17: Correlation & Simple Regression"
               file: content/17-content.qmd
             - text: "18: Putting It All Together"
               file: content/18-content.qmd

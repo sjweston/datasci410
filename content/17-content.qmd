@@ -1,5 +1,5 @@
 ---
-title: "17: Practice & Review"
+title: "17: Correlation & Simple Regression"
 date: "2026-06-01"
 ---
 
@@ -18,32 +18,23 @@ date: "2026-06-01"
 
 We'll cover:
 
-- Guided practice: a complete workflow from import to polished figure
-  - Import a messy dataset
-  - Clean and tidy
-  - Explore and visualize
-  - Create a polished figure
-  - Document in Quarto
-- Common errors and how to read them
-  - "Object not found"
-  - "Could not find function"
-  - "Unexpected symbol"
-  - "Non-numeric argument to binary operator"
-- Debugging strategies
-  - Read the error message (really read it)
-  - Run code line by line
-  - Google the error — everyone does this
-  - Minimal reproducible examples
-- Getting help effectively
-- Q&A for final projects
+- From eyeballing to numbers: why we need correlation and regression
+- Correlation with `cor()` and `cor.test()`
+  - Pearson's *r* — what it is and what it isn't
+  - Correlation matrices and heatmaps
+  - **Correlation ≠ causation** (with psychology examples)
+- Simple linear regression with `lm()`
+  - Interpreting slope, intercept, and R²
+  - Scatterplots with `geom_smooth(method = "lm")`
+- Tidying model output with `broom::tidy()` and `broom::glance()`
 
 ### Slides
 
 ```{=html}
-<a href="/slides/17-practice-review.html" target="_blank" class="btn btn-primary">
+<a href="/slides/17-correlation-regression.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="/slides/17-practice-review.pdf" class="btn btn-secondary">
+<a href="/slides/17-correlation-regression.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 ```
@@ -52,7 +43,7 @@ We'll cover:
 
 ```{=html}
 <div class="ratio ratio-16x9">
-  <iframe src="/slides/17-practice-review.html"></iframe>
+  <iframe src="/slides/17-correlation-regression.html"></iframe>
 </div>
 ```
 
@@ -60,40 +51,17 @@ We'll cover:
 
 ✅ **Practice:**
 
-1. Pick a dataset you haven't worked with before. Walk through the full workflow: import, glimpse, tidy, explore, visualize
-2. Intentionally break your code in 3 different ways. Practice reading the error messages
-3. Create a minimal reproducible example (reprex) for a problem you've encountered
-4. Spend time polishing your final project — this is your last chance to ask questions!
+1. Pick two numeric variables in a dataset you've been working with (or use `palmerpenguins::penguins`). Compute their correlation with `cor()` and `cor.test()`. Is the relationship what you expected?
+2. Fit a simple linear model with `lm()`. Interpret the slope in plain language — what does a one-unit increase in *x* predict for *y*?
+3. Use `broom::tidy()` to extract the model coefficients. Use `broom::glance()` to get the R². Report these with inline code in a Quarto document.
+4. Create a scatterplot with `geom_smooth(method = "lm")`. Add informative labels and a title that tells the story.
 
 ::: {.callout-note}
-## The debugging checklist
+## Correlation guidelines
 
-When your code doesn't work, go through this list:
+- **|r| < 0.3** — weak
+- **0.3 ≤ |r| < 0.7** — moderate
+- **|r| ≥ 0.7** — strong
 
-1. **Read the error message** — it usually tells you exactly what's wrong
-2. **Check spelling and capitalization** — R is case-sensitive
-3. **Check your parentheses and pipes** — missing `)` or `|>` breaks everything
-4. **Did you load the package?** — `library(tidyverse)` needs to run first
-5. **Run code line by line** — find where it breaks
-6. **Google the error** — someone has had this exact problem before
-7. **Ask for help** — but bring a reprex!
+These are rough guidelines, not rigid cutoffs. Context and sample size matter.
 :::
-
-### How to ask a good question
-
-```r
-# A good question includes:
-# 1. What you're trying to do
-# 2. What you expected to happen
-# 3. What actually happened (the error message)
-# 4. A minimal example that reproduces the problem
-
-# Example reprex:
-library(tidyverse)
-data <- tibble(x = c(1, 2, "three"))
-mean(data$x)
-# Error: argument is not numeric or logical
-
-# Question: "I'm trying to calculate the mean of a column,
-# but one value is text. How do I handle this?"
-```

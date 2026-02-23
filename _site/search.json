@@ -1903,49 +1903,49 @@
   {
     "objectID": "content/17-content.html",
     "href": "content/17-content.html",
-    "title": "17: Practice & Review",
+    "title": "17: Correlation & Simple Regression",
     "section": "",
     "text": "Content for Monday, June 1, 2026",
     "crumbs": [
       "Content",
       "Course content",
-      "17: Practice & Review"
+      "17: Correlation & Simple Regression"
     ]
   },
   {
     "objectID": "content/17-content.html#before-class",
     "href": "content/17-content.html#before-class",
-    "title": "17: Practice & Review",
+    "title": "17: Correlation & Simple Regression",
     "section": "Before class",
     "text": "Before class\n📖 Reading:\n\nR4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\n\nImportantAssignment 8 is due today\n\n\n\nAssignment 8: Reproducible Report — submit before class.",
     "crumbs": [
       "Content",
       "Course content",
-      "17: Practice & Review"
+      "17: Correlation & Simple Regression"
     ]
   },
   {
     "objectID": "content/17-content.html#during-class",
     "href": "content/17-content.html#during-class",
-    "title": "17: Practice & Review",
+    "title": "17: Correlation & Simple Regression",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nGuided practice: a complete workflow from import to polished figure\n\nImport a messy dataset\nClean and tidy\nExplore and visualize\nCreate a polished figure\nDocument in Quarto\n\nCommon errors and how to read them\n\n“Object not found”\n“Could not find function”\n“Unexpected symbol”\n“Non-numeric argument to binary operator”\n\nDebugging strategies\n\nRead the error message (really read it)\nRun code line by line\nGoogle the error — everyone does this\nMinimal reproducible examples\n\nGetting help effectively\nQ&A for final projects\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nFrom eyeballing to numbers: why we need correlation and regression\nCorrelation with cor() and cor.test()\n\nPearson’s r — what it is and what it isn’t\nCorrelation matrices and heatmaps\nCorrelation ≠ causation (with psychology examples)\n\nSimple linear regression with lm()\n\nInterpreting slope, intercept, and R²\nScatterplots with geom_smooth(method = \"lm\")\n\nTidying model output with broom::tidy() and broom::glance()\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
-      "17: Practice & Review"
+      "17: Correlation & Simple Regression"
     ]
   },
   {
     "objectID": "content/17-content.html#after-class",
     "href": "content/17-content.html#after-class",
-    "title": "17: Practice & Review",
+    "title": "17: Correlation & Simple Regression",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nPick a dataset you haven’t worked with before. Walk through the full workflow: import, glimpse, tidy, explore, visualize\nIntentionally break your code in 3 different ways. Practice reading the error messages\nCreate a minimal reproducible example (reprex) for a problem you’ve encountered\nSpend time polishing your final project — this is your last chance to ask questions!\n\n\n\n\n\n\n\nNoteThe debugging checklist\n\n\n\nWhen your code doesn’t work, go through this list:\n\nRead the error message — it usually tells you exactly what’s wrong\nCheck spelling and capitalization — R is case-sensitive\nCheck your parentheses and pipes — missing ) or |&gt; breaks everything\nDid you load the package? — library(tidyverse) needs to run first\nRun code line by line — find where it breaks\nGoogle the error — someone has had this exact problem before\nAsk for help — but bring a reprex!\n\n\n\n\nHow to ask a good question\n# A good question includes:\n# 1. What you're trying to do\n# 2. What you expected to happen\n# 3. What actually happened (the error message)\n# 4. A minimal example that reproduces the problem\n\n# Example reprex:\nlibrary(tidyverse)\ndata &lt;- tibble(x = c(1, 2, \"three\"))\nmean(data$x)\n# Error: argument is not numeric or logical\n\n# Question: \"I'm trying to calculate the mean of a column,\n# but one value is text. How do I handle this?\"",
+    "text": "After class\n✅ Practice:\n\nPick two numeric variables in a dataset you’ve been working with (or use palmerpenguins::penguins). Compute their correlation with cor() and cor.test(). Is the relationship what you expected?\nFit a simple linear model with lm(). Interpret the slope in plain language — what does a one-unit increase in x predict for y?\nUse broom::tidy() to extract the model coefficients. Use broom::glance() to get the R². Report these with inline code in a Quarto document.\nCreate a scatterplot with geom_smooth(method = \"lm\"). Add informative labels and a title that tells the story.\n\n\n\n\n\n\n\nNoteCorrelation guidelines\n\n\n\n\n|r| &lt; 0.3 — weak\n0.3 ≤ |r| &lt; 0.7 — moderate\n|r| ≥ 0.7 — strong\n\nThese are rough guidelines, not rigid cutoffs. Context and sample size matter.",
     "crumbs": [
       "Content",
       "Course content",
-      "17: Practice & Review"
+      "17: Correlation & Simple Regression"
     ]
   },
   {
