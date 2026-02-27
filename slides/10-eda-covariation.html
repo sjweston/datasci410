@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/theme/quarto-9100dc9ee5b6242d05f320b60746982d.css">
+  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -256,7 +256,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 13.74919, 13.65594, 20.35588, 13.37908, 11.81901, 19.1…</code></pre>
+$ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 19.73…</code></pre>
 </div>
 </div>
 </section>
@@ -449,11 +449,11 @@ $ depression_post &lt;dbl&gt; 13.74919, 13.65594, 20.35588, 13.37908, 11.81901, 
   gender     diagnosis 
   &lt;chr&gt;      &lt;chr&gt;     
 1 Male       Depression
-2 Non-binary Other     
-3 Female     Other     
+2 Female     Other     
+3 Non-binary Anxiety   
 4 Female     Depression
-5 Female     Anxiety   
-6 Female     Other     </code></pre>
+5 Female     Both      
+6 Male       Both      </code></pre>
 </div>
 </div>
 </section>
@@ -595,8 +595,8 @@ $ depression_post &lt;dbl&gt; 13.74919, 13.65594, 20.35588, 13.37908, 11.81901, 
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 37.84151, 35.54822, 61.34445, 37.21487, 29.85981, 53.739…
-$ reaction_time &lt;dbl&gt; 297.5223, 329.6448, 380.8611, 248.6568, 341.0425, 349.71…</code></pre>
+$ age           &lt;dbl&gt; 69.14151, 28.79860, 41.03369, 64.88125, 58.06150, 32.875…
+$ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 311.53…</code></pre>
 </div>
 </div>
 </section>
@@ -742,7 +742,7 @@ $ reaction_time &lt;dbl&gt; 297.5223, 329.6448, 380.8611, 248.6568, 341.0425, 34
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7202186</code></pre>
+<pre><code>[1] 0.7207867</code></pre>
 </div>
 </div>
 <div class="fragment">
