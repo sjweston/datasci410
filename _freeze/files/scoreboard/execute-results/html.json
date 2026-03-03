@@ -1,0 +1,21 @@
+{
+  "hash": "03413918b4fe53a8e78c7fb1b18aa84d",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"Team Challenge Scoreboard\"\nformat:\n  revealjs:\n    theme: [default, ../slides/custom.scss]\n    slide-number: false\n    controls: false\n    progress: false\n    center: true\n    transition: none\nexecute:\n  echo: false\n  warning: false\n  message: false\n---\n\n\n::: {.cell}\n\n:::\n\n\n## Week 2 Standings\n\n\n::: {.cell}\n::: {.cell-output-display}\n![](scoreboard_files/figure-revealjs/scoreboard-chart-1.png){width=960}\n:::\n:::\n\n\n---\n\n## Point Breakdown\n\n\n::: {.cell}\n::: {.cell-output-display}\n\n\n|Team   | Pair Coding | Assignments | Quizzes | Fun Challenge | Total |\n|:------|:-----------:|:-----------:|:-------:|:-------------:|:-----:|\n|Team 1 |      0      |      0      |    0    |       0       |   0   |\n|Team 2 |      0      |      0      |    0    |       0       |   0   |\n|Team 3 |      0      |      0      |    0    |       0       |   0   |\n|Team 4 |      0      |      0      |    0    |       0       |   0   |\n|Team 5 |      0      |      0      |    0    |       0       |   0   |\n|Team 6 |      0      |      0      |    0    |       0       |   0   |\n|Team 7 |      0      |      0      |    0    |       0       |   0   |\n|Team 8 |      0      |      0      |    0    |       0       |   0   |\n|Team 9 |      0      |      0      |    0    |       0       |   0   |\n\n\n:::\n:::\n\n",
+    "supporting": [
+      "scoreboard_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {
+      "include-after-body": [
+        "\n<script>\n  // htmlwidgets need to know to resize themselves when slides are shown/hidden.\n  // Fire the \"slideenter\" event (handled by htmlwidgets.js) when the current\n  // slide changes (different for each slide format).\n  (function () {\n    // dispatch for htmlwidgets\n    function fireSlideEnter() {\n      const event = window.document.createEvent(\"Event\");\n      event.initEvent(\"slideenter\", true, true);\n      window.document.dispatchEvent(event);\n    }\n\n    function fireSlideChanged(previousSlide, currentSlide) {\n      fireSlideEnter();\n\n      // dispatch for shiny\n      if (window.jQuery) {\n        if (previousSlide) {\n          window.jQuery(previousSlide).trigger(\"hidden\");\n        }\n        if (currentSlide) {\n          window.jQuery(currentSlide).trigger(\"shown\");\n        }\n      }\n    }\n\n    // hookup for slidy\n    if (window.w3c_slidy) {\n      window.w3c_slidy.add_observer(function (slide_num) {\n        // slide_num starts at position 1\n        fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);\n      });\n    }\n\n  })();\n</script>\n\n"
+      ]
+    },
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

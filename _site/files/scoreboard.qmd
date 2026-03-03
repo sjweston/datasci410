@@ -1,0 +1,113 @@
+---
+title: "Team Challenge Scoreboard"
+format:
+  revealjs:
+    theme: [default, ../slides/custom.scss]
+    slide-number: false
+    controls: false
+    progress: false
+    center: true
+    transition: none
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+
+# =====================================================================
+# UPDATE THIS SECTION EACH WEEK
+# =====================================================================
+# Replace team names after Session 2 (students choose names)
+# Update point totals each Monday before class
+
+week <- 2  # Current week number
+
+scoreboard <- tribble(
+  ~team,              ~pair_coding, ~assignments, ~quizzes, ~fun_challenge,
+  "Team 1",           0,            0,            0,        0,
+  "Team 2",           0,            0,            0,        0,
+  "Team 3",           0,            0,            0,        0,
+  "Team 4",           0,            0,            0,        0,
+  "Team 5",           0,            0,            0,        0,
+  "Team 6",           0,            0,            0,        0,
+  "Team 7",           0,            0,            0,        0,
+  "Team 8",           0,            0,            0,        0,
+  "Team 9",           0,            0,            0,        0,
+)
+
+# =====================================================================
+# Everything below is automatic — no need to edit
+# =====================================================================
+
+scoreboard <- scoreboard |>
+  mutate(
+    total = pair_coding + assignments + quizzes + fun_challenge,
+    team = fct_reorder(team, total)
+  )
+
+# Color: leading team(s) get highlight color, others get gray
+max_pts <- max(scoreboard$total)
+scoreboard <- scoreboard |>
+  mutate(
+    is_leader = total == max_pts & total > 0
+  )
+```
+
+## Week `r week` Standings
+
+```{r}
+#| label: scoreboard-chart
+#| fig-width: 10
+#| fig-height: 5.5
+
+# Bar chart
+ggplot(scoreboard, aes(x = total, y = team, fill = is_leader)) +
+  geom_col(width = 0.7) +
+  geom_text(
+    aes(label = total),
+    hjust = -0.3,
+    size = 5,
+    fontface = "bold"
+  ) +
+  scale_fill_manual(
+    values = c("TRUE" = "#e67e22", "FALSE" = "#95a5a6"),
+    guide = "none"
+  ) +
+  scale_x_continuous(
+    expand = expansion(mult = c(0, 0.15))
+  ) +
+  labs(
+    x = "Total Points",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 18) +
+  theme(
+    panel.grid.major.y = element_blank(),
+    panel.grid.minor = element_blank(),
+    axis.text.y = element_text(face = "bold", size = 16)
+  )
+```
+
+---
+
+## Point Breakdown
+
+```{r}
+#| label: scoreboard-table
+
+scoreboard |>
+  arrange(desc(total), team) |>
+  select(
+    Team = team,
+    `Pair Coding` = pair_coding,
+    Assignments = assignments,
+    Quizzes = quizzes,
+    `Fun Challenge` = fun_challenge,
+    Total = total
+  ) |>
+  knitr::kable(align = c("l", "c", "c", "c", "c", "c"))
+```
