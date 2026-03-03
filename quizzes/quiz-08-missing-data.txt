@@ -1,0 +1,315 @@
+Quiz title: Quiz 8: Missing Data (R4DS Ch. 18)
+
+1. In R, what does `NA` stand for?
+a) No Answer
+b) Null Attribute
+*c) Not Available
+d) Not Applicable
+
+2. What is `NA` used to represent in R?
+a) Zero
+b) An empty string
+*c) A missing value
+d) A deleted observation
+
+3. What does it mean that `NA` is "contagious" in R?
+a) NA values spread to other datasets automatically
+b) NA causes R to crash
+*c) Most operations involving NA return NA as the result
+d) NA deletes neighboring values in a vector
+
+4. What does `NA + 5` return in R?
+a) 5
+b) 0
+*c) NA
+d) An error
+
+5. What does `NA == NA` return?
+a) TRUE
+b) FALSE
+*c) NA
+d) An error
+
+6. Which function should you use to test whether a value is `NA`?
+a) `== NA`
+b) `missing()`
+*c) `is.na()`
+d) `check.na()`
+
+7. Why does `x == NA` not work to test for missing values?
+a) R doesn't allow comparisons with special values
+b) It always returns TRUE
+*c) Because NA == NA returns NA, not TRUE
+d) It causes a type conversion error
+
+8. What does `!is.na(x)` test for?
+a) Whether x is missing
+*b) Whether x is NOT missing
+c) Whether x equals zero
+d) Whether x contains an error
+
+9. What is the difference between an explicit and an implicit missing value?
+a) Explicit values are documented; implicit values are undocumented
+*b) Explicit means NA is present in the data; implicit means the row is simply absent
+c) Explicit values can be fixed; implicit values cannot
+d) There is no meaningful difference
+
+10. A survey dataset has rows for participants 1, 2, 4, and 5. Participant 3 is missing entirely. This is an example of:
+a) An explicit missing value
+*b) An implicit missing value
+c) A null value
+d) A data entry error that R cannot detect
+
+11. Which tidyr function makes implicit missing values explicit by filling in missing combinations?
+a) `fill()`
+b) `expand()`
+*c) `complete()`
+d) `replace_na()`
+
+12. What does `complete(df, year, name)` do?
+a) Removes all rows with missing values
+*b) Adds rows for all combinations of year and name that don't already exist, filling new cells with NA
+c) Fills in NA values with the mean
+d) Completes partial strings in the name column
+
+13. Which tidyr function fills missing values with the previous non-missing value (last observation carried forward)?
+*a) `fill()`
+b) `replace_na()`
+c) `complete()`
+d) `carry_forward()`
+
+14. In which direction does `fill()` fill by default?
+a) Right
+*b) Down
+c) Up
+d) Both up and down
+
+15. What does `fill(df, score, .direction = "up")` do?
+a) Fills missing values in score with the mean
+*b) Fills missing values in score with the next non-missing value below them
+c) Moves all NA values to the top of the column
+d) Removes rows where score is NA
+
+16. What does `replace_na()` do?
+a) Removes all NA values from the data
+b) Fills NA with the previous value
+*c) Replaces NA with a specific value you provide
+d) Converts NA to the string "NA"
+
+17. What does the following code produce?
+
+    replace_na(c(1, NA, 3, NA, 5), 0)
+
+a) `1 3 5`
+*b) `1 0 3 0 5`
+c) `0 NA 0 NA 0`
+d) An error
+
+18. What does `coalesce()` do?
+a) Merges two data frames
+b) Removes all NA values from a vector
+*c) Returns the first non-missing value across its arguments for each element
+d) Replaces NA with the column mean
+
+19. What does the following code return?
+
+    coalesce(NA, NA, 3, 5)
+
+a) NA
+*b) 3
+c) 5
+d) An error
+
+20. When might you use `coalesce()` with survey data?
+a) To average responses across multiple items
+*b) To pick the first available response when the same question was asked in multiple places
+c) To remove duplicate responses
+d) To recode missing values as "Did not answer"
+
+21. What does `drop_na()` from tidyr do?
+*a) Removes rows that contain any NA values (or NA in specified columns)
+b) Removes columns that contain NA values
+c) Replaces NA values with zero
+d) Counts the number of NA values per column
+
+22. What does `drop_na(df, score)` do compared to `drop_na(df)`?
+a) They do the same thing
+*b) The first drops rows where score is NA; the second drops rows where any column is NA
+c) The first drops the score column; the second drops all columns with NA
+d) The first fills score NAs; the second fills all NAs
+
+23. What happens when you use `mean(x)` and `x` contains NA values?
+a) R ignores the NA and calculates the mean of the remaining values
+*b) The result is NA
+c) R removes the NA and warns you
+d) R treats NA as zero
+
+24. How do you tell `mean()` to ignore NA values?
+a) `mean(x, ignore.na = TRUE)`
+b) `mean(x, skip.na = TRUE)`
+*c) `mean(x, na.rm = TRUE)`
+d) `mean(x, remove.missing = TRUE)`
+
+25. What does `na.rm` stand for?
+a) NA remove mode
+*b) NA remove (remove missing values)
+c) Not available, run mean
+d) Null argument removal
+
+26. In dplyr, how does `filter()` handle rows where the condition evaluates to `NA`?
+a) It keeps those rows
+*b) It drops those rows (only rows where the condition is TRUE are kept)
+c) It replaces them with FALSE
+d) It throws an error
+
+27. You have a data frame and run `filter(df, score > 80)`. Some rows have `NA` for score. What happens to those rows?
+a) They are kept because R can't prove they're not above 80
+*b) They are dropped because the condition returns NA, not TRUE
+c) They are replaced with score = 80
+d) R throws an error about the NA values
+
+28. How does `arrange()` handle NA values by default?
+a) It puts them at the beginning
+*b) It sorts them to the end
+c) It removes them
+d) It throws an error
+
+29. You want NA values to appear first when sorting. Which approach works?
+
+    arrange(df, desc(is.na(score)), score)
+
+a) This produces an error
+*b) It puts NA values first, then sorts the remaining values
+c) It removes NA values
+d) It replaces NA values with zero before sorting
+
+30. In joins, do NA values in the key column match other NA values by default?
+a) Yes, NA matches NA
+*b) No, NA does not match NA by default
+c) Only in left joins
+d) Only if you use `na.rm = TRUE`
+
+31. What is MCAR in the context of missing data?
+a) Missing Completely After Removal
+*b) Missing Completely At Random — missingness is unrelated to any variable
+c) Missing Cases Are Removed
+d) Multiple Columns Are Replaced
+
+32. If participants with higher depression scores are less likely to complete a follow-up survey, the missing data is likely:
+a) MCAR (Missing Completely At Random)
+b) MAR (Missing At Random)
+*c) MNAR (Missing Not At Random)
+d) Implicit
+
+33. What is MAR (Missing At Random)?
+a) The data is missing for no reason at all
+*b) Missingness is related to other observed variables but not to the missing value itself
+c) The data was randomly deleted by the researcher
+d) Each value has an equal probability of being missing
+
+34. Why is it important to understand WHY data is missing before deciding how to handle it?
+a) Because R requires you to specify the type of missingness
+b) Because some types of missing data can't be removed
+*c) Because the reason for missingness affects whether your analysis will be biased
+d) Because R automatically detects the type of missingness
+
+35. A researcher simply deletes all rows with any missing values from their dataset. What is a potential problem with this approach?
+a) R doesn't allow row deletion
+*b) It can introduce bias if the data is not MCAR, and it reduces sample size
+c) It converts missing values to zero
+d) It changes the data types of the remaining columns
+
+36. What is the `naniar` package used for?
+a) Imputing missing values with machine learning
+b) Converting between NA types
+*c) Visualizing patterns of missingness in data
+d) Removing all missing values from a dataset
+
+37. What is `NULL` in R, and how does it differ from `NA`?
+a) They are interchangeable
+*b) NULL represents the absence of a value or object entirely, while NA represents a missing value within a data structure
+c) NULL is for numeric data; NA is for character data
+d) NULL is used in data frames; NA is used in lists
+
+38. What does `NaN` stand for in R?
+a) No Answer Needed
+b) Null And None
+*c) Not a Number
+d) Not a Null
+
+39. When does `NaN` typically occur?
+a) When you divide by zero
+*b) When you perform an undefined mathematical operation like `0/0`
+c) When you try to add a character to a number
+d) When a value is missing from a survey
+
+40. What does `1/0` return in R?
+a) NA
+b) NaN
+*c) Inf
+d) An error
+
+41. Is `NaN` considered to be `NA`?
+*a) Yes — `is.na(NaN)` returns TRUE
+b) No — they are completely different types
+c) Only in numeric vectors
+d) Only when using tidyverse functions
+
+42. What does `fct_na_value_to_level()` from the forcats package do?
+a) Removes NA values from a factor
+b) Converts all factor levels to NA
+*c) Converts NA to an explicit factor level so it appears in summaries and plots
+d) Tests whether a factor contains NA values
+
+43. When might you use `fct_na_value_to_level()` with survey data?
+a) When you want to remove non-respondents from a bar chart
+*b) When you want "No response" to appear as its own bar in a bar chart
+c) When you want to convert a numeric variable to a factor
+d) When you want to replace NA with the most common category
+
+44. What does the following code do?
+
+    df |>
+      group_by(condition) |>
+      summarize(avg = mean(score, na.rm = TRUE))
+
+a) Removes all NA values from the entire data frame, then calculates group means
+*b) Calculates the mean score for each condition, ignoring NA values in the calculation
+c) Replaces NA values with the group mean, then calculates the overall mean
+d) Produces an error because you can't use na.rm inside summarize
+
+45. You run `sum(c(1, 2, NA, 4), na.rm = TRUE)`. What is the result?
+a) NA
+*b) 7
+c) 10
+d) An error
+
+46. You run `sum(c(1, 2, NA, 4))` without `na.rm = TRUE`. What is the result?
+*a) NA
+b) 7
+c) 0
+d) An error
+
+47. What does `complete(df, year = 2019:2023, participant)` do?
+a) Keeps only rows from 2019 to 2023
+*b) Creates rows for every combination of years 2019-2023 and every participant, filling new cells with NA
+c) Fills in missing years with interpolated data
+d) Removes years outside the 2019-2023 range
+
+48. Which approach is generally better for zooming into a plot when your data has missing values — and why?
+a) `ylim()` because it also removes outliers
+*b) `coord_cartesian()` because it doesn't remove data points
+c) `filter()` because it makes NAs explicit
+d) `drop_na()` because it cleans the data first
+
+49. In a psychology study, a participant skips a question on a survey. In the resulting dataset, that cell contains `NA`. This is an example of:
+*a) An explicit missing value
+b) An implicit missing value
+c) A null value
+d) A NaN value
+
+50. You want to replace NA values in a column called `score` with the value 0 inside a mutate. Which is correct?
+a) `mutate(df, score = na.rm(score, 0))`
+*b) `mutate(df, score = replace_na(score, 0))`
+c) `mutate(df, score = fill(score, 0))`
+d) `mutate(df, score = coalesce(score))`

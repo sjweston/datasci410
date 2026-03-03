@@ -1,0 +1,313 @@
+Quiz title: Quiz 5: Perception & EDA (R4DS Ch. 10 §10.1–10.4)
+
+1. What does EDA stand for?
+a) Experimental Data Assessment
+b) Electronic Data Arrangement
+*c) Exploratory Data Analysis
+d) Estimated Data Approximation
+
+2. According to R4DS, EDA is best described as:
+a) A single statistical test you apply to a dataset
+*b) An iterative cycle of generating questions, visualizing and transforming data, and refining your understanding
+c) A formal hypothesis-testing procedure
+d) A method for cleaning data before analysis
+
+3. R4DS suggests that during EDA, you should focus on two broad types of questions. What are they?
+a) "What is the sample size?" and "What is the p-value?"
+*b) "What type of variation occurs within my variables?" and "What type of covariation occurs between my variables?"
+c) "Is the data normally distributed?" and "Are there outliers?"
+d) "What is the mean?" and "What is the standard deviation?"
+
+4. In R4DS, **variation** refers to:
+*a) The tendency of values of a variable to change from measurement to measurement
+b) The relationship between two variables
+c) The difference between two datasets
+d) Changes in a variable over time
+
+5. Which geom is best for visualizing the distribution of a single **continuous** variable?
+a) `geom_bar()`
+*b) `geom_histogram()`
+c) `geom_point()`
+d) `geom_col()`
+
+6. Which geom is best for visualizing the distribution of a single **categorical** variable?
+*a) `geom_bar()`
+b) `geom_histogram()`
+c) `geom_point()`
+d) `geom_density()`
+
+7. What does `geom_freqpoly()` display?
+a) A bar chart of frequencies
+*b) A line connecting the tops of histogram bins, useful for comparing groups
+c) A scatterplot of frequency data
+d) A smoothed density curve that sums to 1
+
+8. How does `geom_density()` differ from `geom_histogram()`?
+a) `geom_density()` is for categorical variables
+b) `geom_density()` uses bars instead of lines
+*c) `geom_density()` shows a smoothed curve where the area under the curve sums to 1, making it easier to compare shapes across groups
+d) `geom_density()` requires a y variable
+
+9. What does this code produce?
+
+    ggplot(diamonds, aes(x = carat)) +
+      geom_histogram(binwidth = 0.5)
+a) A scatterplot of diamond carats
+*b) A histogram of diamond carats with each bin spanning 0.5 carats
+c) A bar chart with 0.5-carat-wide categories
+d) An error because `binwidth` must be a whole number
+
+10. Why does R4DS recommend trying different `binwidth` values in `geom_histogram()`?
+a) The default binwidth causes errors
+*b) Different binwidths can reveal different patterns in the data
+c) You must match the binwidth to the number of observations
+d) Smaller binwidths always produce better plots
+
+11. The `diamonds` dataset is included with which package?
+a) base R
+*b) ggplot2 (part of tidyverse)
+c) nycflights13
+d) datasets
+
+12. In the `diamonds` dataset, which of the following is a categorical variable?
+a) `carat`
+b) `price`
+*c) `cut`
+d) `depth`
+
+13. What does the `count()` function do?
+a) Counts the total number of rows in a dataset
+b) Counts missing values in each column
+*c) Counts the number of rows for each unique value of one or more variables
+d) Counts the number of columns in a dataset
+
+14. What does this code return?
+
+    diamonds |> count(cut)
+a) The total number of diamonds
+*b) A table showing how many diamonds fall into each cut category
+c) The average carat for each cut
+d) A histogram of cut values
+
+15. When exploring a distribution, R4DS recommends asking about **typical values**. Which of these is a question about typical values?
+*a) "Which values are most common? Which are rare?"
+b) "Is the data tidy?"
+c) "How many variables are in the dataset?"
+d) "What package was used to create the data?"
+
+16. When examining a histogram, you notice two distinct peaks. This pattern is called:
+a) Skewed
+*b) Bimodal
+c) Uniform
+d) Normal
+
+17. In a histogram, a cluster of data around a particular value suggests:
+a) A data entry error
+*b) A subgroup in the data that shares a common characteristic
+c) The variable should be removed from analysis
+d) The binwidth is too small
+
+18. R4DS defines **outliers** as:
+a) Values that are exactly at the mean
+b) Missing values
+*c) Observations that are unusual — data points that don't seem to fit the general pattern
+d) Values in the smallest category of a bar chart
+
+19. What does `coord_cartesian(ylim = c(0, 50))` do in a ggplot?
+a) Filters the data to only include y values between 0 and 50
+b) Changes the y variable to a new range
+*c) Zooms the y-axis to show only values between 0 and 50, without removing any data
+d) Sets the binwidth to 50
+
+20. What is the difference between using `coord_cartesian(ylim = ...)` and `ylim(...)` to zoom in on a plot?
+a) There is no difference; they are aliases
+*b) `coord_cartesian()` zooms without removing data; `ylim()` removes data outside the range before plotting
+c) `ylim()` zooms without removing data; `coord_cartesian()` filters the data
+d) `coord_cartesian()` works only on the x-axis
+
+21. R4DS advises that when you find outliers, you should:
+a) Always delete them immediately
+b) Ignore them — they don't affect analysis
+*c) Investigate them — try to figure out what caused them before deciding what to do
+d) Replace them with the mean
+
+22. Which function provides a quick text-based summary of a dataset, showing each column's type and first few values?
+a) `summary()`
+b) `head()`
+*c) `glimpse()`
+d) `str()`
+
+23. Which function provides a quick numerical summary of each variable, including min, max, median, and quartiles?
+*a) `summary()`
+b) `glimpse()`
+c) `count()`
+d) `describe()`
+
+24. What does this code do?
+
+    ggplot(diamonds, aes(x = carat)) +
+      geom_histogram(binwidth = 0.01)
+a) Creates a bar chart of carat categories
+*b) Creates a very detailed histogram with narrow bins, potentially revealing fine-grained patterns
+c) Produces an error because 0.01 is too small for a binwidth
+d) Creates a density plot
+
+25. A **preattentive attribute** in visual perception is:
+*a) A visual property that the brain processes almost instantly, before conscious attention
+b) A chart element that requires careful study to interpret
+c) A text label added to a data point
+d) The background color of a plot
+
+26. Which of the following is a preattentive attribute?
+a) The title of a chart
+b) The footnote text
+*c) Color hue
+d) The data source citation
+
+27. Color, size, position, and shape are all examples of:
+a) Geom types in ggplot2
+b) Statistical transformations
+*c) Preattentive visual attributes
+d) Faceting variables
+
+28. Among preattentive attributes, which is generally the most accurate for comparing quantitative values?
+*a) Position along a common scale (like an axis)
+b) Color hue
+c) Area / size
+d) Shape
+
+29. Why is shape generally a poor choice for encoding quantitative differences?
+a) R does not support shape aesthetics
+b) Shape can only be used with continuous variables
+*c) The human visual system cannot easily rank or compare shapes by magnitude
+d) Shape uses too much ink on the plot
+
+30. The Gestalt principle of **proximity** states that:
+*a) Objects that are near each other tend to be perceived as a group
+b) Objects that share the same color are seen as related
+c) Objects enclosed by a boundary are perceived as a group
+d) Objects connected by a line are perceived as related
+
+31. The Gestalt principle of **similarity** states that:
+a) Objects near each other are perceived as a group
+*b) Objects that share visual properties (like color or shape) are perceived as belonging together
+c) Enclosed objects are perceived as a group
+d) Connected objects are perceived as related
+
+32. According to Gestalt principles, drawing a box or shaded region around a set of points makes them appear related. This is the principle of:
+a) Proximity
+b) Similarity
+*c) Enclosure
+d) Connection
+
+33. A **sequential** color palette is best for:
+a) Categorical variables with no inherent order
+*b) Continuous variables or ordered categories, showing a gradient from low to high
+c) Variables that have a meaningful midpoint
+d) Distinguishing between exactly two groups
+
+34. A **diverging** color palette is best for:
+a) Unordered categorical variables
+b) Continuous variables with no meaningful midpoint
+*c) Variables where you want to highlight deviation from a central value (e.g., above/below average)
+d) Bar charts with many categories
+
+35. A **qualitative** color palette is best for:
+*a) Categorical variables with no inherent order (e.g., treatment groups)
+b) Continuous variables
+c) Variables with a meaningful midpoint
+d) Highlighting outliers
+
+36. Why are colorblind-friendly palettes important in data visualization?
+a) They print better in black and white
+b) They are required by APA style
+*c) Roughly 8% of men have some form of color vision deficiency, so standard red-green palettes may be unreadable for them
+d) They use fewer colors, reducing visual clutter
+
+37. The `viridis` color palette is recommended because it is:
+a) The default in ggplot2 for all plots
+*b) Perceptually uniform, colorblind-friendly, and readable in grayscale
+c) The only palette that works with continuous variables
+d) Required by R4DS for all assignments
+
+38. Which function applies the viridis color palette to a **discrete** fill aesthetic?
+a) `scale_fill_viridis()`
+*b) `scale_fill_viridis_d()`
+c) `scale_fill_colorblind()`
+d) `viridis_palette(type = "discrete")`
+
+39. Which function applies a ColorBrewer palette to a color aesthetic?
+a) `scale_color_manual()`
+*b) `scale_color_brewer()`
+c) `color_palette()`
+d) `brewer_colors()`
+
+40. What does `theme_minimal()` do to a ggplot?
+a) Removes all data from the plot
+b) Changes the data to a minimal subset
+*c) Applies a clean theme with minimal background elements — no gray background panel
+d) Reduces the number of data points displayed
+
+41. Which of these is NOT a built-in ggplot2 theme?
+a) `theme_bw()`
+b) `theme_classic()`
+c) `theme_minimal()`
+*d) `theme_apa()`
+
+42. What is the difference between `theme_bw()` and `theme_minimal()`?
+a) They are identical
+*b) `theme_bw()` has axis lines and a border around the plot panel; `theme_minimal()` removes the border and axis lines
+c) `theme_bw()` is for black-and-white printers only
+d) `theme_minimal()` removes the legend
+
+43. The `theme()` function in ggplot2 is used to:
+a) Change which variables are plotted
+b) Filter the data before plotting
+*c) Customize individual plot elements like text size, axis labels, legend position, and grid lines
+d) Apply a complete pre-built theme
+
+44. What does this code do?
+
+    ggplot(diamonds, aes(x = cut)) +
+      geom_bar() +
+      theme(axis.text.x = element_text(angle = 45, hjust = 1))
+a) Rotates the entire plot 45 degrees
+*b) Creates a bar chart and rotates the x-axis tick labels 45 degrees for readability
+c) Changes the angle of the bars
+d) Produces an error because `element_text()` is not a real function
+
+45. When exploring a histogram of `carat` in the `diamonds` dataset, you might notice values cluster at "nice" round numbers like 0.5, 1.0, and 1.5. This is an example of:
+a) A data entry error
+*b) A pattern in typical values — human preference for round numbers
+c) Outlier contamination
+d) Measurement instrument malfunction
+
+46. Which of the following is the best approach when you find outliers in your data?
+a) Remove them without further thought
+b) Replace them with the column mean
+c) Pretend they don't exist
+*d) Investigate them — run analyses with and without them to see if they change your conclusions
+
+47. The EDA mindset, according to R4DS, involves:
+a) Running predetermined statistical tests in a fixed order
+b) Immediately fitting a regression model
+*c) Being curious, asking many questions, and letting the data surprise you
+d) Skipping visualization and going straight to modeling
+
+48. In EDA, why is skepticism important alongside curiosity?
+a) You should doubt every result and never publish
+*b) Patterns in data can be real or due to chance — you should look for confirming and disconfirming evidence
+c) Skepticism makes you run more statistical tests
+d) R4DS recommends trusting only p-values below 0.01
+
+49. What does `geom_freqpoly()` have in common with `geom_histogram()`?
+a) Both use bars to display counts
+b) Both require a y aesthetic
+*c) Both bin the data and show counts, but `geom_freqpoly()` uses lines instead of bars
+d) Both display density rather than raw counts
+
+50. When you see an unexpected gap in a histogram (a bin with zero or very few observations), R4DS recommends:
+a) Increasing the binwidth to hide the gap
+b) Ignoring it — gaps are always random noise
+*c) Investigating — gaps can indicate subgroups, measurement limits, or data-quality issues
+d) Switching to a bar chart instead

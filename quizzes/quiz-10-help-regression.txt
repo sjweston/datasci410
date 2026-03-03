@@ -1,0 +1,312 @@
+Quiz title: Quiz 10: Getting Help & Regression (R4DS Ch. 8)
+
+1. What is the correct way to access the help page for the `mean()` function in R?
+a) `help.mean()`
+*b) `?mean`
+c) `search(mean)`
+d) `info(mean)`
+
+2. Which section of an R help page describes what the function returns?
+a) Description
+b) Arguments
+*c) Value
+d) Usage
+
+3. Which section of an R help page shows you what arguments the function accepts?
+a) Description
+b) Value
+*c) Arguments
+d) Examples
+
+4. Which section of an R help page contains runnable code showing the function in action?
+a) Usage
+b) Details
+c) Value
+*d) Examples
+
+5. What is a **reprex**?
+a) A compressed R script file
+b) A type of R error message
+*c) A reproducible example — minimal code that demonstrates a problem
+d) A function for repeating expressions
+
+6. Why are reprexes helpful when asking for help with R code?
+a) They automatically fix bugs
+b) They compress your code to make it shorter
+*c) They isolate the problem and make it easy for others to reproduce and diagnose
+d) They convert R code to pseudocode
+
+7. What should a good reprex include?
+a) Your entire R script and full dataset
+*b) Minimal code, sample data, and the error or unexpected output
+c) Your operating system version and R installation path
+d) A screenshot of your RStudio window
+
+8. Which package provides tools for creating reproducible examples?
+a) `reproducible`
+b) `helper`
+*c) `reprex`
+d) `debug`
+
+9. What does the `dput()` function do?
+a) Deletes an object from the environment
+b) Prints a summary of a data frame
+*c) Outputs R code that can recreate a data object, making it easy to share small datasets
+d) Exports data to a CSV file
+
+10. When asking for help on Stack Overflow, why should you include sample data rather than your actual dataset?
+a) Because Stack Overflow doesn't allow file uploads
+*b) Because others need to run your code, and your actual data may be too large, private, or unavailable
+c) Because R doesn't work with real data on Stack Overflow
+d) Because sample data runs faster
+
+11. You see the error: `Error: object 'scroe' not found`. What is the most likely cause?
+a) The variable was deleted by a previous function
+b) R ran out of memory
+*c) There is a typo — the variable is probably named `score`, not `scroe`
+d) The variable exists but is hidden
+
+12. You see the error: `Error: could not find function "ggplot"`. What is the most likely cause?
+a) ggplot2 is not installed on your computer
+*b) You forgot to load the package with `library(ggplot2)` or `library(tidyverse)`
+c) The function was removed in a recent R update
+d) You need to update R
+
+13. You see the error: `Error: unexpected symbol in "filter(df name)"`. What is the most likely cause?
+a) The function `filter()` doesn't exist
+*b) There is a syntax error — a comma is missing between arguments
+c) `df` is not a data frame
+d) The `name` column doesn't exist
+
+14. You see the error: `Error in x + y: non-numeric argument to binary operator`. What does this mean?
+a) x and y are the same type
+b) The `+` function is broken
+*c) You're trying to do arithmetic on something that isn't a number (e.g., adding a character to a number)
+d) x and y have different lengths
+
+15. What is a good first step when you encounter an error message you don't understand?
+a) Restart R and try again
+b) Delete your code and start over
+*c) Copy the error message and search for it on Google
+d) Switch to a different programming language
+
+16. Which website is commonly recommended for finding answers to R programming questions?
+a) Wikipedia
+*b) Stack Overflow
+c) Reddit
+d) GitHub Issues
+
+17. When Googling an R error, what should you include in your search?
+a) Your entire script
+*b) The error message, ideally with "R" or the package name
+c) Your computer model and operating system
+d) The line number where the error occurred
+
+18. What does correlation measure?
+a) Whether one variable causes changes in another
+*b) The strength and direction of a linear relationship between two variables
+c) The difference between two group means
+d) The probability that two variables are related
+
+19. The correlation coefficient (r) ranges from:
+a) 0 to 1
+b) 0 to 100
+*c) -1 to +1
+d) Negative infinity to positive infinity
+
+20. What does a correlation of r = -0.85 indicate?
+a) A weak negative relationship
+b) No relationship
+*c) A strong negative linear relationship
+d) A strong positive relationship
+
+21. What does a correlation of r = 0 indicate?
+a) A perfect relationship
+b) The variables are identical
+*c) No linear relationship (but a nonlinear relationship might exist)
+d) The data has errors
+
+22. Which R function calculates a correlation coefficient?
+a) `correlation()`
+*b) `cor()`
+c) `r()`
+d) `pearson()`
+
+23. What does the following code return?
+
+    cor(df$study_hours, df$exam_score)
+
+a) A data frame of correlations
+*b) A single number — the correlation coefficient between study hours and exam scores
+c) A plot of the relationship
+d) A p-value for the relationship
+
+24. How do you handle missing values when calculating a correlation?
+a) `cor(x, y, na.rm = TRUE)`
+*b) `cor(x, y, use = "complete.obs")`
+c) `cor(x, y, remove.na = TRUE)`
+d) `cor(x, y, skip.na = TRUE)`
+
+25. What additional information does `cor.test()` provide beyond `cor()`?
+a) Only the correlation coefficient
+b) A scatterplot
+*c) The correlation coefficient, a p-value, and a confidence interval
+d) The regression equation
+
+26. What is the phrase commonly used to caution against interpreting correlation as causation?
+a) "Correlation is stronger than causation"
+*b) "Correlation does not imply causation"
+c) "Causation requires correlation"
+d) "Correlation and causation are equivalent for large samples"
+
+27. If ice cream sales and drowning deaths are positively correlated, what is the most likely explanation?
+a) Ice cream causes drowning
+b) Drowning causes people to buy ice cream
+*c) Both are caused by a third variable (hot weather)
+d) The correlation is an error
+
+28. Which R function fits a simple linear regression model?
+a) `regression()`
+b) `fit()`
+*c) `lm()`
+d) `linear()`
+
+29. What does the `~` (tilde) mean in the formula `lm(y ~ x)`?
+a) y equals x
+b) y minus x
+*c) y is predicted by x (y is modeled as a function of x)
+d) y is correlated with x
+
+30. What does the following code do?
+
+    model <- lm(exam_score ~ study_hours, data = df)
+
+a) Calculates the correlation between exam score and study hours
+*b) Fits a linear regression predicting exam score from study hours
+c) Creates a scatterplot of exam score vs. study hours
+d) Filters the data to only include students who studied
+
+31. After fitting a model with `lm()`, which function displays the coefficients, R-squared, and p-values?
+a) `print()`
+b) `coef()`
+*c) `summary()`
+d) `results()`
+
+32. In the output of `summary(lm(y ~ x))`, what does the Estimate for the intercept represent?
+a) The average value of x
+*b) The predicted value of y when x equals zero
+c) The correlation coefficient
+d) The p-value for the model
+
+33. In a regression of exam scores on study hours, the slope is 3.5. How do you interpret this?
+a) Students who study score exactly 3.5 points
+*b) For each additional hour of studying, exam scores are predicted to increase by 3.5 points
+c) 3.5% of the variance in exam scores is explained by study hours
+d) The correlation between study hours and exam scores is 3.5
+
+34. What does R-squared (R^2) represent in a regression model?
+a) The correlation coefficient
+b) The slope of the line
+*c) The proportion of variance in the outcome variable explained by the predictor
+d) The p-value for the model
+
+35. An R-squared of 0.64 means:
+a) The correlation is 0.64
+b) The model is 64% accurate
+*c) 64% of the variance in the outcome is explained by the predictor
+d) There is a 64% chance the relationship is real
+
+36. What does `broom::tidy()` do when applied to an `lm` object?
+a) Cleans the data before fitting the model
+*b) Returns the model coefficients (estimates, standard errors, p-values) as a tidy tibble
+c) Creates a tidy version of the original data frame
+d) Removes outliers from the model
+
+37. What does `broom::glance()` do when applied to an `lm` object?
+a) Shows a quick preview of the data
+*b) Returns model-level summary statistics (R-squared, AIC, etc.) as a one-row tibble
+c) Visualizes the residuals
+d) Prints the first few rows of the fitted values
+
+38. Why might you prefer `broom::tidy()` over `summary()` for extracting regression results?
+a) `tidy()` produces prettier output in the console
+*b) `tidy()` returns a data frame (tibble) that you can easily manipulate, filter, or use in further analysis
+c) `summary()` doesn't show p-values
+d) `tidy()` runs faster
+
+39. What does `geom_smooth(method = "lm")` add to a scatterplot?
+a) A loess curve
+*b) A straight regression line (and confidence band) fitted to the data
+c) A horizontal line at the mean of y
+d) A vertical line at the mean of x
+
+40. What are residuals in a regression model?
+a) The predicted values
+b) The slope and intercept
+*c) The differences between the observed values and the predicted values
+d) The p-values for each data point
+
+41. A residual of zero means:
+a) The predictor has no effect
+*b) The observed value exactly equals the predicted value for that data point
+c) The model is perfect
+d) The correlation is zero
+
+42. You run `?filter` and get a help page for `stats::filter`, not the dplyr version. What happened?
+a) dplyr doesn't have a filter function
+*b) The stats package's `filter()` took priority — you need to load dplyr or use `?dplyr::filter`
+c) R randomly selects which help page to show
+d) You have a typo
+
+43. When creating a reprex, why should you avoid using data that's only on your computer?
+a) Because R can't read local files
+b) Because your files might have viruses
+*c) Because others won't have your files and won't be able to run your code
+d) Because local files are slower to process
+
+44. What is a common way to include small sample data in a reprex?
+a) Attach a CSV file
+*b) Use `data.frame()` or `tibble()` to create a small example dataset in the code, or use `dput()`
+c) Take a screenshot of your data
+d) Use `read_csv()` with a file path to your data
+
+45. In the formula `lm(anxiety ~ therapy_sessions, data = clinical_df)`, which variable is the outcome (dependent variable)?
+*a) anxiety
+b) therapy_sessions
+c) clinical_df
+d) lm
+
+46. In the formula `lm(anxiety ~ therapy_sessions, data = clinical_df)`, which variable is the predictor (independent variable)?
+a) anxiety
+*b) therapy_sessions
+c) clinical_df
+d) lm
+
+47. You run `cor(x, y)` and get `NA` as the result. What is the most likely reason?
+a) x and y are perfectly correlated
+b) x and y have different lengths
+*c) There are missing values in x or y
+d) The variables are not numeric
+
+48. What does the following code produce?
+
+    ggplot(df, aes(x = study_hours, y = exam_score)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = FALSE)
+
+a) A scatterplot with a loess curve
+*b) A scatterplot with a straight regression line and no confidence band
+c) A bar chart with error bars
+d) A scatterplot with no trend line
+
+49. What does the `se = FALSE` argument do in `geom_smooth()`?
+a) Removes the trend line
+b) Removes the data points
+*c) Removes the shaded confidence interval band around the line
+d) Removes the standard error from the regression output
+
+50. A psychology student fits a model `lm(happiness ~ exercise, data = survey)` and finds a positive slope. Can they conclude that exercise causes happiness?
+a) Yes, if the p-value is small enough
+b) Yes, because regression establishes causation
+*c) No — this is observational data, so a causal claim requires more evidence (e.g., an experiment)
+d) No — regression can never tell us anything about relationships

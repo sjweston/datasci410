@@ -1,0 +1,333 @@
+Quiz title: Quiz 6: Covariation & Data Types (R4DS Ch. 10 §10.5–10.6, Ch. 12, 13)
+
+1. In R4DS, **covariation** is defined as:
+a) The variation within a single variable
+*b) The tendency for the values of two or more variables to vary together in a related way
+c) A statistical test for comparing group means
+d) The process of removing outliers from a dataset
+
+2. When exploring the relationship between a categorical variable and a continuous variable, which geom does R4DS recommend?
+a) `geom_point()`
+*b) `geom_boxplot()`
+c) `geom_bar()`
+d) `geom_histogram()`
+
+3. What does this code display?
+
+    ggplot(diamonds, aes(x = cut, y = price)) +
+      geom_boxplot()
+a) A scatterplot of cut vs. price
+*b) Side-by-side boxplots showing the distribution of price for each cut category
+c) A stacked bar chart of cut and price
+d) An error because `cut` is categorical
+
+4. What advantage does `geom_freqpoly()` with a `color` aesthetic have over overlaid histograms?
+a) It produces a 3D visualization
+*b) The lines are easier to compare because they don't overlap and obscure each other like stacked bars
+c) It automatically runs a statistical test
+d) It only works with categorical variables
+
+5. What does this code produce?
+
+    ggplot(diamonds, aes(x = price, color = cut)) +
+      geom_freqpoly(binwidth = 500)
+a) A single frequency polygon
+*b) Overlaid frequency polygons, one for each cut category, using different colors
+c) A boxplot colored by cut
+d) An error because you can't map cut to color
+
+6. When comparing distributions across groups of very different sizes, R4DS suggests using `geom_freqpoly()` with which y aesthetic instead of raw count?
+a) `y = frequency`
+*b) `y = after_stat(density)`
+c) `y = proportion`
+d) `y = percent`
+
+7. To explore the relationship between **two categorical variables**, which geom shows a point at each combination, sized by count?
+a) `geom_point()`
+b) `geom_tile()`
+*c) `geom_count()`
+d) `geom_bar()`
+
+8. What does `geom_tile()` display when used with a `fill` aesthetic mapped to `n` (a count)?
+a) Colored bars side by side
+*b) A grid of colored rectangles, where the color intensity represents the count at each combination
+c) A heatmap of correlations
+d) A mosaic plot
+
+9. What does this code produce?
+
+    diamonds |>
+      count(color, cut) |>
+      ggplot(aes(x = color, y = cut, fill = n)) +
+      geom_tile()
+a) A scatterplot with colored tiles
+*b) A heatmap showing the count of diamonds for each combination of color and cut
+c) A bar chart grouped by color and cut
+d) An error because `geom_tile()` requires continuous x and y
+
+10. For exploring the relationship between two **continuous** variables, which geom is the most common starting point?
+a) `geom_bar()`
+b) `geom_boxplot()`
+*c) `geom_point()`
+d) `geom_histogram()`
+
+11. **Overplotting** occurs in scatterplots when:
+a) The axes are scaled incorrectly
+*b) Many points overlap, making it hard to see the density of observations
+c) The legend covers data points
+d) Too many colors are used
+
+12. Which of the following is NOT a strategy R4DS mentions for dealing with overplotting?
+a) Using `alpha` to make points semi-transparent
+b) Using `geom_bin2d()` to bin data into rectangles
+c) Using `geom_hex()` to bin data into hexagons
+*d) Using `geom_smooth()` to replace all points with a line
+
+13. What does `geom_bin2d()` do?
+*a) Divides the plot into rectangular bins and uses color to show how many points fall in each bin
+b) Creates a two-dimensional bar chart
+c) Bins data into two groups
+d) Creates side-by-side histograms
+
+14. What does `geom_hex()` do?
+a) Plots data points as hexagonal shapes
+*b) Divides the plot into hexagonal bins and uses color to show density
+c) Creates a hexagonal grid overlay without data
+d) Applies a hex color code to all points
+
+15. Which function divides a continuous variable into bins of a specified width?
+a) `bin_width()`
+*b) `cut_width()`
+c) `group_width()`
+d) `width_bins()`
+
+16. What is the difference between `cut_width()` and `cut_number()`?
+*a) `cut_width()` makes bins of equal width; `cut_number()` makes bins with approximately equal numbers of observations
+b) `cut_width()` is for continuous variables; `cut_number()` is for categorical variables
+c) They are identical
+d) `cut_number()` makes bins of equal width; `cut_width()` makes bins with equal counts
+
+17. What does this code do?
+
+    ggplot(diamonds, aes(x = carat, y = price)) +
+      geom_boxplot(aes(group = cut_width(carat, 0.1)))
+a) Creates a scatterplot with boxplot overlays
+*b) Bins carat into intervals of width 0.1 and draws a boxplot of price for each bin
+c) Creates a histogram of carat with boxplot-shaped bars
+d) An error because you can't use `cut_width()` inside `aes()`
+
+18. According to R4DS, when patterns in covariation suggest a relationship between variables, you should ask:
+a) Only "Is the pattern statistically significant?"
+*b) Questions like "Could this pattern be due to coincidence?" and "What other variables might explain it?"
+c) "Can I publish this finding immediately?"
+d) "Should I remove the outliers?"
+
+19. In R, what are the two possible values of a logical vector?
+a) Yes and No
+b) 1 and 0
+*c) TRUE and FALSE
+d) T and F (these are the only valid forms)
+
+20. What does the comparison `x > 5` produce in R?
+a) A single TRUE or FALSE value
+b) The number 5
+*c) A logical vector with TRUE for each element of x greater than 5 and FALSE otherwise
+d) An error if x contains values equal to 5
+
+21. Which operator tests for **equality** in R?
+a) `=`
+*b) `==`
+c) `===`
+d) `equals()`
+
+22. What does the `&` operator do with logical vectors?
+a) Combines two vectors into one
+*b) Returns TRUE only when BOTH conditions are TRUE (logical AND)
+c) Returns TRUE when EITHER condition is TRUE
+d) Negates a logical value
+
+23. What does the `|` operator do with logical vectors?
+a) Concatenates two vectors
+b) Returns TRUE only when both conditions are TRUE
+*c) Returns TRUE when EITHER condition is TRUE (logical OR)
+d) Pipes data from one function to the next
+
+24. What does the `!` operator do?
+a) Tests for inequality
+b) Marks a value as important
+*c) Negates a logical value — flips TRUE to FALSE and FALSE to TRUE
+d) Raises an error
+
+25. What does `any(x > 10)` return?
+a) A vector of all values in x greater than 10
+*b) A single TRUE if at least one element of x is greater than 10, FALSE otherwise
+c) The count of values greater than 10
+d) The first value greater than 10
+
+26. What does `all(x > 0)` return?
+a) All values of x that are positive
+*b) A single TRUE if every element of x is greater than 0, FALSE otherwise
+c) The count of positive values
+d) TRUE if any value is greater than 0
+
+27. What does `if_else()` do?
+a) Creates a loop that runs different code based on a condition
+*b) Returns one value when a condition is TRUE and a different value when it is FALSE, element-by-element
+c) Filters rows based on a condition
+d) Tests whether two values are equal
+
+28. What does this code produce?
+
+    x <- c(1, -2, 3, -4)
+    if_else(x > 0, "positive", "non-positive")
+a) A single value: "positive"
+*b) A character vector: "positive", "non-positive", "positive", "non-positive"
+c) A logical vector: TRUE, FALSE, TRUE, FALSE
+d) An error because `if_else()` only works with data frames
+
+29. When should you use `case_when()` instead of `if_else()`?
+a) When you have exactly two categories
+*b) When you have multiple conditions that map to different values
+c) When working with numeric data only
+d) When you want to filter rows
+
+30. What does this code produce?
+
+    x <- c(85, 72, 91, 65)
+    case_when(
+      x >= 90 ~ "A",
+      x >= 80 ~ "B",
+      x >= 70 ~ "C",
+      .default = "D"
+    )
+a) All values labeled "A"
+*b) "B", "C", "A", "D"
+c) "A", "B", "A", "C"
+d) An error because `case_when()` requires a data frame
+
+31. In `case_when()`, what does `.default` specify?
+a) The first condition to test
+*b) The value to assign when none of the conditions are TRUE
+c) The data type of the output
+d) Whether to include NA values
+
+32. What does `sum()` return when applied to a logical vector?
+a) TRUE if any values are TRUE
+b) The total number of elements
+*c) The count of TRUE values (since TRUE = 1 and FALSE = 0)
+d) An error because `sum()` only works with numbers
+
+33. What does `mean()` return when applied to a logical vector?
+a) The average of 0s and 1s, which has no practical meaning
+*b) The proportion of TRUE values
+c) The most common value
+d) An error
+
+34. What does this code return?
+
+    x <- c(3, 7, NA, 12, 5)
+    sum(x)
+a) 27
+*b) NA
+c) 0
+d) An error
+
+35. How do you tell `sum()` to ignore missing values?
+a) `sum(x, ignore.na = TRUE)`
+*b) `sum(x, na.rm = TRUE)`
+c) `sum(x, remove.na = TRUE)`
+d) `sum(na.omit(x))` is the only way
+
+36. The `na.rm = TRUE` argument works with which of the following functions?
+a) Only `sum()`
+b) Only `mean()` and `sum()`
+*c) Most summary functions including `sum()`, `mean()`, `median()`, `sd()`, `min()`, and `max()`
+d) Only functions in the tidyverse
+
+37. What is the difference between integer and double in R?
+a) Integers are for counting; doubles are for division
+*b) Integers store whole numbers exactly; doubles (floating-point) store numbers with decimal places and can have tiny rounding imprecisions
+c) Doubles are twice the size of integers
+d) There is no practical difference in R
+
+38. What does `round(3.567, digits = 1)` return?
+a) 3
+b) 4
+*c) 3.6
+d) 3.5
+
+39. What does `floor(3.9)` return?
+*a) 3
+b) 4
+c) 3.9
+d) 3.5
+
+40. What does `ceiling(3.1)` return?
+a) 3
+*b) 4
+c) 3.1
+d) 3.5
+
+41. A psychology researcher has five Likert items (scored 1-5) and wants to create a composite by averaging them. Which approach is correct?
+
+    mutate(df, composite = _______)
+a) `average(item1, item2, item3, item4, item5)`
+*b) `(item1 + item2 + item3 + item4 + item5) / 5`
+c) `mean(item1:item5)`
+d) `composite(item1, item2, item3, item4, item5)`
+
+42. What does `median()` compute?
+a) The most frequently occurring value
+*b) The middle value when data are sorted from smallest to largest
+c) The average of all values
+d) The range of the data
+
+43. What does `sd()` compute?
+a) The sum of deviations
+b) The sorted data
+*c) The standard deviation — a measure of how spread out values are around the mean
+d) The standardized data values
+
+44. What does `min_rank()` do?
+a) Returns the minimum value in a vector
+*b) Assigns ranks to values, with the smallest value getting rank 1 (ties get the same minimum rank)
+c) Filters to the lowest-ranked rows
+d) Sorts data in ascending order
+
+45. What does `row_number()` do when used in a `mutate()`?
+a) Adds the row index of the original data frame
+*b) Assigns ranks to values with no ties — tied values get consecutive ranks
+c) Counts the total number of rows
+d) Numbers rows starting from 0
+
+46. What does `cumsum()` compute?
+a) The total sum of a vector
+b) The cumulative mean
+*c) A running total — each element is the sum of all preceding elements plus itself
+d) The cumulative maximum
+
+47. What does this code return?
+
+    cumsum(c(1, 2, 3, 4))
+a) 10
+b) c(1, 2, 3, 4)
+*c) c(1, 3, 6, 10)
+d) c(4, 3, 2, 1)
+
+48. What does `cummean()` compute?
+a) The overall mean
+*b) A running average — each element is the mean of all values up to and including that position
+c) The cumulative sum divided by the total length
+d) The centered mean
+
+49. What is the result of `sum(c(TRUE, FALSE, TRUE, TRUE))`?
+a) TRUE
+b) 4
+*c) 3
+d) 1
+
+50. A survey dataset has a column `age` with some NA values. Which code correctly computes the average age?
+a) `mean(df$age)`
+b) `mean(df$age, rm.na = TRUE)`
+*c) `mean(df$age, na.rm = TRUE)`
+d) `average(df$age, na.rm = TRUE)`

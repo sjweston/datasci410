@@ -1,0 +1,356 @@
+Quiz title: Quiz 2: Data Transformation (R4DS Ch. 3, 4)
+
+1. Which dplyr function is used to pick rows based on their values?
+a) select()
+b) mutate()
+*c) filter()
+d) arrange()
+
+2. Which dplyr function is used to reorder rows?
+a) filter()
+b) sort()
+*c) arrange()
+d) order()
+
+3. Which dplyr function is used to pick columns by name?
+a) filter()
+*b) select()
+c) pull()
+d) mutate()
+
+4. Which dplyr function is used to create new columns based on existing ones?
+a) select()
+b) summarize()
+c) transform()
+*d) mutate()
+
+5. Which dplyr function collapses many values down to a single summary?
+a) mutate()
+b) count()
+*c) summarize()
+d) group_by()
+
+6. What does the pipe operator `|>` do?
+a) Filters rows from a data frame
+b) Combines two data frames together
+*c) Takes the output of the left side and passes it as the first argument to the right side
+d) Assigns a value to a variable
+
+7. R4DS recommends reading `|>` as:
+a) "pipe into"
+b) "passes to"
+*c) "then"
+d) "and also"
+
+8. What does this code return?
+
+    flights |>
+      filter(month == 1, day == 1)
+
+a) All flights in January or on the 1st of any month
+*b) All flights on January 1st
+c) The first flight of each month
+d) An error, because you cannot use two conditions in filter()
+
+9. Which comparison operator tests for equality in R?
+a) =
+*b) ==
+c) !=
+d) equals()
+
+10. What does `!=` mean in R?
+*a) Not equal to
+b) Equal to
+c) Less than
+d) Not available
+
+11. What does this code return?
+
+    flights |>
+      filter(month == 11 | month == 12)
+
+a) Flights in November only
+b) Flights in December only
+*c) Flights in November or December
+d) An error, because you need & instead of |
+
+12. Which operator provides a shortcut for checking if a value is one of several options?
+a) ==
+b) &
+c) |
+*d) %in%
+
+13. Which of these is equivalent to `filter(flights, month == 11 | month == 12)`?
+a) filter(flights, month == 11 & month == 12)
+b) filter(flights, month = c(11, 12))
+*c) filter(flights, month %in% c(11, 12))
+d) filter(flights, month == c(11, 12))
+
+14. What does `NA` represent in R?
+a) Zero
+b) An empty string
+*c) A missing or unknown value
+d) Negative answer
+
+15. What does `NA == NA` return in R?
+a) TRUE
+b) FALSE
+*c) NA
+d) An error
+
+16. Which function should you use to check if a value is NA?
+a) x == NA
+b) check_na(x)
+*c) is.na(x)
+d) na(x)
+
+17. By default, `arrange()` sorts in which order?
+*a) Ascending (smallest to largest)
+b) Descending (largest to smallest)
+c) Alphabetical for all variable types
+d) The original order of the data
+
+18. How do you sort a column in descending order with `arrange()`?
+a) arrange(x, reverse = TRUE)
+*b) arrange(desc(x))
+c) arrange(-x) only works for numeric columns
+d) arrange(x, order = "desc")
+
+19. Where does `arrange()` place rows with `NA` values by default?
+a) At the top
+*b) At the end
+c) It removes them
+d) It produces an error
+
+20. What does this code do?
+
+    flights |>
+      select(year, month, day)
+
+*a) Returns a data frame with only the year, month, and day columns
+b) Filters flights to rows where year, month, and day are not missing
+c) Creates new columns called year, month, and day
+d) Sorts the data by year, then month, then day
+
+21. Which select() helper selects all columns whose names start with "dep"?
+a) select(contains("dep"))
+*b) select(starts_with("dep"))
+c) select(matches("dep"))
+d) select(begins("dep"))
+
+22. Which select() helper selects all columns whose names end with "time"?
+a) select(contains("time"))
+b) select(starts_with("time"))
+*c) select(ends_with("time"))
+d) select(finishes("time"))
+
+23. Which select() helper selects all columns whose names contain "arr"?
+*a) select(contains("arr"))
+b) select(starts_with("arr"))
+c) select(ends_with("arr"))
+d) select(matches("arr"))
+
+24. What does `select(!year)` do?
+a) Selects only the year column
+*b) Selects all columns except year
+c) Removes all rows where year is missing
+d) Produces an error
+
+25. Where do new columns created by `mutate()` appear by default?
+a) At the beginning of the data frame
+b) Replacing the original columns used in the calculation
+*c) At the end (rightmost side) of the data frame
+d) In alphabetical order with the existing columns
+
+26. What does the `.before` argument in `mutate()` do?
+a) Filters rows before performing the mutation
+*b) Places the new column before a specified existing column
+c) Runs a function before the mutation
+d) Specifies which rows to mutate
+
+27. What does this code produce?
+
+    flights |>
+      mutate(speed = distance / air_time * 60)
+
+a) A single number: the average speed of all flights
+*b) The flights data frame with a new column called speed added
+c) An error, because you cannot do arithmetic inside mutate()
+d) A filtered data frame with only fast flights
+
+28. What does `group_by()` do to a data frame?
+a) Sorts the data by the grouping variable
+b) Removes rows that don't belong to a group
+*c) Divides the data into groups for subsequent operations like summarize()
+d) Creates a new column indicating group membership
+
+29. What does this code calculate?
+
+    flights |>
+      group_by(month) |>
+      summarize(avg_delay = mean(dep_delay, na.rm = TRUE))
+
+a) The overall average departure delay for all flights
+*b) The average departure delay for each month
+c) The month with the highest average delay
+d) The number of flights per month
+
+30. What does `na.rm = TRUE` do inside `mean()`?
+a) Replaces NA values with zero before computing
+b) Returns NA if any values are missing
+*c) Removes NA values before computing the mean
+d) Removes the entire row from the data frame
+
+31. What happens if you calculate `mean(dep_delay)` when `dep_delay` contains NA values and you do NOT specify `na.rm = TRUE`?
+a) R ignores the NAs and calculates the mean of the remaining values
+*b) The result is NA
+c) R produces an error
+d) R replaces NAs with 0 automatically
+
+32. What does `n()` return when used inside `summarize()`?
+a) The number of columns in the data frame
+b) The number of non-missing values
+*c) The number of rows in the current group
+d) The total number of rows in the original data frame
+
+33. What does `n_distinct(x)` return?
+a) The number of rows in the group
+*b) The number of unique values in x
+c) The number of non-missing values in x
+d) The number of groups
+
+34. Which function is a shortcut for `group_by() |> summarize(n())`?
+a) tally()
+*b) count()
+c) table()
+d) freq()
+
+35. What does this code produce?
+
+    flights |>
+      count(dest, sort = TRUE)
+
+a) The number of flights to each destination, in alphabetical order
+*b) The number of flights to each destination, sorted from most to fewest
+c) Only the most popular destination
+d) All columns for each destination, sorted by count
+
+36. What does the `.by` argument provide as an alternative to?
+a) filter()
+b) arrange()
+c) select()
+*d) group_by()
+
+37. What does this code produce?
+
+    flights |>
+      summarize(
+        avg_delay = mean(dep_delay, na.rm = TRUE),
+        .by = month
+      )
+
+*a) The average departure delay for each month (same result as using group_by)
+b) An error, because .by is not a valid argument
+c) The overall average delay, ignoring month
+d) A grouped data frame that needs further summarization
+
+38. What is the logical operator for "and" in R?
+a) &&
+b) AND
+c) +
+*d) &
+
+39. What is the logical operator for "or" in R?
+a) ||
+b) OR
+*c) |
+d) or()
+
+40. What is the logical operator for "not" in R?
+*a) !
+b) ~
+c) NOT
+d) not()
+
+41. What does this code return?
+
+    flights |>
+      filter(dep_delay > 120)
+
+a) Flights with departure delays of exactly 120 minutes
+*b) Flights with departure delays greater than 120 minutes
+c) The first 120 flights
+d) Flights delayed by up to 120 minutes
+
+42. According to R4DS, which of these is the recommended code style for piped operations?
+a) flights |> filter(month == 1) |> select(day)
+b) flights|>filter(month==1)|>select(day)
+*c) flights |>
+      filter(month == 1) |>
+      select(day)
+d) flights
+    |> filter(month == 1)
+    |> select(day)
+
+43. According to R4DS, where should the pipe `|>` go when breaking code across lines?
+a) At the start of the next line
+*b) At the end of the current line
+c) On its own line between operations
+d) It doesn't matter
+
+44. According to R4DS, what naming convention is recommended for R objects?
+*a) snake_case (e.g., flight_data)
+b) camelCase (e.g., flightData)
+c) PascalCase (e.g., FlightData)
+d) dot.case (e.g., flight.data)
+
+45. According to R4DS, where should spaces go around operators like `+`, `-`, `==`, and `<-`?
+a) No spaces are needed; R ignores whitespace
+b) Only before the operator
+c) Only after the operator
+*d) On both sides of the operator (e.g., x == 1, not x==1)
+
+46. What does `select(year:day)` do?
+*a) Selects all columns from year to day (inclusive)
+b) Selects only the year and day columns
+c) Creates a range of values from year to day
+d) Produces an error
+
+47. What does this code do?
+
+    flights |>
+      mutate(
+        gain = dep_delay - arr_delay,
+        speed = distance / air_time * 60
+      )
+
+a) Creates a summary table with two statistics
+*b) Adds two new columns called gain and speed to the flights data
+c) Filters flights to those with positive gain and high speed
+d) Replaces the dep_delay and arr_delay columns
+
+48. Which summary function returns the middle value of a numeric variable?
+a) mean()
+*b) median()
+c) mode()
+d) middle()
+
+49. What does `sd()` compute?
+a) The standard deviation of a factor variable
+*b) The standard deviation of a numeric variable
+c) The sorted descending order
+d) The sum of differences
+
+50. What does this code produce?
+
+    flights |>
+      group_by(dest) |>
+      summarize(
+        count = n(),
+        avg_dist = mean(distance, na.rm = TRUE)
+      )
+
+a) A single row with the total count and average distance
+*b) A data frame with one row per destination showing count and average distance
+c) The destination with the highest average distance
+d) An error, because you cannot use two functions inside summarize()

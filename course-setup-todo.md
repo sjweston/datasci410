@@ -9,9 +9,10 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 ### Before the term starts
 - [x] Finalize day-1 survey questions and choose platform → Canvas ungraded survey (`files/team-formation-survey.md`)
 - [x] Write the R script for team sorting → `scripts/team-sort.R` (tested with 25 fake students)
-- [ ] Design scoreboard slide template (team names, point totals — reusable each week)
-- [ ] Write student-facing explanation of the team challenge (rules, point categories, reward) — handout or slide deck for Session 2
-- [ ] Design all 10 weekly fun challenges (one per week)
+- [x] Design scoreboard slide template → `files/scoreboard.qmd` (horizontal bar chart + breakdown table, update the tribble each week)
+- [x] Write student-facing explanation of the team challenge → `files/team-challenge-handout.md` (rules, point categories, FAQ — distribute Session 2)
+- [x] Design all 10 weekly fun challenges → detailed in `team-challenge-planning.md` (icebreaker, code prediction, relay, bug hunt, plot makeover, data detective, trivia, missing data mystery, figure courtroom, final prediction)
+- [x] Create fun challenge materials → `files/fun-challenges/` (all 10 challenges have instruction docs + datasets/code/images)
 - [ ] Plan reward logistics (pizza pub, budget, timing — last day of class?)
 
 ### Canvas setup for the challenge
@@ -36,11 +37,21 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 - [ ] Upload assignment guidelines / rubrics for each
 - [ ] Configure submission types (file upload? Quarto doc?)
 
-### Quizzes (10 total)
-- [ ] Create all 10 reading quiz shells on Canvas
-- [ ] Set due dates (before each session?)
-- [ ] Configure quiz settings — completion-based grading (full credit for completing, regardless of score)
-- [ ] Write quiz questions for all 10 quizzes (Weeks 2–10, based on R4DS readings — see schedule.qmd for chapter assignments)
+### Quizzes (10 total — one per week, due Tuesday at 11:59 PM)
+- [x] Create all 10 reading quiz shells on Canvas (one per week, Weeks 1–10)
+- [x] Set due dates: each Tuesday at 11:59 PM (Tue Mar 31, Apr 7, Apr 14, Apr 21, Apr 28, May 5, May 12, May 19, May 26, Jun 2)
+- [x] Configure quiz settings — best score (unlimited attempts, 5 random questions from bank, highest score counts)
+- [x] Build question bank for each quiz → `quizzes/` directory, 50 MC questions per quiz + QTI packages (.zip) for Canvas import
+  - [x] Quiz 1: R4DS Ch 1, 2, 6 (85 questions — expanded from original 50)
+  - [x] Quiz 2: R4DS Ch 3, 4
+  - [x] Quiz 3: R4DS Ch 5, 7, 20
+  - [x] Quiz 4: R4DS Ch 28, 9
+  - [x] Quiz 5: R4DS Ch 10 (§10.1–10.4), perception
+  - [x] Quiz 6: R4DS Ch 10 (§10.5–10.6), Ch 12, 13
+  - [x] Quiz 7: R4DS Ch 14, 16, 19
+  - [x] Quiz 8: R4DS Ch 18
+  - [x] Quiz 9: R4DS Ch 11
+  - [x] Quiz 10: R4DS Ch 8, correlation & regression
 - [x] ~~Set drop policy~~ — removed; 48-hour late policy replaces drop policy
 
 ### Final Project (3 checkpoints + presentation)

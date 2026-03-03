@@ -33,7 +33,7 @@ Each 75-minute class follows this general structure:
 
 ### Assignment 1: Getting Started with R
 **Assigned:** Session 2 (Wed Week 1)
-**Due:** Before Session 3 (Mon Week 2)
+**Due:** Sunday, April 5 at 11:59 PM
 **Topics:** RStudio basics, running code, installing packages, basic ggplot
 
 **Tasks:**
@@ -53,7 +53,7 @@ Pair up: Create a scatterplot of `cty` vs `hwy` from `mpg`. Who can make it look
 
 ### Assignment 2: Data Transformation Basics
 **Assigned:** Session 4 (Wed Week 2)
-**Due:** Before Session 5 (Mon Week 3)
+**Due:** Sunday, April 12 at 11:59 PM
 **Topics:** filter, arrange, select, mutate, pipe
 
 **Tasks:**
@@ -77,7 +77,7 @@ Calculate the average departure delay for each carrier. Which airline is the wor
 
 ### Assignment 3: Tidying, Import & Quarto
 **Assigned:** Session 7 (Mon Week 4, after Quarto)
-**Due:** Before Session 9 (Mon Week 5)
+**Due:** Sunday, April 19 at 11:59 PM
 **Topics:** pivot_longer, pivot_wider, read_csv, readxl, Quarto documents
 **Format:** Submit as a rendered Quarto document (HTML). This is the first Quarto assignment — all subsequent assignments should also be Quarto.
 
@@ -103,7 +103,7 @@ Convert this messy R script into a clean Quarto document with sections and narra
 
 ### Assignment 4: Visualization Deep Dive
 **Assigned:** Session 9 (Mon Week 5, after Perception & Design)
-**Due:** Before Session 11 (Mon Week 6)
+**Due:** Sunday, April 26 at 11:59 PM
 **Topics:** geoms, scales, themes, color, perception
 **Format:** Quarto document
 
@@ -125,7 +125,7 @@ Take this cluttered graph and apply the "declutter" principles. Remove at least 
 
 ### Assignment 5: Exploratory Data Analysis
 **Assigned:** Session 11 (Mon Week 6, after EDA — Covariation)
-**Due:** Before Session 13 (Mon Week 7)
+**Due:** Sunday, May 3 at 11:59 PM
 **Topics:** distributions, outliers, covariation, asking questions
 **Format:** Quarto document
 
@@ -148,7 +148,7 @@ What's the relationship between these two variables? Does it differ by group?
 
 ### Assignment 6: Data Types & Wrangling
 **Assigned:** Session 13 (Mon Week 7, after Strings, Factors & Text)
-**Due:** Before Session 15 (Wed Week 8)
+**Due:** Sunday, May 10 at 11:59 PM
 **Topics:** logicals, numbers, strings, factors, recoding, light text analysis
 **Format:** Quarto document
 
@@ -170,7 +170,7 @@ Fix the messy "gender" column (has "M", "Male", "male", "MALE", etc.) and conver
 
 ### Assignment 7: Joins & Missing Data
 **Assigned:** Session 15 (Wed Week 8, after Missing Data)
-**Due:** Before Session 16 (Wed Week 9)
+**Due:** Sunday, May 18 at 11:59 PM
 **Topics:** joins, keys, missing values, complete cases
 **Format:** Quarto document
 
@@ -188,7 +188,7 @@ Join these two tables. Why are some rows missing? How would you handle this?
 
 ### Assignment 8: Storytelling Report
 **Assigned:** Session 16 (Wed Week 9, after Storytelling)
-**Due:** Before Session 17 (Mon Week 10)
+**Due:** Sunday, May 31 at 11:59 PM
 **Topics:** Data storytelling, communication, Knaflic principles, polished Quarto reports
 **Format:** Quarto document
 
@@ -249,22 +249,22 @@ Each session, students complete a brief in-class exercise with a partner. Graded
 
 ## Reading Quizzes
 
-Administered on Canvas before each class. 5-10 questions, timed (10 min), Lockdown Browser.
+One quiz per week (10 total), administered on Canvas. Each quiz draws 5 random questions from a 50-question bank. Due **Tuesday at 11:59 PM** each week. Graded on completion (full credit for finishing), but the team with the highest average earns a challenge point.
 
-| Quiz | Reading | Due Before |
-|------|---------|------------|
-| 1 | R4DS Ch 2 + 6 | Session 1 |
-| 2 | R4DS Ch 1 | Session 2 |
-| 3 | R4DS Ch 3.1-3.4 | Session 3 |
-| 4 | R4DS Ch 3.5 + 4 | Session 4 |
-| 5 | R4DS Ch 5 | Session 5 |
-| 6 | R4DS Ch 7 + 20 | Session 6 |
-| 7 | R4DS Ch 9 | Session 8 |
-| 8 | R4DS Ch 10 | Session 10 |
-| 9 | R4DS Ch 12-14, 16 | Session 12 |
-| 10 | R4DS Ch 18-19 | Session 14 |
+Question banks are in `quizzes/` with QTI packages (.zip) for Canvas import.
 
-Note: No quiz on Quarto (R4DS Ch 28) — students practice Quarto through Assignment 3. No quiz on communication (R4DS Ch 11) — covered through Assignment 8 and the Storytelling session.
+| Quiz | Week | Reading | Due |
+|------|------|---------|-----|
+| 1 | 1 | R4DS Ch 1, 2, 6 | Tue Mar 31 |
+| 2 | 2 | R4DS Ch 3, 4 | Tue Apr 7 |
+| 3 | 3 | R4DS Ch 5, 7, 20 | Tue Apr 14 |
+| 4 | 4 | R4DS Ch 28, 9 | Tue Apr 21 |
+| 5 | 5 | R4DS Ch 10 (§10.1–10.4), perception | Tue Apr 28 |
+| 6 | 6 | R4DS Ch 10 (§10.5–10.6), 12, 13 | Tue May 5 |
+| 7 | 7 | R4DS Ch 14 (§14.1–14.3), 16, 19 | Tue May 12 |
+| 8 | 8 | R4DS Ch 18 | Tue May 19 |
+| 9 | 9 | R4DS Ch 11 | Tue May 26 |
+| 10 | 10 | R4DS Ch 8, correlation & regression | Tue Jun 2 |
 
 ---
 

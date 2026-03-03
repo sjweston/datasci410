@@ -1,0 +1,301 @@
+Quiz title: Quiz 4: Quarto & Layers (R4DS Ch. 28, 9)
+
+1. What is Quarto?
+a) A statistical programming language
+b) A replacement for R
+*c) A system for combining code, results, and narrative text into a single document
+d) A spreadsheet application
+
+2. What is the term for combining code and narrative text in a single document, as Quarto does?
+a) Dynamic programming
+*b) Literate programming
+c) Reactive coding
+d) Inline documentation
+
+3. What file extension do Quarto documents use?
+a) .rmd
+b) .r
+*c) .qmd
+d) .qt
+
+4. What are the three main parts of a Quarto document?
+a) Header, body, footer
+b) Code, output, comments
+*c) YAML header, narrative text (Markdown), and code chunks
+d) Title, methods, results
+
+5. The YAML header in a Quarto document is enclosed by:
+a) Curly braces { }
+b) Square brackets [ ]
+*c) Three dashes --- at the top and bottom
+d) Triple backticks ``` at the top and bottom
+
+6. Which YAML field sets the document title in a Quarto file?
+*a) title:
+b) name:
+c) header:
+d) heading:
+
+7. Which YAML field specifies the output type (e.g., HTML, PDF)?
+a) output:
+*b) format:
+c) type:
+d) render:
+
+8. In Quarto Markdown, how do you create a first-level heading?
+a) Use a single hash followed by a space and the heading text
+b) Wrap the heading text in double asterisks
+*c) Use a single hash at the start of a line, followed by a space: `# My Heading`
+d) Use double equals signs around the text
+
+9. In Quarto Markdown, which syntax makes text bold?
+a) Wrap it in double underscores: `__text__`
+b) Wrap it in single asterisks: one asterisk on each side
+*c) Wrap it in double asterisks: two asterisks on each side
+d) Wrap it in tildes: `~text~`
+
+10. In Quarto Markdown, which syntax makes text italic?
+*a) Wrap it in single asterisks: one asterisk on each side
+b) Wrap it in double asterisks: two asterisks on each side
+c) Wrap it in double underscores: `__text__`
+d) Wrap it in tildes: `~text~`
+
+11. In Quarto Markdown, how do you create a bulleted list?
+a) * item (asterisk without space before it)
+b) 1. item
+*c) - item (dash followed by a space)
+d) > item
+
+12. How do you create a hyperlink in Quarto Markdown?
+a) <url>(text)
+b) {text}(url)
+*c) [text](url)
+d) (text)[url]
+
+13. How is an R code chunk indicated in a Quarto document?
+a) {{ r }}
+b) `r code here`
+*c) A fenced block starting with ```{r} and ending with ```
+d) <code lang="r"> </code>
+
+14. What does the chunk option `#| echo: false` do?
+a) Hides the output but shows the code
+*b) Hides the code but shows the output
+c) Prevents the code from running
+d) Hides both the code and the output
+
+15. What does the chunk option `#| eval: false` do?
+a) Hides the code
+b) Hides the output
+*c) Shows the code but does not run it
+d) Runs the code but hides everything
+
+16. What does the chunk option `#| include: false` do?
+a) Prevents the code from running
+b) Shows the code but hides the output
+*c) Runs the code but hides both the code and its output from the document
+d) Includes an external file
+
+17. What does the chunk option `#| message: false` do?
+a) Prevents error messages from stopping the render
+*b) Suppresses package loading messages and other informational messages from appearing in the output
+c) Hides the code
+d) Disables all console output
+
+18. What does the chunk option `#| warning: false` do?
+a) Turns off all error checking
+*b) Suppresses warning messages from appearing in the document output
+c) Makes warnings appear in red text
+d) Prevents the document from rendering if warnings occur
+
+19. Which chunk option sets the width of a figure in a Quarto document?
+a) #| width:
+b) #| plot-width:
+*c) #| fig-width:
+d) #| figure-size:
+
+20. Which chunk option adds a caption below a figure?
+a) #| title:
+b) #| caption:
+*c) #| fig-cap:
+d) #| plot-title:
+
+21. What does the `#| label:` chunk option do?
+a) Adds a visible title above the code chunk
+*b) Gives the chunk a name for reference and debugging purposes
+c) Creates a label on the plot axis
+d) Assigns the output to a variable
+
+22. How do you include an inline R result (e.g., a calculated value) within Quarto narrative text?
+a) {r expression}
+b) $(r expression)
+*c) `r expression` (backtick r space expression backtick)
+d) <<r expression>>
+
+23. Which of these output formats can Quarto render to?
+a) HTML only
+b) PDF only
+c) Word only
+*d) HTML, PDF, and Word (among others)
+
+24. What function creates nicely formatted tables in a Quarto document?
+a) table()
+b) print_table()
+*c) knitr::kable()
+d) format_table()
+
+25. What does the Render button (or `quarto render`) do?
+a) Only checks the code for errors
+b) Runs the R code but does not create a document
+*c) Runs all code chunks and combines the code, output, and narrative into a finished document
+d) Converts the .qmd file to a .R script
+
+26. According to R4DS, which ggplot2 layer components are essential for every plot?
+a) Data, geom, and facet
+b) Data, scales, and coordinates
+*c) Data, aesthetic mappings, and at least one geom
+d) Geom, labels, and theme
+
+27. Which geom creates a histogram?
+a) geom_bar()
+*b) geom_histogram()
+c) geom_col()
+d) geom_frequency()
+
+28. Which geom creates a smooth density curve?
+a) geom_smooth()
+b) geom_histogram()
+*c) geom_density()
+d) geom_curve()
+
+29. Which geom creates a bar chart from categorical data?
+*a) geom_bar()
+b) geom_histogram()
+c) geom_col()
+d) geom_tile()
+
+30. What is the key difference between `geom_bar()` and `geom_col()`?
+a) geom_bar() makes horizontal bars; geom_col() makes vertical bars
+b) geom_bar() requires both x and y; geom_col() requires only x
+*c) geom_bar() counts rows to determine bar height; geom_col() uses a y value already in the data
+d) There is no difference; they are aliases
+
+31. What is the default statistical transformation used by `geom_bar()`?
+*a) stat = "count" (it counts the number of rows in each group)
+b) stat = "identity" (it uses the raw data values)
+c) stat = "summary" (it computes the mean)
+d) stat = "bin" (it bins continuous data)
+
+32. When would you use `stat = "identity"` with `geom_bar()`?
+a) When you want the bar to show counts
+*b) When your data already contains the values you want for bar heights
+c) When you want stacked bars
+d) When you have continuous data on the x-axis
+
+33. Which geom creates a box plot?
+a) geom_box()
+*b) geom_boxplot()
+c) geom_quartile()
+d) geom_whisker()
+
+34. What does `stat_summary()` do?
+a) Summarizes the data frame and prints a table
+b) Computes summary statistics and stores them in a new data frame
+*c) Computes and plots summary statistics (like mean and error bars) directly on the plot
+d) Adds a text annotation showing the mean
+
+35. What does the `position = "dodge"` argument do in a bar chart?
+a) Stacks the bars on top of each other
+*b) Places the bars side by side
+c) Makes the bars overlap transparently
+d) Converts to a pie chart
+
+36. What does `position = "stack"` do in a bar chart with a fill aesthetic?
+*a) Stacks the groups on top of each other so each bar shows the total count
+b) Places the groups side by side
+c) Makes each bar the same height showing proportions
+d) Removes the fill grouping
+
+37. What does `position = "fill"` do in a bar chart?
+a) Fills bars with a gradient color
+b) Stacks the bars showing raw counts
+*c) Stacks the bars but scales each bar to the same height, showing proportions (0 to 1)
+d) Fills in missing categories with zero-height bars
+
+38. What does `position = "jitter"` do?
+a) Adds error bars to each point
+b) Connects points with a line
+*c) Adds a small amount of random noise to each point's position to reduce overplotting
+d) Removes overlapping points
+
+39. Which geom is a convenient shorthand for `geom_point(position = "jitter")`?
+a) geom_scatter()
+*b) geom_jitter()
+c) geom_noise()
+d) geom_random()
+
+40. Which function from the scales family adjusts the x-axis for a continuous variable?
+*a) scale_x_continuous()
+b) scale_x_discrete()
+c) axis_x()
+d) set_x_scale()
+
+41. What does `scale_color_manual()` allow you to do?
+a) Automatically assign colors based on the data type
+*b) Specify exact colors for each level of a categorical variable
+c) Create a continuous color gradient
+d) Remove colors from the plot
+
+42. What does `coord_flip()` do?
+a) Rotates the entire plot 180 degrees
+b) Mirrors the plot horizontally
+*c) Swaps the x and y axes
+d) Flips the order of categories on the x-axis
+
+43. What does `coord_cartesian()` allow you to do?
+a) Switch to polar coordinates
+*b) Zoom in on a region of the plot without removing data points outside the region
+c) Set the coordinate reference system for map data
+d) Flip the x and y axes
+
+44. What is the difference between setting axis limits with `coord_cartesian(xlim = ...)` versus `scale_x_continuous(limits = ...)`?
+a) There is no difference
+b) coord_cartesian() removes data outside the limits; scale_x_continuous() does not
+*c) coord_cartesian() zooms in without removing data; scale_x_continuous() removes data outside the limits before computing statistics
+d) scale_x_continuous() only works for discrete axes
+
+45. Which geom creates a violin plot?
+a) geom_density()
+b) geom_boxplot()
+*c) geom_violin()
+d) geom_ridge()
+
+46. A `geom_violin()` is most similar to which other geom, but mirrored and rotated?
+a) geom_boxplot()
+b) geom_histogram()
+*c) geom_density()
+d) geom_bar()
+
+47. What happens if you set `#| echo: false` and `#| eval: false` on the same chunk?
+a) The code runs silently in the background
+b) Only the code is shown, no output
+*c) Neither the code nor any output appears in the document (and the code is not run)
+d) An error occurs because the options conflict
+
+48. In a Quarto document, what happens if an R code chunk produces an error?
+a) The error is silently ignored
+b) The document renders but with a warning at the top
+*c) The render fails and stops, displaying the error message
+d) The error is printed but the rest of the document still renders
+
+49. According to R4DS, which geom would you use to display the distribution of a continuous variable split by a categorical variable, showing both the median and spread?
+a) geom_bar()
+*b) geom_boxplot()
+c) geom_histogram()
+d) geom_point()
+
+50. In ggplot2, what does a "layer" consist of?
+a) Only a geom
+b) Only data and aesthetics
+*c) A combination of data, aesthetic mappings, a geom, a stat, and a position adjustment
+d) A combination of a title, axis labels, and a theme

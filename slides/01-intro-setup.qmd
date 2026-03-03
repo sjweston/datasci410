@@ -98,7 +98,7 @@ That means learning to:
 ## Weekly assignments
 
 - Short, focused coding exercises that reinforce each session's content
-- Assigned on Wednesdays, due the following Monday
+- Assigned on Wednesdays, due the following Sunday at 11:59 PM
 - Designed to take 1–2 hours outside of class
 - You'll get time during class to start and ask questions
 
@@ -108,15 +108,15 @@ That means learning to:
 
 ## Reading quizzes
 
-Before each class, you'll complete a brief Canvas quiz on the assigned reading.
+Each week, a brief Canvas quiz on that week's readings. Due **Tuesday at 11:59 PM**.
 
 . . .
 
-Quizzes are graded on **completion, not correctness.** You get full credit for finishing — the goal is to engage with the material before we discuss it, not to memorize details.
+Each quiz pulls **5 random questions** from a larger bank. You can retake as many times as you want — **your best score counts.**
 
 . . .
 
-10 quizzes total. Same late policy as assignments.
+10 quizzes total (one per week). Same late policy as assignments.
 
 ## In-class participation
 

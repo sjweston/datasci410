@@ -16,7 +16,7 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 ## Schedule Notes
 - All readings should be completed **before** the class session
 - R4DS = [R for Data Science (2nd ed.)](https://r4ds.hadley.nz/)
-- 📋 = Assignment due | 📝 = Project milestone
+- 📋 = Assignment due (Sundays at 11:59 PM) | 📝 = Project milestone
 - Schedule is subject to change based on course needs
 :::
 
@@ -62,8 +62,8 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 📖 **Read:** [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (sections 3.1–3.4)
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 1: Getting Started](/assignment/01-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 1: Getting Started](/assignment/01-assignment.qmd) — Due Sunday, April 5 at 11:59 PM
 :::
 
 ### Session 4: Data Transformation II
@@ -94,8 +94,8 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 📖 **Read:** [R4DS Ch 5: Data tidying](https://r4ds.hadley.nz/data-tidy)
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 2: Data Transformation](/assignment/02-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 2: Data Transformation](/assignment/02-assignment.qmd) — Due Sunday, April 12 at 11:59 PM
 :::
 
 ### Session 6: Data Import
@@ -154,8 +154,8 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 :::
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 3: Tidying, Import & Quarto](/assignment/03-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 3: Tidying, Import & Quarto](/assignment/03-assignment.qmd) — Due Sunday, April 26 at 11:59 PM
 :::
 
 ### Session 10: EDA — Variation
@@ -191,8 +191,8 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 :::
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — Due Sunday, May 3 at 11:59 PM
 :::
 
 ### Session 12: Data Types Grab Bag
@@ -223,8 +223,8 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 :::
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd) — Due Sunday, May 10 at 11:59 PM
 :::
 
 ### Session 14: Joins
@@ -262,8 +262,8 @@ Use this time to work on your final project draft!
 :::
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd) — Due Sunday, May 18 at 11:59 PM
 :::
 
 ::: {.callout-warning}
@@ -302,8 +302,8 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 :::
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — Due Sunday, May 25 at 11:59 PM
 :::
 
 ---
@@ -321,8 +321,8 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 📖 **Read:** TBD (supplementary intro to correlation and regression in R)
 
 ::: {.callout-important}
-## 📋 Due Today
-[Assignment 8: Storytelling Report](/assignment/08-assignment.qmd)
+## 📋 Assignment Due
+[Assignment 8: Storytelling Report](/assignment/08-assignment.qmd) — Due Sunday, May 31 at 11:59 PM
 :::
 
 ### Session 18: Putting It All Together
@@ -356,14 +356,14 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 
 | Assignment | Topic | Assigned | Due |
 |------------|-------|----------|-----|
-| 1 | Getting Started | Session 2 (Apr 1) | Session 3 (Apr 6) |
-| 2 | Data Transformation | Session 4 (Apr 8) | Session 5 (Apr 13) |
-| 3 | Tidying, Import & Quarto | Session 7 (Apr 20) | Session 9 (Apr 27) |
-| 4 | Visualization Deep Dive | Session 9 (Apr 27) | Session 11 (May 4) |
-| 5 | Exploratory Data Analysis | Session 11 (May 4) | Session 13 (May 11) |
-| 6 | Data Types & Wrangling | Session 13 (May 11) | Session 15 (May 20) |
-| 7 | Joins & Missing Data | Session 15 (May 20) | Session 16 (May 27) |
-| 8 | Storytelling Report | Session 16 (May 27) | Session 17 (Jun 1) |
+| 1 | Getting Started | Wed Apr 1 | Sun Apr 5 |
+| 2 | Data Transformation | Wed Apr 8 | Sun Apr 12 |
+| 3 | Tidying & Import | Wed Apr 15 | Sun Apr 19 |
+| 4 | Visualization Deep Dive | Wed Apr 22 | Sun Apr 26 |
+| 5 | Exploratory Data Analysis | Wed Apr 29 | Sun May 3 |
+| 6 | Data Types | Wed May 6 | Sun May 10 |
+| 7 | Joins & Missing Data | Wed May 13 | Sun May 18 |
+| 8 | Reproducible Report | Wed May 27 | Sun May 31 |
 
 ## Final Project Milestones
 

@@ -56,15 +56,187 @@ Quizzes are **completion-based for the course grade** — students get full cred
 
 ## Fun Challenges
 
-Weekly challenges done outside of class. Group submission on Canvas. Ideas to develop:
+Weekly challenges done outside of class. Group submission on Canvas. Due **Sunday at 11:59 PM** each week. One member submits for the group. Each challenge should take **~30 minutes or less** and is graded on completion (submitted = point earned).
 
-- R trivia (what does this function do?)
-- Bug hunt (find the error in this code)
-- Prediction challenge (what will this code produce?)
-- Data detective (answer a question using a provided dataset)
-- Visualization challenge (recreate this plot)
+Materials for each challenge go in `files/fun-challenges/` (one subfolder per week).
 
-Need to develop 10 challenges, one per week.
+---
+
+### Challenge 1: Team Bio (Week 1)
+**Assigned:** Session 2 (Wed Apr 1) | **Due:** Sun Apr 5
+**Skills:** None (icebreaker)
+
+Your team's first mission: introduce yourselves. Submit a short document (PDF, Word, or Google Doc) with:
+
+- Your **team name** (choose wisely — it'll be on the scoreboard all quarter)
+- A **team logo or mascot** (hand-drawn, AI-generated, or a meme — just make it yours)
+- A **one-sentence fun fact** from each team member
+
+No R required. This is about getting your team talking.
+
+**Format:** Any document format. One submission per team.
+
+---
+
+### Challenge 2: Code Prediction (Week 2)
+**Assigned:** Mon Apr 6 | **Due:** Sun Apr 12
+**Skills:** ggplot2 basics, aes(), geoms (Sessions 2–3)
+
+Given 5 short ggplot2 code snippets (each 3–5 lines), predict what the resulting plot would look like. For each snippet:
+
+1. What type of plot is it? (scatterplot, bar chart, etc.)
+2. What's on the x-axis? The y-axis?
+3. Sketch or describe the plot (rough sketch on paper is fine — take a photo)
+
+Uses the `mpg` dataset. Tests code *reading*, not writing.
+
+**Format:** PDF or Word with answers for all 5. Sketches can be photos of hand-drawn plots.
+**Materials needed:** Code snippet handout (`files/fun-challenges/02-code-prediction.md`)
+
+---
+
+### Challenge 3: Data Transformation Relay (Week 3)
+**Assigned:** Mon Apr 13 | **Due:** Sun Apr 19
+**Skills:** filter, select, mutate, summarize, pipe (Sessions 3–4)
+
+Given a dataset about fictional psychology experiment participants, answer 5 questions. Each answer requires a pipe chain. Example questions:
+
+1. How many participants scored above 80 on the anxiety measure?
+2. What's the mean reaction time for each experimental condition?
+3. Create a new variable that categorizes participants as "fast" or "slow" based on median RT. How many are in each group?
+
+Submit the code and answers.
+
+**Format:** R script or Quarto doc with code and printed output.
+**Materials needed:** Dataset (`files/fun-challenges/03-relay-data.csv`) and question sheet
+
+---
+
+### Challenge 4: Bug Hunt (Week 4)
+**Assigned:** Mon Apr 20 | **Due:** Sun Apr 26
+**Skills:** All R basics through Session 7 (Quarto, import, tidy, transform, ggplot2)
+
+An R script (~25 lines) that's supposed to load a dataset, clean it, and make a plot. But it has **8 bugs**. Find and fix them all.
+
+Bug types include:
+- Typos in function names (e.g., `read_CSV` instead of `read_csv`)
+- Missing or extra commas/parentheses
+- Wrong variable names
+- Logic errors (filtering the wrong direction)
+- ggplot aesthetic mapped when it should be set (or vice versa)
+
+Submit the corrected script and a list of what you fixed.
+
+**Format:** Corrected `.R` file + a brief list of the 8 fixes.
+**Materials needed:** Buggy script (`files/fun-challenges/04-bug-hunt.R`) and dataset
+
+---
+
+### Challenge 5: Plot Makeover (Week 5)
+**Assigned:** Mon Apr 27 | **Due:** Sun May 3
+**Skills:** ggplot2 layers, perception & design (Sessions 8–9)
+
+Given an ugly default plot and the code that made it. The plot uses the right geom but has:
+- No title or axis labels
+- Default gray theme
+- Hard-to-read colors
+- No legend title
+- Overlapping points with no transparency
+
+Your mission: make it good. Improve the plot using what you've learned about perception and design. Change at least 5 things.
+
+Submit your improved code and a screenshot of the new plot, plus a brief note explaining what you changed and why.
+
+**Format:** R script + screenshot + brief explanation (1–2 sentences per change).
+**Materials needed:** Ugly plot code (`files/fun-challenges/05-plot-makeover.R`) and dataset
+
+---
+
+### Challenge 6: Data Detective (Week 6)
+**Assigned:** Mon May 4 | **Due:** Sun May 10
+**Skills:** EDA, distributions, covariation (Sessions 10–11)
+
+You're given a dataset from a (fictional) psychology study on the relationship between sleep, stress, and exam performance. Something is weird about this data. Your job:
+
+1. Make at least 3 plots exploring the variables
+2. Identify the **two unusual things** hidden in the data (e.g., impossible values, suspicious distributions, unexpected patterns)
+3. Explain what you found and what might have gone wrong in the study
+
+This is EDA in practice — let the data surprise you.
+
+**Format:** Quarto doc (or R script + written answers) with plots and explanations.
+**Materials needed:** Dataset with planted anomalies (`files/fun-challenges/06-data-detective.csv`)
+
+---
+
+### Challenge 7: R Trivia (Week 7)
+**Assigned:** Mon May 11 | **Due:** Sun May 17
+**Skills:** Everything through Session 13 (strings, factors, data types)
+
+15 trivia questions covering everything from Weeks 1–7. Mix of formats:
+
+- **What does this return?** (short code snippet → predict the output)
+- **Name that function** (description → what function does this?)
+- **Spot the difference** (`read_csv` vs `read.csv`, `=` vs `==`, `|>` vs `%>%`)
+- **Fix this** (one-line code with an error → what's wrong?)
+- **Grab bag** (what package is `fct_reorder()` from? What does `NA` stand for?)
+
+**Format:** Numbered answers in any document format.
+**Materials needed:** Trivia question sheet (`files/fun-challenges/07-r-trivia.md`)
+
+---
+
+### Challenge 8: Missing Data Mystery (Week 8)
+**Assigned:** Wed May 20 | **Due:** Sun May 25
+**Skills:** Missing data, joins (Sessions 14–15)
+
+A fictional research lab ran a 3-wave longitudinal study on stress and coping in college students. You're given the data from all 3 waves, but there's substantial missing data. Your job:
+
+1. How much data is missing at each wave? Which variables?
+2. Is the missingness random, or is there a pattern? (Hint: look at whether missingness is related to other variables)
+3. What does this mean for the study's conclusions?
+4. What would you recommend the researchers do?
+
+**Format:** Quarto doc or written answers with supporting code/output.
+**Materials needed:** Three-wave dataset (`files/fun-challenges/08-missing-mystery.csv`)
+
+---
+
+### Challenge 9: Figure Courtroom (Week 9)
+**Assigned:** Wed May 27 | **Due:** Sun May 31
+**Skills:** Storytelling, critical evaluation (Session 16)
+
+You are the jury. Five figures are on trial. For each one, deliver a verdict:
+
+- **Guilty** (misleading — identify the specific problem)
+- **Boring** (technically correct but ineffective — explain why it fails)
+- **Not guilty** (effective — explain what makes it work)
+
+The figures include: a truncated y-axis bar chart, a pie chart with 12 slices, a well-designed small multiples plot, a dual-axis chart, and a cluttered scatterplot with too many colors.
+
+Write a 2–3 sentence verdict for each figure.
+
+**Format:** Written verdicts in any document format.
+**Materials needed:** Five figure images (`files/fun-challenges/09-figure-courtroom/`)
+
+---
+
+### Challenge 10: The Final Prediction (Week 10)
+**Assigned:** Mon Jun 1 | **Due:** Tue Jun 3 (short turnaround — keep it quick!)
+**Skills:** Correlation & regression (Session 17)
+
+You're shown a scatterplot with ~50 data points. No axis numbers, no regression line — just the cloud of points. Your team predicts:
+
+1. The **correlation coefficient** *r* (to one decimal place)
+2. The **direction** of the relationship (positive, negative, or none)
+3. The **R-squared** value (to one decimal place)
+
+After submissions close, the actual values are revealed in Session 18. The team closest to the true values (summed absolute error across all three) earns a **bonus point**.
+
+This one's quick — just look and guess. Trust your visual intuition.
+
+**Format:** Three numbers submitted on Canvas.
+**Materials needed:** Scatterplot image (`files/fun-challenges/10-prediction.png`)
 
 ---
 
@@ -76,16 +248,22 @@ Non-grade reward for the winning team. Current idea: **pizza party** (campus piz
 
 ## Scoreboard
 
-A slide shown at the start of each Monday session with current team standings. Keep it simple — team names, point totals, maybe a bar chart. Could be a recurring slide template added to each deck or a standalone display.
+Standalone Quarto revealjs slide: `files/scoreboard.qmd`. Shows a horizontal bar chart of total points by team and a breakdown table by category. Leading team highlighted in orange.
 
-Teams name themselves in Session 2 when teams are announced.
+**Workflow:** Update the `scoreboard` tibble at the top of the file each week, then render (`quarto render files/scoreboard.qmd`). Show at the start of each Monday session (or first session of the week).
+
+Teams name themselves in Session 2 when teams are announced → update scoreboard team names at that point.
+
+---
+
+## Student Handout
+
+`files/team-challenge-handout.md` — Distributed in Session 2 when teams are announced. Covers rules, point categories, fun challenges, FAQ.
 
 ---
 
 ## Open Questions
 
 - Exact number of teams (8? 9? 10?) — depends on final enrollment
-- What happens with ties?
-- What if a student drops and a team shrinks?
 - Should there be a mid-term team reshuffle or keep teams stable all term?
-- Fun challenge format details — how long should they take? Are they graded for completion?
+- Fun challenge materials still need to be created (datasets, code files, figure images) — see `files/fun-challenges/`

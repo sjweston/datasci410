@@ -1,0 +1,528 @@
+Quiz title: Quiz 1: Getting Started (R4DS Ch. 1, 2, 6)
+
+1. In ggplot2, which function initializes a plot object?
+a) plot()
+b) qplot()
+*c) ggplot()
+d) draw()
+
+2. What does the `+` operator do in a ggplot2 statement?
+a) Adds data values together before plotting
+*b) Adds a new layer or component to the plot
+c) Merges two datasets together
+d) Runs the plot and displays it
+
+3. In the ggplot2 template, `aes()` is short for:
+a) axis endpoint specification
+b) automatic element styling
+*c) aesthetic mapping
+d) aesthetically engineered sequence
+
+4. What is a **geom** in ggplot2?
+a) A type of data transformation
+*b) A geometric object that represents data visually (e.g., point, line, bar)
+c) The coordinate system of the plot
+d) A color palette
+
+5. The `mpg` dataset built into ggplot2 contains:
+a) Miles-per-gallon data for public transit vehicles
+b) Fuel economy data for American-made cars only
+*c) Fuel economy data for a variety of car models
+d) Aircraft fuel efficiency records
+
+6. Which variable in `mpg` records engine displacement in litres?
+a) `hwy`
+b) `cyl`
+*c) `displ`
+d) `trans`
+
+7. Which variable in `mpg` records highway miles per gallon?
+a) `cty`
+*b) `hwy`
+c) `fl`
+d) `displ`
+
+8. What does **mapping** an aesthetic mean in ggplot2?
+*a) Linking a visual property (like color or size) to a variable in the data
+b) Setting a visual property to a fixed value for all observations
+c) Creating a legend entry for the plot
+d) Filtering which rows of data to display
+
+9. What does **setting** an aesthetic mean in ggplot2?
+a) Linking a visual property to a variable in the data
+*b) Assigning a visual property a fixed constant value, outside of `aes()`
+c) Defining the range of an axis
+d) Specifying which aesthetic maps to x vs. y
+
+10. What color will the points be when this code runs?
+
+    ggplot(data = mpg) +
+      geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
+a) Blue, because "blue" is a recognized color name
+*b) A reddish-orange color, because "blue" is treated as a data value and mapped to the default discrete color scale
+c) Gray, the ggplot2 default
+d) This produces an error
+
+11. What is the correct way to make all points in a `geom_point()` layer the color blue?
+a) `geom_point(aes(color = "blue"))`
+b) `geom_point(aes(color = blue))`
+*c) `geom_point(color = "blue")`
+d) `ggplot(color = "blue") + geom_point()`
+
+12. Which aesthetic controls the transparency of a geom?
+a) `opacity`
+b) `shade`
+*c) `alpha`
+d) `clarity`
+
+13. When you map a **continuous** variable to the `color` aesthetic, ggplot2 produces:
+*a) A continuous gradient color scale
+b) A discrete set of colors, one per unique value
+c) An error, because color requires a categorical variable
+d) A black-and-white gradient
+
+14. When you map a **categorical** variable to the `color` aesthetic, ggplot2 produces:
+a) A gradient from light to dark
+*b) A discrete set of distinct colors, one per category
+c) All points in different shades of gray
+d) An error, because color requires a numeric variable
+
+15. Where you place `aes()` — inside `ggplot()` versus inside a specific `geom_*()` call — determines:
+a) Nothing; both placements are completely interchangeable
+*b) Whether the mapping applies globally to all layers or only to that specific geom
+c) Whether the legend is shown or hidden
+d) Whether the aesthetic is mapped or set
+
+16. What does `geom_smooth()` add to a plot by default?
+a) A straight line from the minimum to the maximum data point
+*b) A smoothed curve (loess by default) with a confidence interval band
+c) A horizontal line at the mean of y
+d) A linear regression line
+
+17. How do you add a linear regression line (instead of the default loess smoother) with `geom_smooth()`?
+a) `geom_smooth(type = "lm")`
+b) `geom_smooth(fit = "linear")`
+*c) `geom_smooth(method = "lm")`
+d) `geom_smooth(regression = TRUE)`
+
+18. How do you remove the shaded confidence interval band from `geom_smooth()`?
+a) `geom_smooth(ci = FALSE)`
+b) `geom_smooth(ribbon = FALSE)`
+*c) `geom_smooth(se = FALSE)`
+d) `geom_smooth(shade = FALSE)`
+
+19. You map `color = drv` inside `ggplot(aes(...))` and then add both `geom_point()` and `geom_smooth()`. What happens?
+a) Only `geom_point()` uses the color mapping; `geom_smooth()` ignores it
+*b) Both layers inherit the color mapping and plot separately by `drv`
+c) An error occurs because you can't use a global color mapping with multiple geoms
+d) `geom_smooth()` draws one overall line while `geom_point()` shows separate colors
+
+20. You want separate smooth lines by `drv`, but points should NOT be colored by `drv`. Which code achieves this?
+a) `ggplot(mpg, aes(displ, hwy, color = drv)) + geom_point() + geom_smooth()`
+*b) `ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(aes(color = drv))`
+c) `ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(color = drv)`
+d) `ggplot(mpg, aes(displ, hwy)) + geom_point(color = "gray") + geom_smooth(aes(color = drv))`
+
+21. What does `facet_wrap(~ class)` do?
+a) Colors each point by the `class` variable
+*b) Creates a separate subplot panel for each level of `class`
+c) Filters the data to show only one class at a time
+d) Wraps long axis labels for the `class` variable
+
+22. What is the main practical difference between `facet_wrap()` and `facet_grid()`?
+a) `facet_wrap()` is for categorical variables; `facet_grid()` is for continuous variables
+*b) `facet_wrap()` wraps panels from one variable into a grid; `facet_grid()` arranges panels in a strict row × column layout defined by two variables
+c) `facet_grid()` is an older, deprecated version of `facet_wrap()`
+d) `facet_wrap()` creates rows; `facet_grid()` creates columns
+
+23. In the formula `facet_grid(drv ~ cyl)`, which variable defines the **rows** of the grid?
+*a) `drv`
+b) `cyl`
+c) The variable with fewer unique values
+d) The variable listed alphabetically first
+
+24. What does `facet_grid(. ~ cyl)` produce?
+*a) A single row of panels, one per level of `cyl`
+b) A single column of panels, one per level of `cyl`
+c) A full grid using all combinations of variables
+d) An error; `.` is not valid in a facet formula
+
+25. What does `facet_grid(drv ~ .)` produce?
+a) A single row of panels, one per level of `drv`
+*b) A single column of panels, one per level of `drv`
+c) A scatterplot with `drv` on one axis
+d) An error; `.` is not valid after the `~`
+
+26. By default, all panels in `facet_wrap()` share the same axis scales. Which argument allows each panel to have its own y-axis scale?
+a) `scales = "free_x"`
+*b) `scales = "free_y"`
+c) `fixed = FALSE`
+d) `y_axis = "independent"`
+
+27. R4DS recommends using facets instead of color/shape aesthetics primarily when:
+a) The dataset has more than 1000 rows
+b) You are plotting fewer than 3 groups
+*c) The categorical variable has many levels, making a single plot with overlapping colors hard to read
+d) You are faceting a continuous variable
+
+28. Which geom is most appropriate for visualizing the distribution of a **single categorical variable**?
+a) `geom_histogram()`
+b) `geom_density()`
+*c) `geom_bar()`
+d) `geom_point()`
+
+29. Which geom is most appropriate for visualizing the distribution of a **single continuous variable**?
+a) `geom_bar()`
+b) `geom_point()`
+*c) `geom_histogram()`
+d) `geom_col()`
+
+30. What does the `binwidth` argument in `geom_histogram()` control?
+a) The height of each bar
+*b) The width of each bin — how much of the x range each bar covers
+c) The total number of bars to display
+d) The color of the bars
+
+31. R4DS recommends experimenting with `binwidth` in `geom_histogram()` because:
+a) The default binwidth is always wrong and must be changed before submitting work
+*b) Different binwidths can reveal different patterns; no single default is best for every dataset
+c) The binwidth must match the measurement unit of the variable
+d) Canvas requires a specific binwidth for automated grading
+
+32. Which geom shows the distribution of a continuous variable **split across levels of a categorical variable**?
+a) `geom_histogram()`
+b) `geom_bar()`
+*c) `geom_boxplot()`
+d) `geom_area()`
+
+33. What does the middle line in a `geom_boxplot()` represent?
+*a) The median
+b) The mean
+c) The mode
+d) The midpoint between the minimum and maximum
+
+34. The box in a `geom_boxplot()` spans from:
+a) The minimum to the maximum value
+b) One standard deviation below the mean to one above
+*c) The 25th percentile (Q1) to the 75th percentile (Q3)
+d) Two standard deviations below the mean to two above
+
+35. In a `geom_boxplot()`, individual points plotted beyond the whiskers represent:
+a) Data entry errors that should be removed before analysis
+b) Values more than one standard deviation from the mean
+*c) Potential outliers — values beyond 1.5 × the IQR from the box edges
+d) The top and bottom 5% of the distribution
+
+36. Which function adds a **title**, **axis labels**, and a **caption** to a ggplot?
+a) `title()`
+b) `axis_labels()`
+*c) `labs()`
+d) `annotate()`
+
+37. Which argument to `labs()` sets the plot title?
+*a) `title`
+b) `main`
+c) `header`
+d) `name`
+
+38. Which function saves a ggplot to a file?
+a) `save_plot()`
+b) `export()`
+*c) `ggsave()`
+d) `write_plot()`
+
+39. By default, `ggsave()` saves:
+a) The first plot created in the current session
+b) A plot you specify by passing it as the first argument
+*c) The most recently displayed plot
+d) All plots created since the last `ggsave()` call
+
+40. What does this code produce?
+
+    ggplot(data = mpg) +
+      geom_point(mapping = aes(x = displ, y = hwy)) +
+      geom_smooth(mapping = aes(x = displ, y = hwy))
+
+a) An error, because you cannot use two geoms with identical mappings
+*b) A scatterplot with a smooth line overlaid, both using `displ` and `hwy`
+c) Two separate plots side by side
+d) Only the smooth line; `geom_point()` is overwritten
+
+41. A more concise, idiomatic way to write the code in the previous question is:
+a) `ggplot(mpg, aes(displ, hwy), geom = c(point, smooth))`
+*b) `ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth()`
+c) `ggplot(mpg) + geom(point + smooth, aes(displ, hwy))`
+d) `plot(mpg, displ ~ hwy, type = c("p", "smooth"))`
+
+42. Which of the following correctly maps `cty` to x and `hwy` to y using shorthand ggplot2 syntax (omitting argument names)?
+a) `ggplot(mpg) + aes(cty, hwy) + geom_point()`
+*b) `ggplot(mpg, aes(cty, hwy)) + geom_point()`
+c) `ggplot(mpg, cty, hwy) + geom_point()`
+d) `geom_point(mpg, aes(cty, hwy))`
+
+43. Which statement about how ggplot2 handles missing values (`NA`) in mapped variables is correct?
+a) ggplot2 replaces NAs with the variable mean before plotting
+b) ggplot2 treats NA as a separate category in discrete scales
+*c) ggplot2 removes rows with NAs in mapped variables and shows a warning message
+d) ggplot2 stops with an error if any mapped variable contains NAs
+
+44. What is the purpose of the `group` aesthetic in ggplot2?
+a) It assigns each group a distinct color
+*b) It tells ggplot2 to draw separate lines or curves per group without changing color or shape
+c) It filters the data to display one group at a time
+d) It combines multiple variables into a single composite grouping variable
+
+45. To get a separate smooth line per `drv` group **without** coloring the line by `drv`, what should replace `geom_smooth()` in this code?
+
+    ggplot(mpg, aes(displ, hwy)) +
+      geom_smooth()
+a) `geom_smooth(color = drv)`
+b) `geom_smooth(aes(color = drv))`
+*c) `geom_smooth(aes(group = drv))`
+d) `geom_smooth(facet = drv)`
+
+46. The layered grammar of graphics describes a plot as a combination of:
+a) A dataset, a plot type, and a color palette
+b) An x-axis, a y-axis, and a geom
+*c) Data, aesthetic mappings, and one or more geometric layers — plus optional scales, coordinates, and facets
+d) A title, axis labels, and data points
+
+47. **Overplotting** in a scatterplot occurs when:
+a) Too many variables are mapped to aesthetics at once
+b) Axis labels overlap each other
+*c) Many data points share the same location, making it hard to see the density of observations
+d) The smooth line obscures the underlying data points
+
+48. What does this code produce?
+
+    ggplot(mpg, aes(x = class)) +
+      geom_bar()
+
+a) A scatter plot of `class` values along the x-axis
+*b) A bar chart showing the count of cars in each vehicle class
+c) A histogram of a continuous variable
+d) An error, because `geom_bar()` requires both `x` and `y` aesthetics
+
+49. In `geom_bar()`, if you want the bar heights to represent a value already in your data (not a count), you should use:
+a) `geom_bar(stat = "count")`
+b) `geom_bar(y = myvar)`
+*c) `geom_col()` or `geom_bar(stat = "identity")`
+d) `geom_histogram(stat = "identity")`
+
+50. When troubleshooting a ggplot error, R4DS recommends first:
+a) Deleting the plot and restarting from scratch
+b) Adding `debug = TRUE` to the `ggplot()` call
+*c) Carefully re-reading the code — checking for missing closing parentheses, misspelled names, and making sure `+` appears at the end of a line rather than the beginning of the next
+d) Running `fix(ggplot)` to let R auto-correct the error
+
+51. In R, which operator is used to assign a value to an object?
+a) `=` only
+b) `==`
+*c) `<-`
+d) `->`
+
+52. What does this code do?
+
+    x <- 3 * 4
+a) Prints 12 to the console
+*b) Creates an object called `x` that stores the value 12, but does not print anything
+c) Creates a variable called `3 * 4`
+d) Produces an error because you can't multiply in an assignment
+
+53. After running `x <- 3 * 4`, how do you see the value stored in `x`?
+a) `print x`
+b) `show(x)`
+*c) Type `x` in the console and press Enter
+d) Look in the Files pane
+
+54. Which of the following is a valid R object name?
+a) `2nd_attempt`
+b) `my variable`
+*c) `my_variable`
+d) `my-variable`
+
+55. R object names cannot:
+a) Contain underscores
+b) Be longer than 10 characters
+*c) Start with a number
+d) Contain uppercase letters
+
+56. R is case-sensitive. What happens if you create `my_data` and then type `My_Data`?
+a) R automatically finds the correct object
+b) R asks "did you mean my_data?"
+*c) R says "object 'My_Data' not found"
+d) R converts to lowercase automatically
+
+57. What does the `c()` function do?
+a) Clears the console
+b) Copies a variable
+*c) Combines values into a vector
+d) Counts the number of elements
+
+58. What is the result of `seq(1, 10)`?
+*a) A vector of integers from 1 to 10
+b) A single number: 10
+c) An error, because `seq()` requires three arguments
+d) The number 1 repeated 10 times
+
+59. After running code, where can you see all the objects you've created in RStudio?
+a) The Console pane
+b) The Files pane
+*c) The Environment pane
+d) The Plots pane
+
+60. R4DS recommends using `snake_case` for object names. Which of the following follows this convention?
+a) `myData`
+b) `MyData`
+c) `my.data`
+*d) `my_data`
+
+61. What is the keyboard shortcut for the assignment operator `<-` in RStudio?
+a) Ctrl/Cmd + =
+*b) Alt/Option + -
+c) Ctrl/Cmd + <
+d) Shift + -
+
+62. Which of the following will R interpret as a function call?
+a) `sum`
+*b) `sum()`
+c) `sum[]`
+d) `(sum)`
+
+63. What does `nrow(mpg)` return?
+a) The number of columns in `mpg`
+*b) The number of rows in `mpg`
+c) The row names of `mpg`
+d) A new row added to `mpg`
+
+64. When R tells you `object 'x' not found`, the most likely cause is:
+a) `x` has been deleted from your computer
+*b) You haven't run the code that creates `x` yet, or you misspelled the name
+c) `x` is stored in a package you haven't loaded
+d) Your R session has expired
+
+65. What does the `#` symbol do in an R script?
+a) Starts a new code section
+*b) Marks the rest of the line as a comment (ignored by R)
+c) Creates a heading in the output
+d) References a footnote
+
+66. In RStudio, what is the difference between the **Console** and the **Source** pane?
+a) The Console runs code faster than the Source pane
+*b) The Source pane is for writing and saving scripts; the Console runs code interactively
+c) The Console is for R code; the Source pane is for text documents
+d) There is no practical difference
+
+67. R4DS recommends that you write your code in **scripts** rather than only in the Console. Why?
+a) Code runs faster from a script
+b) The Console cannot handle more than 10 lines
+*c) Scripts can be saved, edited, and re-run; Console history is temporary
+d) Only scripts can produce plots
+
+68. What file extension do R scripts use?
+a) `.r` (lowercase only)
+*b) `.R`
+c) `.rscript`
+d) `.txt`
+
+69. In RStudio, what keyboard shortcut runs the current line (or selection) from a script?
+a) Ctrl/Cmd + R
+*b) Ctrl/Cmd + Enter
+c) Ctrl/Cmd + Shift + Enter
+d) F5
+
+70. What does Ctrl/Cmd + Shift + Enter do in RStudio?
+a) Runs the current line
+b) Opens a new script
+*c) Runs the entire script from top to bottom
+d) Saves the script
+
+71. What is an RStudio Project?
+a) A type of R package
+b) A cloud-based coding environment
+*c) A self-contained folder with an `.Rproj` file that sets the working directory and keeps files organized
+d) A collaboration tool for sharing code with other RStudio users
+
+72. Why does R4DS discourage using `setwd()` to set your working directory?
+a) `setwd()` is deprecated and no longer works
+*b) It creates absolute paths that break when the folder is moved or shared with someone else
+c) It makes code run slower
+d) It only works on Windows
+
+73. When you open an RStudio Project by double-clicking the `.Rproj` file, R automatically:
+a) Installs all packages used in the project
+b) Runs the first script in the folder
+*c) Sets the working directory to the project folder
+d) Opens every file in the project
+
+74. In a project-based workflow, a **relative path** like `"data/survey.csv"` means:
+a) The file is on a remote server
+*b) Start from the current working directory (the project folder) and look inside the `data` subfolder for `survey.csv`
+c) The file could be anywhere on your computer; R will search for it
+d) The path is approximate and R will find the closest match
+
+75. R4DS recommends organizing project files into subfolders. Which structure is most appropriate?
+*a) Separate folders for data, scripts, and output (e.g., `data/`, `scripts/`, `output/`)
+b) All files in one folder for easy access
+c) One folder per file type (`.R`, `.csv`, `.png`)
+d) Alphabetical folders (A-Z)
+
+76. Why should you never modify your raw data files directly?
+a) R can't read files that have been modified
+b) Modified CSV files take up more disk space
+*c) If you make a mistake in cleaning, you can't recover the original; keeping raw data read-only ensures reproducibility
+d) Excel files become corrupted if opened in R
+
+77. Which of the following is the best file name for a data-cleaning script?
+a) `stuff.R`
+b) `untitled3.R`
+c) `script_final_v2_REAL.R`
+*d) `01_clean_data.R`
+
+78. The `.Rproj` file stores:
+a) All your R code
+b) Your datasets
+*c) Project-level settings (like which files were open); it tells RStudio this folder is a project
+d) Your R package library
+
+79. What happens when you restart R (Session → Restart R)?
+a) All your scripts are deleted
+b) Your project folder is reset
+*c) All objects in the Environment are cleared, and all loaded packages are unloaded
+d) Nothing visible changes
+
+80. R4DS recommends that your scripts be written so that they can run from top to bottom in a fresh R session. This ensures:
+a) The script runs faster
+b) You don't need to install packages
+*c) Your work is reproducible — anyone can run the script and get the same results
+d) RStudio doesn't crash
+
+81. What does `install.packages("tidyverse")` do?
+*a) Downloads and installs the tidyverse package from the internet (you only need to do this once)
+b) Loads the tidyverse package into your current session
+c) Updates R to the latest version
+d) Creates a new project called "tidyverse"
+
+82. What does `library(tidyverse)` do?
+a) Installs the tidyverse package
+*b) Loads the tidyverse package so you can use its functions in the current session
+c) Opens the tidyverse documentation website
+d) Downloads example datasets
+
+83. You need to run `install.packages()` every time you start R. True or false?
+a) True — packages are cleared when you close R
+*b) False — you install once, then use `library()` each session to load it
+c) True — but only for packages not in the tidyverse
+d) False — `library()` installs and loads simultaneously
+
+84. What is the tidyverse?
+a) A single package for data visualization
+b) An alternative to RStudio
+*c) A collection of R packages (including ggplot2, dplyr, and tidyr) that share a common design philosophy for data science
+d) A website for learning R
+
+85. Where in RStudio can you see a list of all installed packages?
+a) The Environment pane
+b) The Console
+*c) The Packages tab in the bottom-right pane
+d) The Help menu

@@ -1,0 +1,312 @@
+Quiz title: Quiz 3: Tidying & Import (R4DS Ch. 5, 7, 20)
+
+1. According to R4DS, what are the three rules that make a dataset "tidy"?
+a) Each variable has a unique name, each row is sorted, each cell is formatted
+b) No missing values, no duplicates, no outliers
+*c) Each variable is a column, each observation is a row, each value is a cell
+d) Data is alphabetized, numeric, and complete
+
+2. Why does R4DS say tidy data is important for working with the tidyverse?
+a) R cannot read data that is not tidy
+*b) Tidyverse functions are designed to work with tidy data, making analysis more consistent and efficient
+c) Tidy data takes up less memory
+d) Tidy data is required by all statistical software
+
+3. In a tidy dataset about survey responses, each row should represent:
+a) One variable (e.g., all the age values)
+b) One question from the survey
+*c) One observation (e.g., one participant's complete response)
+d) One summary statistic
+
+4. A dataset has columns: `country`, `year_2020`, `year_2021`, `year_2022`, where each year column contains population values. Is this dataset tidy?
+a) Yes, each value is in its own cell
+*b) No, the year columns represent values of a variable (year), not separate variables
+c) Yes, each row is a country
+d) No, because the data is numeric
+
+5. Which function converts data from wide format to long format?
+a) pivot_wider()
+*b) pivot_longer()
+c) gather()
+d) melt()
+
+6. Which function converts data from long format to wide format?
+*a) pivot_wider()
+b) pivot_longer()
+c) spread()
+d) cast()
+
+7. In `pivot_longer()`, what does the `cols` argument specify?
+a) The new column names to create
+*b) Which existing columns to pivot into longer format
+c) The column that identifies each observation
+d) How many columns the result should have
+
+8. In `pivot_longer()`, what does the `names_to` argument specify?
+a) Which columns to pivot
+*b) The name of the new column that will contain the old column names
+c) The name of the new column that will contain the values
+d) Which columns to keep as-is
+
+9. In `pivot_longer()`, what does the `values_to` argument specify?
+a) Which columns to pivot
+b) The name of the new column that will contain the old column names
+*c) The name of the new column that will contain the cell values
+d) The type of values expected (numeric, character, etc.)
+
+10. Consider this code. What does it do?
+
+    table4a |>
+      pivot_longer(
+        cols = c(`1999`, `2000`),
+        names_to = "year",
+        values_to = "cases"
+      )
+
+a) Creates two new columns called 1999 and 2000
+*b) Stacks the 1999 and 2000 columns into a single "cases" column, with a new "year" column indicating which year each value came from
+c) Filters to only rows from 1999 and 2000
+d) Renames the 1999 and 2000 columns to "year" and "cases"
+
+11. In `pivot_wider()`, what does the `names_from` argument specify?
+*a) The column whose values will become the new column names
+b) The names you want to assign to the new columns
+c) Which columns to keep in the result
+d) The column whose values will fill the new columns
+
+12. In `pivot_wider()`, what does the `values_from` argument specify?
+a) The column whose values will become column names
+*b) The column whose values will fill the cells of the new columns
+c) The default value to use for missing cells
+d) The data types of the new columns
+
+13. When would you use `pivot_wider()` instead of `pivot_longer()`?
+a) When you want to convert from wide to long format
+b) When you have too many columns
+*c) When one observation is spread across multiple rows and you want each observation in a single row
+d) When you need to remove missing values
+
+14. Which function from the readr package is used to read CSV files?
+a) read.csv()
+*b) read_csv()
+c) import_csv()
+d) load_csv()
+
+15. What is one advantage of `read_csv()` over base R's `read.csv()`?
+a) read_csv() can read Excel files
+*b) read_csv() is faster and creates a tibble instead of a data frame
+c) read_csv() automatically cleans the data
+d) read_csv() works without loading any packages
+
+16. What is a tibble?
+a) A type of plot in ggplot2
+b) A file format for storing data
+*c) A modern version of a data frame used by the tidyverse, with improved printing and stricter behavior
+d) A function for creating tables
+
+17. When `read_csv()` reads a file, it guesses each column's type. Which of these is NOT a type it typically guesses?
+a) double (numeric)
+b) character (text)
+c) logical (TRUE/FALSE)
+*d) factor (categorical)
+
+18. What does the first argument to `read_csv()` specify?
+a) The column types
+b) The delimiter character
+*c) The path to the file (or the data itself as a string)
+d) The number of rows to read
+
+19. What does `read_csv()` do with the first row of the file by default?
+a) Treats it as data
+b) Skips it
+*c) Uses it as column names
+d) Uses it to guess column types
+
+20. How do you tell `read_csv()` that a file does not have a header row?
+a) header = FALSE
+*b) col_names = FALSE
+c) skip_header = TRUE
+d) names = NULL
+
+21. What does the `skip` argument in `read_csv()` do?
+a) Skips columns that contain only NA values
+*b) Skips a specified number of lines at the beginning of the file before reading data
+c) Skips rows with missing values
+d) Skips the header row
+
+22. What does the `na` argument in `read_csv()` control?
+a) How to handle rows that are entirely missing
+*b) Which strings in the file should be treated as missing values (NA)
+c) Whether to remove rows with any missing values
+d) The maximum number of NAs allowed per column
+
+23. What does this code do?
+
+    read_csv("mydata.csv", na = c("", "NA", "N/A", "-99"))
+
+a) Removes all rows that contain these values
+*b) Treats empty strings, "NA", "N/A", and "-99" as missing values when reading the file
+c) Replaces all missing values with these strings
+d) Only reads rows that contain these values
+
+24. What does `read_csv()` print when it reads a file?
+a) The first 10 rows of data
+b) Any errors found in the file
+*c) A column specification showing the name and guessed type of each column
+d) The file size and path
+
+25. What function helps you examine problems that occurred during data import?
+a) errors()
+b) warnings()
+*c) problems()
+d) check()
+
+26. How do you explicitly specify column types in `read_csv()`?
+a) types = list(x = "numeric", y = "character")
+*b) col_types = cols(x = col_double(), y = col_character())
+c) columns = c(x = double, y = character)
+d) specify(x = num, y = chr)
+
+27. Which function writes a data frame to a CSV file?
+a) save_csv()
+b) export_csv()
+*c) write_csv()
+d) output_csv()
+
+28. What happens to factor information and date formatting when you use `write_csv()` and then `read_csv()` on the same data?
+a) Everything is preserved exactly
+b) An error occurs
+*c) Some type information (like factors) is lost because CSV files store only text
+d) write_csv() automatically adds type metadata to prevent this
+
+29. Which package provides `read_excel()` for reading Excel files?
+a) tidyverse
+b) openxlsx
+*c) readxl
+d) xlsx
+
+30. Is the readxl package loaded automatically as part of the tidyverse?
+a) Yes, it is loaded with library(tidyverse)
+*b) No, you need to load it separately with library(readxl)
+c) Yes, but only if you have Excel installed
+d) No, and it must be installed from a different source
+
+31. What does the `sheet` argument in `read_excel()` specify?
+a) The file path
+*b) Which worksheet in the Excel file to read
+c) The range of cells to read
+d) Whether to include formatting
+
+32. How can you read a specific rectangular range of cells from an Excel file?
+a) cells = "A1:D10"
+*b) range = "A1:D10"
+c) select = "A1:D10"
+d) area = "A1:D10"
+
+33. Which of these is a common problem with spreadsheet data that R4DS warns about?
+a) Spreadsheets are too large for R to handle
+*b) Merged cells, which do not translate well into a rectangular data format
+c) Spreadsheets cannot contain numeric data
+d) Excel files are encrypted and cannot be read by R
+
+34. R4DS mentions that spreadsheet users sometimes use cell colors or formatting to encode data. Why is this a problem for data analysis in R?
+a) R can read colors but they slow down processing
+b) Colors are automatically converted to numeric codes
+*c) Cell formatting like colors is not imported by read_excel(), so that information is lost
+d) R requires all data to be in black and white
+
+35. According to R4DS, which of these is a common spreadsheet problem?
+a) Having too many worksheets
+*b) Having multiple tables in a single sheet, rather than one table per sheet
+c) Using too many columns
+d) Naming the file with spaces
+
+36. What does `read_excel()` do with the first row by default?
+a) Skips it entirely
+*b) Uses it as column names
+c) Treats it as data
+d) Checks it for formatting errors
+
+37. What does the `col_names` argument do in both `read_csv()` and `read_excel()`?
+a) Renames all columns to standardized names
+b) Removes columns with certain names
+*c) Specifies whether the first row contains column names, or provides custom column names
+d) Sorts columns alphabetically by name
+
+38. What type of file does `read_tsv()` read?
+a) A file with comma-separated values
+*b) A file with tab-separated values
+c) A file with time-series data
+d) A file with tidyverse-specific formatting
+
+39. Which function can read files with any delimiter?
+a) read_csv()
+b) read_any()
+*c) read_delim()
+d) read_file()
+
+40. What does `pivot_longer()` do to the number of rows and columns in a dataset?
+*a) It increases the number of rows and decreases the number of columns
+b) It decreases the number of rows and increases the number of columns
+c) It keeps both the same
+d) It only changes the number of columns
+
+41. What does `pivot_wider()` do to the number of rows and columns in a dataset?
+a) It increases the number of rows and decreases the number of columns
+*b) It decreases the number of rows and increases the number of columns
+c) It keeps both the same
+d) It only changes the number of rows
+
+42. In `pivot_longer()`, why might you need to use backticks around column names like `1999`?
+a) Backticks are always required for column names
+b) Backticks indicate the column contains numeric data
+*c) Column names that start with a number are non-standard and need backticks to be recognized as names
+d) Backticks tell R to convert the column to character type
+
+43. What is the default delimiter (separator) that `read_csv()` expects?
+*a) Comma (,)
+b) Tab
+c) Semicolon (;)
+d) Space
+
+44. What function would you use to read a semicolon-delimited file?
+a) read_csv(delim = ";")
+*b) read_csv2() or read_delim(delim = ";")
+c) read_semicolon()
+d) read_tsv(sep = ";")
+
+45. When `read_csv()` guesses a column type incorrectly, what should you do?
+a) Edit the CSV file manually to fix the data
+*b) Use the col_types argument to explicitly specify the correct column type
+c) Switch to read.csv() which guesses more accurately
+d) Convert the column after import using mutate() only
+
+46. What does `read_csv("data.csv", comment = "#")` do?
+a) Adds comments to the output
+*b) Ignores lines that start with # when reading the file
+c) Only reads lines that start with #
+d) Treats # as a missing value indicator
+
+47. According to R4DS, which of these is a best practice for organizing data in spreadsheets?
+a) Use merged cells for category headers
+b) Use colors to indicate data categories
+c) Put multiple tables on the same sheet for convenience
+*d) Be consistent, use one table per sheet, and avoid using formatting to encode information
+
+48. What is the result of `pivot_longer()` followed by `pivot_wider()` with the same arguments reversed?
+a) The data is always changed permanently
+*b) You generally get back the original dataset (they are inverse operations)
+c) An error, because these functions cannot be chained
+d) A dataset with more rows than the original
+
+49. Which function reads a single Excel file and returns the names of all its sheets?
+a) sheets()
+*b) excel_sheets()
+c) list_sheets()
+d) get_sheets()
+
+50. When reading a CSV file, what does `read_csv()` do if it encounters a value that doesn't match the guessed column type (e.g., the word "missing" in a numeric column)?
+a) It converts the word to 0
+b) It stops with an error
+*c) It generates a parsing problem warning that you can inspect with problems()
+d) It silently drops the entire row

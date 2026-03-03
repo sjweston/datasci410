@@ -1,0 +1,323 @@
+Quiz title: Quiz 9: Communication & Storytelling (R4DS Ch. 11)
+
+1. According to R4DS, what is the main difference between exploratory plots and communication plots?
+a) Exploratory plots use ggplot2; communication plots use base R
+b) Exploratory plots are always scatterplots; communication plots are bar charts
+*c) Exploratory plots help YOU understand the data; communication plots help OTHERS understand your findings
+d) Exploratory plots are interactive; communication plots are static
+
+2. Which ggplot2 function is used to add titles, subtitles, captions, and axis labels to a plot?
+a) `titles()`
+b) `labels()`
+*c) `labs()`
+d) `annotate()`
+
+3. What should a good plot title communicate?
+a) The variables used in the plot
+b) The type of geom used
+*c) The main finding or takeaway from the plot
+d) The name of the dataset
+
+4. What is the `subtitle` argument in `labs()` typically used for?
+a) Citing the data source
+*b) Adding additional detail or context below the title
+c) Labeling the y-axis
+d) Naming the legend
+
+5. What is the `caption` argument in `labs()` typically used for?
+a) The main finding of the plot
+b) A subtitle below the title
+*c) Citing the data source or adding a note
+d) Labeling the x-axis
+
+6. Which argument in `labs()` changes the label on the x-axis?
+a) `xlab`
+b) `xlabel`
+*c) `x`
+d) `axis.x`
+
+7. How do you change the title of a color legend using `labs()`?
+a) `labs(legend = "Title")`
+b) `labs(color.title = "Title")`
+*c) `labs(color = "Title")`
+d) `labs(legend.color = "Title")`
+
+8. What does the following code add to a plot?
+
+    labs(
+      title = "Larger engines use more fuel",
+      x = "Engine displacement (liters)",
+      y = "Highway MPG",
+      caption = "Source: fueleconomy.gov"
+    )
+
+a) Only a title
+b) A title and subtitle
+*c) A title, axis labels, and a data source caption
+d) A title, legend, and footnote
+
+9. What is the purpose of `annotate()` in ggplot2?
+*a) To add text, shapes, or arrows to specific locations on a plot
+b) To add a legend
+c) To label every data point automatically
+d) To add axis labels
+
+10. What is the key difference between `geom_text()` and `annotate("text", ...)`?
+a) `geom_text()` is for numbers; `annotate()` is for words
+*b) `geom_text()` maps text from a variable in the data; `annotate()` places a single piece of text at a specific location
+c) `annotate()` is deprecated in favor of `geom_text()`
+d) There is no difference
+
+11. What does `geom_label()` do differently from `geom_text()`?
+a) It places text at the top of the plot
+*b) It draws a rectangle behind the text for readability
+c) It rotates the text 90 degrees
+d) It uses a larger font by default
+
+12. Which of the following correctly adds a text annotation at coordinates x = 6, y = 40?
+a) `geom_text(x = 6, y = 40, label = "Note")`
+*b) `annotate("text", x = 6, y = 40, label = "Note")`
+c) `labs(annotation = "Note", x = 6, y = 40)`
+d) `add_text("Note", position = c(6, 40))`
+
+13. In ggplot2, what do scales control?
+a) The size of the plot window
+*b) How data values are mapped to visual properties like position, color, and size
+c) The order in which layers are drawn
+d) Whether the plot is interactive or static
+
+14. Which function controls the tick marks and labels on a continuous x-axis?
+a) `axis_x()`
+*b) `scale_x_continuous()`
+c) `coord_x()`
+d) `theme(axis.x = ...)`
+
+15. What does the `breaks` argument in `scale_x_continuous()` control?
+a) Where the axis starts and ends
+*b) Where the tick marks appear on the axis
+c) The color of the axis line
+d) The font size of axis labels
+
+16. What does the `labels` argument in `scale_x_continuous()` control?
+a) The title of the axis
+*b) The text displayed at each tick mark
+c) The number of decimal places shown
+d) Whether the axis is visible or hidden
+
+17. Which code formats y-axis labels as dollar amounts (e.g., $10,000)?
+a) `scale_y_continuous(labels = "dollar")`
+b) `scale_y_continuous(format = dollar)`
+*c) `scale_y_continuous(labels = label_dollar())`
+d) `scale_y_continuous(labels = paste0("$", value))`
+
+18. The functions `label_dollar()` and `label_percent()` come from which package?
+a) ggplot2
+b) dplyr
+*c) scales
+d) stringr
+
+19. What does `scale_x_log10()` do?
+a) Filters the data to only include values greater than 10
+*b) Transforms the x-axis to a logarithmic (base 10) scale
+c) Multiplies all x values by 10
+d) Creates 10 equally spaced tick marks
+
+20. What does `scale_color_brewer()` do?
+a) Creates a custom color for each data point
+*b) Applies a ColorBrewer palette to a discrete color scale
+c) Changes the background color of the plot
+d) Makes the plot grayscale
+
+21. Which function would you use to assign specific custom colors to categories?
+a) `scale_color_brewer()`
+b) `scale_color_gradient()`
+*c) `scale_color_manual()`
+d) `scale_color_custom()`
+
+22. What is the correct way to assign custom colors using `scale_color_manual()`?
+a) `scale_color_manual(colors = c("red", "blue"))`
+*b) `scale_color_manual(values = c("red", "blue"))`
+c) `scale_color_manual(palette = c("red", "blue"))`
+d) `scale_color_manual(fill = c("red", "blue"))`
+
+23. What is the important difference between `coord_cartesian(ylim = c(0, 50))` and `ylim(0, 50)`?
+a) There is no difference; they are interchangeable
+b) `coord_cartesian()` filters data; `ylim()` zooms
+*c) `coord_cartesian()` zooms in without removing data; `ylim()` removes data outside the range
+d) `ylim()` zooms in without removing data; `coord_cartesian()` removes data outside the range
+
+24. A researcher uses `ylim(0, 100)` on a plot that includes a `geom_smooth()` layer. Some data points fall above 100. What happens?
+a) The points above 100 are hidden but still used for the smooth line
+*b) The points above 100 are removed, and the smooth line is recalculated without them
+c) An error occurs
+d) The smooth line extends beyond the y-axis limits
+
+25. Which approach should you use to zoom in on a plot without affecting statistical summaries like trend lines?
+a) `xlim()` and `ylim()`
+b) `scale_x_continuous(limits = ...)`
+*c) `coord_cartesian()`
+d) `filter()` before plotting
+
+26. Which function applies a pre-made visual theme to a ggplot?
+a) `style()`
+*b) `theme_bw()`, `theme_minimal()`, etc.
+c) `format()`
+d) `template()`
+
+27. What does `theme_minimal()` look like compared to the default ggplot theme?
+a) It adds more gridlines and a border
+*b) It removes the gray background panel and has a cleaner, simpler appearance
+c) It makes everything black and white with no gridlines
+d) It uses a dark background with light text
+
+28. What does `theme_void()` do?
+a) Creates a theme with a white background and gridlines
+b) Resets all theme settings to defaults
+*c) Removes almost all non-data elements (axes, gridlines, background)
+d) Makes the entire plot invisible
+
+29. What does `theme()` (without a suffix like `_bw`) allow you to do?
+a) Choose from pre-made themes
+*b) Make fine-grained adjustments to individual plot elements like text size, legend position, and axis appearance
+c) Change the data shown in the plot
+d) Switch between ggplot2 and base R plotting
+
+30. How do you move the legend to the bottom of a ggplot?
+a) `labs(legend.position = "bottom")`
+*b) `theme(legend.position = "bottom")`
+c) `guides(position = "bottom")`
+d) `scale_legend(position = "bottom")`
+
+31. How do you completely remove the legend from a ggplot?
+a) `theme(legend = FALSE)`
+*b) `theme(legend.position = "none")`
+c) `guides(legend = FALSE)`
+d) `labs(legend = NULL)`
+
+32. What is the `guides()` function used for in ggplot2?
+a) Adding guide text to the plot title
+b) Creating tutorial overlays on the plot
+*c) Controlling the appearance of legends (guides) for specific aesthetics
+d) Adding reference lines to the plot
+
+33. What is the `patchwork` package used for?
+a) Fixing broken ggplot code
+b) Applying themes across multiple plots
+*c) Combining multiple ggplot objects into a single figure
+d) Patching missing data before plotting
+
+34. Using the patchwork package, what does the `+` operator do between two plot objects?
+a) Overlays the plots on top of each other
+*b) Places the plots side by side
+c) Merges the data from both plots
+d) Adds the second plot as a layer to the first
+
+35. Which function saves a ggplot to a file?
+a) `save_plot()`
+b) `export()`
+*c) `ggsave()`
+d) `write_plot()`
+
+36. What are the three most important arguments to control the size and quality of a saved plot in `ggsave()`?
+a) `size`, `resolution`, `format`
+b) `scale`, `pixels`, `type`
+*c) `width`, `height`, `dpi`
+d) `x`, `y`, `quality`
+
+37. What does the `dpi` argument in `ggsave()` control?
+a) The file format (PNG, PDF, etc.)
+*b) The resolution (dots per inch) of the saved image
+c) The color depth of the image
+d) The data points included in the plot
+
+38. If you call `ggsave("my_plot.png")` without specifying which plot to save, what does it save?
+a) All plots created in the session
+*b) The last plot that was displayed
+c) Nothing; it produces an error
+d) A blank plot
+
+39. What does the following code do?
+
+    ggplot(mpg, aes(displ, hwy)) +
+      geom_point() +
+      labs(title = "Fuel efficiency decreases with engine size")
+
+*a) Creates a scatterplot with a descriptive title communicating the main finding
+b) Creates a scatterplot and saves it to a file called "Fuel efficiency"
+c) Creates a bar chart with a title
+d) Produces an error because the title is too long
+
+40. Which of the following is an example of a GOOD plot title?
+a) "Scatterplot of displ vs hwy"
+b) "Figure 1"
+*c) "Larger engines are associated with lower fuel efficiency"
+d) "Data from the mpg dataset"
+
+41. Which of the following is an example of a POOR plot title?
+*a) "Scatterplot of x vs y"
+b) "Fuel efficiency drops sharply for engines above 4 liters"
+c) "Students who studied more performed better on the exam"
+d) "Therapy reduced anxiety scores after 8 weeks"
+
+42. What does `scale_fill_brewer()` do compared to `scale_color_brewer()`?
+a) They are identical
+*b) `scale_fill_brewer()` controls the fill color of shapes like bars; `scale_color_brewer()` controls outline/point colors
+c) `scale_fill_brewer()` is for continuous data; `scale_color_brewer()` is for discrete data
+d) `scale_fill_brewer()` only works with bar charts
+
+43. What does `labels = NULL` do when used inside a scale function like `scale_x_continuous()`?
+a) Shows the default labels
+*b) Removes the tick labels from the axis entirely
+c) Replaces labels with question marks
+d) Produces an error
+
+44. Which of the following correctly adds an arrow annotation to a ggplot?
+
+    annotate("segment", x = 3, xend = 5, y = 30, yend = 35,
+             arrow = arrow())
+
+a) This produces an error because `annotate()` doesn't support arrows
+*b) This draws an arrow from (3, 30) to (5, 35)
+c) This draws a line without an arrowhead
+d) This draws a rectangle from (3, 30) to (5, 35)
+
+45. You want to label a specific group of points on a scatterplot with text from a variable. Which function should you use?
+*a) `geom_text(aes(label = variable_name))`
+b) `annotate("text", label = variable_name)`
+c) `labs(label = variable_name)`
+d) `scale_text(label = variable_name)`
+
+46. What argument in `geom_text()` helps prevent labels from overlapping each other?
+a) `spread = TRUE`
+b) `dodge = TRUE`
+*c) `check_overlap = TRUE`
+d) `avoid_overlap = TRUE`
+
+47. What does the following code do?
+
+    ggplot(mpg, aes(displ, hwy)) +
+      geom_point() +
+      scale_y_continuous(breaks = seq(15, 40, by = 5))
+
+a) Filters the data to only show y values from 15 to 40
+*b) Places tick marks on the y-axis at 15, 20, 25, 30, 35, and 40
+c) Changes the y-axis to a logarithmic scale
+d) Sets the y-axis limits to 15 and 40
+
+48. What does `theme_classic()` look like?
+a) A dark background with light gridlines
+*b) A clean look with axis lines but no gridlines or gray background
+c) The default ggplot2 gray background with white gridlines
+d) A completely blank canvas with no axes
+
+49. Which of these is a best practice for communication plots?
+a) Use as many colors as possible to make the plot visually interesting
+*b) Label axes with clear, human-readable names instead of variable names
+c) Avoid titles because they take up space
+d) Use abbreviations for axis labels to save room
+
+50. You want to combine a scatterplot and a boxplot into a single figure with the scatterplot on the left and the boxplot on the right. Which package would help?
+a) gridExtra (deprecated approach)
+*b) patchwork
+c) cowplot is required; patchwork cannot do this
+d) ggplot2 can do this natively with `facet_wrap()`

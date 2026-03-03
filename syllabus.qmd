@@ -78,7 +78,7 @@ Regular attendance is expected. If you must miss class, please notify me in adva
 
 ### Late Work
 
-Assignments and quizzes can be submitted up to **48 hours** past the deadline with a **10% penalty per day** (calendar day, not business day). After 48 hours, late submissions are not accepted. For example, an assignment due Monday at 11:59 PM can be submitted until Wednesday at 11:59 PM, with a 10% deduction for each day late.
+Assignments and quizzes can be submitted up to **48 hours** past the deadline with a **10% penalty per day** (calendar day, not business day). After 48 hours, late submissions are not accepted. For example, an assignment due Sunday at 11:59 PM can be submitted until Tuesday at 11:59 PM, with a 10% deduction for each day late.
 
 Final project milestones follow the same policy. If you're facing circumstances that prevent you from meeting deadlines, please reach out to me as soon as possible so we can make a plan.
 
@@ -119,11 +119,13 @@ By building a strong foundation now, you'll be in a far better position to lever
 
 ### Weekly Coding Assignments (35%)
 
-Short, focused exercises that reinforce each session's content. These are due before the next class meeting and are designed to take 1-2 hours outside of class. You'll have time during class to start these and ask questions.
+Short, focused exercises that reinforce each session's content. These are due **Sunday at 11:59 PM** and are designed to take 1-2 hours outside of class. You'll have time during class to start these and ask questions.
 
 ### Reading Quizzes (15%)
 
-Brief Canvas quizzes on the R4DS readings, completed before class. Quizzes are graded on **completion** — you receive full credit for finishing the quiz, regardless of your score. The goal is to ensure you come to class having engaged with the material, not to test memorization.
+Each week, you'll complete a brief Canvas quiz covering that week's assigned readings. Quizzes are due **Tuesday at 11:59 PM** and cover readings for both Monday and Wednesday sessions. There are 10 quizzes total (one per week).
+
+Each quiz draws 5 random questions from a larger question bank. You can take each quiz as many times as you want — your **best score** counts. The goal is to make sure you've engaged with the readings before class, and unlimited attempts mean there's no reason not to keep trying until you've mastered the material.
 
 ### In-Class Participation (15%)
 
@@ -158,14 +160,14 @@ The team challenge is designed to build community and add a little friendly comp
 
 | Assignment | Topic | Assigned | Due |
 |------------|-------|----------|-----|
-| [1: Getting Started](/assignment/01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Mon Apr 6 |
-| [2: Data Transformation](/assignment/02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Mon Apr 13 |
-| [3: Tidying & Import](/assignment/03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Mon Apr 20 |
-| [4: Visualization Deep Dive](/assignment/04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Mon Apr 27 |
-| [5: Exploratory Data Analysis](/assignment/05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Mon May 4 |
-| [6: Data Types](/assignment/06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Mon May 11 |
-| [7: Joins & Missing Data](/assignment/07-assignment.qmd) | joins, NA handling | Wed May 13 | Wed May 20 |
-| [8: Reproducible Report](/assignment/08-assignment.qmd) | Quarto document | Wed May 27 | Mon Jun 1 |
+| [1: Getting Started](/assignment/01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Sun Apr 5 |
+| [2: Data Transformation](/assignment/02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Sun Apr 12 |
+| [3: Tidying & Import](/assignment/03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Sun Apr 19 |
+| [4: Visualization Deep Dive](/assignment/04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Sun Apr 26 |
+| [5: Exploratory Data Analysis](/assignment/05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Sun May 3 |
+| [6: Data Types](/assignment/06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Sun May 10 |
+| [7: Joins & Missing Data](/assignment/07-assignment.qmd) | joins, NA handling | Wed May 13 | Sun May 18 |
+| [8: Reproducible Report](/assignment/08-assignment.qmd) | Quarto document | Wed May 27 | Sun May 31 |
 
 ### Final Project Milestones
 

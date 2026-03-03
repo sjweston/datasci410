@@ -1,0 +1,305 @@
+Quiz title: Quiz 7: Strings, Factors & Joins (R4DS Ch. 14, 16, 19)
+
+1. In R, which of the following correctly creates a string?
+a) `x <- hello`
+*b) `x <- "hello"`
+c) `x <- 'hello"`
+d) `x <- string(hello)`
+
+2. In R, can you create strings using single quotes?
+a) No, only double quotes create strings
+*b) Yes, `'hello'` and `"hello"` are equivalent
+c) Single quotes create character vectors; double quotes create strings
+d) Single quotes are only for numbers
+
+3. What does `str_c()` do?
+a) Converts a value to a string
+*b) Combines (concatenates) multiple strings into one
+c) Counts characters in a string
+d) Compares two strings
+
+4. What does this code return?
+
+    str_c("Dr", "Weston", sep = " ")
+a) "DrWeston"
+*b) "Dr Weston"
+c) "Dr.Weston"
+d) An error because `sep` is not a valid argument
+
+5. What does `str_length("psychology")` return?
+a) 1
+b) 9
+*c) 10
+d) 11
+
+6. What does `str_to_lower("Hello World")` return?
+*a) "hello world"
+b) "HELLO WORLD"
+c) "Hello world"
+d) "helloworld"
+
+7. What does `str_to_upper("hello")` return?
+a) "hello"
+b) "Hello"
+*c) "HELLO"
+d) "hELLO"
+
+8. What does `str_to_title("the quick brown fox")` return?
+a) "THE QUICK BROWN FOX"
+b) "the quick brown fox"
+*c) "The Quick Brown Fox"
+d) "The quick brown fox"
+
+9. What does `str_trim()` do?
+a) Shortens a string to a specified length
+*b) Removes whitespace from the start and end of a string
+c) Removes all spaces from a string
+d) Trims the string to its first word
+
+10. What does `str_squish()` do that `str_trim()` does not?
+a) `str_squish()` works on vectors; `str_trim()` works on single strings
+*b) `str_squish()` also replaces multiple internal spaces with a single space
+c) `str_squish()` removes all whitespace including inside the string
+d) There is no difference
+
+11. What does `str_sub("psychology", 1, 3)` return?
+*a) "psy"
+b) "psy" through "cho"
+c) "p"
+d) "psych"
+
+12. What does `str_detect("I love data science", "data")` return?
+a) "data"
+b) 12
+*c) TRUE
+d) A vector of character positions
+
+13. `str_detect()` is useful inside which dplyr verb for keeping rows that contain a pattern?
+a) `mutate()`
+b) `select()`
+*c) `filter()`
+d) `arrange()`
+
+14. What does `str_replace("2023-01-15", "-", "/")` do?
+a) Replaces all hyphens with slashes
+*b) Replaces only the first hyphen with a slash, giving "2023/01-15"
+c) Removes the first hyphen
+d) Returns an error
+
+15. How does `str_replace_all()` differ from `str_replace()`?
+a) They are identical
+b) `str_replace_all()` works on all columns in a data frame
+*c) `str_replace_all()` replaces every occurrence of the pattern, not just the first
+d) `str_replace_all()` is case-insensitive
+
+16. What does `str_remove("ID: 12345", "ID: ")` return?
+a) "ID: "
+*b) "12345"
+c) " 12345"
+d) An error
+
+17. What is the difference between `str_remove()` and `str_remove_all()`?
+*a) `str_remove()` removes the first match; `str_remove_all()` removes every match
+b) `str_remove()` works on single strings; `str_remove_all()` works on vectors
+c) They are identical
+d) `str_remove_all()` also removes surrounding whitespace
+
+18. What does `separate_wider_delim()` do?
+a) Splits a data frame into multiple data frames
+*b) Splits a single string column into multiple columns based on a delimiter character
+c) Separates rows based on a condition
+d) Removes a delimiter from strings
+
+19. Which argument in `separate_wider_delim()` specifies what character to split on?
+a) `split`
+*b) `delim`
+c) `sep`
+d) `pattern`
+
+20. What does `separate_wider_position()` do?
+a) Separates columns based on a delimiter
+*b) Splits a string column into multiple columns based on fixed character widths
+c) Reorders columns by position
+d) Splits rows into groups
+
+21. In R, a **factor** is:
+a) A numeric variable used in multiplication
+*b) A categorical variable with a fixed, known set of possible values (levels)
+c) A logical vector with exactly two values
+d) A type of list
+
+22. Why are factors useful instead of plain character strings?
+a) Factors use less memory than character strings
+b) Factors can store numeric values
+*c) Factors enforce a defined set of valid levels and control the order in which categories appear in plots and tables
+d) Factors are required by all tidyverse functions
+
+23. What function creates a factor from a character vector?
+a) `as.character()`
+*b) `factor()`
+c) `levels()`
+d) `categorize()`
+
+24. When you create a factor, what are **levels**?
+a) The number of observations in each category
+b) The data type of the variable
+*c) The set of allowed values and their order
+d) A summary statistic for the factor
+
+25. In a ggplot bar chart, the order of bars for a factor variable is determined by:
+a) Alphabetical order of the values
+*b) The order of the factor levels
+c) The count of each category
+d) The order the values appear in the data
+
+26. What does `fct_reorder()` do?
+a) Reorders rows of a data frame
+*b) Reorders factor levels based on the values of another variable (e.g., reorder by median)
+c) Reverses the order of factor levels
+d) Removes unused factor levels
+
+27. When would you use `fct_reorder()` in a visualization?
+a) When making a scatterplot
+*b) When making a bar chart or dot plot and you want categories sorted by a summary value rather than alphabetically
+c) When you need to filter out certain categories
+d) When you want to add labels to a plot
+
+28. What does `fct_infreq()` do?
+a) Orders levels by their first appearance in the data
+*b) Reorders factor levels from most frequent to least frequent
+c) Counts the frequency of each level
+d) Removes infrequent levels
+
+29. What does `fct_relevel()` do?
+a) Removes levels from a factor
+b) Renames factor levels
+*c) Manually moves specific levels to the front (or a specified position) of the level order
+d) Sorts levels alphabetically
+
+30. What does this code do?
+
+    fct_relevel(survey$education, "High school", "College")
+a) Removes "High school" and "College" from the factor
+*b) Moves "High school" to the first position and "College" to the second, keeping other levels after
+c) Filters the data to only those two levels
+d) Renames the levels
+
+31. What does `fct_recode()` do?
+*a) Changes the names (labels) of factor levels
+b) Reorders factor levels
+c) Converts a factor to a numeric variable
+d) Counts observations per level
+
+32. What does `fct_collapse()` do?
+a) Removes all levels from a factor
+*b) Combines multiple existing levels into fewer, broader categories
+c) Sorts levels from largest to smallest
+d) Converts a factor to a character vector
+
+33. What does `fct_lump_n(x, n = 3)` do?
+a) Keeps only the 3 least common levels
+*b) Keeps the 3 most common levels and collapses all others into an "Other" category
+c) Randomly samples 3 levels
+d) Splits the factor into 3 equal groups
+
+34. Why might you use `fct_lump_n()` in a visualization?
+a) To increase the number of categories displayed
+*b) To simplify a plot when a variable has many rare categories that clutter the display
+c) To randomly select categories for analysis
+d) To remove missing values
+
+35. In R4DS, why do we need **joins**?
+a) To stack datasets on top of each other
+*b) Because data often comes in multiple related tables, and we need to combine them using shared variables
+c) To sort data by multiple columns
+d) To convert between data types
+
+36. A **primary key** is:
+a) The first column in any data frame
+*b) A variable (or set of variables) that uniquely identifies each row in its own table
+c) A password for accessing the data
+d) The most important variable in the dataset
+
+37. A **foreign key** is:
+a) A key from a non-English dataset
+b) A variable that uniquely identifies rows in its own table
+*c) A variable in one table that corresponds to the primary key in another table
+d) A key that has been removed from the dataset
+
+38. What does `left_join(x, y)` do?
+*a) Keeps all rows from x and adds matching columns from y; fills NA where there is no match
+b) Keeps only rows that appear in both x and y
+c) Keeps all rows from y and adds matching columns from x
+d) Removes rows from x that appear in y
+
+39. What does `right_join(x, y)` do?
+a) Keeps all rows from x
+*b) Keeps all rows from y and adds matching columns from x; fills NA where there is no match
+c) Keeps only rows that appear in both x and y
+d) Keeps all rows from both x and y
+
+40. What does `inner_join(x, y)` do?
+a) Keeps all rows from both tables
+b) Keeps all rows from x
+*c) Keeps only rows that have a match in both x and y
+d) Keeps rows from x that do NOT match y
+
+41. What does `full_join(x, y)` do?
+a) Keeps only matching rows
+b) Keeps all rows from x only
+c) Keeps all rows from y only
+*d) Keeps all rows from both x and y, filling NA where matches are missing
+
+42. What does `semi_join(x, y)` do?
+a) Keeps all columns from both x and y
+*b) Keeps rows of x that have a match in y, but does NOT add any columns from y
+c) Keeps half the rows of x
+d) Keeps rows of x that do NOT match y
+
+43. What does `anti_join(x, y)` do?
+a) Keeps rows that appear in both tables
+b) Removes all columns from y
+*c) Keeps rows of x that do NOT have a match in y
+d) Returns the opposite of a full join
+
+44. A researcher has a participant table and a survey-response table. They want to keep all participants even if some haven't responded yet. Which join should they use?
+a) `inner_join(participants, responses)`
+*b) `left_join(participants, responses)`
+c) `anti_join(participants, responses)`
+d) `semi_join(participants, responses)`
+
+45. A researcher wants to find which participants have NOT completed the survey. Which join helps?
+a) `left_join(participants, responses)`
+b) `inner_join(participants, responses)`
+c) `semi_join(participants, responses)`
+*d) `anti_join(participants, responses)`
+
+46. In dplyr joins, the `by` argument (or `join_by()`) specifies:
+a) Which rows to keep
+b) The type of join to perform
+*c) Which column(s) to match between the two tables
+d) The order of the output
+
+47. If the matching columns have **different names** in the two tables, how do you specify the join?
+a) Rename the columns first — there is no other way
+b) `by = c("name1", "name2")`
+*c) `join_by(name_in_x == name_in_y)`
+d) `by = name1 ~ name2`
+
+48. What happens when a key in the left table matches multiple rows in the right table during a `left_join()`?
+a) Only the first match is kept
+b) An error is thrown
+*c) The left-table row is duplicated — once for each matching right-table row
+d) The extra matches are silently dropped
+
+49. R4DS warns about **many-to-many** joins. When do these occur?
+a) When both tables have exactly one matching row per key
+*b) When duplicate key values exist in BOTH tables, causing an explosion of rows
+c) When the tables have different numbers of columns
+d) When using `full_join()` instead of `left_join()`
+
+50. Before performing a join, R4DS recommends checking that your key actually uniquely identifies rows. Which approach helps verify this?
+a) `glimpse()` the data
+b) `str()` on the key column
+*c) Count the keys and look for any with count greater than 1 (e.g., using `count()` and `filter(n > 1)`)
+d) Run the join and check for errors afterward
