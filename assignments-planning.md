@@ -8,8 +8,8 @@ This document outlines the assessment structure for PSY 410. Use this to iterate
 
 | Component | Weight | Quantity |
 |-----------|--------|----------|
-| Weekly Coding Assignments | 35% | 8 (drop lowest 1) |
-| Reading Quizzes | 15% | 10 (drop lowest 2) |
+| Weekly Coding Assignments | 35% | 8 |
+| Reading Quizzes | 15% | 10 (completion-based) |
 | In-Class Participation | 15% | Ongoing |
 | Final Project | 35% | 3 checkpoints + presentation |
 

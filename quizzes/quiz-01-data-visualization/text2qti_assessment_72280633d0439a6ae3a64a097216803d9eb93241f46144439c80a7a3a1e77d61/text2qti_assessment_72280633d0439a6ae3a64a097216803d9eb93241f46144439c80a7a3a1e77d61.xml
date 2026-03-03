@@ -1,0 +1,3122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<questestinterop xmlns="http://www.imsglobal.org/xsd/ims_qtiasiv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/ims_qtiasiv1p2 http://www.imsglobal.org/xsd/ims_qtiasiv1p2p1.xsd">
+  <assessment ident="text2qti_assessment_72280633d0439a6ae3a64a097216803d9eb93241f46144439c80a7a3a1e77d61" title="Quiz 1: Data Visualization (R4DS Ch. 1)">
+    <qtimetadata>
+      <qtimetadatafield>
+        <fieldlabel>cc_maxattempts</fieldlabel>
+        <fieldentry>1</fieldentry>
+      </qtimetadatafield>
+    </qtimetadata>
+    <section ident="root_section">
+      <item ident="text2qti_question_eae874d522d219305047fc1e5aa2e17c646c2c0b3dac33de42edd5a9f326fa12" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_7da4b3cd6d4d688e5c4643b14eb477bb8359ec2f2903b686023f7c2f5cacc982,text2qti_choice_da9d8290e79f3410925bf5cb9647900eadd77c59682f6c399ad231d6ad96897e,text2qti_choice_f7af0c2163aefb7021b0c4fc474446162ac3dfa011d1a55a021445cf730a3482,text2qti_choice_2f5e4713924972d86e2939cac43453cf818d4c86e8422e71a55107c39ed47fb4</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_eae874d522d219305047fc1e5aa2e17c646c2c0b3dac33de42edd5a9f326fa12</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;In ggplot2, which function initializes a plot object?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_7da4b3cd6d4d688e5c4643b14eb477bb8359ec2f2903b686023f7c2f5cacc982">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;plot()&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_da9d8290e79f3410925bf5cb9647900eadd77c59682f6c399ad231d6ad96897e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;qplot()&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f7af0c2163aefb7021b0c4fc474446162ac3dfa011d1a55a021445cf730a3482">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;ggplot()&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2f5e4713924972d86e2939cac43453cf818d4c86e8422e71a55107c39ed47fb4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;draw()&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_f7af0c2163aefb7021b0c4fc474446162ac3dfa011d1a55a021445cf730a3482</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_806a656f6c105eeb776f40ff6fb743e9eab92e19d7db17956ea20fcac71b74ff" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_b3906c21219f16758eb2a16bdfea44077a7460fdc85f069dbcc2893eb37ab5e6,text2qti_choice_2f8934fee8091f541bd492542ba580b55e9b9982f1e43d43284ac1ac1adccb89,text2qti_choice_572abfdaea146436e2c8edf31eff5ad952f6f0f29b4699d12d787206b88fea31,text2qti_choice_9e6fe54fa7174c2052da42f7414487b0194550c854d621db199456f2ebe0e942</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_806a656f6c105eeb776f40ff6fb743e9eab92e19d7db17956ea20fcac71b74ff</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does the &lt;code&gt;+&lt;/code&gt; operator do in a ggplot2 statement?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_b3906c21219f16758eb2a16bdfea44077a7460fdc85f069dbcc2893eb37ab5e6">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Adds data values together before plotting&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2f8934fee8091f541bd492542ba580b55e9b9982f1e43d43284ac1ac1adccb89">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Adds a new layer or component to the plot&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_572abfdaea146436e2c8edf31eff5ad952f6f0f29b4699d12d787206b88fea31">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Merges two datasets together&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_9e6fe54fa7174c2052da42f7414487b0194550c854d621db199456f2ebe0e942">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Runs the plot and displays it&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_2f8934fee8091f541bd492542ba580b55e9b9982f1e43d43284ac1ac1adccb89</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_b17588233339d4930043caae3972612685be62f3bb35fd81dd5e124f29657a77" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_362328d7c024d1f8a1664ee6ec49777da4909744f0a44936e1458748ace32be9,text2qti_choice_8598a721d9079186650c6b32ffdf74be61b94776bc80fd5a8f68d233e35bbe80,text2qti_choice_5066fda5ab97b0feb9ed20edd02c2ce996d86c1fb4d075d2aeb3a480c087f64a,text2qti_choice_10571ccaf2f66ecfb69fc40b386f95b6e04b5daf67faf8c3deb815347913849b</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_b17588233339d4930043caae3972612685be62f3bb35fd81dd5e124f29657a77</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;In the ggplot2 template, &lt;code&gt;aes()&lt;/code&gt; is short for:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_362328d7c024d1f8a1664ee6ec49777da4909744f0a44936e1458748ace32be9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;axis endpoint specification&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8598a721d9079186650c6b32ffdf74be61b94776bc80fd5a8f68d233e35bbe80">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;automatic element styling&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5066fda5ab97b0feb9ed20edd02c2ce996d86c1fb4d075d2aeb3a480c087f64a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;aesthetic mapping&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_10571ccaf2f66ecfb69fc40b386f95b6e04b5daf67faf8c3deb815347913849b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;aesthetically engineered sequence&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_5066fda5ab97b0feb9ed20edd02c2ce996d86c1fb4d075d2aeb3a480c087f64a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_ed0f011e1417b7e21cf2d63113305a82e5db2907a59d8bfd80a37ccbca23b7fd" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_6632ad07a0f5b9994adaeb256a54553a0b3be7df997b49b5bc308d3e86da8d49,text2qti_choice_25e6b1155fcaad777d6b24501a82e3a7ba1227d52cb2cd19429ada30ee463502,text2qti_choice_eaaf77af25316a35a938eb6238e4e17f21c52ca13a492c1dc48269fc8a1ba87c,text2qti_choice_06b2537663077e9a5b4bdec100fe12901f0689e6fcd82bc6af0b9cf69e3e4265</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_ed0f011e1417b7e21cf2d63113305a82e5db2907a59d8bfd80a37ccbca23b7fd</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What is a &lt;strong&gt;geom&lt;/strong&gt; in ggplot2?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_6632ad07a0f5b9994adaeb256a54553a0b3be7df997b49b5bc308d3e86da8d49">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A type of data transformation&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_25e6b1155fcaad777d6b24501a82e3a7ba1227d52cb2cd19429ada30ee463502">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A geometric object that represents data visually (e.g., point, line, bar)&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_eaaf77af25316a35a938eb6238e4e17f21c52ca13a492c1dc48269fc8a1ba87c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The coordinate system of the plot&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_06b2537663077e9a5b4bdec100fe12901f0689e6fcd82bc6af0b9cf69e3e4265">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A color palette&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_25e6b1155fcaad777d6b24501a82e3a7ba1227d52cb2cd19429ada30ee463502</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_764df0665db764ae221ca3199396a032589e29fd3072a02be08ca3ce5a113d73" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_d962c9372586ed6dbdc91cc30923e308ccb83a0e21c48e9632a2ed7b8abe57d9,text2qti_choice_9ef67e9e936e1e43772a332831a9e847daeb9d47d201bb8ec27f6914c9f877b9,text2qti_choice_5379aeb09c7f225aa72dc53ad92856431dcf0fa9d0b372bce346001ffad2bb06,text2qti_choice_ea11672f9ba2c6989678dbf0d56ec4d299b05cb5de61ef43d472291baef50e33</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_764df0665db764ae221ca3199396a032589e29fd3072a02be08ca3ce5a113d73</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;The &lt;code&gt;mpg&lt;/code&gt; dataset built into ggplot2 contains:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_d962c9372586ed6dbdc91cc30923e308ccb83a0e21c48e9632a2ed7b8abe57d9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Miles-per-gallon data for public transit vehicles&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_9ef67e9e936e1e43772a332831a9e847daeb9d47d201bb8ec27f6914c9f877b9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Fuel economy data for American-made cars only&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5379aeb09c7f225aa72dc53ad92856431dcf0fa9d0b372bce346001ffad2bb06">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Fuel economy data for a variety of car models&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_ea11672f9ba2c6989678dbf0d56ec4d299b05cb5de61ef43d472291baef50e33">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Aircraft fuel efficiency records&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_5379aeb09c7f225aa72dc53ad92856431dcf0fa9d0b372bce346001ffad2bb06</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_b22677041bacd3698a5d333e674fdd721acaf924ffa0ed145f62152c15ed958e" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_058d7d40d64d54d26e366ef154db2947849dbed288fcca6ce9d4fb9403815ac9,text2qti_choice_19cfb09658e6e5f3ee63daa4899948cae4b7eacf821b913f2776c370a027628a,text2qti_choice_89bd4052a7e1a00a1bc18b12968a7a3cc1b3cd012a2339c0cdfe8e3784a43714,text2qti_choice_07e0714c6dc3343beb21194049a3ac507105d2747f1eac6e74ed7d675a822d7c</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_b22677041bacd3698a5d333e674fdd721acaf924ffa0ed145f62152c15ed958e</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which variable in &lt;code&gt;mpg&lt;/code&gt; records engine displacement in litres?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_058d7d40d64d54d26e366ef154db2947849dbed288fcca6ce9d4fb9403815ac9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;hwy&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_19cfb09658e6e5f3ee63daa4899948cae4b7eacf821b913f2776c370a027628a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;cyl&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_89bd4052a7e1a00a1bc18b12968a7a3cc1b3cd012a2339c0cdfe8e3784a43714">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;displ&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_07e0714c6dc3343beb21194049a3ac507105d2747f1eac6e74ed7d675a822d7c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;trans&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_89bd4052a7e1a00a1bc18b12968a7a3cc1b3cd012a2339c0cdfe8e3784a43714</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_222c5f5c5657ec991df15fac425e7c49db7078522c37ded3bbd3433279a3ec23" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_0b11ff5c6564285138bd350f6c2bba1d9b2cabf52489eeeaf6b965e05da414fd,text2qti_choice_f399b3ff862cd25d05e3ea9f35605b5f629cd8f71096d995bea151a43def6d25,text2qti_choice_93d44c96dd2d8dae98603e1fca84dafcf864a1eebeac26f3dfe8db776e14f714,text2qti_choice_08c72b8bbdeb780af3b936bca11f8137ba188d3d8bb3f94efca0b25614f25b6a</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_222c5f5c5657ec991df15fac425e7c49db7078522c37ded3bbd3433279a3ec23</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which variable in &lt;code&gt;mpg&lt;/code&gt; records highway miles per gallon?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_0b11ff5c6564285138bd350f6c2bba1d9b2cabf52489eeeaf6b965e05da414fd">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;cty&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f399b3ff862cd25d05e3ea9f35605b5f629cd8f71096d995bea151a43def6d25">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;hwy&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_93d44c96dd2d8dae98603e1fca84dafcf864a1eebeac26f3dfe8db776e14f714">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;fl&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_08c72b8bbdeb780af3b936bca11f8137ba188d3d8bb3f94efca0b25614f25b6a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;displ&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_f399b3ff862cd25d05e3ea9f35605b5f629cd8f71096d995bea151a43def6d25</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_edb1b7e1f51fb66f9387fe5defe76416a475955a58b27348f3b5938b66977f6b" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_17c0e74df22ce38c7010b63f2f729e62ebc8e686fdbfb7acefc61bb2b7b32ed0,text2qti_choice_a60e8be8a8d15d08e5b62b89ec8675e6b857cf8a82903998d0323b754c798a93,text2qti_choice_29bd8c78989b9c7fb4933e74a8ed0736bf9d79df3d3e4289636efafbc09bcbd6,text2qti_choice_1ec4c13530240749bb9142012c19d737a1646a74ffaa443f4efff785de7a7028</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_edb1b7e1f51fb66f9387fe5defe76416a475955a58b27348f3b5938b66977f6b</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;strong&gt;mapping&lt;/strong&gt; an aesthetic mean in ggplot2?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_17c0e74df22ce38c7010b63f2f729e62ebc8e686fdbfb7acefc61bb2b7b32ed0">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Linking a visual property (like color or size) to a variable in the data&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a60e8be8a8d15d08e5b62b89ec8675e6b857cf8a82903998d0323b754c798a93">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Setting a visual property to a fixed value for all observations&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_29bd8c78989b9c7fb4933e74a8ed0736bf9d79df3d3e4289636efafbc09bcbd6">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Creating a legend entry for the plot&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_1ec4c13530240749bb9142012c19d737a1646a74ffaa443f4efff785de7a7028">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Filtering which rows of data to display&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_17c0e74df22ce38c7010b63f2f729e62ebc8e686fdbfb7acefc61bb2b7b32ed0</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_e0a1fa08d5bf970812f9b2fafb7704ebc4b48d4c2ba1a4767239cf326e3c2821" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_b658468799d644641c798d4dbc1a572b388d65e0fa55f6192247f82cf2fe273a,text2qti_choice_b04a888bef69bf1ccf666e3c0214ed402af9e51a1ec36885bcc1ce6a5efe15c1,text2qti_choice_9562714fdb9884a3688476b71cd783937b64a8bdc9e0ffada90f35a8d2c1d5c6,text2qti_choice_920c7fb21a99bc5a567aa509ee89b20b9a75ae969565d2dc7e8e55745205162a</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_e0a1fa08d5bf970812f9b2fafb7704ebc4b48d4c2ba1a4767239cf326e3c2821</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;strong&gt;setting&lt;/strong&gt; an aesthetic mean in ggplot2?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_b658468799d644641c798d4dbc1a572b388d65e0fa55f6192247f82cf2fe273a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Linking a visual property to a variable in the data&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b04a888bef69bf1ccf666e3c0214ed402af9e51a1ec36885bcc1ce6a5efe15c1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Assigning a visual property a fixed constant value, outside of &lt;code&gt;aes()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_9562714fdb9884a3688476b71cd783937b64a8bdc9e0ffada90f35a8d2c1d5c6">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Defining the range of an axis&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_920c7fb21a99bc5a567aa509ee89b20b9a75ae969565d2dc7e8e55745205162a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Specifying which aesthetic maps to x vs. y&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_b04a888bef69bf1ccf666e3c0214ed402af9e51a1ec36885bcc1ce6a5efe15c1</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_522b51297bb7888e2b6cf2c19bf18b09372a17adb934f742424d4caf4d56b739" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_0e7546a6a9f4d5c8e971ddbe60bf4eadbb4d86df4eb446f0e7cf4a10da5e35c0,text2qti_choice_2f51f2f0b97e555557fb063755d5ee0e493758174e14da429b6d73a8d97fe16e,text2qti_choice_90a1533638a3d1c5c0de9a9019424299084d51f50c72e2cceb04680025355c43,text2qti_choice_dfedf7bac528fb75ed2f6c48f23b244f29f077456238646a70d8986658a54979</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_522b51297bb7888e2b6cf2c19bf18b09372a17adb934f742424d4caf4d56b739</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What color will the points be when this code runs?&lt;/p&gt;
+&lt;p&gt;ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy, color = &amp;ldquo;blue&amp;rdquo;))&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_0e7546a6a9f4d5c8e971ddbe60bf4eadbb4d86df4eb446f0e7cf4a10da5e35c0">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Blue, because &amp;ldquo;blue&amp;rdquo; is a recognized color name&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2f51f2f0b97e555557fb063755d5ee0e493758174e14da429b6d73a8d97fe16e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A reddish-orange color, because &amp;ldquo;blue&amp;rdquo; is treated as a data value and mapped to the default discrete color scale&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_90a1533638a3d1c5c0de9a9019424299084d51f50c72e2cceb04680025355c43">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Gray, the ggplot2 default&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_dfedf7bac528fb75ed2f6c48f23b244f29f077456238646a70d8986658a54979">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;This produces an error&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_2f51f2f0b97e555557fb063755d5ee0e493758174e14da429b6d73a8d97fe16e</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_a65da7016f5207069cde3f5abc7fe7b9ac08dd44ee2d22e4e22ee5e36811cecd" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_953f315c8d7b6e4d3bab432ba62ecf331c6fda86babafff0c5a0674f6e5a7d1c,text2qti_choice_3639ac9af1cccffc811358c8693fdc2da281ce28499b4af4d9a2daec5d909c24,text2qti_choice_024e872bf859c4094f8cd15ef719ae744bef9aa0c96ab2c6233ebde53c4a3a85,text2qti_choice_b2eca46e9339696f170d928553aba59cd86ff732712ba84a2a5e5fe3ba978e90</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_a65da7016f5207069cde3f5abc7fe7b9ac08dd44ee2d22e4e22ee5e36811cecd</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What is the correct way to make all points in a &lt;code&gt;geom_point()&lt;/code&gt; layer the color blue?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_953f315c8d7b6e4d3bab432ba62ecf331c6fda86babafff0c5a0674f6e5a7d1c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point(aes(color = "blue"))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3639ac9af1cccffc811358c8693fdc2da281ce28499b4af4d9a2daec5d909c24">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point(aes(color = blue))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_024e872bf859c4094f8cd15ef719ae744bef9aa0c96ab2c6233ebde53c4a3a85">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point(color = "blue")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b2eca46e9339696f170d928553aba59cd86ff732712ba84a2a5e5fe3ba978e90">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(color = "blue") + geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_024e872bf859c4094f8cd15ef719ae744bef9aa0c96ab2c6233ebde53c4a3a85</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_16a9dbe224420c448daf1d3464351585f0a73bdfdeaabdaff1f7ef70a59cb607" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_683fe1b463e412ecb3e74904833194a638cf36d436508c1f389a899b31947695,text2qti_choice_8cf56455ad4e0457ce44c4fed97a218872ea0328d52f78c4e264e181bf1c100b,text2qti_choice_6282bbb8624ba3ac952db319a5c9a8fc067023548b7f781e57bd23e3d95a11e7,text2qti_choice_d816c9e776e9f0bea3c26264ea226bf14c430f4940fe88105f234514b2bbdb81</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_16a9dbe224420c448daf1d3464351585f0a73bdfdeaabdaff1f7ef70a59cb607</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which aesthetic controls the transparency of a geom?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_683fe1b463e412ecb3e74904833194a638cf36d436508c1f389a899b31947695">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;opacity&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8cf56455ad4e0457ce44c4fed97a218872ea0328d52f78c4e264e181bf1c100b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;shade&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6282bbb8624ba3ac952db319a5c9a8fc067023548b7f781e57bd23e3d95a11e7">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;alpha&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_d816c9e776e9f0bea3c26264ea226bf14c430f4940fe88105f234514b2bbdb81">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;clarity&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_6282bbb8624ba3ac952db319a5c9a8fc067023548b7f781e57bd23e3d95a11e7</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_05ea1eb31c135877f57231cf9418da9783257f2e320782468260037718d1e36b" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_93ef8868b8ff8fdba8f65d4a26cc4ddbfefc467b390f4fa18435df44800afaf0,text2qti_choice_2b1d065132d1a3bc9012b4020f73ff11b9e64cfe759e9ad94e8cc81fdf8df2fb,text2qti_choice_9df8c0d38d6c7b8ff205bf88e79e3dca2291e3d62f3e532448489d08b926cd8a,text2qti_choice_c688274d7e2903961d41b8637d3f3eb4893180902948a638ee0387b3967f386b</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_05ea1eb31c135877f57231cf9418da9783257f2e320782468260037718d1e36b</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;When you map a &lt;strong&gt;continuous&lt;/strong&gt; variable to the &lt;code&gt;color&lt;/code&gt; aesthetic, ggplot2 produces:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_93ef8868b8ff8fdba8f65d4a26cc4ddbfefc467b390f4fa18435df44800afaf0">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A continuous gradient color scale&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2b1d065132d1a3bc9012b4020f73ff11b9e64cfe759e9ad94e8cc81fdf8df2fb">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A discrete set of colors, one per unique value&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_9df8c0d38d6c7b8ff205bf88e79e3dca2291e3d62f3e532448489d08b926cd8a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error, because color requires a categorical variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c688274d7e2903961d41b8637d3f3eb4893180902948a638ee0387b3967f386b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A black-and-white gradient&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_93ef8868b8ff8fdba8f65d4a26cc4ddbfefc467b390f4fa18435df44800afaf0</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_0c814f7d44de3499958d0fe10400721a6b5c739eea323c2fb4953961a975ddea" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_e42587896a14cce43d38ee704d7a98600bdc33511aeb6772a1fb97c538b99177,text2qti_choice_34b83e67c141d503f03651f1a8bff9ac603527e8dd77e9e4f78301c5e0e7fc50,text2qti_choice_53d5322de96812b55244e5992a8718a149606a1a7021fb90dfcffff260079814,text2qti_choice_abd00eecd38e4a82b6385202c8229f030d88d293e4d7732fb5c23f95453ed567</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_0c814f7d44de3499958d0fe10400721a6b5c739eea323c2fb4953961a975ddea</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;When you map a &lt;strong&gt;categorical&lt;/strong&gt; variable to the &lt;code&gt;color&lt;/code&gt; aesthetic, ggplot2 produces:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_e42587896a14cce43d38ee704d7a98600bdc33511aeb6772a1fb97c538b99177">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A gradient from light to dark&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_34b83e67c141d503f03651f1a8bff9ac603527e8dd77e9e4f78301c5e0e7fc50">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A discrete set of distinct colors, one per category&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_53d5322de96812b55244e5992a8718a149606a1a7021fb90dfcffff260079814">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;All points in different shades of gray&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_abd00eecd38e4a82b6385202c8229f030d88d293e4d7732fb5c23f95453ed567">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error, because color requires a numeric variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_34b83e67c141d503f03651f1a8bff9ac603527e8dd77e9e4f78301c5e0e7fc50</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_5beea74fce6822186c679a69eb3a5e881311cfb9ea5708be6e12406993dd8ee3" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_5a280c64cecbae283ebd9261c54ce27a5a1258ab9019a7ab9d8edec0b3426de4,text2qti_choice_334e07f23db0e379cd047e664b7506d662827906b32c4c70ff46ad12bc47ce1f,text2qti_choice_8113ce284c3ec2a6d989c10a7d9339e15a26f778906cb562f86e1d113f1488da,text2qti_choice_38ebd6cad4a73dbef98df32f6b8edc3f6b9649fb14fdb488aa2d1806264ab628</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_5beea74fce6822186c679a69eb3a5e881311cfb9ea5708be6e12406993dd8ee3</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Where you place &lt;code&gt;aes()&lt;/code&gt; — inside &lt;code&gt;ggplot()&lt;/code&gt; versus inside a specific &lt;code&gt;geom_*()&lt;/code&gt; call — determines:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_5a280c64cecbae283ebd9261c54ce27a5a1258ab9019a7ab9d8edec0b3426de4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Nothing; both placements are completely interchangeable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_334e07f23db0e379cd047e664b7506d662827906b32c4c70ff46ad12bc47ce1f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Whether the mapping applies globally to all layers or only to that specific geom&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8113ce284c3ec2a6d989c10a7d9339e15a26f778906cb562f86e1d113f1488da">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Whether the legend is shown or hidden&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_38ebd6cad4a73dbef98df32f6b8edc3f6b9649fb14fdb488aa2d1806264ab628">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Whether the aesthetic is mapped or set&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_334e07f23db0e379cd047e664b7506d662827906b32c4c70ff46ad12bc47ce1f</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_5bd9b67b5a9af4c4796f1678f08c04b719fd0f9649cf038d240e97a8798eb02c" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_c4a85e4d54f691192b061e35497d4f872e6d34103a05f843519e697dcd5de942,text2qti_choice_fe0597268b2118f37e4dc930551c842fc2e2d7cc09e123acaebf0b2896980426,text2qti_choice_374dc13b679e07eeb4a6fd26e09ed74cf11c5ce784015c45123c8c7168779f82,text2qti_choice_020547bef77735bb23bc04ef6689cc9eeb4868004280729799ef1118398bbf1b</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_5bd9b67b5a9af4c4796f1678f08c04b719fd0f9649cf038d240e97a8798eb02c</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;code&gt;geom_smooth()&lt;/code&gt; add to a plot by default?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_c4a85e4d54f691192b061e35497d4f872e6d34103a05f843519e697dcd5de942">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A straight line from the minimum to the maximum data point&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_fe0597268b2118f37e4dc930551c842fc2e2d7cc09e123acaebf0b2896980426">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A smoothed curve (loess by default) with a confidence interval band&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_374dc13b679e07eeb4a6fd26e09ed74cf11c5ce784015c45123c8c7168779f82">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A horizontal line at the mean of y&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_020547bef77735bb23bc04ef6689cc9eeb4868004280729799ef1118398bbf1b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A linear regression line&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_fe0597268b2118f37e4dc930551c842fc2e2d7cc09e123acaebf0b2896980426</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_a47e6d39e13621a22f4308e986ae92c310b7f14fde3b11b1f57f7ec61320d824" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_f776956a437e6805f82ecb1848188d94cfd8598d0550b8234aa66bf574cf81c4,text2qti_choice_ab4b2b9f4c3e4b2d6955e25ab21ed60cef20d0ac1af072c0a9b3cb4ddbf8cf98,text2qti_choice_70e0f07c10aaa8092d299293e3488cd970a2207c0bb7250142498535a5d67dad,text2qti_choice_1fa69272c42916282702bd4224e858c72c3b16c4cb888d128f866336cfb4d8f9</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_a47e6d39e13621a22f4308e986ae92c310b7f14fde3b11b1f57f7ec61320d824</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;How do you add a linear regression line (instead of the default loess smoother) with &lt;code&gt;geom_smooth()&lt;/code&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_f776956a437e6805f82ecb1848188d94cfd8598d0550b8234aa66bf574cf81c4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(type = "lm")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_ab4b2b9f4c3e4b2d6955e25ab21ed60cef20d0ac1af072c0a9b3cb4ddbf8cf98">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(fit = "linear")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_70e0f07c10aaa8092d299293e3488cd970a2207c0bb7250142498535a5d67dad">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(method = "lm")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_1fa69272c42916282702bd4224e858c72c3b16c4cb888d128f866336cfb4d8f9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(regression = TRUE)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_70e0f07c10aaa8092d299293e3488cd970a2207c0bb7250142498535a5d67dad</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_b2b51516b2032b591a3ddb5557cc80a721eb0df04227dee3e0f30051f78174ab" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_1f8298d30b94d800de4fadf38d4adab403d8ded65d601fcb1e11a1e401a4dd0a,text2qti_choice_878ca7ed18f48479b3b19cfe775dda3a9054215de74e81e5dc2a44ff89f9c7e1,text2qti_choice_b61033ceee3238f82a49cd5af418fe3ad2e43e7933630c9532897109ef93e35c,text2qti_choice_ffaabb516a2db1cd6fad7605737439d942ed621440a5fc221dad287a13a00bdf</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_b2b51516b2032b591a3ddb5557cc80a721eb0df04227dee3e0f30051f78174ab</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;How do you remove the shaded confidence interval band from &lt;code&gt;geom_smooth()&lt;/code&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_1f8298d30b94d800de4fadf38d4adab403d8ded65d601fcb1e11a1e401a4dd0a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(ci = FALSE)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_878ca7ed18f48479b3b19cfe775dda3a9054215de74e81e5dc2a44ff89f9c7e1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(ribbon = FALSE)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b61033ceee3238f82a49cd5af418fe3ad2e43e7933630c9532897109ef93e35c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(se = FALSE)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_ffaabb516a2db1cd6fad7605737439d942ed621440a5fc221dad287a13a00bdf">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(shade = FALSE)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_b61033ceee3238f82a49cd5af418fe3ad2e43e7933630c9532897109ef93e35c</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_880f4a25c0a25eb02ffbcb4e7e59872af8a9334401f7c94fa1930a4932270e9b" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_19cd4d7353d0ee20ffa4fbb744c4b14533529fd8d6105de1730dd530326e36e2,text2qti_choice_d02625c0e13bb701ada2ed86f06c897c2cfed3716e66a807e22170d47d37d338,text2qti_choice_cabb573eac00de755833ab33b5bd7faebc23c22b14c42ad9ad7ebe718cdb87a5,text2qti_choice_b2a48168fc822284a1b0dd823a6854c44dcb62c6f867430f85afd5dfe3b8ead5</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_880f4a25c0a25eb02ffbcb4e7e59872af8a9334401f7c94fa1930a4932270e9b</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;You map &lt;code&gt;color = drv&lt;/code&gt; inside &lt;code&gt;ggplot(aes(...))&lt;/code&gt; and then add both &lt;code&gt;geom_point()&lt;/code&gt; and &lt;code&gt;geom_smooth()&lt;/code&gt;. What happens?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_19cd4d7353d0ee20ffa4fbb744c4b14533529fd8d6105de1730dd530326e36e2">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Only &lt;code&gt;geom_point()&lt;/code&gt; uses the color mapping; &lt;code&gt;geom_smooth()&lt;/code&gt; ignores it&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_d02625c0e13bb701ada2ed86f06c897c2cfed3716e66a807e22170d47d37d338">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Both layers inherit the color mapping and plot separately by &lt;code&gt;drv&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_cabb573eac00de755833ab33b5bd7faebc23c22b14c42ad9ad7ebe718cdb87a5">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error occurs because you can&amp;rsquo;t use a global color mapping with multiple geoms&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b2a48168fc822284a1b0dd823a6854c44dcb62c6f867430f85afd5dfe3b8ead5">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth()&lt;/code&gt; draws one overall line while &lt;code&gt;geom_point()&lt;/code&gt; shows separate colors&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_d02625c0e13bb701ada2ed86f06c897c2cfed3716e66a807e22170d47d37d338</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_ba4ceae1be342c6ddbbf3edc5bbd8f07edd78cc067d352251b91cc19d9aa7115" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_a0155756def2c5e1fc13f2ba7d33d323ba3701ba13616848494cebc109ad8600,text2qti_choice_8314aa57364e5cefd30ef6ec977b139d5f92a705ea58b6a3e59ac226dc4b747f,text2qti_choice_506036b2b830d9983b692a2961a14f3700009cbabc4006d68b42dfbb05e5180c,text2qti_choice_82e59ec1ee53d7ee446ffc1ac11991b0e36758f5e4ce28f0298eca8f9ec73d38</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_ba4ceae1be342c6ddbbf3edc5bbd8f07edd78cc067d352251b91cc19d9aa7115</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;You want separate smooth lines by &lt;code&gt;drv&lt;/code&gt;, but points should NOT be colored by &lt;code&gt;drv&lt;/code&gt;. Which code achieves this?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_a0155756def2c5e1fc13f2ba7d33d323ba3701ba13616848494cebc109ad8600">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy, color = drv)) + geom_point() + geom_smooth()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8314aa57364e5cefd30ef6ec977b139d5f92a705ea58b6a3e59ac226dc4b747f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(aes(color = drv))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_506036b2b830d9983b692a2961a14f3700009cbabc4006d68b42dfbb05e5180c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth(color = drv)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_82e59ec1ee53d7ee446ffc1ac11991b0e36758f5e4ce28f0298eca8f9ec73d38">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy)) + geom_point(color = "gray") + geom_smooth(aes(color = drv))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_8314aa57364e5cefd30ef6ec977b139d5f92a705ea58b6a3e59ac226dc4b747f</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_f2bc2909fecc90112944ebb4bed6d408eb9a63407e7ddf5f60743bbc90f0d939" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_092c69719a40dd2ee18a7b161c8648de703562f855b1f311570285e828eb0c74,text2qti_choice_8024e79efd092691687aea9a870de2da920ea6d75390fc797aebb69e8b97af71,text2qti_choice_0b024d48cf5b7abcd32a9e0bf6bdaf319528d6ee7ad8b2119505ba051039ac6c,text2qti_choice_9118ad7f289f60484610c3d4c97491d7944e3350aacdc10f579c59a94edad0ba</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_f2bc2909fecc90112944ebb4bed6d408eb9a63407e7ddf5f60743bbc90f0d939</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;code&gt;facet_wrap(~ class)&lt;/code&gt; do?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_092c69719a40dd2ee18a7b161c8648de703562f855b1f311570285e828eb0c74">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Colors each point by the &lt;code&gt;class&lt;/code&gt; variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8024e79efd092691687aea9a870de2da920ea6d75390fc797aebb69e8b97af71">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Creates a separate subplot panel for each level of &lt;code&gt;class&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_0b024d48cf5b7abcd32a9e0bf6bdaf319528d6ee7ad8b2119505ba051039ac6c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Filters the data to show only one class at a time&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_9118ad7f289f60484610c3d4c97491d7944e3350aacdc10f579c59a94edad0ba">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Wraps long axis labels for the &lt;code&gt;class&lt;/code&gt; variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_8024e79efd092691687aea9a870de2da920ea6d75390fc797aebb69e8b97af71</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_51b786724636ae2c7f29d4ecbd4b81ffe04fdb15d85d9b15e4f438e4e29526dc" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_36e824b0bad8c24710f26dd7ad3db43266af70ec44506f977410c5101ffe9a56,text2qti_choice_79df96918f25cbfdd9e2d95dd785e54c3c03ed4233ba207abd2da6a1468c6bb6,text2qti_choice_a12e195e6131b86c11a755a7c5f497d9f11598c71c65a0d5ee5915694091a85e,text2qti_choice_f34a262dc927a46b47a2563889afc121c0175c3ae2a5e6f0dd7c39822c5dd8ed</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_51b786724636ae2c7f29d4ecbd4b81ffe04fdb15d85d9b15e4f438e4e29526dc</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What is the main practical difference between &lt;code&gt;facet_wrap()&lt;/code&gt; and &lt;code&gt;facet_grid()&lt;/code&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_36e824b0bad8c24710f26dd7ad3db43266af70ec44506f977410c5101ffe9a56">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;facet_wrap()&lt;/code&gt; is for categorical variables; &lt;code&gt;facet_grid()&lt;/code&gt; is for continuous variables&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_79df96918f25cbfdd9e2d95dd785e54c3c03ed4233ba207abd2da6a1468c6bb6">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;facet_wrap()&lt;/code&gt; wraps panels from one variable into a grid; &lt;code&gt;facet_grid()&lt;/code&gt; arranges panels in a strict row × column layout defined by two variables&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a12e195e6131b86c11a755a7c5f497d9f11598c71c65a0d5ee5915694091a85e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;facet_grid()&lt;/code&gt; is an older, deprecated version of &lt;code&gt;facet_wrap()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f34a262dc927a46b47a2563889afc121c0175c3ae2a5e6f0dd7c39822c5dd8ed">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;facet_wrap()&lt;/code&gt; creates rows; &lt;code&gt;facet_grid()&lt;/code&gt; creates columns&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_79df96918f25cbfdd9e2d95dd785e54c3c03ed4233ba207abd2da6a1468c6bb6</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_bb85d657baf8e30342b9c91ee6b572d625ef409aeb9b8f57395367745b23735e" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_d0cecc2b324689cc953484377d8d22e47067076257aeb6584ca9da4af5f6f5ab,text2qti_choice_6dbfec0ae0c51fe0ecf8251e1d94e0bed128dba1e5c61cf30ee0ab17fa727649,text2qti_choice_833324920af19c40dfbf719fe16fd78e395c20c350c1fdc81ed400474b757682,text2qti_choice_a82cc0c2827e5bc92fd0ee8a2ab4707795a65768b35aff9ab5804da01e9662ef</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_bb85d657baf8e30342b9c91ee6b572d625ef409aeb9b8f57395367745b23735e</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;In the formula &lt;code&gt;facet_grid(drv ~ cyl)&lt;/code&gt;, which variable defines the &lt;strong&gt;rows&lt;/strong&gt; of the grid?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_d0cecc2b324689cc953484377d8d22e47067076257aeb6584ca9da4af5f6f5ab">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;drv&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6dbfec0ae0c51fe0ecf8251e1d94e0bed128dba1e5c61cf30ee0ab17fa727649">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;cyl&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_833324920af19c40dfbf719fe16fd78e395c20c350c1fdc81ed400474b757682">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The variable with fewer unique values&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a82cc0c2827e5bc92fd0ee8a2ab4707795a65768b35aff9ab5804da01e9662ef">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The variable listed alphabetically first&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_d0cecc2b324689cc953484377d8d22e47067076257aeb6584ca9da4af5f6f5ab</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_9bf82694e41f3450f237c832ae4561d13c9168dbba8caa59b69700597c41a0f9" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_55d47efa0abfd6d5dd18f43474038f9628305fa165c1ac77ddbea91951f643ae,text2qti_choice_6ff4f9136e4bb329e8e031eebfd66c2d2be4a792de9ded064f8b4ff241006e10,text2qti_choice_f1d3b024500807881f76a4917d3d0eaf0a8e7dffe7388be47fd0d284e5457a53,text2qti_choice_324182f3af7bd990d4357f7aafa726b888a394bf8bbf7bc7939ff6ecdb6b303b</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_9bf82694e41f3450f237c832ae4561d13c9168dbba8caa59b69700597c41a0f9</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;code&gt;facet_grid(. ~ cyl)&lt;/code&gt; produce?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_55d47efa0abfd6d5dd18f43474038f9628305fa165c1ac77ddbea91951f643ae">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A single row of panels, one per level of &lt;code&gt;cyl&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6ff4f9136e4bb329e8e031eebfd66c2d2be4a792de9ded064f8b4ff241006e10">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A single column of panels, one per level of &lt;code&gt;cyl&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f1d3b024500807881f76a4917d3d0eaf0a8e7dffe7388be47fd0d284e5457a53">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A full grid using all combinations of variables&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_324182f3af7bd990d4357f7aafa726b888a394bf8bbf7bc7939ff6ecdb6b303b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error; &lt;code&gt;.&lt;/code&gt; is not valid in a facet formula&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_55d47efa0abfd6d5dd18f43474038f9628305fa165c1ac77ddbea91951f643ae</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_3111b18e2e2062fe557d464c5814db5173e49b11dfc619d71d48d256bf07f631" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_c1e252223f16586c7b08fd5d4c227922a867925ab0dc3804e9bd7f211f316ea4,text2qti_choice_7fe58be996916ea8f6ad54bc2e614775e77ec2f0f96928e91145c0785298b9db,text2qti_choice_c5d2d4b5ff2911cc0f7f40ba5f18655ab389d8f4785f7bae278448a35e90a2be,text2qti_choice_6a6d7a59c8dd5ea3ac8747cdc3056b50b1d9a3d89c5f3d9ce2082e2752d35ae3</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_3111b18e2e2062fe557d464c5814db5173e49b11dfc619d71d48d256bf07f631</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does &lt;code&gt;facet_grid(drv ~ .)&lt;/code&gt; produce?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_c1e252223f16586c7b08fd5d4c227922a867925ab0dc3804e9bd7f211f316ea4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A single row of panels, one per level of &lt;code&gt;drv&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_7fe58be996916ea8f6ad54bc2e614775e77ec2f0f96928e91145c0785298b9db">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A single column of panels, one per level of &lt;code&gt;drv&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c5d2d4b5ff2911cc0f7f40ba5f18655ab389d8f4785f7bae278448a35e90a2be">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A scatterplot with &lt;code&gt;drv&lt;/code&gt; on one axis&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6a6d7a59c8dd5ea3ac8747cdc3056b50b1d9a3d89c5f3d9ce2082e2752d35ae3">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error; &lt;code&gt;.&lt;/code&gt; is not valid after the &lt;code&gt;~&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_7fe58be996916ea8f6ad54bc2e614775e77ec2f0f96928e91145c0785298b9db</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_980f68cfd4cbc7df40b486a7257568a756cad0e4991f28f2a11780948d3cc23c" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_27cdbe7b462b9d372fe787fb385cd1d1caabbf7b3167271f1f97570db1ebda58,text2qti_choice_36ab7cdb92fa8a7d1d0fead7b9aafea3d746881e30a36e7dec95cdaa8beedef1,text2qti_choice_514758a003c6cf3733bcda6be395250664b9a3563af9433feb566ad2903d2bbd,text2qti_choice_b5c8a89326d7d183b2b46c4b5e2c18a689f4aceedb4c2d90078964d0d61014f7</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_980f68cfd4cbc7df40b486a7257568a756cad0e4991f28f2a11780948d3cc23c</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;By default, all panels in &lt;code&gt;facet_wrap()&lt;/code&gt; share the same axis scales. Which argument allows each panel to have its own y-axis scale?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_27cdbe7b462b9d372fe787fb385cd1d1caabbf7b3167271f1f97570db1ebda58">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;scales = "free_x"&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_36ab7cdb92fa8a7d1d0fead7b9aafea3d746881e30a36e7dec95cdaa8beedef1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;scales = "free_y"&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_514758a003c6cf3733bcda6be395250664b9a3563af9433feb566ad2903d2bbd">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;fixed = FALSE&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b5c8a89326d7d183b2b46c4b5e2c18a689f4aceedb4c2d90078964d0d61014f7">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;y_axis = "independent"&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_36ab7cdb92fa8a7d1d0fead7b9aafea3d746881e30a36e7dec95cdaa8beedef1</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_75ab2fbfa5dd63a1f1be8b23c0d3f0abbf91ae81047402a8396132d1b0ddb002" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_c06c1788b5b490c399374367aa068a9834c9d3eda56daee17d1e3683293b9f5c,text2qti_choice_3b71b5dcdedd52d26803b1cf1f5d696f47563ba8c095fd52b3b58be36a94cab3,text2qti_choice_4eee2fab7a6cb79d328793acf73f8676638a991342a7d71bb8a68ae93c0c20e5,text2qti_choice_4bf437822133c865c2d2f9e40e5bffbf9f7a3c9c5e2f7f0a1ef19dbb2095a2e7</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_75ab2fbfa5dd63a1f1be8b23c0d3f0abbf91ae81047402a8396132d1b0ddb002</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;R4DS recommends using facets instead of color/shape aesthetics primarily when:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_c06c1788b5b490c399374367aa068a9834c9d3eda56daee17d1e3683293b9f5c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The dataset has more than 1000 rows&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3b71b5dcdedd52d26803b1cf1f5d696f47563ba8c095fd52b3b58be36a94cab3">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;You are plotting fewer than 3 groups&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_4eee2fab7a6cb79d328793acf73f8676638a991342a7d71bb8a68ae93c0c20e5">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The categorical variable has many levels, making a single plot with overlapping colors hard to read&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_4bf437822133c865c2d2f9e40e5bffbf9f7a3c9c5e2f7f0a1ef19dbb2095a2e7">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;You are faceting a continuous variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_4eee2fab7a6cb79d328793acf73f8676638a991342a7d71bb8a68ae93c0c20e5</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_7d2b786c39f5d0d22a8fc845898b651f1f2c8437c435b7801babed94cffb0480" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_0f4ab54e9cfd7fe6b0569a9a9451a299f9f85639214bc6e4c4102dde2bd7149e,text2qti_choice_63b66716b484cfa1cc3769cc6e7f27df935e936b6f8e667be34f7c6b06b66108,text2qti_choice_672379c450a27ace670925d095a3bdb98bc74d2af335aa8f17a169c1d67ba45f,text2qti_choice_f757ff286e5093e728121c59ad22365670231bfee5c0deb313edb0f39cb2b303</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_7d2b786c39f5d0d22a8fc845898b651f1f2c8437c435b7801babed94cffb0480</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which geom is most appropriate for visualizing the distribution of a &lt;strong&gt;single categorical variable&lt;/strong&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_0f4ab54e9cfd7fe6b0569a9a9451a299f9f85639214bc6e4c4102dde2bd7149e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_histogram()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_63b66716b484cfa1cc3769cc6e7f27df935e936b6f8e667be34f7c6b06b66108">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_density()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_672379c450a27ace670925d095a3bdb98bc74d2af335aa8f17a169c1d67ba45f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_bar()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f757ff286e5093e728121c59ad22365670231bfee5c0deb313edb0f39cb2b303">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_672379c450a27ace670925d095a3bdb98bc74d2af335aa8f17a169c1d67ba45f</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_7f1e236a3b28272b2f0c30f7ea8eb24c7992f49375740ee361b18dfcb41fa552" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_b8bef9b8f0985a4bebb84fe507e35845efcce0c9e52e226755a68d65b7b5b58c,text2qti_choice_eebfa5de852cdd5fa0feeff4d05f6f366687072b9b4aade74db7d44699d2c219,text2qti_choice_326930a4597dd49b0f3c742e4b80111612b9cc3507c9944763f622471863acff,text2qti_choice_89ad588b88810149ac330ab977c40891e431acfebd1b60fabca19cf0033c86bf</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_7f1e236a3b28272b2f0c30f7ea8eb24c7992f49375740ee361b18dfcb41fa552</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which geom is most appropriate for visualizing the distribution of a &lt;strong&gt;single continuous variable&lt;/strong&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_b8bef9b8f0985a4bebb84fe507e35845efcce0c9e52e226755a68d65b7b5b58c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_bar()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_eebfa5de852cdd5fa0feeff4d05f6f366687072b9b4aade74db7d44699d2c219">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_326930a4597dd49b0f3c742e4b80111612b9cc3507c9944763f622471863acff">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_histogram()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_89ad588b88810149ac330ab977c40891e431acfebd1b60fabca19cf0033c86bf">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_col()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_326930a4597dd49b0f3c742e4b80111612b9cc3507c9944763f622471863acff</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_fc6f3c03749f4251fbde7a6cc4188fd92f249a8a1ca693f53aed581f33be0a16" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_d3783a58b53092488a8328007072ef0a93dccc4785b42947b86058fe2debcb90,text2qti_choice_ade35fb5048a55d2bcfbebdcec7afdefecd536ab18988914d21a206851b3ad9b,text2qti_choice_3b83ac910be02452a32330cc389d7a6f5cfd38a70de067c1297cfc3968db16ce,text2qti_choice_03c0734173e7efef87d022391abb6f6edf58945580ddbda9e3c6d528a39886f8</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_fc6f3c03749f4251fbde7a6cc4188fd92f249a8a1ca693f53aed581f33be0a16</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does the &lt;code&gt;binwidth&lt;/code&gt; argument in &lt;code&gt;geom_histogram()&lt;/code&gt; control?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_d3783a58b53092488a8328007072ef0a93dccc4785b42947b86058fe2debcb90">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The height of each bar&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_ade35fb5048a55d2bcfbebdcec7afdefecd536ab18988914d21a206851b3ad9b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The width of each bin — how much of the x range each bar covers&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3b83ac910be02452a32330cc389d7a6f5cfd38a70de067c1297cfc3968db16ce">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The total number of bars to display&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_03c0734173e7efef87d022391abb6f6edf58945580ddbda9e3c6d528a39886f8">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The color of the bars&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_ade35fb5048a55d2bcfbebdcec7afdefecd536ab18988914d21a206851b3ad9b</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_6fffd955404b82cd4deef1d74a4c839211a81ad44fecb007a8ce062b47a7a07c" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_85b25fdc9e11a39e83e4eca46b636919b94e578ae558bbe8ef1e045aa23e7115,text2qti_choice_69eb84e6d9f8621d775d3c1c898f7342c23b4eefa38c4d73aa087622b7c80adc,text2qti_choice_6d9f9ce5dad44bed800dbd76506c9fd392b13e8734f0ce22107180a5e335c055,text2qti_choice_6b6037a2309bf26fcc77282f68db8501c6c99e134481dc7656aa0214691a0808</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_6fffd955404b82cd4deef1d74a4c839211a81ad44fecb007a8ce062b47a7a07c</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;R4DS recommends experimenting with &lt;code&gt;binwidth&lt;/code&gt; in &lt;code&gt;geom_histogram()&lt;/code&gt; because:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_85b25fdc9e11a39e83e4eca46b636919b94e578ae558bbe8ef1e045aa23e7115">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The default binwidth is always wrong and must be changed before submitting work&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_69eb84e6d9f8621d775d3c1c898f7342c23b4eefa38c4d73aa087622b7c80adc">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Different binwidths can reveal different patterns; no single default is best for every dataset&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6d9f9ce5dad44bed800dbd76506c9fd392b13e8734f0ce22107180a5e335c055">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The binwidth must match the measurement unit of the variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6b6037a2309bf26fcc77282f68db8501c6c99e134481dc7656aa0214691a0808">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Canvas requires a specific binwidth for automated grading&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_69eb84e6d9f8621d775d3c1c898f7342c23b4eefa38c4d73aa087622b7c80adc</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_3aa79ed01d49bb7f5adcf706c63f710e4ae4f0837a636a68c7e8a1ae5439b1ad" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_b5ec94f5a30e7cb65ce26218be0fe4fcd7bbc955e56dd418efdc090761ee8c83,text2qti_choice_49cbdc74dda1cc60dd1580b300bdfa379e45da54fa99499259d7f2677486b7c4,text2qti_choice_c3243f739701d71fa6e7e746e12eba0f614f64ae7fd0569fe041df585d0850fa,text2qti_choice_d85ef5c0b31c5b61e63ab66ff8122c1ca544c16496b13779b6709e039af56a16</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_3aa79ed01d49bb7f5adcf706c63f710e4ae4f0837a636a68c7e8a1ae5439b1ad</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which geom shows the distribution of a continuous variable &lt;strong&gt;split across levels of a categorical variable&lt;/strong&gt;?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_b5ec94f5a30e7cb65ce26218be0fe4fcd7bbc955e56dd418efdc090761ee8c83">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_histogram()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_49cbdc74dda1cc60dd1580b300bdfa379e45da54fa99499259d7f2677486b7c4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_bar()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c3243f739701d71fa6e7e746e12eba0f614f64ae7fd0569fe041df585d0850fa">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_boxplot()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_d85ef5c0b31c5b61e63ab66ff8122c1ca544c16496b13779b6709e039af56a16">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_area()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_c3243f739701d71fa6e7e746e12eba0f614f64ae7fd0569fe041df585d0850fa</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_78f70a2acad49fea39e7142412926e106a30b26adc02eb27cdfaef11e9fcffc2" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_61ae0abe4725afb7af65aed0bc1d51e2d73ab4723c07bb9ce9caae692293b410,text2qti_choice_553ec3898283b9bf7bf5448d78b90d72f7a9eda39e052480332fe13ed2dc296f,text2qti_choice_6e0d3ad74b81a1b95515398be09a7dae233ff25f96b2552e9d83cc2ddd2e044c,text2qti_choice_477ef9736b75b9de0c924843be9fd5a6a91b24f17653b3cc38516b5c57a22764</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_78f70a2acad49fea39e7142412926e106a30b26adc02eb27cdfaef11e9fcffc2</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does the middle line in a &lt;code&gt;geom_boxplot()&lt;/code&gt; represent?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_61ae0abe4725afb7af65aed0bc1d51e2d73ab4723c07bb9ce9caae692293b410">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The median&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_553ec3898283b9bf7bf5448d78b90d72f7a9eda39e052480332fe13ed2dc296f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The mean&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_6e0d3ad74b81a1b95515398be09a7dae233ff25f96b2552e9d83cc2ddd2e044c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The mode&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_477ef9736b75b9de0c924843be9fd5a6a91b24f17653b3cc38516b5c57a22764">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The midpoint between the minimum and maximum&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_61ae0abe4725afb7af65aed0bc1d51e2d73ab4723c07bb9ce9caae692293b410</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_467e552ba928a22a2032d56b4e01cebe23f64d04706e6af34b193fe60ac101e8" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_4de1344699680d20ccfe9a9f3ec54be88d63132e9e593604e73a85e16c07ebd4,text2qti_choice_0ef26c567270ebcd0cffddad27aee549edb8bf5dd7ec8c92e1c61a4bf08f8fab,text2qti_choice_e5ed6f2e22c61a108e8b36be617db6afc79488f4a0d2b02118a853505aaf29a8,text2qti_choice_4ae94811fff057b704001d4de88cdba99de922174b5a5648bbfcb409bbbbb9a3</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_467e552ba928a22a2032d56b4e01cebe23f64d04706e6af34b193fe60ac101e8</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;The box in a &lt;code&gt;geom_boxplot()&lt;/code&gt; spans from:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_4de1344699680d20ccfe9a9f3ec54be88d63132e9e593604e73a85e16c07ebd4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The minimum to the maximum value&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_0ef26c567270ebcd0cffddad27aee549edb8bf5dd7ec8c92e1c61a4bf08f8fab">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;One standard deviation below the mean to one above&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_e5ed6f2e22c61a108e8b36be617db6afc79488f4a0d2b02118a853505aaf29a8">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The 25th percentile (Q1) to the 75th percentile (Q3)&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_4ae94811fff057b704001d4de88cdba99de922174b5a5648bbfcb409bbbbb9a3">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Two standard deviations below the mean to two above&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_e5ed6f2e22c61a108e8b36be617db6afc79488f4a0d2b02118a853505aaf29a8</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_2282f6d26a2bbdc7c06a6e1a69311a300fa5f6181c5e8b86b3d537933bb34035" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_d94548b89c00800e99bcb8fdd923f6f85fdd5a035bfc1f2fa95faf8a8043d7b1,text2qti_choice_7b98574bfe58411a71161e1b9b94124c4ff95a15a31d4f2030efdca256342ad4,text2qti_choice_c72be5ad32457ee62293cbb9bf36159d1080bd8280689794d2001d08ecc1aafe,text2qti_choice_af22cfe7746fecb50c617d76121f344188014094c8a18b755f83a6d5b10f159f</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_2282f6d26a2bbdc7c06a6e1a69311a300fa5f6181c5e8b86b3d537933bb34035</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;In a &lt;code&gt;geom_boxplot()&lt;/code&gt;, individual points plotted beyond the whiskers represent:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_d94548b89c00800e99bcb8fdd923f6f85fdd5a035bfc1f2fa95faf8a8043d7b1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Data entry errors that should be removed before analysis&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_7b98574bfe58411a71161e1b9b94124c4ff95a15a31d4f2030efdca256342ad4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Values more than one standard deviation from the mean&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c72be5ad32457ee62293cbb9bf36159d1080bd8280689794d2001d08ecc1aafe">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Potential outliers — values beyond 1.5 × the IQR from the box edges&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_af22cfe7746fecb50c617d76121f344188014094c8a18b755f83a6d5b10f159f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The top and bottom 5% of the distribution&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_c72be5ad32457ee62293cbb9bf36159d1080bd8280689794d2001d08ecc1aafe</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_51b710c1f7b269bb62b3202f0bc62fe9c20eb9fe3d1729c81a899f3d43314043" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_67663d064168aacf0d38b49cd214418a01badd30cce61997414d4d75eaf7152f,text2qti_choice_5f0b9b3eaec30b5fc2ab3a322285a2fa2622200f216fa5d78d8c50f55c1cc350,text2qti_choice_4fce28ae82be32503444048ed83ebf2ac13f3b1401524142afede1a2190865f8,text2qti_choice_167e2319fada84060280751e83332153b3a800964f8ccba7c1b2c46673a059c8</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_51b710c1f7b269bb62b3202f0bc62fe9c20eb9fe3d1729c81a899f3d43314043</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which function adds a &lt;strong&gt;title&lt;/strong&gt;, &lt;strong&gt;axis labels&lt;/strong&gt;, and a &lt;strong&gt;caption&lt;/strong&gt; to a ggplot?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_67663d064168aacf0d38b49cd214418a01badd30cce61997414d4d75eaf7152f">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;title()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5f0b9b3eaec30b5fc2ab3a322285a2fa2622200f216fa5d78d8c50f55c1cc350">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;axis_labels()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_4fce28ae82be32503444048ed83ebf2ac13f3b1401524142afede1a2190865f8">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;labs()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_167e2319fada84060280751e83332153b3a800964f8ccba7c1b2c46673a059c8">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;annotate()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_4fce28ae82be32503444048ed83ebf2ac13f3b1401524142afede1a2190865f8</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_43251a8a0e031cdea19f416d6ad3ecfebb3862a772283e93282ce5b65187a9ff" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_8d17efb77a08d466277a89bf25c984744e371599f1041e4369652adb38302d32,text2qti_choice_68ea06b1b99590f86415b1b19cc16aaa8d1c2b440b0723585abf9ace8378d6b5,text2qti_choice_c25fbd38b5c94bc6faf33a1d02e858be31ad9bb9f2bb208c09ab237efba0274b,text2qti_choice_966d09dfbedd9d7b773b36e0f3662c07222619796f66ecbd3d298c176b6ed3ac</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_43251a8a0e031cdea19f416d6ad3ecfebb3862a772283e93282ce5b65187a9ff</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which argument to &lt;code&gt;labs()&lt;/code&gt; sets the plot title?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_8d17efb77a08d466277a89bf25c984744e371599f1041e4369652adb38302d32">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;title&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_68ea06b1b99590f86415b1b19cc16aaa8d1c2b440b0723585abf9ace8378d6b5">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;main&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c25fbd38b5c94bc6faf33a1d02e858be31ad9bb9f2bb208c09ab237efba0274b">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;header&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_966d09dfbedd9d7b773b36e0f3662c07222619796f66ecbd3d298c176b6ed3ac">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;name&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_8d17efb77a08d466277a89bf25c984744e371599f1041e4369652adb38302d32</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_6d7f1eaf88a6706480e4b774d59926befe281e5d7c51f4041b0b51527fa171f5" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_f3aa005ece50035e559c729c6e4f1bb6e9ba295b18b6dc1b58c0485b2ca77fb4,text2qti_choice_258e406e6fb285d851593f52f8019462f16e235a9dbc5e709f502fb1b24a51a7,text2qti_choice_1cbfcf9ab6db1f884431400a3c1c7ab675cc279f83cbf55334e5c08caf384735,text2qti_choice_8334b766cee57084cb4b4e3ac1f2c9970bbea0d4c51d7c669e2972a82300db80</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_6d7f1eaf88a6706480e4b774d59926befe281e5d7c51f4041b0b51527fa171f5</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which function saves a ggplot to a file?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_f3aa005ece50035e559c729c6e4f1bb6e9ba295b18b6dc1b58c0485b2ca77fb4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;save_plot()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_258e406e6fb285d851593f52f8019462f16e235a9dbc5e709f502fb1b24a51a7">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;export()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_1cbfcf9ab6db1f884431400a3c1c7ab675cc279f83cbf55334e5c08caf384735">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggsave()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8334b766cee57084cb4b4e3ac1f2c9970bbea0d4c51d7c669e2972a82300db80">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;write_plot()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_1cbfcf9ab6db1f884431400a3c1c7ab675cc279f83cbf55334e5c08caf384735</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_cf3c35e1a2804856c6f554d364813122e8d125ad06f416bd3b37c2d1049d3595" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_61e74b36c625dc27bc0e340a617716e15d997c87f1b45dba9dc52d0230ac4c15,text2qti_choice_c258d14fc76d6b60b531b90aafc1a8ff285ab1a6dc09158088486e372a971883,text2qti_choice_a6231126fd4ad9dc0ed7c34c7cb4161f0fa22c3f74e14b376a4b8a989bd883e1,text2qti_choice_5f08315c41e49700de10c13d2ce101ee63cd04defcf3884f85addefe556574d4</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_cf3c35e1a2804856c6f554d364813122e8d125ad06f416bd3b37c2d1049d3595</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;By default, &lt;code&gt;ggsave()&lt;/code&gt; saves:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_61e74b36c625dc27bc0e340a617716e15d997c87f1b45dba9dc52d0230ac4c15">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The first plot created in the current session&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c258d14fc76d6b60b531b90aafc1a8ff285ab1a6dc09158088486e372a971883">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A plot you specify by passing it as the first argument&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a6231126fd4ad9dc0ed7c34c7cb4161f0fa22c3f74e14b376a4b8a989bd883e1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The most recently displayed plot&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5f08315c41e49700de10c13d2ce101ee63cd04defcf3884f85addefe556574d4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;All plots created since the last &lt;code&gt;ggsave()&lt;/code&gt; call&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_a6231126fd4ad9dc0ed7c34c7cb4161f0fa22c3f74e14b376a4b8a989bd883e1</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_5bb4e29dfc848ba1f2dc82ac5613994f42dbbf3fd3e603e5181cd064eae988ad" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_1893defcb64af4c8fa365f8b26270581276b0f1b37f25e00ba2d209673d05b9c,text2qti_choice_2a438f9020810cf46eefca49088b426be88cde39c3593c69d66e05587cf4c7d5,text2qti_choice_3f1b603c2b86901cf739d921ed900945e28dc988f9f285e07ca31a6989becd23,text2qti_choice_bcd4495ad443f9b9fa136ae7a960c0d266e7de1cf425a0babc5eac3f8165a357</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_5bb4e29dfc848ba1f2dc82ac5613994f42dbbf3fd3e603e5181cd064eae988ad</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does this code produce?&lt;/p&gt;
+&lt;p&gt;ggplot(data = mpg) +
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_1893defcb64af4c8fa365f8b26270581276b0f1b37f25e00ba2d209673d05b9c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error, because you cannot use two geoms with identical mappings&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2a438f9020810cf46eefca49088b426be88cde39c3593c69d66e05587cf4c7d5">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A scatterplot with a smooth line overlaid, both using &lt;code&gt;displ&lt;/code&gt; and &lt;code&gt;hwy&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3f1b603c2b86901cf739d921ed900945e28dc988f9f285e07ca31a6989becd23">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Two separate plots side by side&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_bcd4495ad443f9b9fa136ae7a960c0d266e7de1cf425a0babc5eac3f8165a357">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Only the smooth line; &lt;code&gt;geom_point()&lt;/code&gt; is overwritten&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_2a438f9020810cf46eefca49088b426be88cde39c3593c69d66e05587cf4c7d5</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_3a63d3d2f4b054bbfdb5f93e4911a0594a5f151e69ffcae8b0cdb74b67cddf47" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_3848d201730e024e9c6cecd48cf98cbdb60eeb0b0f7db42c6a07db34da23a9d9,text2qti_choice_1970ac090b05a0cd444240518aef3e86978e21fae9b1ea9ed144a627737a42b4,text2qti_choice_4f7363f1e9dd282ed1bcd7fc40be293c2534c512b4946d345c8c7a307d437470,text2qti_choice_08ecb3070237f71feccc4633e3afccafd0fcf88dfd87dd1b566b4e96efbec917</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_3a63d3d2f4b054bbfdb5f93e4911a0594a5f151e69ffcae8b0cdb74b67cddf47</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;A more concise, idiomatic way to write the code in the previous question is:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_3848d201730e024e9c6cecd48cf98cbdb60eeb0b0f7db42c6a07db34da23a9d9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy), geom = c(point, smooth))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_1970ac090b05a0cd444240518aef3e86978e21fae9b1ea9ed144a627737a42b4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(displ, hwy)) + geom_point() + geom_smooth()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_4f7363f1e9dd282ed1bcd7fc40be293c2534c512b4946d345c8c7a307d437470">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg) + geom(point + smooth, aes(displ, hwy))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_08ecb3070237f71feccc4633e3afccafd0fcf88dfd87dd1b566b4e96efbec917">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;plot(mpg, displ ~ hwy, type = c("p", "smooth"))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_1970ac090b05a0cd444240518aef3e86978e21fae9b1ea9ed144a627737a42b4</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_978fc04220ae0b04082ca134a665c1c75512cec3f213e65312b1ab47eb7f1470" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_9b20b8bdfe86259fae6ffcbb168ac827541a4bd3186bd091dfdc448c8620349e,text2qti_choice_fcda0b47d3a1eb737ac132298ff469d6a0b3103cca4270f58d6726c1ecd2655e,text2qti_choice_d41e18e024af2389234b66bb46d06b7e034ded925aa7df386b37a8b535402974,text2qti_choice_dcf67f6b2c204c73f0274a86b092f95772af97101ddf76e724e4daee7b68423a</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_978fc04220ae0b04082ca134a665c1c75512cec3f213e65312b1ab47eb7f1470</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which of the following correctly maps &lt;code&gt;cty&lt;/code&gt; to x and &lt;code&gt;hwy&lt;/code&gt; to y using shorthand ggplot2 syntax (omitting argument names)?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_9b20b8bdfe86259fae6ffcbb168ac827541a4bd3186bd091dfdc448c8620349e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg) + aes(cty, hwy) + geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_fcda0b47d3a1eb737ac132298ff469d6a0b3103cca4270f58d6726c1ecd2655e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, aes(cty, hwy)) + geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_d41e18e024af2389234b66bb46d06b7e034ded925aa7df386b37a8b535402974">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;ggplot(mpg, cty, hwy) + geom_point()&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_dcf67f6b2c204c73f0274a86b092f95772af97101ddf76e724e4daee7b68423a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_point(mpg, aes(cty, hwy))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_fcda0b47d3a1eb737ac132298ff469d6a0b3103cca4270f58d6726c1ecd2655e</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_c24d03af97d93bf27451aa17a8b00d7d179d0c4f5b6fd62fd463a6de35bea02d" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_9c6d611ce11aaabf1f367d881ee3d498426317750cbf583882816ad1fc8b5411,text2qti_choice_a3790b166e266fc4fbeed891c17b2bf0e69220d340ee2e5394681ddabecd46d8,text2qti_choice_c94187653f685368b25b0108e90008450a7730498c39bced6ad9651773d1fd37,text2qti_choice_2b19bc0b2512a1b17ce02c0a17811eb9a0b0d8d08b7937bc040806f451eb891a</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_c24d03af97d93bf27451aa17a8b00d7d179d0c4f5b6fd62fd463a6de35bea02d</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;Which statement about how ggplot2 handles missing values (&lt;code&gt;NA&lt;/code&gt;) in mapped variables is correct?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_9c6d611ce11aaabf1f367d881ee3d498426317750cbf583882816ad1fc8b5411">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;ggplot2 replaces NAs with the variable mean before plotting&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a3790b166e266fc4fbeed891c17b2bf0e69220d340ee2e5394681ddabecd46d8">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;ggplot2 treats NA as a separate category in discrete scales&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_c94187653f685368b25b0108e90008450a7730498c39bced6ad9651773d1fd37">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;ggplot2 removes rows with NAs in mapped variables and shows a warning message&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_2b19bc0b2512a1b17ce02c0a17811eb9a0b0d8d08b7937bc040806f451eb891a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;ggplot2 stops with an error if any mapped variable contains NAs&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_c94187653f685368b25b0108e90008450a7730498c39bced6ad9651773d1fd37</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_03769bcb7043fb90dc1946eeead3c53c4919bcd3f07fcada2d7858725ab2f0ff" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_a760c0b5e013bd96e9efd1b1e9c252602971579f85bd8fe340ffa708d36d181c,text2qti_choice_abba17588f2349b38410fa95ffd5635f51505506dfbdbbc1884c9b3413fff923,text2qti_choice_98a9c8c84e0f09a3d71f4ff126f27c5e983d72e012d492abc699ca98c7eac034,text2qti_choice_f542d559d310a2f532fa58d6b9c5405f1f66f2f558f733a9c19f4e8b8fbd3c56</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_03769bcb7043fb90dc1946eeead3c53c4919bcd3f07fcada2d7858725ab2f0ff</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What is the purpose of the &lt;code&gt;group&lt;/code&gt; aesthetic in ggplot2?&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_a760c0b5e013bd96e9efd1b1e9c252602971579f85bd8fe340ffa708d36d181c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;It assigns each group a distinct color&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_abba17588f2349b38410fa95ffd5635f51505506dfbdbbc1884c9b3413fff923">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;It tells ggplot2 to draw separate lines or curves per group without changing color or shape&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_98a9c8c84e0f09a3d71f4ff126f27c5e983d72e012d492abc699ca98c7eac034">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;It filters the data to display one group at a time&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f542d559d310a2f532fa58d6b9c5405f1f66f2f558f733a9c19f4e8b8fbd3c56">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;It combines multiple variables into a single composite grouping variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_abba17588f2349b38410fa95ffd5635f51505506dfbdbbc1884c9b3413fff923</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_9354b3059d9d97da8cecead90f5dbf6e9600cb5a38a674d4f8b981a3a8947b0a" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_ea07468531bd5bf19ff68c04ccef9154042829f597f3a99729960db87285550e,text2qti_choice_87886a8ed2f211b8e000a68c254571a39a853999a129d033335807b8a6824d90,text2qti_choice_479c0276e91beef8470bd4ddecc67e1562720d56fd6230beb9cc5877d8a4e70a,text2qti_choice_461083a495e122bc7f4ed215f87b8b8e081540e9b03596d6edd013cda8b89720</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_9354b3059d9d97da8cecead90f5dbf6e9600cb5a38a674d4f8b981a3a8947b0a</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;To get a separate smooth line per &lt;code&gt;drv&lt;/code&gt; group &lt;strong&gt;without&lt;/strong&gt; coloring the line by &lt;code&gt;drv&lt;/code&gt;, what should replace &lt;code&gt;geom_smooth()&lt;/code&gt; in this code?&lt;/p&gt;
+&lt;p&gt;ggplot(mpg, aes(displ, hwy)) +
+  geom_smooth()&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_ea07468531bd5bf19ff68c04ccef9154042829f597f3a99729960db87285550e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(color = drv)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_87886a8ed2f211b8e000a68c254571a39a853999a129d033335807b8a6824d90">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(aes(color = drv))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_479c0276e91beef8470bd4ddecc67e1562720d56fd6230beb9cc5877d8a4e70a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(aes(group = drv))&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_461083a495e122bc7f4ed215f87b8b8e081540e9b03596d6edd013cda8b89720">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_smooth(facet = drv)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_479c0276e91beef8470bd4ddecc67e1562720d56fd6230beb9cc5877d8a4e70a</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_5277af061e6ad2619a6d3caf7ddef88c4d735c5b9345f0bc543322baf38773fd" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_2e39452bc96e471d062b77ebdbc78d214e086931c86b5e1dfacdf466d4abdf4c,text2qti_choice_a7f7fbb0a12e341f6f43362477c08bc90e5ad4072818504fb75fe5d2fd2d7e2a,text2qti_choice_39621427571f35bc3fa16f67263ac6a91a679f38f5dde9156f51ccaa78c75216,text2qti_choice_7f0da132ec2843fc4426682f10b9d21bf0084e3cdd33c693437e9b268ddd7ce4</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_5277af061e6ad2619a6d3caf7ddef88c4d735c5b9345f0bc543322baf38773fd</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;The layered grammar of graphics describes a plot as a combination of:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_2e39452bc96e471d062b77ebdbc78d214e086931c86b5e1dfacdf466d4abdf4c">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A dataset, a plot type, and a color palette&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_a7f7fbb0a12e341f6f43362477c08bc90e5ad4072818504fb75fe5d2fd2d7e2a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An x-axis, a y-axis, and a geom&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_39621427571f35bc3fa16f67263ac6a91a679f38f5dde9156f51ccaa78c75216">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Data, aesthetic mappings, and one or more geometric layers — plus optional scales, coordinates, and facets&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_7f0da132ec2843fc4426682f10b9d21bf0084e3cdd33c693437e9b268ddd7ce4">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A title, axis labels, and data points&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_39621427571f35bc3fa16f67263ac6a91a679f38f5dde9156f51ccaa78c75216</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_74987a397726c4bc244de2bf787d25e915d1a06cbaa4279d68a390eda623e91b" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_d16cb4b7f6c32f430094048ef5948b72cc8bf14925a5c6253261c993e1253edf,text2qti_choice_b01a4cf07138e90c15555a95e7af24a007cc9b3dd1531c3272477202dc009679,text2qti_choice_20729078bb26df59c4b4ddf38bdc109049c6e8ac7deb2de736014d501bb7431d,text2qti_choice_deb5329d5737b0bd4d2df1a1b493daf753d946eab6a49330c7378cb9af7ad643</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_74987a397726c4bc244de2bf787d25e915d1a06cbaa4279d68a390eda623e91b</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;&lt;strong&gt;Overplotting&lt;/strong&gt; in a scatterplot occurs when:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_d16cb4b7f6c32f430094048ef5948b72cc8bf14925a5c6253261c993e1253edf">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Too many variables are mapped to aesthetics at once&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b01a4cf07138e90c15555a95e7af24a007cc9b3dd1531c3272477202dc009679">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Axis labels overlap each other&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_20729078bb26df59c4b4ddf38bdc109049c6e8ac7deb2de736014d501bb7431d">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Many data points share the same location, making it hard to see the density of observations&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_deb5329d5737b0bd4d2df1a1b493daf753d946eab6a49330c7378cb9af7ad643">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;The smooth line obscures the underlying data points&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_20729078bb26df59c4b4ddf38bdc109049c6e8ac7deb2de736014d501bb7431d</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_fce80e57cc345a2b5c2e91cc7f1ffbd7aca8f29fada6ed7abc00fca9c0f98969" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_6714ad5697720113ff20ff89eba6cf833181c0486839cb8051891e2b5631975e,text2qti_choice_8f16c326027391d7b05215076e5a42cdf92abf2ba2d3436427daa9826a22c127,text2qti_choice_fc212bc73ae1002c33f6068553609d6237b9c7973f77f085690d0c401da34d20,text2qti_choice_f51adfd94893dc934ad40a6db8d55fe7f01ea8bdf9744bb1edb53104b2c7e963</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_fce80e57cc345a2b5c2e91cc7f1ffbd7aca8f29fada6ed7abc00fca9c0f98969</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;What does this code produce?&lt;/p&gt;
+&lt;p&gt;ggplot(mpg, aes(x = class)) +
+  geom_bar()&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_6714ad5697720113ff20ff89eba6cf833181c0486839cb8051891e2b5631975e">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A scatter plot of &lt;code&gt;class&lt;/code&gt; values along the x-axis&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_8f16c326027391d7b05215076e5a42cdf92abf2ba2d3436427daa9826a22c127">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A bar chart showing the count of cars in each vehicle class&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_fc212bc73ae1002c33f6068553609d6237b9c7973f77f085690d0c401da34d20">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;A histogram of a continuous variable&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_f51adfd94893dc934ad40a6db8d55fe7f01ea8bdf9744bb1edb53104b2c7e963">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;An error, because &lt;code&gt;geom_bar()&lt;/code&gt; requires both &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt; aesthetics&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_8f16c326027391d7b05215076e5a42cdf92abf2ba2d3436427daa9826a22c127</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_71f7ec7359ac7943eb35395767d946706f354cf7ac2009bdcb636e72d24532cc" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_7494b66e6963708af6f8be07c0b61f7ad443de41bb93199619b3d3dca4987e2d,text2qti_choice_5069895de9bdd85efad71214a5dd582890bfe1531bf9017cb0aef1a741360b93,text2qti_choice_3cf102e550bb8cb4f28528592069b0346023cecefaa2620a30d1d7f371e36da9,text2qti_choice_b93ee16128d70f5e2753c093c471adab9bd91cb9f214acb65aa3a35713c4e4b1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_71f7ec7359ac7943eb35395767d946706f354cf7ac2009bdcb636e72d24532cc</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;In &lt;code&gt;geom_bar()&lt;/code&gt;, if you want the bar heights to represent a value already in your data (not a count), you should use:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_7494b66e6963708af6f8be07c0b61f7ad443de41bb93199619b3d3dca4987e2d">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_bar(stat = "count")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5069895de9bdd85efad71214a5dd582890bfe1531bf9017cb0aef1a741360b93">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_bar(y = myvar)&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3cf102e550bb8cb4f28528592069b0346023cecefaa2620a30d1d7f371e36da9">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_col()&lt;/code&gt; or &lt;code&gt;geom_bar(stat = "identity")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_b93ee16128d70f5e2753c093c471adab9bd91cb9f214acb65aa3a35713c4e4b1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;&lt;code&gt;geom_histogram(stat = "identity")&lt;/code&gt;&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_3cf102e550bb8cb4f28528592069b0346023cecefaa2620a30d1d7f371e36da9</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+      <item ident="text2qti_question_c7e7c5ac5d50e0396515975a49414ff968c7b5b62be6c5964431d92bd8e3fefa" title="Question">
+        <itemmetadata>
+          <qtimetadata>
+            <qtimetadatafield>
+              <fieldlabel>question_type</fieldlabel>
+              <fieldentry>multiple_choice_question</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>points_possible</fieldlabel>
+              <fieldentry>1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>original_answer_ids</fieldlabel>
+              <fieldentry>text2qti_choice_eb7d78d7a9b5454b0e915958ab30e3b0b1032f67ae7ab546a98b70773624a91a,text2qti_choice_866be51108371dfba77385b9cab7bdbb134741041f54895bffc7c3f5210a9f71,text2qti_choice_3c6bd5a4679d74e590f0da743821fb1dc99c8108361a2a212f339637a12ae104,text2qti_choice_5772ffbbedbfb5defa99766029422011fcd2d14848132adac7398b1d29c107d1</fieldentry>
+            </qtimetadatafield>
+            <qtimetadatafield>
+              <fieldlabel>assessment_question_identifierref</fieldlabel>
+              <fieldentry>text2qti_question_ref_c7e7c5ac5d50e0396515975a49414ff968c7b5b62be6c5964431d92bd8e3fefa</fieldentry>
+            </qtimetadatafield>
+          </qtimetadata>
+        </itemmetadata>
+        <presentation>
+          <material>
+            <mattext texttype="text/html">&lt;p&gt;When troubleshooting a ggplot error, R4DS recommends first:&lt;/p&gt;</mattext>
+          </material>
+          <response_lid ident="response1" rcardinality="Single">
+            <render_choice>
+              <response_label ident="text2qti_choice_eb7d78d7a9b5454b0e915958ab30e3b0b1032f67ae7ab546a98b70773624a91a">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Deleting the plot and restarting from scratch&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_866be51108371dfba77385b9cab7bdbb134741041f54895bffc7c3f5210a9f71">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Adding &lt;code&gt;debug = TRUE&lt;/code&gt; to the &lt;code&gt;ggplot()&lt;/code&gt; call&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_3c6bd5a4679d74e590f0da743821fb1dc99c8108361a2a212f339637a12ae104">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Carefully re-reading the code — checking for missing closing parentheses, misspelled names, and making sure &lt;code&gt;+&lt;/code&gt; appears at the end of a line rather than the beginning of the next&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+              <response_label ident="text2qti_choice_5772ffbbedbfb5defa99766029422011fcd2d14848132adac7398b1d29c107d1">
+                <material>
+                  <mattext texttype="text/html">&lt;p&gt;Running &lt;code&gt;fix(ggplot)&lt;/code&gt; to let R auto-correct the error&lt;/p&gt;</mattext>
+                </material>
+              </response_label>
+            </render_choice>
+          </response_lid>
+        </presentation>
+        <resprocessing>
+          <outcomes>
+            <decvar maxvalue="100" minvalue="0" varname="SCORE" vartype="Decimal"/>
+          </outcomes>
+          <respcondition continue="No">
+            <conditionvar>
+              <varequal respident="response1">text2qti_choice_3c6bd5a4679d74e590f0da743821fb1dc99c8108361a2a212f339637a12ae104</varequal>
+            </conditionvar>
+            <setvar action="Set" varname="SCORE">100</setvar>
+          </respcondition>
+        </resprocessing>
+      </item>
+    </section>
+  </assessment>
+</questestinterop>

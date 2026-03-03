@@ -299,6 +299,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#part-4-reflection-15-points" id="toc-part-4-reflection-15-points" class="nav-link" data-scroll-target="#part-4-reflection-15-points">Part 4: Reflection (15 points)</a></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#graduate-extension-formal-missing-data-report" id="toc-graduate-extension-formal-missing-data-report" class="nav-link" data-scroll-target="#graduate-extension-formal-missing-data-report">Graduate Extension: Formal Missing Data Report</a>
+  <ul class="collapse">
+  <li><a href="#task-g.1" id="toc-task-g.1" class="nav-link" data-scroll-target="#task-g.1">Task G.1</a></li>
+  <li><a href="#task-g.2" id="toc-task-g.2" class="nav-link" data-scroll-target="#task-g.2">Task G.2</a></li>
+  <li><a href="#task-g.3" id="toc-task-g.3" class="nav-link" data-scroll-target="#task-g.3">Task G.3</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -444,8 +450,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Script runs without errors</label></li>
 </ul>
 <p>Submit your <code>.R</code> file on Canvas.</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>PSY 510 (Graduate Students)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Students enrolled in PSY 510 must complete the following extension in addition to all tasks above.</p>
+</div>
+</div>
+</section>
+<section id="graduate-extension-formal-missing-data-report" class="level2">
+<h2 class="anchored" data-anchor-id="graduate-extension-formal-missing-data-report">Graduate Extension: Formal Missing Data Report</h2>
+<p>Reviewers regularly ask authors to characterize and justify how they handled missing data. This extension gives you a reusable script and language for doing that.</p>
+<section id="task-g.1" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
+<p>Install and use the <code>naniar</code> package to create a <strong>missingness matrix</strong> — a visualization showing which participants have missing values across which variables.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("naniar")</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(your_joined_data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="task-g.2" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
+<p>Classify the likely missingness mechanism for the survey data in this assignment. Is it <strong>MCAR</strong> (missing completely at random), <strong>MAR</strong> (missing at random — related to other observed variables), or <strong>MNAR</strong> (missing not at random — related to the missing value itself)? Justify your classification using your results from Part 3 — point to specific numbers.</p>
+</section>
+<section id="task-g.3" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>
+<p>Write a <strong>missing data paragraph</strong> as it would appear in a manuscript’s Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.</p>
+<p><strong>Submission:</strong> Add your <code>naniar</code> code and the missing data paragraph (as a clearly marked comment) to your <code>.R</code> file under <code># === GRADUATE EXTENSION ===</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

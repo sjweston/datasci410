@@ -133,3 +133,47 @@ Both files are required! The `.qmd` shows your code, the `.html` shows it runs c
 - Have a friend review your report — does it make sense to someone who hasn't seen your code?
 
 This assignment is excellent preparation for your final project!
+
+---
+
+::: {.callout-note}
+## PSY 510 (Graduate Students)
+Students enrolled in PSY 510 must complete the following extension in addition to all requirements above.
+:::
+
+## Graduate Extension: Parameterized Report
+
+A parameterized Quarto report can regenerate automatically for different inputs — different subgroups, conditions, time points, or datasets — by changing a single value. This is directly useful for anyone running multiple studies with the same measures, or generating participant-level summaries from a single template.
+
+### Task G.1
+
+Add a `params` block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:
+
+```yaml
+params:
+  subset: "all"   # options: "all", "Female", "Male"
+```
+
+Or, if using your final project dataset:
+
+```yaml
+params:
+  data_file: "data.csv"
+```
+
+### Task G.2
+
+Use your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least **two different parameter values** by rendering it twice (from the command line or RStudio's Knit menu → "Knit with Parameters").
+
+```r
+# Example usage inside a code chunk:
+if (params$subset != "all") {
+  data <- data |> filter(gender == params$subset)
+}
+```
+
+### Task G.3
+
+In a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.
+
+**Submission:** Submit your `.qmd` and two rendered `.html` files (one per parameter value). Name them to reflect the parameter used (e.g., `report-all.html`, `report-female.html`).

@@ -13,6 +13,8 @@ Always keep these in mind. If something we're about to do would conflict with an
 - **`schedule.qmd`** — The student-facing timeline. Dates, what's due when, readings. Keep this in sync with lecture-outline.md.
 - **`assignments-planning.md`** — Internal planning doc for assignments: task lists, in-class exercises, datasets, grading structure. The in-class exercises listed here should show up in the slides.
 - **`graduate-student-assignments.md`** — Planning doc for grad student extensions. Currently the Qualtrics API extension on Assignment 3 is the priority. Add to this as we develop more extensions.
+- **`team-challenge-planning.md`** — Design doc for the team-based competition system: team formation, point categories, reward structure, open questions.
+- **`course-setup-todo.md`** — Master to-do list for Canvas setup and team challenge implementation.
 
 ---
 
@@ -64,6 +66,10 @@ The pair coding exercises should match what's listed in `assignments-planning.md
 - **broom** needs to be installed for Session 17. Add to the package list.
 - **Slide pair exercises match the planning doc.** We added mid-deck exercises to slides 02–05 that correspond to the in-class exercises in `assignments-planning.md`. Session 1 didn't need one (it's setup). Keep this alignment going for future decks.
 - **Anti-copy-paste:** Slides use `code-copy: false` and CSS to discourage copy-paste. Students should type code to build muscle memory. PDF exports available for students who want them.
+- **Team challenge adopted.** 8–10 teams of 5–6 students compete for points across four categories: pair coding completion, assignment submission, quiz performance (highest team average), and weekly fun challenges. Teams are formed via a day-1 survey (stats experience, coding experience, optional friend request) and balanced by prior experience. Reward is non-grade (pizza party). Quizzes are completion-based for the course grade but scored for the challenge. See `team-challenge-planning.md` for full design.
+- **Quizzes changed to completion-based grading.** Students get full credit (toward the 15% quiz weight) for completing quizzes, regardless of score. Quiz scores still matter for the team challenge (highest team average earns a point). This reduces quiz anxiety while maintaining an incentive to try.
+- **Late work policy: 48-hour grace period with 10% daily penalty.** Applies to both assignments and quizzes. After 48 hours, no submissions accepted. Final project milestones follow the same policy. Late submissions don't count toward the team challenge "on-time" points.
+- **Drop policies removed.** No more "drop lowest 1 assignment" or "drop lowest 2 quizzes." The 48-hour late policy replaces the drop policy as the safety net.
 
 ---
 

@@ -26,6 +26,108 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+
+# Toy data for join diagrams (2026 Grammy winners)
+artists <- tibble(
+  name  = c("Taylor Swift", "Bad Bunny", "Kendrick Lamar"),
+  genre = c("Pop", "Latin", "Hip-Hop")
+)
+
+grammys_2026 <- tibble(
+  name  = c("Bad Bunny", "Kendrick Lamar", "Billie Eilish"),
+  award = c("Album of the Year", "Record of the Year", "Song of the Year")
+)
+
+# Row-matching diagram for individual join types
+plot_join <- function(title, left_active, right_active) {
+  left_df <- tibble(
+    name  = c("Taylor Swift", "Bad Bunny", "Kendrick Lamar"),
+    y     = c(4, 3, 2),
+    group = c("left_only", "both", "both")
+  ) |> mutate(alpha_val = if_else(left_active, 1, 0.2))
+
+  right_df <- tibble(
+    name  = c("Bad Bunny", "Kendrick Lamar", "Billie Eilish"),
+    y     = c(3, 2, 1),
+    group = c("both", "both", "right_only")
+  ) |> mutate(alpha_val = if_else(right_active, 1, 0.2))
+
+  tile_colors <- c(both = "#5B8DB8", left_only = "#E07B54", right_only = "#5BA87A")
+
+  ggplot() +
+    geom_tile(data = left_df,
+              aes(x = 1, y = y, fill = group, alpha = alpha_val),
+              width = 1.7, height = 0.65, color = "white", linewidth = 1.2) +
+    geom_text(data = left_df,
+              aes(x = 1, y = y, label = name, alpha = alpha_val),
+              size = 3, color = "white", fontface = "bold") +
+    geom_tile(data = right_df,
+              aes(x = 3.2, y = y, fill = group, alpha = alpha_val),
+              width = 1.7, height = 0.65, color = "white", linewidth = 1.2) +
+    geom_text(data = right_df,
+              aes(x = 3.2, y = y, label = name, alpha = alpha_val),
+              size = 3, color = "white", fontface = "bold") +
+    geom_segment(aes(x = 1.86, xend = 2.34, y = 3, yend = 3),
+                 color = "#5B8DB8", linewidth = 0.8, linetype = "dashed") +
+    geom_segment(aes(x = 1.86, xend = 2.34, y = 2, yend = 2),
+                 color = "#5B8DB8", linewidth = 0.8, linetype = "dashed") +
+    annotate("text", x = 1,   y = 4.7, label = "artists",
+             fontface = "bold.italic", size = 4, color = "#2c3e50") +
+    annotate("text", x = 3.2, y = 4.7, label = "grammys_2026",
+             fontface = "bold.italic", size = 4, color = "#2c3e50") +
+    scale_fill_manual(values = tile_colors) +
+    scale_alpha_identity() +
+    coord_cartesian(xlim = c(0, 4.3), ylim = c(0.4, 5.1)) +
+    labs(title = title) +
+    theme_void() +
+    theme(
+      legend.position = "none",
+      plot.title = element_text(hjust = 0.5, size = 14, face = "bold",
+                                color = "#2c3e50", margin = margin(b = 6))
+    )
+}
+
+# Venn diagram for join type summary
+make_venn <- function(title, shade = c("inner", "left", "right", "full")) {
+  shade <- match.arg(shade)
+  r <- 0.9; cx_l <- -0.5; cx_r <- 0.5
+  theta <- seq(0, 2 * pi, length.out = 300)
+  yi  <- sqrt(r^2 - cx_l^2)       # y-coord of intersection points (~0.748)
+  a_l <- atan2(yi, -cx_l)          # angle from left center to intersect (~56°)
+  b   <- pi - a_l                  # angle from right center to intersect (~124°)
+
+  lc   <- tibble(x = cx_l + r * cos(theta), y = r * sin(theta))
+  rc   <- tibble(x = cx_r + r * cos(theta), y = r * sin(theta))
+  lens <- tibble(
+    x = c(cx_l + r * cos(seq( a_l, -a_l, length.out = 150)),
+          cx_r + r * cos(c(seq(-b, -pi, length.out = 75),
+                            seq( pi,  b, length.out = 75)))),
+    y = c(         r * sin(seq( a_l, -a_l, length.out = 150)),
+                   r * sin(c(seq(-b, -pi, length.out = 75),
+                              seq( pi,  b, length.out = 75))))
+  )
+
+  fill_col <- "#5B8DB8"
+  p <- ggplot() +
+    coord_fixed(xlim = c(-1.6, 1.6), ylim = c(-1.2, 1.4)) +
+    theme_void() +
+    labs(title = title) +
+    theme(plot.title = element_text(hjust = 0.5, face = "bold",
+                                    size = 11, color = "#2c3e50",
+                                    margin = margin(b = 4)))
+
+  if (shade %in% c("left",  "full")) p <- p + geom_polygon(data = lc,   aes(x, y), fill = fill_col, alpha = 0.7)
+  if (shade %in% c("right", "full")) p <- p + geom_polygon(data = rc,   aes(x, y), fill = fill_col, alpha = 0.7)
+  if (shade == "inner")              p <- p + geom_polygon(data = lens, aes(x, y), fill = fill_col, alpha = 0.9)
+
+  p +
+    geom_path(data = lc, aes(x, y), color = "gray40", linewidth = 0.8) +
+    geom_path(data = rc, aes(x, y), color = "gray40", linewidth = 0.8) +
+    annotate("text", x = cx_l, y = -(r + 0.2),
+             label = "artists",      size = 2.8, fontface = "italic", color = "#2c3e50") +
+    annotate("text", x = cx_r, y = -(r + 0.2),
+             label = "grammys_2026", size = 2.8, fontface = "italic", color = "#2c3e50")
+}
 ```
 
 # Why join data? {background-color="#2c3e50"}
@@ -168,9 +270,17 @@ participants |>
 
 ## Visualizing left_join()
 
-![](https://r4ds.hadley.nz/diagrams/join/left.png){width="60%"}
-
-All rows from the left (blue) table are kept.
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+#| fig-align: center
+plot_join(
+  "left_join(artists, grammys_2026)",
+  left_active  = c(TRUE, TRUE, TRUE),
+  right_active = c(TRUE, TRUE, FALSE)
+)
+```
 
 ## right_join(): The mirror
 
@@ -184,6 +294,20 @@ participants |>
 . . .
 
 Now participant 5 is included (with `NA` for age/condition), but participant 4 is excluded.
+
+## Visualizing right_join()
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+#| fig-align: center
+plot_join(
+  "right_join(artists, grammys_2026)",
+  left_active  = c(FALSE, TRUE, TRUE),
+  right_active = c(TRUE, TRUE, TRUE)
+)
+```
 
 ## inner_join(): Only matches
 
@@ -201,9 +325,17 @@ participants |>
 
 ## Visualizing inner_join()
 
-![](https://r4ds.hadley.nz/diagrams/join/inner.png){width="60%"}
-
-Only matching rows are kept.
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+#| fig-align: center
+plot_join(
+  "inner_join(artists, grammys_2026)",
+  left_active  = c(FALSE, TRUE, TRUE),
+  right_active = c(TRUE, TRUE, FALSE)
+)
+```
 
 ## full_join(): Everything
 
@@ -220,9 +352,30 @@ Every participant appears, with `NA` where data is missing.
 
 ## Visualizing full_join()
 
-![](https://r4ds.hadley.nz/diagrams/join/full.png){width="60%"}
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4
+#| fig-align: center
+plot_join(
+  "full_join(artists, grammys_2026)",
+  left_active  = c(TRUE, TRUE, TRUE),
+  right_active = c(TRUE, TRUE, TRUE)
+)
+```
 
-All rows from both tables are kept.
+## Join types at a glance
+
+```{r}
+#| echo: false
+#| layout-ncol: 2
+#| fig-width: 4
+#| fig-height: 2.8
+make_venn("inner_join()", "inner")
+make_venn("left_join()",  "left")
+make_venn("right_join()", "right")
+make_venn("full_join()",  "full")
+```
 
 ## Which join should I use?
 
@@ -315,6 +468,8 @@ followup <- tibble(
 )
 ```
 
+## Your turn: Combine study data
+
 1. Create a dataset with baseline info and treatment condition (keep all participants)
 2. Add followup data (keep all from step 1)
 3. How many participants are missing followup data?
@@ -382,13 +537,11 @@ Participant 4 didn't complete the survey.
 # Who was enrolled
 enrolled <- tibble(
   participant_id = 1:10,
-  condition = rep(c("Treatment", "Control"), each = 5)
-)
+  condition = rep(c("Treatment", "Control"), each = 5))
 
 # Who completed
 completed <- tibble(
-  participant_id = c(1, 2, 3, 4, 7, 8, 9, 10)  # Missing 5 and 6
-)
+  participant_id = c(1, 2, 3, 4, 7, 8, 9, 10))  # Missing 5 and 6
 
 # Who dropped out?
 enrolled |>
@@ -415,6 +568,8 @@ Both dropouts were from the Treatment condition — this could bias results!
 
 ## Problem 1: Keys with different names
 
+:::: {.columns}
+::: {.column width="50%"}
 ```{r}
 demographics <- tibble(
   subj_id = 1:3,
@@ -426,15 +581,18 @@ scores <- tibble(
   depression = c(18, 22, 15)
 )
 ```
+:::
 
-. . .
-
+::: {.column width="50%"}
 **Solution:** Use named vector in `by`:
 
 ```{r}
 demographics |>
-  left_join(scores, by = c("subj_id" = "participant"))
+  left_join(scores,
+    by = c("subj_id" = "participant"))
 ```
+:::
+::::
 
 ## Problem 2: Duplicate keys
 
@@ -545,8 +703,11 @@ demo <- tibble(
   age = c(25, 30, 22),
   gender = c("Female", "Male", "Female")
 )
+```
 
-# Combine
+## Example 1: Result
+
+```{r}
 qualtrics |>
   left_join(demo, by = "ResponseId")
 ```
@@ -563,7 +724,11 @@ post_test <- tibble(
   participant = c(1, 2, 4),  # 3 dropped out
   depression_post = c(12, 23, 15)
 )
+```
 
+## Example 2: Result
+
+```{r}
 # Combine and compute change
 pre_test |>
   left_join(post_test, by = "participant") |>
@@ -585,7 +750,11 @@ participants_info <- tibble(
   id = 1:3,
   condition = c("Control", "Treatment", "Treatment")
 )
+```
 
+## Example 3: Result
+
+```{r}
 # Compute scale scores then join
 items |>
   group_by(id) |>
@@ -668,6 +837,8 @@ baseline_demo |>
 
 ## Join decision flowchart
 
+:::: {.columns}
+::: {.column width="50%"}
 Ask yourself:
 
 1. **Do I want to add columns?**
@@ -679,10 +850,14 @@ Ask yourself:
    - All from right → `right_join()`
    - Only matches → `inner_join()`
    - Everything → `full_join()`
+:::
 
+::: {.column width="50%"}
 3. **Am I filtering rows?**
    - Keep matches → `semi_join()`
    - Keep non-matches → `anti_join()`
+:::
+::::
 
 ## Key takeaways
 

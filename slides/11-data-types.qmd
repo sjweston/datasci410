@@ -32,7 +32,8 @@ library(tidyverse)
 
 ## A published error
 
-A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg Self-Esteem Scale. Item 3 is reverse-coded.
+A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg
+Self-Esteem Scale. Item 3 is reverse-coded.
 
 . . .
 
@@ -40,7 +41,9 @@ What's their total score?
 
 . . .
 
-If you said 15, you forgot to reverse-code — `2` should become `(5 + 1) - 2 = 4`, making the real total **17**. This kind of mistake happens in published papers, and it lives in how you handle data types.
+If you said 15, you forgot to reverse-code — `2` should become
+`(5 + 1) - 2 = 4`, making the real total **17**. This kind of mistake
+happens in published papers, and it lives in how you handle data types.
 
 ## Everything in R is a type
 
@@ -51,18 +54,21 @@ In R, every value has a **type**:
 -   `TRUE` is a **logical** (boolean)
 -   `"Female"` can be a **factor** (categorical)
 
-Understanding types helps you choose the right functions, avoid cryptic errors, and transform data correctly.
+Understanding types helps you choose the right functions, avoid cryptic
+errors, and transform data correctly.
 
 ## Today's focus
 
 We'll dive into two fundamental types:
 
-1.  **Logical vectors** — TRUE/FALSE values for filtering and conditional logic
+1.  **Logical vectors** — TRUE/FALSE values for filtering and
+    conditional logic
 2.  **Numbers** — integers and doubles for calculations and summaries
 
 . . .
 
-**Psychology application:** Computing scale scores, recoding responses, handling missing data
+**Psychology application:** Computing scale scores, recoding responses,
+handling missing data
 
 # Logical vectors {background-color="#2c3e50"}
 
@@ -241,14 +247,15 @@ case_when(
 
 ## if_else() vs case_when() — when to use which
 
-| Situation | Use |
-|-----------|-----|
-| Two outcomes (yes/no, pass/fail) | `if_else()` |
-| Three or more categories | `case_when()` |
+| Situation                           | Use           |
+|-------------------------------------|---------------|
+| Two outcomes (yes/no, pass/fail)    | `if_else()`   |
+| Three or more categories            | `case_when()` |
 | Recoding a Likert scale into groups | `case_when()` |
-| Flagging a single condition | `if_else()` |
+| Flagging a single condition         | `if_else()`   |
 
-When in doubt, start with `if_else()`. Graduate to `case_when()` when you need more categories.
+When in doubt, start with `if_else()`. Graduate to `case_when()` when
+you need more categories.
 
 ## Psychology example: Reverse coding
 
@@ -257,6 +264,9 @@ When in doubt, start with `if_else()`. Graduate to `case_when()` when you need m
 ## Psychology example: Reverse coding
 
 Many scales have reverse-coded items:
+
+::::: columns
+::: {.column width="50%"}
 
 ```{r}
 # Original responses (1-5 scale)
@@ -267,7 +277,7 @@ rosenberg <- tibble(
 )
 
 # Reverse code item2
-rosenberg |>
+rosenberg = rosenberg |>
   mutate(
     item2_reversed = case_when(
       item2 == 1 ~ 5,
@@ -278,6 +288,19 @@ rosenberg |>
     )
   )
 ```
+
+:::
+
+::: {.column width="50%"}
+
+```{r}
+rosenberg
+```
+
+:::
+:::::
+
+
 
 ## Easier reverse coding
 
@@ -301,7 +324,8 @@ General formula: `(max + min) - original_value`
 
 ## Your turn: Recode responses
 
-You have survey data with a 1-7 attention check item where the correct answer is 4:
+You have survey data with a 1-7 attention check item where the correct
+answer is 4:
 
 ```{r}
 attention_data <- tibble(
@@ -310,8 +334,10 @@ attention_data <- tibble(
 )
 ```
 
-1.  Create a new column `passed` that is `TRUE` if they answered 4, `FALSE` otherwise
-2.  Create a column `status` with three values: "Passed", "Failed", or "No response" (for NA)
+1.  Create a new column `passed` that is `TRUE` if they answered 4,
+    `FALSE` otherwise
+2.  Create a column `status` with three values: "Passed", "Failed", or
+    "No response" (for NA)
 3.  What proportion of participants passed?
 
 **Time: 10 minutes**
@@ -396,7 +422,8 @@ mean(scores, na.rm = TRUE)  # Ignores NA
 . . .
 
 ::: callout-warning
-**Think carefully** — Should you exclude missing values? Or is missingness meaningful?
+**Think carefully** — Should you exclude missing values? Or is
+missingness meaningful?
 :::
 
 ## Counting non-missing values
@@ -454,7 +481,8 @@ scale_data |>
 
 ## Option 2: Sum with na.rm
 
-We can't use `na.rm` directly in `mutate()` with `+`, but we can use `sum()`:
+We can't use `na.rm` directly in `mutate()` with `+`, but we can use
+`sum()`:
 
 ```{r}
 scale_data |>
@@ -481,7 +509,8 @@ scale_data |>
 . . .
 
 ::: callout-tip
-**Mean vs Total:** Use means when participants might have different numbers of items answered.
+**Mean vs Total:** Use means when participants might have different
+numbers of items answered.
 :::
 
 ## Cleaner approach: pivot then summarize
@@ -504,7 +533,8 @@ scale_data |>
 
 ## When to worry about missing items
 
-Should you compute a scale score if someone only answered 1 out of 4 items?
+Should you compute a scale score if someone only answered 1 out of 4
+items?
 
 . . .
 
@@ -584,7 +614,8 @@ phq_data <- tibble(
 
 1.  Compute a **total score** (sum of all 9 items)
 2.  Only compute the score if **at least 7 items** are answered
-3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)
+3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate
+    (10-14), Moderately Severe (15-19), Severe (20-27)
 
 ```{r}
 #| echo: false
@@ -621,8 +652,10 @@ phq_data |>
 
 ## Key takeaways
 
-1.  **Logical vectors** (TRUE/FALSE) are powerful for filtering and conditions
-2.  **if_else()** for two-way decisions, **case_when()** for multiple outcomes
+1.  **Logical vectors** (TRUE/FALSE) are powerful for filtering and
+    conditions
+2.  **if_else()** for two-way decisions, **case_when()** for multiple
+    outcomes
 3.  **Reverse coding:** `(max + min) - value`
 4.  **Scale scoring:**
     -   Use `rowwise()` + `sum()/mean()` with `na.rm = TRUE`
@@ -645,6 +678,7 @@ phq_data |>
 
 ## The one thing to remember
 
-Scoring a scale correctly is the most common data task in psychology — and the easiest place to introduce errors.
+Scoring a scale correctly is the most common data task in psychology —
+and the easiest place to introduce errors.
 
 See you Wednesday for strings and factors!

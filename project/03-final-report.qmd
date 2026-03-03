@@ -112,3 +112,37 @@ Your report should include **4-6 publication-ready figures** total. Each figure 
 
 An excellent report doesn't just show data — it tells a **story**. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.
 :::
+
+---
+
+::: {.callout-note}
+## PSY 510 (Graduate Students)
+Students enrolled in PSY 510 must complete the following extension in addition to all requirements above.
+:::
+
+## Graduate Extension: Open Science Supplement
+
+Publicly sharing data and code is increasingly required or encouraged by journals, funding agencies, and IRBs. This extension gives you practice writing the documentation that makes shared materials usable by someone who wasn't there when you collected the data.
+
+### Task G.1: Write a README
+
+Create a `README.md` file for your project. It should include:
+
+1. **Project title and author**
+2. **Dataset description**: What the data contain, who collected it, when, and from where — or a statement that it is synthetic or course data not for redistribution
+3. **File inventory**: A list of every file in your submission zip and what each one is
+4. **Variable codebook**: For each key variable in your dataset — variable name, plain-English description, units or response scale, and how missing values are coded
+5. **Reproduction instructions**: What someone would need to do to re-run your analysis from scratch — R version, packages used (with version numbers from `sessionInfo()`), and the order to run files
+6. **License**: A brief statement about whether and how others may use this work
+
+### Task G.2: Document your environment
+
+Add a code chunk at the end of your `.qmd` that prints your session info:
+
+```r
+sessionInfo()
+```
+
+This documents the exact R and package versions used — a basic but important step toward reproducibility that reviewers and collaborators will appreciate.
+
+**Submission:** Include your `README.md` in the zip file alongside your `.qmd`, `.html`, and data. It should be readable as a plain text file without any special software.

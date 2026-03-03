@@ -122,3 +122,34 @@ Answer in comments:
 - [ ] Script runs without errors
 
 Submit your `.R` file on Canvas.
+
+---
+
+::: {.callout-note}
+## PSY 510 (Graduate Students)
+Students enrolled in PSY 510 must complete the following extension in addition to all tasks above.
+:::
+
+## Graduate Extension: Formal Missing Data Report
+
+Reviewers regularly ask authors to characterize and justify how they handled missing data. This extension gives you a reusable script and language for doing that.
+
+### Task G.1
+
+Install and use the `naniar` package to create a **missingness matrix** — a visualization showing which participants have missing values across which variables.
+
+```r
+# install.packages("naniar")
+library(naniar)
+vis_miss(your_joined_data)
+```
+
+### Task G.2
+
+Classify the likely missingness mechanism for the survey data in this assignment. Is it **MCAR** (missing completely at random), **MAR** (missing at random — related to other observed variables), or **MNAR** (missing not at random — related to the missing value itself)? Justify your classification using your results from Part 3 — point to specific numbers.
+
+### Task G.3
+
+Write a **missing data paragraph** as it would appear in a manuscript's Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.
+
+**Submission:** Add your `naniar` code and the missing data paragraph (as a clearly marked comment) to your `.R` file under `# === GRADUATE EXTENSION ===`.

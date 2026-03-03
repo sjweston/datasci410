@@ -59,16 +59,16 @@ The course is organized into 10 weeks with 18 class sessions. See the [Schedule]
 
 | Week | Topics | R4DS Chapters |
 |------|--------|---------------|
-| 1 | Introduction, Setup, First Visualization | Intro, 1, 2, 6 |
-| 2 | Data Transformation | 3, 4 |
+| 1 | Introduction & Setup, First Visualization | 1, 2, 6 |
+| 2 | Data Transformation I & II | 3, 4 |
 | 3 | Data Tidying & Import | 5, 7, 20 |
-| 4 | Data Visualization Deep Dive | 9 |
-| 5 | Exploratory Data Analysis | 10 |
-| 6 | Data Types & Wrangling | 12, 13, 14, 16 |
-| 7 | Joins & Missing Data | 18, 19 |
-| 8 | Storytelling with Data | 11 |
-| 9 | Reproducible Research with Quarto | 28 |
-| 10 | Practice & Wrap-up | 8 |
+| 4 | Quarto & Reproducibility, Layers & Aesthetics | 28, 9 |
+| 5 | Perception & Design, EDA — Variation | 10 |
+| 6 | EDA — Covariation, Data Types | 10, 12, 13 |
+| 7 | Strings, Factors & Text, Joins | 14, 16, 19 |
+| 8 | Missing Data | 18 |
+| 9 | Storytelling with Data | 11 |
+| 10 | Correlation & Regression, Putting It All Together | 8 |
 
 ## Course Policies
 
@@ -78,11 +78,13 @@ Regular attendance is expected. If you must miss class, please notify me in adva
 
 ### Late Work
 
-[Add late work policy]
+Assignments and quizzes can be submitted up to **48 hours** past the deadline with a **10% penalty per day** (calendar day, not business day). After 48 hours, late submissions are not accepted. For example, an assignment due Monday at 11:59 PM can be submitted until Wednesday at 11:59 PM, with a 10% deduction for each day late.
 
-### Academic Integrity
+Final project milestones follow the same policy. If you're facing circumstances that prevent you from meeting deadlines, please reach out to me as soon as possible so we can make a plan.
 
-[Add academic integrity policy]
+### Collaboration
+
+You are encouraged to discuss approaches, strategies, and concepts with your classmates — especially your teammates. However, all code you submit must be your own. Do not copy code from another student or share your code for others to copy. If you discussed an approach with someone, that's great; just write the code yourself.
 
 ### AI Tools Policy
 
@@ -110,8 +112,8 @@ By building a strong foundation now, you'll be in a far better position to lever
 
 | Component | Weight | Details |
 |-----------|--------|---------|
-| Weekly Coding Assignments | 35% | 8 assignments, lowest 1 dropped |
-| Reading Quizzes | 15% | 10 quizzes, lowest 2 dropped |
+| Weekly Coding Assignments | 35% | 8 assignments |
+| Reading Quizzes | 15% | 10 quizzes, graded on completion |
 | In-Class Participation | 15% | Completion-based coding exercises |
 | Final Project | 35% | Includes proposal, draft, and final submission |
 
@@ -121,7 +123,7 @@ Short, focused exercises that reinforce each session's content. These are due be
 
 ### Reading Quizzes (15%)
 
-Brief Canvas quizzes on the R4DS readings, completed before class. These are timed and use Lockdown Browser. The goal is to ensure you come to class prepared.
+Brief Canvas quizzes on the R4DS readings, completed before class. Quizzes are graded on **completion** — you receive full credit for finishing the quiz, regardless of your score. The goal is to ensure you come to class having engaged with the material, not to test memorization.
 
 ### In-Class Participation (15%)
 
@@ -136,6 +138,19 @@ A capstone project where you'll apply everything you've learned to analyze a dat
 - **Final Submission** (Week 10): Polished Quarto report with visualizations and narrative
 
 You'll also give a brief (5-minute) presentation during finals week.
+
+**Dataset requirements:** Your project must use a real dataset (not simulated), with at least 20 rows. You may not reuse a dataset from a previous course. More details will be provided with the project proposal guidelines.
+
+### Team Challenge (Not Part of Your Grade)
+
+At the start of the term, you'll be placed on a team of 5–6 students. Throughout the quarter, teams earn points across four categories:
+
+- **Pair coding completion** — your team earns a point when all (or nearly all) members submit the in-class exercise
+- **Assignment submission** — your team earns a point when all members submit on time
+- **Quiz performance** — the team with the highest quiz average each week earns a point
+- **Weekly fun challenge** — a short, low-stakes challenge completed outside of class
+
+The team challenge is designed to build community and add a little friendly competition — it has **no effect on your course grade**. The winning team at the end of the term earns a celebration (details TBA).
 
 ## Assignment Schedule
 

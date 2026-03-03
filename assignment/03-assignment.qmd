@@ -107,3 +107,46 @@ Join the survey data with the demographics data by participant ID. How many part
 - [ ] Script runs without errors
 
 Submit your `.R` file on Canvas.
+
+---
+
+::: {.callout-note}
+## PSY 510 (Graduate Students)
+Students enrolled in PSY 510 must complete the following extension in addition to all tasks above.
+:::
+
+## Graduate Extension: Qualtrics API
+
+Most psychology researchers collect data through Qualtrics. Instead of logging in and downloading a CSV by hand, you can pull data directly into R using the `qualtRics` package — a workflow that scales to repeated data collection and eliminates manual steps that introduce error.
+
+### Setup
+
+```r
+# install.packages("qualtRics")
+library(qualtRics)
+```
+
+### Task G.1
+
+Authenticate with the Qualtrics API using your UO API key and data center ID. Instructions for locating these in your Qualtrics account settings are posted on Canvas.
+
+```r
+qualtrics_api_credentials(
+  api_key  = "YOUR_API_KEY",
+  base_url = "YOUR_BASE_URL"
+)
+```
+
+### Task G.2
+
+Pull responses from the shared course practice survey (survey ID posted on Canvas) using `fetch_survey()`. Print the first few rows and run `glimpse()` on the result.
+
+### Task G.3
+
+Compare the API output to the manually exported CSV version of the same survey (also on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match?
+
+### Task G.4
+
+Write a short reflection (~half a page, as a comment block in your script) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?
+
+**Submission:** Add your code and reflection to the same `.R` file, clearly marked with a comment block: `# === GRADUATE EXTENSION ===`.

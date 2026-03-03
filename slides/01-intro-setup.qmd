@@ -84,6 +84,82 @@ That means learning to:
 :::
 ::::
 
+# How this course works {background-color="#2c3e50"}
+
+## Your grade
+
+| Component | Weight | What it is |
+|-----------|--------|------------|
+| Assignments | 35% | 8 weekly coding exercises |
+| Reading quizzes | 15% | 10 pre-class quizzes — graded on completion |
+| Participation | 15% | In-class pair coding submissions |
+| Final project | 35% | Analyze a dataset of your choosing |
+
+## Weekly assignments
+
+- Short, focused coding exercises that reinforce each session's content
+- Assigned on Wednesdays, due the following Monday
+- Designed to take 1–2 hours outside of class
+- You'll get time during class to start and ask questions
+
+. . .
+
+8 assignments total. Late submissions accepted up to 48 hours with a 10% daily penalty.
+
+## Reading quizzes
+
+Before each class, you'll complete a brief Canvas quiz on the assigned reading.
+
+. . .
+
+Quizzes are graded on **completion, not correctness.** You get full credit for finishing — the goal is to engage with the material before we discuss it, not to memorize details.
+
+. . .
+
+10 quizzes total. Same late policy as assignments.
+
+## In-class participation
+
+Every class, you'll work with a partner on a coding exercise.
+
+- Submit your attempt on Canvas before you leave
+- Graded on completion and good-faith effort, not correctness
+- This is your time to experiment, make mistakes, and learn
+
+## The final project
+
+A capstone project where you apply everything to a dataset you choose.
+
+| Milestone | When |
+|-----------|------|
+| Proposal | Week 5 — dataset and research questions |
+| Draft | Week 8 — working code and preliminary results |
+| Final report | Week 10 — polished Quarto document |
+| Presentation | Finals week — 5-minute share-out |
+
+## The team challenge
+
+At the start of the term, you'll be placed on a team of 5–6 students.
+
+Throughout the quarter, your team earns points:
+
+- **Pair coding** — team gets a point when (nearly) everyone submits
+- **Assignments** — team gets a point when everyone submits on time
+- **Quizzes** — team with the highest average earns a point
+- **Fun challenges** — weekly mini-challenges outside of class
+
+## The team challenge
+
+The team challenge **does not affect your grade.**
+
+The winning team at the end of the term earns a celebration.
+
+. . .
+
+We'll form teams based on a short survey you'll take today. Teams will be announced on Wednesday.
+
+# The tools we'll use {background-color="#2c3e50"}
+
 ## The old way vs. the new way
 
 :::: {.columns}
@@ -207,6 +283,25 @@ x + x
 
 ### The filing cabinet
 
+![](img/file_cabinet.png)
+:::
+
+::: {.column width="50%"}
+
+### The laundry basket
+
+![](img/laundry-basket.jpg)
+
+:::
+::::
+
+## Two mental models
+
+:::: {.columns}
+::: {.column width="50%"}
+
+### The filing cabinet
+
 Every piece of paper has a **place** where it *lives*.
 
 You navigate **to** that place to find it.
@@ -238,9 +333,6 @@ You **search** to find it.
 :::
 ::::
 
-. . .
-
-Neither is wrong for daily life. But **coding requires the filing cabinet.**
 
 ## Why coding requires the filing cabinet
 
@@ -318,7 +410,7 @@ psy410/
     └── figures/       # Saved plots
 ```
 
-. . .
+## A standard project structure
 
 Two principles:
 
@@ -348,8 +440,6 @@ Good names make code **self-documenting**. Bad names create confusion and bugs.
 - `stuff.R`, `untitled3.R`
 :::
 ::::
-
-. . .
 
 The test: Can someone unfamiliar with your project understand what a variable contains or what a file does?
 
@@ -505,11 +595,9 @@ Read Cat Hicks: ["Cognitive helmets for AI bicycles"](https://www.fightforthehum
 
 AI gives you a working answer immediately. It *feels* like you solved it.
 
-. . .
 
 But you didn't build the **mental model** of *why* it works.
 
-. . .
 
 When the AI hallucinates (which it will), **you cannot debug it.** You are stranded.
 
@@ -525,11 +613,9 @@ Before we get on the motorcycle, we need a **cognitive helmet**:
 2. **Debugging resilience** — emotional regulation when things break
 3. **Strategic friction** — breaking big problems into small pieces
 
-. . .
 
 That's what the many short assignments in this course build. The goal: **you** are the pilot, not the passenger.
 
----
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -542,6 +628,7 @@ That's what the many short assignments in this course build. The goal: **you** a
 
 **Do:**
 
+- Complete the **team formation survey** on Canvas (if you haven't already)
 - Install R and RStudio
 - Create your psy410 project with `data/`, `scripts/`, and `output/` folders
 - Install the tidyverse package

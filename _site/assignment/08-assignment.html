@@ -294,6 +294,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#grading-rubric" id="toc-grading-rubric" class="nav-link" data-scroll-target="#grading-rubric">Grading Rubric</a></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   <li><a href="#tips-for-success" id="toc-tips-for-success" class="nav-link" data-scroll-target="#tips-for-success">Tips for Success</a></li>
+  <li><a href="#graduate-extension-parameterized-report" id="toc-graduate-extension-parameterized-report" class="nav-link" data-scroll-target="#graduate-extension-parameterized-report">Graduate Extension: Parameterized Report</a>
+  <ul class="collapse">
+  <li><a href="#task-g.1" id="toc-task-g.1" class="nav-link" data-scroll-target="#task-g.1">Task G.1</a></li>
+  <li><a href="#task-g.2" id="toc-task-g.2" class="nav-link" data-scroll-target="#task-g.2">Task G.2</a></li>
+  <li><a href="#task-g.3" id="toc-task-g.3" class="nav-link" data-scroll-target="#task-g.3">Task G.3</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -486,8 +492,48 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Have a friend review your report — does it make sense to someone who hasn’t seen your code?</li>
 </ul>
 <p>This assignment is excellent preparation for your final project!</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>PSY 510 (Graduate Students)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Students enrolled in PSY 510 must complete the following extension in addition to all requirements above.</p>
+</div>
+</div>
+</section>
+<section id="graduate-extension-parameterized-report" class="level2">
+<h2 class="anchored" data-anchor-id="graduate-extension-parameterized-report">Graduate Extension: Parameterized Report</h2>
+<p>A parameterized Quarto report can regenerate automatically for different inputs — different subgroups, conditions, time points, or datasets — by changing a single value. This is directly useful for anyone running multiple studies with the same measures, or generating participant-level summaries from a single template.</p>
+<section id="task-g.1" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
+<p>Add a <code>params</code> block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">subset</span><span class="kw">:</span><span class="at"> </span><span class="st">"all"</span><span class="co">   # options: "all", "Female", "Male"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Or, if using your final project dataset:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data_file</span><span class="kw">:</span><span class="at"> </span><span class="st">"data.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="task-g.2" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
+<p>Use your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least <strong>two different parameter values</strong> by rendering it twice (from the command line or RStudio’s Knit menu → “Knit with Parameters”).</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage inside a code chunk:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>subset <span class="sc">!=</span> <span class="st">"all"</span>) {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> params<span class="sc">$</span>subset)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="task-g.3" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>
+<p>In a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.</p>
+<p><strong>Submission:</strong> Submit your <code>.qmd</code> and two rendered <code>.html</code> files (one per parameter value). Name them to reflect the parameter used (e.g., <code>report-all.html</code>, <code>report-female.html</code>).</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

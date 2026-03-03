@@ -99,3 +99,30 @@ Submit:
 - [ ] 1-page EDA report as PDF
 
 Make sure your script runs without errors.
+
+---
+
+::: {.callout-note}
+## PSY 510 (Graduate Students)
+Students enrolled in PSY 510 must complete the following extension **in place of** the 1-page EDA report in Part 4.
+:::
+
+## Graduate Extension: Preliminary Analysis Write-Up
+
+Instead of the 1-page EDA summary, write your findings as if they were the preliminary analysis section of a manuscript — combining your code output and interpretations in a form that would make sense to a reader of a journal article.
+
+Your write-up should include the following, in order:
+
+1. **Dataset description** (2–3 sentences): What are the data? How many participants? What variables? How was it collected?
+
+2. **Data quality and exclusions** (1–2 sentences): Were any observations flagged or removed? What did you do about missing data? Write this as you would in a Methods section — specific and justified.
+
+3. **Descriptive statistics**: Report means, SDs, and ranges for at least 5 key variables. Format these as a table using `knitr::kable()` in a Quarto document, or present them clearly in prose if submitting a plain PDF.
+
+4. **Key patterns** (1–2 paragraphs): Describe 2–3 findings from your EDA, referring to your figures by number (*Figure 1 shows...*). Write this as you would in a Results section — precise, direct, no over-interpretation.
+
+5. **Analysis plan** (1 paragraph): Based on what you found, what would you examine next in a formal analysis? Why does the EDA support that direction?
+
+**Length:** 500–700 words. This should read as a coherent piece of writing, not a list of answers.
+
+**Submission:** Submit your write-up as a PDF alongside your `.R` script.

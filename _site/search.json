@@ -46,21 +46,21 @@
     "href": "syllabus.html#course-schedule-overview",
     "title": "Syllabus",
     "section": "Course Schedule Overview",
-    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction, Setup, First Visualization\nIntro, 1, 2, 6\n\n\n2\nData Transformation\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nData Visualization Deep Dive\n9\n\n\n5\nExploratory Data Analysis\n10\n\n\n6\nData Types & Wrangling\n12, 13, 14, 16\n\n\n7\nJoins & Missing Data\n18, 19\n\n\n8\nStorytelling with Data\n11\n\n\n9\nReproducible Research with Quarto\n28\n\n\n10\nPractice & Wrap-up\n8"
+    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction & Setup, First Visualization\n1, 2, 6\n\n\n2\nData Transformation I & II\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nQuarto & Reproducibility, Layers & Aesthetics\n28, 9\n\n\n5\nPerception & Design, EDA — Variation\n10\n\n\n6\nEDA — Covariation, Data Types\n10, 12, 13\n\n\n7\nStrings, Factors & Text, Joins\n14, 16, 19\n\n\n8\nMissing Data\n18\n\n\n9\nStorytelling with Data\n11\n\n\n10\nCorrelation & Regression, Putting It All Together\n8"
   },
   {
     "objectID": "syllabus.html#course-policies",
     "href": "syllabus.html#course-policies",
     "title": "Syllabus",
     "section": "Course Policies",
-    "text": "Course Policies\n\nAttendance\nRegular attendance is expected. If you must miss class, please notify me in advance when possible.\n\n\nLate Work\n[Add late work policy]\n\n\nAcademic Integrity\n[Add academic integrity policy]\n\n\nAI Tools Policy\nTL;DR: No AI tools in this course. But plan to use AI extensively in your future career.\nAI tools like ChatGPT, Claude, and GitHub Copilot are transforming data science work. You should learn to use them effectively — but not yet. This course prohibits AI assistance on all assessments:\n\nWeekly coding assignments\nIn-class coding exercises\nReading quizzes\nFinal project\n\nWhy no AI?\nThink of it like going to the gym. You don’t hire someone to lift the weights for you — the struggle is the point. The goal is to build mental muscle: understanding why code works, debugging when it doesn’t, and developing intuition about data structures.\nUsing AI before you have these foundations creates an “illusion of competence.” The code works, so it feels like you understand it. But when the AI hallucinates (and it will), you can’t debug it. You’re stranded.\nResearch shows that AI coding tools are most effective when used for augmentation (enhancing what you already know) rather than automation (doing what you don’t understand). In Anthropic’s Economic Index (January 2026), AI output quality was strongly correlated with the user’s education level and domain expertise — AI amplifies your existing skills, it doesn’t replace them (Anthropic, 2026).\nBy building a strong foundation now, you’ll be in a far better position to leverage AI as a collaborator in your future work."
+    "text": "Course Policies\n\nAttendance\nRegular attendance is expected. If you must miss class, please notify me in advance when possible.\n\n\nLate Work\nAssignments and quizzes can be submitted up to 48 hours past the deadline with a 10% penalty per day (calendar day, not business day). After 48 hours, late submissions are not accepted. For example, an assignment due Monday at 11:59 PM can be submitted until Wednesday at 11:59 PM, with a 10% deduction for each day late.\nFinal project milestones follow the same policy. If you’re facing circumstances that prevent you from meeting deadlines, please reach out to me as soon as possible so we can make a plan.\n\n\nCollaboration\nYou are encouraged to discuss approaches, strategies, and concepts with your classmates — especially your teammates. However, all code you submit must be your own. Do not copy code from another student or share your code for others to copy. If you discussed an approach with someone, that’s great; just write the code yourself.\n\n\nAI Tools Policy\nTL;DR: No AI tools in this course. But plan to use AI extensively in your future career.\nAI tools like ChatGPT, Claude, and GitHub Copilot are transforming data science work. You should learn to use them effectively — but not yet. This course prohibits AI assistance on all assessments:\n\nWeekly coding assignments\nIn-class coding exercises\nReading quizzes\nFinal project\n\nWhy no AI?\nThink of it like going to the gym. You don’t hire someone to lift the weights for you — the struggle is the point. The goal is to build mental muscle: understanding why code works, debugging when it doesn’t, and developing intuition about data structures.\nUsing AI before you have these foundations creates an “illusion of competence.” The code works, so it feels like you understand it. But when the AI hallucinates (and it will), you can’t debug it. You’re stranded.\nResearch shows that AI coding tools are most effective when used for augmentation (enhancing what you already know) rather than automation (doing what you don’t understand). In Anthropic’s Economic Index (January 2026), AI output quality was strongly correlated with the user’s education level and domain expertise — AI amplifies your existing skills, it doesn’t replace them (Anthropic, 2026).\nBy building a strong foundation now, you’ll be in a far better position to leverage AI as a collaborator in your future work."
   },
   {
     "objectID": "syllabus.html#grading",
     "href": "syllabus.html#grading",
     "title": "Syllabus",
     "section": "Grading",
-    "text": "Grading\n\n\n\nComponent\nWeight\nDetails\n\n\n\n\nWeekly Coding Assignments\n35%\n8 assignments, lowest 1 dropped\n\n\nReading Quizzes\n15%\n10 quizzes, lowest 2 dropped\n\n\nIn-Class Participation\n15%\nCompletion-based coding exercises\n\n\nFinal Project\n35%\nIncludes proposal, draft, and final submission\n\n\n\n\nWeekly Coding Assignments (35%)\nShort, focused exercises that reinforce each session’s content. These are due before the next class meeting and are designed to take 1-2 hours outside of class. You’ll have time during class to start these and ask questions.\n\n\nReading Quizzes (15%)\nBrief Canvas quizzes on the R4DS readings, completed before class. These are timed and use Lockdown Browser. The goal is to ensure you come to class prepared.\n\n\nIn-Class Participation (15%)\nDuring each class, you’ll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.\n\n\nFinal Project (35%)\nA capstone project where you’ll apply everything you’ve learned to analyze a dataset of your choosing. The project has three checkpoints:\n\nProposal (Week 5): Dataset selection and research questions\nDraft (Week 8): Working code and preliminary results\nFinal Submission (Week 10): Polished Quarto report with visualizations and narrative\n\nYou’ll also give a brief (5-minute) presentation during finals week."
+    "text": "Grading\n\n\n\nComponent\nWeight\nDetails\n\n\n\n\nWeekly Coding Assignments\n35%\n8 assignments\n\n\nReading Quizzes\n15%\n10 quizzes, graded on completion\n\n\nIn-Class Participation\n15%\nCompletion-based coding exercises\n\n\nFinal Project\n35%\nIncludes proposal, draft, and final submission\n\n\n\n\nWeekly Coding Assignments (35%)\nShort, focused exercises that reinforce each session’s content. These are due before the next class meeting and are designed to take 1-2 hours outside of class. You’ll have time during class to start these and ask questions.\n\n\nReading Quizzes (15%)\nBrief Canvas quizzes on the R4DS readings, completed before class. Quizzes are graded on completion — you receive full credit for finishing the quiz, regardless of your score. The goal is to ensure you come to class having engaged with the material, not to test memorization.\n\n\nIn-Class Participation (15%)\nDuring each class, you’ll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.\n\n\nFinal Project (35%)\nA capstone project where you’ll apply everything you’ve learned to analyze a dataset of your choosing. The project has three checkpoints:\n\nProposal (Week 5): Dataset selection and research questions\nDraft (Week 8): Working code and preliminary results\nFinal Submission (Week 10): Polished Quarto report with visualizations and narrative\n\nYou’ll also give a brief (5-minute) presentation during finals week.\nDataset requirements: Your project must use a real dataset (not simulated), with at least 20 rows. You may not reuse a dataset from a previous course. More details will be provided with the project proposal guidelines.\n\n\nTeam Challenge (Not Part of Your Grade)\nAt the start of the term, you’ll be placed on a team of 5–6 students. Throughout the quarter, teams earn points across four categories:\n\nPair coding completion — your team earns a point when all (or nearly all) members submit the in-class exercise\nAssignment submission — your team earns a point when all members submit on time\nQuiz performance — the team with the highest quiz average each week earns a point\nWeekly fun challenge — a short, low-stakes challenge completed outside of class\n\nThe team challenge is designed to build community and add a little friendly competition — it has no effect on your course grade. The winning team at the end of the term earns a celebration (details TBA)."
   },
   {
     "objectID": "syllabus.html#assignment-schedule",
@@ -837,7 +837,19 @@
     "href": "assignment/07-assignment.html#submission",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll joins performed correctly\nMissing data analysis complete\nReflection questions answered\nScript runs without errors\n\nSubmit your .R file on Canvas.",
+    "text": "Submission\n\nAll joins performed correctly\nMissing data analysis complete\nReflection questions answered\nScript runs without errors\n\nSubmit your .R file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "7: Joins & Missing Data"
+    ]
+  },
+  {
+    "objectID": "assignment/07-assignment.html#graduate-extension-formal-missing-data-report",
+    "href": "assignment/07-assignment.html#graduate-extension-formal-missing-data-report",
+    "title": "Assignment 7: Joins & Missing Data",
+    "section": "Graduate Extension: Formal Missing Data Report",
+    "text": "Graduate Extension: Formal Missing Data Report\nReviewers regularly ask authors to characterize and justify how they handled missing data. This extension gives you a reusable script and language for doing that.\n\nTask G.1\nInstall and use the naniar package to create a missingness matrix — a visualization showing which participants have missing values across which variables.\n# install.packages(\"naniar\")\nlibrary(naniar)\nvis_miss(your_joined_data)\n\n\nTask G.2\nClassify the likely missingness mechanism for the survey data in this assignment. Is it MCAR (missing completely at random), MAR (missing at random — related to other observed variables), or MNAR (missing not at random — related to the missing value itself)? Justify your classification using your results from Part 3 — point to specific numbers.\n\n\nTask G.3\nWrite a missing data paragraph as it would appear in a manuscript’s Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.\nSubmission: Add your naniar code and the missing data paragraph (as a clearly marked comment) to your .R file under # === GRADUATE EXTENSION ===.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -945,7 +957,19 @@
     "href": "assignment/05-assignment.html#submission",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Submission",
-    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\n1-page EDA report as PDF\n\nMake sure your script runs without errors.",
+    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\n1-page EDA report as PDF\n\nMake sure your script runs without errors.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in place of the 1-page EDA report in Part 4.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "5: Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "assignment/05-assignment.html#graduate-extension-preliminary-analysis-write-up",
+    "href": "assignment/05-assignment.html#graduate-extension-preliminary-analysis-write-up",
+    "title": "Assignment 5: Exploratory Data Analysis",
+    "section": "Graduate Extension: Preliminary Analysis Write-Up",
+    "text": "Graduate Extension: Preliminary Analysis Write-Up\nInstead of the 1-page EDA summary, write your findings as if they were the preliminary analysis section of a manuscript — combining your code output and interpretations in a form that would make sense to a reader of a journal article.\nYour write-up should include the following, in order:\n\nDataset description (2–3 sentences): What are the data? How many participants? What variables? How was it collected?\nData quality and exclusions (1–2 sentences): Were any observations flagged or removed? What did you do about missing data? Write this as you would in a Methods section — specific and justified.\nDescriptive statistics: Report means, SDs, and ranges for at least 5 key variables. Format these as a table using knitr::kable() in a Quarto document, or present them clearly in prose if submitting a plain PDF.\nKey patterns (1–2 paragraphs): Describe 2–3 findings from your EDA, referring to your figures by number (Figure 1 shows…). Write this as you would in a Results section — precise, direct, no over-interpretation.\nAnalysis plan (1 paragraph): Based on what you found, what would you examine next in a formal analysis? Why does the EDA support that direction?\n\nLength: 500–700 words. This should read as a coherent piece of writing, not a list of answers.\nSubmission: Submit your write-up as a PDF alongside your .R script.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1029,7 +1053,19 @@
     "href": "assignment/03-assignment.html#submission",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nScript runs without errors\n\nSubmit your .R file on Canvas.",
+    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nScript runs without errors\n\nSubmit your .R file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "3: Tidying & Import"
+    ]
+  },
+  {
+    "objectID": "assignment/03-assignment.html#graduate-extension-qualtrics-api",
+    "href": "assignment/03-assignment.html#graduate-extension-qualtrics-api",
+    "title": "Assignment 3: Tidying & Importing Data",
+    "section": "Graduate Extension: Qualtrics API",
+    "text": "Graduate Extension: Qualtrics API\nMost psychology researchers collect data through Qualtrics. Instead of logging in and downloading a CSV by hand, you can pull data directly into R using the qualtRics package — a workflow that scales to repeated data collection and eliminates manual steps that introduce error.\n\nSetup\n# install.packages(\"qualtRics\")\nlibrary(qualtRics)\n\n\nTask G.1\nAuthenticate with the Qualtrics API using your UO API key and data center ID. Instructions for locating these in your Qualtrics account settings are posted on Canvas.\nqualtrics_api_credentials(\n  api_key  = \"YOUR_API_KEY\",\n  base_url = \"YOUR_BASE_URL\"\n)\n\n\nTask G.2\nPull responses from the shared course practice survey (survey ID posted on Canvas) using fetch_survey(). Print the first few rows and run glimpse() on the result.\n\n\nTask G.3\nCompare the API output to the manually exported CSV version of the same survey (also on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match?\n\n\nTask G.4\nWrite a short reflection (~half a page, as a comment block in your script) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?\nSubmission: Add your code and reflection to the same .R file, clearly marked with a comment block: # === GRADUATE EXTENSION ===.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1293,7 +1329,19 @@
     "href": "assignment/04-assignment.html#submission",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Submission",
-    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\ngood_graph.png — your good visualization from Part 3\nbad_graph.png — your bad visualization from Part 3\n\nMake sure your script runs without errors and all files are saved correctly.",
+    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\ngood_graph.png — your good visualization from Part 3\nbad_graph.png — your bad visualization from Part 3\n\nMake sure your script runs without errors and all files are saved correctly.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "4: Visualization Deep Dive"
+    ]
+  },
+  {
+    "objectID": "assignment/04-assignment.html#graduate-extension-publication-ready-figure",
+    "href": "assignment/04-assignment.html#graduate-extension-publication-ready-figure",
+    "title": "Assignment 4: Visualization Deep Dive",
+    "section": "Graduate Extension: Publication-Ready Figure",
+    "text": "Graduate Extension: Publication-Ready Figure\nCreating figures for a course assignment and creating figures for a manuscript are different tasks. Journals specify file format, resolution, and dimensions, and reviewers expect a caption that stands on its own without the surrounding text.\n\nTask G.1\nChoose the figure you’re most proud of from Parts 1–3. Look up the author guidelines for one real journal in your area (Psychological Science, JPSP, Emotion, or similar) and save the figure at 300 dpi with dimensions matching their specifications.\n# Example — adjust width/height to your target journal's specs:\nggsave(\"publication_figure.tiff\",\n       plot  = my_plot,\n       width = 3.5, height = 3,\n       units = \"in\", dpi = 300)\n\n\nTask G.2\nWrite a figure caption in APA style — the kind you would include in a manuscript. It should describe what the figure shows, define any abbreviations, and state what the error bars represent (if applicable). Refer to the APA figure guidelines handout from Session 16.\nInclude the caption as a comment directly above your ggsave() call.\n\n\nTask G.3\nIn 3–5 sentences (as a comment), justify your design choices: Why this geom? Why this color palette? What did you deliberately remove or simplify? Connect your reasoning to the perception and design principles from Session 9.\nSubmission: Add ggsave(), the caption comment, and the justification comment to your .R file, clearly marked # === GRADUATE EXTENSION ===. Submit the saved figure file alongside your script.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1509,7 +1557,19 @@
     "href": "assignment/08-assignment.html#tips-for-success",
     "title": "Assignment 8: Reproducible Report",
     "section": "Tips for Success",
-    "text": "Tips for Success\n\nStart with an outline before coding\nWrite narrative as you go, not at the end\nTest each code chunk as you write it\nKeep visualizations simple and clear\nHave a friend review your report — does it make sense to someone who hasn’t seen your code?\n\nThis assignment is excellent preparation for your final project!",
+    "text": "Tips for Success\n\nStart with an outline before coding\nWrite narrative as you go, not at the end\nTest each code chunk as you write it\nKeep visualizations simple and clear\nHave a friend review your report — does it make sense to someone who hasn’t seen your code?\n\nThis assignment is excellent preparation for your final project!\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all requirements above.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "8: Reproducible Report"
+    ]
+  },
+  {
+    "objectID": "assignment/08-assignment.html#graduate-extension-parameterized-report",
+    "href": "assignment/08-assignment.html#graduate-extension-parameterized-report",
+    "title": "Assignment 8: Reproducible Report",
+    "section": "Graduate Extension: Parameterized Report",
+    "text": "Graduate Extension: Parameterized Report\nA parameterized Quarto report can regenerate automatically for different inputs — different subgroups, conditions, time points, or datasets — by changing a single value. This is directly useful for anyone running multiple studies with the same measures, or generating participant-level summaries from a single template.\n\nTask G.1\nAdd a params block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:\nparams:\n  subset: \"all\"   # options: \"all\", \"Female\", \"Male\"\nOr, if using your final project dataset:\nparams:\n  data_file: \"data.csv\"\n\n\nTask G.2\nUse your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least two different parameter values by rendering it twice (from the command line or RStudio’s Knit menu → “Knit with Parameters”).\n# Example usage inside a code chunk:\nif (params$subset != \"all\") {\n  data &lt;- data |&gt; filter(gender == params$subset)\n}\n\n\nTask G.3\nIn a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.\nSubmission: Submit your .qmd and two rendered .html files (one per parameter value). Name them to reflect the parameter used (e.g., report-all.html, report-female.html).",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2073,7 +2133,19 @@
     "href": "project/03-final-report.html#how-this-will-be-graded",
     "title": "Milestone 3: Final Report",
     "section": "How this will be graded",
-    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nReflection — honest, thoughtful\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.",
+    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nReflection — honest, thoughtful\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.\n\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all requirements above.",
+    "crumbs": [
+      "Project",
+      "Milestones",
+      "3: Final Report"
+    ]
+  },
+  {
+    "objectID": "project/03-final-report.html#graduate-extension-open-science-supplement",
+    "href": "project/03-final-report.html#graduate-extension-open-science-supplement",
+    "title": "Milestone 3: Final Report",
+    "section": "Graduate Extension: Open Science Supplement",
+    "text": "Graduate Extension: Open Science Supplement\nPublicly sharing data and code is increasingly required or encouraged by journals, funding agencies, and IRBs. This extension gives you practice writing the documentation that makes shared materials usable by someone who wasn’t there when you collected the data.\n\nTask G.1: Write a README\nCreate a README.md file for your project. It should include:\n\nProject title and author\nDataset description: What the data contain, who collected it, when, and from where — or a statement that it is synthetic or course data not for redistribution\nFile inventory: A list of every file in your submission zip and what each one is\nVariable codebook: For each key variable in your dataset — variable name, plain-English description, units or response scale, and how missing values are coded\nReproduction instructions: What someone would need to do to re-run your analysis from scratch — R version, packages used (with version numbers from sessionInfo()), and the order to run files\nLicense: A brief statement about whether and how others may use this work\n\n\n\nTask G.2: Document your environment\nAdd a code chunk at the end of your .qmd that prints your session info:\nsessionInfo()\nThis documents the exact R and package versions used — a basic but important step toward reproducibility that reviewers and collaborators will appreciate.\nSubmission: Include your README.md in the zip file alongside your .qmd, .html, and data. It should be readable as a plain text file without any special software.",
     "crumbs": [
       "Project",
       "Milestones",

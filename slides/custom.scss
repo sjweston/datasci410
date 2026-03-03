@@ -3,18 +3,24 @@
 // Custom theme for PSY 410 slides
 // Builds on the default revealjs theme
 
+// --- Typography Configuration ---
+// Switch to Garamond and reduce size
+$font-family-sans-serif: "EB Garamond", Garamond, Georgia, serif;
+$presentation-heading-font: "EB Garamond", Garamond, Georgia, serif;
+
+// Reduce base size (Default is usually ~40px. 32px is smaller/professional)
+$presentation-font-size-root: 32px;
+$presentation-line-height: 1.5;     // Serifs need a little more breathing room
+
 // Colors
 $body-bg: #ffffff;
-$body-color: #333333;
-$link-color: #2c3e50;
-$selection-bg: #3498db;
-
-// Fonts
-$font-family-sans-serif: "Source Sans Pro", Helvetica, sans-serif;
-$presentation-heading-font: "Source Sans Pro", Helvetica, sans-serif;
+$body-color: #2c3e50; // Darkened slightly for better contrast with thin serif strokes
+$link-color: #2980b9; // Slightly darker blue than before for elegance
+$selection-bg: #d6eaf8; // Softer highlight
 
 // Headings
 $presentation-heading-color: #2c3e50;
+$presentation-heading-font-weight: 600; // Garamond looks better semi-bold in headings
 
 // Code
 $code-block-bg: #f8f9fa;
@@ -22,39 +28,39 @@ $code-color: #c7254e;
 
 /*-- scss:rules --*/
 
+// Import the font from Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
 // Make slide titles more prominent
 .reveal h1 {
   font-weight: 700;
+  letter-spacing: -0.02em; // Tighten large serif titles slightly
 }
 
 .reveal h2 {
   font-weight: 600;
-  border-bottom: 3px solid #3498db;
-  padding-bottom: 0.3em;
+  border-bottom: 2px solid #3498db; // Thinned the border to match the font elegance
+  padding-bottom: 0.2em;
 }
 
 // Style callout boxes
 .callout {
   margin: 1em 0;
+  font-family: "Source Sans Pro", Helvetica, sans-serif; // Keep callouts sans-serif for contrast?
+  // If you want callouts to be Garamond too, remove the line above.
+  font-size: 0.9em;
 }
 
-.callout-tip {
-  border-left-color: #27ae60;
-}
-
-.callout-warning {
-  border-left-color: #f39c12;
-}
-
-.callout-important {
-  border-left-color: #e74c3c;
-}
+.callout-tip { border-left-color: #27ae60; }
+.callout-warning { border-left-color: #f39c12; }
+.callout-important { border-left-color: #e74c3c; }
 
 // Style code blocks
 .reveal pre {
   font-size: 0.7em;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 1px solid #e1e4e8; // Added subtle border
 }
 
 .reveal code {
@@ -64,11 +70,14 @@ $code-color: #c7254e;
 // Style tables
 .reveal table {
   font-size: 0.8em;
+  border-collapse: collapse;
 }
 
 .reveal table th {
   background-color: #2c3e50;
   color: white;
+  font-family: "Source Sans Pro", Helvetica, sans-serif; // Headers often look cleaner sans-serif
+  font-weight: 600;
 }
 
 .reveal table tr:nth-child(even) {
@@ -84,13 +93,14 @@ $code-color: #c7254e;
 // Add some breathing room to lists
 .reveal ul li,
 .reveal ol li {
-  margin-bottom: 0.5em;
+  margin-bottom: 0.4em;
 }
 
 // Style the footer
 .reveal .footer {
-  font-size: 0.6em;
+  font-size: 0.5em; // Scaled down since root font is smaller
   color: #7f8c8d;
+  font-family: "Source Sans Pro", Helvetica, sans-serif; // Footer easier to read as Sans
 }
 
 // Incremental reveals - fade in nicely
@@ -98,25 +108,19 @@ $code-color: #c7254e;
   transition: all 0.3s ease;
 }
 
-// Notes styling (for speaker view)
+// Notes styling
 .reveal .notes {
   font-size: 0.8em;
   color: #666;
 }
 
 // --- Overflow guardrails ---
-// Prevent slide content from silently running off the bottom.
-// Slides that overflow will clip rather than push content out of view.
 .reveal .slides section {
   overflow: hidden;
 }
 
-// Debug mode: toggle with ?debug-overflow in the URL.
-// Adds a red outline to any slide whose content overflows its container.
-// Usage: open the rendered HTML and append ?debug-overflow to the URL.
-// Overflowing slides get a red dashed border so they're easy to spot.
 html.debug-overflow .reveal .slides section {
-  overflow: visible; // temporarily allow overflow so we can see it
+  overflow: visible;
 }
 
 // Small helper: ensure images don't blow out slide width
