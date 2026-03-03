@@ -297,6 +297,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-3.4" id="toc-task-3.4" class="nav-link" data-scroll-target="#task-3.4">Task 3.4</a></li>
   </ul></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
+  <li><a href="#graduate-extension-qualtrics-api" id="toc-graduate-extension-qualtrics-api" class="nav-link" data-scroll-target="#graduate-extension-qualtrics-api">Graduate Extension: Qualtrics API</a>
+  <ul class="collapse">
+  <li><a href="#setup-1" id="toc-setup-1" class="nav-link" data-scroll-target="#setup-1">Setup</a></li>
+  <li><a href="#task-g.1" id="toc-task-g.1" class="nav-link" data-scroll-target="#task-g.1">Task G.1</a></li>
+  <li><a href="#task-g.2" id="toc-task-g.2" class="nav-link" data-scroll-target="#task-g.2">Task G.2</a></li>
+  <li><a href="#task-g.3" id="toc-task-g.3" class="nav-link" data-scroll-target="#task-g.3">Task G.3</a></li>
+  <li><a href="#task-g.4" id="toc-task-g.4" class="nav-link" data-scroll-target="#task-g.4">Task G.4</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -423,8 +431,52 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Script runs without errors</label></li>
 </ul>
 <p>Submit your <code>.R</code> file on Canvas.</p>
+<hr>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>PSY 510 (Graduate Students)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Students enrolled in PSY 510 must complete the following extension in addition to all tasks above.</p>
+</div>
+</div>
+</section>
+<section id="graduate-extension-qualtrics-api" class="level2">
+<h2 class="anchored" data-anchor-id="graduate-extension-qualtrics-api">Graduate Extension: Qualtrics API</h2>
+<p>Most psychology researchers collect data through Qualtrics. Instead of logging in and downloading a CSV by hand, you can pull data directly into R using the <code>qualtRics</code> package — a workflow that scales to repeated data collection and eliminates manual steps that introduce error.</p>
+<section id="setup-1" class="level3">
+<h3 class="anchored" data-anchor-id="setup-1">Setup</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("qualtRics")</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(qualtRics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="task-g.1" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
+<p>Authenticate with the Qualtrics API using your UO API key and data center ID. Instructions for locating these in your Qualtrics account settings are posted on Canvas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qualtrics_api_credentials</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key  =</span> <span class="st">"YOUR_API_KEY"</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_url =</span> <span class="st">"YOUR_BASE_URL"</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="task-g.2" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
+<p>Pull responses from the shared course practice survey (survey ID posted on Canvas) using <code>fetch_survey()</code>. Print the first few rows and run <code>glimpse()</code> on the result.</p>
+</section>
+<section id="task-g.3" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>
+<p>Compare the API output to the manually exported CSV version of the same survey (also on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match?</p>
+</section>
+<section id="task-g.4" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.4">Task G.4</h3>
+<p>Write a short reflection (~half a page, as a comment block in your script) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?</p>
+<p><strong>Submission:</strong> Add your code and reflection to the same <code>.R</code> file, clearly marked with a comment block: <code># === GRADUATE EXTENSION ===</code>.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
