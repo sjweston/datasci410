@@ -266,16 +266,55 @@ Dr.&nbsp;Sara Weston
 </table>
 </div>
 </div>
+<aside class="notes">
+<p>Spend ~2 minutes here. Let students look at the table and ask them: “If you saw these summary statistics, would you think these datasets look the same?” Get a few responses before advancing. The goal is to build suspense for the reveal on the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="but-look-at-the-plots" class="slide level2">
 <h2>But look at the plots!</h2>
 
 <img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p><strong>Always visualize your data before running statistics.</strong></p>
+<aside class="notes">
+<p>This is the payoff. Let it land. Point out that Set 1 is a nice linear relationship, Set 2 is a curve, Set 3 has an outlier pulling the stats, and Set 4 is clustered with one extreme point. Emphasize: “This is why we visualize before we analyze.” This connects back to the replication crisis discussion from Session 1 — researchers who only look at numbers miss things.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-datasaurus-dozen" class="slide level2">
 <h2>The datasaurus dozen</h2>
 
-<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"></section></section>
+<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><aside class="notes">
+<p>Brief slide — just reinforce the Anscombe point with a more dramatic example. Mention that the original Datasaurus Dozen includes datasets shaped like a star, a dinosaur, etc., all with the same summary statistics. You can Google “datasaurus dozen” to show students the full set if there’s time, but don’t linger. Transition: “So visualization matters. Now let’s learn the tool we’ll use to make them.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="introduction-to-ggplot2" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Introduction to ggplot2</h1>
@@ -291,6 +330,19 @@ Dr.&nbsp;Sara Weston
 </ul>
 <div class="fragment">
 <p>The “gg” stands for “Grammar of Graphics”</p>
+<aside class="notes">
+<p>Don’t dwell on history. The key point is that ggplot2 is not a random collection of plotting commands — it has a coherent logic. The “grammar” metaphor means that just like you can combine words following grammatical rules to make any sentence, you can combine data, aesthetics, and geoms to make any plot. Students don’t need to remember who Hadley Wickham is for the quiz.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-grammar-of-graphics" class="slide level2">
@@ -307,6 +359,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="sc">&lt;</span>DATA<span class="sc">&gt;</span>, <span class="at">mapping =</span> <span class="fu">aes</span>(<span class="sc">&lt;</span>MAPPINGS<span class="sc">&gt;</span>)) <span class="sc">+</span></span>
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="er">&lt;</span>GEOM_FUNCTION<span class="sc">&gt;</span>()</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Spend a moment on this template — it will be their mental model for the rest of the course. Emphasize that every ggplot follows this same structure. Walk through each piece slowly: “First you tell it what data, then how variables map to visual things, then what shape to draw.” Students often ask why we use <code>+</code> instead of <code>|&gt;</code> — the short answer is that ggplot2 predates the pipe and uses <code>+</code> to add layers. They’ll get used to it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="our-dataset-mpg" class="slide level2">
@@ -330,6 +395,19 @@ $ fl           &lt;chr&gt; "p", "p", "p", "p", "p", "p", "p", "p", "p", "p", "p"
 $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact", "c…</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Walk through the output of <code>glimpse()</code> briefly: 234 rows means 234 cars, each column is a variable. Point out <code>displ</code> (engine displacement in liters) and <code>hwy</code> (highway miles per gallon) since those are what we’ll plot first. Don’t explain every column — they’ll explore more in Assignment 1. If students ask what a tibble is, say it’s just a modern version of a data frame.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="your-first-plot" class="slide level2">
 <h2>Your first plot</h2>
@@ -339,6 +417,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This is a big moment — their first real plot from code. Let students react to seeing it appear. Ask: “What does this plot tell us about the relationship between engine size and fuel efficiency?” (Bigger engines, worse mileage.) Type the code live in RStudio if possible so students see the workflow of writing code and seeing the output. Expect questions about the warning message from overplotting.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="your-first-plot-output" class="slide level2 output-location-slide"><h2>Your first plot</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -377,6 +468,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()  <span class="co"># x and y are first args</span></span></code></pre></div>
 </div>
 <p>I’ll use the middle version — clear but not overly verbose.</p>
+<aside class="notes">
+<p>Students often get anxious about which version is “correct.” Reassure them that all three work identically. Mention that you’ll use the middle version in slides, but they’ll see the shortest version in online examples. The only thing that matters is consistency within a script. Don’t spend more than 1 minute here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="aesthetic-mappings" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -403,6 +507,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This is the first time students see a third variable encoded visually. Point out how the legend appeared automatically — ggplot handles that for you. Ask: “Which car class gets the best highway mileage? Which has the biggest engines?” (Compact/subcompact do well; SUVs and pickups have big engines.) This is a good moment to connect to psych: “Imagine color = experimental condition.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="mapping-color-to-a-variable-output" class="slide level2 output-location-slide"><h2>Mapping color to a variable</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -490,6 +607,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy)) <span class="sc">+</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"blue"</span>, <span class="at">size =</span> <span class="dv">3</span>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>This is one of the most common sources of confusion for beginners. Emphasize the rule: if the aesthetic should vary with the data, it goes inside <code>aes()</code>. If you want every point the same color/size, it goes outside <code>aes()</code> as a direct argument to the geom. You’ll see the consequence of getting this wrong on the next slide with the “common mistake” example. Spend ~2 minutes here making sure the distinction is clear before moving on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="setting-aesthetics-manually" class="slide level2">
 <h2>Setting aesthetics manually</h2>
@@ -516,6 +646,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div>
 
 <p>ggplot thinks “blue” is a category name!</p>
+<aside class="notes">
+<p>Let students laugh at this one. It’s a very common mistake and worth burning into memory now. Explain: when you put <code>"blue"</code> inside <code>aes()</code>, ggplot treats it as a categorical variable with one level called “blue” and assigns it its default color (which happens to be salmon/red). The fix is simple — move it outside <code>aes()</code>. If students encounter this later, they’ll hopefully remember this slide. This is a natural stopping point for the first half of class (~25 minutes in).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="common-mistake-output" class="slide level2 output-location-slide"><h2>Common mistake!</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
@@ -553,10 +696,36 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Set a visible timer for 10 minutes. Circulate the room and help pairs who are stuck — the most common issues will be: forgetting the <code>+</code> between layers, putting <code>color</code> outside <code>aes()</code>, and not knowing how to add <code>geom_smooth()</code>. Encourage students to experiment beyond the requirements (try different colors, themes, alpha). For the “who can make it look the nicest” prompt, you might do a quick informal show-and-tell at the end. They haven’t learned <code>labs()</code> or themes yet, so don’t penalize anyone who doesn’t add them — but some students will figure it out from autocomplete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
 <p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
+<aside class="notes">
+<p>Give students 1 minute to submit. Emphasize that it doesn’t need to be perfect or even run — partial code is fine. This is about participation, not correctness. Transition: “Now that you’ve made a scatterplot, let’s see what other kinds of plots ggplot2 can make.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="different-data-types-need-different-geoms" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -599,6 +768,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Don’t try to cover every geom in detail — this is a reference slide they can come back to. Just emphasize that ggplot2 has many geoms and the choice depends on your data type. The next few slides will demo the most common ones. Students will use <code>geom_point()</code> and <code>geom_smooth()</code> most in the first few weeks; bar charts and histograms come up more in EDA sessions later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="geom_smooth" class="slide level2">
 <h2>geom_smooth()</h2>
@@ -644,6 +826,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>)  <span class="co"># se = FALSE removes confidence band</span></span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Point out what happened here: because <code>color = drv</code> is in the <code>aes()</code> of the main <code>ggplot()</code> call, both <code>geom_point()</code> and <code>geom_smooth()</code> inherit it, so you get separate trend lines per group. This is a preview of how layering and aesthetic inheritance work — they’ll explore this more in Session 8 (Layers &amp; Aesthetics). Students often ask what the gray band is on the previous slide — it’s a confidence interval. The <code>se = FALSE</code> argument removes it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="layering-geoms-output" class="slide level2 output-location-slide"><h2>Layering geoms</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -695,6 +890,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Briefly connect boxplots to psych: “This is exactly the kind of plot you’d use to show group differences — treatment vs.&nbsp;control, different age groups, etc.” Students may not know how to read boxplots; if anyone looks confused, do a 30-second refresher on median, IQR, and whiskers. Don’t belabor it — they’ll get more practice in EDA sessions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="geom_boxplot-comparing-groups-output" class="slide level2 output-location-slide"><h2>geom_boxplot() — comparing groups</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
@@ -718,6 +926,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>class)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Facets are often the first “wow” moment for students. Point out how much clearer the patterns are when each class gets its own panel vs.&nbsp;the earlier color-coded version. The <code>~</code> (tilde) syntax may confuse students — just say “read it as ‘by’” for now (facet by class). They’ll encounter <code>~</code> again in formulas later in the course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-are-facets-output" class="slide level2 output-location-slide"><h2>What are facets?</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -750,6 +971,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_grid</span>(drv <span class="sc">~</span> cyl)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p><code>facet_grid()</code> is less commonly used than <code>facet_wrap()</code> but worth showing so students know it exists. Point out that rows correspond to <code>drv</code> and columns to <code>cyl</code>. Some panels are empty (e.g., no rear-wheel-drive 4-cylinder cars) — ask students why that might be. Don’t spend more than 1 minute here; <code>facet_wrap()</code> is the one they’ll use 90% of the time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="facet_grid-output" class="slide level2 output-location-slide"><h2>facet_grid()</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -787,6 +1021,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb25-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Emphasize that <code>labs()</code> is not optional decoration — it’s what makes a plot interpretable. Point out the subtitle as a place for the main finding (“Larger engines tend to be less efficient”) and the axis labels as a place for units. Relate to psych: “When you present findings in a paper or poster, your reader needs to understand the axes without reading your methods section.” Students often forget to relabel the legend — show that <code>color = "Vehicle class"</code> changes the legend title.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="adding-labels-output" class="slide level2 output-location-slide"><h2>Adding labels</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -830,6 +1077,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save it</span></span>
 <span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"my_plot.png"</span>, my_plot, <span class="at">width =</span> <span class="dv">8</span>, <span class="at">height =</span> <span class="dv">6</span>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Two things to emphasize: (1) assigning a plot to a variable (<code>my_plot &lt;-</code>) so you can save it, and (2) specifying width and height in inches for consistent output. Students will need <code>ggsave()</code> for Assignment 1. Common question: “Where does it save?” Answer: in your current working directory (the project folder). They can also give a full path. Mention that <code>ggsave()</code> auto-detects the file type from the extension (.png, .pdf, .jpg).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="same-template-psychology-data" class="slide level2">
 <h2>Same template, psychology data</h2>
@@ -851,6 +1111,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <span id="cb28-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This is the “so what” bridge to psychology. Emphasize that the exact same template they just learned with car data works with any dataset — including their own research data. The simulated anxiety data uses realistic values (BAI scores typically range from 0–63). Ask: “What does this plot tell us about the treatment?” Make the point that even with a small simulated dataset, a boxplot immediately communicates the group difference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="same-template-psychology-data-output" class="slide level2 output-location-slide"><h2>Same template, psychology data</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
@@ -906,6 +1179,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li>Save it with <code>ggsave()</code></li>
 </ol>
 <p>This is the first part of Assignment 1 — finish it before next class.</p>
+<aside class="notes">
+<p>Give students ~10 minutes of independent work time here. Walk around and help. This exercise combines everything from the session: the basic template, color mapping, faceting, and saving. Students who finish early can experiment with themes, labels, or different geoms. Reveal the solution only if most students are stuck. Remind them that Assignment 1 is due Sunday at 11:59 PM and includes additional tasks beyond this exercise.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solution" class="slide level2">
 <h2>Solution</h2>
@@ -938,6 +1224,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li>Try different geoms, aesthetics, and facets</li>
 <li>Save your favorite plot with <code>ggsave()</code></li>
 </ul>
+<aside class="notes">
+<p>Mention that the reading for next time is about dplyr and data transformation — a different topic from today. They don’t need to understand it perfectly before class, but reading it will make the lecture click faster. The practice exercises are ungraded but strongly recommended. Mention that <code>diamonds</code> is another built-in dataset they can explore with <code>glimpse(diamonds)</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>

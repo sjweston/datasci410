@@ -227,6 +227,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>Today we learn to <strong>see</strong> those relationships in data — before testing them statistically.</p>
+<aside class="notes">
+<p>Connect back to last session: “Last time we looked at one variable at a time. But the questions you actually care about in psychology involve relationships.” Spend ~2 minutes. The three example questions (treatment/depression, age/RT, anxiety/insomnia) are deliberately chosen to span different variable type pairings — point out that we’ll learn a different plot type for each.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -256,9 +269,22 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 19.73…</code></pre>
+$ depression_post &lt;dbl&gt; 17.692092, 19.434088, 15.709533, 16.930036, 19.911307,…</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Walk through the simulated data structure. Emphasize that this is simulated — we chose the means and SDs on purpose so the CBT group looks better. In real research, you wouldn’t know the answer in advance. The dataset is small (150 rows) and simple so students can focus on the visualization, not the data wrangling. Students may ask about BDI-II — it’s the Beck Depression Inventory, a widely used clinical measure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="boxplots-the-classic-choice" class="slide level2">
 <h2>Boxplots: The classic choice</h2>
@@ -305,6 +331,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </div></div>
 <div class="fragment">
 <p>Great for comparing distributions, but they hide the actual data points.</p>
+<aside class="notes">
+<p>Spend ~2 minutes on the anatomy of boxplots. Students may have seen boxplots in stats but not know the mechanics. Draw attention to the specific components: “The line in the middle is NOT the mean — it’s the median.” This is a common misconception. Ask students: “Based on this boxplot, which treatment looks most effective?” (CBT has the lowest median.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-problem-with-boxplots" class="slide level2">
@@ -317,6 +356,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </ul>
 <div class="fragment">
 <p>We can do better.</p>
+<aside class="notes">
+<p>This slide motivates the next section on raincloud plots. The key point: boxplots hide bimodality, sample size, and the actual distribution shape. You can show the classic “same boxplot, different distributions” example verbally — two very different distributions can produce identical boxplots. If students push back (“but boxplots are fine for homework”), acknowledge that boxplots are quick and useful, but for publications and presentations, we want more information.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -334,6 +386,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </ol>
 <p>They’re increasingly popular in psychology publications because they show <strong>everything</strong>.</p>
 <p>Use the <code>ggrain</code> package. (<a href="https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html">More details here.</a>)</p>
+<aside class="notes">
+<p>Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expected in psychology journals — if students go on to do research, they’ll encounter these. The name comes from the shape: the violin is the “cloud” and the jittered points are the “rain.” The ggrain package makes them easy; without it, you’d need to layer violin + boxplot + jitter manually. Students do NOT need to memorize the ggrain syntax for the assignment — boxplots are fine — but exposure here is valuable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="building-a-raincloud" class="slide level2">
 <h2>Building a raincloud</h2>
@@ -372,6 +437,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 <span id="cb5-28"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
 <span id="cb5-29"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.grid =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Walk through the code on this slide since the previous slide just showed the output. Point out the key pieces: geom_rain() does the heavy lifting, stat_summary adds the mean diamond, and coord_flip() makes it horizontal. Don’t get bogged down in the color scale code. The important takeaway is that geom_rain() gives you violin + box + points in one function call.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-rainclouds-are-great" class="slide level2">
 <h2>Why rainclouds are great</h2>
@@ -411,6 +489,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Quick reference slide — ~30 seconds. Emphasize that boxplots are still perfectly fine for EDA and assignments. Rainclouds are the ideal for final presentations and publications. Violin + jitter is a good middle ground if ggrain isn’t installed.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
@@ -427,6 +518,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 <li>Add appropriate labels</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
+<aside class="notes">
+<p>Circulate during this exercise. The main challenge is step 1: students need to add a column using mutate + sample(). Some may struggle with the sample() syntax — remind them of the arguments: values to choose from, number to draw, and replace = TRUE. If pairs finish early, ask them to add a facet_wrap(~condition) to see gender differences within each treatment group. Common error: forgetting replace = TRUE when the number of rows exceeds the number of categories.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="categorical-categorical" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -448,17 +552,30 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 <pre><code># A tibble: 6 × 2
   gender     diagnosis 
   &lt;chr&gt;      &lt;chr&gt;     
-1 Male       Depression
-2 Female     Other     
-3 Non-binary Anxiety   
+1 Male       Anxiety   
+2 Female     Anxiety   
+3 Female     Other     
 4 Female     Depression
-5 Female     Both      
-6 Male       Both      </code></pre>
+5 Non-binary Anxiety   
+6 Female     Other     </code></pre>
 </div>
 </div>
 </section>
 <section id="option-1-stacked-bar-chart" class="slide level2">
 <h2>Option 1: Stacked bar chart</h2>
+<aside class="notes">
+<p>The next five slides show five options for the same data. Move through them at a moderate pace (~1 minute each). For stacked bars, point out the problem: it’s hard to compare the sizes of non-bottom segments across groups because they don’t share a common baseline. This is a perceptual limitation, not a coding one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
@@ -505,6 +622,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </div>
 </div></section><section id="option-3-proportions" class="slide level2">
 <h2>Option 3: Proportions</h2>
+<aside class="notes">
+<p>Highlight the difference between position = “dodge” (previous slide) and position = “fill” (this slide). “fill” normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: “If one gender group has 10 people and another has 100, this chart makes them look equally important. Is that a problem?” This gets students thinking about when proportions vs.&nbsp;counts are appropriate.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
@@ -552,6 +682,19 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 </div>
 </div></section><section id="option-5-tile-with-counts" class="slide level2">
 <h2>Option 5: Tile with counts</h2>
+<aside class="notes">
+<p>geom_tile() is essentially a heatmap. Note that this requires pre-computing the counts with count() before piping into ggplot — this is different from the previous options where geom_bar() computed counts automatically. The viridis color scale is colorblind-friendly. This approach works best with many categories on both axes; with only 3x4, a bar chart is probably clearer. Still worth showing so students have it in their toolkit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_counts <span class="ot">&lt;-</span> diagnosis_data <span class="sc">|&gt;</span></span>
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender, diagnosis)</span>
@@ -595,13 +738,26 @@ $ depression_post &lt;dbl&gt; 20.13118, 2.51663, 17.87366, 15.69772, 15.62494, 1
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 69.14151, 28.79860, 41.03369, 64.88125, 58.06150, 32.875…
-$ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 311.53…</code></pre>
+$ age           &lt;dbl&gt; 29.43316, 18.11258, 38.82195, 56.89481, 61.15111, 28.451…
+$ reaction_time &lt;dbl&gt; 339.9540, 228.5203, 276.7809, 388.3518, 371.6985, 302.52…</code></pre>
 </div>
 </div>
 </section>
 <section id="basic-scatterplot" class="slide level2">
 <h2>Basic scatterplot</h2>
+<aside class="notes">
+<p>Scatterplots should feel familiar from stats classes, but many students haven’t made one in R yet. Walk through the aes() mapping: x goes on the horizontal axis, y goes on the vertical. Ask: “What would you predict about the relationship between age and reaction time?” Most students will guess that older people are slower, which matches the data. Spend ~2 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -624,6 +780,19 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 </div>
 </div></section><section id="add-a-trend-line" class="slide level2">
 <h2>Add a trend line</h2>
+<aside class="notes">
+<p>geom_smooth(method = “lm”) adds a linear regression line. Students will see lm() again in Session 17 — for now, just explain that it draws the “best-fit” straight line through the data. The gray band is the confidence interval (se = TRUE). Students often ask “what does the gray area mean?” — a simple answer is “where we think the true line probably falls.” Don’t go deep into regression mechanics here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(rt_data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> reaction_time)) <span class="sc">+</span></span>
 <span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -665,6 +834,19 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 <span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>The plot looks like a solid blob. Ask: “Can you tell where most of the data is?” (No — that’s the problem.) With 5,000 points, geom_point() alone fails. This motivates the next three solutions. In psychology, overplotting is common with large survey datasets or reaction time studies with many trials.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="overplotting-problem-demonstrated-output" class="slide level2 output-location-slide"><h2>Overplotting problem demonstrated</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -683,6 +865,19 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 <span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Alpha is the simplest fix and often the best first attempt. Explain: alpha = 0.1 means each point is 90% transparent, so areas with many overlapping points appear darker. Students should experiment with different alpha values — 0.1 is good for 5000 points, but 0.5 might be better for 200 points. This is the overplotting solution they’ll use most often.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solution-1-transparency-alpha-output" class="slide level2 output-location-slide"><h2>Solution 1: Transparency (alpha)</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -738,11 +933,24 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 </div>
 </div></section><section id="correlation-coefficient" class="slide level2">
 <h2>Correlation coefficient</h2>
+<aside class="notes">
+<p>This is a preview of Session 17 (Correlation and Regression). Keep it brief — ~2 minutes. The goal is just to connect the visual pattern they saw in the scatterplot to a single number. Most students have encountered correlation coefficients in stats, so this should feel familiar. Emphasize the dollar-sign syntax (rt_data$age) as an alternative to piping — cor() expects vectors, not a data frame. Students often ask “is this r significant?” — save that for Session 17.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>A single number summary of the linear relationship:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7207867</code></pre>
+<pre><code>[1] 0.7163931</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -766,6 +974,19 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 </div>
 <div class="fragment">
 <p>But always plot your data first! (See: Anscombe’s Quartet)</p>
+<aside class="notes">
+<p>If you have time, briefly describe Anscombe’s Quartet: four datasets with identical means, standard deviations, and correlations that look completely different when plotted. This powerfully reinforces the “always visualize” message. You can also mention the Datasaurus Dozen as a modern, fun version of the same idea.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -796,6 +1017,19 @@ $ reaction_time &lt;dbl&gt; 368.4209, 290.7953, 370.3542, 382.6296, 323.6248, 31
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Spend ~3 minutes here — this is conceptually the most important slide in the deck. Walk through each question with the age/reaction-time example: (1) Could it be coincidence? With 100 data points and a clear trend, probably not. (2) What’s the mechanism? Cognitive processing speed declines with age. (3) Is there a confound? Maybe older participants have different levels of education, health, or motivation. The correlation vs.&nbsp;causation callout connects directly to what they learned in stats — reinforce it here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="real-data-example" class="slide level2">
@@ -845,6 +1079,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div>
 </div></section><section id="question-2-does-this-vary-by-car-type" class="slide level2">
 <h2>Question 2: Does this vary by car type?</h2>
+<aside class="notes">
+<p>This slide demonstrates a key EDA move: adding a third variable via color. Walk through the insight: some car types (2seater, subcompact) break the overall trend — they have small engines but aren’t particularly fuel-efficient, or they have large engines but are surprisingly efficient. This is a confound in action: the relationship between engine size and fuel economy depends on the type of car.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mpg, <span class="fu">aes</span>(<span class="at">x =</span> displ, <span class="at">y =</span> hwy, <span class="at">color =</span> class)) <span class="sc">+</span></span>
 <span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
@@ -903,6 +1150,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </ol>
 <p><strong>Exercise:</strong> Start exploring potential datasets. Find one that interests you and create 2-3 exploratory visualizations showing different types of covariation (categorical + continuous, continuous + continuous, etc.).</p>
 <p>This will form the basis of your proposal, <strong>due today!</strong></p>
+<aside class="notes">
+<p>Give students ~10 minutes of work time here. This exercise doubles as final project proposal prep — the proposal is due today, so this is their chance to get started or polish what they have. If students don’t have a dataset yet, suggest palmerpenguins, mpg, or the bfi data from last session. Circulate and help students think about which variable combinations are interesting. Remind them that the proposal only needs 2-3 research questions and planned visualizations, not finished analyses.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -924,6 +1184,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li><strong>Always visualize first</strong> before computing correlations</li>
 <li><strong>Patterns suggest but don’t prove</strong> causation</li>
 </ol>
+<aside class="notes">
+<p>Quick summary — ~1 minute. If you’re short on time, let students read this slide themselves. The most important takeaway is point 3 (raincloud plots) and point 6 (correlation is not causation). Remind them that Assignment 5 will ask them to use several of these plot types on a real dataset.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-next-class" class="slide level2">
 <h2>Before next class</h2>
@@ -943,6 +1216,19 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>The one thing to remember</h2>
 <p>Relationships hide in data. Your job is to make them visible — carefully, honestly.</p>
 <p>See you Monday for data types and scale scoring!</p>
+<aside class="notes">
+<p>End on this closing line. Remind students: Assignment 4 is due, Assignment 5 (EDA) is now assigned, and the Final Project Proposal is due today. Next session shifts from visualization to data types — logical vectors, numbers, and computing scale scores (like averaging personality items into composite scores). That will connect directly back to the BFI data they’ve been exploring.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>

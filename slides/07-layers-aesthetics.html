@@ -211,13 +211,38 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="choosing-the-right-geom" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Choosing the right geom</h1>
-
+<aside class="notes">
+<p>This first section (~25 min total) covers geom selection, distributions, and stat_summary(). The opening comparison is the hook — let it land before moving on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="same-data-two-stories" class="slide level2">
 <h2>Same data, two stories</h2>
 
 <img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" width="960" class="r-stretch"><p>Both use the same data. The difference is <strong>layers</strong> — and the right layers tell the right story.</p>
 <p>The wrong geom doesn’t just look bad — it can actively mislead.</p>
+<aside class="notes">
+<p>Spend ~2 minutes here. Ask students which version they’d trust more and why. The bar chart hides everything — the spread, outliers, individual data points. Version B tells the full story. This contrast motivates the entire session: choosing the right geom is a design decision, not just a coding one.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="geom-selection-guide" class="slide level2">
 <h2>Geom selection guide</h2>
@@ -267,6 +292,19 @@ Dr.&nbsp;Sara Weston
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>This table is a reference slide students will come back to. Don’t read every row aloud — highlight the “Avoid” column. The most common mistake is using <code>geom_bar()</code> for continuous data. Also note that pie charts are absent from the “Good geom” column entirely. Students will ask about pie charts; the short answer is that position along a common axis (bar chart) is easier for the human eye to compare than angle (pie chart).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="one-variable-distributions" class="slide level2">
 <h2>One variable: distributions</h2>
@@ -284,6 +322,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Walk through the code line by line. Emphasize <code>binwidth</code> — students will forget it and get the default “30 bins” warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. Students often ask what number to use; there’s no single right answer, but for reaction times in the hundreds, 20-30 ms bins are reasonable.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="one-variable-distributions-output" class="slide level2 output-location-slide"><h2>One variable: distributions</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -297,6 +348,19 @@ Dr.&nbsp;Sara Weston
 <h2>histogram vs density</h2>
 
 <img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
+<aside class="notes">
+<p>Quick comparison — don’t belabor this. The key point is that density plots are better for comparing distributions across groups (you can overlay them), while histograms are better for seeing exact counts. Students sometimes get confused by the y-axis on density plots; reassure them that the area under the curve sums to 1, but they rarely need to interpret the y-axis value itself.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="one-categorical-variable" class="slide level2">
 <h2>One categorical variable</h2>
@@ -349,6 +413,19 @@ Dr.&nbsp;Sara Weston
 <h2>boxplot vs violin</h2>
 
 <img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
+<aside class="notes">
+<p>Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. Bimodal distributions look obvious in a violin but invisible in a boxplot. Mention that we’ll see an even better option (raincloud plots) in the next session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="stat_summary" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -358,6 +435,19 @@ Dr.&nbsp;Sara Weston
 <section id="the-psychology-staple-means-error-bars" class="slide level2">
 <h2>The psychology staple: means + error bars</h2>
 <p>In psych papers, you’ll see this constantly: a bar chart showing group means with error bars. <code>stat_summary()</code> is how you make it.</p>
+<aside class="notes">
+<p>Transition: “So far we’ve been plotting raw data. But in psychology, you’ll almost always need to show summary statistics — means, error bars, confidence intervals. That’s what stat_summary() is for.” This is the most psych-relevant section of the deck. Spend ~8 minutes on stat_summary() total. Students will use this constantly in assignments and the final project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="stat_summary-basics" class="slide level2">
 <h2>stat_summary() basics</h2>
@@ -403,6 +493,19 @@ Dr.&nbsp;Sara Weston
 <li><code>fun.data</code> = a function that returns ymin, y, ymax (like <code>mean_cl_normal</code>)</li>
 <li><code>geom</code> = what shape to use to show the result</li>
 </ul>
+<aside class="notes">
+<p>The <code>fun</code> vs <code>fun.data</code> distinction trips students up. Emphasize: <code>fun</code> returns one number (e.g., the mean), while <code>fun.data</code> returns three (ymin, y, ymax) — which is what you need for error bars. Students don’t need to memorize this; they need to know the pattern: one stat_summary() for the bar, another for the error bars.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-are-error-bars-showing" class="slide level2">
 <h2>What are error bars showing?</h2>
@@ -445,6 +548,19 @@ Dr.&nbsp;Sara Weston
 <h2>Why does this matter?</h2>
 <p>The APA Publication Manual (7th ed.) recommends showing individual data points alongside summary statistics whenever possible.</p>
 <p>Bar charts with error bars are ubiquitous in psychology — but they hide the <em>shape</em> of the data. Outliers, bimodality, and floor/ceiling effects all disappear behind a rectangle.</p>
+<aside class="notes">
+<p>This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). Emphasize that the field is moving toward showing more data, not less.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="adding-individual-data-points" class="slide level2">
 <h2>Adding individual data points</h2>
@@ -465,6 +581,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Walk through the layering order: jittered points go first (behind), then the summary point and error bars on top. Emphasize that <code>alpha = 0.4</code> makes individual points semi-transparent so they don’t overwhelm the summary. This is the pattern students should use for most psych figures going forward: show the data AND the summary.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="adding-individual-data-points-output" class="slide level2 output-location-slide"><h2>Adding individual data points</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
@@ -481,6 +610,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
+<aside class="notes">
+<p>Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use <code>stat_summary()</code> twice (once for bar, once for error bars), (2) putting <code>geom_jitter()</code> after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in <code>labs()</code>. If pairs finish early, challenge them to add <code>age_group</code> as a facet or dodge variable. Reveal the solution after time is up.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Using the <code>reaction_data</code> dataset:</p>
 <ol type="1">
 <li>Create a <strong>bar chart with error bars</strong> showing mean RT by condition</li>
@@ -509,7 +651,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="position-scales" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Position &amp; scales</h1>
-
+<aside class="notes">
+<p>This second lecture block (~20 min) covers position adjustments, scales, coordinate systems, and the polished figure. This is more about refinement than new geoms — students already know the building blocks, now they learn how to control them precisely.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="position-adjustments" class="slide level2">
 <h2>Position adjustments</h2>
@@ -548,6 +702,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="dodge-grouped-bar-charts" class="slide level2">
 <h2>dodge: grouped bar charts</h2>
+<aside class="notes">
+<p>This is the trickiest position adjustment. The key gotcha: when you dodge both the bars and the error bars, they need to dodge by the same width. That’s why we use <code>position_dodge(0.6)</code> for the error bars to match <code>width = 0.6</code> on the bars. If these don’t match, the error bars float between the bars. Students will hit this bug — it’s a good one to flag proactively.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
@@ -577,6 +744,19 @@ Dr.&nbsp;Sara Weston
 <img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" width="1152" class="r-stretch"></section>
 <section id="scales-controlling-axes-and-colors" class="slide level2">
 <h2>Scales: controlling axes and colors</h2>
+<aside class="notes">
+<p>Spend ~3 minutes on this and the next slide together. Students don’t need to memorize every scale function — they need to know the naming pattern: <code>scale_</code> + the aesthetic (<code>fill</code>, <code>color</code>, <code>x</code>, <code>y</code>) + <code>_</code> + the type (<code>manual</code>, <code>continuous</code>, <code>discrete</code>, <code>viridis</code>). Once they see the pattern, they can guess function names and use autocomplete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Scales translate data values into visual properties:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis range</span></span>
@@ -616,6 +796,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div></section><section id="coordinate-systems" class="slide level2">
 <h2>Coordinate systems</h2>
+<aside class="notes">
+<p>The <code>coord_cartesian()</code> vs <code>scale_y_continuous(limits = ...)</code> distinction is critical and students will confuse them. The key: <code>coord_cartesian()</code> zooms the view (like pinching to zoom on a photo), while <code>scale_y_continuous(limits = ...)</code> filters the data first and then plots. This means boxplot whiskers, smooth lines, and error bars can all change when you use scale limits because outliers are removed before the calculation. Always use <code>coord_cartesian()</code> for zooming.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip x and y (great for long category labels)</span></span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_flip</span>()</span>
@@ -653,6 +846,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="a-polished-psychology-figure" class="slide level2">
 <h2>A polished psychology figure</h2>
+<aside class="notes">
+<p>This is the “bringing it all together” slide. Walk through the code slowly, pointing out each layer and why it’s there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for accessibility, and informative labels. This is roughly the quality you’d expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
@@ -688,6 +894,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="assignment-4-preview" class="slide level2">
 <h2>Assignment 4 preview</h2>
+<aside class="notes">
+<p>This is the head-start exercise (~10 min remaining). Students don’t need to finish this in class — it’s a bridge to Assignment 4. Encourage them to have fun making the “bad” version deliberately awful. If students seem finished early, suggest they try adding <code>facet_wrap(~age_group)</code> to any of today’s plots as a preview of faceting.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Assignment 4 will ask you to create “bad” and “good” versions of figures. Start experimenting:</p>
 <ol type="1">
 <li>Take any plot from today and make it <strong>deliberately bad</strong> — wrong geom, missing labels, confusing colors</li>
@@ -773,6 +992,19 @@ Dr.&nbsp;Sara Weston
 <h2>The one thing to remember</h2>
 <p>The difference between a chart and a figure is intention — every layer should earn its place.</p>
 <p>Next time: Perception &amp; Design</p>
+<aside class="notes">
+<p>End on this line and let it land. Next session builds directly on this one — we go from “which geom” to “which color, which theme, which design decisions.” Students should have R4DS Ch 9 fresh in their minds and the optional perception reading done before Monday.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>

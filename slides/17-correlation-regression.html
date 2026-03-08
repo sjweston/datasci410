@@ -212,19 +212,57 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="from-patterns-to-numbers" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>From patterns to numbers</h1>
-
+<aside class="notes">
+<p>This session is a taste of modeling, not a stats unit. Set that expectation early: “We’re not learning statistics today – we’re learning to put numbers on patterns you can already see.” Students who’ve had stats may want to go deeper; redirect them to PSY 420 or STAT 510.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="youve-been-eyeballing-patterns-for-16-sessions" class="slide level2">
 <h2>You’ve been eyeballing patterns for 16 sessions</h2>
 
 <img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><div class="fragment">
 <p>Today you learn to put a <strong>number</strong> on that pattern.</p>
+<aside class="notes">
+<p>Spend about 2 minutes here. Let the plot sit for a moment before advancing. Ask the class: “What do you see? Is there a pattern?” Let a few students answer. The point is they can already detect the relationship visually – today’s tools just formalize what their eyes already know.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-same-plot-with-a-number" class="slide level2">
 <h2>The same plot — with a number</h2>
 
 <img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" class="r-stretch"><p><strong>Correlation</strong> measures the strength and direction. <strong>Regression</strong> draws the line.</p>
+<aside class="notes">
+<p>This slide is the thesis for the whole session. Emphasize the distinction: correlation gives a single number summarizing the relationship; regression gives an equation that lets you predict. Both tell you the same story in different ways.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="correlation" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -274,6 +312,19 @@ Dr.&nbsp;Sara Weston
 </table>
 <div class="fragment">
 <p><strong>Key:</strong> r tells you <strong>direction</strong> and <strong>strength</strong>, not causation.</p>
+<aside class="notes">
+<p>Spend ~3 minutes on this table. Students often ask what counts as “strong” vs.&nbsp;“weak” – emphasize that these labels are rough guidelines, and that what’s “strong” depends on the field. In psychology, r = 0.3 is often considered meaningful. Don’t get bogged down in formulas; focus on the intuition of “closer to 1 or -1 means tighter clustering around a line.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="cor-in-r" class="slide level2">
@@ -299,6 +350,19 @@ Dr.&nbsp;Sara Weston
 1 0.461</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is a good moment to demo live. Type the code rather than just advancing the slide. Students may ask about the dollar-sign syntax vs.&nbsp;the pipeline version – briefly explain both work, but the pipeline version is consistent with what they’ve been doing all quarter. If anyone asks about Pearson vs.&nbsp;Spearman, acknowledge the distinction but say Pearson is the default and all we need today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="this-is-what-geom_smooth-has-been-doing" class="slide level2">
@@ -316,6 +380,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This is a satisfying callback. Students have been writing geom_smooth(method = “lm”) since Session 2 without knowing what it does mathematically. Point out that they’ve been fitting regression lines all along – today they’re just learning to read the numbers behind them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="this-is-what-geom_smooth-has-been-doing-output" class="slide level2 output-location-slide"><h2>This is what geom_smooth() has been doing</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -345,6 +422,19 @@ sample estimates:
 </div>
 <div class="fragment">
 <p><strong>What to report:</strong> r, p-value, and 95% confidence interval.</p>
+<aside class="notes">
+<p>Walk through the output slowly. Students often feel overwhelmed by dense console output. Point out the three things they need: the r value (cor), the p-value, and the confidence interval. You don’t need to explain degrees of freedom or the test statistic. Common question: “What does a small p-value mean?” Keep it simple: “It means this relationship is unlikely to be due to chance alone.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="correlation-matrix-multiple-variables-at-once" class="slide level2">
@@ -364,6 +454,19 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 </div>
 <div class="fragment">
 <p>Each cell is the correlation between the row variable and the column variable. The diagonal is always 1 (a variable correlates perfectly with itself).</p>
+<aside class="notes">
+<p>Point out two features: the diagonal of 1s (a variable always correlates perfectly with itself) and the symmetry (top-right mirrors bottom-left). Ask students to find the strongest relationship in the matrix. Note the use = “complete.obs” argument – briefly mention this handles missing data by using only complete pairs, connecting back to Session 15.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="visualizing-a-correlation-matrix" class="slide level2">
@@ -431,6 +534,19 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 </div>
 <div class="fragment">
 <p><strong>To establish causation, you need an experiment</strong> — random assignment, manipulation, control group. Correlation from observational data tells you variables are <em>related</em>, not that one <em>causes</em> the other.</p>
+<aside class="notes">
+<p>Spend ~3 minutes here. This is arguably the most important conceptual slide in the deck. Psych majors hear “correlation does not equal causation” constantly, but connecting it to real examples helps it stick. The social media example is especially relevant because students see causal claims about social media in the news all the time. Ask: “Can you think of a third variable that could explain the social media-anxiety relationship?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -440,6 +556,19 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 </section>
 <section id="your-turn-explore-correlations" class="slide level2">
 <h2>Your turn: Explore correlations</h2>
+<aside class="notes">
+<p>This is the mid-deck pair coding break – 10 minutes. Circulate and check that students can find the study_data object (it was created in the setup chunk). The therapy-depression example intentionally has a negative correlation, which trips some students up. Common confusion: “Does negative mean the correlation is weak?” Clarify that negative means inverse relationship, not weak. The hint callout helps with this. Make sure students actually create the scatterplot – that’s the payoff.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Using the <code>study_data</code> dataset (already loaded):</p>
 <ol type="1">
 <li>Compute the correlation between <code>therapy_hours</code> and <code>depression_post</code></li>
@@ -481,6 +610,19 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 <li><strong>b0</strong> (intercept) = predicted y when x = 0</li>
 <li><strong>b1</strong> (slope) = how much y changes for each 1-unit increase in x</li>
 </ul>
+<aside class="notes">
+<p>Transition from Part 1 to Part 2. Emphasize that correlation answers “is there a relationship?” while regression answers “what’s the equation?” Use the analogy: correlation is like saying “taller people tend to weigh more,” while regression says “for each additional inch of height, weight increases by about 5 pounds.” The equation y = b0 + b1*x is the same line they learned in algebra – reassure them they already know this.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="lm-fitting-a-model" class="slide level2">
@@ -491,6 +633,19 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 <div class="fragment">
 <p>Read this as: “Predict anxiety (<code>gad7_total</code>) from social media use (<code>hours_social_media</code>).”</p>
 <p>The <code>~</code> means “predicted by.”</p>
+<aside class="notes">
+<p>Demo this live. Emphasize the formula syntax: outcome on the left, predictor on the right, tilde in the middle. Read it aloud as “gad7_total predicted by hours_social_media.” Students often confuse which variable goes where – remind them the outcome (what you’re trying to predict) always goes on the left of the tilde.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="reading-the-output" class="slide level2">
@@ -518,6 +673,19 @@ Multiple R-squared:  0.2128,    Adjusted R-squared:  0.2062
 F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This output is intimidating. Do not try to explain every line. Point to the Coefficients table and say “this is what matters.” Specifically highlight the Estimate column (the intercept and slope), the p-value column (stars mean significant), and the Multiple R-squared at the bottom. Everything else is details for a stats course. Spend ~2 minutes max.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-the-numbers-mean" class="slide level2">
 <h2>What the numbers mean</h2>
@@ -557,6 +725,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </div>
 <div class="fragment">
 <p><strong>In a sentence:</strong> For each additional hour of daily social media use, anxiety scores increase by about 1.1 points on the GAD-7.</p>
+<aside class="notes">
+<p>This is the most important slide in the regression section. The “in plain language” column does the heavy lifting – linger here. Ask a student to read the interpretation of the slope aloud. Students often struggle with the intercept: “What does it mean to use 0 hours of social media?” Acknowledge that the intercept doesn’t always have a meaningful interpretation, but it anchors the line. The slope is what they should focus on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="r-squared-how-much-does-the-model-explain" class="slide level2">
@@ -577,6 +758,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </div>
 <div class="fragment">
 <p>The other 79% is explained by other factors (genetics, life events, personality, etc.).</p>
+<aside class="notes">
+<p>R-squared is intuitive for students if you frame it as a percentage. “Social media use explains about X% of why people differ in anxiety.” The low R-squared is actually a great teaching moment – in psychology, single predictors rarely explain a lot. That’s why researchers use multiple regression (preview of what’s next). Students sometimes think low R-squared means the model is “bad” – reframe it as “one piece of a bigger puzzle.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="visualizing-the-regression-line" class="slide level2">
@@ -657,6 +851,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </table>
 </div>
 </div>
+<aside class="notes">
+<p>This slide connects regression back to tidy data principles. The broom package takes messy model output and makes it a data frame – consistent with everything they’ve learned about tidy data. Emphasize that tidy() gives coefficient-level results (one row per term) while glance() gives model-level results (one row per model). Students should recognize that the kable() call at the end is the same table-formatting tool they’ve used before.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="broomglance-model-level-statistics" class="slide level2">
@@ -706,6 +913,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </ol>
 <div class="fragment">
 <p><strong>This is what researchers do.</strong> You now have the tools.</p>
+<aside class="notes">
+<p>This is the summary slide for the modeling section. Spend a moment reinforcing that this four-step workflow (explore, correlate, model, report) is the actual workflow researchers use. They now have every piece. For students considering research careers or grad school, this is an empowering moment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -727,6 +947,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </div>
 <div class="fragment">
 <p><strong>All of these build on <code>lm()</code>.</strong> The syntax is nearly identical.</p>
+<aside class="notes">
+<p>Keep this brief (~2 minutes). The goal is to show students that everything in this list is a natural extension of what they just learned, not a separate scary topic. Students headed to grad school especially benefit from seeing that ANOVA and mixed models use the same lm() foundation. Don’t explain any of these methods in detail – just name them and move on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="you-have-the-r-skills-for-all-of-this" class="slide level2">
@@ -750,6 +983,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </section>
 <section id="end-of-deck-exercise" class="slide level2">
 <h2>End-of-deck exercise</h2>
+<aside class="notes">
+<p>This is individual work time (~10 minutes). The exercise mirrors the anxiety analysis but uses depression (phq9_total) instead, so students can apply the same workflow independently. Circulate and check that students can interpret their slope in a sentence – that’s the hardest part. Encourage students who finish early to try the bonus (broom::tidy table). Remind them that this exercise is also good practice for the final project if they have continuous variables.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Using the <code>study_data</code> dataset:</p>
 <ol type="1">
 <li>Run a regression predicting <code>phq9_total</code> (depression) from <code>hours_social_media</code></li>
@@ -776,6 +1022,19 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </section>
 <section id="the-one-thing-to-remember" class="slide level2">
 <h2>The one thing to remember</h2>
+<aside class="notes">
+<p>End with this takeaway and let it land. Remind students that Assignment 8 is due today and the final project is due Wednesday. If anyone is considering adding a correlation or regression to their final project, encourage them to – it’s not required, but it would strengthen their work. Final reminder: no new reading, just focus on the project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>The pattern you see in a scatterplot and the numbers from <code>lm()</code> are telling you the same story — one with your eyes, one with math.</p>
 
 </section></section>

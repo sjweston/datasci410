@@ -211,7 +211,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="how-we-see-data" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>How we see data</h1>
-
+<aside class="notes">
+<p>This first block (~25 min) covers perception, color theory, and decluttering. The opening “what’s wrong” slide is meant to be interactive — pause and let students call out problems before revealing the answer. Assignment 3 is due this week and Assignment 4 (Visualization Deep Dive) is assigned today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="whats-wrong-with-this" class="slide level2">
 <h2>What’s wrong with this?</h2>
@@ -219,6 +231,19 @@ Dr.&nbsp;Sara Weston
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><div class="fragment">
 <p>Red-green palette (colorblind-unfriendly). No informative title. Tiny text. Gridline noise. Bars hiding the data.</p>
 <p>Today we learn <strong>why your brain rejects bad figures</strong> — and how to design ones that work.</p>
+<aside class="notes">
+<p>Let the reveal build naturally — use the pause (<code>. . .</code>) to give students 30 seconds to identify problems on their own first. Cold-call a few students or ask pairs to share. Most will catch the red-green issue since we mentioned it last session. Fewer will notice the bar chart hiding data or the uninformative title. This sets up the whole session: design isn’t decoration, it’s communication.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="your-brain-processes-some-visual-features-before-you-even-think" class="slide level2">
@@ -255,11 +280,37 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <p>These are your tools for drawing the viewer’s eye.</p>
+<aside class="notes">
+<p>This connects directly to psych content students may have seen in intro psych or perception courses. Preattentive processing happens in ~250ms — before conscious attention. The practical implication for data viz: if you want something to stand out, use one of these attributes. If you use too many at once, nothing stands out. Spend ~3 minutes here. Students often ask about animation — yes, motion is preattentive too, but we won’t use it in static figures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="preattentive-in-action" class="slide level2">
 <h2>Preattentive in action</h2>
 
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-3-1.png" width="1152" class="r-stretch"><p>Your eye goes to the red points, the big points, and the outlier — instantly.</p>
+<aside class="notes">
+<p>Ask students: “Where did your eye go first in each panel?” The answer should be obvious and immediate — that’s the whole point. The practical takeaway: use color to highlight your key finding, not to decorate. If everything is colorful, nothing pops.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="gestalt-principles-brief" class="slide level2">
 <h2>Gestalt principles (brief)</h2>
@@ -270,7 +321,20 @@ Dr.&nbsp;Sara Weston
 <li><strong>Enclosure</strong> — things inside a border feel like a group</li>
 </ul>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"></section></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" width="768" class="r-stretch"><aside class="notes">
+<p>Keep Gestalt brief — 1-2 minutes. Students don’t need to memorize the terms, just the intuition: your brain groups things that are close together, look similar, or are enclosed together. This matters for figure design because spacing and visual similarity communicate grouping whether you intend it or not. Facets use proximity; color-coding uses similarity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="color-theory" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Color theory</h1>
@@ -310,6 +374,19 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <p>Using the wrong type is one of the most common visualization mistakes.</p>
+<aside class="notes">
+<p>This is a high-value slide — spend ~3 minutes here. The most common mistake: using a qualitative palette for ordered data (like a rainbow for low-to-high), or using a sequential palette for unrelated categories. Ask students: “If you had data on anxiety levels from low to high, which palette type?” (Sequential.) “If you had data on four different therapy types?” (Qualitative.) Test their intuition before moving to examples.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="sequential-palettes" class="slide level2">
 <h2>Sequential palettes</h2>
@@ -321,6 +398,19 @@ Dr.&nbsp;Sara Weston
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
 <section id="colorblind-friendly-choices" class="slide level2">
 <h2>Colorblind-friendly choices</h2>
+<aside class="notes">
+<p>Emphasize that 8% of men is roughly 1 in 12 — in a class of 50, there are likely 2-3 students with some color vision deficiency. This is not an edge case. The practical advice is simple: use viridis or a tested palette, and never rely on color alone (also use shape or labels). Students often ask “how do I check?” — suggest the colorblindness simulator at davidmathlogic.com/colorblind or the <code>colorblindr</code> R package.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>About 8% of men have some form of color vision deficiency. Red-green is the most common.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># viridis is colorblind-safe AND sequential</span></span>
@@ -338,7 +428,20 @@ Dr.&nbsp;Sara Weston
 <section id="a-bad-color-choice-vs-a-good-one" class="slide level2">
 <h2>A bad color choice vs a good one</h2>
 
-<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"></section></section>
+<img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-8-1.png" width="1152" class="r-stretch"><aside class="notes">
+<p>Let the side-by-side comparison speak for itself. The blue-orange version on the right is distinguishable to virtually all viewers. You can mention that some journals now require colorblind-accessible figures. The hex codes shown earlier (#0072B2, #E69F00, #009E73) are from the Okabe-Ito palette — a safe default students can copy into any project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="decluttering" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Decluttering</h1>
@@ -346,11 +449,37 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="the-default-is-cluttered" class="slide level2">
 <h2>The default is cluttered</h2>
+<aside class="notes">
+<p>Transition: “Now that we know what to show, let’s talk about what to remove.” This section draws heavily on Knaflic’s “declutter” philosophy. The before/after comparison here is dramatic — the gray background, heavy gridlines, and redundant legend all add zero information. Students sometimes resist removing gridlines because they think figures look “empty” without them. Remind them: if the reader needs a gridline to read the value, add a direct label instead.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>ggplot2’s default theme adds a lot of visual noise. Compare:</p>
 
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-9-1.png" width="1152" class="r-stretch"></section>
 <section id="the-declutter-checklist" class="slide level2">
 <h2>The declutter checklist</h2>
+<aside class="notes">
+<p>This is a reference slide students should internalize. Walk through the “Remove” column and ask students to justify each removal — e.g., “Why remove the legend when we have two conditions?” (Because the x-axis already labels them.) The “Keep” column matters too: titles should state a finding, not label the chart type. “Boxplot of RT” is a label; “Treatment reduces reaction time” is a finding.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Ask: does this element help the reader understand the data?</p>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -409,6 +538,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="theme-for-fine-control" class="slide level2">
 <h2>theme() for fine control</h2>
+<aside class="notes">
+<p>Don’t try to teach every theme() option — there are dozens. The goal is for students to know that theme() exists and to see the pattern: each element gets a function like <code>element_blank()</code> (remove it), <code>element_text()</code> (style text), <code>element_line()</code> (style lines), or <code>element_rect()</code> (style rectangles). They can look up specific options in the ggplot2 documentation. The most common ones they’ll use are <code>legend.position</code>, <code>panel.grid</code>, and <code>plot.title</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(</span>
 <span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"none"</span>,                    <span class="co"># Remove legend</span></span>
@@ -427,6 +569,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
+<aside class="notes">
+<p>Give 10 minutes. The cluttered graph on the next slide has at least 7 problems: red-green colors, size mapped to accuracy (binary variable — misleading), no informative title, variable names as axis labels, default gray theme, redundant color and fill, and points plotted behind the boxplot. Circulate and ask pairs to name each problem before they start fixing it. Common student approach: they’ll fix the colors first because it’s most obvious. Push them to also address the title and labels.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>I’ll put a cluttered graph on screen. With a partner, <strong>rewrite it</strong> to follow the design principles we just covered.</p>
 <p>Remove at least 5 unnecessary elements. Make it tell a clear story.</p>
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -466,13 +621,38 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="critiquing-bad-graphs" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Critiquing bad graphs</h1>
-
+<aside class="notes">
+<p>This section (~10 min) is the second lecture block. It transitions from “how to build good figures” to “how to spot bad ones.” These three examples each illustrate a different category of problem: misleading axes, poor aesthetics, and wrong chart type. Run through them interactively — show the figure, let students diagnose it, then reveal the answer. This builds the critical evaluation skill they’ll need for Assignment 4.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="whats-wrong-here-1-of-3" class="slide level2">
 <h2>What’s wrong here? (1 of 3)</h2>
 
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-13-1.png" width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problem:</strong> The y-axis starts at 470, not 0. The difference looks massive — but it’s only ~40 ms. A truncated axis exaggerates the effect.</p>
+<aside class="notes">
+<p>Students often ask: “But isn’t it sometimes okay to not start at zero?” Good question. For bar charts, no — the bar height represents the value, so truncating is always misleading. For line charts or dot plots, it can be acceptable because the position (not the area) encodes the value. This nuance matters and comes up in the storytelling session (Session 16) too.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="whats-wrong-here-2-of-3" class="slide level2">
@@ -487,6 +667,19 @@ Dr.&nbsp;Sara Weston
 
 <img data-src="08-perception-design_files/figure-revealjs/unnamed-chunk-15-1.png" width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problems:</strong> Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.</p>
+<aside class="notes">
+<p>This is the strongest example because it shows a cascade of bad decisions: first they binned continuous data (losing information), then they used a pie chart (making comparison harder), and they dropped the condition variable entirely. Each step destroyed information. The lesson: your choice of chart type determines what story you can tell. A pie chart here makes it impossible to compare conditions or see the distribution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -496,6 +689,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="assignment-4-preview" class="slide level2">
 <h2>Assignment 4 preview</h2>
+<aside class="notes">
+<p>Assignment 4 is being assigned today. Briefly outline the three parts so students know what to aim for. Emphasize that the “bad” version should be deliberately bad with specific design violations they can name — not just ugly. They need to articulate what’s wrong with it and why the good version is better. The colorblind-accessible version is a separate deliverable, not just “the good version with viridis.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Assignment 4 will ask you to:</p>
 <ol type="1">
 <li>Create a <strong>“bad” version</strong> of a figure — deliberately violate design principles</li>
@@ -556,6 +762,19 @@ Dr.&nbsp;Sara Weston
 <h2>The one thing to remember</h2>
 <p>You’re not designing for yourself. You’re designing for a reader who will look at your figure for five seconds.</p>
 <p>Next time: Exploratory Data Analysis</p>
+<aside class="notes">
+<p>End on this line — it reframes everything from today. Students naturally design for themselves (they already know what the data shows). The challenge is designing for someone who doesn’t. Five seconds is roughly how long a reader spends on a figure before deciding whether to engage. Next session shifts from how to present data to how to explore it (EDA). Remind students that Assignment 3 is due this week and Assignment 4 is now available.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>

@@ -222,6 +222,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>If you said 15, you forgot to reverse-code — <code>2</code> should become <code>(5 + 1) - 2 = 4</code>, making the real total <strong>17</strong>. This kind of mistake happens in published papers, and it lives in how you handle data types.</p>
+<aside class="notes">
+<p>Spend ~3 minutes here. Let students answer out loud before revealing the catch. This hooks them because it shows that “just adding numbers” is not always correct — data types and scoring decisions matter. Mention that reverse-coding errors are genuinely common in published work.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="everything-in-r-is-a-type" class="slide level2">
@@ -234,6 +247,19 @@ Dr.&nbsp;Sara Weston
 <li><code>"Female"</code> can be a <strong>factor</strong> (categorical)</li>
 </ul>
 <p>Understanding types helps you choose the right functions, avoid cryptic errors, and transform data correctly.</p>
+<aside class="notes">
+<p>Move through this quickly — it is review from earlier sessions. The goal is just to name the four types so students have a mental map. Point out that today focuses on logicals and numbers; strings and factors come next session.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="todays-focus" class="slide level2">
 <h2>Today’s focus</h2>
@@ -270,6 +296,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1]  TRUE  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Emphasize that logicals are the result of asking a question about data, and that every filter() they have written so far has been producing logicals under the hood. The ages example connects to IRB eligibility, which students can relate to.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="comparison-operators-review" class="slide level2">
@@ -312,6 +351,19 @@ Dr.&nbsp;Sara Weston
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>This is review — skim it quickly unless students look lost. Highlight that == is for comparison and = is for assignment; this is one of the most common syntax errors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="logical-operators" class="slide level2">
 <h2>Logical operators</h2>
@@ -368,6 +420,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Students often confuse AND and OR. Emphasize that AND narrows results (both must be true, so you get fewer rows) while OR broadens them (either can be true, so you get more rows). Ask students: “Which one gives you more rows back?” to check understanding.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="using-logicals-in-filter" class="slide level2">
@@ -416,6 +481,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Emphasize the data-quality use case: you can use any() to check “did anyone fail this check?” and all() to check “did everyone complete this section?” These are handy sanity checks to run before analysis. Students may ask about the difference between any()/all() and sum() — clarify that any/all return a single TRUE/FALSE, while sum counts how many.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="counting-with-logicals" class="slide level2">
@@ -433,6 +511,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] 0.8</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is the key insight of the section: TRUE acts like 1 and FALSE acts like 0, so sum() counts TRUEs and mean() gives the proportion. Students find this surprising and useful. Pause to make sure it sinks in — it comes back when they compute scale scores later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="conditional-values" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -459,6 +550,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <p><strong>Syntax:</strong> <code>if_else(condition, value_if_true, value_if_false)</code></p>
+<aside class="notes">
+<p>Walk through the syntax carefully: condition first, then what happens when TRUE, then what happens when FALSE. Students sometimes reverse the TRUE/FALSE order. Emphasize that if_else() is used inside mutate() to create new columns, not for control flow like an if statement in other languages.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="handling-na-with-if_else" class="slide level2">
 <h2>Handling NA with if_else()</h2>
@@ -479,6 +583,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] "Low"         "Low"         "No response" "High"        "High"       </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>The missing argument is new to most students. Point out the default behavior first (NA stays as NA), then show the override. Students often ask “why didn’t NA become ‘Low’?” — explain that NA means “we don’t know the value,” so the comparison NA &gt;= 3 returns NA, not FALSE.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="case_when-multiple-conditions" class="slide level2">
@@ -505,6 +622,19 @@ Dr.&nbsp;Sara Weston
 5     5    30 TRUE            30 Severe             </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Use the PHQ-9 cutoffs as a concrete example students will encounter in their careers. Walk through the logic slowly: “If depression is less than 14, label it Minimal. Otherwise, check if it is less than 20…” Emphasize the tilde (~) syntax — students often forget it or use = instead.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="case_when-rules" class="slide level2">
 <h2>case_when() rules</h2>
@@ -523,6 +653,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">.default =</span> <span class="cn">NA</span>  <span class="co"># Explicit about NAs</span></span>
 <span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Spend a moment on .default — students frequently get unexpected NAs from case_when() because their conditions do not cover all values. Encourage them to always include .default as a safety net. Ask: “What happens if someone’s age is NA? Which condition matches?” Answer: none, so they get NA from .default.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="if_else-vs-case_when-when-to-use-which" class="slide level2">
@@ -558,7 +701,20 @@ Dr.&nbsp;Sara Weston
 <section id="psychology-example-reverse-coding" class="slide level2">
 <h2>Psychology example: Reverse coding</h2>
 
-<img data-src="img/rosenberg.png" class="quarto-figure quarto-figure-center r-stretch" width="600"></section>
+<img data-src="img/rosenberg.png" class="quarto-figure quarto-figure-center r-stretch" width="600"><aside class="notes">
+<p>Show the actual Rosenberg Self-Esteem Scale so students can see which items are reverse-coded. Ask if anyone has taken this measure in a psych class. This connects the abstract coding lesson to something tangible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="psychology-example-reverse-coding-1" class="slide level2">
 <h2>Psychology example: Reverse coding</h2>
 <p>Many scales have reverse-coded items:</p>
@@ -600,6 +756,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="easier-reverse-coding" class="slide level2">
 <h2>Easier reverse coding</h2>
+<aside class="notes">
+<p>Transition: “case_when() works but is tedious for a 5-point scale — imagine a 7-point scale. There is a much simpler formula.” This slide is the payoff.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>For scales, use arithmetic:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a>rosenberg <span class="sc">|&gt;</span></span>
@@ -621,6 +790,19 @@ Dr.&nbsp;Sara Weston
 <li>1-5 scale: <code>6 - x</code> (because 1 + 5 = 6)</li>
 <li>1-7 scale: <code>8 - x</code> (because 1 + 7 = 8)</li>
 </ul>
+<aside class="notes">
+<p>Make sure students understand the general formula: (max + min) - value. Ask them to calculate the formula for a 0-4 scale (answer: 4 - x) to confirm understanding before moving to the exercise. Common mistake: students forget that the formula depends on the scale endpoints, not just the max.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -643,6 +825,19 @@ Dr.&nbsp;Sara Weston
 <li>What proportion of participants passed?</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
+<aside class="notes">
+<p>Give 10 minutes. Circulate and watch for: (1) students using = instead of == in the comparison, (2) forgetting to handle NA in the case_when — the NA case must come first or use is.na(), (3) forgetting na.rm = TRUE in the mean() for question 3. After time is up, walk through the solution live. Emphasize that checking for NA first in case_when() is a good habit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="numbers" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -671,6 +866,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>You rarely need to worry about this distinction!</p>
+<aside class="notes">
+<p>Spend very little time here — the integer vs.&nbsp;double distinction almost never matters in practice for this course. The point is just awareness. If students ask, the main case where it matters is when checking types with is.integer() or when a function unexpectedly returns integer vs.&nbsp;double.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="rounding" class="slide level2">
@@ -753,6 +961,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Pause on the callout. This is a conceptual point, not a coding one. Ask students: “If 20% of participants skipped the depression items, does that tell you something?” In psychology, missingness is often not random — people skip sensitive questions. This foreshadows the missing data session (Session 15).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="counting-non-missing-values" class="slide level2">
@@ -811,6 +1032,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <p>How do you compute a total or mean score?</p>
+<aside class="notes">
+<p>This is the core practical section of the deck — plan ~15 minutes for the scale scoring walkthrough. Frame it as: “This is the single most common data task you will do as a psychology researcher.” Walk through the data first so students see the NA values before you try to compute scores.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="option-1-manual-addition" class="slide level2">
 <h2>Option 1: Manual addition</h2>
@@ -831,6 +1065,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p><strong>Problem:</strong> If any item is <code>NA</code>, the whole sum is <code>NA</code>!</p>
+<aside class="notes">
+<p>Let the output speak for itself — students will see participant 4 gets NA for the total even though they answered 3 out of 4 items. Ask: “Is that what we want?” This motivates the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="option-2-sum-with-na.rm" class="slide level2">
@@ -854,6 +1101,19 @@ Dr.&nbsp;Sara Weston
 4     4       NA        2        1        2             5</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>rowwise() is new and important. Explain that by default, mutate works column-wise — sum() would add up the entire column. rowwise() tells R to work one row at a time. Warn students that they must ungroup() afterward, or subsequent operations will still be row-by-row and run slowly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="computing-mean-scores" class="slide level2">
 <h2>Computing mean scores</h2>
@@ -889,6 +1149,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Highlight the practical difference: if participant A answered all 10 items and participant B answered only 5, their sums are not comparable, but their means are. This is why many published papers report mean scores rather than totals.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="cleaner-approach-pivot-then-summarize" class="slide level2">
@@ -908,6 +1181,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb74-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Present this as an alternative, not a replacement. The pivot approach is more elegant for large scales with many items, but rowwise() is more intuitive for beginners. Point out the bonus of n_items — it counts how many items each person actually answered, which feeds into the missingness rule on the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="cleaner-approach-pivot-then-summarize-output" class="slide level2 output-location-slide"><h2>Cleaner approach: pivot then summarize</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
@@ -929,6 +1215,19 @@ Dr.&nbsp;Sara Weston
 <li><strong>Require ≥ 75%</strong> for critical scales</li>
 <li><strong>Document your decision</strong> clearly</li>
 </ul>
+<aside class="notes">
+<p>This is a methods decision, not a coding decision. Emphasize that there is no single right answer — the rule depends on your scale and your field’s conventions. The key is to choose a rule, apply it consistently, and report it in your methods section. Students often ask “what do most people do?” — 50% or 75% are both common.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="implementing-a-missingness-rule" class="slide level2">
@@ -985,6 +1284,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb79-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, depression, anxiety, stress)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Mention that real scales like the DASS-21 have 7 items per subscale, not 2. The pattern is the same — just more columns in the c() call. If students ask about automating the column selection, you can preview c_across() but do not spend long on it; it appears in the end-of-deck solution.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="computing-subscales-output" class="slide level2 output-location-slide"><h2>Computing subscales</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
@@ -1022,6 +1334,19 @@ Dr.&nbsp;Sara Weston
 <li>Only compute the score if <strong>at least 7 items</strong> are answered</li>
 <li>Create a <strong>severity category</strong>: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)</li>
 </ol>
+<aside class="notes">
+<p>Give ~10 minutes for this exercise. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. Circulate and help with the case_when cutoffs — students often get the boundary conditions wrong (e.g., using &lt; instead of &lt;=). The solution uses c_across(), which is a nice shortcut to show when reviewing. If time is short, have students start and finish as homework.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1061,6 +1386,19 @@ Dr.&nbsp;Sara Weston
 <h2>The one thing to remember</h2>
 <p>Scoring a scale correctly is the most common data task in psychology — and the easiest place to introduce errors.</p>
 <p>See you Wednesday for strings and factors!</p>
+<aside class="notes">
+<p>End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>

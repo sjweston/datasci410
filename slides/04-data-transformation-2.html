@@ -222,6 +222,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>Today we learn to answer that — with <strong>group_by()</strong> + <strong>summarize()</strong>.</p>
+<aside class="notes">
+<p>Start by connecting to Session 3. Ask students what verbs they learned last time (filter, arrange, mutate, select). Then pivot: “Those are great for exploring, but your advisor doesn’t want 1,000 rows — they want a single number.” The depression score example resonates because it sounds like something they’d actually need to do. Spend ~2 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -283,6 +296,19 @@ Dr.&nbsp;Sara Weston
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Don’t dwell on this table — it’s a reference slide. Point out that <code>n()</code> and <code>n_distinct()</code> are new (no base R equivalent students would know), while the rest are familiar from stats classes. Mention that <code>n()</code> takes no arguments, which trips students up later.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-na.rm-argument" class="slide level2">
 <h2>The na.rm argument</h2>
@@ -312,6 +338,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>This is one of the most common early frustrations. Run the code live and let them see the NA result before showing the fix. Ask: “Why does R do this?” The answer is that R is being cautious — if data is missing, the true mean is unknown. Emphasize that forgetting <code>na.rm = TRUE</code> is the #1 reason students get unexpected NAs in their output. They will hit this on Assignment 2.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="summarize-alone-isnt-very-useful" class="slide level2">
 <h2>summarize() alone isn’t very useful</h2>
@@ -323,6 +362,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <p>The power comes when we combine it with <strong>group_by()</strong>.</p>
+<aside class="notes">
+<p>This slide sets up the “aha” moment. Pause here and say something like: “Okay, so summarize alone is kind of boring. But watch what happens when we add one line.” Then move to the next section.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="group_by" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -356,6 +408,19 @@ Dr.&nbsp;Sara Weston
 12    12     16.6      28135</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is the key moment of the deck. Run the code and let the output land. Point to the 12-row result and ask: “How many rows? Why 12?” Make sure students see the connection between <code>group_by(month)</code> and getting one row per month. Spend ~3 minutes here. If you can, compare it to the single-row result from the previous slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-happened" class="slide level2">
 <h2>What happened?</h2>
@@ -397,6 +462,19 @@ Dr.&nbsp;Sara Weston
 # ℹ 175 more rows</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Point out that the output now has <code>Groups: month [12]</code> printed at the top — this is R telling you grouping is still partially active. Ask: “How many rows would you expect?” (12 months x 16 carriers = up to 192). This naturally leads to the <code>.groups</code> message on the next slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-.groups-argument" class="slide level2">
 <h2>The .groups argument</h2>
@@ -413,6 +491,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop last group level</span></span>
 <span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">summarize</span>(..., <span class="at">.groups =</span> <span class="st">"drop_last"</span>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Students will see this message and panic — reassure them it’s informational, not an error. For this course, recommend <code>.groups = "drop"</code> as the safest default. The message appears because after summarizing two grouping variables, R keeps the first one grouped. You don’t need to belabor <code>"keep"</code> vs <code>"drop_last"</code> — just tell them <code>"drop"</code> is the safe bet and move on. Spend ~2 minutes max.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="group-by-for-psychology" class="slide level2">
 <h2>Group by for psychology</h2>
@@ -438,6 +529,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">se =</span> <span class="fu">sd</span>(outcome) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">n</span>())</span>
 <span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Pause on the standard error formula. Students from stats classes may recognize <code>sd / sqrt(n)</code>, but point out how elegant it is that <code>n()</code> works inline inside <code>summarize()</code>. These two psychology slides are important for framing — students need to see that group_by + summarize is exactly what SPSS “Descriptives &gt; Split File” does, but more flexible.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="multiple-summaries-at-once" class="slide level2">
 <h2>Multiple summaries at once</h2>
@@ -496,6 +600,19 @@ Dr.&nbsp;Sara Weston
 <li>Which airline has the <strong>worst</strong> average delay?</li>
 <li><strong>Bonus:</strong> Also calculate the number of flights per carrier. Does the worst airline just have fewer flights?</li>
 </ol>
+<aside class="notes">
+<p>Set a timer for 10 minutes. Circulate and watch for: (1) forgetting <code>na.rm = TRUE</code> and getting NA results, (2) using <code>mean(dep_delay)</code> without <code>summarize()</code>, (3) not knowing how to sort descending (<code>desc()</code>). The bonus question is intentionally a “think about your data” prompt — Frontier (F9) has the worst average delay but relatively few flights. This is a good moment to talk about sample size and whether an average is trustworthy. Reveal the solution after time is up.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
@@ -511,6 +628,19 @@ Dr.&nbsp;Sara Weston
 </ul>
 <div class="fragment">
 <p>These are the building blocks of a results section. Next: some shortcuts.</p>
+<aside class="notes">
+<p>This is a pivot slide. Use it to let the energy from the pair coding settle and reset for part 2. Emphasize that they’ve already learned the single most important dplyr pattern. Everything from here is refinements and shortcuts. ~1 minute.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -576,6 +706,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <p>Same result, less typing!</p>
+<aside class="notes">
+<p>Show both versions side by side (scroll back if needed). Emphasize that <code>count()</code> is just syntactic sugar for <code>group_by() |&gt; summarize(n = n())</code>. Students often ask: “When do I use <code>count()</code> vs <code>group_by() + summarize()</code>?” Answer: use <code>count()</code> when you only need frequencies; use the full pattern when you need means, SDs, or other statistics alongside the count.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="count-with-multiple-variables" class="slide level2">
 <h2>count() with multiple variables</h2>
@@ -646,6 +789,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>() <span class="sc">|&gt;</span>   <span class="co"># Calculate summaries</span></span>
 <span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>()        <span class="co"># Sort results</span></span></code></pre></div>
 </div>
+<aside class="notes">
+<p>This is a “big picture” slide. Emphasize that the order listed here is a common workflow, not a rigid rule. Students often ask whether the order matters — it does for some combinations (e.g., <code>filter()</code> before <code>summarize()</code> reduces what gets summarized), but <code>select()</code> can go anywhere. The key insight: each verb does one thing, and the pipe chains them together.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="a-complete-analysis-pipeline" class="slide level2">
 <h2>A complete analysis pipeline</h2>
@@ -683,6 +839,19 @@ Dr.&nbsp;Sara Weston
 10 AA           2.76        34.1      8271</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Walk through the pipeline step by step, narrating what each line does. Point out the <code>mean(arr_delay &gt; 0)</code> trick — since TRUE = 1 and FALSE = 0, taking the mean of a logical gives you the proportion. This is a useful pattern students haven’t seen before. Also highlight the post-summarize <code>filter(n_flights &gt; 1000)</code> — filtering after summarizing is a common and powerful pattern for removing small-sample groups.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="piping-into-ggplot" class="slide level2">
 <h2>Piping into ggplot</h2>
@@ -701,6 +870,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This slide previews a pattern they’ll use heavily later: pipe straight from data wrangling into ggplot. Point out the switch from <code>|&gt;</code> to <code>+</code> once you enter ggplot — students frequently mix these up. You don’t need to explain the ggplot code in detail here; just show that the summary data flows directly into the visualization. Sessions 8 and 9 will cover ggplot in depth.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="piping-into-ggplot-output" class="slide level2 output-location-slide"><h2>Piping into ggplot</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -746,6 +928,19 @@ Dr.&nbsp;Sara Weston
 # ℹ 336,766 more rows</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is a more advanced use of <code>group_by()</code> that students find surprising. Emphasize the difference: with <code>summarize()</code>, you collapse to one row per group; with <code>mutate()</code>, you keep all rows but the calculation is done within each group. The psychology use case: centering scores within each participant (person-mean centering) for repeated-measures designs. Don’t dwell too long — this is a “you’ll need this later” preview. ~2 minutes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="filtering-within-groups" class="slide level2">
 <h2>Filtering within groups</h2>
@@ -808,6 +1003,19 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <p>All work within groups when preceded by <code>group_by()</code>.</p>
+<aside class="notes">
+<p>Present <code>slice_*()</code> as a reference — students don’t need to memorize all five variants today. The most useful ones for this course are <code>slice_max()</code> and <code>slice_min()</code>, which appear in the end-of-deck exercise. Mention that <code>slice_sample()</code> is handy for quickly peeking at random rows when exploring data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ungroup" class="slide level2">
 <h2>ungroup()</h2>
@@ -836,6 +1044,19 @@ Dr.&nbsp;Sara Weston
 # ℹ 336,766 more rows</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>The key teaching point: without <code>ungroup()</code>, the <code>grand_mean</code> would be calculated per carrier (same as <code>carrier_mean</code>). With <code>ungroup()</code>, it uses all rows. Students often ask “How do I know if my data is still grouped?” — point them to the <code>Groups:</code> line printed at the top of tibble output. A good rule of thumb: if you’re done with grouped operations, add <code>ungroup()</code> to be safe.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="code-style-matters" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -865,6 +1086,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb38-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <p>Same code. One you can debug at midnight. One you can’t.</p>
+<aside class="notes">
+<p>Let students look at Version A for a moment before revealing Version B. Ask: “Which one would you rather debug at midnight before the assignment is due?” This gets a laugh and makes the point viscerally. Version A is deliberately awful but realistic — students write code like this when they’re rushing. Emphasize that both versions produce identical output; the difference is entirely for the human reader.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-rules-behind-the-difference" class="slide level2">
@@ -893,6 +1127,19 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="simulated-experiment-data" class="slide level2">
 <h2>Simulated experiment data</h2>
+<aside class="notes">
+<p>Transition: “Now let’s put it all together with data that looks like what you’d actually collect.” Walk through the <code>set.seed()</code> and <code>tibble()</code> call briefly — students don’t need to understand the simulation code, just the resulting data structure. Point out that this is a 2-condition experiment with 60 participants doing 20 trials each (1,200 rows). This mirrors a real cognitive psychology experiment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
 <span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
@@ -990,6 +1237,19 @@ Dr.&nbsp;Sara Weston
 2 treatment  469.  27.7  89.2   10.1    60</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This two-step summarization (trials to participants, then participants to conditions) is the most important methodological pattern in the deck. Emphasize why you can’t just do <code>group_by(condition) |&gt; summarize(mean(reaction_time))</code> on the raw data — that would weight participants with more valid trials more heavily. Students who’ve taken stats will recognize this as the distinction between treating trials vs.&nbsp;participants as the unit of analysis. Spend ~3 minutes walking through both steps.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="visualize-the-results" class="slide level2">
 <h2>Visualize the results</h2>
@@ -1037,6 +1297,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Give students ~10 minutes of individual work time. This exercise requires chaining four operations and doing a second <code>group_by()</code> after the first summarize — that’s the hard part. Hint if students are stuck: “Build the pipeline one line at a time. First just filter, run it, then add the group_by, run it, then add summarize…” This incremental approach is a skill in itself. Assignment 2 is assigned today, so mention that it builds on the same skills. Reveal the solution with ~2 minutes left.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1116,6 +1389,19 @@ Dr.&nbsp;Sara Weston
 <h2>The one thing to remember</h2>
 <p><code>group_by()</code> + <code>summarize()</code> is how you go from raw data to the descriptive statistics table in every published paper.</p>
 <p>Next time: Data Tidying with tidyr</p>
+<aside class="notes">
+<p>End on this line — it connects today’s skills directly to something students will encounter in every journal article they read. Remind them that Assignment 2 is now posted and due Sunday at 11:59 PM. Next session is Data Tidying (pivot_longer, pivot_wider), which is conceptually harder but builds on what they learned today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>
