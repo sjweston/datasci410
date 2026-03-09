@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>10: EDA — Covariation – PSY 410/510: Data Science for Psychology</title>
+<title>10: EDA — Variation – PSY 410/510: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,12 +108,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="10: EDA — Covariation – PSY 410/510: Data Science for Psychology">
+<meta property="og:title" content="10: EDA — Variation – PSY 410/510: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="10: EDA — Covariation – PSY 410/510: Data Science for Psychology">
+<meta name="twitter:title" content="10: EDA — Variation – PSY 410/510: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -344,13 +344,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a>
   <ul class="collapse">
-  <li><a href="#overplotting-solutions" id="toc-overplotting-solutions" class="nav-link" data-scroll-target="#overplotting-solutions">Overplotting solutions</a></li>
+  <li><a href="#loading-the-dataset" id="toc-loading-the-dataset" class="nav-link" data-scroll-target="#loading-the-dataset">Loading the dataset</a></li>
+  <li><a href="#outlier-investigation-template" id="toc-outlier-investigation-template" class="nav-link" data-scroll-target="#outlier-investigation-template">Outlier investigation template</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/10-content.html">10: EDA — Covariation</a></li></ol></nav><h1 class="title display-7">10: EDA — Covariation</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/10-content.html">10: EDA — Covariation</a></li></ol></nav><h1 class="title display-7">10: EDA — Variation</h1></header>
 
 <header id="title-block-header">
 
@@ -365,34 +366,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="before-class">Before class</h2>
 <p>📖 <strong>Reading:</strong></p>
 <ul>
-<li><a href="https://r4ds.hadley.nz/eda">R4DS Ch 10: Exploratory data analysis</a> (sections 10.5–10.6)</li>
+<li><a href="https://r4ds.hadley.nz/eda">R4DS Ch 10: Exploratory data analysis</a> (sections 10.1–10.4)</li>
 </ul>
-</section>
-<section id="during-class" class="level2">
-<h2 class="anchored" data-anchor-id="during-class">During class</h2>
-<p>We’ll cover:</p>
-<ul>
-<li>Exploring covariation — relationships between variables</li>
-<li>Categorical + continuous: boxplots, violin plots, <code>geom_freqpoly()</code> with color</li>
-<li>Categorical + categorical: <code>geom_count()</code>, <code>geom_tile()</code> with counts</li>
-<li>Continuous + continuous: scatterplots and trend lines</li>
-<li>Dealing with overplotting: alpha, jitter, binning</li>
-<li>Patterns, models, and the correlation vs.&nbsp;causation reminder</li>
-<li>Hands-on: Explore a real psychology dataset</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Assignment 5 is assigned today
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="../assignment/05-assignment.html">Assignment 5: Exploratory Data Analysis</a> — due before Session 11.</p>
-</div>
-</div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -406,32 +381,46 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Submit your dataset selection, research questions, and initial plan before class.</p>
 </div>
 </div>
+</section>
+<section id="during-class" class="level2">
+<h2 class="anchored" data-anchor-id="during-class">During class</h2>
+<p>We’ll cover:</p>
+<ul>
+<li>What is EDA? Exploratory vs.&nbsp;confirmatory thinking</li>
+<li>The EDA mindset — curiosity, not confirmation</li>
+<li>Exploring distributions: histograms, density plots, bar charts</li>
+<li>Choosing binwidth and when it matters</li>
+<li>Spotting outliers visually and programmatically</li>
+<li>What to do with outliers (investigate, don’t delete)</li>
+<li>A first look at missing data</li>
+<li>Putting it all together: a systematic EDA workflow</li>
+</ul>
 <section id="slides" class="level3">
 <h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<a href="../slides/10-eda-covariation.html" target="_blank" class="btn btn-primary">
+<a href="../slides/09-eda-variation.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="../slides/10-eda-covariation.pdf" class="btn btn-secondary">
+<a href="../slides/09-eda-variation.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 </section>
 <section id="embedded-slides" class="level3">
 <h3 class="anchored" data-anchor-id="embedded-slides">Embedded slides</h3>
 <div class="ratio ratio-16x9">
-  <iframe src="../slides/10-eda-covariation.html"></iframe>
+  <iframe src="../slides/09-eda-variation.html"></iframe>
 </div>
 </section>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After class</h2>
 <p>✅ <strong>Practice:</strong></p>
-<p>Using the <code>bfi</code> dataset from the <code>psych</code> package:</p>
+<p>Using the <code>bfi</code> dataset from the <code>psych</code> package (loaded in class today):</p>
 <ol type="1">
-<li>Pick two personality items (e.g., <code>E1</code> and <code>A1</code>). Make a scatterplot — is there a relationship?</li>
-<li>Create boxplots of <code>age</code> grouped by <code>education</code>. What patterns do you see?</li>
-<li>Use <code>geom_count()</code> to visualize the relationship between <code>education</code> and <code>gender</code></li>
-<li>Try adding <code>alpha = 0.3</code> to a crowded scatterplot. Does it help?</li>
-<li>Calculate the correlation between two continuous variables using <code>cor(x, y, use = "complete.obs")</code></li>
+<li>Explore the distribution of <code>age</code>. What shape is it? Is it skewed?</li>
+<li>Check for outliers in <code>age</code> using both a histogram and a boxplot. Are any values suspicious?</li>
+<li>Pick 3 personality items (e.g., <code>E1</code>, <code>N2</code>, <code>A4</code>) and plot their distributions. What do you notice?</li>
+<li>Count how many missing values each variable has. Which variables have the most?</li>
+<li>Write down 2–3 questions that your exploration makes you want to answer</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -439,31 +428,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Correlation vs.&nbsp;causation
+<span class="screen-reader-only">Note</span>The EDA loop
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Finding a relationship between two variables does <strong>not</strong> mean one causes the other. Always ask:</p>
-<ul>
-<li>Could there be a confounding variable?</li>
-<li>Does the direction of causation make sense?</li>
-<li>Is this a meaningful effect or just a large sample?</li>
-</ul>
-<p>In psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.</p>
+<p>EDA isn’t a linear checklist — it’s a cycle:</p>
+<ol type="1">
+<li><strong>Ask</strong> a question</li>
+<li><strong>Visualize</strong> the data to answer it</li>
+<li><strong>Notice</strong> something new</li>
+<li><strong>Ask</strong> another question</li>
+<li>Repeat</li>
+</ol>
+<p>There’s no “finished.” The goal is understanding, not a final answer.</p>
 </div>
 </div>
-<section id="overplotting-solutions" class="level3">
-<h3 class="anchored" data-anchor-id="overplotting-solutions">Overplotting solutions</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Too many points? Try these:</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Transparency</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Jitter (adds random noise)</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. 2D binning (heatmap-style)</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y)) <span class="sc">+</span> <span class="fu">geom_bin2d</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="loading-the-dataset" class="level3">
+<h3 class="anchored" data-anchor-id="loading-the-dataset">Loading the dataset</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bfi)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>bfi <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(bfi)   <span class="co"># Convert to tibble for tidyverse compatibility</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="outlier-investigation-template" class="level3">
+<h3 class="anchored" data-anchor-id="outlier-investigation-template">Outlier investigation template</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick outlier check for any numeric variable</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>variable_name <span class="ot">&lt;-</span> <span class="st">"age"</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag values beyond 3 SD from the mean</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(age <span class="sc">-</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>9: EDA — Variation – PSY 410/510: Data Science for Psychology</title>
+<title>9: Perception &amp; Design – PSY 410/510: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,12 +108,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="9: EDA — Variation – PSY 410/510: Data Science for Psychology">
+<meta property="og:title" content="9: Perception &amp; Design – PSY 410/510: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="9: EDA — Variation – PSY 410/510: Data Science for Psychology">
+<meta name="twitter:title" content="9: Perception &amp; Design – PSY 410/510: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -344,14 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a>
   <ul class="collapse">
-  <li><a href="#loading-the-dataset" id="toc-loading-the-dataset" class="nav-link" data-scroll-target="#loading-the-dataset">Loading the dataset</a></li>
-  <li><a href="#outlier-investigation-template" id="toc-outlier-investigation-template" class="nav-link" data-scroll-target="#outlier-investigation-template">Outlier investigation template</a></li>
+  <li><a href="#colorblind-friendly-palettes" id="toc-colorblind-friendly-palettes" class="nav-link" data-scroll-target="#colorblind-friendly-palettes">Colorblind-friendly palettes</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/09-content.html">9: EDA — Variation</a></li></ol></nav><h1 class="title display-7">9: EDA — Variation</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/09-content.html">9: EDA — Variation</a></li></ol></nav><h1 class="title display-7">9: Perception &amp; Design</h1></header>
 
 <header id="title-block-header">
 
@@ -366,7 +365,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="before-class">Before class</h2>
 <p>📖 <strong>Reading:</strong></p>
 <ul>
-<li><a href="https://r4ds.hadley.nz/eda">R4DS Ch 10: Exploratory data analysis</a> (sections 10.1–10.4)</li>
+<li><a href="https://mediashift.org/2016/02/checklist-does-your-data-visualization-say-what-you-think-it-says/">Kang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?</a></li>
+<li><a href="https://www.storytellingwithdata.com/blog/dont-hide-the-crucial-findings">Rowe, S. (2022, May 24) Don’t hide the crucial findings.</a></li>
+<li><a href="https://www.storytellingwithdata.com/blog/showing-the-insights-vs-showing-off">Cisneros, M. (2022, June 14). Showing off the insights vs.&nbsp;showing off.</a></li>
+<li><a href="https://www.storytellingwithdata.com/blog/declutter-a-dual-y-axis-chart">Esselman, A. (2022, June 23) Declutter a dual y-axis chart.</a></li>
+<li><a href="https://www.storytellingwithdata.com/blog/a-diverging-bar-makeover-how-to-tackle-the-challenge-of-scope-creep">Rowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.</a></li>
+<li>Optional: Knaflic, <em>Storytelling with Data</em>, Ch 1–3</li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -374,11 +378,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Assignment 4 is due today
+<span class="screen-reader-only">Important</span>Assignment 3 is due today
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="../assignment/04-assignment.html">Assignment 4: Visualization Deep Dive</a> — submit before class.</p>
+<p><a href="../assignment/03-assignment.html">Assignment 3: Tidying, Import &amp; Quarto</a> — due Sunday, April 26 at 11:59 PM.</p>
 </div>
 </div>
 </section>
@@ -386,41 +390,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="during-class">During class</h2>
 <p>We’ll cover:</p>
 <ul>
-<li>What is EDA? Exploratory vs.&nbsp;confirmatory thinking</li>
-<li>The EDA mindset — curiosity, not confirmation</li>
-<li>Exploring distributions: histograms, density plots, bar charts</li>
-<li>Choosing binwidth and when it matters</li>
-<li>Spotting outliers visually and programmatically</li>
-<li>What to do with outliers (investigate, don’t delete)</li>
-<li>A first look at missing data</li>
-<li>Putting it all together: a systematic EDA workflow</li>
+<li>Why perception matters — how the brain processes visual information</li>
+<li>Preattentive attributes: color, size, position, shape</li>
+<li>Gestalt principles and how they shape layout</li>
+<li>Color theory: sequential, diverging, and qualitative palettes</li>
+<li>Colorblind-friendly design (and why it matters)</li>
+<li>Decluttering: removing the visual noise</li>
+<li>Psychology-specific figures: error bars, interaction plots, raincloud plots</li>
+<li>Putting it all together with <code>theme()</code> customization</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Assignment 4 is assigned today
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../assignment/04-assignment.html">Assignment 4: Visualization Deep Dive</a> — due Sunday, May 3 at 11:59 PM.</p>
+</div>
+</div>
 <section id="slides" class="level3">
 <h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<a href="../slides/09-eda-variation.html" target="_blank" class="btn btn-primary">
+<a href="../slides/08-perception-design.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="../slides/09-eda-variation.pdf" class="btn btn-secondary">
+<a href="../slides/08-perception-design.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 </section>
 <section id="embedded-slides" class="level3">
 <h3 class="anchored" data-anchor-id="embedded-slides">Embedded slides</h3>
 <div class="ratio ratio-16x9">
-  <iframe src="../slides/09-eda-variation.html"></iframe>
+  <iframe src="../slides/08-perception-design.html"></iframe>
 </div>
 </section>
 </section>
 <section id="after-class" class="level2">
 <h2 class="anchored" data-anchor-id="after-class">After class</h2>
 <p>✅ <strong>Practice:</strong></p>
-<p>Using the <code>bfi</code> dataset from the <code>psych</code> package (loaded in class today):</p>
 <ol type="1">
-<li>Explore the distribution of <code>age</code>. What shape is it? Is it skewed?</li>
-<li>Check for outliers in <code>age</code> using both a histogram and a boxplot. Are any values suspicious?</li>
-<li>Pick 3 personality items (e.g., <code>E1</code>, <code>N2</code>, <code>A4</code>) and plot their distributions. What do you notice?</li>
-<li>Count how many missing values each variable has. Which variables have the most?</li>
-<li>Write down 2–3 questions that your exploration makes you want to answer</li>
+<li>Take a plot you made earlier in the course. Identify 3 things that could be decluttered.</li>
+<li>Recreate it using only <code>theme_minimal()</code> — what disappears? What stays?</li>
+<li>Try switching your color palette to <code>scale_fill_viridis_d()</code>. Does it change the story?</li>
+<li>Create a raincloud plot (violin + boxplot + jitter) for any grouped data you have</li>
+<li>Make a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -428,43 +444,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The EDA loop
+<span class="screen-reader-only">Note</span>The decluttering checklist
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>EDA isn’t a linear checklist — it’s a cycle:</p>
-<ol type="1">
-<li><strong>Ask</strong> a question</li>
-<li><strong>Visualize</strong> the data to answer it</li>
-<li><strong>Notice</strong> something new</li>
-<li><strong>Ask</strong> another question</li>
-<li>Repeat</li>
-</ol>
-<p>There’s no “finished.” The goal is understanding, not a final answer.</p>
+<p>Before you call a figure “done,” ask:</p>
+<ul>
+<li>Is the background gray? → Switch to <code>theme_minimal()</code> or <code>theme_classic()</code></li>
+<li>Are there gridlines? → Remove them</li>
+<li>Is there a legend when there’s only one group? → Remove it</li>
+<li>Do the axis labels say something meaningful? → If not, rename them</li>
+<li>Can someone understand the point without reading the caption? → If not, the title needs work</li>
+</ul>
 </div>
 </div>
-<section id="loading-the-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="loading-the-dataset">Loading the dataset</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(psych)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(bfi)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>bfi <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(bfi)   <span class="co"># Convert to tibble for tidyverse compatibility</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="outlier-investigation-template" class="level3">
-<h3 class="anchored" data-anchor-id="outlier-investigation-template">Outlier investigation template</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Quick outlier check for any numeric variable</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>variable_name <span class="ot">&lt;-</span> <span class="st">"age"</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">min =</span> <span class="fu">min</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">max =</span> <span class="fu">max</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">mean</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">sd</span>(<span class="sc">!!</span><span class="fu">sym</span>(variable_name), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag values beyond 3 SD from the mean</span></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">abs</span>(age <span class="sc">-</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">&gt;</span> <span class="dv">3</span> <span class="sc">*</span> <span class="fu">sd</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="colorblind-friendly-palettes" class="level3">
+<h3 class="anchored" data-anchor-id="colorblind-friendly-palettes">Colorblind-friendly palettes</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Viridis — works for continuous and discrete</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()   <span class="co"># discrete categories</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_c</span>()   <span class="co"># continuous values</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co"># ColorBrewer — curated palettes</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)      <span class="co"># qualitative</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"RdBu"</span>)      <span class="co"># diverging</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Blues"</span>)     <span class="co"># sequential</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>These are all built into ggplot2 — no extra packages needed.</p>
 
 
 </section>

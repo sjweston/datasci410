@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>13: Joins – PSY 410/510: Data Science for Psychology</title>
+<title>13: Strings, Factors &amp; Text – PSY 410/510: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -108,12 +108,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="13: Joins – PSY 410/510: Data Science for Psychology">
+<meta property="og:title" content="13: Strings, Factors &amp; Text – PSY 410/510: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="13: Joins – PSY 410/510: Data Science for Psychology">
+<meta name="twitter:title" content="13: Strings, Factors &amp; Text – PSY 410/510: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -344,13 +344,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a>
   <ul class="collapse">
-  <li><a href="#psychology-application-combining-data-sources" id="toc-psychology-application-combining-data-sources" class="nav-link" data-scroll-target="#psychology-application-combining-data-sources">Psychology application: combining data sources</a></li>
+  <li><a href="#psychology-application-cleaning-demographics" id="toc-psychology-application-cleaning-demographics" class="nav-link" data-scroll-target="#psychology-application-cleaning-demographics">Psychology application: cleaning demographics</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/13-content.html">13: Joins</a></li></ol></nav><h1 class="title display-7">13: Joins</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/13-content.html">13: Joins</a></li></ol></nav><h1 class="title display-7">13: Strings, Factors &amp; Text</h1></header>
 
 <header id="title-block-header">
 
@@ -363,9 +363,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="before-class" class="level2">
 <h2 class="anchored" data-anchor-id="before-class">Before class</h2>
-<p>📖 <strong>Reading:</strong></p>
+<p>📖 <strong>Readings:</strong></p>
 <ul>
-<li><a href="https://r4ds.hadley.nz/joins">R4DS Ch 19: Joins</a></li>
+<li><a href="https://r4ds.hadley.nz/strings">R4DS Ch 14: Strings</a> (sections 14.1–14.3 only)</li>
+<li><a href="https://r4ds.hadley.nz/factors">R4DS Ch 16: Factors</a></li>
 </ul>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -373,11 +374,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Assignment 6 is due today
+<span class="screen-reader-only">Important</span>Assignment 5 is due today
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="../assignment/06-assignment.html">Assignment 6: Data Types</a> — submit before class.</p>
+<p><a href="../assignment/05-assignment.html">Assignment 5: Exploratory Data Analysis</a> — due Sunday, May 10 at 11:59 PM.</p>
 </div>
 </div>
 </section>
@@ -385,34 +386,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="during-class">During class</h2>
 <p>We’ll cover:</p>
 <ul>
-<li>Why join data? Psychology data often lives in multiple tables</li>
-<li>Keys — primary keys and foreign keys</li>
-<li>Mutating joins (add columns from another table):
-<ul>
-<li><code>left_join()</code> — keep all rows from the left table</li>
-<li><code>inner_join()</code> — keep only matching rows</li>
-<li><code>right_join()</code> and <code>full_join()</code></li>
-</ul></li>
-<li>Filtering joins (use one table to filter another):
-<ul>
-<li><code>semi_join()</code> — keep rows that have a match</li>
-<li><code>anti_join()</code> — keep rows that <em>don’t</em> have a match</li>
-</ul></li>
-<li>Common issues: many-to-many, missing keys, duplicates</li>
+<li>Strings — creating, combining, and basic cleaning</li>
+<li><code>str_to_lower()</code>, <code>str_to_upper()</code>, <code>str_trim()</code> for cleanup</li>
+<li><code>str_detect()</code> and <code>str_replace()</code> for simple pattern matching</li>
+<li>Factors — categorical data with a fixed set of levels</li>
+<li>Why factor order matters for plots and tables</li>
+<li>Reordering factors: <code>fct_relevel()</code>, <code>fct_reorder()</code>, <code>fct_infreq()</code></li>
+<li>Recoding factors: <code>fct_recode()</code>, <code>fct_collapse()</code></li>
+<li>Practical application: cleaning demographic variables</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Assignment 6 is assigned today
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../assignment/06-assignment.html">Assignment 6: Data Types &amp; Wrangling</a> — due Sunday, May 17 at 11:59 PM.</p>
+</div>
+</div>
 <section id="slides" class="level3">
 <h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<a href="../slides/13-joins.html" target="_blank" class="btn btn-primary">
+<a href="../slides/12-strings-factors.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="../slides/13-joins.pdf" class="btn btn-secondary">
+<a href="../slides/12-strings-factors.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 </section>
 <section id="embedded-slides" class="level3">
 <h3 class="anchored" data-anchor-id="embedded-slides">Embedded slides</h3>
 <div class="ratio ratio-16x9">
-  <iframe src="../slides/13-joins.html"></iframe>
+  <iframe src="../slides/12-strings-factors.html"></iframe>
 </div>
 </section>
 </section>
@@ -420,11 +428,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="after-class">After class</h2>
 <p>✅ <strong>Practice:</strong></p>
 <ol type="1">
-<li>Create two small tibbles with a shared key column. Practice <code>left_join()</code>, <code>inner_join()</code>, and <code>full_join()</code> — what’s different about the output?</li>
-<li>Use <code>anti_join()</code> to find participants who are in one dataset but not another (a common quality check)</li>
-<li>Try joining by multiple keys using <code>by = c("id", "timepoint")</code></li>
-<li>What happens when a key isn’t unique? Try it and see</li>
-<li>Think about your final project: do you need to combine multiple tables?</li>
+<li>Clean up a messy text column using <code>str_trim()</code> and <code>str_to_lower()</code> — try it on free-response demographic data</li>
+<li>Use <code>str_detect()</code> to filter rows where a column contains a specific word</li>
+<li>Convert a character column to a factor with <code>factor()</code>. What happens to the levels?</li>
+<li>Reorder bars in a bar chart using <code>fct_infreq()</code> — most common category first</li>
+<li>Use <code>fct_recode()</code> to combine similar categories (e.g., “Male” and “male” and “M”)</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -432,60 +440,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Which join do you need?
+<span class="screen-reader-only">Note</span>Why factors matter for plots
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Most of the time, you want <code>left_join()</code> — it keeps everything in your main table and adds columns from the second table where there’s a match.</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Join</th>
-<th>Keeps</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>left_join(x, y)</code></td>
-<td>All rows from <code>x</code>, matching rows from <code>y</code></td>
-</tr>
-<tr class="even">
-<td><code>inner_join(x, y)</code></td>
-<td>Only rows that match in both</td>
-</tr>
-<tr class="odd">
-<td><code>full_join(x, y)</code></td>
-<td>All rows from both tables</td>
-</tr>
-<tr class="even">
-<td><code>anti_join(x, y)</code></td>
-<td>Rows in <code>x</code> with no match in <code>y</code></td>
-</tr>
-</tbody>
-</table>
+<p>By default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Alphabetical (default) — not great</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Ordered by frequency — much better</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_infreq</span>(condition))) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Custom order — you decide</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_relevel</span>(condition, <span class="st">"Control"</span>, <span class="st">"Low"</span>, <span class="st">"High"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
-<section id="psychology-application-combining-data-sources" class="level3">
-<h3 class="anchored" data-anchor-id="psychology-application-combining-data-sources">Psychology application: combining data sources</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Participant demographics + survey responses</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>demographics <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">c</span>(<span class="st">"P01"</span>, <span class="st">"P02"</span>, <span class="st">"P03"</span>),</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">19</span>, <span class="dv">22</span>, <span class="dv">20</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Woman"</span>, <span class="st">"Man"</span>, <span class="st">"Woman"</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>survey_scores <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="fu">c</span>(<span class="st">"P01"</span>, <span class="st">"P02"</span>, <span class="st">"P04"</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety_score =</span> <span class="fu">c</span>(<span class="dv">34</span>, <span class="dv">28</span>, <span class="dv">41</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Keep all participants, add scores where available</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>demographics <span class="sc">|&gt;</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(survey_scores, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Find who's missing survey data</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>demographics <span class="sc">|&gt;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(survey_scores, <span class="at">by =</span> <span class="st">"participant_id"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="psychology-application-cleaning-demographics" class="level3">
+<h3 class="anchored" data-anchor-id="psychology-application-cleaning-demographics">Psychology application: cleaning demographics</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common cleanup pipeline for survey demographics</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(gender)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">fct_recode</span>(<span class="fu">as_factor</span>(gender),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Man"</span> <span class="ot">=</span> <span class="st">"male"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Man"</span> <span class="ot">=</span> <span class="st">"m"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Woman"</span> <span class="ot">=</span> <span class="st">"female"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Woman"</span> <span class="ot">=</span> <span class="st">"f"</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">education =</span> <span class="fu">fct_relevel</span>(education,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High school"</span>, <span class="st">"Some college"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Graduate"</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
 </section>

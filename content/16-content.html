@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>16: Quarto – PSY 410/510: Data Science for Psychology</title>
+<title>16: Storytelling with Data – PSY 410/510: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,41 +20,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -108,12 +73,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<meta property="og:title" content="16: Quarto – PSY 410/510: Data Science for Psychology">
+<meta property="og:title" content="16: Storytelling with Data – PSY 410/510: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="16: Quarto – PSY 410/510: Data Science for Psychology">
+<meta name="twitter:title" content="16: Storytelling with Data – PSY 410/510: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -344,13 +309,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#after-class" id="toc-after-class" class="nav-link" data-scroll-target="#after-class">After class</a>
   <ul class="collapse">
-  <li><a href="#useful-chunk-options" id="toc-useful-chunk-options" class="nav-link" data-scroll-target="#useful-chunk-options">Useful chunk options</a></li>
+  <li><a href="#handout" id="toc-handout" class="nav-link" data-scroll-target="#handout">Handout</a></li>
   </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/16-content.html">16: Quarto</a></li></ol></nav><h1 class="title display-7">16: Quarto</h1></header>
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../content/01-content.html">Course content</a></li><li class="breadcrumb-item"><a href="../content/16-content.html">16: Quarto</a></li></ol></nav><h1 class="title display-7">16: Storytelling with Data</h1></header>
 
 <header id="title-block-header">
 
@@ -363,23 +328,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="before-class" class="level2">
 <h2 class="anchored" data-anchor-id="before-class">Before class</h2>
-<p>📖 <strong>Reading:</strong></p>
+<p>📖 <strong>Readings:</strong></p>
 <ul>
-<li><a href="https://r4ds.hadley.nz/quarto">R4DS Ch 28: Quarto</a></li>
+<li><a href="https://r4ds.hadley.nz/communication">R4DS Ch 11: Communication</a></li>
+<li>Dykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)</li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Assignment 7 is due today
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="../assignment/07-assignment.html">Assignment 7: Joins &amp; Missing Data</a> — due Sunday, May 24 at 11:59 PM.</p>
+</div>
+</div>
 </section>
 <section id="during-class" class="level2">
 <h2 class="anchored" data-anchor-id="during-class">During class</h2>
 <p>We’ll cover:</p>
 <ul>
-<li>What is literate programming? Code + narrative in one document</li>
-<li>Why reproducibility matters</li>
-<li>Quarto basics: YAML header, Markdown text, code chunks</li>
-<li>Code chunk options: <code>echo</code>, <code>eval</code>, <code>include</code>, <code>message</code>, <code>warning</code></li>
-<li>Figure options: <code>fig-width</code>, <code>fig-height</code>, <code>fig-cap</code></li>
-<li>Inline code — embedding results in text (never hard-code statistics!)</li>
-<li>Output formats: HTML, PDF, Word</li>
-<li>Tables with <code>knitr::kable()</code></li>
+<li>Why storytelling? Data + visuals + narrative = change</li>
+<li>The Knaflic framework:
+<ol type="1">
+<li>Understand the context — who is your audience?</li>
+<li>Choose appropriate visuals — match plot type to message</li>
+<li>Eliminate clutter — less is more</li>
+<li>Focus attention — use preattentive attributes strategically</li>
+<li>Think like a designer — visual hierarchy, accessibility</li>
+</ol></li>
+<li>Critical evaluation of figures:
+<ul>
+<li>Misleading figures — truncated axes, cherry-picked ranges, 3D charts</li>
+<li>Boring figures — no title, too many colors, wrong plot type</li>
+<li>The “so what?” test</li>
+</ul></li>
+<li>Applying storytelling to your final project</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -391,22 +378,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="../assignment/08-assignment.html">Assignment 8: Reproducible Report</a> — due before Session 17.</p>
+<p><a href="../assignment/08-assignment.html">Assignment 8: Storytelling Report</a> — due Sunday, May 31 at 11:59 PM.</p>
 </div>
 </div>
 <section id="slides" class="level3">
 <h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<a href="../slides/16-quarto.html" target="_blank" class="btn btn-primary">
+<a href="../slides/15-storytelling.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="../slides/16-quarto.pdf" class="btn btn-secondary">
+<a href="../slides/15-storytelling.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 </section>
 <section id="embedded-slides" class="level3">
 <h3 class="anchored" data-anchor-id="embedded-slides">Embedded slides</h3>
 <div class="ratio ratio-16x9">
-  <iframe src="../slides/16-quarto.html"></iframe>
+  <iframe src="../slides/15-storytelling.html"></iframe>
 </div>
 </section>
 </section>
@@ -414,11 +401,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="after-class">After class</h2>
 <p>✅ <strong>Practice:</strong></p>
 <ol type="1">
-<li>Create a new Quarto document (<code>.qmd</code>). Add a title, your name, and today’s date in the YAML header</li>
-<li>Write a short introduction in Markdown — use headers, bold, italic, and a bulleted list</li>
-<li>Add a code chunk that loads a dataset and creates a plot. Try <code>#| echo: false</code> to hide the code</li>
-<li>Use inline code to report a summary statistic in a sentence (e.g., “The mean age was <code>`r knitr::inline_expr("mean(data$age)")`</code>”)</li>
-<li>Render your document to HTML. Then try PDF (you may need to install <code>tinytex</code>)</li>
+<li>Pick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?</li>
+<li>Declutter that figure: remove unnecessary gridlines, legends, and default styling</li>
+<li>Add a clear, informative title that tells the reader what to see (not just what the axes are)</li>
+<li>Try <code>annotate()</code> to add a text label highlighting the key finding</li>
+<li>Show your figure to someone who hasn’t seen your data. Can they understand the point without explanation?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -426,27 +413,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The golden rule of reproducibility
+<span class="screen-reader-only">Note</span>The “so what?” test
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Never hard-code a number in your text.</strong> If your data changes, your text should update automatically.</p>
-<p>Instead of: &gt; “The mean score was 4.2.”</p>
-<p>Write: &gt; “The mean score was <code>`r knitr::inline_expr("round(mean(data$score, na.rm = TRUE), 1)")`</code>.”</p>
-<p>This way, if you add more data or fix an error, everything stays in sync.</p>
+<p>Every figure should answer a question. If you can’t complete this sentence, the figure needs work:</p>
+<blockquote class="blockquote">
+<p>“This figure shows that _______________.”</p>
+</blockquote>
+<p>If you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.</p>
 </div>
 </div>
-<section id="useful-chunk-options" class="level3">
-<h3 class="anchored" data-anchor-id="useful-chunk-options">Useful chunk options</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#| label: fig-results</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Mean anxiety scores by condition"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-width: 8</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 5</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> anxiety)) <span class="sc">+</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>) <span class="sc">+</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="handout" class="level3">
+<h3 class="anchored" data-anchor-id="handout">Handout</h3>
+<p>The APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere.</p>
 
 
 </section>
