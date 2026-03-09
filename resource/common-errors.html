@@ -8,7 +8,7 @@
 
 <meta name="description" content="An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse.">
 
-<title>Resources – PSY 410/510: Data Science for Psychology</title>
+<title>Common R Errors (and What They Mean) – PSY 410/510: Data Science for Psychology</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -73,12 +108,12 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<meta property="og:title" content="Resources – PSY 410/510: Data Science for Psychology">
+<meta property="og:title" content="Common R Errors (and What They Mean) – PSY 410/510: Data Science for Psychology">
 <meta property="og:description" content="">
 <meta property="og:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta property="og:site_name" content="{{< var course.number >}}: {{< var course.title >}}">
 <meta property="og:locale" content="en_US">
-<meta name="twitter:title" content="Resources – PSY 410/510: Data Science for Psychology">
+<meta name="twitter:title" content="Common R Errors (and What They Mean) – PSY 410/510: Data Science for Psychology">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://sarajweston.com/datasci410//files/social-image.png">
 <meta name="twitter:creator" content="">
@@ -139,7 +174,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resource/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../resource/index.html">Resources</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resource/r-projects.html">Guides</a></li><li class="breadcrumb-item"><a href="../resource/common-errors.html">Common R Errors</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -166,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resource/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../resource/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -201,7 +236,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../resource/common-errors.html" class="sidebar-item-text sidebar-link">
+  <a href="../resource/common-errors.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Common R Errors</span></a>
   </div>
 </li>
@@ -293,22 +328,46 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#guides" id="toc-guides" class="nav-link active" data-scroll-target="#guides">Guides</a></li>
-  <li><a href="#course-textbook" id="toc-course-textbook" class="nav-link" data-scroll-target="#course-textbook">Course Textbook</a></li>
-  <li><a href="#cheatsheets" id="toc-cheatsheets" class="nav-link" data-scroll-target="#cheatsheets">Cheatsheets</a></li>
-  <li><a href="#extra-practice" id="toc-extra-practice" class="nav-link" data-scroll-target="#extra-practice">Extra Practice</a></li>
-  <li><a href="#finding-datasets" id="toc-finding-datasets" class="nav-link" data-scroll-target="#finding-datasets">Finding Datasets</a></li>
-  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
-  <li><a href="#getting-help" id="toc-getting-help" class="nav-link" data-scroll-target="#getting-help">Getting Help</a></li>
+  <li><a href="#reading-error-messages" id="toc-reading-error-messages" class="nav-link active" data-scroll-target="#reading-error-messages">Reading error messages</a></li>
+  <li><a href="#object-and-function-errors" id="toc-object-and-function-errors" class="nav-link" data-scroll-target="#object-and-function-errors">Object and function errors</a>
+  <ul class="collapse">
+  <li><a href="#object-x-not-found" id="toc-object-x-not-found" class="nav-link" data-scroll-target="#object-x-not-found"><code>object 'x' not found</code></a></li>
+  <li><a href="#could-not-find-function-x" id="toc-could-not-find-function-x" class="nav-link" data-scroll-target="#could-not-find-function-x"><code>could not find function "x"</code></a></li>
+  <li><a href="#unused-argument" id="toc-unused-argument" class="nav-link" data-scroll-target="#unused-argument"><code>unused argument</code></a></li>
+  </ul></li>
+  <li><a href="#syntax-errors" id="toc-syntax-errors" class="nav-link" data-scroll-target="#syntax-errors">Syntax errors</a>
+  <ul class="collapse">
+  <li><a href="#unexpected-or-unexpected" id="toc-unexpected-or-unexpected" class="nav-link" data-scroll-target="#unexpected-or-unexpected"><code>unexpected ')'</code> or <code>unexpected '}'</code></a></li>
+  <li><a href="#unexpected-input-or-unexpected-string-constant" id="toc-unexpected-input-or-unexpected-string-constant" class="nav-link" data-scroll-target="#unexpected-input-or-unexpected-string-constant"><code>unexpected input</code> or <code>unexpected string constant</code></a></li>
+  <li><a href="#unexpected" id="toc-unexpected" class="nav-link" data-scroll-target="#unexpected"><code>unexpected '='</code></a></li>
+  </ul></li>
+  <li><a href="#data-errors" id="toc-data-errors" class="nav-link" data-scroll-target="#data-errors">Data errors</a>
+  <ul class="collapse">
+  <li><a href="#x-must-be-numeric-or-non-numeric-argument" id="toc-x-must-be-numeric-or-non-numeric-argument" class="nav-link" data-scroll-target="#x-must-be-numeric-or-non-numeric-argument"><code>x must be numeric</code> or <code>non-numeric argument</code></a></li>
+  <li><a href="#column-name-issues" id="toc-column-name-issues" class="nav-link" data-scroll-target="#column-name-issues">Column name issues</a></li>
+  </ul></li>
+  <li><a href="#ggplot-errors" id="toc-ggplot-errors" class="nav-link" data-scroll-target="#ggplot-errors">ggplot errors</a>
+  <ul class="collapse">
+  <li><a href="#mapping-must-be-created-by-aes" id="toc-mapping-must-be-created-by-aes" class="nav-link" data-scroll-target="#mapping-must-be-created-by-aes"><code>mapping must be created by aes()</code></a></li>
+  <li><a href="#geom_bar-requires-a-missing-aesthetic-y-or-x" id="toc-geom_bar-requires-a-missing-aesthetic-y-or-x" class="nav-link" data-scroll-target="#geom_bar-requires-a-missing-aesthetic-y-or-x"><code>geom_bar requires a missing aesthetic: y</code> (or x)</a></li>
+  <li><a href="#stat_count-can-only-have-an-x-or-y-aesthetic" id="toc-stat_count-can-only-have-an-x-or-y-aesthetic" class="nav-link" data-scroll-target="#stat_count-can-only-have-an-x-or-y-aesthetic"><code>stat_count() can only have an x or y aesthetic</code></a></li>
+  <li><a href="#plot-doesnt-show-up" id="toc-plot-doesnt-show-up" class="nav-link" data-scroll-target="#plot-doesnt-show-up">Plot doesn’t show up</a></li>
+  </ul></li>
+  <li><a href="#file-and-path-errors" id="toc-file-and-path-errors" class="nav-link" data-scroll-target="#file-and-path-errors">File and path errors</a>
+  <ul class="collapse">
+  <li><a href="#cannot-open-file-data.csv-no-such-file-or-directory" id="toc-cannot-open-file-data.csv-no-such-file-or-directory" class="nav-link" data-scroll-target="#cannot-open-file-data.csv-no-such-file-or-directory"><code>cannot open file 'data.csv': No such file or directory</code></a></li>
+  </ul></li>
+  <li><a href="#warnings-vs.-errors" id="toc-warnings-vs.-errors" class="nav-link" data-scroll-target="#warnings-vs.-errors">Warnings vs.&nbsp;errors</a></li>
+  <li><a href="#when-youre-really-stuck" id="toc-when-youre-really-stuck" class="nav-link" data-scroll-target="#when-youre-really-stuck">When you’re really stuck</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resource/index.html">Overview</a></li><li class="breadcrumb-item"><a href="../resource/index.html">Resources</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../resource/r-projects.html">Guides</a></li><li class="breadcrumb-item"><a href="../resource/common-errors.html">Common R Errors</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Resources</h1>
+<h1 class="title">Common R Errors (and What They Mean)</h1>
 </div>
 
 
@@ -325,91 +384,214 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="guides" class="level2">
-<h2 class="anchored" data-anchor-id="guides">Guides</h2>
-<p>Step-by-step instructions for common tasks in this course.</p>
+<p>R error messages can be cryptic, especially when you’re just starting out. This page translates the most common ones into plain English and shows you how to fix them.</p>
+<section id="reading-error-messages" class="level2">
+<h2 class="anchored" data-anchor-id="reading-error-messages">Reading error messages</h2>
+<p>Every R error has the same structure:</p>
+<pre><code>Error in &lt;where it happened&gt;: &lt;what went wrong&gt;</code></pre>
+<p>Read from right to left: the <strong>what</strong> is usually more helpful than the <strong>where</strong>. And remember — errors are normal. Every R programmer sees them daily.</p>
+</section>
+<section id="object-and-function-errors" class="level2">
+<h2 class="anchored" data-anchor-id="object-and-function-errors">Object and function errors</h2>
+<section id="object-x-not-found" class="level3">
+<h3 class="anchored" data-anchor-id="object-x-not-found"><code>object 'x' not found</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(dat, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> score)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in ggplot(dat, aes(x = age, y = score)) : object 'dat' not found</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> R doesn’t know what <code>dat</code> is. You either haven’t created it yet, misspelled it, or forgot to run the line that defines it.</p>
+<p><strong>Fix:</strong> Check for typos. Make sure you ran the code that creates the object. If you’re in a Quarto document, remember that chunks run top-to-bottom — you can’t use something defined in a later chunk.</p>
+<hr>
+</section>
+<section id="could-not-find-function-x" class="level3">
+<h3 class="anchored" data-anchor-id="could-not-find-function-x"><code>could not find function "x"</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in ggplot(data, aes(x = age)) : could not find function "ggplot"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> R doesn’t recognize the function name. You probably forgot to load the package.</p>
+<p><strong>Fix:</strong> Add <code>library(tidyverse)</code> (or whatever package the function comes from) to the top of your script and run it. If you get an error on <code>library()</code> too, you need to install the package first:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Run once in the Console (not in your script):</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="unused-argument" class="level3">
+<h3 class="anchored" data-anchor-id="unused-argument"><code>unused argument</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="cn">NA</span>), <span class="at">na.rm =</span> true)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in mean(c(1, 2, NA), na.rm = true) : unused argument (na.rm = true)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> You passed an argument the function doesn’t recognize — usually because of a typo or capitalization error.</p>
+<p><strong>Fix:</strong> R is case-sensitive. It’s <code>TRUE</code>, not <code>true</code>. Check the spelling of argument names too (<code>na.rm</code>, not <code>na_rm</code>).</p>
+</section>
+</section>
+<section id="syntax-errors" class="level2">
+<h2 class="anchored" data-anchor-id="syntax-errors">Syntax errors</h2>
+<section id="unexpected-or-unexpected" class="level3">
+<h3 class="anchored" data-anchor-id="unexpected-or-unexpected"><code>unexpected ')'</code> or <code>unexpected '}'</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, age <span class="sc">&gt;</span> <span class="dv">18</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       species <span class="sc">==</span> <span class="st">"dog"</span>)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: unexpected symbol in "species"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> R hit something it wasn’t expecting, almost always because of a missing comma, parenthesis, or pipe.</p>
+<p><strong>Fix:</strong> Check for:</p>
+<ul>
+<li>Missing commas between arguments</li>
+<li>Unmatched parentheses — count your <code>(</code> and <code>)</code> to make sure they pair up</li>
+<li>A missing pipe <code>|&gt;</code> or <code>+</code> between ggplot layers</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>RStudio helps with this
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you put your cursor next to a parenthesis, RStudio highlights its match. If there’s no highlight, you’re missing one.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="unexpected-input-or-unexpected-string-constant" class="level3">
+<h3 class="anchored" data-anchor-id="unexpected-input-or-unexpected-string-constant"><code>unexpected input</code> or <code>unexpected string constant</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>name <span class="ot">&lt;-</span> <span class="st">"Sara</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">#&gt; Error: unexpected end of input</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> You opened a quote or parenthesis but never closed it. R is waiting for the rest.</p>
+<p><strong>Fix:</strong> Make sure every <code>"</code> has a matching <code>"</code>. If your Console shows a <code>+</code> instead of <code>&gt;</code>, R is waiting for you to finish the expression. Press <strong>Escape</strong> to cancel and fix the line.</p>
+<hr>
+</section>
+<section id="unexpected" class="level3">
+<h3 class="anchored" data-anchor-id="unexpected"><code>unexpected '='</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">filter</span>(<span class="at">age =</span> <span class="dv">18</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error in filter(age = 18) : unused argument (age = 18)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> You used <code>=</code> (assignment) when you needed <code>==</code> (comparison).</p>
+<p><strong>Fix:</strong> Inside <code>filter()</code>, comparisons need <code>==</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">filter</span>(age <span class="sc">==</span> <span class="dv">18</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="data-errors" class="level2">
+<h2 class="anchored" data-anchor-id="data-errors">Data errors</h2>
+<section id="x-must-be-numeric-or-non-numeric-argument" class="level3">
+<h3 class="anchored" data-anchor-id="x-must-be-numeric-or-non-numeric-argument"><code>x must be numeric</code> or <code>non-numeric argument</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(data<span class="sc">$</span>age)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Warning: argument is not numeric or logical: returning NA</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> You’re trying to do math on something that isn’t a number. The column might have been read as character or factor instead of numeric.</p>
+<p><strong>Fix:</strong> Check the column type with <code>class(data$age)</code> or <code>glimpse(data)</code>. If it’s character, convert it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">mutate</span>(<span class="at">age =</span> <span class="fu">as.numeric</span>(age))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="column-name-issues" class="level3">
+<h3 class="anchored" data-anchor-id="column-name-issues">Column name issues</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">select</span>(reaction time)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: unexpected symbol in "data |&gt; select(reaction time)"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> Column names with spaces or special characters need backticks.</p>
+<p><strong>Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span> <span class="fu">select</span>(<span class="st">`</span><span class="at">reaction time</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Even better — rename it right away:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">rename</span>(<span class="at">reaction_time =</span> <span class="st">`</span><span class="at">reaction time</span><span class="st">`</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="ggplot-errors" class="level2">
+<h2 class="anchored" data-anchor-id="ggplot-errors">ggplot errors</h2>
+<section id="mapping-must-be-created-by-aes" class="level3">
+<h3 class="anchored" data-anchor-id="mapping-must-be-created-by-aes"><code>mapping must be created by aes()</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="at">x =</span> age, <span class="at">y =</span> score)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: mapping must be created by `aes()`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> You forgot to wrap the aesthetics in <code>aes()</code>.</p>
+<p><strong>Fix:</strong></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> score))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="geom_bar-requires-a-missing-aesthetic-y-or-x" class="level3">
+<h3 class="anchored" data-anchor-id="geom_bar-requires-a-missing-aesthetic-y-or-x"><code>geom_bar requires a missing aesthetic: y</code> (or x)</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: geom_col requires the following missing aesthetics: y</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> <code>geom_col()</code> needs both x and y. You might want <code>geom_bar()</code> instead (which counts for you), or you need to supply a y variable.</p>
+<p><strong>Fix:</strong> Use <code>geom_bar()</code> for counts, <code>geom_col()</code> when you have pre-computed values:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count how many in each group:</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span> <span class="fu">geom_bar</span>()</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot pre-computed values:</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_data, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> mean_score)) <span class="sc">+</span> <span class="fu">geom_col</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<hr>
+</section>
+<section id="stat_count-can-only-have-an-x-or-y-aesthetic" class="level3">
+<h3 class="anchored" data-anchor-id="stat_count-can-only-have-an-x-or-y-aesthetic"><code>stat_count() can only have an x or y aesthetic</code></h3>
+<p><strong>What it means:</strong> You gave <code>geom_bar()</code> both x and y, but it only needs one (it counts the other automatically).</p>
+<p><strong>Fix:</strong> Either drop the y aesthetic from <code>geom_bar()</code>, or switch to <code>geom_col()</code> if you want to supply your own y values.</p>
+<hr>
+</section>
+<section id="plot-doesnt-show-up" class="level3">
+<h3 class="anchored" data-anchor-id="plot-doesnt-show-up">Plot doesn’t show up</h3>
+<p><strong>What it means:</strong> You assigned the plot to an object but didn’t print it.</p>
+<p><strong>Fix:</strong> Either type the object name on its own line, or don’t assign it:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This won't display:</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>my_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Add this line to display it:</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>my_plot</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="file-and-path-errors" class="level2">
+<h2 class="anchored" data-anchor-id="file-and-path-errors">File and path errors</h2>
+<section id="cannot-open-file-data.csv-no-such-file-or-directory" class="level3">
+<h3 class="anchored" data-anchor-id="cannot-open-file-data.csv-no-such-file-or-directory"><code>cannot open file 'data.csv': No such file or directory</code></h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"data.csv"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Error: 'data.csv' does not exist in current working directory</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><strong>What it means:</strong> R can’t find the file. It’s looking in your working directory, and the file isn’t there.</p>
+<p><strong>Fix:</strong></p>
+<ol type="1">
+<li>Check you opened the R Project (look at the upper-right corner of RStudio)</li>
+<li>Check the file is in your project folder (look in the Files pane)</li>
+<li>Check for typos in the filename (capitalization matters!)</li>
+</ol>
+<p>See <a href="../resource/r-projects.html">Setting Up an R Project</a> for more on how working directories work.</p>
+</section>
+</section>
+<section id="warnings-vs.-errors" class="level2">
+<h2 class="anchored" data-anchor-id="warnings-vs.-errors">Warnings vs.&nbsp;errors</h2>
+<p>Not everything red is an error. R has two kinds of messages:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 43%">
+<col style="width: 37%">
+</colgroup>
 <thead>
 <tr class="header">
-<th>Guide</th>
-<th>When to use it</th>
+<th>Type</th>
+<th>What it means</th>
+<th>What to do</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="../resource/r-projects.html">Setting Up an R Project</a></td>
-<td>Every assignment — start here</td>
+<td><strong>Error</strong></td>
+<td>Something broke. Code didn’t run.</td>
+<td>Fix it.</td>
 </tr>
 <tr class="even">
-<td><a href="../resource/r-scripts.html">Using R Scripts for Assignments</a></td>
-<td>Assignments 1–2</td>
-</tr>
-<tr class="odd">
-<td><a href="../resource/quarto-docs.html">Using Quarto Documents for Assignments</a></td>
-<td>Assignments 3–8 and Final Project</td>
-</tr>
-<tr class="even">
-<td><a href="../resource/common-errors.html">Common R Errors (and What They Mean)</a></td>
-<td>When you get a red error message and don’t know what it means</td>
+<td><strong>Warning</strong></td>
+<td>Code ran, but R wants you to know something.</td>
+<td>Read it. Usually fine, sometimes important.</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="course-textbook" class="level2">
-<h2 class="anchored" data-anchor-id="course-textbook">Course Textbook</h2>
+<p>Common warnings you can usually ignore:</p>
 <ul>
-<li><a href="https://r4ds.hadley.nz/">R for Data Science (2nd edition)</a> — free online. Weekly readings are listed on the <a href="../schedule.html">schedule</a>.</li>
+<li><code>Removed N rows containing missing values</code> — ggplot dropped NAs from your plot</li>
+<li><code>package was built under R version X.X.X</code> — version mismatch, usually harmless</li>
+</ul>
+<p>Common warnings you should pay attention to:</p>
+<ul>
+<li><code>NAs introduced by coercion</code> — <code>as.numeric()</code> couldn’t convert some values</li>
+<li><code>Removed N rows containing non-finite values</code> — you might have unexpected Inf or NaN values</li>
 </ul>
 </section>
-<section id="cheatsheets" class="level2">
-<h2 class="anchored" data-anchor-id="cheatsheets">Cheatsheets</h2>
-<p>One-page visual references for the packages we use most. Print these out or keep them open while you work.</p>
-<ul>
-<li><a href="https://rstudio.github.io/cheatsheets/data-visualization.pdf">ggplot2 Cheatsheet</a> — geoms, aesthetics, scales, themes</li>
-<li><a href="https://rstudio.github.io/cheatsheets/data-transformation.pdf">dplyr Cheatsheet</a> — filter, select, mutate, summarize, group_by</li>
-<li><a href="https://rstudio.github.io/cheatsheets/tidyr.pdf">tidyr Cheatsheet</a> — pivot_longer, pivot_wider, separate, unite</li>
-<li><a href="https://rstudio.github.io/cheatsheets/rstudio-ide.pdf">RStudio IDE Cheatsheet</a> — keyboard shortcuts, panes, project setup</li>
-<li><a href="https://rstudio.github.io/cheatsheets/quarto.pdf">Quarto Cheatsheet</a> — code chunks, Markdown formatting, YAML options</li>
-<li><a href="https://posit.co/resources/cheatsheets/">Browse all cheatsheets</a></li>
-</ul>
-</section>
-<section id="extra-practice" class="level2">
-<h2 class="anchored" data-anchor-id="extra-practice">Extra Practice</h2>
-<p>If you want more practice beyond the assignments, these are all free.</p>
-<ul>
-<li><a href="https://posit.cloud/learn/primers">Posit Primers</a> — interactive R tutorials in your browser. Great for reinforcing the basics.</li>
-<li><a href="https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/">Cédric Scherer’s ggplot2 Tutorial</a> — a beautifully illustrated deep dive into ggplot2. Useful when you’re working on the visualization assignments.</li>
-<li><a href="https://quarto.org/docs/get-started/hello/rstudio.html">Quarto Tutorial</a> — Quarto’s own getting-started guide, if you want more detail than our in-class introduction.</li>
-</ul>
-</section>
-<section id="finding-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="finding-datasets">Finding Datasets</h2>
-<p>For your final project, you’ll need a psychology or social science dataset. Here are good places to look:</p>
-<ul>
-<li><a href="https://osf.io/">Open Science Framework (OSF)</a> — published research data, often with codebooks</li>
-<li><a href="https://www.icpsr.umich.edu/">ICPSR</a> — large archive of social and behavioral science data</li>
-<li><a href="https://gss.norc.org/">General Social Survey (GSS)</a> — decades of survey data on American attitudes and behaviors</li>
-<li><a href="https://www.worldvaluessurvey.org/">World Values Survey</a> — cross-cultural survey data</li>
-<li><a href="https://www.kaggle.com/datasets">Kaggle Datasets</a> — wide variety; filter for social science topics</li>
-<li>Your own research lab (with advisor permission)</li>
-</ul>
-<p>See the <a href="../project/index.html">Final Project page</a> for dataset requirements.</p>
-</section>
-<section id="software" class="level2">
-<h2 class="anchored" data-anchor-id="software">Software</h2>
-<ul>
-<li><a href="https://cran.r-project.org/">Download R</a></li>
-<li><a href="https://posit.co/download/rstudio-desktop/">Download RStudio</a></li>
-</ul>
-</section>
-<section id="getting-help" class="level2">
-<h2 class="anchored" data-anchor-id="getting-help">Getting Help</h2>
-<ul>
-<li><strong>In class:</strong> Start assignments during work time — the instructor and TA are there to help</li>
-<li><strong>Office hours:</strong> See the <a href="../syllabus.html">syllabus</a> for times and location</li>
-<li><strong>Canvas discussion board:</strong> Post questions anytime — classmates and the teaching team can respond</li>
-<li><strong>Classmates:</strong> Work together, but write your own code</li>
-</ul>
+<section id="when-youre-really-stuck" class="level2">
+<h2 class="anchored" data-anchor-id="when-youre-really-stuck">When you’re really stuck</h2>
+<ol type="1">
+<li><strong>Read the error message carefully</strong> — it’s often more helpful than you think</li>
+<li><strong>Google the exact error message</strong> (in quotes) — someone has had this problem before</li>
+<li><strong>Restart R</strong> (<code>Session &gt; Restart R</code>) and run your code from the top — this fixes more problems than you’d expect</li>
+<li><strong>Ask for help</strong> — bring the error message to office hours or post it on the Canvas discussion board</li>
+</ol>
 
 
 </section>
