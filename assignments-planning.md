@@ -9,7 +9,7 @@ This document outlines the assessment structure for PSY 410. Use this to iterate
 | Component | Weight | Quantity |
 |-----------|--------|----------|
 | Weekly Coding Assignments | 35% | 8 |
-| Reading Quizzes | 15% | 10 (completion-based) |
+| Reading Quizzes | 15% | 10 (unlimited retakes, best score) |
 | In-Class Participation | 15% | Ongoing |
 | Final Project | 35% | 3 checkpoints + presentation |
 
@@ -77,7 +77,7 @@ Calculate the average departure delay for each carrier. Which airline is the wor
 
 ### Assignment 3: Tidying, Import & Quarto
 **Assigned:** Session 7 (Mon Week 4, after Quarto)
-**Due:** Sunday, April 19 at 11:59 PM
+**Due:** Sunday, April 26 at 11:59 PM
 **Topics:** pivot_longer, pivot_wider, read_csv, readxl, Quarto documents
 **Format:** Submit as a rendered Quarto document (HTML). This is the first Quarto assignment — all subsequent assignments should also be Quarto.
 
@@ -103,7 +103,7 @@ Convert this messy R script into a clean Quarto document with sections and narra
 
 ### Assignment 4: Visualization Deep Dive
 **Assigned:** Session 9 (Mon Week 5, after Perception & Design)
-**Due:** Sunday, April 26 at 11:59 PM
+**Due:** Sunday, May 3 at 11:59 PM
 **Topics:** geoms, scales, themes, color, perception
 **Format:** Quarto document
 
@@ -125,7 +125,7 @@ Take this cluttered graph and apply the "declutter" principles. Remove at least 
 
 ### Assignment 5: Exploratory Data Analysis
 **Assigned:** Session 11 (Mon Week 6, after EDA — Covariation)
-**Due:** Sunday, May 3 at 11:59 PM
+**Due:** Sunday, May 10 at 11:59 PM
 **Topics:** distributions, outliers, covariation, asking questions
 **Format:** Quarto document
 
@@ -148,7 +148,7 @@ What's the relationship between these two variables? Does it differ by group?
 
 ### Assignment 6: Data Types & Wrangling
 **Assigned:** Session 13 (Mon Week 7, after Strings, Factors & Text)
-**Due:** Sunday, May 10 at 11:59 PM
+**Due:** Sunday, May 17 at 11:59 PM
 **Topics:** logicals, numbers, strings, factors, recoding, light text analysis
 **Format:** Quarto document
 
@@ -169,8 +169,8 @@ Fix the messy "gender" column (has "M", "Male", "male", "MALE", etc.) and conver
 ---
 
 ### Assignment 7: Joins & Missing Data
-**Assigned:** Session 15 (Wed Week 8, after Missing Data)
-**Due:** Sunday, May 18 at 11:59 PM
+**Assigned:** Session 14 (Wed Week 8, after Joins)
+**Due:** Sunday, May 24 at 11:59 PM
 **Topics:** joins, keys, missing values, complete cases
 **Format:** Quarto document
 
@@ -229,7 +229,7 @@ Take this default ggplot and redesign it as a "storytelling" figure. What's the 
 - Optional: include a correlation or simple regression if appropriate for your data
 - Process documentation (code diary showing AI use if any)
 
-### Presentation (Finals Week)
+### Presentation (Wed Jun 10)
 - 5-minute share-out
 - Show 2-3 key visualizations
 - Explain one interesting finding or challenge

@@ -34,29 +34,31 @@ A script will handle the sorting. Input: survey responses. Output: team rosters.
 
 ## Point Categories
 
-| Category | How earned | How tracked | Frequency |
-|----------|-----------|-------------|-----------|
-| Pair coding completion | All (or all but one) team members submit on Canvas | Individual Canvas submissions (same ones used for the 15% participation grade) | ~16 sessions |
-| Assignment submission | All team members submit on time | Individual Canvas submissions, check timestamps | 8 assignments |
-| Quiz performance | Team with highest average earns a point | Canvas quiz scores, compute team averages | ~10 quizzes |
-| Fun challenge | Weekly challenge, group submission | Canvas group assignment | ~10 weeks |
+| Category | Points | How earned | How tracked | Frequency |
+|----------|--------|-----------|-------------|-----------|
+| Pair coding completion | 1 | All (or all but one) team members submit on Canvas | Individual Canvas submissions (same ones used for the 15% participation grade) | ~16 sessions |
+| Assignment submission | 1 | All team members submit on time | Individual Canvas submissions, check timestamps | 8 assignments |
+| Quiz performance | 1 | Top 2 teams by average quiz score each earn a point | Canvas quiz scores, compute team averages | ~10 quizzes |
+| Fun challenge | 2 | Weekly challenge, group submission | Canvas group assignment | ~10 weeks |
 
 ### Design Principles
 
 - **No grade overlap:** Pair coding submissions serve double duty — they feed the individual participation grade (15%) and are also checked for team completion for the challenge. Same data, different purposes. The challenge itself never affects course grades.
 - **Effort over performance:** 3 of 4 categories reward showing up and doing the work, not getting the right answer
-- **Quiz performance is the one exception:** Quizzes are completion-based for the course grade (15%) but the team with the highest average gets a challenge point. This keeps quizzes low-stakes for grades while adding a competitive incentive to try.
+- **Quiz performance:** Quizzes are points-based with unlimited retakes (best score counts) for the course grade (15%). The top 2 teams by average score each earn a challenge point, adding competitive incentive.
 - **Threshold for attendance-type points:** "All but one" member submitting still counts, so one absence doesn't punish the whole team
 
 ### Grading Note
 
-Quizzes are **completion-based for the course grade** — students get full credit for completing them. This is a change from scored quizzes. The quiz performance competition is entirely separate from the course grade. Update the syllabus to reflect this.
+Quizzes are **points-based with unlimited retakes** — students' best score counts toward their course grade. The top 2 teams by quiz average each earn a challenge point.
 
 ---
 
 ## Fun Challenges
 
 Weekly challenges done outside of class. Group submission on Canvas. Due **Sunday at 11:59 PM** each week. One member submits for the group. Each challenge should take **~30 minutes or less** and is graded on completion (submitted = point earned).
+
+**No late submissions.** The 48-hour grace period that applies to assignments and quizzes does **not** apply to fun challenges. If a team misses the deadline, they don't get the points. These are low-stakes and meant to be fun — no need for late-work logistics.
 
 Materials for each challenge go in `files/fun-challenges/` (one subfolder per week).
 
@@ -187,7 +189,7 @@ This is EDA in practice — let the data surprise you.
 ---
 
 ### Challenge 8: Missing Data Mystery (Week 8)
-**Assigned:** Wed May 20 | **Due:** Sun May 25
+**Assigned:** Wed May 20 | **Due:** Sun May 24
 **Skills:** Missing data, joins (Sessions 14–15)
 
 A fictional research lab ran a 3-wave longitudinal study on stress and coping in college students. You're given the data from all 3 waves, but there's substantial missing data. Your job:
@@ -222,7 +224,7 @@ Write a 2–3 sentence verdict for each figure.
 ---
 
 ### Challenge 10: The Final Prediction (Week 10)
-**Assigned:** Mon Jun 1 | **Due:** Tue Jun 3 (short turnaround — keep it quick!)
+**Assigned:** Mon Jun 1 | **Due:** Tue Jun 2 (short turnaround — keep it quick!)
 **Skills:** Correlation & regression (Session 17)
 
 You're shown a scatterplot with ~50 data points. No axis numbers, no regression line — just the cloud of points. Your team predicts:
@@ -262,8 +264,25 @@ Teams name themselves in Session 2 when teams are announced → update scoreboar
 
 ---
 
+## Power Play (Week 7)
+
+At the start of **Session 13 (Mon May 11)**, after the Week 7 scoreboard is revealed, the **top 2 teams** each get a one-time strategic choice:
+
+- **Option A — Boost:** Add **+3 points** to your own team's total
+- **Option B — Sabotage:** Remove **-2 points** from each of **two other teams** of your choice (4-point swing in the standings)
+
+Both options have the same net effect on the gap between the choosing team and the field, but sabotage is more disruptive — it can close gaps between rivals or knock a rising team back. Choices are announced live in class for maximum drama.
+
+**Rules:**
+- The two top teams choose in order (1st place picks first)
+- A team that is targeted by both top teams loses 4 points total (the penalties stack)
+- Teams cannot go below 0 points
+- Choices are final — no take-backs
+
+**Rationale:** Adds a strategic twist two-thirds through the term. Keeps trailing teams in contention (a well-placed sabotage can shake up the standings) and gives leaders a meaningful decision. Also a fun excuse to talk game theory for 5 minutes.
+
+---
+
 ## Open Questions
 
 - Exact number of teams (8? 9? 10?) — depends on final enrollment
-- Should there be a mid-term team reshuffle or keep teams stable all term?
-- Fun challenge materials still need to be created (datasets, code files, figure images) — see `files/fun-challenges/`

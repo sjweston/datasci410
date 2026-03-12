@@ -485,6 +485,9 @@ This outline maps every lecture with specific topics, functions, and readings. T
 ### Readings (before class)
 - R4DS Ch 19: Joins
 
+### Assignment
+- **Assigned:** Assignment 7 (Joins & Missing Data)
+
 ---
 
 ## Session 15: Missing Data
@@ -521,7 +524,6 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - R4DS Ch 18: Missing values
 
 ### Assignments
-- **Assigned:** Assignment 7 (Joins & Missing Data)
 - **Due:** Assignment 6
 - **Due:** Final Project Draft
 
@@ -688,8 +690,8 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ---
 
-## Finals Week
-- **Final Presentations** (5 minutes each)
+## Finals Week — Wednesday, June 10
+- **Final Presentation Videos Due** (5 minutes each) — due Wed Jun 10 at 11:59 PM on Canvas
 
 ---
 

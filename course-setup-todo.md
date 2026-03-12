@@ -16,9 +16,9 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 - [ ] Plan reward logistics (pizza pub, budget, timing — last day of class?)
 
 ### Canvas setup for the challenge
-- [ ] Create Canvas group sets (8–10 teams, populated after Session 1 survey)
-- [ ] Create Canvas assignments for fun challenge group submissions (10 weekly, group submission enabled)
-- [ ] Create Canvas assignments for pair coding submissions (~16 sessions, individual submission)
+- [x] Create Canvas group set → "Team Challenge Teams" (empty shell, populate after Session 1 survey)
+- [x] Create Canvas assignments for fun challenge group submissions → 10 weekly, group submission via "Team Challenge Teams" group set, in "Team Challenges" assignment group (0% weight)
+- [x] Create Canvas assignments for pair coding submissions → 17 sessions (Sessions 2–18), individual, in "In-Class Check-ins" assignment group (15% weight)
 - [ ] Decide how to track pair coding completion by team (manual spreadsheet? Canvas analytics export?)
 - [ ] Set up a tracking spreadsheet: columns for each point category, rows for each team, updated weekly
 
@@ -27,15 +27,13 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 ## Canvas Setup — General Course Infrastructure
 
 ### Gradebook & policies
-- [ ] Set up gradebook categories and weights (Assignments 35%, Quizzes 15%, Participation 15%, Final Project 35%)
+- [x] Set up gradebook categories and weights → Assignments 35%, Reading Quizzes 15%, In-Class Check-ins 15%, Project 35%, Team Challenges 0%. Weighted grading enabled.
 - [x] Configure late policy → 48-hour grace period, 10% daily penalty, applies to assignments and quizzes
 - [x] Decide how to handle quiz grading → completion-based, no drop policy
 
 ### Assignments (8 total)
-- [ ] Create all 8 assignment shells on Canvas
-- [ ] Set due dates for each assignment (check schedule.qmd for dates)
-- [ ] Upload assignment guidelines / rubrics for each
-- [ ] Configure submission types (file upload? Quarto doc?)
+- [x] Create all 8 assignment shells on Canvas (due dates and submission types configured)
+- [ ] Create rubrics for each assignment
 
 ### Quizzes (10 total — one per week, due Tuesday at 11:59 PM)
 - [x] Create all 10 reading quiz shells on Canvas (one per week, Weeks 1–10)
@@ -55,22 +53,21 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 - [x] ~~Set drop policy~~ — removed; 48-hour late policy replaces drop policy
 
 ### Final Project (3 checkpoints + presentation)
-- [ ] Create submission points for each project milestone
-- [ ] Upload project guidelines and rubric
-- [ ] Set milestone due dates
+- [x] Create submission points for each project milestone (due dates configured)
+- [ ] Create rubrics for each project milestone
 
 ### Course pages & content
 - [ ] Upload syllabus page
-- [ ] Set up weekly modules (or topic-based modules)
+- [x] Set up weekly modules → 10 modules (Week 1–10), unpublished, ready to populate with content links
 - [ ] Upload schedule / calendar
 - [ ] Upload handouts to Files (APA figure guidelines, etc.)
 - [ ] Create or link to content pages for each session
 - [ ] Add links to R4DS readings for each week
-- [ ] Create first-day announcement
+- [x] Create first-day announcement → scheduled for Mar 27 at 9:00 AM (Thu before first class)
 
 ### Housekeeping
-- [ ] Set course start/end dates
-- [ ] Configure navigation menu (which pages are visible to students)
+- [x] Set course start/end dates (set by admin)
+- [x] ~~Configure navigation menu~~ — skipped; not needed
 - [ ] Test student view to make sure everything looks right
 
 ---
@@ -84,6 +81,12 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 - [x] Add final project dataset requirements → real data, 20+ rows, no reuse from previous courses
 - [x] Remove academic integrity placeholder → covered by university-wide policies
 - [x] Add late work policy → 48-hour grace, 10% daily penalty
+
+---
+
+## Slide Materials
+
+- [x] Add detailed speaker notes to all 18 slide decks — completed March 2026
 
 ---
 

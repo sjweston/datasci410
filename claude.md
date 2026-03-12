@@ -66,11 +66,20 @@ The pair coding exercises should match what's listed in `assignments-planning.md
 - **broom** needs to be installed for Session 17. Add to the package list.
 - **Slide pair exercises match the planning doc.** We added mid-deck exercises to slides 02–05 that correspond to the in-class exercises in `assignments-planning.md`. Session 1 didn't need one (it's setup). Keep this alignment going for future decks.
 - **Anti-copy-paste:** Slides use `code-copy: false` and CSS to discourage copy-paste. Students should type code to build muscle memory. PDF exports available for students who want them.
-- **Team challenge adopted.** 8–10 teams of 5–6 students compete for points across four categories: pair coding completion, assignment submission, quiz performance (highest team average), and weekly fun challenges. Teams are formed via a day-1 survey (stats experience, coding experience, optional friend request) and balanced by prior experience. Reward is non-grade (pizza party). See `team-challenge-planning.md` for full design. Materials in `files/team-challenge-handout.md`, `files/scoreboard.qmd`, and `files/fun-challenges/`.
-- **Quizzes use best-score grading.** 10 weekly quizzes, each pulling 5 random questions from a 50-question bank. Unlimited attempts; highest score counts. This gives students incentive to actually learn the material while keeping stakes low. Quiz scores also matter for the team challenge (highest team average earns a point). Question banks are in `quizzes/` with QTI packages for Canvas import.
-- **Due dates standardized to 11:59 PM.** Assignments due Sundays, quizzes due Tuesdays. This replaced the earlier "before class" / "Monday" scheme.
+- **Team challenge adopted.** 8–10 teams of 5–6 students compete for points across four categories: pair coding completion, assignment submission, quiz performance (highest team average), and weekly fun challenges. Teams are formed via a day-1 survey (stats experience, coding experience, optional friend request) and balanced by prior experience. Teams stay the same all term (no mid-term reshuffle). Reward is non-grade (pizza party). See `team-challenge-planning.md` for full design. Materials in `files/team-challenge-handout.md`, `files/scoreboard.qmd`, and `files/fun-challenges/`.
+- **Power Play in Week 7.** After the Week 7 scoreboard reveal (Session 13, Mon May 11), the top 2 teams each get a one-time choice: add +3 points to themselves, or remove -2 points from each of two other teams. Choices announced live. See `team-challenge-planning.md` for full rules.
+- **Team challenge point values:** Pair coding = 1 pt, assignment submission = 1 pt, quiz performance = 1 pt (top 2 teams each earn a point), fun challenges = 2 pts each.
+- **Quizzes use best-score grading.** 10 weekly quizzes, each pulling 5 random questions from a 50-question bank. Unlimited attempts; highest score counts. This gives students incentive to actually learn the material while keeping stakes low. Quiz scores also matter for the team challenge (top 2 teams by average each earn a point). Question banks are in `quizzes/` with QTI packages for Canvas import.
+- **Due dates standardized to 11:59 PM the night before class.** Assignments are due at 11:59 PM the night before the class session where they're listed as "due" (typically Sundays for Monday sessions, Tuesdays for Wednesday sessions). Quizzes due Tuesdays. This replaced the earlier "before class" / "Monday" scheme.
+- **Assignments assigned on Mondays for A3–A6** to give students 2 class sessions of instruction before the due date. A1–A2 are assigned Wednesdays (first week). A7–A8 are assigned Wednesdays (gap weeks make Monday assignment impossible). See the assignment schedule table below.
+- **A3 is the first Quarto assignment.** It requires `.qmd` submission. All assignments from A3 onward are Quarto documents. A3 is assigned at Session 7 (the Quarto session) so students learn Quarto before they need it.
+- **Speaker notes added to all 18 slide decks.** Notes cover what to emphasize, timing guidance, common student misconceptions, transition cues, and exercise management tips. Access them by pressing S in the browser during a Reveal.js presentation.
 - **Late work policy: 48-hour grace period with 10% daily penalty.** Applies to both assignments and quizzes. After 48 hours, no submissions accepted. Final project milestones follow the same policy. Late submissions don't count toward the team challenge "on-time" points.
 - **Drop policies removed.** No more "drop lowest 1 assignment" or "drop lowest 2 quizzes." The 48-hour late policy replaces the drop policy as the safety net.
+- **Quizzes are points-based, not completion-based.** Students can retake as many times as they want; we always take the best score. This replaced an earlier completion-based policy. All references to "completion-based" quizzes in planning docs have been updated.
+- **Final project presentation due Wed Jun 10** (finals week). 5-minute recorded video submitted to Canvas. Same 48-hour late policy applies.
+- **Final project dataset minimum is 20 observations** (not 100). Lowered to accommodate students in neuro labs or other fields with small clinical samples.
+- **Resource guides created.** Four step-by-step guides in `resource/`: `r-projects.qmd` (R Projects), `r-scripts.qmd` (R scripts for A1–A2), `quarto-docs.qmd` (Quarto docs for A3–A8), `common-errors.qmd` (common R error messages and fixes). Each assignment page links to the relevant guides via a tip callout. The resources sidebar also links to external cheatsheets (ggplot2, dplyr, tidyr, Quarto, RStudio IDE) and learning resources (R4DS, Posit Primers, Cédric Scherer's ggplot2 tutorial, Quarto getting started guide).
 
 ---
 
@@ -98,6 +107,7 @@ The pair coding exercises should match what's listed in `assignments-planning.md
 | 16 | Wed May 27 | Storytelling with Data |
 | 17 | Mon Jun 1 | Correlation & Simple Regression |
 | 18 | Wed Jun 3 | Putting It All Together |
+| — | Wed Jun 10 | *Finals Week: Video presentations due* |
 
 ---
 
@@ -112,6 +122,7 @@ Graduate students take the same course but need additional or higher-level work 
 - Slides: `slides/NN-topic.qmd` → renders to `slides/NN-topic.html`
 - Content pages: `content/NN-content.qmd`
 - Assignments: `assignment/NN-assignment.qmd`
+- Resource guides: `resource/*.qmd` (R Projects, R Scripts, Quarto Docs)
 - Static assets (images, handouts, bib files): `files/`
 - Planning docs (internal, not student-facing): root directory, `.md` files (e.g., `lecture-outline.md`, `assignments-planning.md`, `graduate-student-assignments.md`)
 - Student-facing site pages: root directory, `.qmd` files (e.g., `syllabus.qmd`, `schedule.qmd`)
