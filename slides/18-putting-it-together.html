@@ -212,13 +212,38 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="looking-back" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Looking back</h1>
-
+<aside class="notes">
+<p>This is the last class session. The tone should feel celebratory and reflective, not rushed. Students have their final projects due today and presentations during finals week. Start with a warm opening – acknowledge that it’s the end, and that you’re proud of how far they’ve come. The first ~10 minutes are about reflection before moving into the live demo.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-data-science-workflow" class="slide level2">
 <h2>The data science workflow</h2>
 
 <img data-src="https://r4ds.hadley.nz/diagrams/data-science/whole-game.png" style="width:80.0%" class="r-stretch"><div class="fragment">
 <p>Ten weeks ago, you couldn’t do any of this. Now you can do all of it.</p>
+<aside class="notes">
+<p>Let this diagram sit for a moment. Ask students to name which sessions covered which parts of the cycle. Import (Session 6), Tidy (Session 5), Transform (Sessions 3-4), Visualize (Sessions 2, 8-9), Model (Session 17), Communicate (Sessions 7, 16). The point is that they’ve covered the entire workflow. This is the same R4DS diagram from the textbook – it should feel familiar.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -239,6 +264,19 @@ Dr.&nbsp;Sara Weston
 <li>Create publication-ready figures</li>
 <li>Build a Quarto report</li>
 </ol>
+<aside class="notes">
+<p>This live demo should take ~15 minutes total (Steps 1-9). You can either advance through the slides or live-code in RStudio alongside – live-coding is more engaging if time allows. The research question deliberately mirrors what many students are doing for their final projects (social media and mental health), so it should feel relevant. Emphasize that this is the exact workflow they should use for their final project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-dataset" class="slide level2">
@@ -294,6 +332,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 1     0     0      0                  6         13          0             0</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: “What do you notice about the missing data? Which variables have it? How much?” This connects directly back to Session 15 on missing data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="step-2-clean-the-data" class="slide level2">
@@ -317,6 +368,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb6-16"><a href="" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Freshman"</span>, <span class="st">"Sophomore"</span>, <span class="st">"Junior"</span>, <span class="st">"Senior"</span>))</span>
 <span id="cb6-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Walk through each cleaning decision and explain the reasoning. “Why drop_na on the outcome variable?” Because you can’t analyze what you can’t measure. “Why create categories?” Because clinical cutoffs make the continuous scores more interpretable. “Why reorder academic year?” Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 15), case_when (Session 4), factor levels (Session 12).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-3-descriptive-statistics" class="slide level2">
 <h2>Step 3: Descriptive statistics</h2>
@@ -379,6 +443,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <p><strong>Finding:</strong> Moderate positive correlation (r = 0.34)</p>
+<aside class="notes">
+<p>This is a callback to Monday’s session. Ask students to interpret the correlation in plain language before you advance to the finding. “What does a positive correlation mean here?” Students who were in Session 17 should be able to answer this. Note that we drop_na before computing the correlation – reinforce the habit of handling missing data explicitly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="step-6-explore-by-gender" class="slide level2">
@@ -518,10 +595,36 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb15-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Relationship between social media use and anxiety"</span></span>
 <span id="cb15-16"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># [Insert scatterplot code]</span></span>
 <span id="cb15-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<aside class="notes">
+<p>This is the communication step – the one students often skip. Emphasize that inline R code (the backtick-r expressions) means the numbers in the writeup update automatically if the data changes. No more copy-pasting numbers from output into a Word doc. This is what makes it reproducible. If time allows, show this rendering in a Quarto document to drive the point home.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-this-demonstrates" class="slide level2">
 <h2>What this demonstrates</h2>
 <p>✅ <strong>Complete workflow</strong> — import to interpretation ✅ <strong>Data cleaning</strong> — handling missing data, creating factors ✅ <strong>Multiple visualizations</strong> — exploring from different angles ✅ <strong>Summary statistics</strong> — both numerical and tabular ✅ <strong>Inline reporting</strong> — no hard-coded numbers ✅ <strong>Clear narrative</strong> — telling the story</p>
+<aside class="notes">
+<p>Pause here and take a breath. This checklist summarizes the entire course in six bullet points. Let students appreciate that they can now do every single one of these things. Then transition: “But what happens when things go wrong? Because they will, even for experienced programmers.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="when-things-break" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -576,6 +679,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Spend ~3 minutes on this table. Ask students: “Which of these have you gotten this quarter?” Hands will go up for almost all of them. The most common by far is “object not found” (usually a capitalization issue or forgetting to run an earlier chunk). The “unexpected symbol” error is the trickiest because the actual problem is on the line before the error – emphasize checking the previous line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="a-5-step-debugging-strategy" class="slide level2">
 <h2>A 5-step debugging strategy</h2>
@@ -601,6 +717,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <ol start="5" type="1">
 <li><strong>Google it</strong> — include “R”, the package name, and the exact error message.</li>
 </ol>
+<aside class="notes">
+<p>Step 3 (“run line by line”) is the most underused debugging technique among beginners. Demo it quickly: take a piped chain, highlight just the first line and run it, then add the next line, and so on. The line where it breaks is where the bug is. This is the single most useful debugging habit they can develop. Steps 1-3 solve ~90% of bugs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="when-you-ask-for-help-make-a-reprex" class="slide level2">
@@ -622,6 +751,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <p><strong>Tip:</strong> Use <code>dput()</code> to share a small slice of your real data so others can recreate it exactly.</p>
+<aside class="notes">
+<p>The reprex concept is a life skill for programming. Emphasize the contrast between the “bad” and “good” examples. The good example includes: the library call, a minimal dataset, the code that fails, and the expected vs.&nbsp;actual result. Even if students never post on Stack Overflow, learning to create a reprex forces them to isolate the problem – which often helps them solve it themselves.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="where-to-get-help-after-this-course" class="slide level2">
@@ -643,6 +785,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </section>
 <section id="your-turn-debug-this-code" class="slide level2">
 <h2>Your turn: Debug this code</h2>
+<aside class="notes">
+<p>This is the final pair coding exercise of the course – 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says “object not found.” Bug 2 gives a helpful error (“Did you mean ==?”). Bug 4 gives “unexpected symbol.” This exercise reinforces the debugging strategy from the previous slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>This code has several errors. Find and fix them all:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -688,6 +843,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </section>
 <section id="you-have-the-foundation" class="slide level2">
 <h2>You have the foundation</h2>
+<aside class="notes">
+<p>Transition to the forward-looking section (~10 minutes for the “Where to go from here” block). The goal is to show students that this course was the on-ramp, not the destination. Each of the next slides shows one possible direction. Don’t spend too long on any one – just plant seeds. Students who are interested will follow up on their own.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>This course covered <strong>data wrangling and visualization</strong> — the foundation of data science.</p>
 <div class="fragment">
 <p>What’s next?</p>
@@ -720,6 +888,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <li>STAT 510: Applied Regression</li>
 <li>Online: <a href="https://learningstatisticswithr.com/">Learning Statistics with R</a></li>
 </ul>
+<aside class="notes">
+<p>This is the most natural next step for psych majors. Emphasize that the code syntax is nearly identical to what they learned in Session 17 – t.test, aov, and lm all follow the same formula syntax. If students are taking PSY 420 or a stats course next, they’ll already know the R side.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="writing-functions" class="slide level2">
@@ -773,6 +954,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <span id="cb20-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Shiny is the most visually exciting “what’s next” option. If you have a Shiny app example you can show briefly, that makes a big impact. Students are often surprised that you can build interactive web apps entirely in R without knowing HTML or JavaScript. Keep it to ~1 minute – just enough to spark curiosity.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="machine-learning-with-tidymodels" class="slide level2">
 <h2>Machine learning with tidymodels</h2>
@@ -861,6 +1055,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>The “1 hour per week” tip is the most actionable takeaway from this section. Skills decay fast without practice, but even a small amount of regular use keeps them sharp. TidyTuesday is the best recommendation for students who want structure – it provides a new dataset every week with a community sharing their visualizations. Encourage students to pick one or two ideas from this list, not all of them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -884,6 +1091,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <p>You’ve developed all of these skills this quarter.</p>
+<aside class="notes">
+<p>This is the emotional core of the closing section. Slow down here. Read through the six qualities and pause on each one. The last line – “You’ve developed all of these skills this quarter” – should land. Students often don’t realize how much they’ve grown because it happened gradually. Connecting each quality back to specific class moments makes it concrete: “Remember when you debugged your partner’s code? That’s persistence.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-growth-mindset" class="slide level2">
@@ -901,6 +1121,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <p><strong>That’s incredible growth.</strong></p>
+<aside class="notes">
+<p>Let the bullet list build slowly. Each skill maps to a specific part of the course. Students may not feel like they “mastered” everything, and that’s fine – emphasize that they can do all of these things, even if they still need to look things up. Looking things up is what professionals do too. The phrase “That’s incredible growth” is genuine – let it land before moving on.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="errors-are-part-of-the-process" class="slide level2">
@@ -926,6 +1159,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>This is the single most important message of the course. Many students came in believing they “aren’t math people” or “can’t code.” They now have evidence that they can. The callout box should be the emotional peak of the session. Pause after it. Let the room be quiet for a moment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="thank-you" class="slide level2">
@@ -964,6 +1210,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <li>Focus on the story, not technical details</li>
 <li>Practice timing!</li>
 </ul>
+<aside class="notes">
+<p>Presentations happen during finals week, not today. Go through the format and timing quickly. Emphasize that 5 minutes goes fast – students should practice timing at home. The key message: show your best 1-2 figures and tell the story. Don’t try to explain every line of code. The audience wants to hear the finding, not the data wrangling.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="presentation-order" class="slide level2">
@@ -998,6 +1257,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 </div>
 <div class="fragment">
 <p><strong>I read every evaluation carefully.</strong></p>
+<aside class="notes">
+<p>Give students 5-10 minutes in class to fill out evaluations. They’re much more likely to complete them if given dedicated class time. Step out of the room or move to the back – students give more honest feedback when the instructor isn’t watching. Set a timer so you know when to come back.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -1029,6 +1301,19 @@ $ academic_year      &lt;chr&gt; "Junior", "Freshman", "Sophomore", "Freshman", 
 <div class="fragment">
 <p><strong>Use them.</strong></p>
 <p>Make psychology more reproducible, transparent, and data-driven.</p>
+<aside class="notes">
+<p>This is the aspirational close. The call to action – “Make psychology more reproducible, transparent, and data-driven” – connects back to Session 1’s opening about the replication crisis. The course has come full circle: they started by learning why data science matters for psychology, and they end with the skills to actually do something about it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="final-final-words" class="slide level2">

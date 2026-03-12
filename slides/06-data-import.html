@@ -221,6 +221,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>Today we learn how to get it into R — and what to check when things don’t import cleanly.</p>
+<aside class="notes">
+<p>This opening connects to students’ real frustration — they know R can do things, but they haven’t been able to use their own data yet. Ask: “How many of you have data sitting in a CSV or Excel file right now?” Most hands should go up. That’s the motivation. This is a shorter, more practical deck than Session 5, so the pace can be a bit faster.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -239,6 +252,19 @@ Dr.&nbsp;Sara Weston
 <li>Returns a <strong>tibble</strong>, not a base R data frame</li>
 <li>Smarter about guessing column types than <code>read.csv()</code></li>
 </ul>
+<aside class="notes">
+<p>Emphasize the file path — this is where students get stuck most often. Common issues: wrong working directory, file not in the project folder, using backslashes on Windows. If you’re doing a live demo, show what happens when the path is wrong (a clear error message). Remind them about the RStudio Files pane for navigating to files.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-not-read.csv" class="slide level2">
 <h2>Why not read.csv()?</h2>
@@ -279,6 +305,19 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <p>Always use <code>read_csv()</code> in this class.</p>
+<aside class="notes">
+<p>Students will encounter read.csv() in StackOverflow answers and older textbooks. The key practical difference: read.csv() silently converts character columns to factors, which causes confusing errors later. read_csv() (underscore) doesn’t do this. Emphasize the underscore vs.&nbsp;period distinction — it’s an easy typo. If a student’s code uses read.csv(), it will still work, but they may hit unexpected behavior.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-read_csv-does-automatically" class="slide level2">
 <h2>What read_csv() does automatically</h2>
@@ -305,6 +344,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>)</span>
 <span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(my_data)  <span class="co"># Shows any parsing issues</span></span></code></pre></div>
 </div>
+<aside class="notes">
+<p>The participant ID example resonates most with psychology students. If IDs are “001”, “002”, “003”, R reads them as numbers 1, 2, 3 — losing the leading zeros. Ask: “Why does that matter?” It matters for merging datasets later, and it changes how the ID behaves in plots. Always run problems() after importing — make this a habit students build now.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="specifying-column-types" class="slide level2">
 <h2>Specifying column types</h2>
@@ -319,6 +371,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
 <span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Frame this as: “When R guesses wrong, you override it.” Students don’t need to memorize every col_* function — the important ones are col_character() and col_double(). Mention that you can specify types for just the problem columns and let R guess the rest (using .default = col_guess() inside cols()). Spend ~2 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="col_types-shortcuts" class="slide level2">
 <h2>col_types shortcuts</h2>
@@ -375,6 +440,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>, <span class="at">score =</span> <span class="st">`</span><span class="at">Total Score</span><span class="st">`</span>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Point out the backticks around column names with spaces or special characters. Students will see this a lot with Qualtrics exports and Excel files. The backtick syntax confuses people — explain that R needs them because “Age (years)” isn’t a valid R name. The janitor::clean_names() function is a nice shortcut here if you want to mention it briefly, though it’s not required for this course.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="missing-values" class="slide level2">
 <h2>Missing values</h2>
@@ -385,6 +463,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>))</span></code></pre></div>
 </div>
 <p>Psychology datasets often use <code>-999</code> or <code>99</code> as missing value codes!</p>
+<aside class="notes">
+<p>This is critical for psychology data. Many students will have worked with SPSS datasets that use -999 as a missing value code. If you don’t catch these at import, they’ll silently corrupt your means and standard deviations. Ask: “What happens to your mean anxiety score if one participant has -999 instead of NA?” The answer is devastating — and that’s the point. Handling missing values at import prevents downstream errors.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="writing-csv-files" class="slide level2">
 <h2>Writing CSV files</h2>
@@ -393,6 +484,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(my_cleaned_data, <span class="st">"data/cleaned_survey.csv"</span>)</span></code></pre></div>
 </div>
 <p>Save intermediate cleaned files — don’t re-clean every time you start R.</p>
+<aside class="notes">
+<p>This is a workflow habit, not a coding lesson. Emphasize the practical benefit: cleaning data takes time, so save the cleaned version and read that in future scripts. This also connects to reproducibility (Session 7) — your cleaning script documents exactly what you did to the raw data. Transition to the pair exercise: “Now let’s practice the full import-check-fix workflow.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
@@ -408,6 +512,19 @@ Dr.&nbsp;Sara Weston
 <li>Rename the columns to clean snake_case names</li>
 <li>What does <code>problems()</code> show you?</li>
 </ol>
+<aside class="notes">
+<p>Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument. After time is up, walk through the solution and ask: “Did anyone get something different from problems()?” Remind students to upload their code to Canvas.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
@@ -436,6 +553,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"A1:F50"</span></span>
 <span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Note that readxl is installed with tidyverse but not loaded by library(tidyverse) — you need to load it separately or use the readxl:: prefix. Students often ask “Why not just save as CSV first?” That’s a reasonable approach, but read_excel() handles it directly and avoids data loss from CSV conversion (e.g., Excel date formatting). Spend ~3 minutes on Excel; it’s familiar territory for most students.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="excel-pitfalls" class="slide level2">
 <h2>Excel pitfalls</h2>
@@ -459,6 +589,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Students who have worked in labs may recognize these problems. The “colors as data” point usually gets a laugh — some labs really do use cell highlighting to code conditions. The practical takeaway: Excel is a display tool, not a data storage tool. If you receive an Excel file with these issues, the cleanest fix is often to open it in Excel, fix the formatting, and re-save before importing.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="listing-sheet-names" class="slide level2">
 <h2>Listing sheet names</h2>
@@ -486,6 +629,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>sas_data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"study.sas"</span>)</span></code></pre></div>
 </div>
 <p>These return tibbles, just like <code>read_csv()</code>.</p>
+<aside class="notes">
+<p>Many students will encounter SPSS files in their research labs. The key message is: you don’t need SPSS installed to read .sav files. This is a selling point for R — it can read anything. Move through this slide quickly (~1 minute) unless students have specific questions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="a-note-about-spss-labels" class="slide level2">
 <h2>A note about SPSS labels</h2>
@@ -499,6 +655,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
 <span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">zap_labels</span>(spss_data)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>This is a “just so you know” slide. Students don’t need to master haven labels right now, but they should know that SPSS files carry metadata that can cause unexpected behavior (e.g., a column that looks numeric but is actually a labelled vector). If they hit weird errors after importing a .sav file, zap_labels() is the quick fix. Move on fairly quickly.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="getting-data-out-of-qualtrics" class="slide level2">
 <h2>Getting data out of Qualtrics</h2>
@@ -528,6 +697,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>This will be the most practically relevant slide for many students. Qualtrics exports are notoriously messy — the first two rows after the header are Qualtrics metadata (question text, import IDs), not data. If you don’t skip them, your first two “participants” will be nonsense strings. If time permits, show a real Qualtrics export on screen so students can see the three-row header structure. Spend ~3 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="putting-it-together" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -565,6 +747,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb14-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Save the cleaned version</span></span>
 <span id="cb14-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean_data, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Walk through this as a complete workflow — this is the template students should internalize. Emphasize the order: read, check, rename, fix types, save. Students often want to skip step 2 (checking), but that’s where you catch problems before they propagate. This workflow is essentially what Assignment 3 will ask them to do end to end. Spend ~3 minutes walking through each step.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="get-a-head-start-assignment-3" class="slide level2">
 <h2>Get a head start: Assignment 3</h2>
@@ -583,6 +778,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div>
 </div>
 <p>Assignment 3 will have you do this end to end with real messy data.</p>
+<aside class="notes">
+<p>This is individual work for the remaining class time (~10 minutes). Students who finished the pair exercise quickly can extend their earlier code. If time is short, frame this as homework: “Start this now and finish before next class.” Mention that Assignment 3 builds directly on this workflow, so the practice now will pay off.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="solution" class="slide level2">
 <h2>Solution</h2>
@@ -651,11 +859,37 @@ Dr.&nbsp;Sara Weston
 <li><strong>Excel is tricky</strong> — use <code>readxl</code> and be suspicious of formatting</li>
 <li><strong>Save cleaned files</strong> — don’t re-clean every time</li>
 </ol>
+<aside class="notes">
+<p>If you need to cut anything from this deck for time, the col_types shortcuts slide and the separate Excel “listing sheet names” slide are the most skippable. The core message students should leave with: always check your imports, and handle missing values at import time.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="the-one-thing-to-remember" class="slide level2">
 <h2>The one thing to remember</h2>
 <p>Your analysis is only as good as your import. Check it before you trust it.</p>
 <p>Next time: Layers &amp; Aesthetics</p>
+<aside class="notes">
+<p>Remind students of the reading for next class (R4DS Ch 9: Layers). Next session moves back to ggplot2 with a deeper dive into layers and aesthetics. Preview: “Now that you can import and reshape your own data, we’ll learn how to build more sophisticated visualizations with it.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>
