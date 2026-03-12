@@ -13,6 +13,53 @@ Step-by-step instructions for common tasks in this course.
 | [Using Quarto Documents for Assignments](quarto-docs.qmd) | Assignments 3–8 and Final Project |
 | [Common R Errors (and What They Mean)](common-errors.qmd) | When you get a red error message and don't know what it means |
 
+## Session Handouts
+
+Printable reference sheets for each class session — key functions, syntax, and tips on one page.
+
+::: {.panel-tabset}
+
+### Weeks 1–3
+
+| Session | Handout |
+|---------|---------|
+| 2: Your First Visualization | [PDF](/files/handouts-pdf/handout-02-first-visualization.pdf) |
+| 3: Data Transformation I | [PDF](/files/handouts-pdf/handout-03-data-transformation-1.pdf) |
+| 4: Data Transformation II | [PDF](/files/handouts-pdf/handout-04-data-transformation-2.pdf) |
+| 5: Data Tidying | [PDF](/files/handouts-pdf/handout-05-data-tidying.pdf) |
+| 6: Data Import | [PDF](/files/handouts-pdf/handout-06-data-import.pdf) |
+
+### Weeks 4–6
+
+| Session | Handout |
+|---------|---------|
+| 7: Quarto & Reproducibility | [PDF](/files/handouts-pdf/handout-07-quarto.pdf) |
+| 8: Layers & Aesthetics | [PDF](/files/handouts-pdf/handout-08-layers-aesthetics.pdf) |
+| 9: Perception & Design | [PDF](/files/handouts-pdf/handout-09-perception-design.pdf) |
+| 10: EDA — Variation | [PDF](/files/handouts-pdf/handout-10-eda-variation.pdf) |
+| 11: EDA — Covariation | [PDF](/files/handouts-pdf/handout-11-eda-covariation.pdf) |
+| 12: Data Types | [PDF](/files/handouts-pdf/handout-12-data-types.pdf) |
+
+### Weeks 7–10
+
+| Session | Handout |
+|---------|---------|
+| 13: Strings, Factors & Text | [PDF](/files/handouts-pdf/handout-13-strings-factors.pdf) |
+| 14: Joins | [PDF](/files/handouts-pdf/handout-14-joins.pdf) |
+| 15: Missing Data | [PDF](/files/handouts-pdf/handout-15-missing-data.pdf) |
+| 16: Storytelling with Data | [PDF](/files/handouts-pdf/handout-16-storytelling.pdf) |
+| 17: Correlation & Regression | [PDF](/files/handouts-pdf/handout-17-correlation-regression.pdf) |
+| 18: Putting It All Together | [PDF](/files/handouts-pdf/handout-18-putting-it-together.pdf) |
+
+### Other Handouts
+
+| Handout | Description |
+|---------|-------------|
+| [APA Figure Guidelines](/files/handouts-pdf/apa-figure-guidelines.pdf) | Formatting figures for journal submissions |
+| [Data Visualization Principles](/files/handouts-pdf/data-viz-principles.pdf) | Key design principles at a glance |
+
+:::
+
 ## Course Textbook
 
 - [R for Data Science (2nd edition)](https://r4ds.hadley.nz/) — free online. Weekly readings are listed on the [schedule](/schedule.qmd).
