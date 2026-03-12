@@ -42,6 +42,10 @@ If you just delete their data, you might be throwing away the most important par
 
 Today we learn to detect, explore, and handle missing data honestly.
 
+::: {.notes}
+Welcome students back — there was no class on Monday, so acknowledge the gap. Ask if anyone ran into NAs on their final project data over the break. The 30-50% statistic is a real number from attrition research and tends to surprise students. Emphasize the word "honestly" — this session is as much about research ethics and transparency as it is about R functions. Spend ~2 minutes on this opening.
+:::
+
 # Types of missing data {background-color="#2c3e50"}
 
 ## Explicit missing: NA
@@ -60,6 +64,10 @@ survey
 
 The `NA` values are obvious.
 
+::: {.notes}
+Students have seen NA before (it appeared whenever they did a left_join last session that did not match), but this is the first time we treat it as a topic in its own right. Make sure they understand that NA means "we do not know" — not zero, not blank, not "no answer." R treats NA differently from any other value, which is why things like `NA == NA` return NA, not TRUE. You do not need to go deep on that quirk, but mention it because students will stumble on it eventually.
+:::
+
 ## Implicit missing: Rows don't exist
 
 **Implicit missing** means entire rows are absent:
@@ -77,6 +85,10 @@ appointments
 . . .
 
 Who didn't show up? You can't tell because they're not in the data!
+
+::: {.notes}
+This distinction (explicit vs. implicit) is one of the most important conceptual takeaways. Ask students: "Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?" The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. Connect it to last session: when we used anti_join to find dropouts, we were detecting implicit missingness.
+:::
 
 ## Why implicit missing matters
 
@@ -118,6 +130,10 @@ any(is.na(survey))
 sum(is.na(survey))
 ```
 
+::: {.notes}
+Walk through these two functions as the first step in any missing-data analysis. The any() check is a quick yes/no diagnostic; sum() tells you the scale of the problem. Point out that is.na() returns TRUE/FALSE, and since R treats TRUE as 1 and FALSE as 0, sum() counts the TRUEs. This is the same logic they used with sum(!is.na()) in last session's exercise.
+:::
+
 ## NAs by column
 
 ```{r}
@@ -156,6 +172,10 @@ survey |>
   )
 ```
 
+::: {.notes}
+The across() + everything() pattern is new for most students. Explain the tilde (~) shorthand as "for each column, do this." The proportion version (using mean() instead of sum()) is especially useful for reporting — you can say "33% of participants were missing age data." Students often ask whether to report counts or proportions; the answer is both, ideally. Spend ~3 minutes on this slide since the syntax is unfamiliar.
+:::
+
 ## Which rows have missing data?
 
 ```{r}
@@ -182,6 +202,10 @@ library(naniar)
 # Visual summary
 vis_miss(survey)
 ```
+
+::: {.notes}
+The naniar package is optional — students do not need to install it for assignments. But the vis_miss() plot is a great diagnostic tool worth showing. Each column is a variable, each row is a participant, and missing cells are colored. This gives an immediate visual sense of where the holes are. If naniar is not installed on your machine, you can skip this live and just show the rendered output.
+:::
 
 ## Patterns of missingness
 
@@ -213,6 +237,10 @@ survey |>
   drop_na()
 ```
 
+::: {.notes}
+Transition cue: "Now that we know how to find missing data, let's talk about what to do about it." Present both the base R and tidyverse approaches so students recognize na.omit() when they see it in other people's code, but encourage them to use drop_na() for consistency with the tidyverse workflow. Students often default to this strategy because it is the simplest — the next slide shows why that can be dangerous.
+:::
+
 ## Dangers of complete case analysis
 
 ```{r}
@@ -229,6 +257,10 @@ survey |>
 
 ::: {.callout-warning}
 You just lost 67% of your data!
+:::
+
+::: {.notes}
+Let this number land. Going from 6 to 2 participants is dramatic, and it gets worse with real datasets that have many variables — each additional variable with any missingness compounds the loss. In a study with 20 survey items, even a small per-item missing rate can reduce your sample to almost nothing if you use listwise deletion. Ask: "Would you trust a result based on 2 participants?" This motivates the selective dropping approach on the next slide.
 :::
 
 ## Selective dropping
@@ -265,6 +297,10 @@ survey |>
 - Certain groups have more missingness (systematic bias)
 - Sample size is small
 
+::: {.notes}
+The 5-10% and 20% thresholds are rules of thumb, not hard cutoffs. The key question is always "does the missingness bias my results?" If depressed people are the ones skipping the depression questionnaire, then even 5% missing data is a problem. Emphasize that the amount of missing data matters less than the pattern. This sets up the MCAR/MAR/MNAR discussion later in the deck.
+:::
+
 ## Strategy 2: Filling values
 
 Sometimes you can **reasonably fill** missing values:
@@ -279,6 +315,10 @@ time_series <- tibble(
 time_series |>
   fill(mood)  # Fills downward by default
 ```
+
+::: {.notes}
+fill() is called "last observation carried forward" (LOCF) in clinical research. It assumes the missing values are the same as the most recent non-missing value. This is reasonable for things like demographic variables that do not change between rows (e.g., filling in a participant's age across multiple trials), but more questionable for outcome variables. Students often want to use fill() for everything — the warning slide that follows is important.
+:::
 
 ## Fill directions
 
@@ -321,6 +361,10 @@ survey |>
   )
 ```
 
+::: {.notes}
+Students often ask "why not just replace NA with the mean?" Replacing with the mean is a form of imputation that shrinks variance and can bias results — it is generally not recommended in modern practice. The placeholder codes shown here (99, -999) are a SPSS-era convention for marking missing data that should not be analyzed. If you use them, you must filter them out before computing any statistics. Generally, leaving values as NA is safer and more transparent.
+:::
+
 ## Strategy 3: Replace with a specific value
 
 ::: {.callout-important}
@@ -343,6 +387,10 @@ survey |>
 . . .
 
 This is transparent about what data you have.
+
+::: {.notes}
+Emphasize that this is often the best default for students at this level. Keeping NAs and using na.rm = TRUE is honest and simple. Remind them that without na.rm = TRUE, mean() will return NA if any values are missing — this is R's way of saying "I cannot give you a trustworthy answer with incomplete data." Students frequently forget na.rm and get confused by NA results; this is the fix.
+:::
 
 # Implicit missing → Explicit missing {background-color="#2c3e50"}
 
@@ -374,6 +422,10 @@ study_completion |>
 . . .
 
 Now we can see: Participant 2 missing timepoint 3, Participant 3 missing timepoint 2.
+
+::: {.notes}
+complete() is the key function for this section. It generates every combination of the variables you specify and fills in NA where data is missing. Walk through the output carefully: the original data had 7 rows, but with 3 participants and 3 timepoints there should be 9 rows. The 2 new rows (with NAs for depression) represent the implicit missing data that is now explicit. This is conceptually similar to what students did with anti_join last session, but complete() does it in one step and keeps everything in a single table.
+:::
 
 ## Why this matters
 
@@ -424,6 +476,10 @@ therapy_survey <- tibble(
 
 **Time: 10 minutes**
 
+::: {.notes}
+Circulate during the exercise. For question 1, students can use sum(is.na()) or the across() approach — either is fine. The most common mistake on question 3 is using drop_na() without specifying the column, which drops too many rows. Question 4 is the most interesting: mean(!is.na(followup_depression)) gives the completion rate directly. When reviewing, connect this to reporting: "You would write something like '50% of participants completed the follow-up assessment.'"
+:::
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -461,6 +517,10 @@ Statisticians distinguish three types:
 2. **MAR (Missing At Random)** — Missingness related to observed variables
 3. **MNAR (Missing Not At Random)** — Missingness related to the missing value itself
 
+::: {.notes}
+This is conceptual — students do not need to memorize the acronyms, but they need to understand the core idea: the reason data is missing affects whether your results are biased. Spend ~5 minutes on this slide and the next two. The names are counterintuitive (especially MAR, which sounds like it should be unproblematic but actually means missingness is related to other measured variables). Use the depression study examples on the next slide to make each type concrete.
+:::
+
 ## Example: Depression study
 
 **MCAR:** Computer randomly failed to save 5% of responses
@@ -489,6 +549,10 @@ Statisticians distinguish three types:
 
 ::: {.callout-tip}
 **Your job:** Always **document and report** how much data is missing and why you think it's missing.
+:::
+
+::: {.notes}
+The practical takeaway for this course: you cannot statistically test whether data is MNAR (because you do not have the missing values to compare). So the best you can do is (1) document how much is missing, (2) check whether missingness is related to observed variables, and (3) be transparent about your assumptions. For their final projects, students should include a short paragraph about missing data even if they have very little — that is good practice.
 :::
 
 ## Attrition analysis
@@ -543,6 +607,10 @@ Example:
 
 > "Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24) or treatment condition (χ² = 0.8, p = .37). Analyses used complete case analysis (N = 60)."
 
+::: {.notes}
+Read the example paragraph aloud. This is the kind of reporting students should aim for in their final projects. They do not need to run t-tests or chi-squared tests for this class, but they should at minimum report the count and percentage of missing data and state how they handled it. This connects back to Session 1 and Session 16 themes about transparency and reproducibility.
+:::
+
 # Advanced topic: Multiple imputation {background-color="#2c3e50"}
 
 ## Beyond this course
@@ -563,9 +631,17 @@ Packages in R: `mice`, `Amelia`, `missForest`
 We won't cover these methods, but know they exist for when you need them in future research!
 :::
 
+::: {.notes}
+Keep this brief — ~2 minutes. The goal is awareness, not instruction. Students who go on to graduate school will encounter these methods in statistics courses. For now, just knowing the names exist is enough. If a student asks for more detail, suggest they look at the mice package vignette after the course.
+:::
+
 # End-of-deck exercise {background-color="#e67e22"}
 
 ## Practice: Longitudinal missing data
+
+::: {.notes}
+This end-of-deck exercise ties together joins (from last session) and missing data (from today). Task 1 uses complete(), task 2 uses left_join(), and tasks 3-5 require combining summarize, filter, and group_by with missing data logic. Give students ~10 minutes. If they get stuck on task 5 (computing change scores for complete cases only), suggest they filter for waves 1 and 3 first, then check that both values are non-missing before computing the difference. This exercise is directly relevant to Assignment 7.
+:::
 
 You have a three-wave study:
 
@@ -641,6 +717,8 @@ longitudinal_study |>
 
 ## Decision tree for missing data
 
+:::: {.columns}
+::: {.column width="50%"}
 1. **How much is missing?**
    - < 5%: Usually safe to drop
    - 5-20%: Investigate patterns
@@ -649,7 +727,9 @@ longitudinal_study |>
 2. **Why is it missing?**
    - Random: Less concerning
    - Systematic: Potentially biasing
+:::
 
+::: {.column width="50%"}
 3. **What's your plan?**
    - Drop complete cases?
    - Drop specific variables?
@@ -657,6 +737,8 @@ longitudinal_study |>
    - Fill (carefully)?
 
 4. **Document everything!**
+:::
+::::
 
 ## Key takeaways
 
@@ -697,3 +779,7 @@ longitudinal_study |>
 Missing data isn't a problem to solve — it's information about your study. Treat it that way.
 
 See you Wednesday for storytelling with data!
+
+::: {.notes}
+End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results. Remind them that Assignment 7 (Joins and Missing Data) is now assigned, Assignment 6 is due, and their final project draft is also due. Next session (after Memorial Day) is Storytelling with Data.
+:::

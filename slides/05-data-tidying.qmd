@@ -50,6 +50,10 @@ Not easily. The columns mix variables (depression vs anxiety) with time points (
 
 By the end of today, you'll be able to reshape this into a form that works — and understand *why* it needs reshaping.
 
+::: {.notes}
+Open by showing this table and asking the class: "If I wanted to make a line graph of pre vs. post scores, what goes on the x-axis? What goes on the y-axis?" Let them struggle for a moment — the confusion is the point. This motivates the entire session. Spend ~2 minutes here.
+:::
+
 ## The tidyverse philosophy
 
 > "Tidy datasets are all alike, but every messy dataset is messy in its own way."
@@ -67,6 +71,10 @@ The tools we've learned (ggplot2, dplyr) expect data in a specific format: **tid
 
 Simple in theory, surprisingly complex in practice.
 
+::: {.notes}
+Spend ~3 minutes on the three rules. Have students say them aloud or repeat them back. The hardest part is rule 1 — students struggle with what counts as a "variable" vs. a "value." Emphasize that this isn't about right vs. wrong; it's about what structure makes analysis easiest. You'll come back to the "what is a variable?" question throughout the deck.
+:::
+
 ## Tidy data visualized
 
 ```{r}
@@ -82,6 +90,10 @@ tibble(
 . . .
 
 **No!** Time (pre/post) is a variable, but it's spread across columns.
+
+::: {.notes}
+Pause before revealing the answer and poll the class: "Is this tidy?" Many students will say yes because it looks clean and organized. That's a great teaching moment — tidy doesn't mean "neat." Emphasize that pre_test and post_test are values of a time variable, not separate variables.
+:::
 
 ## The tidy version
 
@@ -113,6 +125,10 @@ data |>
   summarize(mean = mean(score))
 ```
 
+::: {.notes}
+Connect this back to Sessions 2–4. Students already know ggplot and dplyr — point out that those tools assume tidy data. If their data isn't tidy, the code they've already learned won't work. This is the practical motivation: you're not reshaping for fun, you're reshaping so your tools work.
+:::
+
 ## Wide vs. Long
 
 :::: {.columns}
@@ -135,6 +151,10 @@ data |>
 
 Most real data needs reshaping.
 
+::: {.notes}
+Students often ask: "So wide is always wrong?" No — wide is fine for reading and some analyses. The key message is that most tidyverse tools expect long format, so you need to know how to get there. SPSS users especially will be used to wide format (one row per participant). Acknowledge that wide feels more natural to read, but long is what R needs.
+:::
+
 # Common untidy patterns {background-color="#2c3e50"}
 
 ## Pattern 1: Column headers are values
@@ -150,6 +170,10 @@ wide_scores
 ```
 
 The semester names are **values**, not variable names.
+
+::: {.notes}
+This is by far the most common untidy pattern in psychology data. Walk through this example slowly and ask: "What are the actual variables here?" (student, semester, score). The semester names are values of a semester variable, not variables in themselves. This is the pattern that pivot_longer() fixes. Spend ~2 minutes here; the next two patterns can be faster.
+:::
 
 ## Pattern 2: Multiple variables in one column
 
@@ -195,6 +219,10 @@ survey_wide
 
 Each item is a column — wide format.
 
+::: {.notes}
+This is the example that will matter most for their assignments and thesis work. Point out that every Qualtrics export looks like this — one column per item. This dataset (survey_wide) will be reused in the pair coding exercise, so make sure students follow it. Transition: "Now let's learn the function that fixes this."
+:::
+
 # pivot_longer() {background-color="#2c3e50"}
 
 ## The most common tidying operation
@@ -210,6 +238,10 @@ wide_scores |>
   )
 ```
 
+::: {.notes}
+This is the most important slide in the deck. Walk through each argument slowly, pointing at the output as you explain. Key confusion point: students mix up names_to and values_to. Use this mnemonic — "names_to is where the old column NAMES go; values_to is where the old cell VALUES go." Run the code live so students see the output build. Spend ~3-4 minutes here.
+:::
+
 ## Breaking it down
 
 ```{r}
@@ -220,6 +252,10 @@ pivot_longer(
   values_to = "..."  # Name for the new "values" column
 )
 ```
+
+::: {.notes}
+Emphasize that names_to and values_to take quoted strings (these are new column names you are inventing). Students will forget the quotes — it's one of the most common errors. Also note that cols uses the same selection syntax they learned in select(), which helps it feel less foreign.
+:::
 
 ## Selecting columns to pivot
 
@@ -240,6 +276,10 @@ pivot_longer(cols = contains("202"))
 # Everything except
 pivot_longer(cols = -student)
 ```
+
+::: {.notes}
+Highlight the "everything except" pattern (cols = -student) — in practice, this is what students will use most often. When you have 50 BDI items and one ID column, you don't want to list all 50 items. The negative selection is the practical shortcut.
+:::
 
 ## Psychology example: Survey items
 
@@ -281,6 +321,10 @@ experiment_wide |>
   )
 ```
 
+::: {.notes}
+Without names_prefix, the time column would contain "score_t1", "score_t2", etc. — the full column name. That's messy. names_prefix strips the redundant part, leaving clean values like "t1", "t2", "t3". Students often forget this argument exists and try to fix the names afterward with mutate() + str_remove(). Mention that this is the cleaner approach.
+:::
+
 ## names_pattern argument
 
 For more complex parsing:
@@ -308,6 +352,10 @@ multi_scale |>
   )
 ```
 
+::: {.notes}
+This is an advanced feature — don't dwell on the regex syntax. The key idea is that column names sometimes contain TWO pieces of information (scale name AND item number), and names_pattern can split them into separate columns. Say: "You don't need to memorize the regex. Just know this exists for when your column names encode multiple things." Students will see this again in the real-world examples section.
+:::
+
 ## Pivoting to calculate scale scores
 
 ```{r}
@@ -321,6 +369,10 @@ survey_wide |>
   group_by(participant) |>
   summarize(bdi_total = sum(response))
 ```
+
+::: {.notes}
+This is the "aha" moment for many students — pivot_longer() isn't just reshaping for its own sake, it enables analyses they actually need. Walk through the pipeline: pivot to long, then group_by participant, then summarize. Point out that this is the exact workflow they'll use in the pair exercise in a moment. Transition: "Now you try it."
+:::
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -352,6 +404,10 @@ survey_wide |>
   summarize(mean_bdi = mean(response))
 ```
 
+::: {.notes}
+Set a 10-minute timer. Circulate the room — the most common sticking point is getting the pivot_longer() arguments right. If pairs are stuck, ask: "Which columns do you want to pivot? What should the new columns be called?" After ~8 minutes, ask who has an answer. Participant 3 has the highest mean (2.0). Reveal the solution and walk through it line by line. Remind students to upload their code to Canvas before moving on.
+:::
+
 ---
 
 ## Before we move on
@@ -373,6 +429,10 @@ long_data <- tibble(
 long_data
 ```
 
+::: {.notes}
+Transition: "pivot_longer() is the workhorse, but sometimes you need to go the other direction." Spend less time on pivot_wider() — it's used less often and the logic mirrors what they just learned. About 5 minutes total for the pivot_wider() section is fine.
+:::
+
 ## pivot_wider() syntax
 
 ```{r}
@@ -382,6 +442,10 @@ long_data |>
     values_from = score  # Column to get values from
   )
 ```
+
+::: {.notes}
+Point out the naming symmetry: pivot_longer() uses names_TO and values_TO (you're creating new columns), while pivot_wider() uses names_FROM and values_FROM (you're pulling from existing columns). Students sometimes confuse the two — the to/from distinction helps.
+:::
 
 ## When to use pivot_wider()
 
@@ -431,6 +495,10 @@ tibble(
   )
 ```
 
+::: {.notes}
+This connects back to Pattern 2 from earlier (multiple variables in one column). You can move through separate/unite fairly quickly (~3 minutes total) — these are less commonly needed than the pivots, but students should know they exist. Note that the resulting age column is character, not numeric — they'd need mutate(age = as.numeric(age)) to use it as a number. This foreshadows data type issues in Session 6.
+:::
+
 ## separate_wider_regex()
 
 For complex patterns:
@@ -478,6 +546,10 @@ wide_rm <- tibble(
 wide_rm
 ```
 
+::: {.notes}
+This is the flagship real-world example. Frame it as: "This is what reaction time data looks like when your advisor hands it to you from SPSS." The column names encode two variables (condition AND time), which is exactly the names_pattern use case from earlier. Walk through this example carefully — it reappears in the end-of-deck exercise.
+:::
+
 ## Tidying repeated measures
 
 ```{r}
@@ -509,6 +581,10 @@ tidy_rm |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+This is the payoff — show that once the data is tidy, the ggplot code is straightforward. Refer back to the opening slide: "Remember when we couldn't figure out what to put on the axes? Now we can." Don't explain stat_summary() in depth (that's Session 8); just note that tidy data made this plot possible.
+:::
 
 ## Example 2: Questionnaire with subscales
 
@@ -548,6 +624,10 @@ quest |>
 #| echo: false
 ```
 
+::: {.notes}
+This example shows a pivot_longer() followed by a pivot_wider() — a common real-world pattern. You pivot long to calculate subscale means, then pivot wide again to get one row per participant with separate columns for each subscale. Students often ask: "Why not just do the math in wide format?" You can, but it's brittle and doesn't generalize when you have many subscales or items.
+:::
+
 ## Example 3: Multilevel/nested data
 
 ```{r}
@@ -585,6 +665,10 @@ Ask yourself: What are my **variables**?
 - Score? ✓ Variable
 - Item number? Depends on your analysis
 
+::: {.notes}
+Students often ask about item number — is it a variable or not? The honest answer is "it depends on your analysis." If you want per-item analysis, keep it as a variable. If you just want a total score, it's a grouping artifact. Don't oversimplify this; acknowledging the ambiguity builds critical thinking about data structure.
+:::
+
 ## Pitfall 2: Over-pivoting
 
 Not everything needs to be long:
@@ -609,6 +693,10 @@ Age, gender, and score are **different variables** — keep them as columns.
 3. **Determine** what operations you need
 4. **Test** with a small subset first
 5. **Verify** you haven't lost data
+
+::: {.notes}
+Emphasize step 5 — after pivoting, check that you have the expected number of rows. If you started with 3 participants and 4 items, pivot_longer() should give you 12 rows. If it doesn't, something went wrong. This is a quick sanity check that prevents silent errors. Transition: "Now try the full pipeline yourself."
+:::
 
 # Get a head start {background-color="#e67e22"}
 
@@ -638,6 +726,10 @@ wide_rm |>
   group_by(condition, time) |>
   summarize(mean_rt = mean(rt))
 ```
+
+::: {.notes}
+This is individual work, not a pair exercise. Give ~10 minutes if time allows. This uses names_pattern, which is the hardest concept from today. If students are struggling, suggest they start with a simpler pivot (cols = -subject, without names_pattern) to at least get the long format, then try extracting condition and time. Mention that Assignment 3 will involve a very similar task, so this is genuine practice.
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -684,3 +776,7 @@ When in doubt, ask: "What would make this easiest to plot/analyze?"
 If your data isn't tidy, your analysis can't start. `pivot_longer()` is the bridge.
 
 Next time: Data Import
+
+::: {.notes}
+End with the reminder about readings for next class (R4DS Ch 7 and Ch 20). If time permits, preview Session 6 briefly: "Next time we'll learn how to get your own data files into R — CSVs, Excel, SPSS files. You'll need that skill for every assignment going forward."
+:::

@@ -35,6 +35,10 @@ This wasn't fraud. These were real labs, following published methods, using real
 
 So what went wrong?
 
+::: {.notes}
+Spend ~5 minutes on this opening sequence. Let the "36%" land — pause after the reveal. This is the Open Science Collaboration (2015) study. Students may have heard of the replication crisis in intro psych but probably don't know the details. The goal is to frame data science skills as the *solution*, not just a technical requirement. Don't get into specific studies yet — the point is the systemic problem.
+:::
+
 ## Many things went wrong
 
 - Analyses that couldn't be reproduced (even by the original authors)
@@ -45,6 +49,10 @@ So what went wrong?
 . . .
 
 The replication crisis isn't just a statistics problem. It's a **workflow** problem.
+
+::: {.notes}
+The "workflow problem" reframe is the key insight. Students expect this to be a stats problem — redirect that assumption. This sets up the entire course narrative: every skill we teach is about building a better workflow. Transition: "So what does a better workflow look like? That's what this course is about."
+:::
 
 ## This course is about the workflow
 
@@ -62,6 +70,10 @@ That means learning to:
 - **Transform** it transparently (with code, not clicks)
 - **Visualize** it to find patterns — and catch errors
 - **Communicate** what you found so others can verify it
+
+::: {.notes}
+Read the blockquote aloud — it's the course mission statement. The four bullet points map directly to the four units of the course. Students don't need to memorize this now, but it gives them a roadmap. Spend ~2 minutes here.
+:::
 
 ## About this course
 
@@ -91,9 +103,13 @@ That means learning to:
 | Component | Weight | What it is |
 |-----------|--------|------------|
 | Assignments | 35% | 8 weekly coding exercises |
-| Reading quizzes | 15% | 10 pre-class quizzes — graded on completion |
+| Reading quizzes | 15% | 10 pre-class quizzes — unlimited retakes, best score counts |
 | Participation | 15% | In-class pair coding submissions |
 | Final project | 35% | Analyze a dataset of your choosing |
+
+::: {.notes}
+Students fixate on grading — spend ~3 minutes walking through this clearly. Emphasize: quizzes are points-based but they can retake as many times as they'd like and you always take the best score, participation is about showing up and trying (not correctness), and the final project is the biggest piece. The 48-hour late policy applies to everything — mention it but don't belabor it now.
+:::
 
 ## Weekly assignments
 
@@ -138,6 +154,10 @@ A capstone project where you apply everything to a dataset you choose.
 | Presentation | Finals week — 5-minute share-out |
 
 ## The team challenge
+
+::: {.notes}
+The team challenge should feel fun, not stressful. Emphasize that it doesn't affect grades — it's just a way to build community and motivate each other. Teams will be formed from the survey they take today, balanced by prior experience. The winning team gets a pizza celebration on the last day. Spend ~3 minutes on both team challenge slides.
+:::
 
 At the start of the term, you'll be placed on a team of 5–6 students.
 
@@ -192,6 +212,10 @@ We'll form teams based on a short survey you'll take today. Teams will be announ
 | Publication-quality figures | `ggplot2` — industry-leading |
 | Reproducibility | Quarto integration (we'll learn this) |
 
+::: {.notes}
+Students often ask "Why not Python?" Honest answer: both are great, but R's ecosystem is purpose-built for statistical analysis and psychology has strong R adoption. The packages listed here (`lavaan` for SEM, `lme4` for mixed models) are what they'll encounter in grad school or advanced stats courses. Don't spend more than ~2 minutes here — they'll see the proof through the course.
+:::
+
 # Getting set up {background-color="#2c3e50"}
 
 ## What you need to install
@@ -208,6 +232,10 @@ We'll form teams based on a short survey you'll take today. Teams will be announ
 Install R **first**, then RStudio. RStudio needs R to work!
 :::
 
+::: {.notes}
+Students should have installed R and RStudio before class (it was in the pre-class instructions), but expect ~20% to not have done it. Have them start installing now while you continue — installations take a few minutes. Common issues: Mac users need to choose the correct chip (Apple Silicon vs Intel); Windows users may need admin permissions. If someone is truly stuck, they can pair with a neighbor for today.
+:::
+
 ## R vs RStudio
 
 Think of it like this:
@@ -222,7 +250,7 @@ You *could* drive with just an engine... but why would you?
 ![](img/rstudio-panes.png){fig-alt="RStudio interface showing four panes" width="80%"}
 
 ::: {.notes}
-The four panes: Source (top-left), Console (bottom-left), Environment (top-right), Files/Plots/Help (bottom-right)
+The four panes: Source (top-left), Console (bottom-left), Environment (top-right), Files/Plots/Help (bottom-right). Walk through each pane briefly — students will get to know them organically, so don't over-explain. The most important thing right now is that the Console is where code runs and Source is where you save code. The Environment pane will make more sense once they create objects.
 :::
 
 ## The four panes
@@ -251,6 +279,10 @@ Type in the Console and press Enter:
 
 Congrats — you just ran R code!
 
+::: {.notes}
+This is the first interactive moment — have everyone type `2 + 2` in their Console and press Enter. Wait until most people have done it. This tiny success matters: it proves R is working and they can make it do something. If anyone gets an error here, it's usually a sign R didn't install correctly.
+:::
+
 ## The assignment operator
 
 In R, we use `<-` to assign values to objects:
@@ -274,9 +306,17 @@ x + x
 **Keyboard shortcut:** Alt + - (Windows) or Option + - (Mac)
 :::
 
+::: {.notes}
+The assignment operator is a common early confusion. Students will try to use `=` (which works but isn't idiomatic R). Don't fight this battle too hard — just model `<-` consistently and they'll adopt it. The keyboard shortcut is worth demonstrating live — have everyone try it. Also note that the object `x` now appears in the Environment pane (top-right).
+:::
+
 # Organizing your work {background-color="#2c3e50"}
 
 ## Two mental models
+
+::: {.notes}
+This filing cabinet vs. laundry basket metaphor (from Scott Cunningham's Gov 51 at Harvard) is one of the most important conceptual lessons in the course. Spend ~5 minutes on the two "mental models" slides combined. Most students have grown up with search-based file access (Spotlight, Google Drive) and have never thought about directory structure. The goal is to make them understand *why* organized folders matter for code — not just as a preference but as a functional requirement.
+:::
 
 :::: {.columns}
 ::: {.column width="50%"}
@@ -354,6 +394,10 @@ If the file isn't exactly there, the code **breaks**. No fuzzy matching. No "did
 This is why we need to learn directory structure — even if it feels foreign.
 :::
 
+::: {.notes}
+This is the "aha" moment for the filing cabinet metaphor. When students get "file not found" errors later in the course, point them back to this concept. The code gives *directions*, not a *search query* — if the path is wrong, R can't find the file, period. This is the single most common source of frustration for beginners.
+:::
+
 ## Why use RStudio Projects?
 
 :::: {.columns}
@@ -394,6 +438,10 @@ This is why we need to learn directory structure — even if it feels foreign.
 
 You'll see a `.Rproj` file appear — this is your project file. From now on, double-click it to open your project.
 
+::: {.notes}
+Do this live — walk through the steps while students follow along. Pause after each step. The most common mistake is students creating the project inside another project, or not being able to find where they saved it. Encourage them to put it somewhere easy to find (Desktop or Documents). After creating the project, show them that the Files pane now shows the project directory.
+:::
+
 ## A standard project structure
 
 ```
@@ -416,6 +464,10 @@ Two principles:
 
 1. **Raw data is sacred** — never modify original files
 2. **Outputs are disposable** — you can always regenerate them from code
+
+::: {.notes}
+These two principles are worth repeating throughout the course. "Raw data is sacred" means never edit a CSV by hand — always use code to clean it, so there's a record. "Outputs are disposable" means if you lose a figure, you just re-run the code. This connects back to reproducibility: if your workflow is code-based, everything is recoverable.
+:::
 
 ## Naming things
 
@@ -442,6 +494,10 @@ Good names make code **self-documenting**. Bad names create confusion and bugs.
 ::::
 
 The test: Can someone unfamiliar with your project understand what a variable contains or what a file does?
+
+::: {.notes}
+Get a quick laugh from the "data_final_v2_REAL.csv" example — everyone has done this. The naming slide is quick (~1 minute) but plants a seed. You'll reinforce good naming habits throughout the course, especially in the code style section of Session 4.
+:::
 
 ## R Scripts
 
@@ -515,6 +571,10 @@ The `tidyverse` is actually a collection of packages:
 
 We'll use most of these throughout the course.
 
+::: {.notes}
+Don't go through every package — just note that `library(tidyverse)` loads them all at once. Students sometimes worry about memorizing all of these. Reassure them: we'll learn them one at a time, and they only need `library(tidyverse)` at the top of every script. We won't cover `purrr` in this course.
+:::
+
 ## Let's look at some data
 
 After loading tidyverse, you have access to built-in datasets:
@@ -536,6 +596,10 @@ mpg
 4. Install and load the tidyverse
 5. Run `glimpse(mpg)` and `glimpse(diamonds)`
 6. Save your script!
+
+::: {.notes}
+Give students ~10 minutes for this. Walk around the room and help. The most common issues: (1) students who haven't installed R/RStudio yet — have them start installing now; (2) students who don't know how to create folders — show them the "New Folder" button in the Files pane; (3) `install.packages("tidyverse")` taking a long time — this is normal on first install, can take 3–5 minutes. If they finish early, encourage them to try other things: `nrow(mpg)`, `names(mpg)`, `head(mpg)`.
+:::
 
 # Getting help {background-color="#2c3e50"}
 
@@ -577,6 +641,10 @@ maen(c(1, 2, 3))
 
 Read the error message carefully — R is trying to help you.
 
+::: {.notes}
+The typo example (`maen` instead of `mean`) is intentional — it shows the most common beginner error. Normalize errors loudly: "I make typos every single day. R will yell at you. That's fine." This sets the emotional tone for the whole course. Students who fear errors will freeze up; students who expect errors will debug and learn.
+:::
+
 # Why no AI? (Yet) {background-color="#2c3e50"}
 
 ---
@@ -588,6 +656,10 @@ Steve Jobs called the computer a **"bicycle for the mind"** — it amplifies you
 Generative AI is more like a **motorcycle**. It provides the engine. But if you don't know how to ride, you crash faster and harder.
 
 Read Cat Hicks: ["Cognitive helmets for AI bicycles"](https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/)
+
+::: {.notes}
+The AI policy section should take ~5 minutes across the three slides. Anticipate pushback: some students will think banning AI is old-fashioned. The bicycle/motorcycle metaphor reframes it — we're not anti-AI, we're pro-fundamentals. The course AI policy (in the syllabus) allows AI for debugging help later in the term but not for generating assignment code. The key message: "I want you to be the pilot, not the passenger. We'll get to the motorcycle — but first, learn to balance."
+:::
 
 ---
 
@@ -647,3 +719,7 @@ That's what the many short assignments in this course build. The goal: **you** a
 Every skill you learn in this course is a brick in a wall between you and the replication crisis.
 
 See you Wednesday for your first visualization!
+
+::: {.notes}
+End on this line — it ties back to the opening and gives them a sense of purpose. Before dismissing, remind them of the to-do list on the previous slide: readings, team survey, install R/RStudio, create project, install tidyverse. The team survey is the most time-sensitive — teams need to be formed before Session 2.
+:::

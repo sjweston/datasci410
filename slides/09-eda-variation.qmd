@@ -41,6 +41,10 @@ Before you run a single statistical test, you should know your data well enough 
 
 That's what EDA gives you — **no surprises**.
 
+::: {.notes}
+Open by asking students: "How many of you have ever run an analysis and been confused by the results?" This is the problem EDA solves. Spend ~2 minutes here. The goal is to frame EDA not as busywork but as something that saves time and prevents mistakes.
+:::
+
 ## Exploratory vs. confirmatory
 
 | | Exploratory (EDA) | Confirmatory |
@@ -51,6 +55,10 @@ That's what EDA gives you — **no surprises**.
 | **Output** | Visualizations, hunches | p-values, conclusions |
 
 EDA comes **first.** You can't test a hypothesis you didn't notice.
+
+::: {.notes}
+Students sometimes think EDA is optional or that it's what you do when you don't have a hypothesis. Emphasize that even in confirmatory research, EDA is step one. It tells you whether your data even look the way you expect. If they've taken stats, connect to the idea of checking assumptions.
+:::
 
 ## Good EDA means looking before you test
 
@@ -64,6 +72,10 @@ EDA comes **first.** You can't test a hypothesis you didn't notice.
 
 There is no single "right" way to do EDA. The goal is **understanding.**
 
+::: {.notes}
+The Tukey quote is worth pausing on. Students who are used to following step-by-step procedures may feel anxious that there's no single recipe. Reassure them: EDA is more like being a detective than following a protocol. The "attitude" framing gives them permission to explore.
+:::
+
 ## What we're doing today
 
 Exploring **variation** — what does a single variable look like?
@@ -75,6 +87,10 @@ Exploring **variation** — what does a single variable look like?
 
 Tomorrow: **covariation** — how do variables relate to each other?
 
+::: {.notes}
+Quick roadmap slide — spend ~30 seconds. This orients students on the two-session arc: today is single variables, next class is relationships between variables.
+:::
+
 ## Our dataset: Big Five Personality
 
 ```{r}
@@ -82,6 +98,10 @@ glimpse(bfi)
 ```
 
 25 items measuring five personality factors (Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness) + demographics.
+
+::: {.notes}
+Walk through the glimpse() output. Point out the variable names, number of rows (~2800), and that some columns are integers (survey items on a 1-6 scale) while age is continuous. Students often ask what A1, C3, etc. stand for — the next slide covers that. If they've taken personality psych, ask what the Big Five are.
+:::
 
 ## What's in here
 
@@ -114,6 +134,10 @@ bfi |>
 
 But summary stats can hide a lot. Always visualize.
 
+::: {.notes}
+Run this live and walk through the output. Point out the NA counts in the summary — students will see missing data here for the first time. Ask: "What does this summary tell you about education? Is it really a number?" This sets up the idea that summary stats on categorical-coded-as-numeric variables are misleading. Spend ~2 minutes.
+:::
+
 ## Histograms: the workhorse
 
 ```{r}
@@ -130,6 +154,10 @@ bfi |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+This is the first histogram of the session. Walk through the code line by line: the pipe into ggplot, the aes() mapping, and then geom_histogram(). Emphasize that binwidth is a choice, not a default — ggplot will warn them if they don't set it. Ask students to describe the shape: right-skewed, most people are young. Spend ~3 minutes here since this is a core geom.
+:::
 
 ## Choosing binwidth
 
@@ -161,6 +189,10 @@ p1 + p2 + p3
 
 There's no "right" answer — try a few and pick the one that shows the shape clearly.
 
+::: {.notes}
+Spend ~2 minutes comparing the three panels. Point to specific differences: binwidth=1 shows noisy spikes that are just sampling variability, binwidth=20 hides the right skew entirely. A common student question: "Which binwidth should I use on the assignment?" Answer: try a few, pick the one that shows the overall shape without too much noise. There is no single correct answer.
+:::
+
 ## Density plots: smooth alternative
 
 ```{r}
@@ -177,6 +209,10 @@ bfi |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+Briefly explain that density plots are like a smoothed histogram — the y-axis is density, not count, so the area under the curve sums to 1. Students often ask what the y-axis means; it's fine to say "think of it as relative likelihood" without going deep into probability density. The main advantage: no binwidth decision. The main disadvantage: harder to read exact counts.
+:::
 
 ## Exploring survey items
 
@@ -197,6 +233,10 @@ bfi |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+This slide introduces pivot_longer in a practical context — students saw it in the tidying session but may need a reminder. The key insight here is that some items look different from others: E1 and E2 might have different distributions because some items are reverse-scored. If a student notices this, it's a great teaching moment about reverse coding in personality measures. Don't dwell on pivot_longer mechanics; the focus is the visualization.
+:::
 
 ## Categorical variables
 
@@ -247,6 +287,10 @@ Values that are unusual compared to the rest of the data. They might be:
 
 **Never delete an outlier without understanding it.**
 
+::: {.notes}
+This is one of the most important slides in the deck. Spend ~3 minutes here. Students in psych methods courses are often taught to "remove outliers" as a default step. Push back on that: outliers are data, and deleting them is a decision that changes your results. The real question is always "is this value plausible?" A 95-year-old in a college study is real but might not represent your target population. An age of 999 is clearly an error. These are different situations requiring different responses.
+:::
+
 ## Spotting outliers visually
 
 ```{r}
@@ -282,6 +326,10 @@ bfi |>
 
 Points beyond the whiskers are flagged as outliers by the 1.5×IQR rule.
 
+::: {.notes}
+Briefly explain the 1.5xIQR rule: any point more than 1.5 times the interquartile range above Q3 or below Q1 gets plotted individually. Students don't need to memorize this, just know that boxplots have a built-in outlier detection rule. Transition: "But seeing a dot on a plot isn't enough — let's look at those outliers in the actual data."
+:::
+
 ## Investigating outliers programmatically
 
 ```{r}
@@ -302,6 +350,10 @@ bfi |>
 
 **Document your decisions.** Future you will want to know.
 
+::: {.notes}
+Emphasize the documentation point. In psychology research, you need to justify every data cleaning decision in your methods section. "I removed 3 participants with ages over 80 because the study targeted 18-65 year olds" is fine. "I removed outliers" with no explanation is not. This connects to the reproducibility theme from Session 1.
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: 10 minutes
@@ -313,6 +365,10 @@ Using the `penguins` dataset (from the `palmerpenguins` package):
 
 ::: {.callout-tip}
 Try both a histogram and a boxplot. They show different things. Use `summary()` first to get oriented.
+:::
+
+::: {.notes}
+Circulate during this exercise. Common issues: students forget to load palmerpenguins, or they get a warning about removed rows (that's the missing data — point it out as a natural segue to the next section). The flipper length distribution is bimodal — this is a great moment to ask "why might there be two peaks?" (Answer: different species have different flipper lengths.) If pairs finish early, suggest they try body_mass_g or bill_length_mm.
 :::
 
 ```{r}
@@ -346,6 +402,10 @@ bfi |>
   arrange(desc(n_missing))
 ```
 
+::: {.notes}
+This code is more advanced than what students have written themselves — across() and the anonymous function syntax may be new. Focus on the output, not the code mechanics. The takeaway: education has the most missing data (~200+ values). Ask: "Why might education be more likely to be missing than personality items?" (People skip demographic questions they find irrelevant or sensitive.)
+:::
+
 ## Visualizing missingness
 
 ```{r}
@@ -378,6 +438,10 @@ Missing data can bias your exploration:
 
 We'll cover this in depth in Session 14. For now: **always check for missing data before exploring.**
 
+::: {.notes}
+Keep this brief — ~1 minute. The point is to plant a seed, not to teach missing data handling. Students just need to know that missing data exists and can bias their exploration. The full treatment comes in Session 14 (Missing Data).
+:::
+
 # The EDA workflow {background-color="#2c3e50"}
 
 ## A systematic approach
@@ -388,6 +452,10 @@ We'll cover this in depth in Session 14. For now: **always check for missing dat
 4. **Look for outliers** — boxplots, programmatic checks
 5. **Ask questions** — what surprised you? What do you want to know more about?
 6. **Repeat** — EDA is iterative
+
+::: {.notes}
+This is the "cheat sheet" slide — the workflow students should follow when they sit down with a new dataset. Emphasize that step 6 is the most important: EDA is a loop, not a checklist. Each answer generates new questions. This workflow will be the backbone of Assignment 5. Spend ~2 minutes walking through the steps with the BFI data as a running example.
+:::
 
 ## Putting it together: a mini-EDA
 
@@ -425,6 +493,10 @@ Assignment 5 will have you do a full EDA on a psychology dataset. Start now:
 4. Write down **one question** each distribution makes you want to ask
 
 That's the core of EDA — noticing things and getting curious.
+
+::: {.notes}
+Give students ~10 minutes of work time here. Frame this as a head start on Assignment 5, not as something they need to finish now. Circulate and help with code issues. If students are stuck on which 3 variables to pick, suggest one continuous (age), one discrete (a personality item), and one categorical (gender or education).
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -466,3 +538,7 @@ That's the core of EDA — noticing things and getting curious.
 EDA isn't a step you finish. It's the habit of looking at your data before you believe anything about it.
 
 Next time: EDA — Covariation
+
+::: {.notes}
+End on this line. Remind students that the reading for next time is R4DS Ch 10 sections 10.5-10.6 (covariation). No assignment is due or assigned today, but the Final Project Proposal is due soon — check the schedule. Next session picks up exactly where this one leaves off.
+:::

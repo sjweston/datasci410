@@ -40,6 +40,10 @@ But your thesis data isn't sitting inside a package. It's a CSV on your desktop,
 
 Today we learn how to get it into R — and what to check when things don't import cleanly.
 
+::: {.notes}
+This opening connects to students' real frustration — they know R can do things, but they haven't been able to use their own data yet. Ask: "How many of you have data sitting in a CSV or Excel file right now?" Most hands should go up. That's the motivation. This is a shorter, more practical deck than Session 5, so the pace can be a bit faster.
+:::
+
 # Reading CSV files {background-color="#2c3e50"}
 
 ## read_csv() — your workhorse
@@ -54,6 +58,10 @@ my_data <- read_csv("path/to/file.csv")
 - Returns a **tibble**, not a base R data frame
 - Smarter about guessing column types than `read.csv()`
 
+::: {.notes}
+Emphasize the file path — this is where students get stuck most often. Common issues: wrong working directory, file not in the project folder, using backslashes on Windows. If you're doing a live demo, show what happens when the path is wrong (a clear error message). Remind them about the RStudio Files pane for navigating to files.
+:::
+
 ## Why not read.csv()?
 
 | | `read_csv()` | `read.csv()` |
@@ -65,6 +73,10 @@ my_data <- read_csv("path/to/file.csv")
 | Consistent | Yes | Depends on options |
 
 Always use `read_csv()` in this class.
+
+::: {.notes}
+Students will encounter read.csv() in StackOverflow answers and older textbooks. The key practical difference: read.csv() silently converts character columns to factors, which causes confusing errors later. read_csv() (underscore) doesn't do this. Emphasize the underscore vs. period distinction — it's an easy typo. If a student's code uses read.csv(), it will still work, but they may hit unexpected behavior.
+:::
 
 ## What read_csv() does automatically
 
@@ -95,6 +107,10 @@ my_data <- read_csv("survey.csv")
 problems(my_data)  # Shows any parsing issues
 ```
 
+::: {.notes}
+The participant ID example resonates most with psychology students. If IDs are "001", "002", "003", R reads them as numbers 1, 2, 3 — losing the leading zeros. Ask: "Why does that matter?" It matters for merging datasets later, and it changes how the ID behaves in plots. Always run problems() after importing — make this a habit students build now.
+:::
+
 ## Specifying column types
 
 ```{r}
@@ -109,6 +125,10 @@ my_data <- read_csv("survey.csv",
   )
 )
 ```
+
+::: {.notes}
+Frame this as: "When R guesses wrong, you override it." Students don't need to memorize every col_* function — the important ones are col_character() and col_double(). Mention that you can specify types for just the problem columns and let R guess the rest (using .default = col_guess() inside cols()). Spend ~2 minutes here.
+:::
 
 ## col_types shortcuts
 
@@ -144,6 +164,10 @@ my_data <- read_csv("messy.csv") |>
   rename(age = `Age (years)`, score = `Total Score`)
 ```
 
+::: {.notes}
+Point out the backticks around column names with spaces or special characters. Students will see this a lot with Qualtrics exports and Excel files. The backtick syntax confuses people — explain that R needs them because "Age (years)" isn't a valid R name. The janitor::clean_names() function is a nice shortcut here if you want to mention it briefly, though it's not required for this course.
+:::
+
 ## Missing values
 
 By default, `read_csv()` recognizes these as NA:
@@ -158,6 +182,10 @@ read_csv("survey.csv", na = c("NA", "N/A", "-999", ""))
 
 Psychology datasets often use `-999` or `99` as missing value codes!
 
+::: {.notes}
+This is critical for psychology data. Many students will have worked with SPSS datasets that use -999 as a missing value code. If you don't catch these at import, they'll silently corrupt your means and standard deviations. Ask: "What happens to your mean anxiety score if one participant has -999 instead of NA?" The answer is devastating — and that's the point. Handling missing values at import prevents downstream errors.
+:::
+
 ## Writing CSV files
 
 ```{r}
@@ -167,6 +195,10 @@ write_csv(my_cleaned_data, "data/cleaned_survey.csv")
 ```
 
 Save intermediate cleaned files — don't re-clean every time you start R.
+
+::: {.notes}
+This is a workflow habit, not a coding lesson. Emphasize the practical benefit: cleaning data takes time, so save the cleaned version and read that in future scripts. This also connects to reproducibility (Session 7) — your cleaning script documents exactly what you did to the raw data. Transition to the pair exercise: "Now let's practice the full import-check-fix workflow."
+:::
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -194,6 +226,10 @@ mess = messy |>
     notes = Notes
   )
 ```
+
+::: {.notes}
+Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument. After time is up, walk through the solution and ask: "Did anyone get something different from problems()?" Remind students to upload their code to Canvas.
+:::
 
 ---
 
@@ -224,6 +260,10 @@ my_data <- read_excel("survey_results.xlsx",
 )
 ```
 
+::: {.notes}
+Note that readxl is installed with tidyverse but not loaded by library(tidyverse) — you need to load it separately or use the readxl:: prefix. Students often ask "Why not just save as CSV first?" That's a reasonable approach, but read_excel() handles it directly and avoids data loss from CSV conversion (e.g., Excel date formatting). Spend ~3 minutes on Excel; it's familiar territory for most students.
+:::
+
 ## Excel pitfalls
 
 Things that look fine in Excel but break in R:
@@ -235,6 +275,10 @@ Things that look fine in Excel but break in R:
 
 ::: {.callout-tip}
 The best fix is usually to clean the Excel file first, or use `range` to read just the clean part.
+:::
+
+::: {.notes}
+Students who have worked in labs may recognize these problems. The "colors as data" point usually gets a laugh — some labs really do use cell highlighting to code conditions. The practical takeaway: Excel is a display tool, not a data storage tool. If you receive an Excel file with these issues, the cleanest fix is often to open it in Excel, fix the formatting, and re-save before importing.
 :::
 
 ## Listing sheet names
@@ -266,6 +310,10 @@ sas_data <- read_sas("study.sas")
 
 These return tibbles, just like `read_csv()`.
 
+::: {.notes}
+Many students will encounter SPSS files in their research labs. The key message is: you don't need SPSS installed to read .sav files. This is a selling point for R — it can read anything. Move through this slide quickly (~1 minute) unless students have specific questions.
+:::
+
 ## A note about SPSS labels
 
 SPSS files often have **variable labels** and **value labels**:
@@ -280,6 +328,10 @@ attr(spss_data$gender, "levels")  # 1="Male", 2="Female"
 library(haven)
 spss_data <- zap_labels(spss_data)
 ```
+
+::: {.notes}
+This is a "just so you know" slide. Students don't need to master haven labels right now, but they should know that SPSS files carry metadata that can cause unexpected behavior (e.g., a column that looks numeric but is actually a labelled vector). If they hit weird errors after importing a .sav file, zap_labels() is the quick fix. Move on fairly quickly.
+:::
 
 ## Getting data out of Qualtrics
 
@@ -299,6 +351,10 @@ qualtrics_data <- read_csv("my_survey_export.csv", skip = 2)
 
 ::: {.callout-note}
 The first two rows after the header contain Qualtrics' own descriptions. `skip = 2` gets past them. Always check with `glimpse()` after importing.
+:::
+
+::: {.notes}
+This will be the most practically relevant slide for many students. Qualtrics exports are notoriously messy — the first two rows after the header are Qualtrics metadata (question text, import IDs), not data. If you don't skip them, your first two "participants" will be nonsense strings. If time permits, show a real Qualtrics export on screen so students can see the three-row header structure. Spend ~3 minutes here.
 :::
 
 # Putting it together {background-color="#2c3e50"}
@@ -336,6 +392,10 @@ clean_data <- clean_data |>
 write_csv(clean_data, "data/clean_survey.csv")
 ```
 
+::: {.notes}
+Walk through this as a complete workflow — this is the template students should internalize. Emphasize the order: read, check, rename, fix types, save. Students often want to skip step 2 (checking), but that's where you catch problems before they propagate. This workflow is essentially what Assignment 3 will ask them to do end to end. Spend ~3 minutes walking through each step.
+:::
+
 ## Get a head start: Assignment 3
 
 Try this mini-challenge before next class:
@@ -356,6 +416,10 @@ write_csv(clean, "data/clean_survey.csv")
 ```
 
 Assignment 3 will have you do this end to end with real messy data.
+
+::: {.notes}
+This is individual work for the remaining class time (~10 minutes). Students who finished the pair exercise quickly can extend their earlier code. If time is short, frame this as homework: "Start this now and finish before next class." Mention that Assignment 3 builds directly on this workflow, so the practice now will pay off.
+:::
 
 ## Solution
 
@@ -412,8 +476,16 @@ write_csv(clean, "data/clean_survey.csv")
 4. **Excel is tricky** — use `readxl` and be suspicious of formatting
 5. **Save cleaned files** — don't re-clean every time
 
+::: {.notes}
+If you need to cut anything from this deck for time, the col_types shortcuts slide and the separate Excel "listing sheet names" slide are the most skippable. The core message students should leave with: always check your imports, and handle missing values at import time.
+:::
+
 ## The one thing to remember
 
 Your analysis is only as good as your import. Check it before you trust it.
 
 Next time: Layers & Aesthetics
+
+::: {.notes}
+Remind students of the reading for next class (R4DS Ch 9: Layers). Next session moves back to ggplot2 with a deeper dive into layers and aesthetics. Preview: "Now that you can import and reshape your own data, we'll learn how to build more sophisticated visualizations with it."
+:::

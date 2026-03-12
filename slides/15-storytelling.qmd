@@ -30,6 +30,10 @@ library(tidyverse)
 
 # Why storytelling? {background-color="#2c3e50"}
 
+::: {.notes}
+Welcome back — reminder that Monday was Memorial Day, so it's been a full week since they were last in class (Session 15 on missing data). Today is Session 16: Storytelling with Data. Assignment 7 is due today and Assignment 8 (Storytelling Report) is assigned. Also distribute the APA figure formatting handout at the start of class. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time.
+:::
+
 ## Data alone isn't enough
 
 You've learned to:
@@ -42,6 +46,10 @@ You've learned to:
 . . .
 
 But **technical skills ≠ communication skills**
+
+::: {.notes}
+Spend ~2 minutes here. This slide should feel like a pivot — acknowledge everything they've learned so far, then reframe it. The incremental reveal makes the punchline land: all those skills are necessary but not sufficient. This sets up the "why" for the whole session.
+:::
 
 ## The data storytelling triad
 
@@ -80,6 +88,10 @@ ggplot(triad) +
 Adapted from Brent Dykes
 :::
 
+::: {.notes}
+This is the Dykes triad from the assigned reading. Spend ~3 minutes here. Walk through each pair: Data + Visuals = Enlighten (like a dashboard — informative but no narrative), Data + Narrative = Explain (like a report — words and numbers but no visuals), Visuals + Narrative = Engage (like an infographic — compelling but potentially empty). The center — all three together — is where you actually change minds or drive action. Students may ask whether "change" is too strong a word; emphasize that even in an academic paper, you're trying to change what the reader believes.
+:::
+
 ## Why stories work
 
 **Stories are memorable:**
@@ -101,6 +113,10 @@ Adapted from Brent Dykes
 - But emotions drive decision-making
 - Stories engage emotions
 
+::: {.notes}
+The charity brochure study is from Slovic (2007) — identifiable victim effect. Students sometimes push back on the "decisions are emotional" point; you can cite Damasio's somatic marker hypothesis if it comes up. The key message: if you want your research to matter outside academia, you need to communicate it in a way that connects with people, not just report p-values.
+:::
+
 ## Your goal as a data scientist
 
 **Don't just show data — tell a story that:**
@@ -112,6 +128,10 @@ Adapted from Brent Dykes
 
 # The storytelling framework {background-color="#2c3e50"}
 
+::: {.notes}
+This section covers Knaflic's 5-step framework. Spend about 15 minutes total on Steps 1-5 before the pair coding break.
+:::
+
 ## Step 1: Understand the context
 
 Before making any visualization, ask:
@@ -122,6 +142,10 @@ Before making any visualization, ask:
   - Effect sizes? Practical implications? Cost savings?
 - **What action do you want them to take?**
   - Fund your research? Change clinical practice? Read your paper?
+
+::: {.notes}
+Emphasize that this is the step most students skip. They jump straight to making a ggplot without asking who will see it or what they should do with it. Ask the class: "Who is the audience for your final project?" — it's their classmates and you, but push them to imagine a real-world audience. This connects directly to their final project planning.
+:::
 
 ## Example: Different audiences, different stories
 
@@ -143,6 +167,10 @@ Before making any visualization, ask:
 - How to implement, training required
 - Success rates, dropout rates
 
+::: {.notes}
+Walk through both audiences slowly. The key insight is that the same finding (CBT reduces depression by 8 BDI-II points, d = 0.65) produces fundamentally different presentations depending on who's listening. Researchers want to compare effect sizes; clinicians want to know what it means for their patients. Students sometimes ask "which is right?" — both are. Neither is complete on its own.
+:::
+
 ## Step 2: Choose appropriate visuals
 
 Match your plot type to your message:
@@ -154,6 +182,10 @@ Match your plot type to your message:
 | Show distribution | Histogram, density | Table |
 | Show relationship | Scatterplot | Multiple pie charts |
 | Show parts of whole | Stacked bar, treemap | 3D bar chart |
+
+::: {.notes}
+Move through the table quickly — this is review from earlier sessions on ggplot. The main new idea is "match your message," not just "match your data type." A scatterplot might be technically correct for a relationship, but if your message is about group differences, a boxplot tells that story better.
+:::
 
 ## Step 3: Eliminate clutter
 
@@ -168,6 +200,10 @@ Common clutter:
 - Too many colors
 - Redundant labels
 - Chart junk (3D effects, shadows, unnecessary decorations)
+
+::: {.notes}
+Clutter is Knaflic's term for anything that takes up visual space without adding information. Students often add clutter unintentionally because ggplot defaults include it (gridlines, legends for single-variable color mapping, etc.). The next two slides show a before/after — walk through the cluttered version first and ask students to identify what they'd remove.
+:::
 
 ## Example: Cluttered figure
 
@@ -189,6 +225,10 @@ ggplot(therapy_data, aes(x = condition, y = depression, fill = condition)) +
   )
 ```
 
+::: {.notes}
+Point out the specific clutter: the colored background, heavy gridlines, redundant legend (fill maps to the same variable as x-axis), and generic title. Ask students what they notice first — it's probably the blue background, not the data.
+:::
+
 ## Example: Decluttered figure
 
 ```{r}
@@ -201,12 +241,68 @@ ggplot(therapy_data, aes(x = condition, y = depression)) +
     x = NULL,
     y = "Depression score"
   ) +
-  theme_minimal() +
-  theme(
-    panel.grid.minor = element_blank(),
-    panel.grid.major.x = element_blank()
-  )
+  theme_classic()
 ```
+
+::: {.notes}
+Walk through the changes: theme_classic() removes the background, single fill color removes the legend, the title now makes a claim instead of describing the axes, and the subtitle provides context (what the score means). Emphasize the title shift — from "Depression scores by condition" (label) to "CBT most effective at reducing depression" (assertion). This is a recurring theme in the deck.
+:::
+
+## Build your own theme
+
+`theme_classic()` is a great starting point. You can customize it into a reusable function:
+
+```{r}
+theme_story <- function(base_size = 14) {
+  theme_classic(base_size = base_size) %+replace%
+    theme(
+      text = element_text(color = "grey40"),
+      axis.line = element_line(color = "grey60"),
+      axis.ticks = element_line(color = "grey60"),
+      axis.text = element_text(color = "grey40"),
+      plot.title = element_text(color = "grey30", face = "bold", hjust = 0, size = rel(1.3)),
+      plot.subtitle = element_text(color = "grey40", hjust = 0),
+      plot.title.position = "plot",
+      plot.caption.position = "plot"
+    )
+}
+```
+
+. . .
+
+Now you can use `theme_story()` anywhere — and every figure looks consistent.
+
+::: {.notes}
+This is aspirational for most students at this point — don't expect them to write custom theme functions for their final project. The point is to show that theme customization is reusable, not one-off. If students ask about `%+replace%`, explain it's a ggplot2-specific operator that fully replaces theme elements instead of merging them. They don't need to memorize it; they just need to know the pattern exists.
+:::
+
+## Side by side: `theme_classic()` vs `theme_story()`
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+#| fig-align: center
+library(patchwork)
+
+p_data <- therapy_data |>
+  group_by(condition) |>
+  summarize(mean_depression = mean(depression))
+
+p_classic <- ggplot(p_data, aes(x = condition, y = mean_depression)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "theme_classic()", x = NULL, y = "Depression score") +
+  theme_classic()
+
+p_story <- ggplot(p_data, aes(x = condition, y = mean_depression)) +
+  geom_col(fill = "steelblue") +
+  labs(title = "theme_story()", x = NULL, y = "Depression score") +
+  theme_story()
+
+p_classic + p_story
+```
+
+Grey text, grey axes, title aligned to the full plot — small changes, big improvement.
 
 ## Gestalt principles of design
 
@@ -221,6 +317,10 @@ Your brain groups things automatically based on:
 
 Use these principles intentionally!
 
+::: {.notes}
+These are Gestalt principles from perceptual psychology — connect this to their psych background. They've probably seen these in an intro or sensation/perception course. The point here is that these principles aren't just academic — they have practical design implications. Proximity: group related elements. Similarity: use consistent color/shape for related categories. Enclosure: use facets or annotated rectangles. Connection: use lines to show trajectories.
+:::
+
 ## Step 4: Focus attention
 
 **Preattentive attributes** are processed by the brain in < 500ms:
@@ -233,6 +333,10 @@ Use these principles intentionally!
 . . .
 
 Use these to **direct attention to what matters**
+
+::: {.notes}
+Preattentive processing is another psych concept they may recognize. The key insight: you can use these attributes to create a visual hierarchy without the viewer even thinking about it. Color contrast is the one they'll use most in practice. The next two slides show the same data with and without strategic use of color to focus attention.
+:::
 
 ## Example: Without focus
 
@@ -249,8 +353,12 @@ ggplot(therapy_summary, aes(x = condition, y = mean_depression)) +
     x = "Condition",
     y = "Mean depression score"
   ) +
-  theme_minimal()
+  theme_story()
 ```
+
+::: {.notes}
+All bars are the same gray — the viewer has to read every bar and compare. There's no visual cue about which bar matters. Ask students: "What's the takeaway from this figure?" They'll have to work to answer.
+:::
 
 ## Example: With focus
 
@@ -268,9 +376,13 @@ ggplot(therapy_summary, aes(x = condition, y = mean_depression, fill = highlight
     x = NULL,
     y = "Depression score"
   ) +
-  theme_minimal() +
+  theme_story() +
   theme(legend.position = "none")
 ```
+
+::: {.notes}
+Now CBT pops immediately — the blue bar stands out from the gray. Walk through the code: the `if_else()` + `scale_fill_manual()` pattern is the key technique. Students will use this in the pair coding exercise and in their final projects. Also note the title changed from a label ("Mean depression by condition") to an assertion ("CBT reduces depression more than other conditions"). This is a technique they should apply to every figure.
+:::
 
 ## Step 5: Think like a designer
 
@@ -288,6 +400,10 @@ ggplot(therapy_summary, aes(x = condition, y = mean_depression, fill = highlight
 - Important = bigger
 - Secondary = smaller
 
+::: {.notes}
+Move through this quickly — it reinforces what was just shown. The visual hierarchy concept maps to ggplot elements: title = labs(title), main visual = geom layer, supporting = theme elements, context = labs(subtitle, caption). Students often make everything the same size and weight; encourage them to think about what the viewer's eye should land on first.
+:::
+
 ## Effective titles
 
 **Bad title:** "Depression scores by condition"
@@ -302,6 +418,10 @@ ggplot(therapy_summary, aes(x = condition, y = mean_depression, fill = highlight
 
 - Title: "CBT reduces depression by 8 points"
 - Subtitle: "Compared to control (2 points) and mindfulness (4 points)"
+
+::: {.notes}
+This is one of the most actionable slides in the deck. Students often ask "but my advisor said the title should be descriptive, not a claim." The answer: it depends on the context. For a final project presentation or a talk, assertion titles are better. For a journal figure, a descriptive title is conventional. Both have their place, but assertion titles force you to know what the figure is actually showing.
+:::
 
 ## Color best practices
 
@@ -322,7 +442,7 @@ demographics <- tibble(
 ggplot(demographics, aes(x = age_group, y = count, fill = age_group)) +
   geom_col() +
   labs(title = "Participants by age group", x = "Age group", y = "Count") +
-  theme_minimal()
+  theme_story()
 ```
 
 ## Color example: After
@@ -336,10 +456,18 @@ ggplot(demographics, aes(x = age_group, y = count)) +
     x = NULL,
     y = "Number of participants"
   ) +
-  theme_minimal()
+  theme_story()
 ```
 
+::: {.notes}
+The before/after is intentionally stark. In the "before," four different colors are used for four bars that all represent the same variable — there's no information in the color. In the "after," one uniform color is used and the title does the storytelling work. Ask: "What information did we lose by using one color?" Answer: none.
+:::
+
 # Critical evaluation of figures {background-color="#2c3e50"}
+
+::: {.notes}
+Transition: "We've talked about making your own figures better. Now let's talk about evaluating other people's figures — including catching problems." This section connects back to Session 1's replication crisis opening. Spend ~10 minutes on the misleading/boring figures section.
+:::
 
 ## Misleading figures
 
@@ -350,6 +478,10 @@ Visualizations can deceive (intentionally or not):
 3. **Cherry-picked time ranges** — hide broader trends
 4. **3D charts** — distort perception of size
 5. **Area/bubble charts** — hard to compare sizes accurately
+
+::: {.notes}
+Go through each type briefly. Truncated y-axes are the most common in psychology; the next slides show a concrete example. Dual axes are common in policy/media visualizations. Cherry-picked time ranges show up in news coverage of trends. 3D charts are mostly a relic of Excel defaults but still appear. Students may have examples from their own reading — invite them to share.
+:::
 
 ## Example: Truncated y-axis
 
@@ -369,8 +501,12 @@ ggplot(treatment_effect, aes(x = condition, y = score)) +
     x = NULL,
     y = "Depression score"
   ) +
-  theme_minimal()
+  theme_story()
 ```
+
+::: {.notes}
+The effect looks dramatic because the y-axis starts at 15 instead of 0. Point out the `coord_cartesian(ylim = c(15, 19))` line — this is how it's done in code, and also how you'd catch it in someone else's code. Ask: "Would this make it into a journal?" — possibly yes, especially if reviewers aren't careful.
+:::
 
 ## Fixed: Full y-axis
 
@@ -385,8 +521,12 @@ ggplot(treatment_effect, aes(x = condition, y = score)) +
     x = NULL,
     y = "Depression score"
   ) +
-  theme_minimal()
+  theme_story()
 ```
+
+::: {.notes}
+Now the effect looks modest — which is honest. The difference is only 2 points on the BDI-II. Let the contrast speak for itself before moving on.
+:::
 
 ## When truncated axes are okay
 
@@ -403,6 +543,10 @@ ggplot(treatment_effect, aes(x = condition, y = score)) +
 - Bar charts (bars must start at zero)
 - When comparing magnitudes
 
+::: {.notes}
+Students often ask about this nuance. The rule of thumb is simple: bars must start at zero because the height of the bar encodes the magnitude. Line charts can start anywhere because the slope (change) is what matters, not the absolute position. Body temperature (97-100 F) is a good example — starting at zero would make the variation invisible.
+:::
+
 ## Boring: Spaghetti plot with no message
 
 ```{r}
@@ -418,7 +562,7 @@ longitudinal <- tibble(
 
 ggplot(longitudinal, aes(x = time, y = depression, group = participant)) +
   geom_line() +
-  theme_minimal()
+  theme_story()
 ```
 
 Eight lines going everywhere. What's the takeaway?
@@ -442,8 +586,12 @@ longitudinal |>
     x = NULL,
     y = "Depression score"
   ) +
-  theme_minimal(base_size = 14)
+  theme_story(base_size = 14)
 ```
+
+::: {.notes}
+The spaghetti plot vs. summary line is a common issue in psychology research. The fix here was to summarize (group means) and use a single line. Students may ask "but don't you lose information by summarizing?" — yes, and sometimes you want the individual lines (e.g., to show individual differences). The point is to choose based on your message, not default to showing everything.
+:::
 
 ## Boring: Default pie chart
 
@@ -483,8 +631,12 @@ therapy_types |>
     x = "Number of clinicians",
     y = NULL
   ) +
-  theme_minimal(base_size = 14)
+  theme_story(base_size = 14)
 ```
+
+::: {.notes}
+This pair — pie chart vs. ranked bar chart — usually gets a strong reaction. Ask the class to estimate the difference between CBT and DBT from the pie chart. They can't. Then show the bar chart where the comparison is trivial. The lesson: pie charts make it almost impossible to compare slices accurately, especially with more than 3-4 categories. Also point out the `fct_reorder()` — a callback to Session 13 on factors.
+:::
 
 ## The "so what?" test
 
@@ -501,6 +653,10 @@ Every figure should answer a question:
 . . .
 
 **Ask yourself:** If someone only sees this figure for 5 seconds, what should they remember?
+
+::: {.notes}
+This is the single most important takeaway from the entire deck. Linger here. Read the examples aloud and ask which version they'd remember after a conference talk. The 5-second test is a practical heuristic they can apply to every figure in their final project. Before transitioning to the pair coding break, summarize: "Every figure should pass the 'so what?' test. If you can't state the takeaway in one sentence, the figure needs work."
+:::
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -521,11 +677,17 @@ ggplot(stress_data, aes(x = profession, y = stress, fill = profession)) +
   theme_gray()
 ```
 
+::: {.notes}
+Give students ~10 minutes for this exercise. The starting figure has multiple problems: unnecessary legend, rainbow colors, unsorted bars, label-style title, and default theme. Walk around and check that pairs are tackling the problems in a logical order. Common sticking point: students forget `fct_reorder()` — remind them it was in Session 13. The solution uses a horizontal bar chart, which is optional but often reads better for categorical comparisons.
+:::
+
+## Your tasks
+
 1. Remove the unnecessary legend
 2. Reorder professions by stress level
 3. Highlight the profession with highest stress
 4. Add a clear, message-driven title
-5. Clean up the theme
+5. Clean up the theme using `theme_story()`
 
 **Time: 10 minutes**
 
@@ -548,30 +710,46 @@ ggplot(stress_data, aes(x = stress, y = profession, fill = highlight)) +
     x = "Stress level",
     y = NULL
   ) +
-  theme_minimal() +
+  theme_story() +
   theme(legend.position = "none")
 ```
 
 # Applying to your final project {background-color="#2c3e50"}
 
+::: {.notes}
+Transition to the second half of the lecture (~20 minutes). This section connects the storytelling principles directly to the final project. Students should be thinking about their own data and figures as you go through this.
+:::
+
 ## Your final project narrative
 
 Your final project should tell a story with three acts:
 
+:::: {.columns}
+::: {.column width="33%"}
 1. **Setup (Introduction)**
    - What's the question?
    - Why does it matter?
    - What's your hypothesis?
+:::
 
+::: {.column width="33%"}
 2. **Conflict (Results)**
    - What did you find?
    - Show with visualizations
    - Highlight surprising or important patterns
+:::
 
+::: {.column width="33%"}
 3. **Resolution (Discussion)**
    - What does it mean?
    - How does it answer your question?
    - What should we do with this information?
+:::
+::::
+
+::: {.notes}
+The three-act structure maps directly onto a psychology paper: Introduction = Setup, Results = Conflict, Discussion = Resolution. Students sometimes find "conflict" odd for results, but the idea is that the results should present something surprising, interesting, or unresolved — that's what makes the reader care. If your results are exactly what everyone expected, the story is boring.
+:::
 
 ## Building a narrative arc
 
@@ -584,6 +762,10 @@ Your final project should tell a story with three acts:
 **Strong narrative:**
 
 > "Depression and anxiety often co-occur, but we don't know how strongly they're related in college students. I analyzed 200 student surveys and found a strong correlation (r = .65). This suggests these conditions may share underlying mechanisms and should be treated together."
+
+::: {.notes}
+Read both examples aloud. The weak narrative is a laundry list of plot types — "I made this, then I made this." The strong narrative has a question, a finding, and an implication. Students often struggle with the "so what" — push them to state why their finding matters. Even for a class project, they should be able to articulate why someone should care.
+:::
 
 ## One thing to remember
 
@@ -611,6 +793,10 @@ Every figure, every sentence should support that one key message.
 5. **Get feedback** — show your figures to someone outside the class
 
 # APA figure formatting {background-color="#2c3e50"}
+
+::: {.notes}
+Spend ~2 minutes on the APA section. The main message is: don't obsess over APA formatting for this course. The handout covers the details; class time is better spent on clarity and communication. Students who are writing theses or submitting to journals can consult the handout. Distribute the APA figure formatting handout now if you haven't already.
+:::
 
 ## A note on APA formatting
 
@@ -644,9 +830,12 @@ Not included in the figure itself:
 
 - Legend goes in figure note (if needed)
 - No borders around the figure
-- Black and white or grayscale (for print journals)
 
 # End-of-deck exercise {background-color="#e67e22"}
+
+::: {.notes}
+The end-of-deck exercise uses real published figures for critique practice. Give students ~5 minutes per figure to discuss with a partner, then debrief as a class. After the published figures, have them apply the same critical lens to their own final project drafts. If time is short, skip to the self-evaluation step.
+:::
 
 ## Critique these figures
 
@@ -657,11 +846,23 @@ For each figure, identify:
 3. What could be improved?
 4. How would you redesign it?
 
-Look at 2-3 example figures from published psychology papers (I'll show them in class).
+## Figure 1
 
-Then, apply these principles to **your own final project draft**.
+![](img/class-identity.jpg){fig-align="center" height="550"}
+
+## Figure 2
+
+![](img/truth-sensitivity.jpg){fig-align="center" height="550"}
+
+## Now apply it to your own work
+
+Apply these same questions to **your own final project draft**.
 
 # Wrapping up {background-color="#2c3e50"}
+
+::: {.notes}
+Transition to the closing section. Move through this quickly — it's a summary, not new material. If running short on time, you can skip the checklist slide and go straight to key takeaways.
+:::
 
 ## The storytelling checklist
 
@@ -691,6 +892,10 @@ Before finalizing any figure, ask:
 - **APA Style:** Figure formatting guidelines (handout provided)
 - **ColorBrewer:** [colorbrewer2.org](https://colorbrewer2.org) for colorblind-safe palettes
 
+::: {.notes}
+Remind students that these are practical resources, not required reading. Knaflic's book is on reserve and is excellent for anyone who wants to go deeper. The ColorBrewer link is something they can use right now for their final projects.
+:::
+
 ## Before next class
 
 📖 **Read:**
@@ -703,6 +908,16 @@ Before finalizing any figure, ask:
 - **Submit Final Project Draft** (due today)
 - Revise your figures based on today's principles
 - Review feedback on your draft
+
+## Heads up: The Final Prediction
+
+Next session (Correlation & Regression) we'll reveal **Fun Challenge 10: The Final Prediction**.
+
+It's a quick one — you'll look at a scatterplot and predict the correlation. But the deadline is **Tuesday at 11:59 PM**, so you'll get time in class on Monday to work on it with your team.
+
+::: {.notes}
+Brief mention — 30 seconds. Just plant the seed so teams aren't caught off guard by the short turnaround. They don't need to do anything yet. The actual challenge is revealed and worked on during Session 17.
+:::
 
 ## The one thing to remember
 

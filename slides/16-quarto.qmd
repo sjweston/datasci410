@@ -30,6 +30,10 @@ library(tidyverse)
 
 # What is literate programming? {background-color="#2c3e50"}
 
+::: {.notes}
+This is Session 7 (Week 4, Mon Apr 20), even though the file is numbered 16. Quarto was moved earlier in the curriculum so students use it for all assignments from A3 onward. Assignment 3 (Tidying, Import & Quarto) is assigned today. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time. Open with the callback to Session 1 — this is the payoff for the replication crisis discussion.
+:::
+
 ## Remember Session 1?
 
 We opened this course with a striking finding: only 36% of psychology studies replicated.
@@ -41,6 +45,10 @@ Part of the problem was that analyses couldn't be reproduced — even by the ori
 . . .
 
 **Quarto is part of the solution.** Today we learn to write documents where the analysis *is* the report.
+
+::: {.notes}
+Spend ~3 minutes on this opening. Let the callback land — they'll remember the 36% stat from Session 1. The three-part incremental reveal builds the problem before offering the solution. Emphasize that this isn't just an academic problem: "Data cleaned by hand" and "code only ran on one laptop" are things that happen in real labs right now.
+:::
 
 ## Copy-paste workflows break when anything changes
 
@@ -61,12 +69,20 @@ mean(data$depression)
 :::
 ::::
 
+::: {.notes}
+Walk through this scenario concretely. Ask: "How many of you have written a paper where you ran the analysis in one program and typed the results into Word?" Most hands will go up. This is the problem Quarto solves. The two-column layout makes the disconnect visual — code on the left, Word on the right, no connection between them.
+:::
+
 ## What goes wrong?
 
 - Typos when copying numbers
 - If data changes, you have to update manually
 - No record of what code produced what result
 - Can't reproduce your own analysis in 6 months
+
+::: {.notes}
+Ask students to name other things that can go wrong. Common answers: forgetting to update a table, accidentally reporting results from an old version of the data, not remembering which script produced which figure. All of these are solved by having the code and the report in the same document.
+:::
 
 ## Literate programming approach
 
@@ -89,6 +105,10 @@ mean(data$depression)
 :::
 ::::
 
+::: {.notes}
+The term "literate programming" comes from Donald Knuth (1984). You don't need to go into the history, but if students ask, it's the idea that programs should be written for humans to read, not just for computers to execute. The key concept: one document contains code, results, and narrative. No separation, no copying.
+:::
+
 ## Introducing Quarto
 
 **Quarto** is a publishing system that combines:
@@ -101,6 +121,10 @@ mean(data$depression)
 
 It's the evolution of R Markdown (same company, newer technology).
 
+::: {.notes}
+Students sometimes find R Markdown resources online and get confused. Reassure them: Quarto is the successor. The syntax is very similar, so R Markdown tutorials are mostly transferable. If they encounter `.Rmd` files, those are R Markdown; `.qmd` files are Quarto. For this course, we use Quarto exclusively.
+:::
+
 # Anatomy of a Quarto document {background-color="#2c3e50"}
 
 ## Three main components
@@ -108,6 +132,10 @@ It's the evolution of R Markdown (same company, newer technology).
 1. **YAML header** — metadata (title, author, format)
 2. **Markdown text** — your narrative
 3. **Code chunks** — your R code
+
+::: {.notes}
+This section covers the three building blocks. Spend about 12 minutes total on YAML, markdown, and code chunks before moving to chunk options. Consider doing a live demo in RStudio alongside these slides — create a new .qmd file and walk through each component as you go.
+:::
 
 ## YAML header
 
@@ -129,6 +157,10 @@ This controls:
 - What appears at the top of the document
 - What format to render (HTML, PDF, Word)
 - Various options (table of contents, theme, etc.)
+
+::: {.notes}
+YAML (rhymes with "camel") stands for "YAML Ain't Markup Language." Students will inevitably ask how to pronounce it. The key thing to emphasize: YAML is picky about indentation and spacing. Common errors include missing the closing `---`, using tabs instead of spaces, or forgetting colons. If students get mysterious rendering errors, YAML formatting is the first place to check.
+:::
 
 ## Markdown basics
 
@@ -188,6 +220,10 @@ Our research questions:
 :::
 ::::
 
+::: {.notes}
+Move through the markdown slides quickly — students pick this up fast and most have seen basic formatting before (Google Docs, Slack, Discord). The side-by-side "you write / you get" layout is effective here. Point out that markdown is used everywhere, not just Quarto — GitHub, Slack, Reddit, etc. If anyone has used those, they already know markdown basics.
+:::
+
 ## Code chunks
 
 Surround R code with three backticks:
@@ -206,6 +242,10 @@ mean(data$depression)
 
 When you render, both the code **and** output appear in the document.
 
+::: {.notes}
+This is where the magic happens for students. Emphasize that the `{r}` tells Quarto "this is R code, run it." The triple backticks mark the boundaries of the chunk. Common mistake: students forget the closing backticks, which causes everything below to be treated as code. If doing a live demo, type a chunk, run it, and show the output appearing right below.
+:::
+
 ## Running code chunks
 
 In RStudio:
@@ -213,6 +253,10 @@ In RStudio:
 - **Run current chunk:** Click green arrow or Ctrl/Cmd + Shift + Enter
 - **Run one line:** Ctrl/Cmd + Enter (like in scripts)
 - **Run all chunks above:** Button in toolbar
+
+::: {.notes}
+Emphasize the green arrow — students will use this constantly. Also note that Ctrl/Cmd + Enter works just like in scripts, so the workflow they already know still applies within chunks. "Run all chunks above" is useful for debugging when something breaks midway through a document.
+:::
 
 ## Rendering the document
 
@@ -231,7 +275,15 @@ Quarto will:
 3. Combine with your text
 4. Create the final document
 
+::: {.notes}
+Key distinction students miss: running a chunk (green arrow) is for interactive development. Rendering (Render button) is for producing the final document. When you render, Quarto starts fresh — it doesn't use objects from your environment. This is a common source of confusion: "It works when I run it but fails when I render." The answer is always that something wasn't loaded or created in the document itself.
+:::
+
 # Code chunk options {background-color="#2c3e50"}
+
+::: {.notes}
+This is the most detail-heavy section. Spend about 8 minutes here. Students don't need to memorize every option — they need to know where to look them up and understand the most common ones (echo, eval, include).
+:::
 
 ## Controlling output
 
@@ -247,6 +299,10 @@ mean(depression_scores)
 ```
 ````
 
+::: {.notes}
+Point out the `#|` syntax — this is the "hash-pipe" and it's Quarto-specific (R Markdown used chunk header options). Students sometimes forget the space after `#|`. The key concept: you can independently control whether code runs (eval) and whether code shows (echo). This gives four combinations, but only three are useful (there's no point in showing code that doesn't run AND hiding the output).
+:::
+
 ## Common chunk options
 
 | Option | What it does | When to use |
@@ -256,6 +312,10 @@ mean(depression_scores)
 | `include: false` | Run code, hide everything | Loading packages |
 | `message: false` | Hide messages | Loading tidyverse |
 | `warning: false` | Hide warnings | Final reports |
+
+::: {.notes}
+Walk through the table row by row. The most confusing one for students is the difference between `echo: false` and `include: false`. The key: `echo: false` hides the code but shows the output (a figure, a number, a table). `include: false` hides everything — it's as if the chunk doesn't exist in the output, but the code still runs behind the scenes. This is exactly what they want for their setup chunk.
+:::
 
 ## Figure options
 
@@ -272,6 +332,10 @@ ggplot(data, aes(x = condition, y = depression)) +
 
 - `fig-width` / `fig-height` — size in inches
 - `fig-cap` — adds a caption below the figure
+
+::: {.notes}
+Figure options are something students will use immediately in their assignments. Emphasize that `fig-cap` is how you add proper figure captions — not by writing "Figure 1: ..." in your text. The caption is tied to the figure, so if you reorder things, the caption moves with the figure.
+:::
 
 ## Example: Setup chunk
 
@@ -290,7 +354,15 @@ library(here)
 - `include: false` means the chunk **runs** but nothing shows in the output
 - Load all your packages here so they're available throughout
 
+::: {.notes}
+Emphasize the convention: every Quarto document should start with a setup chunk that loads packages and, optionally, reads in data. This is a habit they should build now. The `label: setup` name is conventional but not required; what matters is `include: false` so readers don't see the library loading messages.
+:::
+
 # Inline code {background-color="#2c3e50"}
+
+::: {.notes}
+This is the feature that sells Quarto to most students. When they see that they can type a formula in their text and have it automatically update when the data changes, it clicks. Spend ~5 minutes here and make sure the concept lands.
+:::
 
 ## Embedding results in text
 
@@ -319,6 +391,10 @@ depression_scores <- c(12, 18, 25, 22, 15, 20, 19, 21)
 
 **In your text, you write** `r knitr::inline_expr("expression")` **and Quarto fills in the result.**
 
+::: {.notes}
+The "never hard-code numbers" rule is the single most important Quarto habit. If a student writes "The mean was 18.5" in their report, they have a time bomb — the number will become wrong the moment anything about the data changes. Inline code means the number always matches the data. Students often ask: "But what if I know the number won't change?" The answer: you never know that for certain. Build the habit now.
+:::
+
 ## Inline code: before and after
 
 :::: {.columns}
@@ -338,6 +414,10 @@ The mean score was
 The mean score was `r mean(depression_scores)` (SD = `r round(sd(depression_scores), 2)`).
 :::
 ::::
+
+::: {.notes}
+The side-by-side layout shows the raw syntax on the left and the rendered result on the right. Point out the backtick-r pattern: backtick, the letter r, a space, then the R expression, then a closing backtick. Common mistake: students use regular backticks (code formatting) instead of the inline code syntax. If the expression shows as literal text instead of a number, they forgot the `r`.
+:::
 
 ## Formatting inline results
 
@@ -363,7 +443,15 @@ Use `scales::comma()` for large numbers:
 `r scales::comma(15234)`
 ````
 
+::: {.notes}
+These formatting functions are practical tools. `round()` is the one they'll use most — without it, inline code might print 15 decimal places. `scales::percent()` and `scales::comma()` are nice to know but not essential. If short on time, just cover `round()`.
+:::
+
 # Pair coding break {background-color="#e67e22"}
+
+::: {.notes}
+This is the main hands-on exercise. Give students 10 minutes. Walk around and help — the most common issues will be: YAML formatting errors (missing dashes, wrong indentation), forgetting to close code chunks, inline code syntax errors, and render failures because of missing packages or objects. Remind them to create a new .qmd file from the RStudio menu (File > New File > Quarto Document), not by hand.
+:::
 
 ## Your turn: Create a mini-report
 
@@ -413,6 +501,10 @@ round(mean(mpg$hwy), 1)
 
 # Output formats {background-color="#2c3e50"}
 
+::: {.notes}
+Transition to the second half. Spend ~5 minutes on output formats — this is informational, not hands-on. For this course, students will primarily use HTML. But they should know that the same .qmd file can produce Word or PDF, which is relevant for their future work.
+:::
+
 ## HTML (default)
 
 ```yaml
@@ -432,6 +524,10 @@ format: html
 **Cons:**
 
 - Not suitable for print journals
+
+::: {.notes}
+HTML is the default and what students should use for this course. If students ask about sharing HTML files: the rendered .html is a single self-contained file that opens in any browser. No special software needed to view it.
+:::
 
 ## PDF
 
@@ -453,6 +549,10 @@ format: pdf
 - Requires LaTeX installation
 - Less flexible for complex layouts
 - Not interactive
+
+::: {.notes}
+Students will inevitably ask about PDF. The honest answer: PDF requires a LaTeX installation (like TinyTeX), which can be finicky to set up. Don't spend class time on it. If students want PDF for their final project, they can install TinyTeX with `quarto install tinytex` outside of class. For this course, HTML is fine.
+:::
 
 ## Word
 
@@ -496,6 +596,10 @@ Then choose which to render in RStudio dropdown.
 
 # Tables {background-color="#2c3e50"}
 
+::: {.notes}
+Tables are a practical skill students need for their assignments and final project. Spend ~5 minutes here. The focus is on `knitr::kable()` — it's simple, it works across all output formats, and it's good enough for most purposes.
+:::
+
 ## Simple tables with kable()
 
 ```{r}
@@ -512,6 +616,10 @@ therapy_summary <- tibble(
 knitr::kable(therapy_summary)
 ```
 
+::: {.notes}
+Show the contrast: without `kable()`, R prints a tibble with its default console formatting. With `kable()`, you get a proper HTML table. The difference is dramatic in the rendered output. If doing a live demo, show both versions side by side.
+:::
+
 ## Kable options
 
 ```{r}
@@ -522,6 +630,10 @@ knitr::kable(
   col.names = c("Condition", "N", "M", "SD")
 )
 ```
+
+::: {.notes}
+Point out the three most useful options: `digits` controls decimal places (students will need this), `caption` adds a table title, and `col.names` lets you rename columns for presentation without changing the underlying data. The `col.names` pattern is important — students should keep their data columns as clean variable names and only pretty-print them in the table output.
+:::
 
 ## Fancier tables: gt package
 
@@ -540,6 +652,10 @@ therapy_summary |>
 
 `gt` is powerful but beyond our scope — use `kable()` for now.
 
+::: {.notes}
+Mention `gt` briefly as something that exists for when they need fancier tables, but don't dwell on it. For this course, `kable()` is sufficient. If students are curious, they can explore `gt` on their own.
+:::
+
 # Workflow tips {background-color="#2c3e50"}
 
 ## Best practices
@@ -552,6 +668,10 @@ therapy_summary |>
 
 4. **Use relative paths** — `here::here("data/file.csv")`
 5. **Cache expensive computations** — `#| cache: true`
+
+::: {.notes}
+"Render often" is the most important tip. Students who write an entire document and render at the end will hit a wall of errors and not know where they started. Encourage them to render after every new chunk or section. Also, naming chunks (`#| label: something`) means that when Quarto throws an error, it tells you which chunk failed — invaluable for debugging.
+:::
 
 ## Structuring a psychology report
 
@@ -583,6 +703,10 @@ therapy_summary |>
 :::
 ::::
 
+::: {.notes}
+This maps directly to an APA-style paper. Point out that Quarto makes this structure natural — each heading becomes a section, and the code chunks live right next to the text that interprets them. Students should start structuring their final project .qmd file this way now. Emphasize that the Results section is where the code-narrative integration really shines.
+:::
+
 ## Project organization
 
 ```
@@ -601,7 +725,15 @@ project/
 
 Keep your `.qmd` file in the root, data in `data/`, outputs separate.
 
+::: {.notes}
+This connects back to Session 1's filing cabinet metaphor. A well-organized project folder means anyone (including future you) can find the data, the code, and the output. The .qmd file goes in the root because it references everything else with relative paths. If students ask about `here::here()`, explain briefly that it always finds paths relative to the project root, avoiding the "it works on my laptop but not yours" problem.
+:::
+
 # End-of-deck exercise {background-color="#e67e22"}
+
+::: {.notes}
+This exercise is a head start on Assignment 3 and also scaffolds the final project. Give students ~10 minutes of work time. They probably won't finish, and that's fine — the point is to get started and identify questions. Walk around and help with rendering errors, which will be frequent.
+:::
 
 ## Create your final project draft
 
@@ -616,6 +748,10 @@ Convert your final project draft to a Quarto document (`.qmd`):
 **This will become your final project report!**
 
 # Wrapping up {background-color="#2c3e50"}
+
+::: {.notes}
+Transition to the closing. Keep this section brisk — ~3 minutes to wrap up.
+:::
 
 ## Why Quarto matters
 
@@ -633,6 +769,10 @@ Convert your final project draft to a Quarto document (`.qmd`):
 - Transparency — full record of your analysis
 - Sharing — collaborators can build on your work
 
+::: {.notes}
+This is the "why should I care?" slide. The personal benefits (no lost analyses, automatic updates) are immediate. The science benefits (reproducibility, transparency) are what they'll appreciate later. Connect back to Session 1 one more time: if every researcher used Quarto, the replication crisis would be smaller.
+:::
+
 ## Quarto beyond this course
 
 Quarto can create:
@@ -646,6 +786,10 @@ Quarto can create:
 . . .
 
 You're learning a tool you'll use for years.
+
+::: {.notes}
+This slide is motivational — "these slides" is a fun reveal (this very presentation was made with Quarto). If students are interested in making their own websites or presentations, point them to quarto.org. The main message: Quarto isn't just a class requirement; it's a professional tool with a long shelf life.
+:::
 
 ## Key takeaways
 

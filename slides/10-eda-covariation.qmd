@@ -48,6 +48,10 @@ But psychology is about *relationships*:
 
 Today we learn to **see** those relationships in data — before testing them statistically.
 
+::: {.notes}
+Connect back to last session: "Last time we looked at one variable at a time. But the questions you actually care about in psychology involve relationships." Spend ~2 minutes. The three example questions (treatment/depression, age/RT, anxiety/insomnia) are deliberately chosen to span different variable type pairings — point out that we'll learn a different plot type for each.
+:::
+
 # Categorical + Continuous {background-color="#2c3e50"}
 
 ## Example: Mental health by treatment group
@@ -70,6 +74,10 @@ therapy_data <- tibble(
 ```{r}
 glimpse(therapy_data)
 ```
+
+::: {.notes}
+Walk through the simulated data structure. Emphasize that this is simulated — we chose the means and SDs on purpose so the CBT group looks better. In real research, you wouldn't know the answer in advance. The dataset is small (150 rows) and simple so students can focus on the visualization, not the data wrangling. Students may ask about BDI-II — it's the Beck Depression Inventory, a widely used clinical measure.
+:::
 
 ## Boxplots: The classic choice
 
@@ -110,6 +118,10 @@ ggplot(therapy_data, aes(x = condition, y = depression_post)) +
 
 Great for comparing distributions, but they hide the actual data points.
 
+::: {.notes}
+Spend ~2 minutes on the anatomy of boxplots. Students may have seen boxplots in stats but not know the mechanics. Draw attention to the specific components: "The line in the middle is NOT the mean — it's the median." This is a common misconception. Ask students: "Based on this boxplot, which treatment looks most effective?" (CBT has the lowest median.)
+:::
+
 ## The problem with boxplots
 
 Boxplots summarize, but they hide important information:
@@ -121,6 +133,10 @@ Boxplots summarize, but they hide important information:
 . . .
 
 We can do better.
+
+::: {.notes}
+This slide motivates the next section on raincloud plots. The key point: boxplots hide bimodality, sample size, and the actual distribution shape. You can show the classic "same boxplot, different distributions" example verbally — two very different distributions can produce identical boxplots. If students push back ("but boxplots are fine for homework"), acknowledge that boxplots are quick and useful, but for publications and presentations, we want more information.
+:::
 
 # Raincloud plots {background-color="#2c3e50"}
 
@@ -135,6 +151,10 @@ Raincloud plots combine three elements:
 They're increasingly popular in psychology publications because they show **everything**.
 
 Use the `ggrain` package. ([More details here.](https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html))
+
+::: {.notes}
+Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expected in psychology journals — if students go on to do research, they'll encounter these. The name comes from the shape: the violin is the "cloud" and the jittered points are the "rain." The ggrain package makes them easy; without it, you'd need to layer violin + boxplot + jitter manually. Students do NOT need to memorize the ggrain syntax for the assignment — boxplots are fine — but exposure here is valuable.
+:::
 
 ## Building a raincloud
 
@@ -182,6 +202,10 @@ therapy_data |>
 #| eval: false
 ```
 
+::: {.notes}
+Walk through the code on this slide since the previous slide just showed the output. Point out the key pieces: geom_rain() does the heavy lifting, stat_summary adds the mean diamond, and coord_flip() makes it horizontal. Don't get bogged down in the color scale code. The important takeaway is that geom_rain() gives you violin + box + points in one function call.
+:::
+
 ## Why rainclouds are great
 
 Compare these three views of the **same data**:
@@ -221,6 +245,10 @@ p1 + p2 + p3 + plot_layout(ncol = 1)
 | **Raincloud** | Distribution + summary + raw data | Psychology papers, presentations, publications |
 | **Violin + jitter** | Distribution + raw data | Alternative to raincloud, simpler to code |
 
+::: {.notes}
+Quick reference slide — ~30 seconds. Emphasize that boxplots are still perfectly fine for EDA and assignments. Rainclouds are the ideal for final presentations and publications. Violin + jitter is a good middle ground if ggrain isn't installed.
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: Compare by gender
@@ -233,6 +261,10 @@ Using the therapy data, explore whether depression scores differ by gender:
 4. Add appropriate labels
 
 **Time: 10 minutes**
+
+::: {.notes}
+Circulate during this exercise. The main challenge is step 1: students need to add a column using mutate + sample(). Some may struggle with the sample() syntax — remind them of the arguments: values to choose from, number to draw, and replace = TRUE. If pairs finish early, ask them to add a facet_wrap(~condition) to see gender differences within each treatment group. Common error: forgetting replace = TRUE when the number of rows exceeds the number of categories.
+:::
 
 ```{r}
 #| echo: false
@@ -282,6 +314,10 @@ head(diagnosis_data)
 
 ## Option 1: Stacked bar chart
 
+::: {.notes}
+The next five slides show five options for the same data. Move through them at a moderate pace (~1 minute each). For stacked bars, point out the problem: it's hard to compare the sizes of non-bottom segments across groups because they don't share a common baseline. This is a perceptual limitation, not a coding one.
+:::
+
 ```{r}
 #| output-location: slide
 ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
@@ -311,6 +347,10 @@ ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
 ```
 
 ## Option 3: Proportions
+
+::: {.notes}
+Highlight the difference between position = "dodge" (previous slide) and position = "fill" (this slide). "fill" normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: "If one gender group has 10 people and another has 100, this chart makes them look equally important. Is that a problem?" This gets students thinking about when proportions vs. counts are appropriate.
+:::
 
 ```{r}
 #| output-location: slide
@@ -343,6 +383,10 @@ ggplot(diagnosis_data, aes(x = gender, y = diagnosis)) +
 ```
 
 ## Option 5: Tile with counts
+
+::: {.notes}
+geom_tile() is essentially a heatmap. Note that this requires pre-computing the counts with count() before piping into ggplot — this is different from the previous options where geom_bar() computed counts automatically. The viridis color scale is colorblind-friendly. This approach works best with many categories on both axes; with only 3x4, a bar chart is probably clearer. Still worth showing so students have it in their toolkit.
+:::
 
 ```{r}
 #| output-location: slide
@@ -377,6 +421,10 @@ glimpse(rt_data)
 
 ## Basic scatterplot
 
+::: {.notes}
+Scatterplots should feel familiar from stats classes, but many students haven't made one in R yet. Walk through the aes() mapping: x goes on the horizontal axis, y goes on the vertical. Ask: "What would you predict about the relationship between age and reaction time?" Most students will guess that older people are slower, which matches the data. Spend ~2 minutes here.
+:::
+
 ```{r}
 #| output-location: slide
 ggplot(rt_data, aes(x = age, y = reaction_time)) +
@@ -390,6 +438,10 @@ ggplot(rt_data, aes(x = age, y = reaction_time)) +
 ```
 
 ## Add a trend line
+
+::: {.notes}
+geom_smooth(method = "lm") adds a linear regression line. Students will see lm() again in Session 17 — for now, just explain that it draws the "best-fit" straight line through the data. The gray band is the confidence interval (se = TRUE). Students often ask "what does the gray area mean?" — a simple answer is "where we think the true line probably falls." Don't go deep into regression mechanics here.
+:::
 
 ```{r}
 #| output-location: slide
@@ -426,6 +478,10 @@ ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   theme_minimal()
 ```
 
+::: {.notes}
+The plot looks like a solid blob. Ask: "Can you tell where most of the data is?" (No — that's the problem.) With 5,000 points, geom_point() alone fails. This motivates the next three solutions. In psychology, overplotting is common with large survey datasets or reaction time studies with many trials.
+:::
+
 ## Solution 1: Transparency (alpha)
 
 ```{r}
@@ -435,6 +491,10 @@ ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   labs(title = "Using alpha = 0.1 to show density") +
   theme_minimal()
 ```
+
+::: {.notes}
+Alpha is the simplest fix and often the best first attempt. Explain: alpha = 0.1 means each point is 90% transparent, so areas with many overlapping points appear darker. Students should experiment with different alpha values — 0.1 is good for 5000 points, but 0.5 might be better for 200 points. This is the overplotting solution they'll use most often.
+:::
 
 ## Solution 2: geom_bin2d()
 
@@ -466,6 +526,10 @@ ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
 
 ## Correlation coefficient
 
+::: {.notes}
+This is a preview of Session 17 (Correlation and Regression). Keep it brief — ~2 minutes. The goal is just to connect the visual pattern they saw in the scatterplot to a single number. Most students have encountered correlation coefficients in stats, so this should feel familiar. Emphasize the dollar-sign syntax (rt_data$age) as an alternative to piping — cor() expects vectors, not a data frame. Students often ask "is this r significant?" — save that for Session 17.
+:::
+
 A single number summary of the linear relationship:
 
 ```{r}
@@ -484,6 +548,10 @@ cor(rt_data$age, rt_data$reaction_time)
 
 But always plot your data first! (See: Anscombe's Quartet)
 
+::: {.notes}
+If you have time, briefly describe Anscombe's Quartet: four datasets with identical means, standard deviations, and correlations that look completely different when plotted. This powerfully reinforces the "always visualize" message. You can also mention the Datasaurus Dozen as a modern, fun version of the same idea.
+:::
+
 # Patterns and models {background-color="#2c3e50"}
 
 ## What patterns tell us
@@ -500,6 +568,10 @@ When you see covariation, ask:
 **Correlation ≠ Causation**
 
 Covariation suggests a relationship, but doesn't prove one variable *causes* the other.
+:::
+
+::: {.notes}
+Spend ~3 minutes here — this is conceptually the most important slide in the deck. Walk through each question with the age/reaction-time example: (1) Could it be coincidence? With 100 data points and a clear trend, probably not. (2) What's the mechanism? Cognitive processing speed declines with age. (3) Is there a confound? Maybe older participants have different levels of education, health, or motivation. The correlation vs. causation callout connects directly to what they learned in stats — reinforce it here.
 :::
 
 ## Real data example
@@ -526,6 +598,10 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 ```
 
 ## Question 2: Does this vary by car type?
+
+::: {.notes}
+This slide demonstrates a key EDA move: adding a third variable via color. Walk through the insight: some car types (2seater, subcompact) break the overall trend — they have small engines but aren't particularly fuel-efficient, or they have large engines but are surprisingly efficient. This is a confound in action: the relationship between engine size and fuel economy depends on the type of car.
+:::
 
 ```{r}
 #| output-location: slide
@@ -567,6 +643,10 @@ For your final project, you'll need to:
 **Exercise:** Start exploring potential datasets. Find one that interests you and create 2-3 exploratory visualizations showing different types of covariation (categorical + continuous, continuous + continuous, etc.).
 
 This will form the basis of your proposal, **due today!**
+
+::: {.notes}
+Give students ~10 minutes of work time here. This exercise doubles as final project proposal prep — the proposal is due today, so this is their chance to get started or polish what they have. If students don't have a dataset yet, suggest palmerpenguins, mpg, or the bfi data from last session. Circulate and help students think about which variable combinations are interesting. Remind them that the proposal only needs 2-3 research questions and planned visualizations, not finished analyses.
+:::
 
 ```{r}
 #| echo: false
@@ -622,6 +702,10 @@ ggplot(penguins, aes(x = species, fill = island)) +
 5. **Always visualize first** before computing correlations
 6. **Patterns suggest but don't prove** causation
 
+::: {.notes}
+Quick summary — ~1 minute. If you're short on time, let students read this slide themselves. The most important takeaway is point 3 (raincloud plots) and point 6 (correlation is not causation). Remind them that Assignment 5 will ask them to use several of these plot types on a real dataset.
+:::
+
 ## Before next class
 
 📖 **Read:**
@@ -640,3 +724,7 @@ ggplot(penguins, aes(x = species, fill = island)) +
 Relationships hide in data. Your job is to make them visible — carefully, honestly.
 
 See you Monday for data types and scale scoring!
+
+::: {.notes}
+End on this closing line. Remind students: Assignment 4 is due, Assignment 5 (EDA) is now assigned, and the Final Project Proposal is due today. Next session shifts from visualization to data types — logical vectors, numbers, and computing scale scores (like averaging personality items into composite scores). That will connect directly back to the BFI data they've been exploring.
+:::

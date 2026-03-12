@@ -43,6 +43,10 @@ But your advisor doesn't want rows. They want a number:
 
 Today we learn to answer that — with **group_by()** + **summarize()**.
 
+::: {.notes}
+Start by connecting to Session 3. Ask students what verbs they learned last time (filter, arrange, mutate, select). Then pivot: "Those are great for exploring, but your advisor doesn't want 1,000 rows — they want a single number." The depression score example resonates because it sounds like something they'd actually need to do. Spend ~2 minutes here.
+:::
+
 # summarize() {background-color="#2c3e50"}
 
 ## summarize() collapses data
@@ -69,6 +73,10 @@ flights |>
 | `n()` | Count of rows |
 | `n_distinct()` | Count of unique values |
 
+::: {.notes}
+Don't dwell on this table — it's a reference slide. Point out that `n()` and `n_distinct()` are new (no base R equivalent students would know), while the rest are familiar from stats classes. Mention that `n()` takes no arguments, which trips students up later.
+:::
+
 ## The na.rm argument
 
 Most summary functions need `na.rm = TRUE` to handle missing values:
@@ -84,6 +92,10 @@ mean(x, na.rm = TRUE)    # Returns 3
 Always use `na.rm = TRUE` unless you specifically want NA propagation.
 :::
 
+::: {.notes}
+This is one of the most common early frustrations. Run the code live and let them see the NA result before showing the fix. Ask: "Why does R do this?" The answer is that R is being cautious — if data is missing, the true mean is unknown. Emphasize that forgetting `na.rm = TRUE` is the #1 reason students get unexpected NAs in their output. They will hit this on Assignment 2.
+:::
+
 ## summarize() alone isn't very useful
 
 One row of summary stats? That's what `mean()` already does.
@@ -93,6 +105,10 @@ mean(flights$dep_delay, na.rm = TRUE)
 ```
 
 The power comes when we combine it with **group_by()**.
+
+::: {.notes}
+This slide sets up the "aha" moment. Pause here and say something like: "Okay, so summarize alone is kind of boring. But watch what happens when we add one line." Then move to the next section.
+:::
 
 # group_by() {background-color="#2c3e50"}
 
@@ -106,6 +122,10 @@ flights |>
     n_flights = n()
   )
 ```
+
+::: {.notes}
+This is the key moment of the deck. Run the code and let the output land. Point to the 12-row result and ask: "How many rows? Why 12?" Make sure students see the connection between `group_by(month)` and getting one row per month. Spend ~3 minutes here. If you can, compare it to the single-row result from the previous slide.
+:::
 
 ## What happened?
 
@@ -142,6 +162,9 @@ flights |>
   )
 ```
 
+::: {.notes}
+Point out that the output now has `Groups: month [12]` printed at the top — this is R telling you grouping is still partially active. Ask: "How many rows would you expect?" (12 months x 16 carriers = up to 192). This naturally leads to the `.groups` message on the next slide.
+:::
 
 ## The .groups argument
 
@@ -164,6 +187,10 @@ summarize(..., .groups = "drop")
 # Drop last group level
 summarize(..., .groups = "drop_last")
 ```
+
+::: {.notes}
+Students will see this message and panic — reassure them it's informational, not an error. For this course, recommend `.groups = "drop"` as the safest default. The message appears because after summarizing two grouping variables, R keeps the first one grouped. You don't need to belabor `"keep"` vs `"drop_last"` — just tell them `"drop"` is the safe bet and move on. Spend ~2 minutes max.
+:::
 
 ## Group by for psychology
 
@@ -191,6 +218,10 @@ data |>
     se = sd(outcome) / sqrt(n())
   )
 ```
+
+::: {.notes}
+Pause on the standard error formula. Students from stats classes may recognize `sd / sqrt(n)`, but point out how elegant it is that `n()` works inline inside `summarize()`. These two psychology slides are important for framing — students need to see that group_by + summarize is exactly what SPSS "Descriptives > Split File" does, but more flexible.
+:::
 
 ## Multiple summaries at once
 
@@ -242,6 +273,10 @@ flights |>
   arrange(desc(avg_delay))
 ```
 
+::: {.notes}
+Set a timer for 10 minutes. Circulate and watch for: (1) forgetting `na.rm = TRUE` and getting NA results, (2) using `mean(dep_delay)` without `summarize()`, (3) not knowing how to sort descending (`desc()`). The bonus question is intentionally a "think about your data" prompt — Frontier (F9) has the worst average delay but relatively few flights. This is a good moment to talk about sample size and whether an average is trustworthy. Reveal the solution after time is up.
+:::
+
 ---
 
 ## Before we move on
@@ -259,6 +294,10 @@ With `summarize()` + `group_by()`, you can answer questions like:
 . . .
 
 These are the building blocks of a results section. Next: some shortcuts.
+
+::: {.notes}
+This is a pivot slide. Use it to let the energy from the pair coding settle and reset for part 2. Emphasize that they've already learned the single most important dplyr pattern. Everything from here is refinements and shortcuts. ~1 minute.
+:::
 
 # count() — a shortcut {background-color="#2c3e50"}
 
@@ -279,6 +318,10 @@ flights |>
 ```
 
 Same result, less typing!
+
+::: {.notes}
+Show both versions side by side (scroll back if needed). Emphasize that `count()` is just syntactic sugar for `group_by() |> summarize(n = n())`. Students often ask: "When do I use `count()` vs `group_by() + summarize()`?" Answer: use `count()` when you only need frequencies; use the full pattern when you need means, SDs, or other statistics alongside the count.
+:::
 
 ## count() with multiple variables
 
@@ -312,6 +355,10 @@ data |>
   arrange()        # Sort results
 ```
 
+::: {.notes}
+This is a "big picture" slide. Emphasize that the order listed here is a common workflow, not a rigid rule. Students often ask whether the order matters — it does for some combinations (e.g., `filter()` before `summarize()` reduces what gets summarized), but `select()` can go anywhere. The key insight: each verb does one thing, and the pipe chains them together.
+:::
+
 ## A complete analysis pipeline
 
 ```{r}
@@ -338,6 +385,10 @@ flights |>
 #| echo: false
 ```
 
+::: {.notes}
+Walk through the pipeline step by step, narrating what each line does. Point out the `mean(arr_delay > 0)` trick — since TRUE = 1 and FALSE = 0, taking the mean of a logical gives you the proportion. This is a useful pattern students haven't seen before. Also highlight the post-summarize `filter(n_flights > 1000)` — filtering after summarizing is a common and powerful pattern for removing small-sample groups.
+:::
+
 ## Piping into ggplot
 
 ```{r}
@@ -357,6 +408,10 @@ flights |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+This slide previews a pattern they'll use heavily later: pipe straight from data wrangling into ggplot. Point out the switch from `|>` to `+` once you enter ggplot — students frequently mix these up. You don't need to explain the ggplot code in detail here; just show that the summary data flows directly into the visualization. Sessions 8 and 9 will cover ggplot in depth.
+:::
 
 ## group_by() with mutate()
 
@@ -385,6 +440,10 @@ flights |>
 
 ```
 
+::: {.notes}
+This is a more advanced use of `group_by()` that students find surprising. Emphasize the difference: with `summarize()`, you collapse to one row per group; with `mutate()`, you keep all rows but the calculation is done within each group. The psychology use case: centering scores within each participant (person-mean centering) for repeated-measures designs. Don't dwell too long — this is a "you'll need this later" preview. ~2 minutes.
+:::
+
 ## Filtering within groups
 
 ```{r}
@@ -408,6 +467,10 @@ flights |>
 
 All work within groups when preceded by `group_by()`.
 
+::: {.notes}
+Present `slice_*()` as a reference — students don't need to memorize all five variants today. The most useful ones for this course are `slice_max()` and `slice_min()`, which appear in the end-of-deck exercise. Mention that `slice_sample()` is handy for quickly peeking at random rows when exploring data.
+:::
+
 ## ungroup()
 
 Sometimes you need to remove grouping:
@@ -420,6 +483,10 @@ flights |>
   mutate(grand_mean = mean(arr_delay, na.rm = TRUE)) |>  # Now uses ALL flights
   select(carrier, arr_delay, carrier_mean, grand_mean)
 ```
+
+::: {.notes}
+The key teaching point: without `ungroup()`, the `grand_mean` would be calculated per carrier (same as `carrier_mean`). With `ungroup()`, it uses all rows. Students often ask "How do I know if my data is still grouped?" — point them to the `Groups:` line printed at the top of tibble output. A good rule of thumb: if you're done with grouped operations, add `ungroup()` to be safe.
+:::
 
 # Code style matters {background-color="#2c3e50"}
 
@@ -452,6 +519,10 @@ participant_data |>
 
 Same code. One you can debug at midnight. One you can't.
 
+::: {.notes}
+Let students look at Version A for a moment before revealing Version B. Ask: "Which one would you rather debug at midnight before the assignment is due?" This gets a laugh and makes the point viscerally. Version A is deliberately awful but realistic — students write code like this when they're rushing. Emphasize that both versions produce identical output; the difference is entirely for the human reader.
+:::
+
 ## The rules behind the difference
 
 ::: {.columns}
@@ -474,6 +545,10 @@ Same code. One you can debug at midnight. One you can't.
 # Practice: Psychology example {background-color="#e67e22"}
 
 ## Simulated experiment data
+
+::: {.notes}
+Transition: "Now let's put it all together with data that looks like what you'd actually collect." Walk through the `set.seed()` and `tibble()` call briefly — students don't need to understand the simulation code, just the resulting data structure. Point out that this is a 2-condition experiment with 60 participants doing 20 trials each (1,200 rows). This mirrors a real cognitive psychology experiment.
+:::
 
 ```{r}
 set.seed(42)
@@ -538,6 +613,10 @@ condition_summaries <- participant_summaries |>
 condition_summaries
 ```
 
+::: {.notes}
+This two-step summarization (trials to participants, then participants to conditions) is the most important methodological pattern in the deck. Emphasize why you can't just do `group_by(condition) |> summarize(mean(reaction_time))` on the raw data — that would weight participants with more valid trials more heavily. Students who've taken stats will recognize this as the distinction between treating trials vs. participants as the unit of analysis. Spend ~3 minutes walking through both steps.
+:::
+
 ## Visualize the results
 
 ```{r}
@@ -580,6 +659,10 @@ experiment |>
   group_by(condition) |>
   slice_min(mean_rt, n = 5)
 ```
+
+::: {.notes}
+Give students ~10 minutes of individual work time. This exercise requires chaining four operations and doing a second `group_by()` after the first summarize — that's the hard part. Hint if students are stuck: "Build the pipeline one line at a time. First just filter, run it, then add the group_by, run it, then add summarize..." This incremental approach is a skill in itself. Assignment 2 is assigned today, so mention that it builds on the same skills. Reveal the solution with ~2 minutes left.
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -632,3 +715,7 @@ raw_data |>
 `group_by()` + `summarize()` is how you go from raw data to the descriptive statistics table in every published paper.
 
 Next time: Data Tidying with tidyr
+
+::: {.notes}
+End on this line — it connects today's skills directly to something students will encounter in every journal article they read. Remind them that Assignment 2 is now posted and due Sunday at 11:59 PM. Next session is Data Tidying (pivot_longer, pivot_wider), which is conceptually harder but builds on what they learned today.
+:::

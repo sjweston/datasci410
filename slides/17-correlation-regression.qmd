@@ -31,6 +31,10 @@ library(broom)
 
 # From patterns to numbers {background-color="#2c3e50"}
 
+::: {.notes}
+This session is a taste of modeling, not a stats unit. Set that expectation early: "We're not learning statistics today -- we're learning to put numbers on patterns you can already see." Students who've had stats may want to go deeper; redirect them to PSY 420 or STAT 510.
+:::
+
 ## You've been eyeballing patterns for 16 sessions
 
 ```{r}
@@ -62,6 +66,10 @@ ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
 
 Today you learn to put a **number** on that pattern.
 
+::: {.notes}
+Spend about 2 minutes here. Let the plot sit for a moment before advancing. Ask the class: "What do you see? Is there a pattern?" Let a few students answer. The point is they can already detect the relationship visually -- today's tools just formalize what their eyes already know.
+:::
+
 ## The same plot — with a number
 
 ```{r}
@@ -86,6 +94,10 @@ ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
 
 **Correlation** measures the strength and direction. **Regression** draws the line.
 
+::: {.notes}
+This slide is the thesis for the whole session. Emphasize the distinction: correlation gives a single number summarizing the relationship; regression gives an equation that lets you predict. Both tell you the same story in different ways.
+:::
+
 # Correlation {background-color="#2c3e50"}
 
 ## What correlation measures
@@ -106,6 +118,10 @@ ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
 
 **Key:** r tells you **direction** and **strength**, not causation.
 
+::: {.notes}
+Spend ~3 minutes on this table. Students often ask what counts as "strong" vs. "weak" -- emphasize that these labels are rough guidelines, and that what's "strong" depends on the field. In psychology, r = 0.3 is often considered meaningful. Don't get bogged down in formulas; focus on the intuition of "closer to 1 or -1 means tighter clustering around a line."
+:::
+
 ## cor() in R
 
 ```{r}
@@ -124,6 +140,10 @@ study_data |>
   summarize(r = cor(hours_social_media, gad7_total))
 ```
 
+::: {.notes}
+This is a good moment to demo live. Type the code rather than just advancing the slide. Students may ask about the dollar-sign syntax vs. the pipeline version -- briefly explain both work, but the pipeline version is consistent with what they've been doing all quarter. If anyone asks about Pearson vs. Spearman, acknowledge the distinction but say Pearson is the default and all we need today.
+:::
+
 ## This is what geom_smooth() has been doing
 
 Every time you wrote `geom_smooth(method = "lm")`, you were fitting a line through the data.
@@ -141,6 +161,10 @@ ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
   theme_minimal()
 ```
 
+::: {.notes}
+This is a satisfying callback. Students have been writing geom_smooth(method = "lm") since Session 2 without knowing what it does mathematically. Point out that they've been fitting regression lines all along -- today they're just learning to read the numbers behind them.
+:::
+
 ## cor.test() — is it statistically significant?
 
 ```{r}
@@ -150,6 +174,10 @@ cor.test(study_data$hours_social_media, study_data$gad7_total)
 . . .
 
 **What to report:** r, p-value, and 95% confidence interval.
+
+::: {.notes}
+Walk through the output slowly. Students often feel overwhelmed by dense console output. Point out the three things they need: the r value (cor), the p-value, and the confidence interval. You don't need to explain degrees of freedom or the test statistic. Common question: "What does a small p-value mean?" Keep it simple: "It means this relationship is unlikely to be due to chance alone."
+:::
 
 ## Correlation matrix: multiple variables at once
 
@@ -163,6 +191,10 @@ study_data |>
 . . .
 
 Each cell is the correlation between the row variable and the column variable. The diagonal is always 1 (a variable correlates perfectly with itself).
+
+::: {.notes}
+Point out two features: the diagonal of 1s (a variable always correlates perfectly with itself) and the symmetry (top-right mirrors bottom-left). Ask students to find the strongest relationship in the matrix. Note the use = "complete.obs" argument -- briefly mention this handles missing data by using only complete pairs, connecting back to Session 15.
+:::
 
 ## Visualizing a correlation matrix
 
@@ -210,9 +242,17 @@ tibble(
 
 **To establish causation, you need an experiment** — random assignment, manipulation, control group. Correlation from observational data tells you variables are *related*, not that one *causes* the other.
 
+::: {.notes}
+Spend ~3 minutes here. This is arguably the most important conceptual slide in the deck. Psych majors hear "correlation does not equal causation" constantly, but connecting it to real examples helps it stick. The social media example is especially relevant because students see causal claims about social media in the news all the time. Ask: "Can you think of a third variable that could explain the social media-anxiety relationship?"
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: Explore correlations
+
+::: {.notes}
+This is the mid-deck pair coding break -- 10 minutes. Circulate and check that students can find the study_data object (it was created in the setup chunk). The therapy-depression example intentionally has a negative correlation, which trips some students up. Common confusion: "Does negative mean the correlation is weak?" Clarify that negative means inverse relationship, not weak. The hint callout helps with this. Make sure students actually create the scatterplot -- that's the payoff.
+:::
 
 Using the `study_data` dataset (already loaded):
 
@@ -269,6 +309,10 @@ The equation: **y = b0 + b1 * x**
 - **b0** (intercept) = predicted y when x = 0
 - **b1** (slope) = how much y changes for each 1-unit increase in x
 
+::: {.notes}
+Transition from Part 1 to Part 2. Emphasize that correlation answers "is there a relationship?" while regression answers "what's the equation?" Use the analogy: correlation is like saying "taller people tend to weigh more," while regression says "for each additional inch of height, weight increases by about 5 pounds." The equation y = b0 + b1*x is the same line they learned in algebra -- reassure them they already know this.
+:::
+
 ## lm() — fitting a model
 
 ```{r}
@@ -281,11 +325,19 @@ Read this as: "Predict anxiety (`gad7_total`) from social media use (`hours_soci
 
 The `~` means "predicted by."
 
+::: {.notes}
+Demo this live. Emphasize the formula syntax: outcome on the left, predictor on the right, tilde in the middle. Read it aloud as "gad7_total predicted by hours_social_media." Students often confuse which variable goes where -- remind them the outcome (what you're trying to predict) always goes on the left of the tilde.
+:::
+
 ## Reading the output
 
 ```{r}
 summary(model)
 ```
+
+::: {.notes}
+This output is intimidating. Do not try to explain every line. Point to the Coefficients table and say "this is what matters." Specifically highlight the Estimate column (the intercept and slope), the p-value column (stars mean significant), and the Multiple R-squared at the bottom. Everything else is details for a stats course. Spend ~2 minutes max.
+:::
 
 ## What the numbers mean
 
@@ -306,6 +358,10 @@ tidy(model) |>
 
 **In a sentence:** For each additional hour of daily social media use, anxiety scores increase by about `r round(tidy(model)$estimate[2], 1)` points on the GAD-7.
 
+::: {.notes}
+This is the most important slide in the regression section. The "in plain language" column does the heavy lifting -- linger here. Ask a student to read the interpretation of the slope aloud. Students often struggle with the intercept: "What does it mean to use 0 hours of social media?" Acknowledge that the intercept doesn't always have a meaningful interpretation, but it anchors the line. The slope is what they should focus on.
+:::
+
 ## R-squared: How much does the model explain?
 
 ```{r}
@@ -323,6 +379,10 @@ glance(model)$r.squared
 . . .
 
 The other `r 100 - round(glance(model)$r.squared * 100)`% is explained by other factors (genetics, life events, personality, etc.).
+
+::: {.notes}
+R-squared is intuitive for students if you frame it as a percentage. "Social media use explains about X% of why people differ in anxiety." The low R-squared is actually a great teaching moment -- in psychology, single predictors rarely explain a lot. That's why researchers use multiple regression (preview of what's next). Students sometimes think low R-squared means the model is "bad" -- reframe it as "one piece of a bigger puzzle."
+:::
 
 ## Visualizing the regression line
 
@@ -360,6 +420,10 @@ tidy(model) |>
   knitr::kable(digits = 3)
 ```
 
+::: {.notes}
+This slide connects regression back to tidy data principles. The broom package takes messy model output and makes it a data frame -- consistent with everything they've learned about tidy data. Emphasize that tidy() gives coefficient-level results (one row per term) while glance() gives model-level results (one row per model). Students should recognize that the kable() call at the end is the same table-formatting tool they've used before.
+:::
+
 ## broom::glance() — model-level statistics
 
 ```{r}
@@ -388,6 +452,10 @@ The workflow you now know:
 
 **This is what researchers do.** You now have the tools.
 
+::: {.notes}
+This is the summary slide for the modeling section. Spend a moment reinforcing that this four-step workflow (explore, correlate, model, report) is the actual workflow researchers use. They now have every piece. For students considering research careers or grad school, this is an empowering moment.
+:::
+
 # What's next {background-color="#2c3e50"}
 
 ## This is just the beginning
@@ -406,6 +474,10 @@ Real research often uses:
 . . .
 
 **All of these build on `lm()`.** The syntax is nearly identical.
+
+::: {.notes}
+Keep this brief (~2 minutes). The goal is to show students that everything in this list is a natural extension of what they just learned, not a separate scary topic. Students headed to grad school especially benefit from seeing that ANOVA and mixed models use the same lm() foundation. Don't explain any of these methods in detail -- just name them and move on.
+:::
 
 ## You have the R skills for all of this
 
@@ -427,6 +499,10 @@ aov(gad7_total ~ condition, data = study_data)
 # Get a head start {background-color="#e67e22"}
 
 ## End-of-deck exercise
+
+::: {.notes}
+This is individual work time (~10 minutes). The exercise mirrors the anxiety analysis but uses depression (phq9_total) instead, so students can apply the same workflow independently. Circulate and check that students can interpret their slope in a sentence -- that's the hardest part. Encourage students who finish early to try the bonus (broom::tidy table). Remind them that this exercise is also good practice for the final project if they have continuous variables.
+:::
 
 Using the `study_data` dataset:
 
@@ -460,6 +536,38 @@ ggplot(study_data, aes(x = hours_social_media, y = phq9_total)) +
 tidy(model2) |> knitr::kable(digits = 3)
 ```
 
+# Fun Challenge 10: The Final Prediction {background-color="#e67e22"}
+
+## Can you eyeball a correlation?
+
+::: {.notes}
+Transition: "Before we wrap up, let's put your new correlation skills to the test." Pull up the challenge image (or have it ready on Canvas). Give teams ~5 minutes to discuss and submit. This is meant to be quick and fun — no code, no calculations, just visual intuition. Remind them the deadline is tomorrow (Tuesday at 11:59 PM) so they should submit now while they're together.
+:::
+
+Look at this scatterplot. The axis labels and numbers have been removed — all you have are the points.
+
+![The Final Prediction](../files/fun-challenges/10-prediction.png){fig-align="center"}
+
+## Your team predicts:
+
+1. The **correlation coefficient** *r* (to one decimal place)
+2. The **direction** of the relationship (positive, negative, or none)
+3. The **R-squared** value (to one decimal place)
+
+. . .
+
+The actual values will be revealed on Wednesday. The team closest to the true values earns a **bonus point**.
+
+**Submit on Canvas by tomorrow (Tuesday) at 11:59 PM.**
+
+. . .
+
+Take 5 minutes now with your team to discuss and submit.
+
+::: {.notes}
+Let teams huddle for ~5 minutes. Walk around and listen to their reasoning — it's a great window into whether they've internalized what r values "look like." If a team asks whether the relationship is strong or weak, redirect: "That's exactly what you're predicting." Remind them: one submission per team, due tomorrow night. The actual values get revealed in Session 18.
+:::
+
 # Wrapping up {background-color="#2c3e50"}
 
 ## Before next class
@@ -473,5 +581,9 @@ No new reading — focus on your final project!
 - Consider: could a correlation or regression strengthen your project?
 
 ## The one thing to remember
+
+::: {.notes}
+End with this takeaway and let it land. Remind students that Assignment 8 is due today and the final project is due Wednesday. If anyone is considering adding a correlation or regression to their final project, encourage them to -- it's not required, but it would strengthen their work. Final reminder: no new reading, just focus on the project.
+:::
 
 The pattern you see in a scatterplot and the numbers from `lm()` are telling you the same story — one with your eyes, one with math.

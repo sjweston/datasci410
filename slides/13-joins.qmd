@@ -144,6 +144,10 @@ You want to ask: *"Did anxious participants respond more slowly?"*
 
 You can't answer that from any single file. You need **joins** — the tool that connects separate tables through a shared key.
 
+::: {.notes}
+Open by asking students if they have ever tried to combine two spreadsheets by hand — copying and pasting columns, sorting to line things up. That pain point is the motivation for today. Spend ~3 minutes here. This example (survey + task + demographics) maps directly onto what many of them will face in their final projects.
+:::
+
 ## Two tables, one question
 
 ```{r}
@@ -184,6 +188,10 @@ survey
 
 How do we combine these based on `participant_id`?
 
+::: {.notes}
+Point out the deliberate mismatch: participant 4 is in the left table but not the right, and participant 5 is in the right but not the left. Ask students to predict what should happen to those rows. This asymmetry is the whole reason different join types exist, and it will recur throughout the deck.
+:::
+
 # Keys {background-color="#2c3e50"}
 
 ## What are keys?
@@ -203,6 +211,10 @@ How do we combine these based on `participant_id`?
 
 - `participant_id` in the survey table
 - Links back to the participants table
+
+::: {.notes}
+Students sometimes confuse keys with row numbers. Emphasize that a key is a meaningful identifier that lives in the data itself, not the row index. A useful analogy: your student ID number follows you across the registrar, financial aid, and library systems — it is the key that links your records across those separate databases.
+:::
 
 ## Checking for unique keys
 
@@ -241,6 +253,10 @@ longitudinal |>
   filter(n > 1)
 ```
 
+::: {.notes}
+This is a common point of confusion. Students think "participant_id is always the key," but in repeated-measures data it is not unique on its own. Ask them: "If you have 3 participants measured at 2 timepoints, how many rows do you have?" This sets up the compound key idea naturally. The count-and-filter pattern for checking uniqueness is worth having them type out — they will use it often.
+:::
+
 # Mutating joins {background-color="#2c3e50"}
 
 ## The join family
@@ -253,6 +269,10 @@ longitudinal |>
 | `right_join()` | Right table (all rows) |
 | `inner_join()` | Both tables (only matches) |
 | `full_join()` | Both tables (all rows) |
+
+::: {.notes}
+Pause here and explain why they are called "mutating" joins — like mutate(), they add new columns. The table is a reference slide; don't belabor it. Tell students you will walk through each type one at a time with the same example so they can see exactly how the output differs. Spend ~1 minute on this overview before moving on.
+:::
 
 ## left_join(): Most common
 
@@ -267,6 +287,10 @@ participants |>
 
 - Participant 4 has no survey data → `NA`
 - Participant 5 from survey isn't in participants → excluded
+
+::: {.notes}
+This is the most important slide in the first half of the deck. Walk through the output row by row. Ask: "Why does participant 4 have NA for depression and anxiety?" and "Where did participant 5 go?" Students often ask whether the left table is the one before the pipe or the one inside left_join() — clarify that the piped-in table is always the left table. Spend ~3 minutes here.
+:::
 
 ## Visualizing left_join()
 
@@ -323,6 +347,10 @@ participants |>
 - Participant 4 excluded (no survey data)
 - Participant 5 excluded (not in participants)
 
+::: {.notes}
+Emphasize that inner_join() silently drops rows that do not match, which means you lose data without a warning. In psychology research this is usually not what you want — you want to know who is missing, not hide them. This is why left_join() is the default recommendation. Students may ask "when would I actually use inner_join?" — a fair answer is when you only want to analyze people who completed both measures and you have already documented the attrition.
+:::
+
 ## Visualizing inner_join()
 
 ```{r}
@@ -349,6 +377,10 @@ participants |>
 . . .
 
 Every participant appears, with `NA` where data is missing.
+
+::: {.notes}
+Point out that full_join() gives you the most complete picture — nobody is dropped. But it also means you may have rows with lots of NAs, which connects directly to next session on missing data. This is a nice foreshadowing moment.
+:::
 
 ## Visualizing full_join()
 
@@ -395,6 +427,10 @@ Use when:
 Start with `left_join()` unless you have a specific reason to use another type.
 :::
 
+::: {.notes}
+Reinforce this strongly: "If you remember nothing else from today, remember left_join()." In practice, 90% of joins students will do in this course and in research are left joins. The mental model is simple: "I have a main table and I want to stick more columns onto it." Spend ~2 minutes here before transitioning to the psychology example.
+:::
+
 ## Psychology example: Adding demographics
 
 ```{r}
@@ -409,6 +445,10 @@ task_data <- tibble(
 task_data |>
   left_join(participants, by = "participant_id")
 ```
+
+::: {.notes}
+Draw attention to what happened to the row count. The task_data table has 6 rows (3 participants x 2 trials) and the participants table has 4 rows, but the result still has 6 rows. This is because left_join() matched each trial row to the participant's demographics and repeated the demographic info for each trial. Students often expect the result to have more or fewer rows — this is a good moment to check their intuition.
+:::
 
 ## Joining by multiple keys
 
@@ -444,6 +484,10 @@ all_times |>
   )
 ```
 
+::: {.notes}
+Two things to highlight here. First, this is the first time students see the named-vector syntax for `by` when keys have different names — slow down and explain that the left side of the equals sign is the column name in the left table and the right side is the column name in the right table. Second, note the use of select() inside the join to avoid bringing in columns you do not need. Students often ask "can I just join everything?" — yes, but selecting first keeps your result tidy.
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: Combine study data
@@ -476,6 +520,10 @@ followup <- tibble(
 
 **Time: 10 minutes**
 
+::: {.notes}
+Circulate during the exercise. The most common mistake is using inner_join() instead of left_join(), which silently drops participant 5 in step 1. If pairs finish early, ask them to figure out which participants are missing followup data and whether missingness is related to condition. That bridges to the filtering joins section and next week's missing data session. When time is up, walk through the solution and emphasize step 3 — the sum(is.na()) pattern will come back next session.
+:::
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -502,6 +550,10 @@ sum(is.na(complete_data$followup_depression))
 
 - `semi_join()` — Keep rows that **have** a match
 - `anti_join()` — Keep rows that **don't have** a match
+
+::: {.notes}
+Transition cue: "So far every join we have seen adds columns. Filtering joins are different — they only keep or remove rows." Emphasize the contrast: mutating joins change the width of your table, filtering joins change the height. Students sometimes wonder why you would not just use filter() — the answer is that filtering joins let you filter based on whether a match exists in another table, which filter() alone cannot do.
+:::
 
 ## semi_join(): Has a match
 
@@ -548,6 +600,10 @@ enrolled |>
   anti_join(completed, by = "participant_id")
 ```
 
+::: {.notes}
+This is the "aha" moment for anti_join(). Walk through it slowly: "enrolled has 10 people, completed has 8 — anti_join gives us the 2 who are in enrolled but not in completed." This is exactly what psychologists need for attrition analyses, and students will use it on their final projects if they have longitudinal or multi-session data. Linger on this example — it is more memorable than the abstract definition.
+:::
+
 ## Attrition by condition
 
 ```{r}
@@ -562,6 +618,10 @@ dropout |>
 
 ::: {.callout-warning}
 Both dropouts were from the Treatment condition — this could bias results!
+:::
+
+::: {.notes}
+This slide connects back to Session 1's discussion of the replication crisis. If participants drop out of the treatment condition because the treatment is unpleasant, your remaining sample is biased — only the people who tolerated the treatment are left. This is differential attrition and it is a real threat to internal validity. Emphasize: "The code is simple, but the implication for your research is huge."
 :::
 
 # Common join problems {background-color="#2c3e50"}
@@ -594,6 +654,10 @@ demographics |>
 :::
 ::::
 
+::: {.notes}
+This is the single most common join problem students will encounter with real data. Different labs, different Qualtrics surveys, different RA conventions — the ID column is almost never named the same thing across files. Remind them of the syntax: left table name on the left side of the equals sign, right table name on the right. If they forget the `by` argument entirely, R will try to join on all shared column names, which often produces wrong results silently.
+:::
+
 ## Problem 2: Duplicate keys
 
 ```{r}
@@ -624,6 +688,10 @@ Each duplicate gets matched → creates extra rows!
 
 ::: {.callout-important}
 Always check for duplicate keys before joining.
+:::
+
+::: {.notes}
+This is the sneakiest bug students will encounter. The join runs without error, but you end up with more rows than expected. Students often do not notice until their summary statistics look wrong. Reinforce the habit: always run the count-and-filter check before joining. Ask: "If your table had 100 participants and after a join it has 105 rows, what happened?" Duplicates.
 :::
 
 ## Problem 3: Missing keys
@@ -685,6 +753,10 @@ Creates all combinations — probably not what you want!
 
 **Solution:** Be more specific about what you're joining on, or reshape first.
 
+::: {.notes}
+Many-to-many joins are rare in well-structured data, but students occasionally create them by accident (e.g., joining on participant ID alone when they should also join on session or timepoint). Point out that the result has 8 rows instead of the expected 4 — every trial got matched with every session for the same participant. The fix is usually to add another column to the `by` argument to make the key unique, or to reshape one of the tables first. You do not need to dwell here — just make sure they recognize the symptom (unexpected row explosion).
+:::
+
 # Practical psychology examples {background-color="#2c3e50"}
 
 ## Example 1: Qualtrics + demographics
@@ -704,6 +776,10 @@ demo <- tibble(
   gender = c("Female", "Male", "Female")
 )
 ```
+
+::: {.notes}
+Transition cue: "Let me show you three examples of how this works with real psychology workflows." The Qualtrics example is the most immediately relevant for students who are running their own studies. Mention that Qualtrics exports include ResponseId automatically, which makes it a natural join key when you have separate survey blocks exported as different CSVs.
+:::
 
 ## Example 1: Result
 
@@ -762,9 +838,17 @@ items |>
   left_join(participants_info, by = "id")
 ```
 
+::: {.notes}
+This example shows a common pattern: summarize first, then join. Students often try to join first and then summarize, which can work but is harder to reason about (especially if the join changes the number of rows). Encourage the "reduce then combine" workflow: compute your scale scores, then attach the metadata. This is also a nice callback to the group_by + summarize skills from earlier in the course.
+:::
+
 # End-of-deck exercise {background-color="#e67e22"}
 
 ## Practice: Longitudinal study
+
+::: {.notes}
+This exercise is a head start on Assignment 7 (Joins and Missing Data). It combines multiple join types — left_join for building the dataset, anti_join for identifying dropout — and asks students to think about attrition patterns. Give them ~10 minutes. If they get stuck on task 3 (identifying dropout at each wave), hint that anti_join is the right tool. Task 4 (dropout by condition) is the stretch goal; do not worry if not everyone gets there.
+:::
 
 You have data from a three-wave longitudinal study:
 
@@ -859,6 +943,10 @@ Ask yourself:
 :::
 ::::
 
+::: {.notes}
+Walk through this flowchart as a decision tree. Consider having students practice with a quick verbal exercise: you describe a scenario and they call out which join to use. For example: "I want to add survey scores to my participant table" (left_join), "I want to find out which participants did NOT complete the follow-up" (anti_join). Two or three of these takes about 2 minutes and solidifies the mental model.
+:::
+
 ## Key takeaways
 
 1. **Joins combine data** from multiple tables using key variables
@@ -885,3 +973,7 @@ Ask yourself:
 If your data lives in separate files, joins are how you ask a question that spans all of them.
 
 See you Wednesday for handling missing data!
+
+::: {.notes}
+End strong on this takeaway. Remind students that Assignment 6 is due before next class, and that they should check whether their final project data will require any joins — if so, now is the time to start thinking about what the key variable is. Next session covers missing data, which pairs naturally with joins since joins often introduce NAs.
+:::

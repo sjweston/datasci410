@@ -39,6 +39,10 @@ reaction_data <- tibble(
 
 # Choosing the right geom {background-color="#2c3e50"}
 
+::: {.notes}
+This first section (~25 min total) covers geom selection, distributions, and stat_summary(). The opening comparison is the hook — let it land before moving on.
+:::
+
 ## Same data, two stories
 
 ```{r}
@@ -68,6 +72,10 @@ Both use the same data. The difference is **layers** — and the right layers te
 
 The wrong geom doesn't just look bad — it can actively mislead.
 
+::: {.notes}
+Spend ~2 minutes here. Ask students which version they'd trust more and why. The bar chart hides everything — the spread, outliers, individual data points. Version B tells the full story. This contrast motivates the entire session: choosing the right geom is a design decision, not just a coding one.
+:::
+
 ## Geom selection guide
 
 | Your data | Good geom | Avoid |
@@ -78,6 +86,10 @@ The wrong geom doesn't just look bad — it can actively mislead.
 | One continuous + one categorical | `geom_boxplot()`, `geom_violin()` | pie charts |
 | Two categorical | `geom_count()`, `geom_tile()` | — |
 | Change over time | `geom_line()` | `geom_point()` alone |
+
+::: {.notes}
+This table is a reference slide students will come back to. Don't read every row aloud — highlight the "Avoid" column. The most common mistake is using `geom_bar()` for continuous data. Also note that pie charts are absent from the "Good geom" column entirely. Students will ask about pie charts; the short answer is that position along a common axis (bar chart) is easier for the human eye to compare than angle (pie chart).
+:::
 
 ## One variable: distributions
 
@@ -97,6 +109,10 @@ reaction_data |>
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+Walk through the code line by line. Emphasize `binwidth` — students will forget it and get the default "30 bins" warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. Students often ask what number to use; there's no single right answer, but for reaction times in the hundreds, 20-30 ms bins are reasonable.
+:::
 
 ## histogram vs density
 
@@ -122,6 +138,10 @@ p1 + p2
 ```
 
 Histogram = actual counts. Density = smoothed estimate of the shape.
+
+::: {.notes}
+Quick comparison — don't belabor this. The key point is that density plots are better for comparing distributions across groups (you can overlay them), while histograms are better for seeing exact counts. Students sometimes get confused by the y-axis on density plots; reassure them that the area under the curve sums to 1, but they rarely need to interpret the y-axis value itself.
+:::
 
 ## One categorical variable
 
@@ -184,11 +204,19 @@ p1 + p2
 
 Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.
 
+::: {.notes}
+Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. Bimodal distributions look obvious in a violin but invisible in a boxplot. Mention that we'll see an even better option (raincloud plots) in the next session.
+:::
+
 # stat_summary() {background-color="#2c3e50"}
 
 ## The psychology staple: means + error bars
 
 In psych papers, you'll see this constantly: a bar chart showing group means with error bars. `stat_summary()` is how you make it.
+
+::: {.notes}
+Transition: "So far we've been plotting raw data. But in psychology, you'll almost always need to show summary statistics — means, error bars, confidence intervals. That's what stat_summary() is for." This is the most psych-relevant section of the deck. Spend ~8 minutes on stat_summary() total. Students will use this constantly in assignments and the final project.
+:::
 
 ## stat_summary() basics
 
@@ -229,6 +257,10 @@ stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
 - `fun.data` = a function that returns ymin, y, ymax (like `mean_cl_normal`)
 - `geom` = what shape to use to show the result
 
+::: {.notes}
+The `fun` vs `fun.data` distinction trips students up. Emphasize: `fun` returns one number (e.g., the mean), while `fun.data` returns three (ymin, y, ymax) — which is what you need for error bars. Students don't need to memorize this; they need to know the pattern: one stat_summary() for the bar, another for the error bars.
+:::
+
 ## What are error bars showing?
 
 This matters! Always state it in your figure caption.
@@ -254,6 +286,10 @@ The APA Publication Manual (7th ed.) recommends showing individual data points a
 
 Bar charts with error bars are ubiquitous in psychology — but they hide the *shape* of the data. Outliers, bimodality, and floor/ceiling effects all disappear behind a rectangle.
 
+::: {.notes}
+This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). Emphasize that the field is moving toward showing more data, not less.
+:::
+
 ## Adding individual data points
 
 Error bars alone hide the data. Show the points too:
@@ -277,9 +313,17 @@ reaction_data |>
   theme(legend.position = "none")
 ```
 
+::: {.notes}
+Walk through the layering order: jittered points go first (behind), then the summary point and error bars on top. Emphasize that `alpha = 0.4` makes individual points semi-transparent so they don't overwhelm the summary. This is the pattern students should use for most psych figures going forward: show the data AND the summary.
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: 10 minutes
+
+::: {.notes}
+Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use `stat_summary()` twice (once for bar, once for error bars), (2) putting `geom_jitter()` after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in `labs()`. If pairs finish early, challenge them to add `age_group` as a facet or dodge variable. Reveal the solution after time is up.
+:::
 
 Using the `reaction_data` dataset:
 
@@ -319,6 +363,10 @@ reaction_data |>
 
 # Position & scales {background-color="#2c3e50"}
 
+::: {.notes}
+This second lecture block (~20 min) covers position adjustments, scales, coordinate systems, and the polished figure. This is more about refinement than new geoms — students already know the building blocks, now they learn how to control them precisely.
+:::
+
 ## Position adjustments
 
 When geoms overlap, position adjustments fix it:
@@ -331,6 +379,10 @@ When geoms overlap, position adjustments fix it:
 | `"jitter"` | Random wiggle | Overplotted points |
 
 ## dodge: grouped bar charts
+
+::: {.notes}
+This is the trickiest position adjustment. The key gotcha: when you dodge both the bars and the error bars, they need to dodge by the same width. That's why we use `position_dodge(0.6)` for the error bars to match `width = 0.6` on the bars. If these don't match, the error bars float between the bars. Students will hit this bug — it's a good one to flag proactively.
+:::
 
 ```{r}
 #| output-location: slide
@@ -373,6 +425,10 @@ p1 + p2
 
 ## Scales: controlling axes and colors
 
+::: {.notes}
+Spend ~3 minutes on this and the next slide together. Students don't need to memorize every scale function — they need to know the naming pattern: `scale_` + the aesthetic (`fill`, `color`, `x`, `y`) + `_` + the type (`manual`, `continuous`, `discrete`, `viridis`). Once they see the pattern, they can guess function names and use autocomplete.
+:::
+
 Scales translate data values into visual properties:
 
 ```{r}
@@ -409,6 +465,10 @@ Use a website like [HTML color codes](https://htmlcolorcodes.com/color-picker/) 
 
 ## Coordinate systems
 
+::: {.notes}
+The `coord_cartesian()` vs `scale_y_continuous(limits = ...)` distinction is critical and students will confuse them. The key: `coord_cartesian()` zooms the view (like pinching to zoom on a photo), while `scale_y_continuous(limits = ...)` filters the data first and then plots. This means boxplot whiskers, smooth lines, and error bars can all change when you use scale limits because outliers are removed before the calculation. Always use `coord_cartesian()` for zooming.
+:::
+
 ```{r}
 #| eval: false
 # Flip x and y (great for long category labels)
@@ -438,6 +498,10 @@ reaction_data |>
 
 ## A polished psychology figure
 
+::: {.notes}
+This is the "bringing it all together" slide. Walk through the code slowly, pointing out each layer and why it's there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for accessibility, and informative labels. This is roughly the quality you'd expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.
+:::
+
 ```{r}
 #| output-location: slide
 #| fig-width: 10
@@ -463,6 +527,10 @@ reaction_data |>
 # Get a head start {background-color="#e67e22"}
 
 ## Assignment 4 preview
+
+::: {.notes}
+This is the head-start exercise (~10 min remaining). Students don't need to finish this in class — it's a bridge to Assignment 4. Encourage them to have fun making the "bad" version deliberately awful. If students seem finished early, suggest they try adding `facet_wrap(~age_group)` to any of today's plots as a preview of faceting.
+:::
 
 Assignment 4 will ask you to create "bad" and "good" versions of figures. Start experimenting:
 
@@ -511,3 +579,8 @@ Assignment 4 will ask you to create "bad" and "good" versions of figures. Start 
 The difference between a chart and a figure is intention — every layer should earn its place.
 
 Next time: Perception & Design
+
+::: {.notes}
+End on this line and let it land. Next session builds directly on this one — we go from "which geom" to "which color, which theme, which design decisions." Students should have R4DS Ch 9 fresh in their minds and the optional perception reading done before Monday.
+:::
+

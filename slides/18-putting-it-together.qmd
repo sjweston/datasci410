@@ -30,6 +30,10 @@ library(tidyverse)
 
 # Looking back {background-color="#2c3e50"}
 
+::: {.notes}
+This is the last class session. The tone should feel celebratory and reflective, not rushed. Students have their final projects due today and presentations during finals week. Start with a warm opening -- acknowledge that it's the end, and that you're proud of how far they've come. The first ~10 minutes are about reflection before moving into the live demo.
+:::
+
 ## The data science workflow
 
 ![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png){width="80%"}
@@ -37,6 +41,10 @@ library(tidyverse)
 . . .
 
 Ten weeks ago, you couldn't do any of this. Now you can do all of it.
+
+::: {.notes}
+Let this diagram sit for a moment. Ask students to name which sessions covered which parts of the cycle. Import (Session 6), Tidy (Session 5), Transform (Sessions 3-4), Visualize (Sessions 2, 8-9), Model (Session 17), Communicate (Sessions 7, 16). The point is that they've covered the entire workflow. This is the same R4DS diagram from the textbook -- it should feel familiar.
+:::
 
 # Live demonstration {background-color="#2c3e50"}
 
@@ -55,6 +63,10 @@ I'll demonstrate the full workflow:
 3. Explore with visualizations
 4. Create publication-ready figures
 5. Build a Quarto report
+
+::: {.notes}
+This live demo should take ~15 minutes total (Steps 1-9). You can either advance through the slides or live-code in RStudio alongside -- live-coding is more engaging if time allows. The research question deliberately mirrors what many students are doing for their final projects (social media and mental health), so it should feel relevant. Emphasize that this is the exact workflow they should use for their final project.
+:::
 
 ## The dataset
 
@@ -95,6 +107,10 @@ social_media |>
   summarize(across(everything(), ~sum(is.na(.x))))
 ```
 
+::: {.notes}
+Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: "What do you notice about the missing data? Which variables have it? How much?" This connects directly back to Session 15 on missing data.
+:::
+
 ## Step 2: Clean the data
 
 ```{r}
@@ -116,6 +132,10 @@ social_media_clean <- social_media |>
                           levels = c("Freshman", "Sophomore", "Junior", "Senior"))
   )
 ```
+
+::: {.notes}
+Walk through each cleaning decision and explain the reasoning. "Why drop_na on the outcome variable?" Because you can't analyze what you can't measure. "Why create categories?" Because clinical cutoffs make the continuous scores more interpretable. "Why reorder academic year?" Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 15), case_when (Session 4), factor levels (Session 12).
+:::
 
 ## Step 3: Descriptive statistics
 
@@ -163,6 +183,10 @@ cor_value
 . . .
 
 **Finding:** Moderate positive correlation (r = `r round(cor_value, 2)`)
+
+::: {.notes}
+This is a callback to Monday's session. Ask students to interpret the correlation in plain language before you advance to the finding. "What does a positive correlation mean here?" Students who were in Session 17 should be able to answer this. Note that we drop_na before computing the correlation -- reinforce the habit of handling missing data explicitly.
+:::
 
 ## Step 6: Explore by gender
 
@@ -245,6 +269,10 @@ used social media more reported higher anxiety levels.
 ```
 ````
 
+::: {.notes}
+This is the communication step -- the one students often skip. Emphasize that inline R code (the backtick-r expressions) means the numbers in the writeup update automatically if the data changes. No more copy-pasting numbers from output into a Word doc. This is what makes it reproducible. If time allows, show this rendering in a Quarto document to drive the point home.
+:::
+
 ## What this demonstrates
 
 ✅ **Complete workflow** — import to interpretation
@@ -253,6 +281,10 @@ used social media more reported higher anxiety levels.
 ✅ **Summary statistics** — both numerical and tabular
 ✅ **Inline reporting** — no hard-coded numbers
 ✅ **Clear narrative** — telling the story
+
+::: {.notes}
+Pause here and take a breath. This checklist summarizes the entire course in six bullet points. Let students appreciate that they can now do every single one of these things. Then transition: "But what happens when things go wrong? Because they will, even for experienced programmers."
+:::
 
 # When things break {background-color="#2c3e50"}
 
@@ -266,6 +298,10 @@ used social media more reported higher anxiety levels.
 | `non-numeric argument` | Math on text — variable is character, not numeric | Check type with `class()` or `glimpse()` |
 | `did you mean '=='?` | Used `=` (assignment) instead of `==` (comparison) in `filter()` | Change `=` to `==` |
 | ggplot `+` error | Missing `+` between ggplot layers | Every line except the last needs `+` |
+
+::: {.notes}
+Spend ~3 minutes on this table. Ask students: "Which of these have you gotten this quarter?" Hands will go up for almost all of them. The most common by far is "object not found" (usually a capitalization issue or forgetting to run an earlier chunk). The "unexpected symbol" error is the trickiest because the actual problem is on the line before the error -- emphasize checking the previous line.
+:::
 
 ## A 5-step debugging strategy
 
@@ -286,6 +322,10 @@ used social media more reported higher anxiety levels.
 . . .
 
 5. **Google it** — include "R", the package name, and the exact error message.
+
+::: {.notes}
+Step 3 ("run line by line") is the most underused debugging technique among beginners. Demo it quickly: take a piped chain, highlight just the first line and run it, then add the next line, and so on. The line where it breaks is where the bug is. This is the single most useful debugging habit they can develop. Steps 1-3 solve ~90% of bugs.
+:::
 
 ## When you ask for help: make a reprex
 
@@ -314,6 +354,10 @@ used social media more reported higher anxiety levels.
 
 **Tip:** Use `dput()` to share a small slice of your real data so others can recreate it exactly.
 
+::: {.notes}
+The reprex concept is a life skill for programming. Emphasize the contrast between the "bad" and "good" examples. The good example includes: the library call, a minimal dataset, the code that fails, and the expected vs. actual result. Even if students never post on Stack Overflow, learning to create a reprex forces them to isolate the problem -- which often helps them solve it themselves.
+:::
+
 ## Where to get help after this course
 
 - [Stack Overflow](https://stackoverflow.com) — searchable Q&A (look for green checkmark ✅)
@@ -328,6 +372,10 @@ used social media more reported higher anxiety levels.
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: Debug this code
+
+::: {.notes}
+This is the final pair coding exercise of the course -- 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says "object not found." Bug 2 gives a helpful error ("Did you mean ==?"). Bug 4 gives "unexpected symbol." This exercise reinforces the debugging strategy from the previous slide.
+:::
 
 This code has several errors. Find and fix them all:
 
@@ -390,6 +438,10 @@ Upload your code to Canvas for participation credit. Paste what you have into to
 
 ## You have the foundation
 
+::: {.notes}
+Transition to the forward-looking section (~10 minutes for the "Where to go from here" block). The goal is to show students that this course was the on-ramp, not the destination. Each of the next slides shows one possible direction. Don't spend too long on any one -- just plant seeds. Students who are interested will follow up on their own.
+:::
+
 This course covered **data wrangling and visualization** — the foundation of data science.
 
 . . .
@@ -425,6 +477,10 @@ lm(gad7_total ~ hours_social_media + age, data = social_media_clean)
 - PSY 420: Advanced Statistics
 - STAT 510: Applied Regression
 - Online: [Learning Statistics with R](https://learningstatisticswithr.com/)
+
+::: {.notes}
+This is the most natural next step for psych majors. Emphasize that the code syntax is nearly identical to what they learned in Session 17 -- t.test, aov, and lm all follow the same formula syntax. If students are taking PSY 420 or a stats course next, they'll already know the R side.
+:::
 
 ## Writing functions
 
@@ -479,6 +535,10 @@ server <- function(input, output) {
 
 shinyApp(ui, server)
 ```
+
+::: {.notes}
+Shiny is the most visually exciting "what's next" option. If you have a Shiny app example you can show briefly, that makes a big impact. Students are often surprised that you can build interactive web apps entirely in R without knowing HTML or JavaScript. Keep it to ~1 minute -- just enough to spark curiosity.
+:::
 
 ## Machine learning with tidymodels
 
@@ -557,6 +617,10 @@ Ideas:
 Aim for 1 hour per week — consistency matters more than intensity
 :::
 
+::: {.notes}
+The "1 hour per week" tip is the most actionable takeaway from this section. Skills decay fast without practice, but even a small amount of regular use keeps them sharp. TidyTuesday is the best recommendation for students who want structure -- it provides a new dataset every week with a community sharing their visualizations. Encourage students to pick one or two ideas from this list, not all of them.
+:::
+
 # Final reflections {background-color="#2c3e50"}
 
 ## What makes a good data scientist?
@@ -578,6 +642,10 @@ It's not about knowing every function or memorizing syntax.
 
 You've developed all of these skills this quarter.
 
+::: {.notes}
+This is the emotional core of the closing section. Slow down here. Read through the six qualities and pause on each one. The last line -- "You've developed all of these skills this quarter" -- should land. Students often don't realize how much they've grown because it happened gradually. Connecting each quality back to specific class moments makes it concrete: "Remember when you debugged your partner's code? That's persistence."
+:::
+
 ## The growth mindset
 
 Ten weeks ago, many of you had never written a line of code.
@@ -596,6 +664,10 @@ Now you can:
 
 **That's incredible growth.**
 
+::: {.notes}
+Let the bullet list build slowly. Each skill maps to a specific part of the course. Students may not feel like they "mastered" everything, and that's fine -- emphasize that they can do all of these things, even if they still need to look things up. Looking things up is what professionals do too. The phrase "That's incredible growth" is genuine -- let it land before moving on.
+:::
+
 ## Errors are part of the process
 
 Remember:
@@ -609,6 +681,10 @@ Remember:
 
 ::: {.callout-important}
 If you take one thing from this course: **You can learn hard things.**
+:::
+
+::: {.notes}
+This is the single most important message of the course. Many students came in believing they "aren't math people" or "can't code." They now have evidence that they can. The callout box should be the emotional peak of the session. Pause after it. Let the room be quiet for a moment.
 :::
 
 ## Thank you
@@ -646,6 +722,10 @@ You've been a great class. I'm excited to see what you do with these skills.
 - Focus on the story, not technical details
 - Practice timing!
 
+::: {.notes}
+Presentations happen during finals week, not today. Go through the format and timing quickly. Emphasize that 5 minutes goes fast -- students should practice timing at home. The key message: show your best 1-2 figures and tell the story. Don't try to explain every line of code. The audience wants to hear the finding, not the data wrangling.
+:::
+
 ## Presentation order
 
 We'll go alphabetically by last name.
@@ -678,6 +758,10 @@ Your feedback helps me improve the course for future students.
 
 **I read every evaluation carefully.**
 
+::: {.notes}
+Give students 5-10 minutes in class to fill out evaluations. They're much more likely to complete them if given dedicated class time. Step out of the room or move to the back -- students give more honest feedback when the instructor isn't watching. Set a timer so you know when to come back.
+:::
+
 # Final words {background-color="#2c3e50"}
 
 ## Keep learning
@@ -706,6 +790,10 @@ You have the skills to:
 **Use them.**
 
 Make psychology more reproducible, transparent, and data-driven.
+
+::: {.notes}
+This is the aspirational close. The call to action -- "Make psychology more reproducible, transparent, and data-driven" -- connects back to Session 1's opening about the replication crisis. The course has come full circle: they started by learning why data science matters for psychology, and they end with the skills to actually do something about it.
+:::
 
 ## Final final words
 

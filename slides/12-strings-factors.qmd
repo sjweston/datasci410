@@ -28,6 +28,28 @@ execute:
 library(tidyverse)
 ```
 
+# The Power Play {background-color="#e67e22"}
+
+## Something new in the team challenge
+
+The top 2 teams on the scoreboard right now get a **one-time strategic choice:**
+
+. . .
+
+**Option A — Boost:** Add **+3 points** to your own team's total
+
+. . .
+
+**Option B — Sabotage:** Remove **2 points** from each of **two other teams** of your choice
+
+. . .
+
+Choices are final. First place picks first.
+
+::: {.notes}
+This is the Power Play — a mid-term twist to keep things interesting. Show the scoreboard first (as usual), then reveal this slide. Give teams a minute to react, then have the top 2 teams announce their choices live. If a team is targeted by both, they lose 4 total. Teams can't go below 0. This should take about 5 minutes and generate some fun energy. Don't belabor it — announce, choose, update the scoreboard, move on.
+:::
+
 # Strings: The basics {background-color="#2c3e50"}
 
 ## How many genders are in this dataset?
@@ -47,6 +69,11 @@ R says **7**. You meant **2**.
 
 The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.
 
+::: {.notes}
+Start by showing the first slide (the table) and asking students "How many genders are in this dataset?" Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.
+:::
+
+
 ## What are strings?
 
 **Strings** are text data — anything in quotes:
@@ -58,6 +85,10 @@ feedback <- "The task was confusing"
 ```
 
 The `stringr` package (part of tidyverse) gives you tools for working with strings. All `stringr` functions start with `str_`.
+
+::: {.notes}
+Emphasize the naming convention: all stringr functions start with str_, so autocomplete in RStudio is very helpful. Students can type str_ and browse available functions. This is a good time to remind them about the tab-completion habit.
+:::
 
 ## Creating and combining strings
 
@@ -80,6 +111,10 @@ str_c("Participant: ", first, " ", last)
 library(glue)
 glue("Participant: {first} {last}")
 ```
+
+::: {.notes}
+Move quickly through str_c() — students will use it occasionally but glue() is more intuitive. Show both so they recognize str_c() in others' code, but recommend glue() for their own work. If students ask: glue is loaded automatically with tidyverse in newer versions, but loading it explicitly does not hurt.
+:::
 
 ## String length
 
@@ -113,6 +148,10 @@ str_to_title(messy_data)
 
 Essential for cleaning demographic data!
 
+::: {.notes}
+This is one of the most important slides in the deck. str_to_lower() alone solves a huge number of data cleaning problems. Run the code live and ask: "If you had to pick just one of these three functions, which would you use for cleaning survey data?" Answer: str_to_lower(), because it makes everything comparable regardless of how participants typed it.
+:::
+
 ## Trimming whitespace
 
 Survey data often has extra spaces:
@@ -123,6 +162,10 @@ messy_responses <- c("  Yes", "No  ", "  Maybe  ")
 str_trim(messy_responses)         # Remove leading/trailing
 str_squish(messy_responses)       # Also reduce internal spaces
 ```
+
+::: {.notes}
+Students often ask the difference between str_trim() and str_squish(). str_trim() only removes leading and trailing whitespace; str_squish() also collapses multiple internal spaces into one. For survey data, str_trim() is usually sufficient. Trailing spaces from Qualtrics exports are very common and invisible to the eye — this is why str_trim() matters.
+:::
 
 ## Psychology example: Cleaning demographics
 
@@ -136,6 +179,10 @@ survey |>
     gender_clean = str_to_lower(str_trim(gender))
   )
 ```
+
+::: {.notes}
+This is the payoff slide for the opening example. Walk through it step by step: "First we trim the spaces, then we lowercase everything." Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |> but nesting is fine for two functions. After cleaning, ask: "How many unique genders would R see now?" This connects directly back to the hook.
+:::
 
 ## Detecting patterns
 
@@ -161,6 +208,10 @@ tibble(feedback) |>
   filter(str_detect(feedback, "clear"))
 ```
 
+::: {.notes}
+Emphasize the filter() integration — str_detect() returns TRUE/FALSE, which is exactly what filter() needs. This connects back to last session on logicals. Students will use this pattern frequently for things like "find all participants who mentioned anxiety in their open-ended response."
+:::
+
 ## Case-insensitive detection
 
 Patterns are case-sensitive by default:
@@ -176,6 +227,10 @@ Make them case-insensitive with `regex(ignore_case = TRUE)`:
 ```{r}
 str_detect("Clear instructions", regex("clear", ignore_case = TRUE))
 ```
+
+::: {.notes}
+The regex() wrapper with ignore_case is essential for real survey data where you cannot control capitalization. Students will forget this and wonder why their str_detect() misses matches — remind them that case-sensitivity is the default and they need to opt in to ignoring case.
+:::
 
 ## Replacing text
 
@@ -201,6 +256,10 @@ str_replace_all(diagnosis, c(
   "OCD" = "Obsessive-Compulsive Disorder"
 ))
 ```
+
+::: {.notes}
+The named vector approach to str_replace_all() is very handy for recoding abbreviations in real data. Emphasize this pattern — students will use it for diagnosis codes, condition labels, and other abbreviation-heavy data. Move fairly quickly through this slide.
+:::
 
 ## Extracting parts of strings
 
@@ -238,6 +297,10 @@ Examples:
 Regex is powerful but complex. For this course, stick to simple patterns. When you need more, check [R4DS Ch 14](https://r4ds.hadley.nz/strings) or [regex101.com](https://regex101.com).
 :::
 
+::: {.notes}
+Do not go deep on regex — this is a "know it exists" slide. Students only need to know that \\d matches digits and that patterns can be more powerful than literal text. If anyone asks for more, point them to regex101.com where they can test patterns interactively. Transition: "You have enough string tools now to clean real data. Let's practice."
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: Clean text data
@@ -264,6 +327,10 @@ messy_survey <- tibble(
 4. Filter to only negative comments
 
 **Time: 10 minutes**
+
+::: {.notes}
+Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(...)) or doing them in the wrong order (order does not matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for "or" — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.
+:::
 
 ```{r}
 #| echo: false
@@ -302,6 +369,10 @@ gender_fct
 
 Notice the **Levels** line — those are the possible categories.
 
+::: {.notes}
+Run this code live. The key thing students should notice is the "Levels:" line in the output — that is what makes a factor different from a plain character vector. Emphasize that levels define the complete set of valid categories, even if some do not appear in the data. This matters for plots and statistical models.
+:::
+
 ## Why use factors?
 
 1. **Memory efficient** — R stores categories once, not repeatedly
@@ -325,6 +396,10 @@ factor(condition)
 factor(condition, levels = c("Control", "Treatment"))
 ```
 
+::: {.notes}
+Emphasize the difference: without specifying levels, R defaults to alphabetical order. With explicit levels, you control the order. For most psychology data, you want explicit levels because alphabetical order rarely makes conceptual sense (e.g., "Control" should come before "Treatment" even though it does alphabetically by coincidence).
+:::
+
 ## Order matters!
 
 ```{r}
@@ -344,6 +419,10 @@ factor(likert, levels = c(
 ```
 
 ## Why order matters: Example
+
+::: {.notes}
+This two-slide sequence is the most persuasive argument for factors. Show the alphabetical plot first and ask "What is wrong with this chart?" Students will immediately see that the Likert order is scrambled. Then show the fixed version. This aha moment makes the factor concept stick.
+:::
 
 ```{r}
 #| output-location: slide
@@ -390,6 +469,10 @@ Key functions:
 - `fct_recode()` — rename levels
 - `fct_collapse()` — combine levels
 
+::: {.notes}
+Emphasize the naming convention: all forcats functions start with fct_, just like stringr functions start with str_. This makes them easy to find with autocomplete. You do not need to load forcats separately — it is part of tidyverse. Skim the list; each function gets its own slide next.
+:::
+
 ## fct_relevel(): Manual reordering
 
 ```{r}
@@ -405,6 +488,10 @@ fct_relevel(education, "High School", "Bachelor's", "Master's")
 ```
 
 ## fct_reorder(): Order by another variable
+
+::: {.notes}
+fct_reorder() is arguably the most useful forcats function for data visualization. It reorders factor levels by the values of another variable. In the therapy example, conditions are ordered by mean improvement, making the bar chart immediately readable. Students will use this frequently in assignments and the final project.
+:::
 
 Extremely useful for plots!
 
@@ -486,6 +573,10 @@ fct_collapse(diagnosis,
 )
 ```
 
+::: {.notes}
+fct_collapse() is useful when you have too many levels for meaningful analysis. In psychology, you often collapse rare diagnosis categories into "Other" or group specific disorders into broader categories. Note that OCD is grouped under Anxiety here, which reflects older DSM-IV classification — this could spark a good discussion about how coding decisions reflect theoretical assumptions.
+:::
+
 ## Psychology example: Recoding demographics
 
 ```{r}
@@ -527,6 +618,10 @@ Use `fct_drop()` to remove them:
 fct_drop(just_depression)
 ```
 
+::: {.notes}
+This is a common gotcha. After filtering, factors remember their old levels, which can create empty bars in plots or confuse statistical models. fct_drop() solves it. Students will encounter this when they subset data and then try to plot — the empty categories show up as blank bars.
+:::
+
 ## Common factor issues
 
 **Problem 1:** Factors created from numbers
@@ -543,6 +638,10 @@ mean(age_factor)  # Error! It's not numeric anymore
 ```{r}
 as.numeric(as.character(age_factor))  # Correct way
 ```
+
+::: {.notes}
+This is a classic trap. Students sometimes accidentally convert numeric columns to factors (e.g., when reading CSV files with read.csv instead of read_csv). The key lesson: as.numeric() on a factor gives you the internal level codes (1, 2, 3...), not the original values. You must go through as.character() first. This mistake has caused real errors in published research.
+:::
 
 ## Common factor issues
 
@@ -579,6 +678,10 @@ likert_data <- tibble(
 3. Create a bar chart showing response counts for each question
 4. Use `facet_wrap()` to make separate panels for each question
 5. Bonus: Use `fct_infreq()` to order responses by overall frequency
+
+::: {.notes}
+Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like "agree" and "Agree." The facet_wrap step is review from earlier visualization sessions. If students finish early, the bonus question (fct_infreq) is a good stretch goal.
+:::
 
 ```{r}
 #| echo: false
@@ -675,3 +778,8 @@ likert_data_clean |>
 Messy categories turn into messy results. `str_to_lower()` and `factor()` are your first line of defense.
 
 See you Monday for joins!
+
+::: {.notes}
+Remind students that Assignment 6 is now assigned and Assignment 5 is due. The reading for next class is R4DS Ch 19 on joins. Preview that joins let you combine two different datasets — e.g., matching participant demographics to their response data. Encourage students to check their final project data for string and factor issues this week.
+:::
+

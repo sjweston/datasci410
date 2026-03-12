@@ -42,6 +42,10 @@ How do you get to *just those rows?*
 
 That's what `filter()` does. And it's just the beginning — today we learn four verbs that turn raw data into exactly what you need.
 
+::: {.notes}
+Pause after revealing the question. Let students sit with the discomfort of not knowing how to do this yet — that tension is the hook. When you reveal filter(), frame it as "this is the tool that solves that exact problem." Spend ~2 minutes here.
+:::
+
 ## The dplyr verbs
 
 | Verb | What it does |
@@ -53,6 +57,10 @@ That's what `filter()` does. And it's just the beginning — today we learn four
 | `summarize()` | Collapse to a **summary** |
 
 Today: `filter()`, `arrange()`, `select()`, `mutate()`
+
+::: {.notes}
+Emphasize the word "verbs" — dplyr is designed so each function is an action word that describes what it does. Mention that summarize() will come next session. Students don't need to memorize this table; it's a roadmap so they know where the hour is going.
+:::
 
 ## Our dataset: flights
 
@@ -70,6 +78,10 @@ glimpse(flights)
 - `origin`, `dest` — airport codes
 - `air_time`, `distance` — in minutes and miles
 
+::: {.notes}
+Spend ~3 minutes on these two slides. Have students look at the glimpse() output and call out what they notice — number of rows, column types, etc. Point out that negative delay means the flight left early. Students often ask about the HHMM time format (e.g., 517 means 5:17 AM) — acknowledge it's awkward and we'll mostly use the delay columns instead.
+:::
+
 # filter() {background-color="#2c3e50"}
 
 ## filter() picks rows
@@ -79,6 +91,10 @@ glimpse(flights)
 # All flights on January 1st
 filter(flights, month == 1, day == 1)
 ```
+
+::: {.notes}
+Type this live in the console. Emphasize the structure: filter(data, condition). Point out that the output is a tibble with fewer rows — filter() didn't change the original data, it returned a new subset. Students often worry about "losing" data; reassure them that the original `flights` object is untouched.
+:::
 
 ## Comparison operators
 
@@ -91,6 +107,10 @@ filter(flights, month == 1, day == 1)
 
 ::: {.callout-warning}
 Use `==` for comparison, not `=`!
+:::
+
+::: {.notes}
+The `==` vs `=` mistake is the single most common error in this session. Demonstrate what happens when you use `=` instead — R will throw an error or silently do the wrong thing. Have students say it aloud: "double equals for comparison." You'll repeat this warning several times today and it's worth it.
 :::
 
 ## Filter examples
@@ -139,6 +159,10 @@ filter(flights, month == 1 & day == 1)
 filter(flights, month == 11 | month == 12)
 ```
 
+::: {.notes}
+Common mistake: students will write `filter(flights, month == 11 | 12)`. This doesn't throw an error but returns the wrong result because R evaluates `12` as TRUE. Show this mistake live so they can see the problem. This sets up %in% nicely as a safer alternative.
+:::
+
 ## A useful shortcut: %in%
 
 ```{r}
@@ -147,6 +171,10 @@ filter(flights, month %in% c(11, 12))
 ```
 
 `%in%` checks if the value is in the vector.
+
+::: {.notes}
+Emphasize that `%in%` is the safer, cleaner way to check "is this value one of these options?" Students will use this constantly for filtering by condition, demographic groups, etc. It also scales — imagine checking for 5 or 6 values with `|`.
+:::
 
 ## filter() with psychology data
 
@@ -177,6 +205,10 @@ x > 2
 ```
 
 Any operation with `NA` returns `NA` (it's unknown!).
+
+::: {.notes}
+This is a conceptual hurdle. Explain the logic: "Is NA greater than 2? We don't know, because we don't know what NA is. So the answer is also NA." The analogy of a blank cell in a spreadsheet works well. Students coming from SPSS may be used to missing values being coded as -99 or similar — emphasize that R has a built-in concept of missingness. Spend ~3 minutes on NA and is.na() together.
+:::
 
 ## Checking for NA
 
@@ -209,6 +241,10 @@ How many flights match? Which origin airport had the most?
 You'll need `filter()` with multiple conditions. Think about which operators you need.
 :::
 
+::: {.notes}
+Set a visible 10-minute timer. Circulate and look for common issues: forgetting quotes around "UA" and "LAX", using `=` instead of `==`, using `>` instead of `>` 120 for minutes vs. hours. The answer is 26 flights; EWR has the most. The bonus count() question previews next session's content — it's fine if they don't get to it. When time is up, reveal the solution and walk through it line by line.
+:::
+
 ```{r}
 #| echo: false
 #| eval: false
@@ -236,6 +272,10 @@ flights |>
 # Sort by departure delay (smallest first)
 arrange(flights, dep_delay)
 ```
+
+::: {.notes}
+After the pair coding break, this is a reset point. Arrange is simpler than filter, so it's a good place to regain momentum. Point out the negative values at the top — those are flights that left early. Ask: "What if we want the most delayed flights first?" to set up desc().
+:::
 
 ## Descending order
 
@@ -267,6 +307,10 @@ arrange(data, response_time)
 ```
 
 ## Quick mental model
+
+::: {.notes}
+This is a breathing slide — use it to consolidate before moving on. Pause and ask students to point to which verb they'd use for a given task: "I want only participants in the treatment group" (filter). "I want to see who scored highest" (arrange with desc). Spend ~1 minute.
+:::
 
 You've now seen three verbs. Each answers a different question:
 
@@ -303,6 +347,10 @@ select(flights, year:day)
 | `ends_with("x")` | Columns ending with "x" |
 | `contains("x")` | Columns containing "x" |
 | `everything()` | All remaining columns |
+
+::: {.notes}
+This is where select becomes genuinely useful for psychology data. Connect it to Qualtrics exports: "Imagine you have 200 columns and all your BDI items start with 'bdi_'. You can grab them all with one line." Students often ask if these are case-sensitive — yes, by default. You can use `contains("delay", ignore.case = TRUE)` if needed but don't belabor it.
+:::
 
 ## Using select helpers
 
@@ -374,6 +422,10 @@ select(flights, year, month, day)
 
 Data goes first. Then you describe what you want. This consistency is by design.
 
+::: {.notes}
+Hammer this point home — the consistent structure (data first, then what you want) is what makes dplyr learnable. Once you know one verb, you already know the shape of the next. This also sets up the pipe: "If data always goes first, what if we could just pass it automatically?"
+:::
+
 # mutate() {background-color="#2c3e50"}
 
 ## mutate() creates new columns
@@ -382,6 +434,10 @@ Data goes first. Then you describe what you want. This consistency is by design.
 # Calculate total delay
 mutate(flights, total_delay = dep_delay + arr_delay)
 ```
+
+::: {.notes}
+Scroll the output to the right to show that the new column appears at the end. Students sometimes think it didn't work because they can't see it. Emphasize the `name = expression` syntax — the left side is the new column name you're choosing, the right side is the calculation. This is different from `==` (comparison) and `=` in filter (a mistake). Spend ~2 minutes.
+:::
 
 ## Multiple new columns
 
@@ -438,6 +494,10 @@ mutate(data, age_group = case_when(
 ))
 ```
 
+::: {.notes}
+Don't dwell on case_when() — show it exists but tell students it's a preview. The z-score and log transform examples connect to stats concepts they already know. If anyone asks about case_when() syntax, the tilde (~) means "then" — read it as "if age < 30, then 'young'." The TRUE line is the "everything else" catch-all.
+:::
+
 ## mutate() for psychology
 
 ```{r}
@@ -460,6 +520,10 @@ mutate(survey,
        item_5r = 8 - item_5  # For 1-7 scale
 )
 ```
+
+::: {.notes}
+This slide is the payoff for psych students — these are tasks they'll actually do. Reverse coding especially resonates because many have encountered it in methods classes. Walk through the reverse coding formula: for a 1-7 scale, subtracting from 8 flips 1 to 7, 7 to 1, etc. The rowMeans example is advanced — mention it exists but don't expect them to write it yet.
+:::
 
 # The pipe makes your code read like a sentence {background-color="#2c3e50"}
 
@@ -491,6 +555,10 @@ arrange(
 ::::
 
 This is hard to read!
+
+::: {.notes}
+Let the nested code sit on screen for a moment. Ask students to figure out what it does — they'll struggle. That's the point. You read nested code inside-out, which is unnatural. The next two slides show two solutions, then the pipe as the winner. This is a "problem, bad solution, good solution" arc — don't skip the setup.
+:::
 
 ## Intermediate objects approach
 
@@ -547,6 +615,10 @@ flights |>                     # Start with flights, THEN
   arrange(dep_delay)           # arrange by delay
 ```
 
+::: {.notes}
+Read this code aloud using "then" for every pipe — have students read it with you. This is the key insight of the pipe: code that reads like English. From this point forward, nearly all code in the course will use the pipe. Emphasize that each line does one thing, and notice how the data argument disappeared from each function because the pipe passes it automatically.
+:::
+
 ## Keyboard shortcut
 
 The pipe is so common, there's a shortcut:
@@ -558,6 +630,10 @@ The pipe is so common, there's a shortcut:
 
 ::: {.callout-tip}
 In RStudio settings, make sure "Use native pipe operator" is enabled (Tools → Global Options → Code)
+:::
+
+::: {.notes}
+Have everyone try the shortcut right now. If their RStudio inserts `%>%` instead of `|>`, walk them through the settings change. This is worth the 60 seconds it takes — they'll type the pipe hundreds of times this quarter.
 :::
 
 ## Note: |> vs %>%
@@ -584,6 +660,10 @@ flights |>
   labs(title = "United Airlines Delays (January)")
 ```
 
+::: {.notes}
+Point out the switch from `|>` to `+` once you enter ggplot territory. Students will mix these up — it's the most common pipe-related error. The rule: `|>` between dplyr steps, `+` between ggplot layers. This example also previews the power of combining transformation and visualization in one pipeline, which is the core of exploratory data analysis.
+:::
+
 # Putting it together {background-color="#2c3e50"}
 
 ## A complete workflow
@@ -599,6 +679,10 @@ flights |>
   arrange(desc(delay_hours))                 # Longest delays first
 ```
 
+::: {.notes}
+Walk through this pipeline step by step — read each line aloud with "then." This is the payoff moment where all four verbs and the pipe come together. Point out that each line has a comment explaining what it does — encourage students to comment their pipelines the same way. Ask: "Could you have written this at the start of class?" The answer should feel like genuine progress.
+:::
+
 # Get a head start {background-color="#e67e22"}
 
 ## Your turn!
@@ -610,6 +694,10 @@ Using the `flights` dataset:
 3. Select carrier, origin, dest, and speed
 4. Arrange by speed (highest first)
 5. What's the fastest AA flight to LAX?
+
+::: {.notes}
+This is the end-of-deck individual exercise and a head start on Assignment 2. Give students ~10 minutes of work time. This exercise requires combining all four verbs in a single pipeline, which is harder than it looks. Circulate and help with pipe syntax — the most common issue is forgetting `|>` at the end of a line or putting it at the start of the next line. Remind them about the keyboard shortcut.
+:::
 
 ```{r}
 #| echo: false
@@ -649,6 +737,10 @@ The pipe (`|>`) connects these verbs into a readable workflow.
 - Transform `flights` in different ways
 - Create new variables with `mutate()`
 - Build multi-step pipelines
+
+::: {.notes}
+Remind students that Assignment 1 was due today. Preview next session: "Wednesday we'll learn group_by() and summarize(), which let you calculate statistics for groups — like mean reaction time by condition. That's the last piece of the dplyr puzzle." Section 3.5 in R4DS covers exactly what we'll do next.
+:::
 
 ## Key takeaways
 

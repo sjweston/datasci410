@@ -52,6 +52,10 @@ anscombe_long |>
   knitr::kable()
 ```
 
+::: {.notes}
+Spend ~2 minutes here. Let students look at the table and ask them: "If you saw these summary statistics, would you think these datasets look the same?" Get a few responses before advancing. The goal is to build suspense for the reveal on the next slide.
+:::
+
 ## But look at the plots!
 
 ```{r}
@@ -68,6 +72,10 @@ ggplot(anscombe_long, aes(x, y)) +
 ```
 
 **Always visualize your data before running statistics.**
+
+::: {.notes}
+This is the payoff. Let it land. Point out that Set 1 is a nice linear relationship, Set 2 is a curve, Set 3 has an outlier pulling the stats, and Set 4 is clustered with one extreme point. Emphasize: "This is why we visualize before we analyze." This connects back to the replication crisis discussion from Session 1 — researchers who only look at numbers miss things.
+:::
 
 ## The datasaurus dozen
 
@@ -90,6 +98,10 @@ tibble(
   labs(title = "Different patterns can have similar summary stats")
 ```
 
+::: {.notes}
+Brief slide — just reinforce the Anscombe point with a more dramatic example. Mention that the original Datasaurus Dozen includes datasets shaped like a star, a dinosaur, etc., all with the same summary statistics. You can Google "datasaurus dozen" to show students the full set if there's time, but don't linger. Transition: "So visualization matters. Now let's learn the tool we'll use to make them."
+:::
+
 # Introduction to ggplot2 {background-color="#2c3e50"}
 
 ## ggplot2 builds plots in layers, like a grammar
@@ -102,6 +114,10 @@ tibble(
 . . .
 
 The "gg" stands for "Grammar of Graphics"
+
+::: {.notes}
+Don't dwell on history. The key point is that ggplot2 is not a random collection of plotting commands — it has a coherent logic. The "grammar" metaphor means that just like you can combine words following grammatical rules to make any sentence, you can combine data, aesthetics, and geoms to make any plot. Students don't need to remember who Hadley Wickham is for the quiz.
+:::
 
 ## The grammar of graphics
 
@@ -120,12 +136,20 @@ ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +
   <GEOM_FUNCTION>()
 ```
 
+::: {.notes}
+Spend a moment on this template — it will be their mental model for the rest of the course. Emphasize that every ggplot follows this same structure. Walk through each piece slowly: "First you tell it what data, then how variables map to visual things, then what shape to draw." Students often ask why we use `+` instead of `|>` — the short answer is that ggplot2 predates the pipe and uses `+` to add layers. They'll get used to it.
+:::
+
 ## Our dataset: mpg
 
 ```{r}
 # Fuel economy data for 234 cars
 glimpse(mpg)
 ```
+
+::: {.notes}
+Walk through the output of `glimpse()` briefly: 234 rows means 234 cars, each column is a variable. Point out `displ` (engine displacement in liters) and `hwy` (highway miles per gallon) since those are what we'll plot first. Don't explain every column — they'll explore more in Assignment 1. If students ask what a tibble is, say it's just a modern version of a data frame.
+:::
 
 ## Your first plot
 
@@ -137,6 +161,10 @@ glimpse(mpg)
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_point()
 ```
+
+::: {.notes}
+This is a big moment — their first real plot from code. Let students react to seeing it appear. Ask: "What does this plot tell us about the relationship between engine size and fuel efficiency?" (Bigger engines, worse mileage.) Type the code live in RStudio if possible so students see the workflow of writing code and seeing the output. Expect questions about the warning message from overplotting.
+:::
 
 ## Breaking it down
 
@@ -172,6 +200,10 @@ ggplot(mpg, aes(displ, hwy)) +
 
 I'll use the middle version — clear but not overly verbose.
 
+::: {.notes}
+Students often get anxious about which version is "correct." Reassure them that all three work identically. Mention that you'll use the middle version in slides, but they'll see the shortest version in online examples. The only thing that matters is consistency within a script. Don't spend more than 1 minute here.
+:::
+
 # Aesthetic mappings {background-color="#2c3e50"}
 
 ## What are aesthetics?
@@ -196,6 +228,10 @@ What if we want to see which points are which car class?
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point()
 ```
+
+::: {.notes}
+This is the first time students see a third variable encoded visually. Point out how the legend appeared automatically — ggplot handles that for you. Ask: "Which car class gets the best highway mileage? Which has the biggest engines?" (Compact/subcompact do well; SUVs and pickups have big engines.) This is a good moment to connect to psych: "Imagine color = experimental condition."
+:::
 
 ## Mapping size to a variable
 
@@ -255,6 +291,10 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(color = "blue", size = 3)
 ```
 
+::: {.notes}
+This is one of the most common sources of confusion for beginners. Emphasize the rule: if the aesthetic should vary with the data, it goes inside `aes()`. If you want every point the same color/size, it goes outside `aes()` as a direct argument to the geom. You'll see the consequence of getting this wrong on the next slide with the "common mistake" example. Spend ~2 minutes here making sure the distinction is clear before moving on.
+:::
+
 ## Setting aesthetics manually
 
 ```{r}
@@ -278,6 +318,10 @@ ggplot(mpg, aes(x = displ, y = hwy, color = "blue")) +
 
 ggplot thinks "blue" is a category name!
 
+::: {.notes}
+Let students laugh at this one. It's a very common mistake and worth burning into memory now. Explain: when you put `"blue"` inside `aes()`, ggplot treats it as a categorical variable with one level called "blue" and assigns it its default color (which happens to be salmon/red). The fix is simple — move it outside `aes()`. If students encounter this later, they'll hopefully remember this slide. This is a natural stopping point for the first half of class (~25 minutes in).
+:::
+
 # Pair coding break {background-color="#e67e22"}
 
 ## Your turn: 10 minutes
@@ -292,6 +336,10 @@ With a partner, create a scatterplot using the `mpg` dataset:
 
 ::: {.callout-tip}
 You have everything you need from the last few slides. Start with the basic template and build from there.
+:::
+
+::: {.notes}
+Set a visible timer for 10 minutes. Circulate the room and help pairs who are stuck — the most common issues will be: forgetting the `+` between layers, putting `color` outside `aes()`, and not knowing how to add `geom_smooth()`. Encourage students to experiment beyond the requirements (try different colors, themes, alpha). For the "who can make it look the nicest" prompt, you might do a quick informal show-and-tell at the end. They haven't learned `labs()` or themes yet, so don't penalize anyone who doesn't add them — but some students will figure it out from autocomplete.
 :::
 
 ---
@@ -317,6 +365,10 @@ ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
 
 📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
 
+::: {.notes}
+Give students 1 minute to submit. Emphasize that it doesn't need to be perfect or even run — partial code is fine. This is about participation, not correctness. Transition: "Now that you've made a scatterplot, let's see what other kinds of plots ggplot2 can make."
+:::
+
 # Different data types need different geoms {background-color="#2c3e50"}
 
 ## Common geoms
@@ -329,6 +381,10 @@ ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
 | `geom_histogram()` | Histogram |
 | `geom_boxplot()` | Box plot |
 | `geom_smooth()` | Smoothed line |
+
+::: {.notes}
+Don't try to cover every geom in detail — this is a reference slide they can come back to. Just emphasize that ggplot2 has many geoms and the choice depends on your data type. The next few slides will demo the most common ones. Students will use `geom_point()` and `geom_smooth()` most in the first few weeks; bar charts and histograms come up more in EDA sessions later.
+:::
 
 ## geom_smooth()
 
@@ -367,6 +423,10 @@ ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_smooth(method = "lm", se = FALSE)  # se = FALSE removes confidence band
 ```
 
+::: {.notes}
+Point out what happened here: because `color = drv` is in the `aes()` of the main `ggplot()` call, both `geom_point()` and `geom_smooth()` inherit it, so you get separate trend lines per group. This is a preview of how layering and aesthetic inheritance work — they'll explore this more in Session 8 (Layers & Aesthetics). Students often ask what the gray band is on the previous slide — it's a confidence interval. The `se = FALSE` argument removes it.
+:::
+
 ## geom_bar() — categorical data
 
 ```{r}
@@ -400,6 +460,10 @@ ggplot(mpg, aes(x = class, y = hwy)) +
   geom_boxplot()
 ```
 
+::: {.notes}
+Briefly connect boxplots to psych: "This is exactly the kind of plot you'd use to show group differences — treatment vs. control, different age groups, etc." Students may not know how to read boxplots; if anyone looks confused, do a 30-second refresher on median, IQR, and whiskers. Don't belabor it — they'll get more practice in EDA sessions.
+:::
+
 # Facets {background-color="#2c3e50"}
 
 ## What are facets?
@@ -414,6 +478,10 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   facet_wrap(~class)
 ```
+
+::: {.notes}
+Facets are often the first "wow" moment for students. Point out how much clearer the patterns are when each class gets its own panel vs. the earlier color-coded version. The `~` (tilde) syntax may confuse students — just say "read it as 'by'" for now (facet by class). They'll encounter `~` again in formulas later in the course.
+:::
 
 ## facet_wrap()
 
@@ -443,6 +511,10 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
   facet_grid(drv ~ cyl)
 ```
 
+::: {.notes}
+`facet_grid()` is less commonly used than `facet_wrap()` but worth showing so students know it exists. Point out that rows correspond to `drv` and columns to `cyl`. Some panels are empty (e.g., no rear-wheel-drive 4-cylinder cars) — ask students why that might be. Don't spend more than 1 minute here; `facet_wrap()` is the one they'll use 90% of the time.
+:::
+
 ## When to use facets
 
 Facets are great when:
@@ -469,6 +541,10 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
     color = "Vehicle class"
   )
 ```
+
+::: {.notes}
+Emphasize that `labs()` is not optional decoration — it's what makes a plot interpretable. Point out the subtitle as a place for the main finding ("Larger engines tend to be less efficient") and the axis labels as a place for units. Relate to psych: "When you present findings in a paper or poster, your reader needs to understand the axes without reading your methods section." Students often forget to relabel the legend — show that `color = "Vehicle class"` changes the legend title.
+:::
 
 ## Themes
 
@@ -514,6 +590,10 @@ my_plot <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 ggsave("my_plot.png", my_plot, width = 8, height = 6)
 ```
 
+::: {.notes}
+Two things to emphasize: (1) assigning a plot to a variable (`my_plot <-`) so you can save it, and (2) specifying width and height in inches for consistent output. Students will need `ggsave()` for Assignment 1. Common question: "Where does it save?" Answer: in your current working directory (the project folder). They can also give a full path. Mention that `ggsave()` auto-detects the file type from the extension (.png, .pdf, .jpg).
+:::
+
 ## Same template, psychology data
 
 The ggplot template works the same way with any data:
@@ -537,6 +617,10 @@ ggplot(psych_demo, aes(x = condition, y = anxiety, fill = condition)) +
   ) +
   theme_minimal(base_size = 14)
 ```
+
+::: {.notes}
+This is the "so what" bridge to psychology. Emphasize that the exact same template they just learned with car data works with any dataset — including their own research data. The simulated anxiety data uses realistic values (BAI scores typically range from 0–63). Ask: "What does this plot tell us about the treatment?" Make the point that even with a small simulated dataset, a boxplot immediately communicates the group difference.
+:::
 
 # Putting it together {background-color="#2c3e50"}
 
@@ -572,6 +656,10 @@ Open a new R script in your project. Try these on your own:
 4. Save it with `ggsave()`
 
 This is the first part of Assignment 1 — finish it before next class.
+
+::: {.notes}
+Give students ~10 minutes of independent work time here. Walk around and help. This exercise combines everything from the session: the basic template, color mapping, faceting, and saving. Students who finish early can experiment with themes, labels, or different geoms. Reveal the solution only if most students are stuck. Remind them that Assignment 1 is due Sunday at 11:59 PM and includes additional tasks beyond this exercise.
+:::
 
 ## Solution
 
@@ -621,6 +709,10 @@ You can build almost any visualization with this template!
 - Create 3 different plots with `mpg` or `diamonds`
 - Try different geoms, aesthetics, and facets
 - Save your favorite plot with `ggsave()`
+
+::: {.notes}
+Mention that the reading for next time is about dplyr and data transformation — a different topic from today. They don't need to understand it perfectly before class, but reading it will make the lecture click faster. The practice exercises are ungraded but strongly recommended. Mention that `diamonds` is another built-in dataset they can explore with `glimpse(diamonds)`.
+:::
 
 ## Key takeaways
 

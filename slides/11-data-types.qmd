@@ -45,6 +45,10 @@ If you said 15, you forgot to reverse-code — `2` should become
 `(5 + 1) - 2 = 4`, making the real total **17**. This kind of mistake
 happens in published papers, and it lives in how you handle data types.
 
+::: {.notes}
+Spend ~3 minutes here. Let students answer out loud before revealing the catch. This hooks them because it shows that "just adding numbers" is not always correct — data types and scoring decisions matter. Mention that reverse-coding errors are genuinely common in published work.
+:::
+
 ## Everything in R is a type
 
 In R, every value has a **type**:
@@ -56,6 +60,10 @@ In R, every value has a **type**:
 
 Understanding types helps you choose the right functions, avoid cryptic
 errors, and transform data correctly.
+
+::: {.notes}
+Move through this quickly — it is review from earlier sessions. The goal is just to name the four types so students have a mental map. Point out that today focuses on logicals and numbers; strings and factors come next session.
+:::
 
 ## Today's focus
 
@@ -90,6 +98,10 @@ ages <- c(18, 22, 45, 17, 30)
 ages >= 18  # Is each age 18 or older?
 ```
 
+::: {.notes}
+Emphasize that logicals are the result of asking a question about data, and that every filter() they have written so far has been producing logicals under the hood. The ages example connects to IRB eligibility, which students can relate to.
+:::
+
 ## Comparison operators (review)
 
 | Operator | Meaning                  |
@@ -101,6 +113,10 @@ ages >= 18  # Is each age 18 or older?
 | `<=`     | Less than or equal to    |
 | `>=`     | Greater than or equal to |
 | `%in%`   | Is in a set              |
+
+::: {.notes}
+This is review — skim it quickly unless students look lost. Highlight that == is for comparison and = is for assignment; this is one of the most common syntax errors.
+:::
 
 ## Logical operators
 
@@ -128,6 +144,10 @@ age >= 18 & age < 65
 # OR: At least one condition must be TRUE
 diagnosis == "Depression" | diagnosis == "Anxiety"
 ```
+
+::: {.notes}
+Students often confuse AND and OR. Emphasize that AND narrows results (both must be true, so you get fewer rows) while OR broadens them (either can be true, so you get more rows). Ask students: "Which one gives you more rows back?" to check understanding.
+:::
 
 ## Using logicals in filter()
 
@@ -164,6 +184,10 @@ Useful for checking data quality:
 any(survey_data$consent == FALSE)
 ```
 
+::: {.notes}
+Emphasize the data-quality use case: you can use any() to check "did anyone fail this check?" and all() to check "did everyone complete this section?" These are handy sanity checks to run before analysis. Students may ask about the difference between any()/all() and sum() — clarify that any/all return a single TRUE/FALSE, while sum counts how many.
+:::
+
 ## Counting with logicals
 
 Remember: `TRUE = 1` and `FALSE = 0`
@@ -175,6 +199,10 @@ sum(survey_data$age >= 18)
 # What proportion are adults?
 mean(survey_data$age >= 18)
 ```
+
+::: {.notes}
+This is the key insight of the section: TRUE acts like 1 and FALSE acts like 0, so sum() counts TRUEs and mean() gives the proportion. Students find this surprising and useful. Pause to make sure it sinks in — it comes back when they compute scale scores later.
+:::
 
 # Conditional values {background-color="#2c3e50"}
 
@@ -190,6 +218,10 @@ survey_data |>
 ```
 
 **Syntax:** `if_else(condition, value_if_true, value_if_false)`
+
+::: {.notes}
+Walk through the syntax carefully: condition first, then what happens when TRUE, then what happens when FALSE. Students sometimes reverse the TRUE/FALSE order. Emphasize that if_else() is used inside mutate() to create new columns, not for control flow like an if statement in other languages.
+:::
 
 ## Handling NA with if_else()
 
@@ -209,6 +241,10 @@ You can specify what to do with `NA`:
 if_else(responses >= 3, "High", "Low", missing = "No response")
 ```
 
+::: {.notes}
+The missing argument is new to most students. Point out the default behavior first (NA stays as NA), then show the override. Students often ask "why didn't NA become 'Low'?" — explain that NA means "we don't know the value," so the comparison NA >= 3 returns NA, not FALSE.
+:::
+
 ## case_when(): Multiple conditions
 
 For more than two outcomes, use `case_when()`:
@@ -224,6 +260,10 @@ survey_data |>
     )
   )
 ```
+
+::: {.notes}
+Use the PHQ-9 cutoffs as a concrete example students will encounter in their careers. Walk through the logic slowly: "If depression is less than 14, label it Minimal. Otherwise, check if it is less than 20..." Emphasize the tilde (~) syntax — students often forget it or use = instead.
+:::
 
 ## case_when() rules
 
@@ -245,6 +285,10 @@ case_when(
 )
 ```
 
+::: {.notes}
+Spend a moment on .default — students frequently get unexpected NAs from case_when() because their conditions do not cover all values. Encourage them to always include .default as a safety net. Ask: "What happens if someone's age is NA? Which condition matches?" Answer: none, so they get NA from .default.
+:::
+
 ## if_else() vs case_when() — when to use which
 
 | Situation                           | Use           |
@@ -260,6 +304,10 @@ you need more categories.
 ## Psychology example: Reverse coding
 
 ![](img/rosenberg.png){fig-align="center" width="600"}
+
+::: {.notes}
+Show the actual Rosenberg Self-Esteem Scale so students can see which items are reverse-coded. Ask if anyone has taken this measure in a psych class. This connects the abstract coding lesson to something tangible.
+:::
 
 ## Psychology example: Reverse coding
 
@@ -304,6 +352,10 @@ rosenberg
 
 ## Easier reverse coding
 
+::: {.notes}
+Transition: "case_when() works but is tedious for a 5-point scale — imagine a 7-point scale. There is a much simpler formula." This slide is the payoff.
+:::
+
 For scales, use arithmetic:
 
 ```{r}
@@ -319,6 +371,10 @@ General formula: `(max + min) - original_value`
 
 -   1-5 scale: `6 - x` (because 1 + 5 = 6)
 -   1-7 scale: `8 - x` (because 1 + 7 = 8)
+
+::: {.notes}
+Make sure students understand the general formula: (max + min) - value. Ask them to calculate the formula for a 0-4 scale (answer: 4 - x) to confirm understanding before moving to the exercise. Common mistake: students forget that the formula depends on the scale endpoints, not just the max.
+:::
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -341,6 +397,10 @@ attention_data <- tibble(
 3.  What proportion of participants passed?
 
 **Time: 10 minutes**
+
+::: {.notes}
+Give 10 minutes. Circulate and watch for: (1) students using = instead of == in the comparison, (2) forgetting to handle NA in the case_when — the NA case must come first or use is.na(), (3) forgetting na.rm = TRUE in the mean() for question 3. After time is up, walk through the solution live. Emphasize that checking for NA first in case_when() is a good habit.
+:::
 
 ```{r}
 #| echo: false
@@ -382,6 +442,10 @@ typeof(42L)  # The L forces it to be an integer
 . . .
 
 You rarely need to worry about this distinction!
+
+::: {.notes}
+Spend very little time here — the integer vs. double distinction almost never matters in practice for this course. The point is just awareness. If students ask, the main case where it matters is when checking types with is.integer() or when a function unexpectedly returns integer vs. double.
+:::
 
 ## Rounding
 
@@ -426,6 +490,11 @@ mean(scores, na.rm = TRUE)  # Ignores NA
 missingness meaningful?
 :::
 
+::: {.notes}
+Pause on the callout. This is a conceptual point, not a coding one. Ask students: "If 20% of participants skipped the depression items, does that tell you something?" In psychology, missingness is often not random — people skip sensitive questions. This foreshadows the missing data session (Session 15).
+:::
+
+
 ## Counting non-missing values
 
 ```{r}
@@ -466,6 +535,10 @@ scale_data
 
 How do you compute a total or mean score?
 
+::: {.notes}
+This is the core practical section of the deck — plan ~15 minutes for the scale scoring walkthrough. Frame it as: "This is the single most common data task you will do as a psychology researcher." Walk through the data first so students see the NA values before you try to compute scores.
+:::
+
 ## Option 1: Manual addition
 
 ```{r}
@@ -478,6 +551,10 @@ scale_data |>
 . . .
 
 **Problem:** If any item is `NA`, the whole sum is `NA`!
+
+::: {.notes}
+Let the output speak for itself — students will see participant 4 gets NA for the total even though they answered 3 out of 4 items. Ask: "Is that what we want?" This motivates the next slide.
+:::
 
 ## Option 2: Sum with na.rm
 
@@ -493,6 +570,10 @@ scale_data |>
   ) |>
   ungroup()
 ```
+
+::: {.notes}
+rowwise() is new and important. Explain that by default, mutate works column-wise — sum() would add up the entire column. rowwise() tells R to work one row at a time. Warn students that they must ungroup() afterward, or subsequent operations will still be row-by-row and run slowly.
+:::
 
 ## Computing mean scores
 
@@ -513,6 +594,10 @@ scale_data |>
 numbers of items answered.
 :::
 
+::: {.notes}
+Highlight the practical difference: if participant A answered all 10 items and participant B answered only 5, their sums are not comparable, but their means are. This is why many published papers report mean scores rather than totals.
+:::
+
 ## Cleaner approach: pivot then summarize
 
 ```{r}
@@ -531,6 +616,10 @@ scale_data |>
   )
 ```
 
+::: {.notes}
+Present this as an alternative, not a replacement. The pivot approach is more elegant for large scales with many items, but rowwise() is more intuitive for beginners. Point out the bonus of n_items — it counts how many items each person actually answered, which feeds into the missingness rule on the next slide.
+:::
+
 ## When to worry about missing items
 
 Should you compute a scale score if someone only answered 1 out of 4
@@ -543,6 +632,10 @@ Common rules:
 -   **Require ≥ 50%** of items answered
 -   **Require ≥ 75%** for critical scales
 -   **Document your decision** clearly
+
+::: {.notes}
+This is a methods decision, not a coding decision. Emphasize that there is no single right answer — the rule depends on your scale and your field's conventions. The key is to choose a rule, apply it consistently, and report it in your methods section. Students often ask "what do most people do?" — 50% or 75% are both common.
+:::
 
 ## Implementing a missingness rule
 
@@ -591,6 +684,10 @@ dass_data |>
   select(id, depression, anxiety, stress)
 ```
 
+::: {.notes}
+Mention that real scales like the DASS-21 have 7 items per subscale, not 2. The pattern is the same — just more columns in the c() call. If students ask about automating the column selection, you can preview c_across() but do not spend long on it; it appears in the end-of-deck solution.
+:::
+
 # End-of-deck exercise {background-color="#e67e22"}
 
 ## Practice: Score the PHQ-9
@@ -616,6 +713,10 @@ phq_data <- tibble(
 2.  Only compute the score if **at least 7 items** are answered
 3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate
     (10-14), Moderately Severe (15-19), Severe (20-27)
+
+::: {.notes}
+Give ~10 minutes for this exercise. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. Circulate and help with the case_when cutoffs — students often get the boundary conditions wrong (e.g., using < instead of <=). The solution uses c_across(), which is a nice shortcut to show when reviewing. If time is short, have students start and finish as homework.
+:::
 
 ```{r}
 #| echo: false
@@ -682,3 +783,8 @@ Scoring a scale correctly is the most common data task in psychology —
 and the easiest place to introduce errors.
 
 See you Wednesday for strings and factors!
+
+::: {.notes}
+End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide.
+:::
+
