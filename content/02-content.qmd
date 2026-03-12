@@ -9,6 +9,11 @@ date: "2026-04-01"
 
 - [R4DS Ch 1: Data visualization](https://r4ds.hadley.nz/data-visualize)
 
+::: {.callout-tip}
+## Assignment 1 is assigned today
+[Assignment 1: Getting Started](/assignment/01-assignment.qmd) — due Sunday, April 5 at 11:59 PM.
+:::
+
 ## During class
 
 We'll cover:

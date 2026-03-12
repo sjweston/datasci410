@@ -1,13 +1,18 @@
 ---
 title: "Assignment 3: Tidying & Importing Data"
-date: "2026-04-15"
+date: "2026-04-26"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
-**Assigned:** Wednesday, April 15 (Session 6)
-**Due:** Monday, April 20 before class
-**Submit:** R script (`.R` file) on Canvas
+**Assigned:** Monday, April 20 (Session 7)
+**Due:** Sunday, April 26 at 11:59 PM
+**Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+::: {.callout-tip}
+## First Quarto assignment!
+This is the first assignment submitted as a Quarto document. See the guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using Quarto Documents](/resource/quarto-docs.qmd)
 :::
 
 ## Overview

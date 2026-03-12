@@ -1,0 +1,194 @@
+---
+title: "Using Quarto Documents for Assignments"
+---
+
+Starting with Assignment 3, you'll submit your work as **Quarto documents** (`.qmd` files) rendered to **HTML**. Quarto lets you combine code, output, and written explanation in a single document — the kind of reproducible report that's standard in data science.
+
+## What is a Quarto document?
+
+A Quarto document is a plain-text file that mixes two things:
+
+- **Code chunks** — blocks of R code that run and produce output (plots, tables, numbers)
+- **Narrative text** — your written explanations, formatted with Markdown (headers, bold, lists, etc.)
+
+When you **render** the document, Quarto runs all the code, captures the output, and produces a polished HTML page.
+
+## Step 1: Set up your project
+
+Create an R Project for this assignment if you haven't already. See [Setting Up an R Project](r-projects.qmd).
+
+## Step 2: Create a new Quarto document
+
+1. In RStudio, go to **File > New File > Quarto Document...**
+2. Enter a title (e.g., "Assignment 3: Tidying & Import")
+3. Enter your name as the author
+4. Leave the format as **HTML**
+5. Click **Create**
+6. **Save it** with a descriptive name like `assignment-03.qmd`
+
+## Step 3: Understand the YAML header
+
+The top of your document has a section between `---` marks called the **YAML header**. It controls the document settings:
+
+````markdown
+---
+title: "Assignment 3: Tidying & Import"
+author: "Your Name"
+date: today
+format: html
+---
+````
+
+You can leave this as-is. The `date: today` option will automatically insert the current date when you render.
+
+## Step 4: Write narrative text
+
+Outside of code chunks, you write in **Markdown**. Here are the basics:
+
+````markdown
+## Part 1: Importing Data
+
+This section loads the dataset and checks its structure.
+The data contains **200 participants** across three conditions.
+
+### Task 1.1
+
+Here I import the CSV file and check the column types.
+````
+
+Key Markdown formatting:
+
+| What you type | What you get |
+|---------------|-------------|
+| `## Heading` | Section heading |
+| `### Subheading` | Smaller heading |
+| `**bold text**` | **bold text** |
+| `*italic text*` | *italic text* |
+| `- item` | Bullet point |
+| `1. item` | Numbered list |
+
+## Step 5: Add code chunks
+
+Code chunks are where your R code lives. Insert one by:
+
+- Clicking the **green +C button** in the toolbar, or
+- Pressing `Ctrl+Alt+I` / `Cmd+Option+I`, or
+- Typing the fences manually:
+
+````markdown
+```{{r}}
+library(tidyverse)
+
+data <- read_csv("survey_data.csv")
+glimpse(data)
+```
+````
+
+Everything between the ` ```{r} ` and ` ``` ` lines is R code that will run when you render.
+
+::: {.callout-tip}
+## Run chunks as you work
+You don't have to render the whole document to test your code. Click the **green play button** at the top-right of any chunk to run just that chunk. The output appears right below it in the editor.
+:::
+
+## Step 6: Organize your document
+
+Structure your `.qmd` the same way you'd structure an R script — use the assignment parts as section headers, and alternate between narrative and code:
+
+````markdown
+## Part 1: Importing Data
+
+This section loads the provided dataset.
+
+```{{r}}
+library(tidyverse)
+data <- read_csv("survey_data.csv")
+glimpse(data)
+```
+
+The dataset has 200 rows and 8 columns. The `condition` column
+was read as character, which I'll convert to a factor later.
+
+## Part 2: Tidying
+
+The data is in wide format with one column per time point.
+I need to pivot it to long format.
+
+```{{r}}
+data_long <- data |>
+  pivot_longer(
+    cols = time_1:time_3,
+    names_to = "timepoint",
+    values_to = "score"
+  )
+```
+````
+
+## Step 7: Render to HTML
+
+When you're ready to see the finished product:
+
+1. Click the **Render** button at the top of the editor (or press `Ctrl+Shift+K` / `Cmd+Shift+K`)
+2. RStudio will run all the code and produce an HTML file
+3. The HTML file opens in a viewer window
+
+The rendered file is saved in the same folder as your `.qmd` file with the same name but an `.html` extension.
+
+::: {.callout-important}
+## Fix errors before rendering
+If any code chunk has an error, the whole document will fail to render. Run each chunk individually first to catch problems, then render the full document.
+:::
+
+## Step 8: Check your output
+
+Before submitting, open the HTML file and review it:
+
+- Does all the code run without errors?
+- Do plots display correctly?
+- Is your narrative text readable and formatted properly?
+- Did you answer all the questions the assignment asks?
+
+## Step 9: Submit
+
+Upload **both files** to Canvas:
+
+1. Your `.qmd` file (the source document)
+2. Your `.html` file (the rendered output)
+
+## Tips for a clean document
+
+**Hide your setup chunk.** The chunk that loads packages doesn't need to show in the final document. Add `#| include: false` to suppress it:
+
+````markdown
+```{{r}}
+#| include: false
+library(tidyverse)
+```
+````
+
+**Suppress warnings and messages.** Package loading messages and warnings about missing values can clutter your output. Add these options to individual chunks:
+
+````markdown
+```{{r}}
+#| warning: false
+#| message: false
+```
+````
+
+**Use inline code for numbers.** Instead of hard-coding numbers in your text, use inline code so the numbers update automatically:
+
+````markdown
+The dataset contains `` `r nrow(data)` `` participants.
+````
+
+This renders as: "The dataset contains 200 participants."
+
+## Common mistakes
+
+| Problem | Fix |
+|---------|-----|
+| Render fails with an error | Run each chunk individually to find which one has the error. Fix it, then render again. |
+| `object not found` during render | Chunks run in order from top to bottom. Make sure you define objects before you use them. (Running chunks out of order in the editor can mask this.) |
+| Submitted only the `.qmd` or only the `.html` | Submit both. The `.qmd` is your source code; the `.html` is the rendered output. |
+| Plot is too large or too small | Add `#| fig-width: 6` and `#| fig-height: 4` to the chunk options (adjust numbers to taste). |
+| Formatting looks wrong | Make sure there's a blank line before and after headings, code chunks, and lists. Markdown needs those blank lines. |

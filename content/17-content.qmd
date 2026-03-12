@@ -11,7 +11,7 @@ date: "2026-06-01"
 
 ::: {.callout-important}
 ## Assignment 8 is due today
-[Assignment 8: Reproducible Report](/assignment/08-assignment.qmd) — submit before class.
+[Assignment 8: Storytelling Report](/assignment/08-assignment.qmd) — due Sunday, May 31 at 11:59 PM.
 :::
 
 ## During class

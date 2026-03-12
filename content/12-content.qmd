@@ -1,5 +1,5 @@
 ---
-title: "12: Strings & Factors"
+title: "12: Data Types Grab Bag"
 date: "2026-05-06"
 ---
 
@@ -7,34 +7,27 @@ date: "2026-05-06"
 
 📖 **Readings:**
 
-- [R4DS Ch 14: Strings](https://r4ds.hadley.nz/strings) (sections 14.1–14.3 only)
-- [R4DS Ch 16: Factors](https://r4ds.hadley.nz/factors)
+- [R4DS Ch 12: Logical vectors](https://r4ds.hadley.nz/logicals)
+- [R4DS Ch 13: Numbers](https://r4ds.hadley.nz/numbers)
 
 ## During class
 
 We'll cover:
 
-- Strings — creating, combining, and basic cleaning
-- `str_to_lower()`, `str_to_upper()`, `str_trim()` for cleanup
-- `str_detect()` and `str_replace()` for simple pattern matching
-- Factors — categorical data with a fixed set of levels
-- Why factor order matters for plots and tables
-- Reordering factors: `fct_relevel()`, `fct_reorder()`, `fct_infreq()`
-- Recoding factors: `fct_recode()`, `fct_collapse()`
-- Practical application: cleaning demographic variables
-
-::: {.callout-tip}
-## Assignment 6 is assigned today
-[Assignment 6: Data Types](/assignment/06-assignment.qmd) — due before Session 13.
-:::
+- Logical vectors — `TRUE`/`FALSE` and how to use them
+- Comparisons and Boolean operations (`&`, `|`, `!`)
+- `if_else()` and `case_when()` for conditional values
+- Numbers — integer vs. double, rounding, summarizing
+- Handling `NA` in calculations with `na.rm = TRUE`
+- Practical application: computing scale scores in psychology data
 
 ### Slides
 
 ```{=html}
-<a href="/slides/12-strings-factors.html" target="_blank" class="btn btn-primary">
+<a href="/slides/11-data-types.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="/slides/12-strings-factors.pdf" class="btn btn-secondary">
+<a href="/slides/11-data-types.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 ```
@@ -43,7 +36,7 @@ We'll cover:
 
 ```{=html}
 <div class="ratio ratio-16x9">
-  <iframe src="/slides/12-strings-factors.html"></iframe>
+  <iframe src="/slides/11-data-types.html"></iframe>
 </div>
 ```
 
@@ -51,46 +44,44 @@ We'll cover:
 
 ✅ **Practice:**
 
-1. Clean up a messy text column using `str_trim()` and `str_to_lower()` — try it on free-response demographic data
-2. Use `str_detect()` to filter rows where a column contains a specific word
-3. Convert a character column to a factor with `factor()`. What happens to the levels?
-4. Reorder bars in a bar chart using `fct_infreq()` — most common category first
-5. Use `fct_recode()` to combine similar categories (e.g., "Male" and "male" and "M")
+1. Use `if_else()` to create a new column that labels participants as "young" (under 25) or "older" (25+)
+2. Use `case_when()` to recode a Likert scale (1 = "Strongly Disagree", 2 = "Disagree", etc.)
+3. Calculate scale scores by averaging across items — remember `na.rm = TRUE`
+4. Use `any()` and `all()` to check if any/all values in a column meet a condition
+5. Practice rounding with `round()`, `floor()`, and `ceiling()` — when would you use each?
 
 ::: {.callout-note}
-## Why factors matter for plots
+## case_when() is your friend
 
-By default, R orders categories alphabetically. That's rarely what you want in a plot. Factors let you control the order:
+`case_when()` is the tidyverse version of "if... else if... else." It's especially useful for recoding variables:
 
 ```r
-# Alphabetical (default) — not great
-ggplot(data, aes(x = condition)) + geom_bar()
-
-# Ordered by frequency — much better
-ggplot(data, aes(x = fct_infreq(condition))) + geom_bar()
-
-# Custom order — you decide
 data |>
-  mutate(condition = fct_relevel(condition, "Control", "Low", "High")) |>
-  ggplot(aes(x = condition)) + geom_bar()
+  mutate(
+    age_group = case_when(
+      age < 18 ~ "Minor",
+      age < 25 ~ "Young adult",
+      age < 65 ~ "Adult",
+      .default = "Senior"
+    )
+  )
 ```
+
+The `.default` argument catches everything that doesn't match a previous condition.
 :::
 
-### Psychology application: cleaning demographics
+### Psychology application: scale scores
 
 ```r
-# Common cleanup pipeline for survey demographics
-survey |>
+# Computing a scale score from individual items
+survey_data |>
   mutate(
-    gender = str_to_lower(str_trim(gender)),
-    gender = fct_recode(as_factor(gender),
-      "Man" = "male",
-      "Man" = "m",
-      "Woman" = "female",
-      "Woman" = "f"
-    ),
-    education = fct_relevel(education,
-      "High school", "Some college", "Bachelor's", "Graduate"
+    # Reverse code item 3 (on a 1-5 scale)
+    item3_r = 6 - item3,
+    # Calculate mean score across items
+    scale_score = rowMeans(
+      pick(item1, item2, item3_r, item4, item5),
+      na.rm = TRUE
     )
   )
 ```

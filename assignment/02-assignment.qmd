@@ -1,13 +1,18 @@
 ---
 title: "Assignment 2: Data Transformation"
-date: "2026-04-08"
+date: "2026-04-12"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
 **Assigned:** Wednesday, April 8 (Session 4)
-**Due:** Monday, April 13 before class
+**Due:** Sunday, April 12 at 11:59 PM
 **Submit:** R script (`.R` file) on Canvas
+:::
+
+::: {.callout-tip}
+## Getting started
+See the step-by-step guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using R Scripts](/resource/r-scripts.qmd)
 :::
 
 ## Overview

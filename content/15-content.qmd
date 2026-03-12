@@ -1,18 +1,17 @@
 ---
-title: "15: Storytelling with Data"
+title: "15: Missing Data"
 date: "2026-05-20"
 ---
 
 ## Before class
 
-📖 **Readings:**
+📖 **Reading:**
 
-- [R4DS Ch 11: Communication](https://r4ds.hadley.nz/communication)
-- Dykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)
+- [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
 
 ::: {.callout-important}
-## Assignment 7 is due today
-[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — submit before class.
+## Assignment 6 is due today
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd) — due Sunday, May 17 at 11:59 PM.
 :::
 
 ::: {.callout-important}
@@ -24,26 +23,23 @@ Submit your working code and preliminary visualizations before class.
 
 We'll cover:
 
-- Why storytelling? Data + visuals + narrative = change
-- The Knaflic framework:
-  1. Understand the context — who is your audience?
-  2. Choose appropriate visuals — match plot type to message
-  3. Eliminate clutter — less is more
-  4. Focus attention — use preattentive attributes strategically
-  5. Think like a designer — visual hierarchy, accessibility
-- Critical evaluation of figures:
-  - Misleading figures — truncated axes, cherry-picked ranges, 3D charts
-  - Boring figures — no title, too many colors, wrong plot type
-  - The "so what?" test
-- Applying storytelling to your final project
+- Why missing data matters in psychology — attrition, non-response, skip patterns
+- Explicit vs. implicit missing values
+- Counting and exploring missingness patterns
+- `drop_na()` — complete case analysis (listwise deletion)
+- `replace_na()` — filling in known values
+- `fill()` — carrying values forward/backward
+- `complete()` — making implicit missing values explicit
+- When **not** to fill — don't make up data!
+- Brief mention: multiple imputation exists (beyond this course)
 
 ### Slides
 
 ```{=html}
-<a href="/slides/15-storytelling.html" target="_blank" class="btn btn-primary">
+<a href="/slides/14-missing-data.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="/slides/15-storytelling.pdf" class="btn btn-secondary">
+<a href="/slides/14-missing-data.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 ```
@@ -52,7 +48,7 @@ We'll cover:
 
 ```{=html}
 <div class="ratio ratio-16x9">
-  <iframe src="/slides/15-storytelling.html"></iframe>
+  <iframe src="/slides/14-missing-data.html"></iframe>
 </div>
 ```
 
@@ -60,22 +56,35 @@ We'll cover:
 
 ✅ **Practice:**
 
-1. Pick one figure from your final project draft. Apply the "so what?" test — can you state the takeaway in one sentence?
-2. Declutter that figure: remove unnecessary gridlines, legends, and default styling
-3. Add a clear, informative title that tells the reader what to see (not just what the axes are)
-4. Try `annotate()` to add a text label highlighting the key finding
-5. Show your figure to someone who hasn't seen your data. Can they understand the point without explanation?
+1. Count the number of `NA`s in each column of a dataset using `summarize(across(everything(), ~sum(is.na(.x))))`
+2. Use `drop_na()` on a specific column vs. the whole dataset — what's the difference in rows lost?
+3. Try `replace_na()` to fill missing values with a sensible default (e.g., 0 for "no response")
+4. Use `complete()` to make implicit missing values explicit in a longitudinal dataset
+5. Think critically: when is it okay to drop missing data? When is it dangerous?
 
 ::: {.callout-note}
-## The "so what?" test
+## Missing data is information
 
-Every figure should answer a question. If you can't complete this sentence, the figure needs work:
+Missing values aren't just annoying — they can tell you something. Before dropping or filling `NA`s, ask:
 
-> "This figure shows that _______________."
+- **Why** is this value missing? (Didn't answer? Wasn't asked? Data entry error?)
+- **Is the missingness random?** If participants who dropped out were systematically different, dropping them biases your results
+- **How much is missing?** A few values vs. 40% of a column require different strategies
 
-If you find yourself saying "this figure shows the data," you haven't found the story yet. Dig deeper.
+Document your decisions about missing data — your future self (and reviewers) will thank you.
 :::
 
-### Handout
+### Counting missing values
 
-The APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere.
+```r
+# Quick summary of missingness across all columns
+data |>
+  summarize(
+    across(everything(), ~sum(is.na(.x)))
+  ) |>
+  pivot_longer(everything(),
+    names_to = "variable",
+    values_to = "n_missing"
+  ) |>
+  arrange(desc(n_missing))
+```

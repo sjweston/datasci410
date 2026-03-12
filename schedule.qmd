@@ -236,6 +236,11 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 📖 **Read:** [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
 
+::: {.callout-tip}
+## Assigned
+[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
+:::
+
 ---
 
 ## Week 8: Missing Data {#week-8}
@@ -256,14 +261,9 @@ Use this time to work on your final project draft!
 
 📖 **Read:** [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
 
-::: {.callout-tip}
-## Assigned
-[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd)
-:::
-
 ::: {.callout-important}
 ## 📋 Assignment Due
-[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd) — Due Sunday, May 18 at 11:59 PM
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd) — Due Sunday, May 17 at 11:59 PM
 :::
 
 ::: {.callout-warning}
@@ -303,7 +303,7 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 
 ::: {.callout-important}
 ## 📋 Assignment Due
-[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — Due Sunday, May 25 at 11:59 PM
+[Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — Due Sunday, May 24 at 11:59 PM
 :::
 
 ---
@@ -345,9 +345,11 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 
 ## Finals Week
 
+### Wednesday, June 10
+
 ::: {.callout-warning}
-## 📝 Final Presentations
-5-minute project presentations (date/time TBD based on finals schedule)
+## 📝 Final Presentations Due
+5-minute recorded video presentations — due Wednesday, June 10 at 11:59 PM on Canvas
 :::
 
 ---
@@ -358,12 +360,12 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 |------------|-------|----------|-----|
 | 1 | Getting Started | Wed Apr 1 | Sun Apr 5 |
 | 2 | Data Transformation | Wed Apr 8 | Sun Apr 12 |
-| 3 | Tidying & Import | Wed Apr 15 | Sun Apr 19 |
-| 4 | Visualization Deep Dive | Wed Apr 22 | Sun Apr 26 |
-| 5 | Exploratory Data Analysis | Wed Apr 29 | Sun May 3 |
-| 6 | Data Types | Wed May 6 | Sun May 10 |
-| 7 | Joins & Missing Data | Wed May 13 | Sun May 18 |
-| 8 | Reproducible Report | Wed May 27 | Sun May 31 |
+| 3 | Tidying, Import & Quarto | Mon Apr 20 | Sun Apr 26 |
+| 4 | Visualization Deep Dive | Mon Apr 27 | Sun May 3 |
+| 5 | Exploratory Data Analysis | Mon May 4 | Sun May 10 |
+| 6 | Data Types & Wrangling | Mon May 11 | Sun May 17 |
+| 7 | Joins & Missing Data | Wed May 13 | Sun May 24 |
+| 8 | Storytelling Report | Wed May 27 | Sun May 31 |
 
 ## Final Project Milestones
 
@@ -372,4 +374,4 @@ Plus: Data integrity, the replication crisis, and why reproducible workflows mat
 | Proposal | Session 10 (Apr 29) |
 | Draft | Session 15 (May 20) |
 | Final Report | Session 18 (Jun 3) |
-| Presentation | Finals Week |
+| Presentation | Wed Jun 10 |

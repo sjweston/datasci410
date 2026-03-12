@@ -1,11 +1,11 @@
 ---
 title: "Milestone 4: Presentation"
-date: "2026-06-08"
+date: "2026-06-10"
 ---
 
 ::: {.callout-note}
 ## Milestone Details
-**Due:** Finals Week (exact date TBD)
+**Due:** Wednesday, June 10 at 11:59 PM
 **Submit:** Video file (`.mp4` or similar) uploaded to Canvas
 **Points:** 15
 :::

@@ -10,6 +10,11 @@ date: "2026-04-08"
 - [R4DS Ch 3: Data transformation](https://r4ds.hadley.nz/data-transform) (section 3.5)
 - [R4DS Ch 4: Workflow: code style](https://r4ds.hadley.nz/workflow-style)
 
+::: {.callout-tip}
+## Assignment 2 is assigned today
+[Assignment 2: Data Transformation](/assignment/02-assignment.qmd) — due Sunday, April 12 at 11:59 PM.
+:::
+
 ## During class
 
 We'll cover:

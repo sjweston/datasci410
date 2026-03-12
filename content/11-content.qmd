@@ -1,38 +1,43 @@
 ---
-title: "11: Data Types Grab Bag"
+title: "11: EDA — Covariation"
 date: "2026-05-04"
 ---
 
 ## Before class
 
-📖 **Readings:**
+📖 **Reading:**
 
-- [R4DS Ch 12: Logical vectors](https://r4ds.hadley.nz/logicals)
-- [R4DS Ch 13: Numbers](https://r4ds.hadley.nz/numbers)
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.5–10.6)
 
 ::: {.callout-important}
-## Assignment 5 is due today
-[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd) — submit before class.
+## Assignment 4 is due today
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — due Sunday, May 3 at 11:59 PM.
 :::
 
 ## During class
 
 We'll cover:
 
-- Logical vectors — `TRUE`/`FALSE` and how to use them
-- Comparisons and Boolean operations (`&`, `|`, `!`)
-- `if_else()` and `case_when()` for conditional values
-- Numbers — integer vs. double, rounding, summarizing
-- Handling `NA` in calculations with `na.rm = TRUE`
-- Practical application: computing scale scores in psychology data
+- Exploring covariation — relationships between variables
+- Categorical + continuous: boxplots, violin plots, `geom_freqpoly()` with color
+- Categorical + categorical: `geom_count()`, `geom_tile()` with counts
+- Continuous + continuous: scatterplots and trend lines
+- Dealing with overplotting: alpha, jitter, binning
+- Patterns, models, and the correlation vs. causation reminder
+- Hands-on: Explore a real psychology dataset
+
+::: {.callout-tip}
+## Assignment 5 is assigned today
+[Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd) — due Sunday, May 10 at 11:59 PM.
+:::
 
 ### Slides
 
 ```{=html}
-<a href="/slides/11-data-types.html" target="_blank" class="btn btn-primary">
+<a href="/slides/10-eda-covariation.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="/slides/11-data-types.pdf" class="btn btn-secondary">
+<a href="/slides/10-eda-covariation.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 ```
@@ -41,7 +46,7 @@ We'll cover:
 
 ```{=html}
 <div class="ratio ratio-16x9">
-  <iframe src="/slides/11-data-types.html"></iframe>
+  <iframe src="/slides/10-eda-covariation.html"></iframe>
 </div>
 ```
 
@@ -49,44 +54,37 @@ We'll cover:
 
 ✅ **Practice:**
 
-1. Use `if_else()` to create a new column that labels participants as "young" (under 25) or "older" (25+)
-2. Use `case_when()` to recode a Likert scale (1 = "Strongly Disagree", 2 = "Disagree", etc.)
-3. Calculate scale scores by averaging across items — remember `na.rm = TRUE`
-4. Use `any()` and `all()` to check if any/all values in a column meet a condition
-5. Practice rounding with `round()`, `floor()`, and `ceiling()` — when would you use each?
+Using the `bfi` dataset from the `psych` package:
+
+1. Pick two personality items (e.g., `E1` and `A1`). Make a scatterplot — is there a relationship?
+2. Create boxplots of `age` grouped by `education`. What patterns do you see?
+3. Use `geom_count()` to visualize the relationship between `education` and `gender`
+4. Try adding `alpha = 0.3` to a crowded scatterplot. Does it help?
+5. Calculate the correlation between two continuous variables using `cor(x, y, use = "complete.obs")`
 
 ::: {.callout-note}
-## case_when() is your friend
+## Correlation vs. causation
 
-`case_when()` is the tidyverse version of "if... else if... else." It's especially useful for recoding variables:
+Finding a relationship between two variables does **not** mean one causes the other. Always ask:
 
-```r
-data |>
-  mutate(
-    age_group = case_when(
-      age < 18 ~ "Minor",
-      age < 25 ~ "Young adult",
-      age < 65 ~ "Adult",
-      .default = "Senior"
-    )
-  )
-```
+- Could there be a confounding variable?
+- Does the direction of causation make sense?
+- Is this a meaningful effect or just a large sample?
 
-The `.default` argument catches everything that doesn't match a previous condition.
+In psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.
 :::
 
-### Psychology application: scale scores
+### Overplotting solutions
 
 ```r
-# Computing a scale score from individual items
-survey_data |>
-  mutate(
-    # Reverse code item 3 (on a 1-5 scale)
-    item3_r = 6 - item3,
-    # Calculate mean score across items
-    scale_score = rowMeans(
-      pick(item1, item2, item3_r, item4, item5),
-      na.rm = TRUE
-    )
-  )
+# Too many points? Try these:
+
+# 1. Transparency
+ggplot(data, aes(x, y)) + geom_point(alpha = 0.3)
+
+# 2. Jitter (adds random noise)
+ggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)
+
+# 3. 2D binning (heatmap-style)
+ggplot(data, aes(x, y)) + geom_bin2d()
 ```

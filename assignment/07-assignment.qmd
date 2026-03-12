@@ -1,13 +1,18 @@
 ---
 title: "Assignment 7: Joins & Missing Data"
-date: "2026-05-13"
+date: "2026-05-24"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
 **Assigned:** Wednesday, May 13 (Session 14)
-**Due:** Wednesday, May 20 before class
-**Submit:** R script (`.R` file) on Canvas
+**Due:** Sunday, May 24 at 11:59 PM
+**Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+::: {.callout-tip}
+## Getting started
+See the guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using Quarto Documents](/resource/quarto-docs.qmd)
 :::
 
 ## Overview
@@ -116,12 +121,11 @@ Answer in comments:
 
 ## Submission
 
+- [ ] Your `.qmd` file with all code and narrative
+- [ ] Your rendered HTML file
 - [ ] All joins performed correctly
 - [ ] Missing data analysis complete
 - [ ] Reflection questions answered
-- [ ] Script runs without errors
-
-Submit your `.R` file on Canvas.
 
 ---
 
@@ -152,4 +156,4 @@ Classify the likely missingness mechanism for the survey data in this assignment
 
 Write a **missing data paragraph** as it would appear in a manuscript's Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.
 
-**Submission:** Add your `naniar` code and the missing data paragraph (as a clearly marked comment) to your `.R` file under `# === GRADUATE EXTENSION ===`.
+**Submission:** Add your `naniar` code and the missing data paragraph to your `.qmd` file under a clearly marked `## Graduate Extension` section.

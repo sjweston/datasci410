@@ -1,0 +1,84 @@
+---
+title: "Setting Up an R Project"
+---
+
+Every assignment in this course should live inside an **R Project**. This page walks you through creating one and explains why it matters.
+
+## Why use R Projects?
+
+An R Project sets your **working directory** automatically. That means when you write `read_csv("data.csv")`, R knows to look in the same folder as your project — no need to type out long file paths or use `setwd()`.
+
+Think of it like a filing cabinet drawer: everything for one assignment goes in one folder, and R always knows which drawer is open.
+
+## Step 1: Create a new project
+
+1. Open **RStudio**
+2. Go to **File > New Project...**
+3. Choose **New Directory**
+4. Choose **New Project**
+5. Type a name for your project folder (e.g., `assignment-01`)
+6. Choose where to save it (your Documents folder or a course folder is fine)
+7. Click **Create Project**
+
+RStudio will restart and open your new project. You'll see the project name in the **upper-right corner** of the RStudio window.
+
+## Step 2: Check your setup
+
+You should see a few things in RStudio:
+
+- The **Files** pane (bottom-right) shows the contents of your project folder
+- The project name appears in the **upper-right corner**
+- If you run `getwd()` in the Console, it will print the path to your project folder
+
+```r
+getwd()
+# Should print something like: "/Users/yourname/Documents/assignment-01"
+```
+
+## Step 3: Add your files
+
+Save your R script (`.R`) or Quarto document (`.qmd`) directly into this project folder. If the assignment provides data files, download them into the same folder.
+
+A typical assignment folder looks like this:
+
+```
+assignment-01/
+├── assignment-01.Rproj    ← the project file (created automatically)
+├── assignment-01.R        ← your code
+└── data.csv               ← any data files
+```
+
+For Quarto assignments (Assignment 3 onward), it looks like this:
+
+```
+assignment-03/
+├── assignment-03.Rproj
+├── assignment-03.qmd      ← your code + narrative
+├── assignment-03.html     ← rendered output (created when you render)
+└── data.csv
+```
+
+## Opening an existing project
+
+To come back to a project you've already created:
+
+- **Option A:** Double-click the `.Rproj` file in Finder/File Explorer
+- **Option B:** In RStudio, go to **File > Open Project...** and navigate to the `.Rproj` file
+- **Option C:** Click the project name in the upper-right corner of RStudio and select from your recent projects
+
+::: {.callout-tip}
+## Always open the project first
+If you open an `.R` or `.qmd` file directly (by double-clicking it), RStudio might not set the working directory correctly. Always open the **project** first, then open your files from within it.
+:::
+
+## Common mistakes
+
+| Problem | Fix |
+|---------|-----|
+| `read_csv("data.csv")` says file not found | Make sure the data file is in your project folder, and that you opened the project (check upper-right corner) |
+| `setwd()` in your script | Remove it. R Projects handle this automatically. Scripts with `setwd()` break on other people's computers. |
+| Files scattered across Desktop, Downloads, etc. | Move everything into one project folder |
+
+## One project per assignment
+
+Create a **separate R Project for each assignment**. This keeps your work organized and prevents files from different assignments from interfering with each other.

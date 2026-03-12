@@ -113,7 +113,7 @@ By building a strong foundation now, you'll be in a far better position to lever
 | Component | Weight | Details |
 |-----------|--------|---------|
 | Weekly Coding Assignments | 35% | 8 assignments |
-| Reading Quizzes | 15% | 10 quizzes, graded on completion |
+| Reading Quizzes | 15% | 10 quizzes, unlimited retakes, best score counts |
 | In-Class Participation | 15% | Completion-based coding exercises |
 | Final Project | 35% | Includes proposal, draft, and final submission |
 
@@ -139,7 +139,7 @@ A capstone project where you'll apply everything you've learned to analyze a dat
 - **Draft** (Week 8): Working code and preliminary results
 - **Final Submission** (Week 10): Polished Quarto report with visualizations and narrative
 
-You'll also give a brief (5-minute) presentation during finals week.
+You'll also submit a brief (5-minute) recorded video presentation during finals week (due Wednesday, June 10).
 
 **Dataset requirements:** Your project must use a real dataset (not simulated), with at least 20 rows. You may not reuse a dataset from a previous course. More details will be provided with the project proposal guidelines.
 
@@ -162,11 +162,11 @@ The team challenge is designed to build community and add a little friendly comp
 |------------|-------|----------|-----|
 | [1: Getting Started](/assignment/01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Sun Apr 5 |
 | [2: Data Transformation](/assignment/02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Sun Apr 12 |
-| [3: Tidying & Import](/assignment/03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Sun Apr 19 |
-| [4: Visualization Deep Dive](/assignment/04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Sun Apr 26 |
-| [5: Exploratory Data Analysis](/assignment/05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Sun May 3 |
-| [6: Data Types](/assignment/06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Sun May 10 |
-| [7: Joins & Missing Data](/assignment/07-assignment.qmd) | joins, NA handling | Wed May 13 | Sun May 18 |
+| [3: Tidying & Import](/assignment/03-assignment.qmd) | pivot, read_csv (Quarto `.qmd` required) | Mon Apr 20 | Sun Apr 26 |
+| [4: Visualization Deep Dive](/assignment/04-assignment.qmd) | geoms, scales, design | Mon Apr 27 | Sun May 3 |
+| [5: Exploratory Data Analysis](/assignment/05-assignment.qmd) | distributions, relationships | Mon May 4 | Sun May 10 |
+| [6: Data Types](/assignment/06-assignment.qmd) | logicals, strings, factors | Mon May 11 | Sun May 17 |
+| [7: Joins & Missing Data](/assignment/07-assignment.qmd) | joins, NA handling | Wed May 13 | Sun May 24 |
 | [8: Reproducible Report](/assignment/08-assignment.qmd) | Quarto document | Wed May 27 | Sun May 31 |
 
 ### Final Project Milestones
@@ -176,4 +176,4 @@ The team challenge is designed to build community and add a little friendly comp
 | Proposal | Wed Apr 29 | Dataset selection, research questions, initial plan |
 | Draft | Wed May 20 | Working code, preliminary visualizations |
 | Final Report | Wed Jun 3 | Complete Quarto report |
-| Presentation | Finals Week | 5-minute share-out |
+| Presentation | Wed Jun 10 | 5-minute recorded video |

@@ -1,5 +1,5 @@
 ---
-title: "9: EDA — Variation"
+title: "9: Perception & Design"
 date: "2026-04-27"
 ---
 
@@ -7,33 +7,43 @@ date: "2026-04-27"
 
 📖 **Reading:**
 
-- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
+- [Kang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?](https://mediashift.org/2016/02/checklist-does-your-data-visualization-say-what-you-think-it-says/)
+- [Rowe, S. (2022, May 24) Don't hide the crucial findings.](https://www.storytellingwithdata.com/blog/dont-hide-the-crucial-findings)
+- [Cisneros, M. (2022, June 14). Showing off the insights vs. showing off.](https://www.storytellingwithdata.com/blog/showing-the-insights-vs-showing-off)
+- [Esselman, A. (2022, June 23) Declutter a dual y-axis chart.](https://www.storytellingwithdata.com/blog/declutter-a-dual-y-axis-chart)
+- [Rowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.](https://www.storytellingwithdata.com/blog/a-diverging-bar-makeover-how-to-tackle-the-challenge-of-scope-creep)
+- Optional: Knaflic, *Storytelling with Data*, Ch 1–3
 
 ::: {.callout-important}
-## Assignment 4 is due today
-[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — submit before class.
+## Assignment 3 is due today
+[Assignment 3: Tidying, Import & Quarto](/assignment/03-assignment.qmd) — due Sunday, April 26 at 11:59 PM.
 :::
 
 ## During class
 
 We'll cover:
 
-- What is EDA? Exploratory vs. confirmatory thinking
-- The EDA mindset — curiosity, not confirmation
-- Exploring distributions: histograms, density plots, bar charts
-- Choosing binwidth and when it matters
-- Spotting outliers visually and programmatically
-- What to do with outliers (investigate, don't delete)
-- A first look at missing data
-- Putting it all together: a systematic EDA workflow
+- Why perception matters — how the brain processes visual information
+- Preattentive attributes: color, size, position, shape
+- Gestalt principles and how they shape layout
+- Color theory: sequential, diverging, and qualitative palettes
+- Colorblind-friendly design (and why it matters)
+- Decluttering: removing the visual noise
+- Psychology-specific figures: error bars, interaction plots, raincloud plots
+- Putting it all together with `theme()` customization
+
+::: {.callout-tip}
+## Assignment 4 is assigned today
+[Assignment 4: Visualization Deep Dive](/assignment/04-assignment.qmd) — due Sunday, May 3 at 11:59 PM.
+:::
 
 ### Slides
 
 ```{=html}
-<a href="/slides/09-eda-variation.html" target="_blank" class="btn btn-primary">
+<a href="/slides/08-perception-design.html" target="_blank" class="btn btn-primary">
   <i class="fa-solid fa-arrow-up-right-from-square"></i> View slides in new tab
 </a>
-<a href="/slides/09-eda-variation.pdf" class="btn btn-secondary">
+<a href="/slides/08-perception-design.pdf" class="btn btn-secondary">
   <i class="fa-solid fa-file-pdf"></i> Download PDF
 </a>
 ```
@@ -42,7 +52,7 @@ We'll cover:
 
 ```{=html}
 <div class="ratio ratio-16x9">
-  <iframe src="/slides/09-eda-variation.html"></iframe>
+  <iframe src="/slides/08-perception-design.html"></iframe>
 </div>
 ```
 
@@ -50,51 +60,35 @@ We'll cover:
 
 ✅ **Practice:**
 
-Using the `bfi` dataset from the `psych` package (loaded in class today):
-
-1. Explore the distribution of `age`. What shape is it? Is it skewed?
-2. Check for outliers in `age` using both a histogram and a boxplot. Are any values suspicious?
-3. Pick 3 personality items (e.g., `E1`, `N2`, `A4`) and plot their distributions. What do you notice?
-4. Count how many missing values each variable has. Which variables have the most?
-5. Write down 2–3 questions that your exploration makes you want to answer
+1. Take a plot you made earlier in the course. Identify 3 things that could be decluttered.
+2. Recreate it using only `theme_minimal()` — what disappears? What stays?
+3. Try switching your color palette to `scale_fill_viridis_d()`. Does it change the story?
+4. Create a raincloud plot (violin + boxplot + jitter) for any grouped data you have
+5. Make a "bad" version of a figure on purpose — violate as many design principles as you can. Then fix it.
 
 ::: {.callout-note}
-## The EDA loop
+## The decluttering checklist
 
-EDA isn't a linear checklist — it's a cycle:
+Before you call a figure "done," ask:
 
-1. **Ask** a question
-2. **Visualize** the data to answer it
-3. **Notice** something new
-4. **Ask** another question
-5. Repeat
-
-There's no "finished." The goal is understanding, not a final answer.
+- Is the background gray? → Switch to `theme_minimal()` or `theme_classic()`
+- Are there gridlines? → Remove them
+- Is there a legend when there's only one group? → Remove it
+- Do the axis labels say something meaningful? → If not, rename them
+- Can someone understand the point without reading the caption? → If not, the title needs work
 :::
 
-### Loading the dataset
+### Colorblind-friendly palettes
 
 ```r
-library(psych)
-data(bfi)
-bfi <- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility
+# Viridis — works for continuous and discrete
+scale_fill_viridis_d()   # discrete categories
+scale_fill_viridis_c()   # continuous values
+
+# ColorBrewer — curated palettes
+scale_fill_brewer(palette = "Set2")      # qualitative
+scale_fill_brewer(palette = "RdBu")      # diverging
+scale_fill_brewer(palette = "Blues")     # sequential
 ```
 
-### Outlier investigation template
-
-```r
-# Quick outlier check for any numeric variable
-variable_name <- "age"
-
-bfi |>
-  summarize(
-    min = min(!!sym(variable_name), na.rm = TRUE),
-    max = max(!!sym(variable_name), na.rm = TRUE),
-    mean = mean(!!sym(variable_name), na.rm = TRUE),
-    sd = sd(!!sym(variable_name), na.rm = TRUE)
-  )
-
-# Flag values beyond 3 SD from the mean
-bfi |>
-  filter(abs(age - mean(age, na.rm = TRUE)) > 3 * sd(age, na.rm = TRUE))
-```
+These are all built into ggplot2 — no extra packages needed.

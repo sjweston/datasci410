@@ -1,13 +1,18 @@
 ---
 title: "Assignment 5: Exploratory Data Analysis"
-date: "2026-04-29"
+date: "2026-05-10"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
-**Assigned:** Wednesday, April 29 (Session 10)
-**Due:** Monday, May 4 before class
-**Submit:** R script (`.R` file) and 1-page EDA report (PDF) on Canvas
+**Assigned:** Monday, May 4 (Session 11)
+**Due:** Sunday, May 10 at 11:59 PM
+**Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+::: {.callout-tip}
+## Getting started
+See the guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using Quarto Documents](/resource/quarto-docs.qmd)
 :::
 
 ## Overview
@@ -89,16 +94,15 @@ Write a 1-page (approximately 300-400 words) EDA report summarizing:
 3. **Data quality issues:** Missing data, outliers, or concerns
 4. **Next steps:** What would you investigate further?
 
-Save this as a PDF (you can write it in Word, Google Docs, or even as comments in R and knit to PDF).
+Write this as narrative text (not code comments) in your Quarto document.
 
 ## Submission
 
 Submit:
 
-- [ ] Your `.R` script with all code and comments
-- [ ] 1-page EDA report as PDF
-
-Make sure your script runs without errors.
+- [ ] Your `.qmd` file with all code and narrative
+- [ ] Your rendered HTML file
+- [ ] Include your EDA write-up as narrative text in the document (no separate PDF needed)
 
 ---
 
@@ -125,4 +129,4 @@ Your write-up should include the following, in order:
 
 **Length:** 500–700 words. This should read as a coherent piece of writing, not a list of answers.
 
-**Submission:** Submit your write-up as a PDF alongside your `.R` script.
+**Submission:** Include your write-up as narrative text in your `.qmd` file under a clearly marked `## Graduate Extension` section.

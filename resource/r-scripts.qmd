@@ -1,0 +1,113 @@
+---
+title: "Using R Scripts for Assignments"
+---
+
+Assignments 1 and 2 are submitted as **R scripts** (`.R` files). This page walks you through creating, organizing, and testing your script before you submit.
+
+::: {.callout-note}
+Starting with Assignment 3, you'll submit Quarto documents instead. See the [Quarto guide](quarto-docs.qmd) when you get there.
+:::
+
+## Step 1: Set up your project
+
+Before writing any code, create an R Project for this assignment. See [Setting Up an R Project](r-projects.qmd) if you haven't done this yet.
+
+## Step 2: Create a new R script
+
+1. In RStudio, go to **File > New File > R Script** (or press `Ctrl+Shift+N` / `Cmd+Shift+N`)
+2. A blank script will open in the **Source** pane (top-left)
+3. **Save it immediately** with `Ctrl+S` / `Cmd+S` — give it a descriptive name like `assignment-01.R`
+
+## Step 3: Add your header
+
+Start every script with a comment block identifying yourself and the assignment:
+
+```r
+# Assignment 1: Getting Started with R
+# Your Name
+# Date
+```
+
+## Step 4: Load packages
+
+After the header, load the packages you'll need. Always put `library()` calls at the top of your script, not scattered throughout:
+
+```r
+# Load packages
+library(tidyverse)
+```
+
+## Step 5: Write your code in sections
+
+Use comment headers to organize your script into the parts of the assignment. This makes your code easy to read and easy to grade:
+
+```r
+# ---- Part 1: Scatterplot ----
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()
+
+# ---- Part 2: Adding Color ----
+
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point()
+```
+
+::: {.callout-tip}
+## Section headers
+Lines that start with `# ----` (or `# ====` or `# ####`) create collapsible sections in RStudio. You can also jump between them using the document outline (the button at the top-right of the Source pane).
+:::
+
+## Step 6: Add comments explaining your work
+
+Use comments to answer questions the assignment asks and to explain your reasoning:
+
+```r
+# The scatterplot shows a negative relationship between engine size
+# and highway fuel economy. Larger engines get worse gas mileage.
+```
+
+You don't need to comment every line of code — just the parts where the assignment asks you to explain something or where you made a deliberate choice.
+
+## Step 7: Save your plots (if required)
+
+Some assignments ask you to save plots as image files. Use `ggsave()` right after the code that creates the plot:
+
+```r
+# Create the plot
+my_plot <- ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  labs(title = "Engine Size vs. Highway MPG")
+
+# Display it
+my_plot
+
+# Save it
+ggsave("scatterplot.png", plot = my_plot, width = 6, height = 4)
+```
+
+## Step 8: Test your script
+
+Before submitting, make sure your script runs from start to finish without errors:
+
+1. **Restart R:** Go to **Session > Restart R** (or press `Ctrl+Shift+F10` / `Cmd+Shift+F10`)
+2. **Run everything:** Go to **Code > Run Region > Run All** (or press `Ctrl+Alt+R` / `Cmd+Option+R`)
+3. **Check for errors:** Watch the Console for red error messages
+
+::: {.callout-important}
+## Why restart first?
+During your work session, you might have created objects or loaded packages in the Console that your script depends on without realizing it. Restarting R clears everything, so you can confirm that the script is self-contained.
+:::
+
+## Step 9: Submit
+
+Upload your `.R` file (and any required image files) to **Canvas** by the deadline.
+
+## Common mistakes
+
+| Problem | Fix |
+|---------|-----|
+| Script runs fine for you but errors on restart | You probably ran something in the Console that isn't in your script. Add the missing code. |
+| `library(tidyverse)` gives an error | Run `install.packages("tidyverse")` in the Console (just once — don't put `install.packages()` in your script). |
+| Plot doesn't show up | Make sure you're printing the plot object, not just assigning it. Either type the object name on its own line or use `print()`. |
+| `object not found` error | Make sure you run the script from the top. Objects defined later in the script don't exist until that line runs. |

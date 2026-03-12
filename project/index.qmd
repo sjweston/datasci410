@@ -26,7 +26,7 @@ The project is broken into four milestones so you get feedback along the way:
 | [Proposal](01-proposal.qmd) | Wed Apr 29 (Session 10) | Dataset, research questions, initial plan |
 | [Draft](02-draft.qmd) | Wed May 20 (Session 15) | Working code, preliminary visualizations |
 | [Final Report](03-final-report.qmd) | Wed Jun 3 (Session 18) | Complete Quarto report |
-| [Presentation](04-presentation.qmd) | Finals Week | 5-minute recorded video |
+| [Presentation](04-presentation.qmd) | Wed Jun 10 | 5-minute recorded video |
 
 ## Grading breakdown
 
@@ -43,7 +43,7 @@ The project is broken into four milestones so you get feedback along the way:
 Your dataset should:
 
 - Be relevant to **psychology or the social sciences** (broadly defined)
-- Have at least **100 observations** and **5 variables** (ideally a mix of numeric and categorical)
+- Have at least **20 observations** and **5 variables** (ideally a mix of numeric and categorical)
 - Be something you find **genuinely interesting** — you'll spend several weeks with it
 
 ### Good sources for datasets

@@ -6,24 +6,24 @@ title: "Assignments"
 
 Weekly coding assignments reinforce what you learn in each session. They're designed to take 1-2 hours outside of class, and you'll have time during class to get started and ask questions.
 
-**Grading:** 8 assignments total, lowest 1 dropped. Worth 35% of your final grade.
+**Grading:** 8 assignments total. Worth 35% of your final grade.
 
 ## Assignment Schedule
 
 | Assignment | Topic | Assigned | Due |
 |------------|-------|----------|-----|
-| [1: Getting Started](01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Mon Apr 6 |
-| [2: Data Transformation](02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Mon Apr 13 |
-| [3: Tidying & Import](03-assignment.qmd) | pivot, read_csv | Wed Apr 15 | Mon Apr 20 |
-| [4: Visualization Deep Dive](04-assignment.qmd) | geoms, scales, design | Wed Apr 22 | Mon Apr 27 |
-| [5: Exploratory Data Analysis](05-assignment.qmd) | distributions, relationships | Wed Apr 29 | Mon May 4 |
-| [6: Data Types](06-assignment.qmd) | logicals, strings, factors | Wed May 6 | Mon May 11 |
-| [7: Joins & Missing Data](07-assignment.qmd) | joins, NA handling | Wed May 13 | Wed May 20 |
-| [8: Reproducible Report](08-assignment.qmd) | Quarto document | Wed May 27 | Mon Jun 1 |
+| [1: Getting Started](01-assignment.qmd) | RStudio, ggplot2 basics | Wed Apr 1 | Sun Apr 5 |
+| [2: Data Transformation](02-assignment.qmd) | dplyr verbs, pipe | Wed Apr 8 | Sun Apr 12 |
+| [3: Tidying, Import & Quarto](03-assignment.qmd) | pivot, read_csv, Quarto | Mon Apr 20 | Sun Apr 26 |
+| [4: Visualization Deep Dive](04-assignment.qmd) | geoms, scales, design | Mon Apr 27 | Sun May 3 |
+| [5: Exploratory Data Analysis](05-assignment.qmd) | distributions, relationships | Mon May 4 | Sun May 10 |
+| [6: Data Types & Wrangling](06-assignment.qmd) | logicals, strings, factors | Mon May 11 | Sun May 17 |
+| [7: Joins & Missing Data](07-assignment.qmd) | joins, NA handling | Wed May 13 | Sun May 24 |
+| [8: Reproducible Report](08-assignment.qmd) | Quarto document | Wed May 27 | Sun May 31 |
 
 ## Submission Guidelines
 
-- Submit all assignments through **Canvas** before class on the due date
+- Submit all assignments through **Canvas** by 11:59 PM on the due date
 - Submit your `.R` script or `.qmd` file (depending on the assignment)
 - Include your name and the assignment number at the top of your file
 - Make sure your code runs without errors from a fresh R session

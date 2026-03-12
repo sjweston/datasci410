@@ -1,13 +1,18 @@
 ---
 title: "Assignment 8: Reproducible Report"
-date: "2026-05-27"
+date: "2026-05-31"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
 **Assigned:** Wednesday, May 27 (Session 16)
-**Due:** Monday, June 1 before class
+**Due:** Sunday, May 31 at 11:59 PM
 **Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+::: {.callout-tip}
+## Getting started
+See the guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using Quarto Documents](/resource/quarto-docs.qmd)
 :::
 
 ## Overview

@@ -1,6 +1,6 @@
 ---
 title: "Assignment 1: Getting Started with R"
-date: "2026-04-01"
+date: "2026-04-05"
 ---
 
 ```{r}
@@ -11,8 +11,13 @@ date: "2026-04-01"
 ::: {.callout-note}
 ## Assignment Details
 **Assigned:** Wednesday, April 1 (Session 2)
-**Due:** Monday, April 6 before class
+**Due:** Sunday, April 5 at 11:59 PM
 **Submit:** R script (`.R` file) on Canvas
+:::
+
+::: {.callout-tip}
+## New to R?
+See the step-by-step guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using R Scripts](/resource/r-scripts.qmd)
 :::
 
 ## Overview

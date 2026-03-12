@@ -1,0 +1,259 @@
+---
+title: "Common R Errors (and What They Mean)"
+---
+
+R error messages can be cryptic, especially when you're just starting out. This page translates the most common ones into plain English and shows you how to fix them.
+
+## Reading error messages
+
+Every R error has the same structure:
+
+```
+Error in <where it happened>: <what went wrong>
+```
+
+Read from right to left: the **what** is usually more helpful than the **where**. And remember — errors are normal. Every R programmer sees them daily.
+
+## Object and function errors
+
+### `object 'x' not found`
+
+```r
+ggplot(dat, aes(x = age, y = score)) + geom_point()
+#> Error in ggplot(dat, aes(x = age, y = score)) : object 'dat' not found
+```
+
+**What it means:** R doesn't know what `dat` is. You either haven't created it yet, misspelled it, or forgot to run the line that defines it.
+
+**Fix:** Check for typos. Make sure you ran the code that creates the object. If you're in a Quarto document, remember that chunks run top-to-bottom — you can't use something defined in a later chunk.
+
+---
+
+### `could not find function "x"`
+
+```r
+ggplot(data, aes(x = age)) + geom_bar()
+#> Error in ggplot(data, aes(x = age)) : could not find function "ggplot"
+```
+
+**What it means:** R doesn't recognize the function name. You probably forgot to load the package.
+
+**Fix:** Add `library(tidyverse)` (or whatever package the function comes from) to the top of your script and run it. If you get an error on `library()` too, you need to install the package first:
+
+```r
+# Run once in the Console (not in your script):
+install.packages("tidyverse")
+```
+
+---
+
+### `unused argument`
+
+```r
+mean(c(1, 2, NA), na.rm = true)
+#> Error in mean(c(1, 2, NA), na.rm = true) : unused argument (na.rm = true)
+```
+
+**What it means:** You passed an argument the function doesn't recognize — usually because of a typo or capitalization error.
+
+**Fix:** R is case-sensitive. It's `TRUE`, not `true`. Check the spelling of argument names too (`na.rm`, not `na_rm`).
+
+## Syntax errors
+
+### `unexpected ')' ` or `unexpected '}'`
+
+```r
+filter(data, age > 18
+       species == "dog")
+#> Error: unexpected symbol in "species"
+```
+
+**What it means:** R hit something it wasn't expecting, almost always because of a missing comma, parenthesis, or pipe.
+
+**Fix:** Check for:
+
+- Missing commas between arguments
+- Unmatched parentheses — count your `(` and `)` to make sure they pair up
+- A missing pipe `|>` or `+` between ggplot layers
+
+::: {.callout-tip}
+## RStudio helps with this
+If you put your cursor next to a parenthesis, RStudio highlights its match. If there's no highlight, you're missing one.
+:::
+
+---
+
+### `unexpected input` or `unexpected string constant`
+
+```r
+name <- "Sara
+#> Error: unexpected end of input
+```
+
+**What it means:** You opened a quote or parenthesis but never closed it. R is waiting for the rest.
+
+**Fix:** Make sure every `"` has a matching `"`. If your Console shows a `+` instead of `>`, R is waiting for you to finish the expression. Press **Escape** to cancel and fix the line.
+
+---
+
+### `unexpected '='`
+
+```r
+data |> filter(age = 18)
+#> Error in filter(age = 18) : unused argument (age = 18)
+```
+
+**What it means:** You used `=` (assignment) when you needed `==` (comparison).
+
+**Fix:** Inside `filter()`, comparisons need `==`:
+
+```r
+data |> filter(age == 18)
+```
+
+## Data errors
+
+### `x must be numeric` or `non-numeric argument`
+
+```r
+mean(data$age)
+#> Warning: argument is not numeric or logical: returning NA
+```
+
+**What it means:** You're trying to do math on something that isn't a number. The column might have been read as character or factor instead of numeric.
+
+**Fix:** Check the column type with `class(data$age)` or `glimpse(data)`. If it's character, convert it:
+
+```r
+data <- data |> mutate(age = as.numeric(age))
+```
+
+---
+
+### Column name issues
+
+```r
+data |> select(reaction time)
+#> Error: unexpected symbol in "data |> select(reaction time)"
+```
+
+**What it means:** Column names with spaces or special characters need backticks.
+
+**Fix:**
+
+```r
+data |> select(`reaction time`)
+```
+
+Even better — rename it right away:
+
+```r
+data <- data |> rename(reaction_time = `reaction time`)
+```
+
+## ggplot errors
+
+### `mapping must be created by aes()`
+
+```r
+ggplot(data, x = age, y = score)
+#> Error: mapping must be created by `aes()`
+```
+
+**What it means:** You forgot to wrap the aesthetics in `aes()`.
+
+**Fix:**
+
+```r
+ggplot(data, aes(x = age, y = score))
+```
+
+---
+
+### `geom_bar requires a missing aesthetic: y` (or x)
+
+```r
+ggplot(data, aes(x = age)) + geom_col()
+#> Error: geom_col requires the following missing aesthetics: y
+```
+
+**What it means:** `geom_col()` needs both x and y. You might want `geom_bar()` instead (which counts for you), or you need to supply a y variable.
+
+**Fix:** Use `geom_bar()` for counts, `geom_col()` when you have pre-computed values:
+
+```r
+# Count how many in each group:
+ggplot(data, aes(x = condition)) + geom_bar()
+
+# Plot pre-computed values:
+ggplot(summary_data, aes(x = condition, y = mean_score)) + geom_col()
+```
+
+---
+
+### `stat_count() can only have an x or y aesthetic`
+
+**What it means:** You gave `geom_bar()` both x and y, but it only needs one (it counts the other automatically).
+
+**Fix:** Either drop the y aesthetic from `geom_bar()`, or switch to `geom_col()` if you want to supply your own y values.
+
+---
+
+### Plot doesn't show up
+
+**What it means:** You assigned the plot to an object but didn't print it.
+
+**Fix:** Either type the object name on its own line, or don't assign it:
+
+```r
+# This won't display:
+my_plot <- ggplot(data, aes(x = age)) + geom_histogram()
+
+# Add this line to display it:
+my_plot
+```
+
+## File and path errors
+
+### `cannot open file 'data.csv': No such file or directory`
+
+```r
+read_csv("data.csv")
+#> Error: 'data.csv' does not exist in current working directory
+```
+
+**What it means:** R can't find the file. It's looking in your working directory, and the file isn't there.
+
+**Fix:**
+
+1. Check you opened the R Project (look at the upper-right corner of RStudio)
+2. Check the file is in your project folder (look in the Files pane)
+3. Check for typos in the filename (capitalization matters!)
+
+See [Setting Up an R Project](r-projects.qmd) for more on how working directories work.
+
+## Warnings vs. errors
+
+Not everything red is an error. R has two kinds of messages:
+
+| Type | What it means | What to do |
+|------|--------------|------------|
+| **Error** | Something broke. Code didn't run. | Fix it. |
+| **Warning** | Code ran, but R wants you to know something. | Read it. Usually fine, sometimes important. |
+
+Common warnings you can usually ignore:
+
+- `Removed N rows containing missing values` — ggplot dropped NAs from your plot
+- `package was built under R version X.X.X` — version mismatch, usually harmless
+
+Common warnings you should pay attention to:
+
+- `NAs introduced by coercion` — `as.numeric()` couldn't convert some values
+- `Removed N rows containing non-finite values` — you might have unexpected Inf or NaN values
+
+## When you're really stuck
+
+1. **Read the error message carefully** — it's often more helpful than you think
+2. **Google the exact error message** (in quotes) — someone has had this problem before
+3. **Restart R** (`Session > Restart R`) and run your code from the top — this fixes more problems than you'd expect
+4. **Ask for help** — bring the error message to office hours or post it on the Canvas discussion board

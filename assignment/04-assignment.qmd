@@ -1,13 +1,18 @@
 ---
 title: "Assignment 4: Visualization Deep Dive"
-date: "2026-04-22"
+date: "2026-05-03"
 ---
 
 ::: {.callout-note}
 ## Assignment Details
-**Assigned:** Wednesday, April 22 (Session 8)
-**Due:** Monday, April 27 before class
-**Submit:** R script (`.R` file) and PNG files on Canvas
+**Assigned:** Monday, April 27 (Session 9)
+**Due:** Sunday, May 3 at 11:59 PM
+**Submit:** Quarto document (`.qmd`) AND rendered HTML on Canvas
+:::
+
+::: {.callout-tip}
+## Getting started
+See the guides: [Setting Up an R Project](/resource/r-projects.qmd) | [Using Quarto Documents](/resource/quarto-docs.qmd)
 :::
 
 ## Overview
@@ -95,11 +100,9 @@ You won't match it exactly, but get as close as you can.
 
 Submit:
 
-- [ ] Your `.R` script with all code and comments
-- [ ] `good_graph.png` — your good visualization from Part 3
-- [ ] `bad_graph.png` — your bad visualization from Part 3
-
-Make sure your script runs without errors and all files are saved correctly.
+- [ ] Your `.qmd` file with all code and narrative
+- [ ] Your rendered HTML file
+- [ ] Plots should be embedded in the document (they render automatically from code chunks)
 
 ---
 
@@ -134,4 +137,4 @@ Include the caption as a comment directly above your `ggsave()` call.
 
 In 3–5 sentences (as a comment), justify your design choices: Why this geom? Why this color palette? What did you deliberately remove or simplify? Connect your reasoning to the perception and design principles from Session 9.
 
-**Submission:** Add `ggsave()`, the caption comment, and the justification comment to your `.R` file, clearly marked `# === GRADUATE EXTENSION ===`. Submit the saved figure file alongside your script.
+**Submission:** Add `ggsave()`, the caption, and the justification to your `.qmd` file under a clearly marked `## Graduate Extension` section. Submit the saved figure file alongside your `.qmd` and HTML.

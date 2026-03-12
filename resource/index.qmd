@@ -2,17 +2,61 @@
 title: "Resources"
 ---
 
-This section contains helpful resources and tutorials for the course.
+## Guides
 
-## Recommended Resources
+Step-by-step instructions for common tasks in this course.
 
-- [Resource 1 title](https://example.com)
-- [Resource 2 title](https://example.com)
+| Guide | When to use it |
+|-------|---------------|
+| [Setting Up an R Project](r-projects.qmd) | Every assignment — start here |
+| [Using R Scripts for Assignments](r-scripts.qmd) | Assignments 1–2 |
+| [Using Quarto Documents for Assignments](quarto-docs.qmd) | Assignments 3–8 and Final Project |
+| [Common R Errors (and What They Mean)](common-errors.qmd) | When you get a red error message and don't know what it means |
+
+## Course Textbook
+
+- [R for Data Science (2nd edition)](https://r4ds.hadley.nz/) — free online. Weekly readings are listed on the [schedule](/schedule.qmd).
+
+## Cheatsheets
+
+One-page visual references for the packages we use most. Print these out or keep them open while you work.
+
+- [ggplot2 Cheatsheet](https://rstudio.github.io/cheatsheets/data-visualization.pdf) — geoms, aesthetics, scales, themes
+- [dplyr Cheatsheet](https://rstudio.github.io/cheatsheets/data-transformation.pdf) — filter, select, mutate, summarize, group_by
+- [tidyr Cheatsheet](https://rstudio.github.io/cheatsheets/tidyr.pdf) — pivot_longer, pivot_wider, separate, unite
+- [RStudio IDE Cheatsheet](https://rstudio.github.io/cheatsheets/rstudio-ide.pdf) — keyboard shortcuts, panes, project setup
+- [Quarto Cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf) — code chunks, Markdown formatting, YAML options
+- [Browse all cheatsheets](https://posit.co/resources/cheatsheets/)
+
+## Extra Practice
+
+If you want more practice beyond the assignments, these are all free.
+
+- [Posit Primers](https://posit.cloud/learn/primers) — interactive R tutorials in your browser. Great for reinforcing the basics.
+- [Cédric Scherer's ggplot2 Tutorial](https://www.cedricscherer.com/2019/08/05/a-ggplot2-tutorial-for-beautiful-plotting-in-r/) — a beautifully illustrated deep dive into ggplot2. Useful when you're working on the visualization assignments.
+- [Quarto Tutorial](https://quarto.org/docs/get-started/hello/rstudio.html) — Quarto's own getting-started guide, if you want more detail than our in-class introduction.
+
+## Finding Datasets
+
+For your final project, you'll need a psychology or social science dataset. Here are good places to look:
+
+- [Open Science Framework (OSF)](https://osf.io/) — published research data, often with codebooks
+- [ICPSR](https://www.icpsr.umich.edu/) — large archive of social and behavioral science data
+- [General Social Survey (GSS)](https://gss.norc.org/) — decades of survey data on American attitudes and behaviors
+- [World Values Survey](https://www.worldvaluessurvey.org/) — cross-cultural survey data
+- [Kaggle Datasets](https://www.kaggle.com/datasets) — wide variety; filter for social science topics
+- Your own research lab (with advisor permission)
+
+See the [Final Project page](/project/index.qmd) for dataset requirements.
 
 ## Software
 
-[Add software installation guides and links here]
+- [Download R](https://cran.r-project.org/)
+- [Download RStudio](https://posit.co/download/rstudio-desktop/)
 
 ## Getting Help
 
-[Add information about how to get help]
+- **In class:** Start assignments during work time — the instructor and TA are there to help
+- **Office hours:** See the [syllabus](/syllabus.qmd) for times and location
+- **Canvas discussion board:** Post questions anytime — classmates and the teaching team can respond
+- **Classmates:** Work together, but write your own code

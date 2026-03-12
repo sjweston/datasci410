@@ -22,11 +22,6 @@ We'll cover:
 - A quick look at SPSS files with `haven::read_sav()`
 - Practical tips for importing Qualtrics exports
 
-::: {.callout-tip}
-## Assignment 3 is assigned today
-[Assignment 3: Tidying & Import](/assignment/03-assignment.qmd) — due before Session 7.
-:::
-
 ### Slides
 
 ```{=html}
