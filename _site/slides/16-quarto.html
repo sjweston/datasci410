@@ -212,7 +212,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="what-is-literate-programming" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>What is literate programming?</h1>
-
+<aside class="notes">
+<p>This is Session 7 (Week 4, Mon Apr 20), even though the file is numbered 16. Quarto was moved earlier in the curriculum so students use it for all assignments from A3 onward. Assignment 3 (Tidying, Import &amp; Quarto) is assigned today. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time. Open with the callback to Session 1 — this is the payoff for the replication crisis discussion.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="remember-session-1" class="slide level2">
 <h2>Remember Session 1?</h2>
@@ -222,6 +234,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p><strong>Quarto is part of the solution.</strong> Today we learn to write documents where the analysis <em>is</em> the report.</p>
+<aside class="notes">
+<p>Spend ~3 minutes on this opening. Let the callback land — they’ll remember the 36% stat from Session 1. The three-part incremental reveal builds the problem before offering the solution. Emphasize that this isn’t just an academic problem: “Data cleaned by hand” and “code only ran on one laptop” are things that happen in real labs right now.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="copy-paste-workflows-break-when-anything-changes" class="slide level2">
@@ -236,6 +261,19 @@ Dr.&nbsp;Sara Weston
 </div><div class="column" style="width:50%;">
 <p><strong>Step 2:</strong> Copy to Word &gt; “The mean depression score was 18.5 (SD = 5.2).”</p>
 </div></div>
+<aside class="notes">
+<p>Walk through this scenario concretely. Ask: “How many of you have written a paper where you ran the analysis in one program and typed the results into Word?” Most hands will go up. This is the problem Quarto solves. The two-column layout makes the disconnect visual — code on the left, Word on the right, no connection between them.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-goes-wrong" class="slide level2">
 <h2>What goes wrong?</h2>
@@ -245,6 +283,19 @@ Dr.&nbsp;Sara Weston
 <li>No record of what code produced what result</li>
 <li>Can’t reproduce your own analysis in 6 months</li>
 </ul>
+<aside class="notes">
+<p>Ask students to name other things that can go wrong. Common answers: forgetting to update a table, accidentally reporting results from an old version of the data, not remembering which script produced which figure. All of these are solved by having the code and the report in the same document.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="literate-programming-approach" class="slide level2">
 <h2>Literate programming approach</h2>
@@ -265,6 +316,19 @@ Dr.&nbsp;Sara Weston
 <li>Easy to share with collaborators</li>
 </ul>
 </div></div>
+<aside class="notes">
+<p>The term “literate programming” comes from Donald Knuth (1984). You don’t need to go into the history, but if students ask, it’s the idea that programs should be written for humans to read, not just for computers to execute. The key concept: one document contains code, results, and narrative. No separation, no copying.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="introducing-quarto" class="slide level2">
 <h2>Introducing Quarto</h2>
@@ -276,6 +340,19 @@ Dr.&nbsp;Sara Weston
 </ul>
 <div class="fragment">
 <p>It’s the evolution of R Markdown (same company, newer technology).</p>
+<aside class="notes">
+<p>Students sometimes find R Markdown resources online and get confused. Reassure them: Quarto is the successor. The syntax is very similar, so R Markdown tutorials are mostly transferable. If they encounter <code>.Rmd</code> files, those are R Markdown; <code>.qmd</code> files are Quarto. For this course, we use Quarto exclusively.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -290,6 +367,19 @@ Dr.&nbsp;Sara Weston
 <li><strong>Markdown text</strong> — your narrative</li>
 <li><strong>Code chunks</strong> — your R code</li>
 </ol>
+<aside class="notes">
+<p>This section covers the three building blocks. Spend about 12 minutes total on YAML, markdown, and code chunks before moving to chunk options. Consider doing a live demo in RStudio alongside these slides — create a new .qmd file and walk through each component as you go.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="yaml-header" class="slide level2">
 <h2>YAML header</h2>
@@ -307,6 +397,19 @@ Dr.&nbsp;Sara Weston
 <li>What format to render (HTML, PDF, Word)</li>
 <li>Various options (table of contents, theme, etc.)</li>
 </ul>
+<aside class="notes">
+<p>YAML (rhymes with “camel”) stands for “YAML Ain’t Markup Language.” Students will inevitably ask how to pronounce it. The key thing to emphasize: YAML is picky about indentation and spacing. Common errors include missing the closing <code>---</code>, using tabs instead of spaces, or forgetting colons. If students get mysterious rendering errors, YAML formatting is the first place to check.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="markdown-basics" class="slide level2">
@@ -351,6 +454,19 @@ Dr.&nbsp;Sara Weston
 <li>Do effects persist?</li>
 </ol>
 </div></div>
+<aside class="notes">
+<p>Move through the markdown slides quickly — students pick this up fast and most have seen basic formatting before (Google Docs, Slack, Discord). The side-by-side “you write / you get” layout is effective here. Point out that markdown is used everywhere, not just Quarto — GitHub, Slack, Reddit, etc. If anyone has used those, they already know markdown basics.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="code-chunks" class="slide level2">
 <h2>Code chunks</h2>
@@ -364,6 +480,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
 <div class="fragment">
 <p>When you render, both the code <strong>and</strong> output appear in the document.</p>
+<aside class="notes">
+<p>This is where the magic happens for students. Emphasize that the <code>{r}</code> tells Quarto “this is R code, run it.” The triple backticks mark the boundaries of the chunk. Common mistake: students forget the closing backticks, which causes everything below to be treated as code. If doing a live demo, type a chunk, run it, and show the output appearing right below.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="running-code-chunks" class="slide level2">
@@ -374,6 +503,19 @@ Dr.&nbsp;Sara Weston
 <li><strong>Run one line:</strong> Ctrl/Cmd + Enter (like in scripts)</li>
 <li><strong>Run all chunks above:</strong> Button in toolbar</li>
 </ul>
+<aside class="notes">
+<p>Emphasize the green arrow — students will use this constantly. Also note that Ctrl/Cmd + Enter works just like in scripts, so the workflow they already know still applies within chunks. “Run all chunks above” is useful for debugging when something breaks midway through a document.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rendering-the-document" class="slide level2">
 <h2>Rendering the document</h2>
@@ -389,12 +531,37 @@ Dr.&nbsp;Sara Weston
 <li>Combine with your text</li>
 <li>Create the final document</li>
 </ol>
+<aside class="notes">
+<p>Key distinction students miss: running a chunk (green arrow) is for interactive development. Rendering (Render button) is for producing the final document. When you render, Quarto starts fresh — it doesn’t use objects from your environment. This is a common source of confusion: “It works when I run it but fails when I render.” The answer is always that something wasn’t loaded or created in the document itself.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
 <section id="code-chunk-options" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Code chunk options</h1>
-
+<aside class="notes">
+<p>This is the most detail-heavy section. Spend about 8 minutes here. Students don’t need to memorize every option — they need to know where to look them up and understand the most common ones (echo, eval, include).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="controlling-output" class="slide level2">
 <h2>Controlling output</h2>
@@ -406,6 +573,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This code runs but doesn't show in the output</span></span>
 <span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(depression_scores)</span>
 <span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<aside class="notes">
+<p>Point out the <code>#|</code> syntax — this is the “hash-pipe” and it’s Quarto-specific (R Markdown used chunk header options). Students sometimes forget the space after <code>#|</code>. The key concept: you can independently control whether code runs (eval) and whether code shows (echo). This gives four combinations, but only three are useful (there’s no point in showing code that doesn’t run AND hiding the output).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="common-chunk-options" class="slide level2">
 <h2>Common chunk options</h2>
@@ -445,6 +625,19 @@ Dr.&nbsp;Sara Weston
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Walk through the table row by row. The most confusing one for students is the difference between <code>echo: false</code> and <code>include: false</code>. The key: <code>echo: false</code> hides the code but shows the output (a figure, a number, a table). <code>include: false</code> hides everything — it’s as if the chunk doesn’t exist in the output, but the code still runs behind the scenes. This is exactly what they want for their setup chunk.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="figure-options" class="slide level2">
 <h2>Figure options</h2>
@@ -460,6 +653,19 @@ Dr.&nbsp;Sara Weston
 <li><code>fig-width</code> / <code>fig-height</code> — size in inches</li>
 <li><code>fig-cap</code> — adds a caption below the figure</li>
 </ul>
+<aside class="notes">
+<p>Figure options are something students will use immediately in their assignments. Emphasize that <code>fig-cap</code> is how you add proper figure captions — not by writing “Figure 1: …” in your text. The caption is tied to the figure, so if you reorder things, the caption moves with the figure.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="example-setup-chunk" class="slide level2">
 <h2>Example: Setup chunk</h2>
@@ -475,11 +681,36 @@ Dr.&nbsp;Sara Weston
 <li><code>include: false</code> means the chunk <strong>runs</strong> but nothing shows in the output</li>
 <li>Load all your packages here so they’re available throughout</li>
 </ul>
+<aside class="notes">
+<p>Emphasize the convention: every Quarto document should start with a setup chunk that loads packages and, optionally, reads in data. This is a habit they should build now. The <code>label: setup</code> name is conventional but not required; what matters is <code>include: false</code> so readers don’t see the library loading messages.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="inline-code" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Inline code</h1>
-
+<aside class="notes">
+<p>This is the feature that sells Quarto to most students. When they see that they can type a formula in their text and have it automatically update when the data changes, it clicks. Spend ~5 minutes here and make sure the concept lands.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="embedding-results-in-text" class="slide level2">
 <h2>Embedding results in text</h2>
@@ -501,6 +732,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>depression_scores <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">19</span>, <span class="dv">21</span>)</span></code></pre></div>
 </div>
 <p><strong>In your text, you write</strong> <code>r expression</code> <strong>and Quarto fills in the result.</strong></p>
+<aside class="notes">
+<p>The “never hard-code numbers” rule is the single most important Quarto habit. If a student writes “The mean was 18.5” in their report, they have a time bomb — the number will become wrong the moment anything about the data changes. Inline code means the number always matches the data. Students often ask: “But what if I know the number won’t change?” The answer: you never know that for certain. Build the habit now.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="inline-code-before-and-after" class="slide level2">
 <h2>Inline code: before and after</h2>
@@ -516,6 +760,19 @@ Dr.&nbsp;Sara Weston
 <p><strong>Quarto renders:</strong></p>
 <p>The mean score was 19 (SD = 4.07).</p>
 </div></div>
+<aside class="notes">
+<p>The side-by-side layout shows the raw syntax on the left and the rendered result on the right. Point out the backtick-r pattern: backtick, the letter r, a space, then the R expression, then a closing backtick. Common mistake: students use regular backticks (code formatting) instead of the inline code syntax. If the expression shows as literal text instead of a number, they forgot the <code>r</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="formatting-inline-results" class="slide level2">
 <h2>Formatting inline results</h2>
@@ -534,12 +791,37 @@ Dr.&nbsp;Sara Weston
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r scales::comma(15234)`</span></span></code></pre></div>
 </div>
+<aside class="notes">
+<p>These formatting functions are practical tools. <code>round()</code> is the one they’ll use most — without it, inline code might print 15 decimal places. <code>scales::percent()</code> and <code>scales::comma()</code> are nice to know but not essential. If short on time, just cover <code>round()</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
 <h1>Pair coding break</h1>
-
+<aside class="notes">
+<p>This is the main hands-on exercise. Give students 10 minutes. Walk around and help — the most common issues will be: YAML formatting errors (missing dashes, wrong indentation), forgetting to close code chunks, inline code syntax errors, and render failures because of missing packages or objects. Remind them to create a new .qmd file from the RStudio menu (File &gt; New File &gt; Quarto Document), not by hand.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="your-turn-create-a-mini-report" class="slide level2">
 <h2>Your turn: Create a mini-report</h2>
@@ -557,7 +839,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="output-formats" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Output formats</h1>
-
+<aside class="notes">
+<p>Transition to the second half. Spend ~5 minutes on output formats — this is informational, not hands-on. For this course, students will primarily use HTML. But they should know that the same .qmd file can produce Word or PDF, which is relevant for their future work.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="html-default" class="slide level2">
 <h2>HTML (default)</h2>
@@ -576,6 +870,19 @@ Dr.&nbsp;Sara Weston
 <ul>
 <li>Not suitable for print journals</li>
 </ul>
+<aside class="notes">
+<p>HTML is the default and what students should use for this course. If students ask about sharing HTML files: the rendered .html is a single self-contained file that opens in any browser. No special software needed to view it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="pdf" class="slide level2">
 <h2>PDF</h2>
@@ -595,6 +902,19 @@ Dr.&nbsp;Sara Weston
 <li>Less flexible for complex layouts</li>
 <li>Not interactive</li>
 </ul>
+<aside class="notes">
+<p>Students will inevitably ask about PDF. The honest answer: PDF requires a LaTeX installation (like TinyTeX), which can be finicky to set up. Don’t spend class time on it. If students want PDF for their final project, they can install TinyTeX with <code>quarto install tinytex</code> outside of class. For this course, HTML is fine.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="word" class="slide level2">
 <h2>Word</h2>
@@ -633,7 +953,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="tables" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Tables</h1>
-
+<aside class="notes">
+<p>Tables are a practical skill students need for their assignments and final project. Spend ~5 minutes here. The focus is on <code>knitr::kable()</code> — it’s simple, it works across all output formats, and it’s good enough for most purposes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="simple-tables-with-kable" class="slide level2">
 <h2>Simple tables with kable()</h2>
@@ -649,6 +981,19 @@ Dr.&nbsp;Sara Weston
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(therapy_summary)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Show the contrast: without <code>kable()</code>, R prints a tibble with its default console formatting. With <code>kable()</code>, you get a proper HTML table. The difference is dramatic in the rendered output. If doing a live demo, show both versions side by side.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="simple-tables-with-kable-output" class="slide level2 output-location-slide"><h2>Simple tables with kable()</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
@@ -726,6 +1071,19 @@ Dr.&nbsp;Sara Weston
 </table>
 </div>
 </div>
+<aside class="notes">
+<p>Point out the three most useful options: <code>digits</code> controls decimal places (students will need this), <code>caption</code> adds a table title, and <code>col.names</code> lets you rename columns for presentation without changing the underlying data. The <code>col.names</code> pattern is important — students should keep their data columns as clean variable names and only pretty-print them in the table output.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="fancier-tables-gt-package" class="slide level2">
 <h2>Fancier tables: gt package</h2>
@@ -740,6 +1098,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fmt_number</span>(<span class="at">columns =</span> <span class="fu">c</span>(Mean, SD), <span class="at">decimals =</span> <span class="dv">1</span>)</span></code></pre></div>
 </div>
 <p><code>gt</code> is powerful but beyond our scope — use <code>kable()</code> for now.</p>
+<aside class="notes">
+<p>Mention <code>gt</code> briefly as something that exists for when they need fancier tables, but don’t dwell on it. For this course, <code>kable()</code> is sufficient. If students are curious, they can explore <code>gt</code> on their own.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="workflow-tips" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -758,6 +1129,19 @@ Dr.&nbsp;Sara Weston
 <li><strong>Use relative paths</strong> — <code>here::here("data/file.csv")</code></li>
 <li><strong>Cache expensive computations</strong> — <code>#| cache: true</code></li>
 </ol>
+<aside class="notes">
+<p>“Render often” is the most important tip. Students who write an entire document and render at the end will hit a wall of errors and not know where they started. Encourage them to render after every new chunk or section. Also, naming chunks (<code>#| label: something</code>) means that when Quarto throws an error, it tells you which chunk failed — invaluable for debugging.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="structuring-a-psychology-report" class="slide level2">
@@ -782,6 +1166,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Interpretation</span>
 <span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Limitations</span></code></pre></div>
 </div></div>
+<aside class="notes">
+<p>This maps directly to an APA-style paper. Point out that Quarto makes this structure natural — each heading becomes a section, and the code chunks live right next to the text that interprets them. Students should start structuring their final project .qmd file this way now. Emphasize that the Results section is where the code-narrative integration really shines.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="project-organization" class="slide level2">
 <h2>Project organization</h2>
@@ -796,12 +1193,37 @@ Dr.&nbsp;Sara Weston
     └── figures/</code></pre>
 <div class="fragment">
 <p>Keep your <code>.qmd</code> file in the root, data in <code>data/</code>, outputs separate.</p>
+<aside class="notes">
+<p>This connects back to Session 1’s filing cabinet metaphor. A well-organized project folder means anyone (including future you) can find the data, the code, and the output. The .qmd file goes in the root because it references everything else with relative paths. If students ask about <code>here::here()</code>, explain briefly that it always finds paths relative to the project root, avoiding the “it works on my laptop but not yours” problem.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
 <section id="end-of-deck-exercise" class="title-slide slide level1 center" data-background-color="#e67e22">
 <h1>End-of-deck exercise</h1>
-
+<aside class="notes">
+<p>This exercise is a head start on Assignment 3 and also scaffolds the final project. Give students ~10 minutes of work time. They probably won’t finish, and that’s fine — the point is to get started and identify questions. Walk around and help with rendering errors, which will be frequent.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="create-your-final-project-draft" class="slide level2">
 <h2>Create your final project draft</h2>
@@ -818,7 +1240,19 @@ Dr.&nbsp;Sara Weston
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Wrapping up</h1>
-
+<aside class="notes">
+<p>Transition to the closing. Keep this section brisk — ~3 minutes to wrap up.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="why-quarto-matters" class="slide level2">
 <h2>Why Quarto matters</h2>
@@ -835,6 +1269,19 @@ Dr.&nbsp;Sara Weston
 <li>Transparency — full record of your analysis</li>
 <li>Sharing — collaborators can build on your work</li>
 </ul>
+<aside class="notes">
+<p>This is the “why should I care?” slide. The personal benefits (no lost analyses, automatic updates) are immediate. The science benefits (reproducibility, transparency) are what they’ll appreciate later. Connect back to Session 1 one more time: if every researcher used Quarto, the replication crisis would be smaller.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="quarto-beyond-this-course" class="slide level2">
@@ -849,6 +1296,19 @@ Dr.&nbsp;Sara Weston
 </ul>
 <div class="fragment">
 <p>You’re learning a tool you’ll use for years.</p>
+<aside class="notes">
+<p>This slide is motivational — “these slides” is a fun reveal (this very presentation was made with Quarto). If students are interested in making their own websites or presentations, point them to quarto.org. The main message: Quarto isn’t just a class requirement; it’s a professional tool with a long shelf life.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="key-takeaways" class="slide level2">

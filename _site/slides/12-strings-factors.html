@@ -263,6 +263,19 @@ Dr.&nbsp;Sara Weston
 <h2>How many genders are in this dataset?</h2>
 <p>R says <strong>7</strong>. You meant <strong>2</strong>.</p>
 <p>The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.</p>
+<aside class="notes">
+<p>Start by showing the first slide (the table) and asking students “How many genders are in this dataset?” Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="what-are-strings" class="slide level2">
 <h2>What are strings?</h2>
@@ -273,6 +286,19 @@ Dr.&nbsp;Sara Weston
 <span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>feedback <span class="ot">&lt;-</span> <span class="st">"The task was confusing"</span></span></code></pre></div>
 </div>
 <p>The <code>stringr</code> package (part of tidyverse) gives you tools for working with strings. All <code>stringr</code> functions start with <code>str_</code>.</p>
+<aside class="notes">
+<p>Emphasize the naming convention: all stringr functions start with str_, so autocomplete in RStudio is very helpful. Students can type str_ and browse available functions. This is a good time to remind them about the tab-completion habit.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="creating-and-combining-strings" class="slide level2">
 <h2>Creating and combining strings</h2>
@@ -304,6 +330,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>Participant: Jane Doe</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Move quickly through str_c() — students will use it occasionally but glue() is more intuitive. Show both so they recognize str_c() in others’ code, but recommend glue() for their own work. If students ask: glue is loaded automatically with tidyverse in newer versions, but loading it explicitly does not hurt.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="string-length" class="slide level2">
@@ -354,6 +393,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>Essential for cleaning demographic data!</p>
+<aside class="notes">
+<p>This is one of the most important slides in the deck. str_to_lower() alone solves a huge number of data cleaning problems. Run the code live and ask: “If you had to pick just one of these three functions, which would you use for cleaning survey data?” Answer: str_to_lower(), because it makes everything comparable regardless of how participants typed it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="trimming-whitespace" class="slide level2">
@@ -371,6 +423,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] "Yes"   "No"    "Maybe"</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Students often ask the difference between str_trim() and str_squish(). str_trim() only removes leading and trailing whitespace; str_squish() also collapses multiple internal spaces into one. For survey data, str_trim() is usually sufficient. Trailing spaces from Qualtrics exports are very common and invisible to the eye — this is why str_trim() matters.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="psychology-example-cleaning-demographics" class="slide level2">
 <h2>Psychology example: Cleaning demographics</h2>
@@ -394,6 +459,19 @@ Dr.&nbsp;Sara Weston
 5 "  non-binary" non-binary  </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is the payoff slide for the opening example. Walk through it step by step: “First we trim the spaces, then we lowercase everything.” Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |&gt; but nesting is fine for two functions. After cleaning, ask: “How many unique genders would R see now?” This connects directly back to the hook.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="detecting-patterns" class="slide level2">
 <h2>Detecting patterns</h2>
@@ -424,6 +502,19 @@ Dr.&nbsp;Sara Weston
 2 Very clear instructions</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Emphasize the filter() integration — str_detect() returns TRUE/FALSE, which is exactly what filter() needs. This connects back to last session on logicals. Students will use this pattern frequently for things like “find all participants who mentioned anxiety in their open-ended response.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="case-insensitive-detection" class="slide level2">
@@ -443,6 +534,19 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] TRUE</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>The regex() wrapper with ignore_case is essential for real survey data where you cannot control capitalization. Students will forget this and wonder why their str_detect() misses matches — remind them that case-sensitivity is the default and they need to opt in to ignoring case.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="replacing-text" class="slide level2">
@@ -479,6 +583,19 @@ Dr.&nbsp;Sara Weston
 [5] "Generalized Anxiety Disorder" </code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>The named vector approach to str_replace_all() is very handy for recoding abbreviations in real data. Emphasize this pattern — students will use it for diagnosis codes, condition labels, and other abbreviation-heavy data. Move fairly quickly through this slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="extracting-parts-of-strings" class="slide level2">
 <h2>Extracting parts of strings</h2>
@@ -528,6 +645,19 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Do not go deep on regex — this is a “know it exists” slide. Students only need to know that \d matches digits and that patterns can be more powerful than literal text. If anyone asks for more, point them to regex101.com where they can test patterns interactively. Transition: “You have enough string tools now to clean real data. Let’s practice.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section></section>
 <section>
@@ -558,6 +688,19 @@ Dr.&nbsp;Sara Weston
 <li>Filter to only negative comments</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
+<aside class="notes">
+<p>Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(…)) or doing them in the wrong order (order does not matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for “or” — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="factors" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -583,6 +726,19 @@ Levels: Female Male</code></pre>
 </div>
 <div class="fragment">
 <p>Notice the <strong>Levels</strong> line — those are the possible categories.</p>
+<aside class="notes">
+<p>Run this code live. The key thing students should notice is the “Levels:” line in the output — that is what makes a factor different from a plain character vector. Emphasize that levels define the complete set of valid categories, even if some do not appear in the data. This matters for plots and statistical models.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="why-use-factors" class="slide level2">
@@ -615,6 +771,19 @@ Levels: Control Treatment</code></pre>
 Levels: Control Treatment</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Emphasize the difference: without specifying levels, R defaults to alphabetical order. With explicit levels, you control the order. For most psychology data, you want explicit levels because alphabetical order rarely makes conceptual sense (e.g., “Control” should come before “Treatment” even though it does alphabetically by coincidence).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="order-matters" class="slide level2">
@@ -646,6 +815,19 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 </section>
 <section id="why-order-matters-example" class="slide level2">
 <h2>Why order matters: Example</h2>
+<aside class="notes">
+<p>This two-slide sequence is the most persuasive argument for factors. Show the alphabetical plot first and ask “What is wrong with this chart?” Students will immediately see that the Likert order is scrambled. Then show the fixed version. This aha moment makes the factor concept stick.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>,</span>
@@ -705,6 +887,19 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <li><code>fct_recode()</code> — rename levels</li>
 <li><code>fct_collapse()</code> — combine levels</li>
 </ul>
+<aside class="notes">
+<p>Emphasize the naming convention: all forcats functions start with fct_, just like stringr functions start with str_. This makes them easy to find with autocomplete. You do not need to load forcats separately — it is part of tidyverse. Skim the list; each function gets its own slide next.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="fct_relevel-manual-reordering" class="slide level2">
 <h2>fct_relevel(): Manual reordering</h2>
@@ -729,6 +924,19 @@ Levels: High School Bachelor's Master's</code></pre>
 </section>
 <section id="fct_reorder-order-by-another-variable" class="slide level2">
 <h2>fct_reorder(): Order by another variable</h2>
+<aside class="notes">
+<p>fct_reorder() is arguably the most useful forcats function for data visualization. It reorders factor levels by the values of another variable. In the therapy example, conditions are ordered by mean improvement, making the bar chart immediately readable. Students will use this frequently in assignments and the final project.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>Extremely useful for plots!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
@@ -845,6 +1053,19 @@ Levels: Female Male Non-binary</code></pre>
 Levels: Anxiety Depression</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>fct_collapse() is useful when you have too many levels for meaningful analysis. In psychology, you often collapse rare diagnosis categories into “Other” or group specific disorders into broader categories. Note that OCD is grouped under Anxiety here, which reflects older DSM-IV classification — this could spark a good discussion about how coding decisions reflect theoretical assumptions.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="psychology-example-recoding-demographics" class="slide level2">
 <h2>Psychology example: Recoding demographics</h2>
@@ -901,6 +1122,19 @@ Levels: Anxiety Depression Other</code></pre>
 Levels: Depression</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is a common gotcha. After filtering, factors remember their old levels, which can create empty bars in plots or confuse statistical models. fct_drop() solves it. Students will encounter this when they subset data and then try to plot — the empty categories show up as blank bars.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="common-factor-issues" class="slide level2">
@@ -921,6 +1155,19 @@ Levels: Depression</code></pre>
 <pre><code>[1] 25 30 25 40</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>This is a classic trap. Students sometimes accidentally convert numeric columns to factors (e.g., when reading CSV files with read.csv instead of read_csv). The key lesson: as.numeric() on a factor gives you the internal level codes (1, 2, 3…), not the original values. You must go through as.character() first. This mistake has caused real errors in published research.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="common-factor-issues-1" class="slide level2">
@@ -963,6 +1210,19 @@ Levels: blue red</code></pre>
 <li>Use <code>facet_wrap()</code> to make separate panels for each question</li>
 <li>Bonus: Use <code>fct_infreq()</code> to order responses by overall frequency</li>
 </ol>
+<aside class="notes">
+<p>Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like “agree” and “Agree.” The facet_wrap step is review from earlier visualization sessions. If students finish early, the bonus question (fct_infreq) is a good stretch goal.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1080,6 +1340,19 @@ Levels: blue red</code></pre>
 <h2>The one thing to remember</h2>
 <p>Messy categories turn into messy results. <code>str_to_lower()</code> and <code>factor()</code> are your first line of defense.</p>
 <p>See you Monday for joins!</p>
+<aside class="notes">
+<p>Remind students that Assignment 6 is now assigned and Assignment 5 is due. The reading for next class is R4DS Ch 19 on joins. Preview that joins let you combine two different datasets — e.g., matching participant demographics to their response data. Encourage students to check their final project data for string and factor issues this week.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 
 </section></section>
     </div>

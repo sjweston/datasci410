@@ -1,6 +1,6 @@
 # Fun Challenge 8: Missing Data Mystery
 
-**Due:** Sunday, May 25 at 11:59 PM
+**Due:** Sunday, May 24 at 11:59 PM
 
 A fictional research lab ran a 3-wave longitudinal study on stress and coping in college students. Participants were surveyed at the start of the term (Wave 1), midterms (Wave 2), and finals (Wave 3).
 

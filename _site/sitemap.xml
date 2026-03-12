@@ -2,15 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://sarajweston.com/datasci410/syllabus.html</loc>
-    <lastmod>2026-03-03T21:11:47.171Z</lastmod>
+    <lastmod>2026-03-09T00:59:04.226Z</lastmod>
   </url>
   <url>
-    <loc>https://sarajweston.com/datasci410/resource/index.html</loc>
-    <lastmod>2026-01-29T21:12:25.963Z</lastmod>
+    <loc>https://sarajweston.com/datasci410/resource/r-scripts.html</loc>
+    <lastmod>2026-03-08T23:01:52.035Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sarajweston.com/datasci410/resource/quarto-docs.html</loc>
+    <lastmod>2026-03-08T23:02:34.171Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sarajweston.com/datasci410/resource/common-errors.html</loc>
+    <lastmod>2026-03-09T03:33:41.416Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/project/04-presentation.html</loc>
-    <lastmod>2026-02-11T23:28:59.536Z</lastmod>
+    <lastmod>2026-03-09T00:58:58.005Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/project/02-draft.html</loc>
@@ -26,35 +34,35 @@
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/17-content.html</loc>
-    <lastmod>2026-02-22T22:45:28.728Z</lastmod>
+    <lastmod>2026-03-09T21:02:47.280Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/15-content.html</loc>
-    <lastmod>2026-02-06T04:48:27.275Z</lastmod>
+    <lastmod>2026-03-09T21:00:22.066Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/13-content.html</loc>
-    <lastmod>2026-02-06T04:47:58.920Z</lastmod>
+    <lastmod>2026-03-09T20:59:54.319Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/11-content.html</loc>
-    <lastmod>2026-02-06T04:47:21.267Z</lastmod>
+    <lastmod>2026-03-09T20:59:23.363Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/09-content.html</loc>
-    <lastmod>2026-02-03T23:54:29.366Z</lastmod>
+    <lastmod>2026-03-09T20:58:55.621Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/07-content.html</loc>
-    <lastmod>2026-02-03T23:54:04.751Z</lastmod>
+    <lastmod>2026-03-09T20:58:28.045Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/05-content.html</loc>
-    <lastmod>2026-01-29T21:12:25.960Z</lastmod>
+    <lastmod>2026-03-09T21:02:44.334Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/03-content.html</loc>
-    <lastmod>2026-01-29T21:12:25.959Z</lastmod>
+    <lastmod>2026-03-09T21:02:40.819Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/01-content.html</loc>
@@ -62,71 +70,71 @@
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/08-assignment.html</loc>
-    <lastmod>2026-02-28T05:11:17.807Z</lastmod>
+    <lastmod>2026-03-08T23:03:19.944Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/06-assignment.html</loc>
-    <lastmod>2026-01-29T23:55:33.273Z</lastmod>
+    <lastmod>2026-03-08T23:03:17.180Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/04-assignment.html</loc>
-    <lastmod>2026-02-28T05:10:43.253Z</lastmod>
+    <lastmod>2026-03-08T23:03:14.102Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/02-assignment.html</loc>
-    <lastmod>2026-01-29T23:54:20.600Z</lastmod>
+    <lastmod>2026-03-08T23:03:10.453Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/01-assignment.html</loc>
-    <lastmod>2026-01-29T23:54:19.564Z</lastmod>
+    <lastmod>2026-03-08T23:03:09.051Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/03-assignment.html</loc>
-    <lastmod>2026-02-28T05:10:10.727Z</lastmod>
+    <lastmod>2026-03-08T23:03:12.683Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/05-assignment.html</loc>
-    <lastmod>2026-02-28T05:10:55.044Z</lastmod>
+    <lastmod>2026-03-08T23:03:15.809Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/07-assignment.html</loc>
-    <lastmod>2026-02-28T05:11:05.408Z</lastmod>
+    <lastmod>2026-03-08T23:03:18.409Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/assignment/index.html</loc>
-    <lastmod>2026-02-11T23:28:20.861Z</lastmod>
+    <lastmod>2026-03-08T22:57:40.413Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/02-content.html</loc>
-    <lastmod>2026-01-29T21:12:25.959Z</lastmod>
+    <lastmod>2026-03-09T21:02:39.404Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/04-content.html</loc>
-    <lastmod>2026-01-29T21:12:25.960Z</lastmod>
+    <lastmod>2026-03-09T21:02:42.853Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/06-content.html</loc>
-    <lastmod>2026-02-03T23:53:56.042Z</lastmod>
+    <lastmod>2026-03-09T21:02:45.678Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/08-content.html</loc>
-    <lastmod>2026-02-12T23:20:20.027Z</lastmod>
+    <lastmod>2026-03-09T20:58:34.360Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/10-content.html</loc>
-    <lastmod>2026-02-06T04:47:13.440Z</lastmod>
+    <lastmod>2026-03-09T20:59:10.482Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/12-content.html</loc>
-    <lastmod>2026-02-06T04:47:34.602Z</lastmod>
+    <lastmod>2026-03-09T20:59:39.919Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/14-content.html</loc>
-    <lastmod>2026-02-06T04:48:12.548Z</lastmod>
+    <lastmod>2026-03-09T21:00:08.462Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/16-content.html</loc>
-    <lastmod>2026-02-06T04:48:48.550Z</lastmod>
+    <lastmod>2026-03-09T21:00:36.775Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/content/18-content.html</loc>
@@ -146,10 +154,18 @@
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/project/index.html</loc>
-    <lastmod>2026-02-11T23:29:09.216Z</lastmod>
+    <lastmod>2026-03-09T00:58:59.343Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sarajweston.com/datasci410/resource/index.html</loc>
+    <lastmod>2026-03-09T03:34:08.899Z</lastmod>
+  </url>
+  <url>
+    <loc>https://sarajweston.com/datasci410/resource/r-projects.html</loc>
+    <lastmod>2026-03-08T23:01:21.663Z</lastmod>
   </url>
   <url>
     <loc>https://sarajweston.com/datasci410/schedule.html</loc>
-    <lastmod>2026-03-03T20:58:24.546Z</lastmod>
+    <lastmod>2026-03-09T00:59:02.299Z</lastmod>
   </url>
 </urlset>

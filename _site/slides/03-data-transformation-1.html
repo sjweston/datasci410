@@ -221,6 +221,19 @@ Dr.&nbsp;Sara Weston
 </div>
 <div class="fragment">
 <p>That’s what <code>filter()</code> does. And it’s just the beginning — today we learn four verbs that turn raw data into exactly what you need.</p>
+<aside class="notes">
+<p>Pause after revealing the question. Let students sit with the discomfort of not knowing how to do this yet — that tension is the hook. When you reveal filter(), frame it as “this is the tool that solves that exact problem.” Spend ~2 minutes here.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="the-dplyr-verbs" class="slide level2">
@@ -256,6 +269,19 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <p>Today: <code>filter()</code>, <code>arrange()</code>, <code>select()</code>, <code>mutate()</code></p>
+<aside class="notes">
+<p>Emphasize the word “verbs” — dplyr is designed so each function is an action word that describes what it does. Mention that summarize() will come next session. Students don’t need to memorize this table; it’s a roadmap so they know where the hour is going.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="our-dataset-flights" class="slide level2">
 <h2>Our dataset: flights</h2>
@@ -297,6 +323,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <li><code>origin</code>, <code>dest</code> — airport codes</li>
 <li><code>air_time</code>, <code>distance</code> — in minutes and miles</li>
 </ul>
+<aside class="notes">
+<p>Spend ~3 minutes on these two slides. Have students look at the glimpse() output and call out what they notice — number of rows, column types, etc. Point out that negative delay means the flight left early. Students often ask about the HHMM time format (e.g., 517 means 5:17 AM) — acknowledge it’s awkward and we’ll mostly use the delay columns instead.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="filter" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -330,6 +369,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Type this live in the console. Emphasize the structure: filter(data, condition). Point out that the output is a tibble with fewer rows — filter() didn’t change the original data, it returned a new subset. Students often worry about “losing” data; reassure them that the original <code>flights</code> object is untouched.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="comparison-operators" class="slide level2">
 <h2>Comparison operators</h2>
@@ -372,6 +424,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>The <code>==</code> vs <code>=</code> mistake is the single most common error in this session. Demonstrate what happens when you use <code>=</code> instead — R will throw an error or silently do the wrong thing. Have students say it aloud: “double equals for comparison.” You’ll repeat this warning several times today and it’s worth it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="filter-examples" class="slide level2">
 <h2>Filter examples</h2>
@@ -448,6 +513,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Common mistake: students will write <code>filter(flights, month == 11 | 12)</code>. This doesn’t throw an error but returns the wrong result because R evaluates <code>12</code> as TRUE. Show this mistake live so they can see the problem. This sets up %in% nicely as a safer alternative.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="a-useful-shortcut-in" class="slide level2">
 <h2>A useful shortcut: %in%</h2>
@@ -475,6 +553,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 <p><code>%in%</code> checks if the value is in the vector.</p>
+<aside class="notes">
+<p>Emphasize that <code>%in%</code> is the safer, cleaner way to check “is this value one of these options?” Students will use this constantly for filtering by condition, demographic groups, etc. It also scales — imagine checking for 5 or 6 values with <code>|</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="filter-with-psychology-data" class="slide level2">
 <h2>filter() with psychology data</h2>
@@ -504,6 +595,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 <p>Any operation with <code>NA</code> returns <code>NA</code> (it’s unknown!).</p>
+<aside class="notes">
+<p>This is a conceptual hurdle. Explain the logic: “Is NA greater than 2? We don’t know, because we don’t know what NA is. So the answer is also NA.” The analogy of a blank cell in a spreadsheet works well. Students coming from SPSS may be used to missing values being coded as -99 or similar — emphasize that R has a built-in concept of missingness. Spend ~3 minutes on NA and is.na() together.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="checking-for-na" class="slide level2">
 <h2>Checking for NA</h2>
@@ -547,6 +651,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Set a visible 10-minute timer. Circulate and look for common issues: forgetting quotes around “UA” and “LAX”, using <code>=</code> instead of <code>==</code>, using <code>&gt;</code> instead of <code>&gt;</code> 120 for minutes vs.&nbsp;hours. The answer is 26 flights; EWR has the most. The bonus count() question previews next session’s content — it’s fine if they don’t get to it. When time is up, reveal the solution and walk through it line by line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
@@ -582,6 +699,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>After the pair coding break, this is a reset point. Arrange is simpler than filter, so it’s a good place to regain momentum. Point out the negative values at the top — those are flights that left early. Ask: “What if we want the most delayed flights first?” to set up desc().</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="descending-order" class="slide level2">
 <h2>Descending order</h2>
@@ -651,6 +781,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </section>
 <section id="quick-mental-model" class="slide level2">
 <h2>Quick mental model</h2>
+<aside class="notes">
+<p>This is a breathing slide — use it to consolidate before moving on. Pause and ask students to point to which verb they’d use for a given task: “I want only participants in the treatment group” (filter). “I want to see who scored highest” (arrange with desc). Spend ~1 minute.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 <p>You’ve now seen three verbs. Each answers a different question:</p>
 <table class="caption-top">
 <thead>
@@ -759,6 +902,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>This is where select becomes genuinely useful for psychology data. Connect it to Qualtrics exports: “Imagine you have 200 columns and all your BDI items start with ‘bdi_’. You can grab them all with one line.” Students often ask if these are case-sensitive — yes, by default. You can use <code>contains("delay", ignore.case = TRUE)</code> if needed but don’t belabor it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="using-select-helpers" class="slide level2">
 <h2>Using select helpers</h2>
@@ -893,6 +1049,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb39-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(flights, year, month, day)</span></code></pre></div>
 </div>
 <p>Data goes first. Then you describe what you want. This consistency is by design.</p>
+<aside class="notes">
+<p>Hammer this point home — the consistent structure (data first, then what you want) is what makes dplyr learnable. Once you know one verb, you already know the shape of the next. This also sets up the pipe: “If data always goes first, what if we could just pass it automatically?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="mutate" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -924,6 +1093,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 #   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;, total_delay &lt;dbl&gt;</code></pre>
 </div>
 </div>
+<aside class="notes">
+<p>Scroll the output to the right to show that the new column appears at the end. Students sometimes think it didn’t work because they can’t see it. Emphasize the <code>name = expression</code> syntax — the left side is the new column name you’re choosing, the right side is the calculation. This is different from <code>==</code> (comparison) and <code>=</code> in filter (a mistake). Spend ~2 minutes.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="multiple-new-columns" class="slide level2">
 <h2>Multiple new columns</h2>
@@ -1008,6 +1190,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"older"</span></span>
 <span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Don’t dwell on case_when() — show it exists but tell students it’s a preview. The z-score and log transform examples connect to stats concepts they already know. If anyone asks about case_when() syntax, the tilde (~) means “then” — read it as “if age &lt; 30, then ‘young’.” The TRUE line is the “everything else” catch-all.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="mutate-for-psychology" class="slide level2">
 <h2>mutate() for psychology</h2>
@@ -1030,6 +1225,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb47-16"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">item_5r =</span> <span class="dv">8</span> <span class="sc">-</span> item_5  <span class="co"># For 1-7 scale</span></span>
 <span id="cb47-17"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
+<aside class="notes">
+<p>This slide is the payoff for psych students — these are tasks they’ll actually do. Reverse coding especially resonates because many have encountered it in methods classes. Walk through the reverse coding formula: for a 1-7 scale, subtracting from 8 flips 1 to 7, 7 to 1, etc. The rowMeans example is advanced — mention it exists but don’t expect them to write it yet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="the-pipe-makes-your-code-read-like-a-sentence" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1059,6 +1267,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div></div>
 <p>This is hard to read!</p>
+<aside class="notes">
+<p>Let the nested code sit on screen for a moment. Ask students to figure out what it does — they’ll struggle. That’s the point. You read nested code inside-out, which is unnatural. The next two slides show two solutions, then the pipe as the winner. This is a “problem, bad solution, good solution” arc — don’t skip the setup.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="intermediate-objects-approach" class="slide level2">
 <h2>Intermediate objects approach</h2>
@@ -1112,6 +1333,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(dep_time, dep_delay) <span class="sc">|&gt;</span>  <span class="co"># select these columns, THEN</span></span>
 <span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(dep_delay)           <span class="co"># arrange by delay</span></span></code></pre></div>
 </div>
+<aside class="notes">
+<p>Read this code aloud using “then” for every pipe — have students read it with you. This is the key insight of the pipe: code that reads like English. From this point forward, nearly all code in the course will use the pipe. Emphasize that each line does one thing, and notice how the data argument disappeared from each function because the pipe passes it automatically.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="keyboard-shortcut" class="slide level2">
 <h2>Keyboard shortcut</h2>
@@ -1134,6 +1368,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>Have everyone try the shortcut right now. If their RStudio inserts <code>%&gt;%</code> instead of <code>|&gt;</code>, walk them through the settings change. This is worth the 60 seconds it takes — they’ll type the pipe hundreds of times this quarter.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="note-vs" class="slide level2">
@@ -1156,6 +1403,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"United Airlines Delays (January)"</span>)</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Point out the switch from <code>|&gt;</code> to <code>+</code> once you enter ggplot territory. Students will mix these up — it’s the most common pipe-related error. The rule: <code>|&gt;</code> between dplyr steps, <code>+</code> between ggplot layers. This example also previews the power of combining transformation and visualization in one pipeline, which is the core of exploratory data analysis.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="piping-into-ggplot-output" class="slide level2 output-location-slide"><h2>Piping into ggplot</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
@@ -1182,6 +1442,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <span id="cb54-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(delay_hours))                 <span class="co"># Longest delays first</span></span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>Walk through this pipeline step by step — read each line aloud with “then.” This is the payoff moment where all four verbs and the pipe come together. Point out that each line has a comment explaining what it does — encourage students to comment their pipelines the same way. Ask: “Could you have written this at the start of class?” The answer should feel like genuine progress.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section><section id="a-complete-workflow-output" class="slide level2 output-location-slide"><h2>A complete workflow</h2><div class="cell output-location-slide">
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 84,124 × 2
@@ -1215,6 +1488,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <li>Arrange by speed (highest first)</li>
 <li>What’s the fastest AA flight to LAX?</li>
 </ol>
+<aside class="notes">
+<p>This is the end-of-deck individual exercise and a head start on Assignment 2. Give students ~10 minutes of work time. This exercise requires combining all four verbs in a single pipeline, which is harder than it looks. Circulate and help with pipe syntax — the most common issue is forgetting <code>|&gt;</code> at the end of a line or putting it at the start of the next line. Remind them about the keyboard shortcut.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1245,6 +1531,19 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 <li>Create new variables with <code>mutate()</code></li>
 <li>Build multi-step pipelines</li>
 </ul>
+<aside class="notes">
+<p>Remind students that Assignment 1 was due today. Preview next session: “Wednesday we’ll learn group_by() and summarize(), which let you calculate statistics for groups — like mean reaction time by condition. That’s the last piece of the dplyr puzzle.” Section 3.5 in R4DS covers exactly what we’ll do next.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>

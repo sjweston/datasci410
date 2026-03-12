@@ -20,7 +20,7 @@ The team challenge **does not affect your course grade** --- it's designed to bu
 ### A few things to know
 
 - **"Nearly all" means all but one.** If one teammate is absent, it won't tank your team's pair coding or assignment points. Life happens.
-- **Quizzes are still graded on completion for your course grade.** You get full credit for finishing the quiz regardless of your score. But for the *challenge*, the team with the highest average score gets the point --- so there's an incentive to try.
+- **Quizzes are points-based with unlimited retakes — your best score counts.** For the *challenge*, the team with the highest average score gets a point, so there's an extra incentive to keep trying.
 - **Fun challenges are group submissions.** One person submits on behalf of the team, but everyone should contribute. These are designed to be short (30 minutes or less) and fun.
 
 ---

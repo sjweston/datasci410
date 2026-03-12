@@ -60,61 +60,409 @@
     "href": "syllabus.html#grading",
     "title": "Syllabus",
     "section": "Grading",
-    "text": "Grading\n\n\n\nComponent\nWeight\nDetails\n\n\n\n\nWeekly Coding Assignments\n35%\n8 assignments\n\n\nReading Quizzes\n15%\n10 quizzes, graded on completion\n\n\nIn-Class Participation\n15%\nCompletion-based coding exercises\n\n\nFinal Project\n35%\nIncludes proposal, draft, and final submission\n\n\n\n\nWeekly Coding Assignments (35%)\nShort, focused exercises that reinforce each session’s content. These are due Sunday at 11:59 PM and are designed to take 1-2 hours outside of class. You’ll have time during class to start these and ask questions.\n\n\nReading Quizzes (15%)\nEach week, you’ll complete a brief Canvas quiz covering that week’s assigned readings. Quizzes are due Tuesday at 11:59 PM and cover readings for both Monday and Wednesday sessions. There are 10 quizzes total (one per week).\nEach quiz draws 5 random questions from a larger question bank. You can take each quiz as many times as you want — your best score counts. The goal is to make sure you’ve engaged with the readings before class, and unlimited attempts mean there’s no reason not to keep trying until you’ve mastered the material.\n\n\nIn-Class Participation (15%)\nDuring each class, you’ll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.\n\n\nFinal Project (35%)\nA capstone project where you’ll apply everything you’ve learned to analyze a dataset of your choosing. The project has three checkpoints:\n\nProposal (Week 5): Dataset selection and research questions\nDraft (Week 8): Working code and preliminary results\nFinal Submission (Week 10): Polished Quarto report with visualizations and narrative\n\nYou’ll also give a brief (5-minute) presentation during finals week.\nDataset requirements: Your project must use a real dataset (not simulated), with at least 20 rows. You may not reuse a dataset from a previous course. More details will be provided with the project proposal guidelines.\n\n\nTeam Challenge (Not Part of Your Grade)\nAt the start of the term, you’ll be placed on a team of 5–6 students. Throughout the quarter, teams earn points across four categories:\n\nPair coding completion — your team earns a point when all (or nearly all) members submit the in-class exercise\nAssignment submission — your team earns a point when all members submit on time\nQuiz performance — the team with the highest quiz average each week earns a point\nWeekly fun challenge — a short, low-stakes challenge completed outside of class\n\nThe team challenge is designed to build community and add a little friendly competition — it has no effect on your course grade. The winning team at the end of the term earns a celebration (details TBA)."
+    "text": "Grading\n\n\n\n\n\n\n\n\nComponent\nWeight\nDetails\n\n\n\n\nWeekly Coding Assignments\n35%\n8 assignments\n\n\nReading Quizzes\n15%\n10 quizzes, unlimited retakes, best score counts\n\n\nIn-Class Participation\n15%\nCompletion-based coding exercises\n\n\nFinal Project\n35%\nIncludes proposal, draft, and final submission\n\n\n\n\nWeekly Coding Assignments (35%)\nShort, focused exercises that reinforce each session’s content. These are due Sunday at 11:59 PM and are designed to take 1-2 hours outside of class. You’ll have time during class to start these and ask questions.\n\n\nReading Quizzes (15%)\nEach week, you’ll complete a brief Canvas quiz covering that week’s assigned readings. Quizzes are due Tuesday at 11:59 PM and cover readings for both Monday and Wednesday sessions. There are 10 quizzes total (one per week).\nEach quiz draws 5 random questions from a larger question bank. You can take each quiz as many times as you want — your best score counts. The goal is to make sure you’ve engaged with the readings before class, and unlimited attempts mean there’s no reason not to keep trying until you’ve mastered the material.\n\n\nIn-Class Participation (15%)\nDuring each class, you’ll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.\n\n\nFinal Project (35%)\nA capstone project where you’ll apply everything you’ve learned to analyze a dataset of your choosing. The project has three checkpoints:\n\nProposal (Week 5): Dataset selection and research questions\nDraft (Week 8): Working code and preliminary results\nFinal Submission (Week 10): Polished Quarto report with visualizations and narrative\n\nYou’ll also submit a brief (5-minute) recorded video presentation during finals week (due Wednesday, June 10).\nDataset requirements: Your project must use a real dataset (not simulated), with at least 20 rows. You may not reuse a dataset from a previous course. More details will be provided with the project proposal guidelines.\n\n\nTeam Challenge (Not Part of Your Grade)\nAt the start of the term, you’ll be placed on a team of 5–6 students. Throughout the quarter, teams earn points across four categories:\n\nPair coding completion — your team earns a point when all (or nearly all) members submit the in-class exercise\nAssignment submission — your team earns a point when all members submit on time\nQuiz performance — the team with the highest quiz average each week earns a point\nWeekly fun challenge — a short, low-stakes challenge completed outside of class\n\nThe team challenge is designed to build community and add a little friendly competition — it has no effect on your course grade. The winning team at the end of the term earns a celebration (details TBA)."
   },
   {
     "objectID": "syllabus.html#assignment-schedule",
     "href": "syllabus.html#assignment-schedule",
     "title": "Syllabus",
     "section": "Assignment Schedule",
-    "text": "Assignment Schedule\n\nWeekly Assignments\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nSun Apr 5\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nSun Apr 12\n\n\n3: Tidying & Import\npivot, read_csv\nWed Apr 15\nSun Apr 19\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nWed Apr 22\nSun Apr 26\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nWed Apr 29\nSun May 3\n\n\n6: Data Types\nlogicals, strings, factors\nWed May 6\nSun May 10\n\n\n7: Joins & Missing Data\njoins, NA handling\nWed May 13\nSun May 18\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nSun May 31\n\n\n\n\n\nFinal Project Milestones\n\n\n\n\n\n\n\n\nMilestone\nDue Date\nDescription\n\n\n\n\nProposal\nWed Apr 29\nDataset selection, research questions, initial plan\n\n\nDraft\nWed May 20\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3\nComplete Quarto report\n\n\nPresentation\nFinals Week\n5-minute share-out"
+    "text": "Assignment Schedule\n\nWeekly Assignments\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nSun Apr 5\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nSun Apr 12\n\n\n3: Tidying & Import\npivot, read_csv (Quarto .qmd required)\nMon Apr 20\nSun Apr 26\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nMon Apr 27\nSun May 3\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nMon May 4\nSun May 10\n\n\n6: Data Types\nlogicals, strings, factors\nMon May 11\nSun May 17\n\n\n7: Joins & Missing Data\njoins, NA handling\nWed May 13\nSun May 24\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nSun May 31\n\n\n\n\n\nFinal Project Milestones\n\n\n\n\n\n\n\n\nMilestone\nDue Date\nDescription\n\n\n\n\nProposal\nWed Apr 29\nDataset selection, research questions, initial plan\n\n\nDraft\nWed May 20\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3\nComplete Quarto report\n\n\nPresentation\nWed Jun 10\n5-minute recorded video"
   },
   {
-    "objectID": "resource/index.html",
-    "href": "resource/index.html",
-    "title": "Resources",
+    "objectID": "resource/r-scripts.html",
+    "href": "resource/r-scripts.html",
+    "title": "Using R Scripts for Assignments",
     "section": "",
-    "text": "This section contains helpful resources and tutorials for the course.",
+    "text": "Assignments 1 and 2 are submitted as R scripts (.R files). This page walks you through creating, organizing, and testing your script before you submit.",
     "crumbs": [
       "Resources",
-      "Overview",
-      "Resources"
+      "Guides",
+      "Using R Scripts"
     ]
   },
   {
-    "objectID": "resource/index.html#recommended-resources",
-    "href": "resource/index.html#recommended-resources",
-    "title": "Resources",
-    "section": "Recommended Resources",
-    "text": "Recommended Resources\n\nResource 1 title\nResource 2 title",
+    "objectID": "resource/r-scripts.html#step-1-set-up-your-project",
+    "href": "resource/r-scripts.html#step-1-set-up-your-project",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 1: Set up your project",
+    "text": "Step 1: Set up your project\nBefore writing any code, create an R Project for this assignment. See Setting Up an R Project if you haven’t done this yet.",
     "crumbs": [
       "Resources",
-      "Overview",
-      "Resources"
+      "Guides",
+      "Using R Scripts"
     ]
   },
   {
-    "objectID": "resource/index.html#software",
-    "href": "resource/index.html#software",
-    "title": "Resources",
-    "section": "Software",
-    "text": "Software\n[Add software installation guides and links here]",
+    "objectID": "resource/r-scripts.html#step-2-create-a-new-r-script",
+    "href": "resource/r-scripts.html#step-2-create-a-new-r-script",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 2: Create a new R script",
+    "text": "Step 2: Create a new R script\n\nIn RStudio, go to File &gt; New File &gt; R Script (or press Ctrl+Shift+N / Cmd+Shift+N)\nA blank script will open in the Source pane (top-left)\nSave it immediately with Ctrl+S / Cmd+S — give it a descriptive name like assignment-01.R",
     "crumbs": [
       "Resources",
-      "Overview",
-      "Resources"
+      "Guides",
+      "Using R Scripts"
     ]
   },
   {
-    "objectID": "resource/index.html#getting-help",
-    "href": "resource/index.html#getting-help",
-    "title": "Resources",
-    "section": "Getting Help",
-    "text": "Getting Help\n[Add information about how to get help]",
+    "objectID": "resource/r-scripts.html#step-3-add-your-header",
+    "href": "resource/r-scripts.html#step-3-add-your-header",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 3: Add your header",
+    "text": "Step 3: Add your header\nStart every script with a comment block identifying yourself and the assignment:\n# Assignment 1: Getting Started with R\n# Your Name\n# Date",
     "crumbs": [
       "Resources",
-      "Overview",
-      "Resources"
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-4-load-packages",
+    "href": "resource/r-scripts.html#step-4-load-packages",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 4: Load packages",
+    "text": "Step 4: Load packages\nAfter the header, load the packages you’ll need. Always put library() calls at the top of your script, not scattered throughout:\n# Load packages\nlibrary(tidyverse)",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-5-write-your-code-in-sections",
+    "href": "resource/r-scripts.html#step-5-write-your-code-in-sections",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 5: Write your code in sections",
+    "text": "Step 5: Write your code in sections\nUse comment headers to organize your script into the parts of the assignment. This makes your code easy to read and easy to grade:\n# ---- Part 1: Scatterplot ----\n\nggplot(mpg, aes(x = displ, y = hwy)) +\n  geom_point()\n\n# ---- Part 2: Adding Color ----\n\nggplot(mpg, aes(x = displ, y = hwy, color = class)) +\n  geom_point()\n\n\n\n\n\n\nTipSection headers\n\n\n\nLines that start with # ---- (or # ==== or # ####) create collapsible sections in RStudio. You can also jump between them using the document outline (the button at the top-right of the Source pane).",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-6-add-comments-explaining-your-work",
+    "href": "resource/r-scripts.html#step-6-add-comments-explaining-your-work",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 6: Add comments explaining your work",
+    "text": "Step 6: Add comments explaining your work\nUse comments to answer questions the assignment asks and to explain your reasoning:\n# The scatterplot shows a negative relationship between engine size\n# and highway fuel economy. Larger engines get worse gas mileage.\nYou don’t need to comment every line of code — just the parts where the assignment asks you to explain something or where you made a deliberate choice.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-7-save-your-plots-if-required",
+    "href": "resource/r-scripts.html#step-7-save-your-plots-if-required",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 7: Save your plots (if required)",
+    "text": "Step 7: Save your plots (if required)\nSome assignments ask you to save plots as image files. Use ggsave() right after the code that creates the plot:\n# Create the plot\nmy_plot &lt;- ggplot(mpg, aes(x = displ, y = hwy)) +\n  geom_point() +\n  labs(title = \"Engine Size vs. Highway MPG\")\n\n# Display it\nmy_plot\n\n# Save it\nggsave(\"scatterplot.png\", plot = my_plot, width = 6, height = 4)",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-8-test-your-script",
+    "href": "resource/r-scripts.html#step-8-test-your-script",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 8: Test your script",
+    "text": "Step 8: Test your script\nBefore submitting, make sure your script runs from start to finish without errors:\n\nRestart R: Go to Session &gt; Restart R (or press Ctrl+Shift+F10 / Cmd+Shift+F10)\nRun everything: Go to Code &gt; Run Region &gt; Run All (or press Ctrl+Alt+R / Cmd+Option+R)\nCheck for errors: Watch the Console for red error messages\n\n\n\n\n\n\n\nImportantWhy restart first?\n\n\n\nDuring your work session, you might have created objects or loaded packages in the Console that your script depends on without realizing it. Restarting R clears everything, so you can confirm that the script is self-contained.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#step-9-submit",
+    "href": "resource/r-scripts.html#step-9-submit",
+    "title": "Using R Scripts for Assignments",
+    "section": "Step 9: Submit",
+    "text": "Step 9: Submit\nUpload your .R file (and any required image files) to Canvas by the deadline.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/r-scripts.html#common-mistakes",
+    "href": "resource/r-scripts.html#common-mistakes",
+    "title": "Using R Scripts for Assignments",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\n\n\n\n\n\n\nProblem\nFix\n\n\n\n\nScript runs fine for you but errors on restart\nYou probably ran something in the Console that isn’t in your script. Add the missing code.\n\n\nlibrary(tidyverse) gives an error\nRun install.packages(\"tidyverse\") in the Console (just once — don’t put install.packages() in your script).\n\n\nPlot doesn’t show up\nMake sure you’re printing the plot object, not just assigning it. Either type the object name on its own line or use print().\n\n\nobject not found error\nMake sure you run the script from the top. Objects defined later in the script don’t exist until that line runs.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using R Scripts"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html",
+    "href": "resource/quarto-docs.html",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "",
+    "text": "Starting with Assignment 3, you’ll submit your work as Quarto documents (.qmd files) rendered to HTML. Quarto lets you combine code, output, and written explanation in a single document — the kind of reproducible report that’s standard in data science.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#what-is-a-quarto-document",
+    "href": "resource/quarto-docs.html#what-is-a-quarto-document",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "What is a Quarto document?",
+    "text": "What is a Quarto document?\nA Quarto document is a plain-text file that mixes two things:\n\nCode chunks — blocks of R code that run and produce output (plots, tables, numbers)\nNarrative text — your written explanations, formatted with Markdown (headers, bold, lists, etc.)\n\nWhen you render the document, Quarto runs all the code, captures the output, and produces a polished HTML page.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-1-set-up-your-project",
+    "href": "resource/quarto-docs.html#step-1-set-up-your-project",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 1: Set up your project",
+    "text": "Step 1: Set up your project\nCreate an R Project for this assignment if you haven’t already. See Setting Up an R Project.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-2-create-a-new-quarto-document",
+    "href": "resource/quarto-docs.html#step-2-create-a-new-quarto-document",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 2: Create a new Quarto document",
+    "text": "Step 2: Create a new Quarto document\n\nIn RStudio, go to File &gt; New File &gt; Quarto Document…\nEnter a title (e.g., “Assignment 3: Tidying & Import”)\nEnter your name as the author\nLeave the format as HTML\nClick Create\nSave it with a descriptive name like assignment-03.qmd",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-3-understand-the-yaml-header",
+    "href": "resource/quarto-docs.html#step-3-understand-the-yaml-header",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 3: Understand the YAML header",
+    "text": "Step 3: Understand the YAML header\nThe top of your document has a section between --- marks called the YAML header. It controls the document settings:\n---\ntitle: \"Assignment 3: Tidying & Import\"\nauthor: \"Your Name\"\ndate: today\nformat: html\n---\nYou can leave this as-is. The date: today option will automatically insert the current date when you render.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-4-write-narrative-text",
+    "href": "resource/quarto-docs.html#step-4-write-narrative-text",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 4: Write narrative text",
+    "text": "Step 4: Write narrative text\nOutside of code chunks, you write in Markdown. Here are the basics:\n## Part 1: Importing Data\n\nThis section loads the dataset and checks its structure.\nThe data contains **200 participants** across three conditions.\n\n### Task 1.1\n\nHere I import the CSV file and check the column types.\nKey Markdown formatting:\n\n\n\nWhat you type\nWhat you get\n\n\n\n\n## Heading\nSection heading\n\n\n### Subheading\nSmaller heading\n\n\n**bold text**\nbold text\n\n\n*italic text*\nitalic text\n\n\n- item\nBullet point\n\n\n1. item\nNumbered list",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-5-add-code-chunks",
+    "href": "resource/quarto-docs.html#step-5-add-code-chunks",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 5: Add code chunks",
+    "text": "Step 5: Add code chunks\nCode chunks are where your R code lives. Insert one by:\n\nClicking the green +C button in the toolbar, or\nPressing Ctrl+Alt+I / Cmd+Option+I, or\nTyping the fences manually:\n\n```{r}\nlibrary(tidyverse)\n\ndata &lt;- read_csv(\"survey_data.csv\")\nglimpse(data)\n```\nEverything between the ```{r} and ``` lines is R code that will run when you render.\n\n\n\n\n\n\nTipRun chunks as you work\n\n\n\nYou don’t have to render the whole document to test your code. Click the green play button at the top-right of any chunk to run just that chunk. The output appears right below it in the editor.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-6-organize-your-document",
+    "href": "resource/quarto-docs.html#step-6-organize-your-document",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 6: Organize your document",
+    "text": "Step 6: Organize your document\nStructure your .qmd the same way you’d structure an R script — use the assignment parts as section headers, and alternate between narrative and code:\n## Part 1: Importing Data\n\nThis section loads the provided dataset.\n\n```{r}\nlibrary(tidyverse)\ndata &lt;- read_csv(\"survey_data.csv\")\nglimpse(data)\n```\n\nThe dataset has 200 rows and 8 columns. The `condition` column\nwas read as character, which I'll convert to a factor later.\n\n## Part 2: Tidying\n\nThe data is in wide format with one column per time point.\nI need to pivot it to long format.\n\n```{r}\ndata_long &lt;- data |&gt;\n  pivot_longer(\n    cols = time_1:time_3,\n    names_to = \"timepoint\",\n    values_to = \"score\"\n  )\n```",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-7-render-to-html",
+    "href": "resource/quarto-docs.html#step-7-render-to-html",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 7: Render to HTML",
+    "text": "Step 7: Render to HTML\nWhen you’re ready to see the finished product:\n\nClick the Render button at the top of the editor (or press Ctrl+Shift+K / Cmd+Shift+K)\nRStudio will run all the code and produce an HTML file\nThe HTML file opens in a viewer window\n\nThe rendered file is saved in the same folder as your .qmd file with the same name but an .html extension.\n\n\n\n\n\n\nImportantFix errors before rendering\n\n\n\nIf any code chunk has an error, the whole document will fail to render. Run each chunk individually first to catch problems, then render the full document.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-8-check-your-output",
+    "href": "resource/quarto-docs.html#step-8-check-your-output",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 8: Check your output",
+    "text": "Step 8: Check your output\nBefore submitting, open the HTML file and review it:\n\nDoes all the code run without errors?\nDo plots display correctly?\nIs your narrative text readable and formatted properly?\nDid you answer all the questions the assignment asks?",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#step-9-submit",
+    "href": "resource/quarto-docs.html#step-9-submit",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Step 9: Submit",
+    "text": "Step 9: Submit\nUpload both files to Canvas:\n\nYour .qmd file (the source document)\nYour .html file (the rendered output)",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#tips-for-a-clean-document",
+    "href": "resource/quarto-docs.html#tips-for-a-clean-document",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Tips for a clean document",
+    "text": "Tips for a clean document\nHide your setup chunk. The chunk that loads packages doesn’t need to show in the final document. Add #| include: false to suppress it:\n```{r}\n#| include: false\nlibrary(tidyverse)\n```\nSuppress warnings and messages. Package loading messages and warnings about missing values can clutter your output. Add these options to individual chunks:\n```{r}\n#| warning: false\n#| message: false\n```\nUse inline code for numbers. Instead of hard-coding numbers in your text, use inline code so the numbers update automatically:\nThe dataset contains `` `r nrow(data)` `` participants.\nThis renders as: “The dataset contains 200 participants.”",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/quarto-docs.html#common-mistakes",
+    "href": "resource/quarto-docs.html#common-mistakes",
+    "title": "Using Quarto Documents for Assignments",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\n\n\n\n\n\n\nProblem\nFix\n\n\n\n\nRender fails with an error\nRun each chunk individually to find which one has the error. Fix it, then render again.\n\n\nobject not found during render\nChunks run in order from top to bottom. Make sure you define objects before you use them. (Running chunks out of order in the editor can mask this.)\n\n\nSubmitted only the .qmd or only the .html\nSubmit both. The .qmd is your source code; the .html is the rendered output.\n\n\nPlot is too large or too small\nAdd #| fig-width: 6 and #| fig-height: 4 to the chunk options (adjust numbers to taste).\n\n\nFormatting looks wrong\nMake sure there’s a blank line before and after headings, code chunks, and lists. Markdown needs those blank lines.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Using Quarto Documents"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html",
+    "href": "resource/common-errors.html",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "",
+    "text": "R error messages can be cryptic, especially when you’re just starting out. This page translates the most common ones into plain English and shows you how to fix them.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#reading-error-messages",
+    "href": "resource/common-errors.html#reading-error-messages",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "Reading error messages",
+    "text": "Reading error messages\nEvery R error has the same structure:\nError in &lt;where it happened&gt;: &lt;what went wrong&gt;\nRead from right to left: the what is usually more helpful than the where. And remember — errors are normal. Every R programmer sees them daily.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#object-and-function-errors",
+    "href": "resource/common-errors.html#object-and-function-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "Object and function errors",
+    "text": "Object and function errors\n\nobject 'x' not found\nggplot(dat, aes(x = age, y = score)) + geom_point()\n#&gt; Error in ggplot(dat, aes(x = age, y = score)) : object 'dat' not found\nWhat it means: R doesn’t know what dat is. You either haven’t created it yet, misspelled it, or forgot to run the line that defines it.\nFix: Check for typos. Make sure you ran the code that creates the object. If you’re in a Quarto document, remember that chunks run top-to-bottom — you can’t use something defined in a later chunk.\n\n\n\ncould not find function \"x\"\nggplot(data, aes(x = age)) + geom_bar()\n#&gt; Error in ggplot(data, aes(x = age)) : could not find function \"ggplot\"\nWhat it means: R doesn’t recognize the function name. You probably forgot to load the package.\nFix: Add library(tidyverse) (or whatever package the function comes from) to the top of your script and run it. If you get an error on library() too, you need to install the package first:\n# Run once in the Console (not in your script):\ninstall.packages(\"tidyverse\")\n\n\n\nunused argument\nmean(c(1, 2, NA), na.rm = true)\n#&gt; Error in mean(c(1, 2, NA), na.rm = true) : unused argument (na.rm = true)\nWhat it means: You passed an argument the function doesn’t recognize — usually because of a typo or capitalization error.\nFix: R is case-sensitive. It’s TRUE, not true. Check the spelling of argument names too (na.rm, not na_rm).",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#syntax-errors",
+    "href": "resource/common-errors.html#syntax-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "Syntax errors",
+    "text": "Syntax errors\n\nunexpected ')' or unexpected '}'\nfilter(data, age &gt; 18\n       species == \"dog\")\n#&gt; Error: unexpected symbol in \"species\"\nWhat it means: R hit something it wasn’t expecting, almost always because of a missing comma, parenthesis, or pipe.\nFix: Check for:\n\nMissing commas between arguments\nUnmatched parentheses — count your ( and ) to make sure they pair up\nA missing pipe |&gt; or + between ggplot layers\n\n\n\n\n\n\n\nTipRStudio helps with this\n\n\n\nIf you put your cursor next to a parenthesis, RStudio highlights its match. If there’s no highlight, you’re missing one.\n\n\n\n\n\nunexpected input or unexpected string constant\nname &lt;- \"Sara\n#&gt; Error: unexpected end of input\nWhat it means: You opened a quote or parenthesis but never closed it. R is waiting for the rest.\nFix: Make sure every \" has a matching \". If your Console shows a + instead of &gt;, R is waiting for you to finish the expression. Press Escape to cancel and fix the line.\n\n\n\nunexpected '='\ndata |&gt; filter(age = 18)\n#&gt; Error in filter(age = 18) : unused argument (age = 18)\nWhat it means: You used = (assignment) when you needed == (comparison).\nFix: Inside filter(), comparisons need ==:\ndata |&gt; filter(age == 18)",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#data-errors",
+    "href": "resource/common-errors.html#data-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "Data errors",
+    "text": "Data errors\n\nx must be numeric or non-numeric argument\nmean(data$age)\n#&gt; Warning: argument is not numeric or logical: returning NA\nWhat it means: You’re trying to do math on something that isn’t a number. The column might have been read as character or factor instead of numeric.\nFix: Check the column type with class(data$age) or glimpse(data). If it’s character, convert it:\ndata &lt;- data |&gt; mutate(age = as.numeric(age))\n\n\n\nColumn name issues\ndata |&gt; select(reaction time)\n#&gt; Error: unexpected symbol in \"data |&gt; select(reaction time)\"\nWhat it means: Column names with spaces or special characters need backticks.\nFix:\ndata |&gt; select(`reaction time`)\nEven better — rename it right away:\ndata &lt;- data |&gt; rename(reaction_time = `reaction time`)",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#ggplot-errors",
+    "href": "resource/common-errors.html#ggplot-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "ggplot errors",
+    "text": "ggplot errors\n\nmapping must be created by aes()\nggplot(data, x = age, y = score)\n#&gt; Error: mapping must be created by `aes()`\nWhat it means: You forgot to wrap the aesthetics in aes().\nFix:\nggplot(data, aes(x = age, y = score))\n\n\n\ngeom_bar requires a missing aesthetic: y (or x)\nggplot(data, aes(x = age)) + geom_col()\n#&gt; Error: geom_col requires the following missing aesthetics: y\nWhat it means: geom_col() needs both x and y. You might want geom_bar() instead (which counts for you), or you need to supply a y variable.\nFix: Use geom_bar() for counts, geom_col() when you have pre-computed values:\n# Count how many in each group:\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Plot pre-computed values:\nggplot(summary_data, aes(x = condition, y = mean_score)) + geom_col()\n\n\n\nstat_count() can only have an x or y aesthetic\nWhat it means: You gave geom_bar() both x and y, but it only needs one (it counts the other automatically).\nFix: Either drop the y aesthetic from geom_bar(), or switch to geom_col() if you want to supply your own y values.\n\n\n\nPlot doesn’t show up\nWhat it means: You assigned the plot to an object but didn’t print it.\nFix: Either type the object name on its own line, or don’t assign it:\n# This won't display:\nmy_plot &lt;- ggplot(data, aes(x = age)) + geom_histogram()\n\n# Add this line to display it:\nmy_plot",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#file-and-path-errors",
+    "href": "resource/common-errors.html#file-and-path-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "File and path errors",
+    "text": "File and path errors\n\ncannot open file 'data.csv': No such file or directory\nread_csv(\"data.csv\")\n#&gt; Error: 'data.csv' does not exist in current working directory\nWhat it means: R can’t find the file. It’s looking in your working directory, and the file isn’t there.\nFix:\n\nCheck you opened the R Project (look at the upper-right corner of RStudio)\nCheck the file is in your project folder (look in the Files pane)\nCheck for typos in the filename (capitalization matters!)\n\nSee Setting Up an R Project for more on how working directories work.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#warnings-vs.-errors",
+    "href": "resource/common-errors.html#warnings-vs.-errors",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "Warnings vs. errors",
+    "text": "Warnings vs. errors\nNot everything red is an error. R has two kinds of messages:\n\n\n\n\n\n\n\n\nType\nWhat it means\nWhat to do\n\n\n\n\nError\nSomething broke. Code didn’t run.\nFix it.\n\n\nWarning\nCode ran, but R wants you to know something.\nRead it. Usually fine, sometimes important.\n\n\n\nCommon warnings you can usually ignore:\n\nRemoved N rows containing missing values — ggplot dropped NAs from your plot\npackage was built under R version X.X.X — version mismatch, usually harmless\n\nCommon warnings you should pay attention to:\n\nNAs introduced by coercion — as.numeric() couldn’t convert some values\nRemoved N rows containing non-finite values — you might have unexpected Inf or NaN values",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
+    ]
+  },
+  {
+    "objectID": "resource/common-errors.html#when-youre-really-stuck",
+    "href": "resource/common-errors.html#when-youre-really-stuck",
+    "title": "Common R Errors (and What They Mean)",
+    "section": "When you’re really stuck",
+    "text": "When you’re really stuck\n\nRead the error message carefully — it’s often more helpful than you think\nGoogle the exact error message (in quotes) — someone has had this problem before\nRestart R (Session &gt; Restart R) and run your code from the top — this fixes more problems than you’d expect\nAsk for help — bring the error message to office hours or post it on the Canvas discussion board",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Common R Errors"
     ]
   },
   {
@@ -122,7 +470,7 @@
     "href": "project/04-presentation.html",
     "title": "Milestone 4: Presentation",
     "section": "",
-    "text": "June 8, 2026",
+    "text": "June 10, 2026",
     "crumbs": [
       "Project",
       "Milestones",
@@ -273,7 +621,7 @@
     "href": "content/17-content.html#before-class",
     "title": "17: Correlation & Simple Regression",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\n\nImportantAssignment 8 is due today\n\n\n\nAssignment 8: Reproducible Report — submit before class.",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 8: Workflow: getting help\n\n\n\n\n\n\n\nImportantAssignment 8 is due today\n\n\n\nAssignment 8: Storytelling Report — due Sunday, May 31 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -307,7 +655,7 @@
   {
     "objectID": "content/15-content.html",
     "href": "content/15-content.html",
-    "title": "15: Storytelling with Data",
+    "title": "15: Missing Data",
     "section": "",
     "text": "Content for Wednesday, May 20, 2026",
     "crumbs": [
@@ -319,9 +667,9 @@
   {
     "objectID": "content/15-content.html#before-class",
     "href": "content/15-content.html#before-class",
-    "title": "15: Storytelling with Data",
+    "title": "15: Missing Data",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 11: Communication\nDykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)\n\n\n\n\n\n\n\nImportantAssignment 7 is due today\n\n\n\nAssignment 7: Joins & Missing Data — submit before class.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class.",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values\n\n\n\n\n\n\n\nImportantAssignment 6 is due today\n\n\n\nAssignment 6: Data Types & Wrangling — due Sunday, May 17 at 11:59 PM.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class.",
     "crumbs": [
       "Content",
       "Course content",
@@ -331,9 +679,9 @@
   {
     "objectID": "content/15-content.html#during-class",
     "href": "content/15-content.html#during-class",
-    "title": "15: Storytelling with Data",
+    "title": "15: Missing Data",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy storytelling? Data + visuals + narrative = change\nThe Knaflic framework:\n\nUnderstand the context — who is your audience?\nChoose appropriate visuals — match plot type to message\nEliminate clutter — less is more\nFocus attention — use preattentive attributes strategically\nThink like a designer — visual hierarchy, accessibility\n\nCritical evaluation of figures:\n\nMisleading figures — truncated axes, cherry-picked ranges, 3D charts\nBoring figures — no title, too many colors, wrong plot type\nThe “so what?” test\n\nApplying storytelling to your final project\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -343,9 +691,9 @@
   {
     "objectID": "content/15-content.html#after-class",
     "href": "content/15-content.html#after-class",
-    "title": "15: Storytelling with Data",
+    "title": "15: Missing Data",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nPick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?\nDeclutter that figure: remove unnecessary gridlines, legends, and default styling\nAdd a clear, informative title that tells the reader what to see (not just what the axes are)\nTry annotate() to add a text label highlighting the key finding\nShow your figure to someone who hasn’t seen your data. Can they understand the point without explanation?\n\n\n\n\n\n\n\nNoteThe “so what?” test\n\n\n\nEvery figure should answer a question. If you can’t complete this sentence, the figure needs work:\n\n“This figure shows that _______________.”\n\nIf you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.\n\n\n\nHandout\nThe APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere.",
+    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))",
     "crumbs": [
       "Content",
       "Course content",
@@ -355,7 +703,7 @@
   {
     "objectID": "content/13-content.html",
     "href": "content/13-content.html",
-    "title": "13: Joins",
+    "title": "13: Strings, Factors & Text",
     "section": "",
     "text": "Content for Monday, May 11, 2026",
     "crumbs": [
@@ -367,9 +715,9 @@
   {
     "objectID": "content/13-content.html#before-class",
     "href": "content/13-content.html#before-class",
-    "title": "13: Joins",
+    "title": "13: Strings, Factors & Text",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins\n\n\n\n\n\n\n\nImportantAssignment 6 is due today\n\n\n\nAssignment 6: Data Types — submit before class.",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 14: Strings (sections 14.1–14.3 only)\nR4DS Ch 16: Factors\n\n\n\n\n\n\n\nImportantAssignment 5 is due today\n\n\n\nAssignment 5: Exploratory Data Analysis — due Sunday, May 10 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -379,9 +727,9 @@
   {
     "objectID": "content/13-content.html#during-class",
     "href": "content/13-content.html#during-class",
-    "title": "13: Joins",
+    "title": "13: Strings, Factors & Text",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nStrings — creating, combining, and basic cleaning\nstr_to_lower(), str_to_upper(), str_trim() for cleanup\nstr_detect() and str_replace() for simple pattern matching\nFactors — categorical data with a fixed set of levels\nWhy factor order matters for plots and tables\nReordering factors: fct_relevel(), fct_reorder(), fct_infreq()\nRecoding factors: fct_recode(), fct_collapse()\nPractical application: cleaning demographic variables\n\n\n\n\n\n\n\nTipAssignment 6 is assigned today\n\n\n\nAssignment 6: Data Types & Wrangling — due Sunday, May 17 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -391,9 +739,9 @@
   {
     "objectID": "content/13-content.html#after-class",
     "href": "content/13-content.html#after-class",
-    "title": "13: Joins",
+    "title": "13: Strings, Factors & Text",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  gender = c(\"Woman\", \"Man\", \"Woman\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
+    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey demographics\nsurvey |&gt;\n  mutate(\n    gender = str_to_lower(str_trim(gender)),\n    gender = fct_recode(as_factor(gender),\n      \"Man\" = \"male\",\n      \"Man\" = \"m\",\n      \"Woman\" = \"female\",\n      \"Woman\" = \"f\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )",
     "crumbs": [
       "Content",
       "Course content",
@@ -403,7 +751,7 @@
   {
     "objectID": "content/11-content.html",
     "href": "content/11-content.html",
-    "title": "11: Data Types Grab Bag",
+    "title": "11: EDA — Covariation",
     "section": "",
     "text": "Content for Monday, May 4, 2026",
     "crumbs": [
@@ -415,9 +763,9 @@
   {
     "objectID": "content/11-content.html#before-class",
     "href": "content/11-content.html#before-class",
-    "title": "11: Data Types Grab Bag",
+    "title": "11: EDA — Covariation",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 12: Logical vectors\nR4DS Ch 13: Numbers\n\n\n\n\n\n\n\nImportantAssignment 5 is due today\n\n\n\nAssignment 5: Exploratory Data Analysis — submit before class.",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)\n\n\n\n\n\n\n\nImportantAssignment 4 is due today\n\n\n\nAssignment 4: Visualization Deep Dive — due Sunday, May 3 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -427,9 +775,9 @@
   {
     "objectID": "content/11-content.html#during-class",
     "href": "content/11-content.html#during-class",
-    "title": "11: Data Types Grab Bag",
+    "title": "11: EDA — Covariation",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nLogical vectors — TRUE/FALSE and how to use them\nComparisons and Boolean operations (&, |, !)\nif_else() and case_when() for conditional values\nNumbers — integer vs. double, rounding, summarizing\nHandling NA in calculations with na.rm = TRUE\nPractical application: computing scale scores in psychology data\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nExploring covariation — relationships between variables\nCategorical + continuous: boxplots, violin plots, geom_freqpoly() with color\nCategorical + categorical: geom_count(), geom_tile() with counts\nContinuous + continuous: scatterplots and trend lines\nDealing with overplotting: alpha, jitter, binning\nPatterns, models, and the correlation vs. causation reminder\nHands-on: Explore a real psychology dataset\n\n\n\n\n\n\n\nTipAssignment 5 is assigned today\n\n\n\nAssignment 5: Exploratory Data Analysis — due Sunday, May 10 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -439,9 +787,9 @@
   {
     "objectID": "content/11-content.html#after-class",
     "href": "content/11-content.html#after-class",
-    "title": "11: Data Types Grab Bag",
+    "title": "11: EDA — Covariation",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nUse if_else() to create a new column that labels participants as “young” (under 25) or “older” (25+)\nUse case_when() to recode a Likert scale (1 = “Strongly Disagree”, 2 = “Disagree”, etc.)\nCalculate scale scores by averaging across items — remember na.rm = TRUE\nUse any() and all() to check if any/all values in a column meet a condition\nPractice rounding with round(), floor(), and ceiling() — when would you use each?\n\n\n\n\n\n\n\nNotecase_when() is your friend\n\n\n\ncase_when() is the tidyverse version of “if… else if… else.” It’s especially useful for recoding variables:\ndata |&gt;\n  mutate(\n    age_group = case_when(\n      age &lt; 18 ~ \"Minor\",\n      age &lt; 25 ~ \"Young adult\",\n      age &lt; 65 ~ \"Adult\",\n      .default = \"Senior\"\n    )\n  )\nThe .default argument catches everything that doesn’t match a previous condition.\n\n\n\nPsychology application: scale scores\n# Computing a scale score from individual items\nsurvey_data |&gt;\n  mutate(\n    # Reverse code item 3 (on a 1-5 scale)\n    item3_r = 6 - item3,\n    # Calculate mean score across items\n    scale_score = rowMeans(\n      pick(item1, item2, item3_r, item4, item5),\n      na.rm = TRUE\n    )\n  )",
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and gender\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()",
     "crumbs": [
       "Content",
       "Course content",
@@ -451,7 +799,7 @@
   {
     "objectID": "content/09-content.html",
     "href": "content/09-content.html",
-    "title": "9: EDA — Variation",
+    "title": "9: Perception & Design",
     "section": "",
     "text": "Content for Monday, April 27, 2026",
     "crumbs": [
@@ -463,9 +811,9 @@
   {
     "objectID": "content/09-content.html#before-class",
     "href": "content/09-content.html#before-class",
-    "title": "9: EDA — Variation",
+    "title": "9: Perception & Design",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\n\nImportantAssignment 4 is due today\n\n\n\nAssignment 4: Visualization Deep Dive — submit before class.",
+    "text": "Before class\n📖 Reading:\n\nKang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?\nRowe, S. (2022, May 24) Don’t hide the crucial findings.\nCisneros, M. (2022, June 14). Showing off the insights vs. showing off.\nEsselman, A. (2022, June 23) Declutter a dual y-axis chart.\nRowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.\nOptional: Knaflic, Storytelling with Data, Ch 1–3\n\n\n\n\n\n\n\nImportantAssignment 3 is due today\n\n\n\nAssignment 3: Tidying, Import & Quarto — due Sunday, April 26 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -475,9 +823,9 @@
   {
     "objectID": "content/09-content.html#during-class",
     "href": "content/09-content.html#during-class",
-    "title": "9: EDA — Variation",
+    "title": "9: Perception & Design",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhat is EDA? Exploratory vs. confirmatory thinking\nThe EDA mindset — curiosity, not confirmation\nExploring distributions: histograms, density plots, bar charts\nChoosing binwidth and when it matters\nSpotting outliers visually and programmatically\nWhat to do with outliers (investigate, don’t delete)\nA first look at missing data\nPutting it all together: a systematic EDA workflow\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy perception matters — how the brain processes visual information\nPreattentive attributes: color, size, position, shape\nGestalt principles and how they shape layout\nColor theory: sequential, diverging, and qualitative palettes\nColorblind-friendly design (and why it matters)\nDecluttering: removing the visual noise\nPsychology-specific figures: error bars, interaction plots, raincloud plots\nPutting it all together with theme() customization\n\n\n\n\n\n\n\nTipAssignment 4 is assigned today\n\n\n\nAssignment 4: Visualization Deep Dive — due Sunday, May 3 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -487,9 +835,9 @@
   {
     "objectID": "content/09-content.html#after-class",
     "href": "content/09-content.html#after-class",
-    "title": "9: EDA — Variation",
+    "title": "9: Perception & Design",
     "section": "After class",
-    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package (loaded in class today):\n\nExplore the distribution of age. What shape is it? Is it skewed?\nCheck for outliers in age using both a histogram and a boxplot. Are any values suspicious?\nPick 3 personality items (e.g., E1, N2, A4) and plot their distributions. What do you notice?\nCount how many missing values each variable has. Which variables have the most?\nWrite down 2–3 questions that your exploration makes you want to answer\n\n\n\n\n\n\n\nNoteThe EDA loop\n\n\n\nEDA isn’t a linear checklist — it’s a cycle:\n\nAsk a question\nVisualize the data to answer it\nNotice something new\nAsk another question\nRepeat\n\nThere’s no “finished.” The goal is understanding, not a final answer.\n\n\n\nLoading the dataset\nlibrary(psych)\ndata(bfi)\nbfi &lt;- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility\n\n\nOutlier investigation template\n# Quick outlier check for any numeric variable\nvariable_name &lt;- \"age\"\n\nbfi |&gt;\n  summarize(\n    min = min(!!sym(variable_name), na.rm = TRUE),\n    max = max(!!sym(variable_name), na.rm = TRUE),\n    mean = mean(!!sym(variable_name), na.rm = TRUE),\n    sd = sd(!!sym(variable_name), na.rm = TRUE)\n  )\n\n# Flag values beyond 3 SD from the mean\nbfi |&gt;\n  filter(abs(age - mean(age, na.rm = TRUE)) &gt; 3 * sd(age, na.rm = TRUE))",
+    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines? → Remove them\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed.",
     "crumbs": [
       "Content",
       "Course content",
@@ -499,7 +847,7 @@
   {
     "objectID": "content/07-content.html",
     "href": "content/07-content.html",
-    "title": "7: Layers & Aesthetics",
+    "title": "7: Quarto & Reproducibility",
     "section": "",
     "text": "Content for Monday, April 20, 2026",
     "crumbs": [
@@ -511,9 +859,9 @@
   {
     "objectID": "content/07-content.html#before-class",
     "href": "content/07-content.html#before-class",
-    "title": "7: Layers & Aesthetics",
+    "title": "7: Quarto & Reproducibility",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 9: Layers\n\n\n\n\n\n\n\nImportantAssignment 3 is due today\n\n\n\nAssignment 3: Tidying & Import — submit before class.",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 28: Quarto",
     "crumbs": [
       "Content",
       "Course content",
@@ -523,9 +871,9 @@
   {
     "objectID": "content/07-content.html#during-class",
     "href": "content/07-content.html#during-class",
-    "title": "7: Layers & Aesthetics",
+    "title": "7: Quarto & Reproducibility",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nMatching geom to data type — a decision guide\nDistributions: geom_histogram() vs geom_density()\nComparing groups: geom_boxplot() vs geom_violin()\nstat_summary() — means, error bars, and custom functions\nWhat SE, SD, and CI error bars actually mean\nPosition adjustments: dodge, stack, fill, jitter\nScales: controlling axes, colors, and legends\ncoord_flip() vs coord_cartesian() — and why they’re different\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhat is literate programming? Code + narrative in one document\nWhy reproducibility matters\nQuarto basics: YAML header, Markdown text, code chunks\nCode chunk options: echo, eval, include, message, warning\nFigure options: fig-width, fig-height, fig-cap\nInline code — embedding results in text (never hard-code statistics!)\nOutput formats: HTML, PDF, Word\nTables with knitr::kable()\n\n\n\n\n\n\n\nTipAssignment 3 is assigned today\n\n\n\nAssignment 3: Tidying, Import & Quarto — due Sunday, April 26 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -535,9 +883,9 @@
   {
     "objectID": "content/07-content.html#after-class",
     "href": "content/07-content.html#after-class",
-    "title": "7: Layers & Aesthetics",
+    "title": "7: Quarto & Reproducibility",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate a histogram and a density plot of the same variable. When does each one work better?\nMake a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?\nBuild a bar chart with error bars using stat_summary(). Try both mean_se and mean_cl_normal — what changes?\nPractice position = \"dodge\" with a grouped bar chart\nTry coord_flip() on a plot with long category labels — does it help readability?\n\n\n\n\n\n\n\nNotecoord_cartesian() vs scale limits\n\n\n\nThese do very different things:\n# This ZOOMS — all data is still used for calculations\ncoord_cartesian(ylim = c(400, 600))\n\n# This DROPS data outside the range — changes your summaries!\nscale_y_continuous(limits = c(400, 600))\nUse coord_cartesian() when you want to zoom in. Use scale limits only when you actually want to exclude data.\n\n\n\nPsychology application: error bars\n# The standard psych figure: mean + SE + individual points\ndata |&gt;\n  ggplot(aes(x = condition, y = score, fill = condition)) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  stat_summary(fun = mean, geom = \"bar\", alpha = 0.6, width = 0.5) +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2) +\n  labs(caption = \"Error bars = SE of the mean.\")",
+    "text": "After class\n✅ Practice:\n\nCreate a new Quarto document (.qmd). Add a title, your name, and today’s date in the YAML header\nWrite a short introduction in Markdown — use headers, bold, italic, and a bulleted list\nAdd a code chunk that loads a dataset and creates a plot. Try #| echo: false to hide the code\nUse inline code to report a summary statistic in a sentence (e.g., “The mean age was `r knitr::inline_expr(\"mean(data$age)\")`”)\nRender your document to HTML. Then try PDF (you may need to install tinytex)\n\n\n\n\n\n\n\nNoteThe golden rule of reproducibility\n\n\n\nNever hard-code a number in your text. If your data changes, your text should update automatically.\nInstead of: &gt; “The mean score was 4.2.”\nWrite: &gt; “The mean score was `r knitr::inline_expr(\"round(mean(data$score, na.rm = TRUE), 1)\")`.”\nThis way, if you add more data or fix an error, everything stays in sync.\n\n\n\nUseful chunk options\n#| label: fig-results\n#| echo: false\n#| fig-cap: \"Mean anxiety scores by condition\"\n#| fig-width: 8\n#| fig-height: 5\n\nggplot(data, aes(x = condition, y = anxiety)) +\n  stat_summary(fun = mean, geom = \"bar\") +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2)",
     "crumbs": [
       "Content",
       "Course content",
@@ -561,7 +909,7 @@
     "href": "content/05-content.html#before-class",
     "title": "5: Data Tidying",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 5: Data tidying",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 5: Data tidying\n\n\n\n\n\n\n\nImportantAssignment 2 is due today\n\n\n\nAssignment 2: Data Transformation — due Sunday, April 12 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -609,7 +957,7 @@
     "href": "content/03-content.html#before-class",
     "title": "3: Data Transformation I",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 3: Data transformation (sections 3.1–3.4)",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 3: Data transformation (sections 3.1–3.4)\n\n\n\n\n\n\n\nImportantAssignment 1 is due today\n\n\n\nAssignment 1: Getting Started — due Sunday, April 5 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -693,7 +1041,7 @@
     "href": "assignment/08-assignment.html",
     "title": "Assignment 8: Reproducible Report",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, May 27, 2026",
+    "text": "Due by 11:59 PM on Sunday, May 31, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -825,7 +1173,7 @@
     "href": "assignment/06-assignment.html",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, May 6, 2026",
+    "text": "Due by 11:59 PM on Sunday, May 17, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -909,7 +1257,7 @@
     "href": "assignment/06-assignment.html#submission",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Submission",
-    "text": "Submission\n\nScript runs without errors\nAll data cleaning operations work correctly\nFactors are in correct order\nPipeline produces clean final dataset\n\nSubmit your .R file on Canvas.",
+    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll data cleaning operations work correctly\nFactors are in correct order\nPipeline produces clean final dataset",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -921,7 +1269,7 @@
     "href": "assignment/04-assignment.html",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, April 22, 2026",
+    "text": "Due by 11:59 PM on Sunday, May 3, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1005,7 +1353,7 @@
     "href": "assignment/04-assignment.html#submission",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Submission",
-    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\ngood_graph.png — your good visualization from Part 3\nbad_graph.png — your bad visualization from Part 3\n\nMake sure your script runs without errors and all files are saved correctly.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "text": "Submission\nSubmit:\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nPlots should be embedded in the document (they render automatically from code chunks)\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1017,7 +1365,7 @@
     "href": "assignment/04-assignment.html#graduate-extension-publication-ready-figure",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Graduate Extension: Publication-Ready Figure",
-    "text": "Graduate Extension: Publication-Ready Figure\nCreating figures for a course assignment and creating figures for a manuscript are different tasks. Journals specify file format, resolution, and dimensions, and reviewers expect a caption that stands on its own without the surrounding text.\n\nTask G.1\nChoose the figure you’re most proud of from Parts 1–3. Look up the author guidelines for one real journal in your area (Psychological Science, JPSP, Emotion, or similar) and save the figure at 300 dpi with dimensions matching their specifications.\n# Example — adjust width/height to your target journal's specs:\nggsave(\"publication_figure.tiff\",\n       plot  = my_plot,\n       width = 3.5, height = 3,\n       units = \"in\", dpi = 300)\n\n\nTask G.2\nWrite a figure caption in APA style — the kind you would include in a manuscript. It should describe what the figure shows, define any abbreviations, and state what the error bars represent (if applicable). Refer to the APA figure guidelines handout from Session 16.\nInclude the caption as a comment directly above your ggsave() call.\n\n\nTask G.3\nIn 3–5 sentences (as a comment), justify your design choices: Why this geom? Why this color palette? What did you deliberately remove or simplify? Connect your reasoning to the perception and design principles from Session 9.\nSubmission: Add ggsave(), the caption comment, and the justification comment to your .R file, clearly marked # === GRADUATE EXTENSION ===. Submit the saved figure file alongside your script.",
+    "text": "Graduate Extension: Publication-Ready Figure\nCreating figures for a course assignment and creating figures for a manuscript are different tasks. Journals specify file format, resolution, and dimensions, and reviewers expect a caption that stands on its own without the surrounding text.\n\nTask G.1\nChoose the figure you’re most proud of from Parts 1–3. Look up the author guidelines for one real journal in your area (Psychological Science, JPSP, Emotion, or similar) and save the figure at 300 dpi with dimensions matching their specifications.\n# Example — adjust width/height to your target journal's specs:\nggsave(\"publication_figure.tiff\",\n       plot  = my_plot,\n       width = 3.5, height = 3,\n       units = \"in\", dpi = 300)\n\n\nTask G.2\nWrite a figure caption in APA style — the kind you would include in a manuscript. It should describe what the figure shows, define any abbreviations, and state what the error bars represent (if applicable). Refer to the APA figure guidelines handout from Session 16.\nInclude the caption as a comment directly above your ggsave() call.\n\n\nTask G.3\nIn 3–5 sentences (as a comment), justify your design choices: Why this geom? Why this color palette? What did you deliberately remove or simplify? Connect your reasoning to the perception and design principles from Session 9.\nSubmission: Add ggsave(), the caption, and the justification to your .qmd file under a clearly marked ## Graduate Extension section. Submit the saved figure file alongside your .qmd and HTML.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1029,7 +1377,7 @@
     "href": "assignment/02-assignment.html",
     "title": "Assignment 2: Data Transformation",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, April 8, 2026",
+    "text": "Due by 11:59 PM on Sunday, April 12, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1125,7 +1473,7 @@
     "href": "assignment/01-assignment.html",
     "title": "Assignment 1: Getting Started with R",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, April 1, 2026",
+    "text": "Due by 11:59 PM on Sunday, April 5, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1197,7 +1545,7 @@
     "href": "assignment/03-assignment.html",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, April 15, 2026",
+    "text": "Due by 11:59 PM on Sunday, April 26, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1293,7 +1641,7 @@
     "href": "assignment/05-assignment.html",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, April 29, 2026",
+    "text": "Due by 11:59 PM on Sunday, May 10, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1377,7 +1725,7 @@
     "href": "assignment/05-assignment.html#part-4-eda-report-15-points",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Part 4: EDA Report (15 points)",
-    "text": "Part 4: EDA Report (15 points)\nWrite a 1-page (approximately 300-400 words) EDA report summarizing:\n\nThe data: Brief description of the dataset\nKey findings: 2-3 interesting patterns you discovered\nData quality issues: Missing data, outliers, or concerns\nNext steps: What would you investigate further?\n\nSave this as a PDF (you can write it in Word, Google Docs, or even as comments in R and knit to PDF).",
+    "text": "Part 4: EDA Report (15 points)\nWrite a 1-page (approximately 300-400 words) EDA report summarizing:\n\nThe data: Brief description of the dataset\nKey findings: 2-3 interesting patterns you discovered\nData quality issues: Missing data, outliers, or concerns\nNext steps: What would you investigate further?\n\nWrite this as narrative text (not code comments) in your Quarto document.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1389,7 +1737,7 @@
     "href": "assignment/05-assignment.html#submission",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Submission",
-    "text": "Submission\nSubmit:\n\nYour .R script with all code and comments\n1-page EDA report as PDF\n\nMake sure your script runs without errors.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in place of the 1-page EDA report in Part 4.",
+    "text": "Submission\nSubmit:\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nInclude your EDA write-up as narrative text in the document (no separate PDF needed)\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in place of the 1-page EDA report in Part 4.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1401,7 +1749,7 @@
     "href": "assignment/05-assignment.html#graduate-extension-preliminary-analysis-write-up",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Graduate Extension: Preliminary Analysis Write-Up",
-    "text": "Graduate Extension: Preliminary Analysis Write-Up\nInstead of the 1-page EDA summary, write your findings as if they were the preliminary analysis section of a manuscript — combining your code output and interpretations in a form that would make sense to a reader of a journal article.\nYour write-up should include the following, in order:\n\nDataset description (2–3 sentences): What are the data? How many participants? What variables? How was it collected?\nData quality and exclusions (1–2 sentences): Were any observations flagged or removed? What did you do about missing data? Write this as you would in a Methods section — specific and justified.\nDescriptive statistics: Report means, SDs, and ranges for at least 5 key variables. Format these as a table using knitr::kable() in a Quarto document, or present them clearly in prose if submitting a plain PDF.\nKey patterns (1–2 paragraphs): Describe 2–3 findings from your EDA, referring to your figures by number (Figure 1 shows…). Write this as you would in a Results section — precise, direct, no over-interpretation.\nAnalysis plan (1 paragraph): Based on what you found, what would you examine next in a formal analysis? Why does the EDA support that direction?\n\nLength: 500–700 words. This should read as a coherent piece of writing, not a list of answers.\nSubmission: Submit your write-up as a PDF alongside your .R script.",
+    "text": "Graduate Extension: Preliminary Analysis Write-Up\nInstead of the 1-page EDA summary, write your findings as if they were the preliminary analysis section of a manuscript — combining your code output and interpretations in a form that would make sense to a reader of a journal article.\nYour write-up should include the following, in order:\n\nDataset description (2–3 sentences): What are the data? How many participants? What variables? How was it collected?\nData quality and exclusions (1–2 sentences): Were any observations flagged or removed? What did you do about missing data? Write this as you would in a Methods section — specific and justified.\nDescriptive statistics: Report means, SDs, and ranges for at least 5 key variables. Format these as a table using knitr::kable() in a Quarto document, or present them clearly in prose if submitting a plain PDF.\nKey patterns (1–2 paragraphs): Describe 2–3 findings from your EDA, referring to your figures by number (Figure 1 shows…). Write this as you would in a Results section — precise, direct, no over-interpretation.\nAnalysis plan (1 paragraph): Based on what you found, what would you examine next in a formal analysis? Why does the EDA support that direction?\n\nLength: 500–700 words. This should read as a coherent piece of writing, not a list of answers.\nSubmission: Include your write-up as narrative text in your .qmd file under a clearly marked ## Graduate Extension section.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1413,7 +1761,7 @@
     "href": "assignment/07-assignment.html",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "",
-    "text": "Due by 11:59 PM on Wednesday, May 13, 2026",
+    "text": "Due by 11:59 PM on Sunday, May 24, 2026",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1509,7 +1857,7 @@
     "href": "assignment/07-assignment.html#submission",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll joins performed correctly\nMissing data analysis complete\nReflection questions answered\nScript runs without errors\n\nSubmit your .R file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll joins performed correctly\nMissing data analysis complete\nReflection questions answered\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1521,7 +1869,7 @@
     "href": "assignment/07-assignment.html#graduate-extension-formal-missing-data-report",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "Graduate Extension: Formal Missing Data Report",
-    "text": "Graduate Extension: Formal Missing Data Report\nReviewers regularly ask authors to characterize and justify how they handled missing data. This extension gives you a reusable script and language for doing that.\n\nTask G.1\nInstall and use the naniar package to create a missingness matrix — a visualization showing which participants have missing values across which variables.\n# install.packages(\"naniar\")\nlibrary(naniar)\nvis_miss(your_joined_data)\n\n\nTask G.2\nClassify the likely missingness mechanism for the survey data in this assignment. Is it MCAR (missing completely at random), MAR (missing at random — related to other observed variables), or MNAR (missing not at random — related to the missing value itself)? Justify your classification using your results from Part 3 — point to specific numbers.\n\n\nTask G.3\nWrite a missing data paragraph as it would appear in a manuscript’s Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.\nSubmission: Add your naniar code and the missing data paragraph (as a clearly marked comment) to your .R file under # === GRADUATE EXTENSION ===.",
+    "text": "Graduate Extension: Formal Missing Data Report\nReviewers regularly ask authors to characterize and justify how they handled missing data. This extension gives you a reusable script and language for doing that.\n\nTask G.1\nInstall and use the naniar package to create a missingness matrix — a visualization showing which participants have missing values across which variables.\n# install.packages(\"naniar\")\nlibrary(naniar)\nvis_miss(your_joined_data)\n\n\nTask G.2\nClassify the likely missingness mechanism for the survey data in this assignment. Is it MCAR (missing completely at random), MAR (missing at random — related to other observed variables), or MNAR (missing not at random — related to the missing value itself)? Justify your classification using your results from Part 3 — point to specific numbers.\n\n\nTask G.3\nWrite a missing data paragraph as it would appear in a manuscript’s Method section (3–5 sentences). It should state: (a) how much data is missing overall, (b) which variables are most affected, (c) whether missingness appears random or systematic, and (d) how you handled it in your analysis. Write this as something you could drop into a real paper.\nSubmission: Add your naniar code and the missing data paragraph to your .qmd file under a clearly marked ## Graduate Extension section.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1533,7 +1881,7 @@
     "href": "assignment/index.html#overview",
     "title": "Assignments",
     "section": "Overview",
-    "text": "Overview\nWeekly coding assignments reinforce what you learn in each session. They’re designed to take 1-2 hours outside of class, and you’ll have time during class to get started and ask questions.\nGrading: 8 assignments total, lowest 1 dropped. Worth 35% of your final grade.",
+    "text": "Overview\nWeekly coding assignments reinforce what you learn in each session. They’re designed to take 1-2 hours outside of class, and you’ll have time during class to get started and ask questions.\nGrading: 8 assignments total. Worth 35% of your final grade.",
     "crumbs": [
       "Assignments",
       "Overview",
@@ -1545,7 +1893,7 @@
     "href": "assignment/index.html#assignment-schedule",
     "title": "Assignments",
     "section": "Assignment Schedule",
-    "text": "Assignment Schedule\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nMon Apr 6\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nMon Apr 13\n\n\n3: Tidying & Import\npivot, read_csv\nWed Apr 15\nMon Apr 20\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nWed Apr 22\nMon Apr 27\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nWed Apr 29\nMon May 4\n\n\n6: Data Types\nlogicals, strings, factors\nWed May 6\nMon May 11\n\n\n7: Joins & Missing Data\njoins, NA handling\nWed May 13\nWed May 20\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nMon Jun 1",
+    "text": "Assignment Schedule\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nSun Apr 5\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nSun Apr 12\n\n\n3: Tidying, Import & Quarto\npivot, read_csv, Quarto\nMon Apr 20\nSun Apr 26\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nMon Apr 27\nSun May 3\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nMon May 4\nSun May 10\n\n\n6: Data Types & Wrangling\nlogicals, strings, factors\nMon May 11\nSun May 17\n\n\n7: Joins & Missing Data\njoins, NA handling\nWed May 13\nSun May 24\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nSun May 31",
     "crumbs": [
       "Assignments",
       "Overview",
@@ -1557,7 +1905,7 @@
     "href": "assignment/index.html#submission-guidelines",
     "title": "Assignments",
     "section": "Submission Guidelines",
-    "text": "Submission Guidelines\n\nSubmit all assignments through Canvas before class on the due date\nSubmit your .R script or .qmd file (depending on the assignment)\nInclude your name and the assignment number at the top of your file\nMake sure your code runs without errors from a fresh R session",
+    "text": "Submission Guidelines\n\nSubmit all assignments through Canvas by 11:59 PM on the due date\nSubmit your .R script or .qmd file (depending on the assignment)\nInclude your name and the assignment number at the top of your file\nMake sure your code runs without errors from a fresh R session",
     "crumbs": [
       "Assignments",
       "Overview",
@@ -1605,7 +1953,7 @@
     "href": "content/02-content.html#before-class",
     "title": "2: Your First Visualization",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 1: Data visualization",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 1: Data visualization\n\n\n\n\n\n\n\nTipAssignment 1 is assigned today\n\n\n\nAssignment 1: Getting Started — due Sunday, April 5 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -1653,7 +2001,7 @@
     "href": "content/04-content.html#before-class",
     "title": "4: Data Transformation II",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 3: Data transformation (section 3.5)\nR4DS Ch 4: Workflow: code style",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 3: Data transformation (section 3.5)\nR4DS Ch 4: Workflow: code style\n\n\n\n\n\n\n\nTipAssignment 2 is assigned today\n\n\n\nAssignment 2: Data Transformation — due Sunday, April 12 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -1713,7 +2061,7 @@
     "href": "content/06-content.html#during-class",
     "title": "6: Data Import",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nThe data science workflow: where import fits in\nread_csv() — reading CSV files and handling common problems\nColumn types and how to fix them when R guesses wrong\nMissing value codes (-999, \"N/A\", etc.)\nreadxl::read_excel() — working with Excel files\nA quick look at SPSS files with haven::read_sav()\nPractical tips for importing Qualtrics exports\n\n\n\n\n\n\n\nTipAssignment 3 is assigned today\n\n\n\nAssignment 3: Tidying & Import — due before Session 7.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nThe data science workflow: where import fits in\nread_csv() — reading CSV files and handling common problems\nColumn types and how to fix them when R guesses wrong\nMissing value codes (-999, \"N/A\", etc.)\nreadxl::read_excel() — working with Excel files\nA quick look at SPSS files with haven::read_sav()\nPractical tips for importing Qualtrics exports\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1735,7 +2083,7 @@
   {
     "objectID": "content/08-content.html",
     "href": "content/08-content.html",
-    "title": "8: Perception & Design",
+    "title": "8: Layers & Aesthetics",
     "section": "",
     "text": "Content for Wednesday, April 22, 2026",
     "crumbs": [
@@ -1747,9 +2095,9 @@
   {
     "objectID": "content/08-content.html#before-class",
     "href": "content/08-content.html#before-class",
-    "title": "8: Perception & Design",
+    "title": "8: Layers & Aesthetics",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nKang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?\nRowe, S. (2022, May 24) Don’t hide the crucial findings.\nCisneros, M. (2022, June 14). Showing off the insights vs. showing off.\nEsselman, A. (2022, June 23) Declutter a dual y-axis chart.\nRowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.\nOptional: Knaflic, Storytelling with Data, Ch 1–3",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 9: Layers",
     "crumbs": [
       "Content",
       "Course content",
@@ -1759,9 +2107,9 @@
   {
     "objectID": "content/08-content.html#during-class",
     "href": "content/08-content.html#during-class",
-    "title": "8: Perception & Design",
+    "title": "8: Layers & Aesthetics",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy perception matters — how the brain processes visual information\nPreattentive attributes: color, size, position, shape\nGestalt principles and how they shape layout\nColor theory: sequential, diverging, and qualitative palettes\nColorblind-friendly design (and why it matters)\nDecluttering: removing the visual noise\nPsychology-specific figures: error bars, interaction plots, raincloud plots\nPutting it all together with theme() customization\n\n\n\n\n\n\n\nTipAssignment 4 is assigned today\n\n\n\nAssignment 4: Visualization Deep Dive — due before Session 9.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nMatching geom to data type — a decision guide\nDistributions: geom_histogram() vs geom_density()\nComparing groups: geom_boxplot() vs geom_violin()\nstat_summary() — means, error bars, and custom functions\nWhat SE, SD, and CI error bars actually mean\nPosition adjustments: dodge, stack, fill, jitter\nScales: controlling axes, colors, and legends\ncoord_flip() vs coord_cartesian() — and why they’re different\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1771,9 +2119,9 @@
   {
     "objectID": "content/08-content.html#after-class",
     "href": "content/08-content.html#after-class",
-    "title": "8: Perception & Design",
+    "title": "8: Layers & Aesthetics",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nTake a plot you made earlier in the course. Identify 3 things that could be decluttered.\nRecreate it using only theme_minimal() — what disappears? What stays?\nTry switching your color palette to scale_fill_viridis_d(). Does it change the story?\nCreate a raincloud plot (violin + boxplot + jitter) for any grouped data you have\nMake a “bad” version of a figure on purpose — violate as many design principles as you can. Then fix it.\n\n\n\n\n\n\n\nNoteThe decluttering checklist\n\n\n\nBefore you call a figure “done,” ask:\n\nIs the background gray? → Switch to theme_minimal() or theme_classic()\nAre there gridlines? → Remove them\nIs there a legend when there’s only one group? → Remove it\nDo the axis labels say something meaningful? → If not, rename them\nCan someone understand the point without reading the caption? → If not, the title needs work\n\n\n\n\nColorblind-friendly palettes\n# Viridis — works for continuous and discrete\nscale_fill_viridis_d()   # discrete categories\nscale_fill_viridis_c()   # continuous values\n\n# ColorBrewer — curated palettes\nscale_fill_brewer(palette = \"Set2\")      # qualitative\nscale_fill_brewer(palette = \"RdBu\")      # diverging\nscale_fill_brewer(palette = \"Blues\")     # sequential\nThese are all built into ggplot2 — no extra packages needed.",
+    "text": "After class\n✅ Practice:\n\nCreate a histogram and a density plot of the same variable. When does each one work better?\nMake a boxplot and a violin plot side by side for the same data. What does the violin show that the boxplot hides?\nBuild a bar chart with error bars using stat_summary(). Try both mean_se and mean_cl_normal — what changes?\nPractice position = \"dodge\" with a grouped bar chart\nTry coord_flip() on a plot with long category labels — does it help readability?\n\n\n\n\n\n\n\nNotecoord_cartesian() vs scale limits\n\n\n\nThese do very different things:\n# This ZOOMS — all data is still used for calculations\ncoord_cartesian(ylim = c(400, 600))\n\n# This DROPS data outside the range — changes your summaries!\nscale_y_continuous(limits = c(400, 600))\nUse coord_cartesian() when you want to zoom in. Use scale limits only when you actually want to exclude data.\n\n\n\nPsychology application: error bars\n# The standard psych figure: mean + SE + individual points\ndata |&gt;\n  ggplot(aes(x = condition, y = score, fill = condition)) +\n  geom_jitter(width = 0.2, alpha = 0.4) +\n  stat_summary(fun = mean, geom = \"bar\", alpha = 0.6, width = 0.5) +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2) +\n  labs(caption = \"Error bars = SE of the mean.\")",
     "crumbs": [
       "Content",
       "Course content",
@@ -1783,7 +2131,7 @@
   {
     "objectID": "content/10-content.html",
     "href": "content/10-content.html",
-    "title": "10: EDA — Covariation",
+    "title": "10: EDA — Variation",
     "section": "",
     "text": "Content for Wednesday, April 29, 2026",
     "crumbs": [
@@ -1795,9 +2143,9 @@
   {
     "objectID": "content/10-content.html#before-class",
     "href": "content/10-content.html#before-class",
-    "title": "10: EDA — Covariation",
+    "title": "10: EDA — Variation",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.5–10.6)",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 10: Exploratory data analysis (sections 10.1–10.4)\n\n\n\n\n\n\n\nWarningFinal Project Proposal is due today\n\n\n\nSubmit your dataset selection, research questions, and initial plan before class.",
     "crumbs": [
       "Content",
       "Course content",
@@ -1807,9 +2155,9 @@
   {
     "objectID": "content/10-content.html#during-class",
     "href": "content/10-content.html#during-class",
-    "title": "10: EDA — Covariation",
+    "title": "10: EDA — Variation",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nExploring covariation — relationships between variables\nCategorical + continuous: boxplots, violin plots, geom_freqpoly() with color\nCategorical + categorical: geom_count(), geom_tile() with counts\nContinuous + continuous: scatterplots and trend lines\nDealing with overplotting: alpha, jitter, binning\nPatterns, models, and the correlation vs. causation reminder\nHands-on: Explore a real psychology dataset\n\n\n\n\n\n\n\nTipAssignment 5 is assigned today\n\n\n\nAssignment 5: Exploratory Data Analysis — due before Session 11.\n\n\n\n\n\n\n\n\nWarningFinal Project Proposal is due today\n\n\n\nSubmit your dataset selection, research questions, and initial plan before class.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhat is EDA? Exploratory vs. confirmatory thinking\nThe EDA mindset — curiosity, not confirmation\nExploring distributions: histograms, density plots, bar charts\nChoosing binwidth and when it matters\nSpotting outliers visually and programmatically\nWhat to do with outliers (investigate, don’t delete)\nA first look at missing data\nPutting it all together: a systematic EDA workflow\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1819,9 +2167,9 @@
   {
     "objectID": "content/10-content.html#after-class",
     "href": "content/10-content.html#after-class",
-    "title": "10: EDA — Covariation",
+    "title": "10: EDA — Variation",
     "section": "After class",
-    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and gender\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()",
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package (loaded in class today):\n\nExplore the distribution of age. What shape is it? Is it skewed?\nCheck for outliers in age using both a histogram and a boxplot. Are any values suspicious?\nPick 3 personality items (e.g., E1, N2, A4) and plot their distributions. What do you notice?\nCount how many missing values each variable has. Which variables have the most?\nWrite down 2–3 questions that your exploration makes you want to answer\n\n\n\n\n\n\n\nNoteThe EDA loop\n\n\n\nEDA isn’t a linear checklist — it’s a cycle:\n\nAsk a question\nVisualize the data to answer it\nNotice something new\nAsk another question\nRepeat\n\nThere’s no “finished.” The goal is understanding, not a final answer.\n\n\n\nLoading the dataset\nlibrary(psych)\ndata(bfi)\nbfi &lt;- as_tibble(bfi)   # Convert to tibble for tidyverse compatibility\n\n\nOutlier investigation template\n# Quick outlier check for any numeric variable\nvariable_name &lt;- \"age\"\n\nbfi |&gt;\n  summarize(\n    min = min(!!sym(variable_name), na.rm = TRUE),\n    max = max(!!sym(variable_name), na.rm = TRUE),\n    mean = mean(!!sym(variable_name), na.rm = TRUE),\n    sd = sd(!!sym(variable_name), na.rm = TRUE)\n  )\n\n# Flag values beyond 3 SD from the mean\nbfi |&gt;\n  filter(abs(age - mean(age, na.rm = TRUE)) &gt; 3 * sd(age, na.rm = TRUE))",
     "crumbs": [
       "Content",
       "Course content",
@@ -1831,7 +2179,7 @@
   {
     "objectID": "content/12-content.html",
     "href": "content/12-content.html",
-    "title": "12: Strings & Factors",
+    "title": "12: Data Types Grab Bag",
     "section": "",
     "text": "Content for Wednesday, May 6, 2026",
     "crumbs": [
@@ -1843,9 +2191,9 @@
   {
     "objectID": "content/12-content.html#before-class",
     "href": "content/12-content.html#before-class",
-    "title": "12: Strings & Factors",
+    "title": "12: Data Types Grab Bag",
     "section": "Before class",
-    "text": "Before class\n📖 Readings:\n\nR4DS Ch 14: Strings (sections 14.1–14.3 only)\nR4DS Ch 16: Factors",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 12: Logical vectors\nR4DS Ch 13: Numbers",
     "crumbs": [
       "Content",
       "Course content",
@@ -1855,9 +2203,9 @@
   {
     "objectID": "content/12-content.html#during-class",
     "href": "content/12-content.html#during-class",
-    "title": "12: Strings & Factors",
+    "title": "12: Data Types Grab Bag",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nStrings — creating, combining, and basic cleaning\nstr_to_lower(), str_to_upper(), str_trim() for cleanup\nstr_detect() and str_replace() for simple pattern matching\nFactors — categorical data with a fixed set of levels\nWhy factor order matters for plots and tables\nReordering factors: fct_relevel(), fct_reorder(), fct_infreq()\nRecoding factors: fct_recode(), fct_collapse()\nPractical application: cleaning demographic variables\n\n\n\n\n\n\n\nTipAssignment 6 is assigned today\n\n\n\nAssignment 6: Data Types — due before Session 13.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nLogical vectors — TRUE/FALSE and how to use them\nComparisons and Boolean operations (&, |, !)\nif_else() and case_when() for conditional values\nNumbers — integer vs. double, rounding, summarizing\nHandling NA in calculations with na.rm = TRUE\nPractical application: computing scale scores in psychology data\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1867,9 +2215,9 @@
   {
     "objectID": "content/12-content.html#after-class",
     "href": "content/12-content.html#after-class",
-    "title": "12: Strings & Factors",
+    "title": "12: Data Types Grab Bag",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey demographics\nsurvey |&gt;\n  mutate(\n    gender = str_to_lower(str_trim(gender)),\n    gender = fct_recode(as_factor(gender),\n      \"Man\" = \"male\",\n      \"Man\" = \"m\",\n      \"Woman\" = \"female\",\n      \"Woman\" = \"f\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )",
+    "text": "After class\n✅ Practice:\n\nUse if_else() to create a new column that labels participants as “young” (under 25) or “older” (25+)\nUse case_when() to recode a Likert scale (1 = “Strongly Disagree”, 2 = “Disagree”, etc.)\nCalculate scale scores by averaging across items — remember na.rm = TRUE\nUse any() and all() to check if any/all values in a column meet a condition\nPractice rounding with round(), floor(), and ceiling() — when would you use each?\n\n\n\n\n\n\n\nNotecase_when() is your friend\n\n\n\ncase_when() is the tidyverse version of “if… else if… else.” It’s especially useful for recoding variables:\ndata |&gt;\n  mutate(\n    age_group = case_when(\n      age &lt; 18 ~ \"Minor\",\n      age &lt; 25 ~ \"Young adult\",\n      age &lt; 65 ~ \"Adult\",\n      .default = \"Senior\"\n    )\n  )\nThe .default argument catches everything that doesn’t match a previous condition.\n\n\n\nPsychology application: scale scores\n# Computing a scale score from individual items\nsurvey_data |&gt;\n  mutate(\n    # Reverse code item 3 (on a 1-5 scale)\n    item3_r = 6 - item3,\n    # Calculate mean score across items\n    scale_score = rowMeans(\n      pick(item1, item2, item3_r, item4, item5),\n      na.rm = TRUE\n    )\n  )",
     "crumbs": [
       "Content",
       "Course content",
@@ -1879,7 +2227,7 @@
   {
     "objectID": "content/14-content.html",
     "href": "content/14-content.html",
-    "title": "14: Missing Data",
+    "title": "14: Joins",
     "section": "",
     "text": "Content for Wednesday, May 13, 2026",
     "crumbs": [
@@ -1891,9 +2239,9 @@
   {
     "objectID": "content/14-content.html#before-class",
     "href": "content/14-content.html#before-class",
-    "title": "14: Missing Data",
+    "title": "14: Joins",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins",
     "crumbs": [
       "Content",
       "Course content",
@@ -1903,9 +2251,9 @@
   {
     "objectID": "content/14-content.html#during-class",
     "href": "content/14-content.html#during-class",
-    "title": "14: Missing Data",
+    "title": "14: Joins",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due before Session 15.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due Sunday, May 24 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1915,9 +2263,9 @@
   {
     "objectID": "content/14-content.html#after-class",
     "href": "content/14-content.html#after-class",
-    "title": "14: Missing Data",
+    "title": "14: Joins",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))",
+    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  gender = c(\"Woman\", \"Man\", \"Woman\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
     "crumbs": [
       "Content",
       "Course content",
@@ -1927,7 +2275,7 @@
   {
     "objectID": "content/16-content.html",
     "href": "content/16-content.html",
-    "title": "16: Quarto",
+    "title": "16: Storytelling with Data",
     "section": "",
     "text": "Content for Wednesday, May 27, 2026",
     "crumbs": [
@@ -1939,9 +2287,9 @@
   {
     "objectID": "content/16-content.html#before-class",
     "href": "content/16-content.html#before-class",
-    "title": "16: Quarto",
+    "title": "16: Storytelling with Data",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 28: Quarto",
+    "text": "Before class\n📖 Readings:\n\nR4DS Ch 11: Communication\nDykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)\n\n\n\n\n\n\n\nImportantAssignment 7 is due today\n\n\n\nAssignment 7: Joins & Missing Data — due Sunday, May 24 at 11:59 PM.",
     "crumbs": [
       "Content",
       "Course content",
@@ -1951,9 +2299,9 @@
   {
     "objectID": "content/16-content.html#during-class",
     "href": "content/16-content.html#during-class",
-    "title": "16: Quarto",
+    "title": "16: Storytelling with Data",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhat is literate programming? Code + narrative in one document\nWhy reproducibility matters\nQuarto basics: YAML header, Markdown text, code chunks\nCode chunk options: echo, eval, include, message, warning\nFigure options: fig-width, fig-height, fig-cap\nInline code — embedding results in text (never hard-code statistics!)\nOutput formats: HTML, PDF, Word\nTables with knitr::kable()\n\n\n\n\n\n\n\nTipAssignment 8 is assigned today\n\n\n\nAssignment 8: Reproducible Report — due before Session 17.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy storytelling? Data + visuals + narrative = change\nThe Knaflic framework:\n\nUnderstand the context — who is your audience?\nChoose appropriate visuals — match plot type to message\nEliminate clutter — less is more\nFocus attention — use preattentive attributes strategically\nThink like a designer — visual hierarchy, accessibility\n\nCritical evaluation of figures:\n\nMisleading figures — truncated axes, cherry-picked ranges, 3D charts\nBoring figures — no title, too many colors, wrong plot type\nThe “so what?” test\n\nApplying storytelling to your final project\n\n\n\n\n\n\n\nTipAssignment 8 is assigned today\n\n\n\nAssignment 8: Storytelling Report — due Sunday, May 31 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -1963,9 +2311,9 @@
   {
     "objectID": "content/16-content.html#after-class",
     "href": "content/16-content.html#after-class",
-    "title": "16: Quarto",
+    "title": "16: Storytelling with Data",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate a new Quarto document (.qmd). Add a title, your name, and today’s date in the YAML header\nWrite a short introduction in Markdown — use headers, bold, italic, and a bulleted list\nAdd a code chunk that loads a dataset and creates a plot. Try #| echo: false to hide the code\nUse inline code to report a summary statistic in a sentence (e.g., “The mean age was `r knitr::inline_expr(\"mean(data$age)\")`”)\nRender your document to HTML. Then try PDF (you may need to install tinytex)\n\n\n\n\n\n\n\nNoteThe golden rule of reproducibility\n\n\n\nNever hard-code a number in your text. If your data changes, your text should update automatically.\nInstead of: &gt; “The mean score was 4.2.”\nWrite: &gt; “The mean score was `r knitr::inline_expr(\"round(mean(data$score, na.rm = TRUE), 1)\")`.”\nThis way, if you add more data or fix an error, everything stays in sync.\n\n\n\nUseful chunk options\n#| label: fig-results\n#| echo: false\n#| fig-cap: \"Mean anxiety scores by condition\"\n#| fig-width: 8\n#| fig-height: 5\n\nggplot(data, aes(x = condition, y = anxiety)) +\n  stat_summary(fun = mean, geom = \"bar\") +\n  stat_summary(fun.data = mean_se, geom = \"errorbar\", width = 0.2)",
+    "text": "After class\n✅ Practice:\n\nPick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?\nDeclutter that figure: remove unnecessary gridlines, legends, and default styling\nAdd a clear, informative title that tells the reader what to see (not just what the axes are)\nTry annotate() to add a text label highlighting the key finding\nShow your figure to someone who hasn’t seen your data. Can they understand the point without explanation?\n\n\n\n\n\n\n\nNoteThe “so what?” test\n\n\n\nEvery figure should answer a question. If you can’t complete this sentence, the figure needs work:\n\n“This figure shows that _______________.”\n\nIf you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.\n\n\n\nHandout\nThe APA figure formatting guidelines handout is available in the course files. It covers journal-specific formatting conventions for reference — but remember, the core principles of good visualization apply everywhere.",
     "crumbs": [
       "Content",
       "Course content",
@@ -2195,7 +2543,7 @@
     "href": "project/index.html#milestones",
     "title": "Final Project",
     "section": "Milestones",
-    "text": "Milestones\nThe project is broken into four milestones so you get feedback along the way:\n\n\n\nMilestone\nDue Date\nWhat you submit\n\n\n\n\nProposal\nWed Apr 29 (Session 10)\nDataset, research questions, initial plan\n\n\nDraft\nWed May 20 (Session 15)\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3 (Session 18)\nComplete Quarto report\n\n\nPresentation\nFinals Week\n5-minute recorded video",
+    "text": "Milestones\nThe project is broken into four milestones so you get feedback along the way:\n\n\n\nMilestone\nDue Date\nWhat you submit\n\n\n\n\nProposal\nWed Apr 29 (Session 10)\nDataset, research questions, initial plan\n\n\nDraft\nWed May 20 (Session 15)\nWorking code, preliminary visualizations\n\n\nFinal Report\nWed Jun 3 (Session 18)\nComplete Quarto report\n\n\nPresentation\nWed Jun 10\n5-minute recorded video",
     "crumbs": [
       "Project",
       "Overview",
@@ -2219,7 +2567,7 @@
     "href": "project/index.html#choosing-a-dataset",
     "title": "Final Project",
     "section": "Choosing a dataset",
-    "text": "Choosing a dataset\nYour dataset should:\n\nBe relevant to psychology or the social sciences (broadly defined)\nHave at least 100 observations and 5 variables (ideally a mix of numeric and categorical)\nBe something you find genuinely interesting — you’ll spend several weeks with it\n\n\nGood sources for datasets\n\nOpen Science Framework (OSF): osf.io — published research datasets\nICPSR: icpsr.umich.edu — social science data archive\nGeneral Social Survey (GSS): gss.norc.org\nWorld Values Survey: worldvaluessurvey.org\nKaggle: kaggle.com/datasets — search for psychology-related datasets\nYour own research data — with your advisor’s permission\n\n\n\n\n\n\n\nTipNot sure where to start?\n\n\n\nCome to office hours and we can browse datasets together. It’s much easier to stay motivated when you’re working with data you care about.",
+    "text": "Choosing a dataset\nYour dataset should:\n\nBe relevant to psychology or the social sciences (broadly defined)\nHave at least 20 observations and 5 variables (ideally a mix of numeric and categorical)\nBe something you find genuinely interesting — you’ll spend several weeks with it\n\n\nGood sources for datasets\n\nOpen Science Framework (OSF): osf.io — published research datasets\nICPSR: icpsr.umich.edu — social science data archive\nGeneral Social Survey (GSS): gss.norc.org\nWorld Values Survey: worldvaluessurvey.org\nKaggle: kaggle.com/datasets — search for psychology-related datasets\nYour own research data — with your advisor’s permission\n\n\n\n\n\n\n\nTipNot sure where to start?\n\n\n\nCome to office hours and we can browse datasets together. It’s much easier to stay motivated when you’re working with data you care about.",
     "crumbs": [
       "Project",
       "Overview",
@@ -2248,6 +2596,198 @@
       "Project",
       "Overview",
       "Final Project"
+    ]
+  },
+  {
+    "objectID": "resource/index.html",
+    "href": "resource/index.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Step-by-step instructions for common tasks in this course.\n\n\n\nGuide\nWhen to use it\n\n\n\n\nSetting Up an R Project\nEvery assignment — start here\n\n\nUsing R Scripts for Assignments\nAssignments 1–2\n\n\nUsing Quarto Documents for Assignments\nAssignments 3–8 and Final Project\n\n\nCommon R Errors (and What They Mean)\nWhen you get a red error message and don’t know what it means",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#guides",
+    "href": "resource/index.html#guides",
+    "title": "Resources",
+    "section": "",
+    "text": "Step-by-step instructions for common tasks in this course.\n\n\n\nGuide\nWhen to use it\n\n\n\n\nSetting Up an R Project\nEvery assignment — start here\n\n\nUsing R Scripts for Assignments\nAssignments 1–2\n\n\nUsing Quarto Documents for Assignments\nAssignments 3–8 and Final Project\n\n\nCommon R Errors (and What They Mean)\nWhen you get a red error message and don’t know what it means",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#course-textbook",
+    "href": "resource/index.html#course-textbook",
+    "title": "Resources",
+    "section": "Course Textbook",
+    "text": "Course Textbook\n\nR for Data Science (2nd edition) — free online. Weekly readings are listed on the schedule.",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#cheatsheets",
+    "href": "resource/index.html#cheatsheets",
+    "title": "Resources",
+    "section": "Cheatsheets",
+    "text": "Cheatsheets\nOne-page visual references for the packages we use most. Print these out or keep them open while you work.\n\nggplot2 Cheatsheet — geoms, aesthetics, scales, themes\ndplyr Cheatsheet — filter, select, mutate, summarize, group_by\ntidyr Cheatsheet — pivot_longer, pivot_wider, separate, unite\nRStudio IDE Cheatsheet — keyboard shortcuts, panes, project setup\nQuarto Cheatsheet — code chunks, Markdown formatting, YAML options\nBrowse all cheatsheets",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#extra-practice",
+    "href": "resource/index.html#extra-practice",
+    "title": "Resources",
+    "section": "Extra Practice",
+    "text": "Extra Practice\nIf you want more practice beyond the assignments, these are all free.\n\nPosit Primers — interactive R tutorials in your browser. Great for reinforcing the basics.\nCédric Scherer’s ggplot2 Tutorial — a beautifully illustrated deep dive into ggplot2. Useful when you’re working on the visualization assignments.\nQuarto Tutorial — Quarto’s own getting-started guide, if you want more detail than our in-class introduction.",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#finding-datasets",
+    "href": "resource/index.html#finding-datasets",
+    "title": "Resources",
+    "section": "Finding Datasets",
+    "text": "Finding Datasets\nFor your final project, you’ll need a psychology or social science dataset. Here are good places to look:\n\nOpen Science Framework (OSF) — published research data, often with codebooks\nICPSR — large archive of social and behavioral science data\nGeneral Social Survey (GSS) — decades of survey data on American attitudes and behaviors\nWorld Values Survey — cross-cultural survey data\nKaggle Datasets — wide variety; filter for social science topics\nYour own research lab (with advisor permission)\n\nSee the Final Project page for dataset requirements.",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#software",
+    "href": "resource/index.html#software",
+    "title": "Resources",
+    "section": "Software",
+    "text": "Software\n\nDownload R\nDownload RStudio",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/index.html#getting-help",
+    "href": "resource/index.html#getting-help",
+    "title": "Resources",
+    "section": "Getting Help",
+    "text": "Getting Help\n\nIn class: Start assignments during work time — the instructor and TA are there to help\nOffice hours: See the syllabus for times and location\nCanvas discussion board: Post questions anytime — classmates and the teaching team can respond\nClassmates: Work together, but write your own code",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html",
+    "href": "resource/r-projects.html",
+    "title": "Setting Up an R Project",
+    "section": "",
+    "text": "Every assignment in this course should live inside an R Project. This page walks you through creating one and explains why it matters.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#why-use-r-projects",
+    "href": "resource/r-projects.html#why-use-r-projects",
+    "title": "Setting Up an R Project",
+    "section": "Why use R Projects?",
+    "text": "Why use R Projects?\nAn R Project sets your working directory automatically. That means when you write read_csv(\"data.csv\"), R knows to look in the same folder as your project — no need to type out long file paths or use setwd().\nThink of it like a filing cabinet drawer: everything for one assignment goes in one folder, and R always knows which drawer is open.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#step-1-create-a-new-project",
+    "href": "resource/r-projects.html#step-1-create-a-new-project",
+    "title": "Setting Up an R Project",
+    "section": "Step 1: Create a new project",
+    "text": "Step 1: Create a new project\n\nOpen RStudio\nGo to File &gt; New Project…\nChoose New Directory\nChoose New Project\nType a name for your project folder (e.g., assignment-01)\nChoose where to save it (your Documents folder or a course folder is fine)\nClick Create Project\n\nRStudio will restart and open your new project. You’ll see the project name in the upper-right corner of the RStudio window.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#step-2-check-your-setup",
+    "href": "resource/r-projects.html#step-2-check-your-setup",
+    "title": "Setting Up an R Project",
+    "section": "Step 2: Check your setup",
+    "text": "Step 2: Check your setup\nYou should see a few things in RStudio:\n\nThe Files pane (bottom-right) shows the contents of your project folder\nThe project name appears in the upper-right corner\nIf you run getwd() in the Console, it will print the path to your project folder\n\ngetwd()\n# Should print something like: \"/Users/yourname/Documents/assignment-01\"",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#step-3-add-your-files",
+    "href": "resource/r-projects.html#step-3-add-your-files",
+    "title": "Setting Up an R Project",
+    "section": "Step 3: Add your files",
+    "text": "Step 3: Add your files\nSave your R script (.R) or Quarto document (.qmd) directly into this project folder. If the assignment provides data files, download them into the same folder.\nA typical assignment folder looks like this:\nassignment-01/\n├── assignment-01.Rproj    ← the project file (created automatically)\n├── assignment-01.R        ← your code\n└── data.csv               ← any data files\nFor Quarto assignments (Assignment 3 onward), it looks like this:\nassignment-03/\n├── assignment-03.Rproj\n├── assignment-03.qmd      ← your code + narrative\n├── assignment-03.html     ← rendered output (created when you render)\n└── data.csv",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#opening-an-existing-project",
+    "href": "resource/r-projects.html#opening-an-existing-project",
+    "title": "Setting Up an R Project",
+    "section": "Opening an existing project",
+    "text": "Opening an existing project\nTo come back to a project you’ve already created:\n\nOption A: Double-click the .Rproj file in Finder/File Explorer\nOption B: In RStudio, go to File &gt; Open Project… and navigate to the .Rproj file\nOption C: Click the project name in the upper-right corner of RStudio and select from your recent projects\n\n\n\n\n\n\n\nTipAlways open the project first\n\n\n\nIf you open an .R or .qmd file directly (by double-clicking it), RStudio might not set the working directory correctly. Always open the project first, then open your files from within it.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#common-mistakes",
+    "href": "resource/r-projects.html#common-mistakes",
+    "title": "Setting Up an R Project",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\n\n\n\n\n\n\nProblem\nFix\n\n\n\n\nread_csv(\"data.csv\") says file not found\nMake sure the data file is in your project folder, and that you opened the project (check upper-right corner)\n\n\nsetwd() in your script\nRemove it. R Projects handle this automatically. Scripts with setwd() break on other people’s computers.\n\n\nFiles scattered across Desktop, Downloads, etc.\nMove everything into one project folder",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
+    ]
+  },
+  {
+    "objectID": "resource/r-projects.html#one-project-per-assignment",
+    "href": "resource/r-projects.html#one-project-per-assignment",
+    "title": "Setting Up an R Project",
+    "section": "One project per assignment",
+    "text": "One project per assignment\nCreate a separate R Project for each assignment. This keeps your work organized and prevents files from different assignments from interfering with each other.",
+    "crumbs": [
+      "Resources",
+      "Guides",
+      "Setting Up an R Project"
     ]
   },
   {
@@ -2311,21 +2851,21 @@
     "href": "schedule.html#week-7",
     "title": "Schedule",
     "section": "Week 7: Data Wrangling",
-    "text": "Week 7: Data Wrangling\n\nSession 13: Strings, Factors & Text\nMonday, May 11\n\nBasic string cleaning: str_to_lower(), str_trim(), str_replace()\nWorking with categorical variables (factors)\nLight text analysis: tokenizing and counting open-ended survey responses\n\n📖 Read: R4DS Ch 14: Strings (sections 14.1–14.3) | R4DS Ch 16: Factors\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 6: Data Types & Wrangling\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 5: Exploratory Data Analysis — Due Sunday, May 10 at 11:59 PM\n\n\n\n\nSession 14: Joins\nWednesday, May 13\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins"
+    "text": "Week 7: Data Wrangling\n\nSession 13: Strings, Factors & Text\nMonday, May 11\n\nBasic string cleaning: str_to_lower(), str_trim(), str_replace()\nWorking with categorical variables (factors)\nLight text analysis: tokenizing and counting open-ended survey responses\n\n📖 Read: R4DS Ch 14: Strings (sections 14.1–14.3) | R4DS Ch 16: Factors\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 6: Data Types & Wrangling\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 5: Exploratory Data Analysis — Due Sunday, May 10 at 11:59 PM\n\n\n\n\nSession 14: Joins\nWednesday, May 13\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 7: Joins & Missing Data"
   },
   {
     "objectID": "schedule.html#week-8",
     "href": "schedule.html#week-8",
     "title": "Schedule",
     "section": "Week 8: Missing Data",
-    "text": "Week 8: Missing Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\nUse this time to work on your final project draft!\n\n\n\n\nSession 15: Missing Data\nWednesday, May 20\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 7: Joins & Missing Data\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 6: Data Types & Wrangling — Due Sunday, May 18 at 11:59 PM\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Draft Due — Working code, preliminary visualizations"
+    "text": "Week 8: Missing Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\nUse this time to work on your final project draft!\n\n\n\n\nSession 15: Missing Data\nWednesday, May 20\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 6: Data Types & Wrangling — Due Sunday, May 17 at 11:59 PM\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Draft Due — Working code, preliminary visualizations"
   },
   {
     "objectID": "schedule.html#week-9",
     "href": "schedule.html#week-9",
     "title": "Schedule",
     "section": "Week 9: Storytelling with Data",
-    "text": "Week 9: Storytelling with Data\n\nMonday, May 25\n\n\n\n\n\n\nWarningNo Class — Memorial Day\n\n\n\n\n\n\n\n\nSession 16: Storytelling with Data\nWednesday, May 27\nDrawing from Knaflic’s “Storytelling with Data”\n\nUnderstand the context — Audience, message, and the Big Idea\nChoose appropriate visuals — Matching plot types to data and questions\nEliminate clutter — Gestalt principles; strategic contrast\nFocus attention — Preattentive attributes (color, size, position)\nThink like a designer — Visual hierarchy; accessibility; colorblind-friendly palettes\n\nPlus: Data integrity, the replication crisis, and why reproducible workflows matter\n📖 Read: R4DS Ch 11: Communication\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 8: Storytelling Report\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 7: Joins & Missing Data — Due Sunday, May 25 at 11:59 PM"
+    "text": "Week 9: Storytelling with Data\n\nMonday, May 25\n\n\n\n\n\n\nWarningNo Class — Memorial Day\n\n\n\n\n\n\n\n\nSession 16: Storytelling with Data\nWednesday, May 27\nDrawing from Knaflic’s “Storytelling with Data”\n\nUnderstand the context — Audience, message, and the Big Idea\nChoose appropriate visuals — Matching plot types to data and questions\nEliminate clutter — Gestalt principles; strategic contrast\nFocus attention — Preattentive attributes (color, size, position)\nThink like a designer — Visual hierarchy; accessibility; colorblind-friendly palettes\n\nPlus: Data integrity, the replication crisis, and why reproducible workflows matter\n📖 Read: R4DS Ch 11: Communication\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 8: Storytelling Report\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 7: Joins & Missing Data — Due Sunday, May 24 at 11:59 PM"
   },
   {
     "objectID": "schedule.html#week-10",
@@ -2339,20 +2879,20 @@
     "href": "schedule.html#finals-week",
     "title": "Schedule",
     "section": "Finals Week",
-    "text": "Finals Week\n\n\n\n\n\n\nWarning📝 Final Presentations\n\n\n\n5-minute project presentations (date/time TBD based on finals schedule)"
+    "text": "Finals Week\n\nWednesday, June 10\n\n\n\n\n\n\nWarning📝 Final Presentations Due\n\n\n\n5-minute recorded video presentations — due Wednesday, June 10 at 11:59 PM on Canvas"
   },
   {
     "objectID": "schedule.html#assignment-summary",
     "href": "schedule.html#assignment-summary",
     "title": "Schedule",
     "section": "Assignment Summary",
-    "text": "Assignment Summary\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1\nGetting Started\nWed Apr 1\nSun Apr 5\n\n\n2\nData Transformation\nWed Apr 8\nSun Apr 12\n\n\n3\nTidying & Import\nWed Apr 15\nSun Apr 19\n\n\n4\nVisualization Deep Dive\nWed Apr 22\nSun Apr 26\n\n\n5\nExploratory Data Analysis\nWed Apr 29\nSun May 3\n\n\n6\nData Types\nWed May 6\nSun May 10\n\n\n7\nJoins & Missing Data\nWed May 13\nSun May 18\n\n\n8\nReproducible Report\nWed May 27\nSun May 31"
+    "text": "Assignment Summary\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1\nGetting Started\nWed Apr 1\nSun Apr 5\n\n\n2\nData Transformation\nWed Apr 8\nSun Apr 12\n\n\n3\nTidying, Import & Quarto\nMon Apr 20\nSun Apr 26\n\n\n4\nVisualization Deep Dive\nMon Apr 27\nSun May 3\n\n\n5\nExploratory Data Analysis\nMon May 4\nSun May 10\n\n\n6\nData Types & Wrangling\nMon May 11\nSun May 17\n\n\n7\nJoins & Missing Data\nWed May 13\nSun May 24\n\n\n8\nStorytelling Report\nWed May 27\nSun May 31"
   },
   {
     "objectID": "schedule.html#final-project-milestones",
     "href": "schedule.html#final-project-milestones",
     "title": "Schedule",
     "section": "Final Project Milestones",
-    "text": "Final Project Milestones\n\n\n\nMilestone\nDue Date\n\n\n\n\nProposal\nSession 10 (Apr 29)\n\n\nDraft\nSession 15 (May 20)\n\n\nFinal Report\nSession 18 (Jun 3)\n\n\nPresentation\nFinals Week"
+    "text": "Final Project Milestones\n\n\n\nMilestone\nDue Date\n\n\n\n\nProposal\nSession 10 (Apr 29)\n\n\nDraft\nSession 15 (May 20)\n\n\nFinal Report\nSession 18 (Jun 3)\n\n\nPresentation\nWed Jun 10"
   }
 ]
