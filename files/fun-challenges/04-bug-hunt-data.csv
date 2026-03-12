@@ -4,7 +4,7 @@ id,department,satisfaction,completed
 3,Psychology,7,TRUE
 4,Psychology,4,TRUE
 5,Psychology,6,TRUE
-6,Psychology,5,TRUE
+6,Psychology,NA,TRUE
 7,Biology,4,TRUE
 8,Biology,3,TRUE
 9,Biology,5,TRUE
@@ -15,7 +15,7 @@ id,department,satisfaction,completed
 14,Sociology,6,TRUE
 15,Sociology,5,TRUE
 16,Sociology,7,TRUE
-17,Sociology,6,TRUE
+17,Sociology,NA,TRUE
 18,Sociology,4,TRUE
 19,English,3,TRUE
 20,English,4,TRUE
