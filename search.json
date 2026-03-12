@@ -2623,6 +2623,18 @@
     ]
   },
   {
+    "objectID": "resource/index.html#session-handouts",
+    "href": "resource/index.html#session-handouts",
+    "title": "Resources",
+    "section": "Session Handouts",
+    "text": "Session Handouts\nPrintable reference sheets for each class session — key functions, syntax, and tips on one page.\n\nWeeks 1–3Weeks 4–6Weeks 7–10Other Handouts\n\n\n\n\n\nSession\nHandout\n\n\n\n\n2: Your First Visualization\nPDF\n\n\n3: Data Transformation I\nPDF\n\n\n4: Data Transformation II\nPDF\n\n\n5: Data Tidying\nPDF\n\n\n6: Data Import\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n7: Quarto & Reproducibility\nPDF\n\n\n8: Layers & Aesthetics\nPDF\n\n\n9: Perception & Design\nPDF\n\n\n10: EDA — Variation\nPDF\n\n\n11: EDA — Covariation\nPDF\n\n\n12: Data Types\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n13: Strings, Factors & Text\nPDF\n\n\n14: Joins\nPDF\n\n\n15: Missing Data\nPDF\n\n\n16: Storytelling with Data\nPDF\n\n\n17: Correlation & Regression\nPDF\n\n\n18: Putting It All Together\nPDF\n\n\n\n\n\n\n\n\nHandout\nDescription\n\n\n\n\nAPA Figure Guidelines\nFormatting figures for journal submissions\n\n\nData Visualization Principles\nKey design principles at a glance",
+    "crumbs": [
+      "Resources",
+      "Overview",
+      "Resources"
+    ]
+  },
+  {
     "objectID": "resource/index.html#course-textbook",
     "href": "resource/index.html#course-textbook",
     "title": "Resources",
