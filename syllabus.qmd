@@ -123,7 +123,7 @@ Short, focused exercises that reinforce each session's content. These are due **
 
 ### Reading Quizzes (15%)
 
-Each week, you'll complete a brief Canvas quiz covering that week's assigned readings. Quizzes are due **Tuesday at 11:59 PM** and cover readings for both Monday and Wednesday sessions. There are 10 quizzes total (one per week).
+Each week, you'll complete a brief Canvas quiz covering that week's assigned readings. Quizzes are due **Sunday at 11:59 PM** and cover readings for both Monday and Wednesday sessions. There are 10 quizzes total (one per week).
 
 Each quiz draws 5 random questions from a larger question bank. You can take each quiz as many times as you want — your **best score** counts. The goal is to make sure you've engaged with the readings before class, and unlimited attempts mean there's no reason not to keep trying until you've mastered the material.
 

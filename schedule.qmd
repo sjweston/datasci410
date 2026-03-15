@@ -14,7 +14,7 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 ::: {.callout-note}
 ## Schedule Notes
-- All readings should be completed **before** the class session
+- Readings can be completed before or after the class session — quizzes are due **Sunday at 11:59 PM**
 - R4DS = [R for Data Science (2nd ed.)](https://r4ds.hadley.nz/)
 - 📋 = Assignment due (Sundays at 11:59 PM) | 📝 = Project milestone
 - Schedule is subject to change based on course needs

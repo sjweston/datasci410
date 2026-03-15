@@ -34,7 +34,7 @@ dept_means <- dept_means |>
   arange(desc(mean_satisfaction))
 
 # Make a bar chart
-ggplot(dept_means, aes(x = department, y = mean_satisfaction)) +
+ggplot(dept_means, aes(x = department, y = mean_sat)) +
   geom_bar() +
   labs(
     title = "Mean Satisfaction by Department"

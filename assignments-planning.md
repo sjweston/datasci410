@@ -249,22 +249,22 @@ Each session, students complete a brief in-class exercise with a partner. Graded
 
 ## Reading Quizzes
 
-One quiz per week (10 total), administered on Canvas. Each quiz draws 5 random questions from a 50-question bank. Due **Tuesday at 11:59 PM** each week. Graded on completion (full credit for finishing), but the team with the highest average earns a challenge point.
+One quiz per week (10 total), administered on Canvas. Each quiz draws 5 random questions from a 50-question bank. Due **Sunday at 11:59 PM** each week. Graded on completion (full credit for finishing), but the team with the highest average earns a challenge point.
 
 Question banks are in `quizzes/` with QTI packages (.zip) for Canvas import.
 
 | Quiz | Week | Reading | Due |
 |------|------|---------|-----|
-| 1 | 1 | R4DS Ch 1, 2, 6 | Tue Mar 31 |
-| 2 | 2 | R4DS Ch 3, 4 | Tue Apr 7 |
-| 3 | 3 | R4DS Ch 5, 7, 20 | Tue Apr 14 |
-| 4 | 4 | R4DS Ch 28, 9 | Tue Apr 21 |
-| 5 | 5 | R4DS Ch 10 (§10.1–10.4), perception | Tue Apr 28 |
-| 6 | 6 | R4DS Ch 10 (§10.5–10.6), 12, 13 | Tue May 5 |
-| 7 | 7 | R4DS Ch 14 (§14.1–14.3), 16, 19 | Tue May 12 |
-| 8 | 8 | R4DS Ch 18 | Tue May 19 |
-| 9 | 9 | R4DS Ch 11 | Tue May 26 |
-| 10 | 10 | R4DS Ch 8, correlation & regression | Tue Jun 2 |
+| 1 | 1 | R4DS Ch 1, 2, 6 | Sun Apr 5 |
+| 2 | 2 | R4DS Ch 3, 4 | Sun Apr 12 |
+| 3 | 3 | R4DS Ch 5, 7, 20 | Sun Apr 19 |
+| 4 | 4 | R4DS Ch 28, 9 | Sun Apr 26 |
+| 5 | 5 | R4DS Ch 10 (§10.1–10.4), perception | Sun May 3 |
+| 6 | 6 | R4DS Ch 10 (§10.5–10.6), 12, 13 | Sun May 10 |
+| 7 | 7 | R4DS Ch 14 (§14.1–14.3), 16, 19 | Sun May 17 |
+| 8 | 8 | R4DS Ch 18 | Sun May 24 |
+| 9 | 9 | R4DS Ch 11 | Sun May 31 |
+| 10 | 10 | R4DS Ch 8, correlation & regression | Sun Jun 7 |
 
 ---
 

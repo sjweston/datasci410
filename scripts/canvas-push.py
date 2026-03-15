@@ -349,7 +349,7 @@ syllabus_body = """
 <p>Short, focused exercises reinforcing each session\u2019s content. Due <strong>Sundays at 11:59 PM</strong>. Designed to take 1\u20132 hours outside of class.</p>
 
 <h3>Reading Quizzes (15%)</h3>
-<p>Weekly Canvas quizzes covering assigned readings. Due <strong>Tuesdays at 11:59 PM</strong>. Each quiz draws 5 random questions from a larger bank. <strong>Unlimited attempts; best score counts.</strong></p>
+<p>Weekly Canvas quizzes covering assigned readings. Due <strong>Sundays at 11:59 PM</strong>. Each quiz draws 5 random questions from a larger bank. <strong>Unlimited attempts; best score counts.</strong></p>
 
 <h3>In-Class Participation (15%)</h3>
 <p>During each class, you\u2019ll work with a partner on coding exercises. Graded on completion and good-faith effort, not correctness.</p>

@@ -124,7 +124,7 @@ Students fixate on grading — spend ~3 minutes walking through this clearly. Em
 
 ## Reading quizzes
 
-Each week, a brief Canvas quiz on that week's readings. Due **Tuesday at 11:59 PM**.
+Each week, a brief Canvas quiz on that week's readings. Due **Sunday at 11:59 PM**.
 
 . . .
 

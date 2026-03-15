@@ -35,9 +35,9 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 - [x] Create all 8 assignment shells on Canvas (due dates and submission types configured)
 - [ ] Create rubrics for each assignment
 
-### Quizzes (10 total — one per week, due Tuesday at 11:59 PM)
+### Quizzes (10 total — one per week, due Sunday at 11:59 PM)
 - [x] Create all 10 reading quiz shells on Canvas (one per week, Weeks 1–10)
-- [x] Set due dates: each Tuesday at 11:59 PM (Tue Mar 31, Apr 7, Apr 14, Apr 21, Apr 28, May 5, May 12, May 19, May 26, Jun 2)
+- [ ] Set due dates: each Sunday at 11:59 PM (Sun Apr 5, Apr 12, Apr 19, Apr 26, May 3, May 10, May 17, May 24, May 31, Jun 7)
 - [x] Configure quiz settings — best score (unlimited attempts, 5 random questions from bank, highest score counts)
 - [x] Build question bank for each quiz → `quizzes/` directory, 50 MC questions per quiz + QTI packages (.zip) for Canvas import
   - [x] Quiz 1: R4DS Ch 1, 2, 6 (85 questions — expanded from original 50)
