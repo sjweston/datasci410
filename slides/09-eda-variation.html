@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="09-eda-variation_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
+  <link rel="stylesheet" href="09-eda-variation_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
   <link href="09-eda-variation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -502,7 +502,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-5-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Histogram of participant ages with 5-year bins showing a strong right skew, with most participants in their teens to thirties and a long tail extending past age 60." width="960"></p>
 </figure>
 </div>
 </div>
@@ -510,7 +510,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <h2>Choosing binwidth</h2>
 <p>The binwidth matters a lot:</p>
 
-<img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-6-1.png" width="1152" class="r-stretch"><p>There’s no “right” answer — try a few and pick the one that shows the shape clearly.</p>
+<img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Three histograms of age side by side comparing binwidths. Binwidth 1 is noisy with erratic spikes, binwidth 5 clearly shows the right-skewed shape, and binwidth 20 oversimplifies into just a few bars that hide the skew." width="1152" class="r-stretch"><p>There’s no “right” answer — try a few and pick the one that shows the shape clearly.</p>
 <aside class="notes">
 <p>Spend ~2 minutes comparing the three panels. Point to specific differences: binwidth=1 shows noisy spikes that are just sampling variability, binwidth=20 hides the right skew entirely. A common student question: “Which binwidth should I use on the assignment?” Answer: try a few, pick the one that shows the overall shape without too much noise. There is no single correct answer.</p>
 <style type="text/css">
@@ -557,7 +557,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-7-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Density plot of participant ages showing a smooth right-skewed curve that peaks around age 20 and gradually tapers off toward age 80." width="960"></p>
 </figure>
 </div>
 </div>
@@ -596,7 +596,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items." width="960"></p>
 </figure>
 </div>
 </div>
@@ -620,7 +620,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" width="768"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of gender distribution showing roughly twice as many female participants as male participants in the BFI sample." width="768"></p>
 </figure>
 </div>
 </div>
@@ -704,7 +704,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers." width="960"></p>
 </figure>
 </div>
 </div>
@@ -740,7 +740,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers." width="960"></p>
 </figure>
 </div>
 </div>
@@ -924,7 +924,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1004,7 +1004,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
 </figure>
 </div>
 </div>

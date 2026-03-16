@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="17-correlation-regression_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
+  <link rel="stylesheet" href="17-correlation-regression_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
   <link href="17-correlation-regression_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="17-correlation-regression_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="17-correlation-regression_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -229,7 +229,7 @@ Dr.&nbsp;Sara Weston
 <section id="youve-been-eyeballing-patterns-for-16-sessions" class="slide level2">
 <h2>You’ve been eyeballing patterns for 16 sessions</h2>
 
-<img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-2-1.png" width="768" class="r-stretch"><div class="fragment">
+<img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-2-1.png" alt="Scatterplot showing a positive trend between daily social media use (hours) and anxiety scores (GAD-7), with points loosely clustering upward from left to right." width="768" class="r-stretch"><div class="fragment">
 <p>Today you learn to put a <strong>number</strong> on that pattern.</p>
 <aside class="notes">
 <p>Spend about 2 minutes here. Let the plot sit for a moment before advancing. Ask the class: “What do you see? Is there a pattern?” Let a few students answer. The point is they can already detect the relationship visually – today’s tools just formalize what their eyes already know.</p>
@@ -249,7 +249,7 @@ Dr.&nbsp;Sara Weston
 <section id="the-same-plot-with-a-number" class="slide level2">
 <h2>The same plot — with a number</h2>
 
-<img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-3-1.png" width="768" class="r-stretch"><p><strong>Correlation</strong> measures the strength and direction. <strong>Regression</strong> draws the line.</p>
+<img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Scatterplot of social media use versus anxiety with a blue trend line and correlation coefficient annotation, showing a moderate positive relationship." width="768" class="r-stretch"><p><strong>Correlation</strong> measures the strength and direction. <strong>Regression</strong> draws the line.</p>
 <aside class="notes">
 <p>This slide is the thesis for the whole session. Emphasize the distinction: correlation gives a single number summarizing the relationship; regression gives an equation that lets you predict. Both tell you the same story in different ways.</p>
 <style type="text/css">
@@ -398,7 +398,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-6-1.png" width="960"></p>
+<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Scatterplot with a linear trend line and confidence band showing that higher social media use is associated with higher GAD-7 anxiety scores." width="960"></p>
 </figure>
 </div>
 </div>
@@ -496,7 +496,7 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-9-1.png" width="576"></p>
+<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Heatmap of a correlation matrix for four variables (social media hours, GAD-7, PHQ-9, therapy hours) with color ranging from red (negative) to blue (positive) and correlation values displayed in each cell." width="576"></p>
 </figure>
 </div>
 </div>
@@ -793,7 +793,7 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Scatterplot with regression line showing social media use predicts higher anxiety, with slope and R-squared values displayed in the subtitle." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1004,6 +1004,57 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 <li>Create a scatterplot with the regression line and report the key statistics in the subtitle</li>
 <li><strong>Bonus:</strong> Use <code>broom::tidy()</code> to create a clean results table</li>
 </ol>
+</section></section>
+<section>
+<section id="fun-challenge-10-the-final-prediction" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Fun Challenge 10: The Final Prediction</h1>
+
+</section>
+<section id="can-you-eyeball-a-correlation" class="slide level2">
+<h2>Can you eyeball a correlation?</h2>
+<aside class="notes">
+<p>Transition: “Before we wrap up, let’s put your new correlation skills to the test.” Pull up the challenge image (or have it ready on Canvas). Give teams ~5 minutes to discuss and submit. This is meant to be quick and fun — no code, no calculations, just visual intuition. Remind them the deadline is tomorrow (Tuesday at 11:59 PM) so they should submit now while they’re together.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Look at this scatterplot. The axis labels and numbers have been removed — all you have are the points.</p>
+
+<img data-src="../files/fun-challenges/10-prediction.png" class="r-stretch quarto-figure-center"><p class="caption">The Final Prediction</p></section>
+<section id="your-team-predicts" class="slide level2">
+<h2>Your team predicts:</h2>
+<ol type="1">
+<li>The <strong>correlation coefficient</strong> <em>r</em> (to one decimal place)</li>
+<li>The <strong>direction</strong> of the relationship (positive, negative, or none)</li>
+<li>The <strong>R-squared</strong> value (to one decimal place)</li>
+</ol>
+<div class="fragment">
+<p>The actual values will be revealed on Wednesday. The team closest to the true values earns a <strong>bonus point</strong>.</p>
+<p><strong>Submit on Canvas by tomorrow (Tuesday) at 11:59 PM.</strong></p>
+</div>
+<div class="fragment">
+<p>Take 5 minutes now with your team to discuss and submit.</p>
+<aside class="notes">
+<p>Let teams huddle for ~5 minutes. Walk around and listen to their reasoning — it’s a great window into whether they’ve internalized what r values “look like.” If a team asks whether the relationship is strong or weak, redirect: “That’s exactly what you’re predicting.” Remind them: one submission per team, due tomorrow night. The actual values get revealed in Session 18.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
