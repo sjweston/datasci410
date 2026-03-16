@@ -203,25 +203,25 @@ format:
 
 Given the April 24 deadline (~5 weeks away):
 
-**Week 1: Quick structural fixes**
-- [ ] Add `lang: en` to `_quarto.yml` (1 minute)
-- [ ] Add `prefers-reduced-motion` media query to `slides/custom.scss` (2 minutes)
-- [ ] Add `:focus-visible` styles to `slides/custom.scss` (2 minutes)
-- [ ] Fix orange background contrast (choose approach, update `slides/custom.scss` or individual files)
-- [ ] Fix sidebar active link color in `html/custom.scss`
-- [ ] Add alt text to 6 markdown images in slides
+**Structural fixes (completed March 16, 2026):**
+- [x] Add `lang: en` to `_quarto.yml`
+- [x] Add `prefers-reduced-motion` media query to `slides/custom.scss`
+- [x] Add `:focus-visible` styles to `slides/custom.scss`
+- [x] Fix orange background contrast (white text on `#e67e22` via `slides/custom.scss`)
+- [x] Fix navbar active link color in `html/custom.scss` (`#FFC361` → `#C99A30`)
+- [x] Fix sidebar active link color in `html/custom.scss` (`$yellow` → `#b87400`)
+- [x] Add alt text to 6 markdown images in slides (01, 11, 15, 18)
+- [x] Fix heading hierarchy skip in `slides/01-intro-setup.qmd` (`###` → `##`)
+- [x] Add accessibility conventions to `CLAUDE.md`
 
-**Weeks 2–4: fig-alt on all plots (biggest task)**
-- [ ] `02-first-visualization.qmd` (~22 plots)
-- [ ] `07-layers-aesthetics.qmd` (~15 plots)
-- [ ] `08-perception-design.qmd` (~12 plots)
-- [ ] `09-eda-variation.qmd` (~18 plots)
-- [ ] `10-eda-covariation.qmd` (~15 plots)
-- [ ] `17-correlation-regression.qmd` (~8 plots)
-- [ ] All remaining slide decks (03, 04, 05, 06, 11, 12, 13, 14, 15, 16, 18)
+**fig-alt on all plots (completed March 16, 2026):**
+- [x] 115 `fig-alt` descriptions added across 14 slide decks
+- [x] 3 decks confirmed to have no plot-producing chunks (06, 11, 16)
 
-**Week 5: Verification**
-- [ ] Verify Font Awesome icons render with `aria-hidden="true"` in HTML output
+**Verification (completed March 16, 2026):**
+- [x] Font Awesome icons confirmed to render with `aria-hidden="true"` (Quarto handles automatically)
+
+**Remaining verification (do before April 24):**
 - [ ] Run automated accessibility checker (e.g., WAVE, axe, pa11y) on rendered site
 - [ ] Spot-check keyboard navigation through slides
 - [ ] Verify PDF exports (if distributed) are tagged/accessible

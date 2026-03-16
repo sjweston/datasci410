@@ -649,7 +649,7 @@ The typo example (`maen` instead of `mean`) is intentional — it shows the most
 
 ---
 
-### The bicycle vs. the motorcycle
+## The bicycle vs. the motorcycle
 
 Steve Jobs called the computer a **"bicycle for the mind"** — it amplifies your pedaling, but *you* provide the balance and direction.
 
