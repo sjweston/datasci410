@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="13-joins_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
+  <link rel="stylesheet" href="13-joins_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
   <link href="13-joins_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="13-joins_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="13-joins_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -480,7 +480,7 @@ Dr.&nbsp;Sara Weston
 <section id="visualizing-left_join" class="slide level2">
 <h2>Visualizing left_join()</h2>
 
-<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" alt="Diagram showing left_join keeps all three rows from the left table (artists) and matches two rows from the right table (grammys_2026). The unmatched right-table row (Billie Eilish) is dimmed, indicating it is excluded." width="672"></section>
 <section id="right_join-the-mirror" class="slide level2">
 <h2>right_join(): The mirror</h2>
 <p>Keep <strong>all</strong> rows from the right table:</p>
@@ -504,7 +504,7 @@ Dr.&nbsp;Sara Weston
 <section id="visualizing-right_join" class="slide level2">
 <h2>Visualizing right_join()</h2>
 
-<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-11-1.png" class="quarto-figure quarto-figure-center r-stretch" alt="Diagram showing right_join keeps all three rows from the right table (grammys_2026) and matches two rows from the left table (artists). The unmatched left-table row (Taylor Swift) is dimmed, indicating it is excluded." width="672"></section>
 <section id="inner_join-only-matches" class="slide level2">
 <h2>inner_join(): Only matches</h2>
 <p>Keep <strong>only</strong> rows that exist in both tables:</p>
@@ -543,7 +543,7 @@ Dr.&nbsp;Sara Weston
 <section id="visualizing-inner_join" class="slide level2">
 <h2>Visualizing inner_join()</h2>
 
-<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-13-1.png" class="quarto-figure quarto-figure-center r-stretch" alt="Diagram showing inner_join keeps only the two rows that match in both tables (Bad Bunny and Kendrick Lamar). Unmatched rows on both sides are dimmed, indicating they are excluded." width="672"></section>
 <section id="full_join-everything" class="slide level2">
 <h2>full_join(): Everything</h2>
 <p>Keep <strong>all</strong> rows from both tables:</p>
@@ -581,24 +581,24 @@ Dr.&nbsp;Sara Weston
 <section id="visualizing-full_join" class="slide level2">
 <h2>Visualizing full_join()</h2>
 
-<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" width="672"></section>
+<img data-src="13-joins_files/figure-revealjs/unnamed-chunk-15-1.png" class="quarto-figure quarto-figure-center r-stretch" alt="Diagram showing full_join keeps all rows from both tables. All tiles are fully opaque, indicating no rows are excluded regardless of whether they match." width="672"></section>
 <section id="join-types-at-a-glance" class="slide level2">
 <h2>Join types at a glance</h2>
 <div class="cell quarto-layout-panel" data-layout-ncol="2">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-1.png" width="384"></p>
+<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Venn diagram for inner_join showing only the overlapping region shaded, representing rows that exist in both tables." width="384"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-2.png" width="384"></p>
+<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-2.png" alt="Venn diagram for left_join showing the entire left circle shaded, representing all rows from the left table plus matches from the right." width="384"></p>
 </div>
 </div>
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-3.png" width="384"></p>
+<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-3.png" alt="Venn diagram for right_join showing the entire right circle shaded, representing all rows from the right table plus matches from the left." width="384"></p>
 </div>
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
-<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-4.png" width="384"></p>
+<p><img data-src="13-joins_files/figure-revealjs/unnamed-chunk-16-4.png" alt="Venn diagram for full_join showing both circles entirely shaded, representing all rows from both tables." width="384"></p>
 </div>
 </div>
 </div>

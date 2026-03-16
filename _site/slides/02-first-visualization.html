@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="02-first-visualization_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
+  <link rel="stylesheet" href="02-first-visualization_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
   <link href="02-first-visualization_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="02-first-visualization_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="02-first-visualization_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -283,7 +283,7 @@ Dr.&nbsp;Sara Weston
 <section id="but-look-at-the-plots" class="slide level2">
 <h2>But look at the plots!</h2>
 
-<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"><p><strong>Always visualize your data before running statistics.</strong></p>
+<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Four scatterplots of Anscombe's Quartet, each with an identical linear regression line but very different data patterns — one linear, one curved, one with an outlier, and one clustered with a single extreme point." width="960" class="r-stretch"><p><strong>Always visualize your data before running statistics.</strong></p>
 <aside class="notes">
 <p>This is the payoff. Let it land. Point out that Set 1 is a nice linear relationship, Set 2 is a curve, Set 3 has an outlier pulling the stats, and Set 4 is clustered with one extreme point. Emphasize: “This is why we visualize before we analyze.” This connects back to the replication crisis discussion from Session 1 — researchers who only look at numbers miss things.</p>
 <style type="text/css">
@@ -301,7 +301,7 @@ Dr.&nbsp;Sara Weston
 <section id="the-datasaurus-dozen" class="slide level2">
 <h2>The datasaurus dozen</h2>
 
-<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" width="960" class="r-stretch"><aside class="notes">
+<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Two scatterplots side by side — one showing randomly scattered points and the other showing points forming a parabolic curve — demonstrating that different patterns can produce similar summary statistics." width="960" class="r-stretch"><aside class="notes">
 <p>Brief slide — just reinforce the Anscombe point with a more dramatic example. Mention that the original Datasaurus Dozen includes datasets shaped like a star, a dinosaur, etc., all with the same summary statistics. You can Google “datasaurus dozen” to show students the full set if there’s time, but don’t linger. Transition: “So visualization matters. Now let’s learn the tool we’ll use to make them.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -435,7 +435,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" width="768"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Scatterplot of engine displacement versus highway miles per gallon showing a negative curved relationship — cars with larger engines tend to get worse fuel economy." width="768"></p>
 </figure>
 </div>
 </div>
@@ -525,7 +525,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Scatterplot of engine displacement versus highway mpg with points colored by vehicle class, showing that compact and subcompact cars cluster at high mpg and low displacement while SUVs and pickups cluster at low mpg and high displacement." width="960"></p>
 </figure>
 </div>
 </div>
@@ -542,7 +542,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Scatterplot of engine displacement versus highway mpg where point size represents number of cylinders — larger points (more cylinders) appear at higher displacement and lower mpg." width="960"></p>
 </figure>
 </div>
 </div>
@@ -558,7 +558,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Scatterplot of engine displacement versus highway mpg where point transparency represents number of cylinders — points with more cylinders are more opaque, appearing at higher displacement values." width="960"></p>
 </figure>
 </div>
 </div>
@@ -575,7 +575,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Scatterplot of engine displacement versus highway mpg where point shape represents drive type (front, rear, 4-wheel) — front-wheel-drive cars tend to have smaller engines and better fuel economy." width="960"></p>
 </figure>
 </div>
 </div>
@@ -591,7 +591,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Scatterplot of engine displacement versus highway mpg with points colored by vehicle class and shaped by drive type, demonstrating how two categorical variables can be encoded simultaneously." width="960"></p>
 </figure>
 </div>
 </div>
@@ -633,7 +633,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-17-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Scatterplot of engine displacement versus highway mpg with all points colored steel blue, sized larger, and made semi-transparent — demonstrating how to set aesthetic values manually rather than mapping them to data." width="960"></p>
 </figure>
 </div>
 </div>
@@ -663,7 +663,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-18-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Scatterplot where all points are salmon-red instead of blue, with a legend showing a single category labeled 'blue' — illustrating the common mistake of placing a color name inside aes() where ggplot treats it as a categorical variable." width="960"></p>
 </figure>
 </div>
 </div>
@@ -796,7 +796,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-20-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Scatterplot of engine displacement versus highway mpg with a smoothed (loess) trend line and gray confidence band showing a negative curved relationship that levels off around 5 liters of displacement." width="960"></p>
 </figure>
 </div>
 </div>
@@ -813,7 +813,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-21-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Scatterplot of engine displacement versus highway mpg with a straight linear regression line and confidence band showing a clear negative linear trend — highway mpg decreases as engine size increases." width="960"></p>
 </figure>
 </div>
 </div>
@@ -844,7 +844,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-22-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Scatterplot of engine displacement versus highway mpg colored by drive type (front, rear, 4-wheel) with separate linear trend lines for each group, showing that all three drive types have negative trends but at different levels." width="960"></p>
 </figure>
 </div>
 </div>
@@ -861,7 +861,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-23-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-23-1.png" alt="Bar chart showing the count of vehicles in each car class — SUVs are the most common category with over 60 vehicles, followed by compact and midsize, while 2-seaters are the least common." width="960"></p>
 </figure>
 </div>
 </div>
@@ -878,7 +878,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-24-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Histogram of highway miles per gallon with steel blue bars and white borders, showing a roughly bimodal distribution with peaks around 17 and 27 mpg." width="960"></p>
 </figure>
 </div>
 </div>
@@ -907,7 +907,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-25-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Boxplots comparing highway mpg across seven vehicle classes — compact and subcompact cars have the highest median highway mpg while pickups and SUVs have the lowest, with several outliers visible." width="960"></p>
 </figure>
 </div>
 </div>
@@ -944,7 +944,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-26-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Scatterplot of engine displacement versus highway mpg split into seven small panels (one per vehicle class) using facet_wrap, making it easy to see that each class occupies a distinct region of engine size and fuel efficiency." width="960"></p>
 </figure>
 </div>
 </div>
@@ -989,7 +989,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-28-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Scatterplot of engine displacement versus highway mpg arranged in a grid with drive type as rows and number of cylinders as columns — some panels are empty (e.g., no rear-wheel-drive 4-cylinder cars), revealing which combinations of drive type and cylinder count exist." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1039,7 +1039,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-29-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Labeled scatterplot titled 'Fuel Efficiency vs Engine Size' with subtitle, descriptive axis labels, and a legend for vehicle class — demonstrating how labs() makes a plot publication-ready." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1057,14 +1057,14 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-30-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-30-1.png" alt="Scatterplot of engine displacement versus highway mpg colored by vehicle class using theme_minimal, which removes the gray background and gives the plot a clean, modern appearance." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="built-in-themes" class="slide level2">
 <h2>Built-in themes</h2>
 
-<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-31-1.png" width="1152" class="r-stretch"></section>
+<img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-31-1.png" alt="Four versions of the same scatterplot displayed in a 2-by-2 grid, each using a different built-in theme — theme_gray (default with gray background), theme_bw (black and white), theme_minimal (no background), and theme_classic (no gridlines, just axes)." width="1152" class="r-stretch"></section>
 <section id="saving-plots" class="slide level2">
 <h2>Saving plots</h2>
 <p>Use <code>ggsave()</code> to save your plot:</p>
@@ -1128,7 +1128,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-33-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-33-1.png" alt="Side-by-side boxplots comparing anxiety scores (BAI) between a Control group and a Treatment group — the Treatment group has a visibly lower median anxiety score, demonstrating the same ggplot template applied to psychology data." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1159,7 +1159,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-34-1.png" width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-34-1.png" alt="A polished scatterplot showing fuel efficiency decreasing with engine size, with points colored by vehicle class, a black linear trend line with confidence band, descriptive title and subtitle, proper axis labels, a caption citing the EPA data source, and a minimal theme." width="960"></p>
 </figure>
 </div>
 </div>

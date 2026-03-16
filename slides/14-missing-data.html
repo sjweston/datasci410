@@ -95,7 +95,7 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="14-missing-data_files/libs/revealjs/dist/theme/quarto-6554b76f57b009ba8930a87889cf9104.css">
+  <link rel="stylesheet" href="14-missing-data_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
   <link href="14-missing-data_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="14-missing-data_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="14-missing-data_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
@@ -495,7 +495,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(survey)</span></code></pre></div>
 
 </div>
-<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><aside class="notes">
+<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Heatmap showing the pattern of missing values across all variables in the survey data. Each row is a participant and each column is a variable, with missing cells highlighted to reveal where data gaps occur." width="960" class="r-stretch"><aside class="notes">
 <p>The naniar package is optional — students do not need to install it for assignments. But the vis_miss() plot is a great diagnostic tool worth showing. Each column is a variable, each row is a participant, and missing cells are colored. This gives an immediate visual sense of where the holes are. If naniar is not installed on your machine, you can skip this live and just show the rendered output.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -516,7 +516,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_upset</span>(survey)</span></code></pre></div>
 
 </div>
-<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-13-1.png" width="960" class="r-stretch"><div class="fragment">
+<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Upset plot showing which combinations of variables have missing values in the same rows, revealing whether missingness clusters across specific variable pairs." width="960" class="r-stretch"><div class="fragment">
 <p>This shows which combinations of variables are missing in the same rows.</p>
 </div>
 </section></section>

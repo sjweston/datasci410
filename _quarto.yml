@@ -17,10 +17,10 @@ execute:
 
 bibliography: files/bib/references.bib
 csl: files/bib/apa.csl
-description-meta: "{{< var course.description >}}"
+description-meta: "An introduction to data science tools and techniques for psychology majors, covering data visualization, transformation, tidying, and communication using R and the tidyverse."
 
 website:
-  title: "{{< var course.number >}}: {{< var course.title >}}"
+  title: "PSY 410/510: Data Science for Psychology"
   site-url: https://sarajweston.com/datasci410/
 
   favicon: "/files/icon-512.png"
