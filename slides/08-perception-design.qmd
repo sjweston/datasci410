@@ -50,6 +50,7 @@ This first block (~25 min) covers perception, color theory, and decluttering. Th
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
+#| fig-alt: "Deliberately poorly designed bar chart with red and green bars, tiny text, yellow background, heavy gridlines, and an uninformative title — used as a 'what's wrong' warm-up exercise."
 ggplot(reaction_data, aes(x = condition, y = rt, fill = condition)) +
   geom_bar(stat = "summary", fun = mean) +
   scale_fill_manual(values = c("Control" = "red", "Treatment" = "green")) +
@@ -95,6 +96,7 @@ This connects directly to psych content students may have seen in intro psych or
 #| echo: false
 #| fig-width: 12
 #| fig-height: 4
+#| fig-alt: "Three panel demonstration of preattentive processing: the left panel uses color to make red points pop among gray ones, the middle panel uses size to make two large points stand out, and the right panel uses position to isolate one outlier far from a cluster."
 
 # Color draws attention
 p1 <- tibble(x = 1:10, y = rnorm(10), highlight = c(rep("other", 7), rep("target", 3))) |>
@@ -137,6 +139,7 @@ The brain groups things automatically:
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
+#| fig-alt: "Scatterplot showing two visually distinct clusters of points separated by empty space, demonstrating the Gestalt principle of proximity — nearby points are perceived as belonging to the same group."
 # Proximity example
 tibble(
   x = c(1, 1.2, 1.1, 3, 3.2, 3.1),
@@ -177,6 +180,7 @@ This is a high-value slide — spend ~3 minutes here. The most common mistake: u
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
+#| fig-alt: "A row of ten tiles colored with the viridis sequential palette, transitioning smoothly from dark purple on the left to bright yellow on the right, illustrating how sequential palettes encode low-to-high values."
 tibble(x = 1:10, y = rep(1, 10), val = 1:10) |>
   ggplot(aes(x, y, fill = val)) +
   geom_tile(width = 0.9) +
@@ -192,6 +196,7 @@ tibble(x = 1:10, y = rep(1, 10), val = 1:10) |>
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
+#| fig-alt: "A row of eight tiles in distinct pastel colors from the ColorBrewer Set2 qualitative palette, showing how each category gets a visually distinguishable hue with no implied ordering."
 tibble(x = 1:8, y = rep(1, 8), cat = letters[1:8]) |>
   ggplot(aes(x, y, fill = cat)) +
   geom_tile(width = 0.9) +
@@ -229,6 +234,7 @@ scale_fill_manual(values = c("#0072B2", "#E69F00", "#009E73"))
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
+#| fig-alt: "Side-by-side comparison of two boxplots: the left uses red and green fills that are indistinguishable to colorblind viewers, while the right uses blue and orange fills that are accessible to virtually all viewers."
 
 p1 <- reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
@@ -267,6 +273,7 @@ ggplot2's default theme adds a lot of visual noise. Compare:
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
+#| fig-alt: "Side-by-side comparison of the same boxplot using ggplot2's default gray theme on the left versus the cleaner minimal theme on the right, showing how removing the gray background, heavy gridlines, and redundant legend reduces visual clutter."
 
 p1 <- reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
@@ -350,6 +357,7 @@ Think about: colors, legend, labels, theme, size mapping, and whether every aest
 ## Your turn: 10 minutes
 
 ```{r}
+#| fig-alt: "Deliberately cluttered scatterplot with red and green colors, points sized by a binary variable, redundant color and fill mappings, uninformative title, and the default gray theme — students are asked to redesign it."
 # The cluttered version — fix this!
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition, color = condition, size = accuracy)) +
@@ -403,6 +411,7 @@ This section (~10 min) is the second lecture block. It transitions from "how to 
 #| echo: false
 #| fig-width: 7
 #| fig-height: 4
+#| fig-alt: "Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 470 instead of 0, making a small ~40 ms difference appear dramatically large."
 # Bad: Truncated y-axis exaggerates difference
 reaction_data |>
   group_by(condition) |>
@@ -431,6 +440,7 @@ Students often ask: "But isn't it sometimes okay to not start at zero?" Good que
 #| echo: false
 #| fig-width: 7
 #| fig-height: 4
+#| fig-alt: "Boxplot with red and green fills, a yellow background, heavy gridlines, variable names as axis labels, and the uninformative title 'Boxplot' — demonstrating multiple common design mistakes at once."
 # Bad: Rainbow color + too many gridlines + no informative title
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = age_group)) +
@@ -454,6 +464,7 @@ reaction_data |>
 #| echo: false
 #| fig-width: 7
 #| fig-height: 4
+#| fig-alt: "Pie chart showing reaction times arbitrarily binned into Fast, Medium, and Slow categories, hiding the continuous distribution, individual observations, and any comparison between conditions."
 # Bad: Pie chart of continuous data categories
 reaction_data |>
   mutate(speed = case_when(

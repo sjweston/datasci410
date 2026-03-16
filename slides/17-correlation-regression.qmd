@@ -41,6 +41,7 @@ This session is a taste of modeling, not a stats unit. Set that expectation earl
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
+#| fig-alt: "Scatterplot showing a positive trend between daily social media use (hours) and anxiety scores (GAD-7), with points loosely clustering upward from left to right."
 set.seed(410)
 study_data <- tibble(
   participant_id = 1:120,
@@ -76,6 +77,7 @@ Spend about 2 minutes here. Let the plot sit for a moment before advancing. Ask 
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4
+#| fig-alt: "Scatterplot of social media use versus anxiety with a blue trend line and correlation coefficient annotation, showing a moderate positive relationship."
 r_val <- cor(study_data$hours_social_media, study_data$gad7_total)
 
 ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
@@ -150,6 +152,7 @@ Every time you wrote `geom_smooth(method = "lm")`, you were fitting a line throu
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot with a linear trend line and confidence band showing that higher social media use is associated with higher GAD-7 anxiety scores."
 ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", color = "steelblue") +
@@ -202,6 +205,7 @@ Point out two features: the diagonal of 1s (a variable always correlates perfect
 #| output-location: slide
 #| fig-width: 6
 #| fig-height: 5
+#| fig-alt: "Heatmap of a correlation matrix for four variables (social media hours, GAD-7, PHQ-9, therapy hours) with color ranging from red (negative) to blue (positive) and correlation values displayed in each cell."
 cor_matrix <- study_data |>
   select(hours_social_media, gad7_total, phq9_total, therapy_hours) |>
   cor(use = "complete.obs")
@@ -388,6 +392,7 @@ R-squared is intuitive for students if you frame it as a percentage. "Social med
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot with regression line showing social media use predicts higher anxiety, with slope and R-squared values displayed in the subtitle."
 ggplot(study_data, aes(x = hours_social_media, y = gad7_total)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", color = "steelblue") +

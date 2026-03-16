@@ -144,6 +144,7 @@ Run this live and walk through the output. Point out the NA counts in the summar
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Histogram of participant ages with 5-year bins showing a strong right skew, with most participants in their teens to thirties and a long tail extending past age 60."
 bfi |>
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
@@ -167,6 +168,7 @@ The binwidth matters a lot:
 #| echo: false
 #| fig-width: 12
 #| fig-height: 4
+#| fig-alt: "Three histograms of age side by side comparing binwidths. Binwidth 1 is noisy with erratic spikes, binwidth 5 clearly shows the right-skewed shape, and binwidth 20 oversimplifies into just a few bars that hide the skew."
 library(patchwork)
 
 p1 <- bfi |> ggplot(aes(x = age)) +
@@ -199,6 +201,7 @@ Spend ~2 minutes comparing the three panels. Point to specific differences: binw
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Density plot of participant ages showing a smooth right-skewed curve that peaks around age 20 and gradually tapers off toward age 80."
 bfi |>
   ggplot(aes(x = age)) +
   geom_density(fill = "steelblue", alpha = 0.5) +
@@ -220,6 +223,7 @@ Briefly explain that density plots are like a smoothed histogram — the y-axis 
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items."
 # All Extraversion items
 bfi |>
   select(E1:E5) |>
@@ -244,6 +248,7 @@ This slide introduces pivot_longer in a practical context — students saw it in
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Bar chart of gender distribution showing roughly twice as many female participants as male participants in the BFI sample."
 bfi |>
   mutate(gender = ifelse(gender == 1, "Male", "Female")) |>
   ggplot(aes(x = gender)) +
@@ -297,6 +302,7 @@ This is one of the most important slides in the deck. Spend ~3 minutes here. Stu
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers."
 bfi |>
   ggplot(aes(x = age)) +
   geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
@@ -314,6 +320,7 @@ bfi |>
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 4
+#| fig-alt: "Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers."
 bfi |>
   ggplot(aes(x = age)) +
   geom_boxplot(fill = "steelblue", alpha = 0.7) +
@@ -412,6 +419,7 @@ This code is more advanced than what students have written themselves — across
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates."
 bfi |>
   summarize(across(everything(), ~ mean(is.na(.)))) |>
   pivot_longer(everything(), names_to = "variable", values_to = "pct_missing") |>
@@ -463,6 +471,7 @@ This is the "cheat sheet" slide — the workflow students should follow when the
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree."
 # Education distribution — what does it look like?
 bfi |>
   filter(!is.na(education)) |>

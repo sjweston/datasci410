@@ -139,6 +139,7 @@ This is the key moment of the deck. Run the code and let the output land. Point 
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
+#| fig-alt: "Bar chart showing data split into three groups (A, B, C) with different values in each, illustrating how group_by() separates data so each group is summarized independently."
 tibble(
   group = rep(c("A", "B", "C"), each = 4),
   value = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
@@ -395,6 +396,7 @@ Walk through the pipeline step by step, narrating what each line does. Point out
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Bar chart of average arrival delay by month showing delays peak in summer (June and July) and are lowest in fall, demonstrating how a dplyr pipeline can feed directly into ggplot."
 flights |>
   filter(!is.na(arr_delay)) |>
   group_by(month) |>
@@ -623,6 +625,7 @@ This two-step summarization (trials to participants, then participants to condit
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Boxplot with overlaid data points comparing mean reaction time between control and treatment conditions, showing the treatment group has slightly faster reaction times with similar spread."
 participant_summaries |>
   ggplot(aes(x = condition, y = mean_rt, fill = condition)) +
   geom_boxplot(alpha = 0.7) +

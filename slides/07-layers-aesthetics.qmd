@@ -50,6 +50,7 @@ This first section (~25 min total) covers geom selection, distributions, and sta
 #| fig-width: 10
 #| fig-height: 3.5
 #| output-location: slide
+#| fig-alt: "Side-by-side comparison of two plots using the same reaction time data. Version A is a plain bar chart of means that hides all variation. Version B overlays jittered individual data points, boxplots, and mean diamonds, revealing the full spread and overlap between Control and Treatment groups."
 library(patchwork)
 
 p1 <- ggplot(reaction_data, aes(x = condition, y = rt)) +
@@ -97,6 +98,7 @@ This table is a reference slide students will come back to. Don't read every row
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Histogram of reaction times in milliseconds with 30ms bins, showing an approximately normal distribution centered around 500ms with a slight right skew."
 reaction_data |>
   ggplot(aes(x = rt)) +
   geom_histogram(
@@ -120,6 +122,7 @@ Walk through the code line by line. Emphasize `binwidth` — students will forge
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
+#| fig-alt: "Side-by-side comparison of a histogram and density plot of reaction times. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing a similar roughly normal distribution."
 library(patchwork)
 
 p1 <- reaction_data |>
@@ -149,6 +152,7 @@ Quick comparison — don't belabor this. The key point is that density plots are
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Bar chart showing the count of observations in each experimental condition, with Control and Treatment groups having equal counts of 40 each."
 reaction_data |>
   ggplot(aes(x = condition)) +
   geom_bar(fill = "steelblue") +
@@ -166,6 +170,7 @@ reaction_data |>
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Boxplots comparing reaction time distributions for Control and Treatment conditions. The Control group has a slightly higher median and wider spread than the Treatment group."
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
   geom_boxplot(alpha = 0.7) +
@@ -184,6 +189,7 @@ reaction_data |>
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
+#| fig-alt: "Side-by-side comparison of boxplot and violin plot for reaction time by condition. The boxplot shows median, quartiles, and whiskers, while the violin plot reveals the full distribution shape including where data are most concentrated."
 
 p1 <- reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
@@ -224,11 +230,12 @@ Transition: "So far we've been plotting raw data. But in psychology, you'll almo
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Bar chart showing mean reaction time by condition with 95% confidence interval error bars. The Treatment group mean is slightly lower than the Control group, with overlapping error bars."
 reaction_data |>
   ggplot(aes(x = condition, y = rt)) +
   stat_summary(
-    fun = mean, 
-    geom = "bar", 
+    fun = mean,
+    geom = "bar",
     fill = "steelblue", width = 0.5) +
   stat_summary(
     fun.data = mean_cl_normal, 
@@ -298,6 +305,7 @@ Error bars alone hide the data. Show the points too:
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Dot plot showing individual reaction times as jittered points for each condition, with black dots marking the group means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics."
 reaction_data |>
   ggplot(aes(x = condition, y = rt, color = condition)) +
   geom_jitter(width = 0.15, alpha = 0.4, size = 2) +
@@ -388,6 +396,7 @@ This is the trickiest position adjustment. The key gotcha: when you dodge both t
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Grouped bar chart showing mean reaction time by age group and condition with dodged bars and error bars. Control and Treatment bars are side by side within each age group, allowing direct comparison across both factors."
 reaction_data |>
   ggplot(aes(x = age_group, y = rt, fill = condition)) +
   stat_summary(fun = mean, geom = "bar", position = "dodge", width = 0.6) +
@@ -407,6 +416,7 @@ reaction_data |>
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
+#| fig-alt: "Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Control and Treatment observations by age group, while the filled chart normalizes each bar to 100% to compare proportions directly."
 
 p1 <- reaction_data |>
   ggplot(aes(x = age_group, fill = condition)) +
@@ -452,6 +462,7 @@ scale_fill_viridis_d()
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Boxplots of reaction time by condition using custom colors: blue for Control and red for Treatment, demonstrating how scale_fill_manual() applies specific hex color codes to groups."
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition)) +
   geom_boxplot(alpha = 0.7) +
@@ -486,6 +497,7 @@ scale_y_continuous(limits = c(400, 600))  # This DROPS data outside the range!
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Horizontal boxplots of reaction time by condition, with categories on the y-axis and reaction time on the x-axis, demonstrating how flipped axes improve readability for categorical labels."
 reaction_data |>
   ggplot(aes(y = condition, x = rt, fill = condition)) +
   geom_boxplot(alpha = 0.7) +
@@ -506,6 +518,7 @@ This is the "bringing it all together" slide. Walk through the code slowly, poin
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "Polished figure combining jittered individual data points, boxplots, and diamond-shaped mean markers for reaction time by condition. Uses custom blue and red colors, informative title and subtitle, and a caption noting sample size and mean indicator."
 reaction_data |>
   ggplot(aes(x = condition, y = rt, fill = condition, color = condition)) +
   geom_jitter(width = 0.2, alpha = 0.35, size = 2) +

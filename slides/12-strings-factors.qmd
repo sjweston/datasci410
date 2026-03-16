@@ -426,6 +426,7 @@ This two-slide sequence is the most persuasive argument for factors. Show the al
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart of Likert responses in alphabetical order, making the progression from Disagree to Strongly Agree hard to follow because categories are scrambled."
 survey_data <- tibble(
   response = c("Agree", "Disagree", "Strongly Agree", "Agree",
                "Strongly Disagree", "Agree", "Disagree")
@@ -442,6 +443,7 @@ ggplot(survey_data, aes(x = response)) +
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart of Likert responses reordered from Strongly Disagree to Strongly Agree, showing a clear progression that matches how the scale is meant to be read."
 survey_data <- survey_data |>
   mutate(
     response = factor(response, levels = c(
@@ -509,6 +511,7 @@ therapy |>
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Horizontal bar chart showing four therapy conditions ordered by mean improvement, with CBT highest and Control lowest, demonstrating how fct_reorder arranges categories by a numeric variable."
 therapy |>
   mutate(condition = fct_reorder(condition, mean_improvement)) |>
   ggplot(aes(x = mean_improvement, y = condition)) +
@@ -535,6 +538,7 @@ fct_infreq(factor(diagnosis))
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Horizontal bar chart of diagnosis categories ordered by frequency, with Depression most common and Other least common, showing how fct_infreq sorts categories from most to least frequent."
 tibble(diagnosis = factor(diagnosis)) |>
   mutate(diagnosis = fct_infreq(diagnosis)) |>
   ggplot(aes(y = diagnosis)) +  # Note: y instead of x to read easily

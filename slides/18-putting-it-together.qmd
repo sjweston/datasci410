@@ -155,6 +155,7 @@ social_media_clean |>
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot with a linear trend line showing that higher daily social media use is associated with higher GAD-7 anxiety scores among college students."
 ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", color = "steelblue") +
@@ -192,6 +193,7 @@ This is a callback to Monday's session. Ask students to interpret the correlatio
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot with separate colored trend lines for each gender, showing the positive relationship between social media use and anxiety holds across all gender groups."
 ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = gender)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", se = FALSE) +
@@ -209,6 +211,7 @@ ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = g
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Horizontal bar chart showing the distribution of anxiety severity categories, with most students falling in the mild to moderate range and fewer in the minimal or severe categories."
 social_media_clean |>
   count(anxiety_category) |>
   mutate(anxiety_category = fct_rev(anxiety_category)) |>
@@ -801,6 +804,7 @@ This is the aspirational close. The call to action -- "Make psychology more repr
 #| echo: false
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "A smooth logarithmic curve labeled 'Your learning journey continues' showing rapid early growth in skills over time that gradually levels off, representing the learning curve."
 tibble(
   x = seq(0, 10, 0.1),
   y = log(x + 1) * 2

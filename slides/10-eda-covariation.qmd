@@ -84,6 +84,7 @@ Walk through the simulated data structure. Emphasize that this is simulated — 
 ```{r}
 #| label: boxplot
 #| output-location: slide
+#| fig-alt: "Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, showing CBT has the lowest median depression score."
 ggplot(therapy_data, aes(x = condition, y = depression_post)) +
   geom_boxplot() +
   labs(
@@ -102,6 +103,7 @@ ggplot(therapy_data, aes(x = condition, y = depression_post)) +
 ```{r}
 #| ref.label: boxplot
 #| echo: false
+#| fig-alt: "Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, with annotations pointing to the median line, IQR box, whiskers, and outlier dots."
 ```
 
 :::
@@ -163,6 +165,7 @@ Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expe
 #| fig-width: 10
 #| fig-height: 6
 #| echo: false
+#| fig-alt: "Horizontal raincloud plot of post-treatment depression scores by condition, combining violin shapes, boxplots, jittered points, and diamond-shaped means. CBT shows the lowest scores, followed by Mindfulness, then Control."
 
 library(ggrain)
 therapy_data |>
@@ -214,6 +217,7 @@ Compare these three views of the **same data**:
 #| echo: false
 #| fig-width: 12
 #| fig-height: 7
+#| fig-alt: "Three-panel comparison of the same therapy data shown as a boxplot only, a violin plot only, and a full raincloud plot, demonstrating how rainclouds reveal the most information about distribution shape, summary statistics, and individual data points."
 library(patchwork)
 
 p1 <- ggplot(therapy_data, aes(x = condition, y = depression_post)) +
@@ -320,6 +324,7 @@ The next five slides show five options for the same data. Move through them at a
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each gender category (Female, Male, Non-binary)."
 ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
   geom_bar() +
   labs(
@@ -335,6 +340,7 @@ ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Side-by-side bar chart comparing diagnosis counts across gender groups, with separate bars for each diagnosis category placed next to each other within each gender."
 ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
   geom_bar(position = "dodge") +
   labs(
@@ -354,6 +360,7 @@ Highlight the difference between position = "dodge" (previous slide) and positio
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Proportional stacked bar chart showing the relative proportion of each diagnosis within each gender group, with all bars normalized to 100%."
 ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
   geom_bar(position = "fill") +
   labs(
@@ -371,6 +378,7 @@ Shows the *size* of overlaps:
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bubble chart showing the co-occurrence of gender and diagnosis categories, where larger circles indicate more individuals with that combination."
 ggplot(diagnosis_data, aes(x = gender, y = diagnosis)) +
   geom_count() +
   labs(
@@ -390,6 +398,7 @@ geom_tile() is essentially a heatmap. Note that this requires pre-computing the 
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Heatmap tile plot of diagnosis counts by gender, with color intensity (viridis scale) representing the number of individuals in each gender-diagnosis combination."
 diagnosis_counts <- diagnosis_data |>
   count(gender, diagnosis)
 
@@ -427,6 +436,7 @@ Scatterplots should feel familiar from stats classes, but many students haven't 
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of reaction time versus age showing a positive trend where older participants tend to have slower reaction times."
 ggplot(rt_data, aes(x = age, y = reaction_time)) +
   geom_point() +
   labs(
@@ -445,6 +455,7 @@ geom_smooth(method = "lm") adds a linear regression line. Students will see lm()
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of reaction time versus age with a linear trend line and confidence band, showing reaction time increases with age."
 ggplot(rt_data, aes(x = age, y = reaction_time)) +
   geom_point() +
   geom_smooth(method = "lm", se = TRUE) +
@@ -472,6 +483,7 @@ big_rt_data <- tibble(
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of 5,000 reaction time observations that appears as a dense, nearly solid mass of overlapping points, demonstrating the overplotting problem."
 ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   geom_point() +
   labs(title = "Hard to see where the data is dense") +
@@ -486,6 +498,7 @@ The plot looks like a solid blob. Ask: "Can you tell where most of the data is?"
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of 5,000 reaction time observations using transparent points (alpha = 0.1), revealing that the densest concentration of data follows a positive linear trend."
 ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   geom_point(alpha = 0.1) +
   labs(title = "Using alpha = 0.1 to show density") +
@@ -500,6 +513,7 @@ Alpha is the simplest fix and often the best first attempt. Explain: alpha = 0.1
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Two-dimensional bin plot of reaction time versus age, with rectangular bins colored by count using a viridis scale, showing highest density along the central trend."
 ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   geom_bin2d() +
   scale_fill_viridis_c() +
@@ -514,6 +528,7 @@ ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Hexagonal bin plot of reaction time versus age, with hexagons colored by count using a viridis scale, showing highest density along the positive linear trend."
 ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   geom_hex() +
   scale_fill_viridis_c() +
@@ -586,6 +601,7 @@ glimpse(mpg)
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of highway MPG versus engine displacement with a linear trend line, showing a clear negative relationship where larger engines have lower fuel efficiency."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   geom_smooth(method = "lm") +
@@ -605,6 +621,7 @@ This slide demonstrates a key EDA move: adding a third variable via color. Walk 
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Scatterplot of highway MPG versus engine displacement with points colored by car type, revealing that the overall negative trend varies across vehicle classes like 2seaters and subcompacts."
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point() +
   labs(
@@ -620,6 +637,7 @@ ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Horizontal bar chart of vehicle types ordered by frequency, showing SUVs as the most common type followed by compact and midsize cars."
 ggplot(mpg, aes(y = fct_infreq(class))) +
   geom_bar() +
   labs(

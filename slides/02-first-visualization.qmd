@@ -62,6 +62,7 @@ Spend ~2 minutes here. Let students look at the table and ask them: "If you saw 
 #| echo: false
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "Four scatterplots of Anscombe's Quartet, each with an identical linear regression line but very different data patterns — one linear, one curved, one with an outlier, and one clustered with a single extreme point."
 ggplot(anscombe_long, aes(x, y)) +
   geom_point(size = 3, color = "#3498db") +
   geom_smooth(method = "lm", se = FALSE, color = "#e74c3c") +
@@ -83,6 +84,7 @@ This is the payoff. Let it land. Point out that Set 1 is a nice linear relations
 #| echo: false
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "Two scatterplots side by side — one showing randomly scattered points and the other showing points forming a parabolic curve — demonstrating that different patterns can produce similar summary statistics."
 # Simulating the concept - in practice you'd use datasauRus package
 set.seed(42)
 # Just showing the concept with a simple example
@@ -157,6 +159,7 @@ Walk through the output of `glimpse()` briefly: 234 rows means 234 cars, each co
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway miles per gallon showing a negative curved relationship — cars with larger engines tend to get worse fuel economy."
 # Relationship between engine size and highway mpg
 ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
   geom_point()
@@ -225,6 +228,7 @@ What if we want to see which points are which car class?
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg with points colored by vehicle class, showing that compact and subcompact cars cluster at high mpg and low displacement while SUVs and pickups cluster at low mpg and high displacement."
 ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
   geom_point()
 ```
@@ -239,6 +243,7 @@ This is the first time students see a third variable encoded visually. Point out
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg where point size represents number of cylinders — larger points (more cylinders) appear at higher displacement and lower mpg."
 # Size by number of cylinders
 ggplot(mpg, aes(x = displ, y = hwy, size = cyl)) +
   geom_point()
@@ -250,6 +255,7 @@ ggplot(mpg, aes(x = displ, y = hwy, size = cyl)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg where point transparency represents number of cylinders — points with more cylinders are more opaque, appearing at higher displacement values."
 ggplot(mpg, aes(x = displ, y = hwy, alpha = cyl)) +
   geom_point()
 ```
@@ -260,6 +266,7 @@ ggplot(mpg, aes(x = displ, y = hwy, alpha = cyl)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg where point shape represents drive type (front, rear, 4-wheel) — front-wheel-drive cars tend to have smaller engines and better fuel economy."
 # Shape by drive type (front, rear, 4wd)
 ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) +
   geom_point()
@@ -271,6 +278,7 @@ ggplot(mpg, aes(x = displ, y = hwy, shape = drv)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg with points colored by vehicle class and shaped by drive type, demonstrating how two categorical variables can be encoded simultaneously."
 ggplot(mpg, aes(x = displ, y = hwy, color = class, shape = drv)) +
   geom_point(size = 3)
 ```
@@ -301,6 +309,7 @@ This is one of the most common sources of confusion for beginners. Emphasize the
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg with all points colored steel blue, sized larger, and made semi-transparent — demonstrating how to set aesthetic values manually rather than mapping them to data."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(color = "steelblue", size = 3, alpha = 0.6)
 ```
@@ -311,6 +320,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot where all points are salmon-red instead of blue, with a legend showing a single category labeled 'blue' — illustrating the common mistake of placing a color name inside aes() where ggplot treats it as a categorical variable."
 # What happens if you put a constant inside aes()?
 ggplot(mpg, aes(x = displ, y = hwy, color = "blue")) +
   geom_point()
@@ -394,6 +404,7 @@ Add a trend line to your scatterplot:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg with a smoothed (loess) trend line and gray confidence band showing a negative curved relationship that levels off around 5 liters of displacement."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   geom_smooth()  # Adds a smoothed trend line
@@ -405,6 +416,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg with a straight linear regression line and confidence band showing a clear negative linear trend — highway mpg decreases as engine size increases."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   geom_smooth(method = "lm")  # lm = linear model
@@ -418,6 +430,7 @@ Each `+` adds a layer:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg colored by drive type (front, rear, 4-wheel) with separate linear trend lines for each group, showing that all three drive types have negative trends but at different levels."
 ggplot(mpg, aes(x = displ, y = hwy, color = drv)) +
   geom_point() +
   geom_smooth(method = "lm", se = FALSE)  # se = FALSE removes confidence band
@@ -433,6 +446,7 @@ Point out what happened here: because `color = drv` is in the `aes()` of the mai
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Bar chart showing the count of vehicles in each car class — SUVs are the most common category with over 60 vehicles, followed by compact and midsize, while 2-seaters are the least common."
 # Counts of each car class
 ggplot(mpg, aes(x = class)) +
   geom_bar()
@@ -444,6 +458,7 @@ ggplot(mpg, aes(x = class)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Histogram of highway miles per gallon with steel blue bars and white borders, showing a roughly bimodal distribution with peaks around 17 and 27 mpg."
 # Distribution of highway mpg
 ggplot(mpg, aes(x = hwy)) +
   geom_histogram(binwidth = 2, fill = "steelblue", color = "white")
@@ -455,6 +470,7 @@ ggplot(mpg, aes(x = hwy)) +
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Boxplots comparing highway mpg across seven vehicle classes — compact and subcompact cars have the highest median highway mpg while pickups and SUVs have the lowest, with several outliers visible."
 # Highway mpg by car class
 ggplot(mpg, aes(x = class, y = hwy)) +
   geom_boxplot()
@@ -474,6 +490,7 @@ Briefly connect boxplots to psych: "This is exactly the kind of plot you'd use t
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg split into seven small panels (one per vehicle class) using facet_wrap, making it easy to see that each class occupies a distinct region of engine size and fuel efficiency."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   facet_wrap(~class)
@@ -506,6 +523,7 @@ Creates a grid of panels with two variables:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg arranged in a grid with drive type as rows and number of cylinders as columns — some panels are empty (e.g., no rear-wheel-drive 4-cylinder cars), revealing which combinations of drive type and cylinder count exist."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point() +
   facet_grid(drv ~ cyl)
@@ -531,6 +549,7 @@ Facets are great when:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Labeled scatterplot titled 'Fuel Efficiency vs Engine Size' with subtitle, descriptive axis labels, and a legend for vehicle class — demonstrating how labs() makes a plot publication-ready."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = class)) +
   labs(
@@ -554,6 +573,7 @@ Themes control the overall look:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of engine displacement versus highway mpg colored by vehicle class using theme_minimal, which removes the gray background and gives the plot a clean, modern appearance."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = class)) +
   theme_minimal()  # Clean, minimal theme
@@ -565,6 +585,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 #| echo: false
 #| fig-width: 12
 #| fig-height: 8
+#| fig-alt: "Four versions of the same scatterplot displayed in a 2-by-2 grid, each using a different built-in theme — theme_gray (default with gray background), theme_bw (black and white), theme_minimal (no background), and theme_classic (no gridlines, just axes)."
 library(patchwork)
 
 p1 <- ggplot(mpg, aes(displ, hwy)) + geom_point() + theme_gray() + ggtitle("theme_gray() [default]")
@@ -602,6 +623,7 @@ The ggplot template works the same way with any data:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Side-by-side boxplots comparing anxiety scores (BAI) between a Control group and a Treatment group — the Treatment group has a visibly lower median anxiety score, demonstrating the same ggplot template applied to psychology data."
 # Simulated experiment: condition vs. anxiety score
 psych_demo <- tibble(
   condition = rep(c("Control", "Treatment"), each = 30),
@@ -630,6 +652,7 @@ This is the "so what" bridge to psychology. Emphasize that the exact same templa
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
+#| fig-alt: "A polished scatterplot showing fuel efficiency decreasing with engine size, with points colored by vehicle class, a black linear trend line with confidence band, descriptive title and subtitle, proper axis labels, a caption citing the EPA data source, and a minimal theme."
 ggplot(mpg, aes(x = displ, y = hwy)) +
   geom_point(aes(color = class), size = 2, alpha = 0.7) +
   geom_smooth(method = "lm", color = "black", se = TRUE) +

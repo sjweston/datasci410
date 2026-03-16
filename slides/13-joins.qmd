@@ -299,6 +299,7 @@ This is the most important slide in the first half of the deck. Walk through the
 #| fig-width: 7
 #| fig-height: 4
 #| fig-align: center
+#| fig-alt: "Diagram showing left_join keeps all three rows from the left table (artists) and matches two rows from the right table (grammys_2026). The unmatched right-table row (Billie Eilish) is dimmed, indicating it is excluded."
 plot_join(
   "left_join(artists, grammys_2026)",
   left_active  = c(TRUE, TRUE, TRUE),
@@ -326,6 +327,7 @@ Now participant 5 is included (with `NA` for age/condition), but participant 4 i
 #| fig-width: 7
 #| fig-height: 4
 #| fig-align: center
+#| fig-alt: "Diagram showing right_join keeps all three rows from the right table (grammys_2026) and matches two rows from the left table (artists). The unmatched left-table row (Taylor Swift) is dimmed, indicating it is excluded."
 plot_join(
   "right_join(artists, grammys_2026)",
   left_active  = c(FALSE, TRUE, TRUE),
@@ -358,6 +360,7 @@ Emphasize that inner_join() silently drops rows that do not match, which means y
 #| fig-width: 7
 #| fig-height: 4
 #| fig-align: center
+#| fig-alt: "Diagram showing inner_join keeps only the two rows that match in both tables (Bad Bunny and Kendrick Lamar). Unmatched rows on both sides are dimmed, indicating they are excluded."
 plot_join(
   "inner_join(artists, grammys_2026)",
   left_active  = c(FALSE, TRUE, TRUE),
@@ -389,6 +392,7 @@ Point out that full_join() gives you the most complete picture — nobody is dro
 #| fig-width: 7
 #| fig-height: 4
 #| fig-align: center
+#| fig-alt: "Diagram showing full_join keeps all rows from both tables. All tiles are fully opaque, indicating no rows are excluded regardless of whether they match."
 plot_join(
   "full_join(artists, grammys_2026)",
   left_active  = c(TRUE, TRUE, TRUE),
@@ -403,6 +407,11 @@ plot_join(
 #| layout-ncol: 2
 #| fig-width: 4
 #| fig-height: 2.8
+#| fig-alt:
+#|   - "Venn diagram for inner_join showing only the overlapping region shaded, representing rows that exist in both tables."
+#|   - "Venn diagram for left_join showing the entire left circle shaded, representing all rows from the left table plus matches from the right."
+#|   - "Venn diagram for right_join showing the entire right circle shaded, representing all rows from the right table plus matches from the left."
+#|   - "Venn diagram for full_join showing both circles entirely shaded, representing all rows from both tables."
 make_venn("inner_join()", "inner")
 make_venn("left_join()",  "left")
 make_venn("right_join()", "right")

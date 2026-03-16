@@ -653,6 +653,7 @@ The pipe works beautifully with ggplot:
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Scatterplot of departure delay versus arrival delay for United Airlines flights in January, showing a strong positive relationship — flights that depart late tend to arrive late by a similar amount."
 flights |>
   filter(month == 1, carrier == "UA") |>
   ggplot(aes(x = dep_delay, y = arr_delay)) +

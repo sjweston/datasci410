@@ -58,6 +58,7 @@ Spend ~2 minutes here. This slide should feel like a pivot — acknowledge every
 #| fig-width: 7
 #| fig-height: 5
 #| fig-align: center
+#| fig-alt: "Venn diagram showing three overlapping circles for Data, Narrative, and Visuals. Where all three overlap, the word CHANGE appears, illustrating that effective data storytelling requires all three components."
 library(ggforce)
 
 triad <- tibble(
@@ -209,6 +210,7 @@ Clutter is Knaflic's term for anything that takes up visual space without adding
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Cluttered boxplot of depression scores by treatment condition with a blue background, heavy gridlines, rainbow fill colors, and a redundant legend — demonstrating common visual clutter to avoid."
 therapy_data <- tibble(
   condition = rep(c("Control", "CBT", "Mindfulness"), each = 30),
   depression = c(rnorm(30, 18, 5), rnorm(30, 12, 5), rnorm(30, 14, 5))
@@ -233,6 +235,7 @@ Point out the specific clutter: the colored background, heavy gridlines, redunda
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Clean boxplot of depression scores by condition using a single steelblue fill, no legend, a clean theme, and an assertion title stating CBT is most effective — demonstrating effective decluttering."
 ggplot(therapy_data, aes(x = condition, y = depression)) +
   geom_boxplot(fill = "steelblue", alpha = 0.7) +
   labs(
@@ -283,6 +286,7 @@ This is aspirational for most students at this point — don't expect them to wr
 #| fig-width: 10
 #| fig-height: 4
 #| fig-align: center
+#| fig-alt: "Side-by-side bar charts comparing theme_classic and theme_story. The theme_story version has softer grey text, grey axes, and a plot-aligned title, showing how small theme tweaks improve readability."
 library(patchwork)
 
 p_data <- therapy_data |>
@@ -342,6 +346,7 @@ Preattentive processing is another psych concept they may recognize. The key ins
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart of mean depression scores by condition with all bars in uniform gray. Without color contrast, no single condition stands out and the viewer must work to identify the key finding."
 therapy_summary <- therapy_data |>
   group_by(condition) |>
   summarize(mean_depression = mean(depression))
@@ -364,6 +369,7 @@ All bars are the same gray — the viewer has to read every bar and compare. The
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart of mean depression scores where the CBT bar is highlighted in steelblue while other bars are gray, immediately drawing attention to CBT as the most effective condition."
 therapy_summary <- therapy_summary |>
   mutate(highlight = if_else(condition == "CBT", "Highlight", "Normal"))
 
@@ -434,6 +440,7 @@ This is one of the most actionable slides in the deck. Students often ask "but m
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart of participant counts by age group using four different fill colors, one per bar. The rainbow coloring adds no information since the x-axis already identifies each group."
 demographics <- tibble(
   age_group = c("18-25", "26-35", "36-45", "46+"),
   count = c(45, 67, 52, 23)
@@ -449,6 +456,7 @@ ggplot(demographics, aes(x = age_group, y = count, fill = age_group)) +
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Improved bar chart of participants by age group using a single steelblue fill and an assertion title highlighting that the 26-35 age group is the largest."
 ggplot(demographics, aes(x = age_group, y = count)) +
   geom_col(fill = "steelblue") +
   labs(
@@ -487,6 +495,7 @@ Go through each type briefly. Truncated y-axes are the most common in psychology
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart with a truncated y-axis starting at 15 instead of 0, making a 2-point difference between Control and Treatment appear dramatically large. Demonstrates how axis manipulation can mislead."
 treatment_effect <- tibble(
   condition = c("Control", "Treatment"),
   score = c(18, 16)
@@ -512,6 +521,7 @@ The effect looks dramatic because the y-axis starts at 15 instead of 0. Point ou
 
 ```{r}
 #| output-location: slide
+#| fig-alt: "Bar chart with the y-axis starting at 0, honestly showing that the 2-point difference between Control and Treatment is modest relative to the full scale."
 ggplot(treatment_effect, aes(x = condition, y = score)) +
   geom_col(fill = "steelblue") +
   coord_cartesian(ylim = c(0, 25)) +  # Full scale
@@ -553,6 +563,7 @@ Students often ask about this nuance. The rule of thumb is simple: bars must sta
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.5
+#| fig-alt: "Spaghetti plot with eight individual participant lines crossing in all directions, making it impossible to identify any clear trend in depression over time."
 set.seed(42)
 longitudinal <- tibble(
   participant = rep(1:8, each = 3),
@@ -573,6 +584,7 @@ Eight lines going everywhere. What's the takeaway?
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.5
+#| fig-alt: "Single line chart showing mean depression scores decreasing steadily from baseline through 6 and 12 months, clearly conveying the trend that the spaghetti plot obscured."
 longitudinal |>
   group_by(time) |>
   summarize(mean_depression = mean(depression)) |>
@@ -599,6 +611,7 @@ The spaghetti plot vs. summary line is a common issue in psychology research. Th
 #| echo: false
 #| fig-width: 7
 #| fig-height: 4.5
+#| fig-alt: "Pie chart with eight slices representing therapy types. The similar-sized slices make it difficult to compare categories or determine which therapy is most common."
 set.seed(123)
 therapy_types <- tibble(
   type = c("CBT", "DBT", "ACT", "Psychodynamic", "EMDR",
@@ -621,6 +634,7 @@ Eight slices. Which is biggest? By how much?
 #| echo: false
 #| fig-width: 8
 #| fig-height: 4.5
+#| fig-alt: "Horizontal bar chart with therapy types ranked by frequency, clearly showing CBT as the most common approach. The ordered layout makes comparisons between categories easy."
 therapy_types |>
   mutate(type = fct_reorder(type, n)) |>
   ggplot(aes(x = n, y = type)) +
@@ -665,6 +679,7 @@ This is the single most important takeaway from the entire deck. Linger here. Re
 Here's a messy figure:
 
 ```{r}
+#| fig-alt: "Messy bar chart of stress levels by profession with rainbow fill colors, a redundant legend, unsorted bars, a label-style title, and the default gray theme — intended for students to improve."
 stress_data <- tibble(
   profession = c("Teacher", "Nurse", "Engineer", "Retail", "Admin"),
   stress = c(7.2, 8.1, 5.5, 6.8, 6.2),

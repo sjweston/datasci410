@@ -197,6 +197,7 @@ survey |>
 The `naniar` package provides great visualization tools:
 
 ```{r}
+#| fig-alt: "Heatmap showing the pattern of missing values across all variables in the survey data. Each row is a participant and each column is a variable, with missing cells highlighted to reveal where data gaps occur."
 library(naniar)
 
 # Visual summary
@@ -210,6 +211,7 @@ The naniar package is optional — students do not need to install it for assign
 ## Patterns of missingness
 
 ```{r}
+#| fig-alt: "Upset plot showing which combinations of variables have missing values in the same rows, revealing whether missingness clusters across specific variable pairs."
 # Are certain combinations of variables missing together?
 gg_miss_upset(survey)
 ```

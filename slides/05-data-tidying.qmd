@@ -569,6 +569,7 @@ tidy_rm
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
+#| fig-alt: "Line plot showing mean reaction times for conditions A and B at two time points, with error bars. Both conditions decrease from time 1 to time 2, with condition B consistently slower than condition A."
 tidy_rm |>
   ggplot(aes(x = time, y = rt, color = condition, group = condition)) +
   stat_summary(fun = mean, geom = "point", size = 3) +
