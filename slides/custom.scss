@@ -135,3 +135,28 @@ html.debug-overflow .reveal .slides section {
   overflow-y: auto;
   word-wrap: break-word;
 }
+
+// --- Accessibility ---
+
+// Keyboard focus indicator (WCAG 2.4.7)
+.reveal *:focus-visible {
+  outline: 3px solid #e74c3c;
+  outline-offset: 2px;
+}
+
+// Respect reduced motion preferences (WCAG 2.3.3)
+@media (prefers-reduced-motion: reduce) {
+  .reveal .slides section .fragment {
+    transition: none !important;
+  }
+}
+
+// Exercise/practice slide text contrast fix (WCAG 1.4.3)
+// Orange backgrounds need white text to meet contrast requirements
+.reveal .slides section[data-background-color="#e67e22"] {
+  color: #ffffff;
+
+  h1, h2, h3, h4, h5, h6, p, li {
+    color: #ffffff;
+  }
+}

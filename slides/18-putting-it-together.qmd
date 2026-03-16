@@ -36,7 +36,7 @@ This is the last class session. The tone should feel celebratory and reflective,
 
 ## The data science workflow
 
-![](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png){width="80%"}
+![R4DS data science workflow diagram showing the cycle: Import, Tidy, Transform, Visualize, Model, Communicate](https://r4ds.hadley.nz/diagrams/data-science/whole-game.png){width="80%"}
 
 . . .
 

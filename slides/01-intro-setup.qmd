@@ -323,14 +323,14 @@ This filing cabinet vs. laundry basket metaphor (from Scott Cunningham's Gov 51 
 
 ### The filing cabinet
 
-![](img/file_cabinet.png)
+![Filing cabinet with labeled drawers, representing an organized project file structure](img/file_cabinet.png)
 :::
 
 ::: {.column width="50%"}
 
 ### The laundry basket
 
-![](img/laundry-basket.jpg)
+![Overflowing laundry basket, representing files scattered without structure](img/laundry-basket.jpg)
 
 :::
 ::::

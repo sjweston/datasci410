@@ -117,6 +117,28 @@ Graduate students take the same course but need additional or higher-level work 
 
 ---
 
+## Accessibility (WCAG 2.1 AA)
+
+The course website must comply with **WCAG 2.1 Level AA** by **April 24, 2026** (federal requirement for all UO web content). These rules apply to all new and modified content. The full audit is in `accessibility/accessibility-audit.md`.
+
+**Every image needs alt text.** Markdown images use `![Alt text here](path)`. R code chunks that produce plots must include `#| fig-alt: "Description"`. The description should convey the key takeaway of the figure, not just name the chart type. Example:
+
+```r
+#| fig-alt: "Scatterplot of engine displacement vs highway mpg showing a negative relationship — larger engines get worse fuel economy"
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+**Color contrast must meet 4.5:1** for normal text and 3:1 for large text (18pt+ or 14pt+ bold). Check any new color combinations. The orange exercise backgrounds and text colors have been adjusted for compliance — don't revert them.
+
+**Heading hierarchy:** Don't skip heading levels (e.g., H1 → H3 without H2). In Reveal.js slides, `#` = new slide title, `##` = content heading on a slide.
+
+**Don't rely on color alone** to convey meaning. If color distinguishes items (e.g., "the red line vs. the blue line"), also use labels, patterns, or text.
+
+**Link text must be descriptive.** No "click here" or bare URLs. Use `[descriptive text](url)`.
+
+---
+
 ## File and naming conventions
 
 - Slides: `slides/NN-topic.qmd` → renders to `slides/NN-topic.html`

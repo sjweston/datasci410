@@ -848,11 +848,11 @@ For each figure, identify:
 
 ## Figure 1
 
-![](img/class-identity.jpg){fig-align="center" height="550"}
+![Published figure showing the relationship between social class and identity — used as a critique exercise example](img/class-identity.jpg){fig-align="center" height="550"}
 
 ## Figure 2
 
-![](img/truth-sensitivity.jpg){fig-align="center" height="550"}
+![Published figure showing truth sensitivity results — used as a critique exercise example](img/truth-sensitivity.jpg){fig-align="center" height="550"}
 
 ## Now apply it to your own work
 

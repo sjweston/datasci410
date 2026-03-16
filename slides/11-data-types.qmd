@@ -303,7 +303,7 @@ you need more categories.
 
 ## Psychology example: Reverse coding
 
-![](img/rosenberg.png){fig-align="center" width="600"}
+![Rosenberg Self-Esteem Scale showing 10 items with Likert response options — items 2, 5, 6, 8, and 9 are reverse-coded](img/rosenberg.png){fig-align="center" width="600"}
 
 ::: {.notes}
 Show the actual Rosenberg Self-Esteem Scale so students can see which items are reverse-coded. Ask if anyone has taken this measure in a psych class. This connects the abstract coding lesson to something tangible.

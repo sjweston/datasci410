@@ -188,6 +188,7 @@ website:
 
 format:
   html:
+    lang: en
     theme:
       - litera
       - html/custom.scss

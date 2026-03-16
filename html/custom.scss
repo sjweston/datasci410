@@ -71,12 +71,14 @@ ol {
 
 
 // Custom active link colors
+// Active nav link — #C99A30 on dark $sara (#1c5253) background meets 4.5:1 contrast
 .navbar-dark .navbar-nav .show > .nav-link, .navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active {
-  color: #FFC361;
+  color: #C99A30;
 }
 
+// Sidebar active link — darkened from $yellow (#FB9E07) for contrast on light backgrounds
 div.sidebar-item-container .active, div.sidebar-item-container .show > .nav-link, div.sidebar-item-container .sidebar-link > code {
-  color: $yellow;
+  color: #b87400;
 }
 
 
