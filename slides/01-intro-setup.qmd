@@ -688,6 +688,41 @@ Before we get on the motorcycle, we need a **cognitive helmet**:
 
 That's what the many short assignments in this course build. The goal: **you** are the pilot, not the passenger.
 
+---
+
+### Coding teaches you to think differently
+
+Learning R isn't just about R. It's about a set of habits that transfer everywhere:
+
+. . .
+
+- **Breaking big problems into small steps** — instead of staring at a question, you ask: *what's the first concrete thing I can do?*
+- **Thinking in transformations** — data isn't a fixed object; it's something you act on, step by step
+- **Debugging as a skill** — forming a hypothesis, testing it, revising — this is just the scientific method
+
+. . .
+
+You may never write another line of R after June. **That's okay.** The thinking you build here will show up everywhere: in a lab, in a dissertation, in any job that asks you to solve a messy problem.
+
+::: {.notes}
+This slide is a morale investment — plant it early and reference it when students get frustrated later in the term. The core message: the struggle is the point. Decomposing problems, testing hypotheses, tolerating ambiguity — these are transferable cognitive habits, not just coding tricks. Psychology students in particular often don't see themselves as "technical people." This reframes the course as building a way of thinking, not just a skill set. Keep this short (~1–2 minutes) and deliver it warmly — it should feel like reassurance, not a lecture.
+:::
+
+---
+
+### The interview no one warns you about
+
+Many data science and research jobs include a **technical interview** — you're given a dataset and asked to write code **live**, on the spot.
+
+No AI. No Stack Overflow. No notes. Just you and a blank script.
+
+You don't need to be ready for that by June. But every time you practice writing code from memory — instead of copying or prompting — you're building the confidence and fluency that will matter when it counts.
+
+**Start now, so you're not starting from zero later.**
+
+::: {.notes}
+This slide lands well after the cognitive helmet framing — it gives students a concrete, career-relevant reason to practice without AI. Don't oversell the stakes ("you'll never get a job!") — the tone should be encouraging. The message: you're building a skill that compounds. Even if they're not headed for a data science career, being able to sit down and code without a crutch is a transferable confidence. Mention that live coding interviews are common in tech, research labs, and increasingly in social science positions that involve data work.
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 
