@@ -661,7 +661,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "15: Storytelling with Data"
+      "15: Missing Data"
     ]
   },
   {
@@ -673,7 +673,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "15: Storytelling with Data"
+      "15: Missing Data"
     ]
   },
   {
@@ -685,7 +685,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "15: Storytelling with Data"
+      "15: Missing Data"
     ]
   },
   {
@@ -697,7 +697,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "15: Storytelling with Data"
+      "15: Missing Data"
     ]
   },
   {
@@ -709,7 +709,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "13: Joins"
+      "13: Strings, Factors & Text"
     ]
   },
   {
@@ -721,7 +721,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "13: Joins"
+      "13: Strings, Factors & Text"
     ]
   },
   {
@@ -733,7 +733,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "13: Joins"
+      "13: Strings, Factors & Text"
     ]
   },
   {
@@ -745,7 +745,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "13: Joins"
+      "13: Strings, Factors & Text"
     ]
   },
   {
@@ -757,7 +757,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "11: Data Types Grab Bag"
+      "11: EDA — Covariation"
     ]
   },
   {
@@ -769,7 +769,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "11: Data Types Grab Bag"
+      "11: EDA — Covariation"
     ]
   },
   {
@@ -781,7 +781,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "11: Data Types Grab Bag"
+      "11: EDA — Covariation"
     ]
   },
   {
@@ -793,7 +793,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "11: Data Types Grab Bag"
+      "11: EDA — Covariation"
     ]
   },
   {
@@ -805,7 +805,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "9: EDA — Variation"
+      "9: Perception & Design"
     ]
   },
   {
@@ -817,7 +817,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "9: EDA — Variation"
+      "9: Perception & Design"
     ]
   },
   {
@@ -829,7 +829,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "9: EDA — Variation"
+      "9: Perception & Design"
     ]
   },
   {
@@ -841,7 +841,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "9: EDA — Variation"
+      "9: Perception & Design"
     ]
   },
   {
@@ -853,7 +853,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "7: Layers & Aesthetics"
+      "7: Quarto & Reproducibility"
     ]
   },
   {
@@ -865,7 +865,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "7: Layers & Aesthetics"
+      "7: Quarto & Reproducibility"
     ]
   },
   {
@@ -877,7 +877,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "7: Layers & Aesthetics"
+      "7: Quarto & Reproducibility"
     ]
   },
   {
@@ -889,7 +889,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "7: Layers & Aesthetics"
+      "7: Quarto & Reproducibility"
     ]
   },
   {
@@ -1353,7 +1353,7 @@
     "href": "assignment/04-assignment.html#part-4-recreate-a-figure-15-points",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Part 4: Recreate a Figure (15 points)",
-    "text": "Part 4: Recreate a Figure (15 points)\nUsing the provided image on Canvas, recreate the figure as closely as possible. Pay attention to:\n\nGeom type\nColors\nLabels\nTheme elements\n\nYou won’t match it exactly, but get as close as you can.",
+    "text": "Part 4: Recreate a Figure (15 points)\nThis task uses data from a real psychology study on partisan bias in news evaluation. Participants were assigned to one of three teams (Team Spain, Team Greece, or No Team) and read news statements slanted toward one side or the other. The outcome is an acceptance threshold (c) from signal detection theory — higher values mean the participant required stronger evidence before accepting a statement as true.\nDownload partisan_bias.csv from Canvas and save it in your data/raw/ folder. The file has four columns:\n\n\n\n\n\n\n\nColumn\nDescription\n\n\n\n\nparticipant_id\nUnique participant identifier\n\n\nteam\nGroup assignment: 1 = Team Spain, 2 = Team Greece, 3 = No Team\n\n\nSP_c\nAcceptance threshold for Pro-Spain statements\n\n\nGR_c\nAcceptance threshold for Pro-Greece statements\n\n\n\n\nTask 4.1\nImport the data and convert team from a number to a factor with labels “Spain”, “Greece”, and “No Team” (in that order).\n\n\nTask 4.2\nRecreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:\n\nGeom type and positioning\nError bars\nAxis labels and legend title\nTheme\n\nYou won’t match it exactly — plain text axis labels are fine.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2101,7 +2101,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "8: Perception & Design"
+      "8: Layers & Aesthetics"
     ]
   },
   {
@@ -2113,7 +2113,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "8: Perception & Design"
+      "8: Layers & Aesthetics"
     ]
   },
   {
@@ -2125,7 +2125,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "8: Perception & Design"
+      "8: Layers & Aesthetics"
     ]
   },
   {
@@ -2137,7 +2137,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "8: Perception & Design"
+      "8: Layers & Aesthetics"
     ]
   },
   {
@@ -2149,7 +2149,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "10: EDA — Covariation"
+      "10: EDA — Variation"
     ]
   },
   {
@@ -2161,7 +2161,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "10: EDA — Covariation"
+      "10: EDA — Variation"
     ]
   },
   {
@@ -2173,7 +2173,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "10: EDA — Covariation"
+      "10: EDA — Variation"
     ]
   },
   {
@@ -2185,7 +2185,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "10: EDA — Covariation"
+      "10: EDA — Variation"
     ]
   },
   {
@@ -2197,7 +2197,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "12: Strings & Factors"
+      "12: Data Types Grab Bag"
     ]
   },
   {
@@ -2209,7 +2209,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "12: Strings & Factors"
+      "12: Data Types Grab Bag"
     ]
   },
   {
@@ -2221,7 +2221,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "12: Strings & Factors"
+      "12: Data Types Grab Bag"
     ]
   },
   {
@@ -2233,7 +2233,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "12: Strings & Factors"
+      "12: Data Types Grab Bag"
     ]
   },
   {
@@ -2245,7 +2245,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "14: Missing Data"
+      "14: Joins"
     ]
   },
   {
@@ -2257,7 +2257,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "14: Missing Data"
+      "14: Joins"
     ]
   },
   {
@@ -2269,7 +2269,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "14: Missing Data"
+      "14: Joins"
     ]
   },
   {
@@ -2281,7 +2281,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "14: Missing Data"
+      "14: Joins"
     ]
   },
   {
@@ -2293,7 +2293,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "16: Quarto"
+      "16: Storytelling with Data"
     ]
   },
   {
@@ -2305,7 +2305,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "16: Quarto"
+      "16: Storytelling with Data"
     ]
   },
   {
@@ -2317,7 +2317,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "16: Quarto"
+      "16: Storytelling with Data"
     ]
   },
   {
@@ -2329,7 +2329,7 @@
     "crumbs": [
       "Content",
       "Course content",
-      "16: Quarto"
+      "16: Storytelling with Data"
     ]
   },
   {
