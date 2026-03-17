@@ -1197,7 +1197,7 @@
     "href": "assignment/06-assignment.html#setup",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Setup",
-    "text": "Setup\n# Assignment 6: Data Types & Wrangling\n# Your Name\n# Date\n\nlibrary(tidyverse)",
+    "text": "Setup\n# Assignment 6: Data Types & Wrangling\n# Your Name\n# Date\n\nlibrary(tidyverse)\nlibrary(tidytext)\n\n# If you haven't installed tidytext:\n# install.packages(\"tidytext\")",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1253,11 +1253,23 @@
     ]
   },
   {
+    "objectID": "assignment/06-assignment.html#part-5-text-analysis-15-points",
+    "href": "assignment/06-assignment.html#part-5-text-analysis-15-points",
+    "title": "Assignment 6: Data Types & Wrangling",
+    "section": "Part 5: Text Analysis (15 points)",
+    "text": "Part 5: Text Analysis (15 points)\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 5.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 5.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 5.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "6: Data Types"
+    ]
+  },
+  {
     "objectID": "assignment/06-assignment.html#submission",
     "href": "assignment/06-assignment.html#submission",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Submission",
-    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll data cleaning operations work correctly\nFactors are in correct order\nPipeline produces clean final dataset",
+    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll data cleaning operations work correctly\nFactors are in correct order\nPipeline produces clean final dataset\nText analysis section complete with visualization",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1605,7 +1617,7 @@
     "href": "assignment/03-assignment.html#part-3-importing-data-40-points",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Part 3: Importing Data (40 points)",
-    "text": "Part 3: Importing Data (40 points)\nDownload the provided data files from Canvas:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here\n\n\nTask 3.4\nJoin the survey data with the demographics data by participant ID. How many participants have complete data in both files?",
+    "text": "Part 3: Importing Data (40 points)\nDownload the provided data files from Canvas and save them in your project’s data/raw/ folder:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here\n\n\nTask 3.4\nJoin the survey data with the demographics data by participant ID. How many participants have complete data in both files?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1617,7 +1629,7 @@
     "href": "assignment/03-assignment.html#submission",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nScript runs without errors\n\nSubmit your .R file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nScript runs without errors\n\nSubmit your .qmd file and your rendered .html file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
