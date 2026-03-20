@@ -269,7 +269,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 15.26659, 18.77825, 15.53650, 23.37218, 12.23995, 17.6…</code></pre>
+$ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 18.6…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -552,11 +552,11 @@ $ depression_post &lt;dbl&gt; 15.26659, 18.77825, 15.53650, 23.37218, 12.23995, 
 <pre><code># A tibble: 6 × 2
   gender     diagnosis
   &lt;chr&gt;      &lt;chr&gt;    
-1 Male       Other    
-2 Non-binary Anxiety  
-3 Male       Anxiety  
-4 Female     Both     
-5 Non-binary Both     
+1 Non-binary Other    
+2 Male       Other    
+3 Male       Both     
+4 Female     Other    
+5 Non-binary Anxiety  
 6 Non-binary Other    </code></pre>
 </div>
 </div>
@@ -738,8 +738,8 @@ $ depression_post &lt;dbl&gt; 15.26659, 18.77825, 15.53650, 23.37218, 12.23995, 
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 69.75384, 20.15166, 26.11935, 18.44091, 30.27889, 40.933…
-$ reaction_time &lt;dbl&gt; 470.2443, 238.9685, 280.4556, 239.5543, 306.4369, 262.60…</code></pre>
+$ age           &lt;dbl&gt; 49.20563, 30.99242, 23.14226, 45.92638, 22.77392, 24.044…
+$ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 260.50…</code></pre>
 </div>
 </div>
 </section>
@@ -950,7 +950,7 @@ $ reaction_time &lt;dbl&gt; 470.2443, 238.9685, 280.4556, 239.5543, 306.4369, 26
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.6944115</code></pre>
+<pre><code>[1] 0.8072442</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1131,6 +1131,118 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div>
 <figure>
 <p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Horizontal bar chart of vehicle types ordered by frequency, showing SUVs as the most common type followed by compact and midsize cars." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
+<section>
+<section id="your-class-data-covariation" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Your class data: Covariation</h1>
+
+</section>
+<section id="stress-by-chronotype" class="slide level2">
+<h2>Stress by chronotype</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> chronotype, <span class="at">y =</span> stress, <span class="at">fill =</span> chronotype)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Are Night Owls More Stressed?"</span>,</span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Chronotype"</span>,</span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Current stress level (1–10)"</span></span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>This is a categorical + continuous example from your own class. Ask: “Do night owls appear more stressed, or is it about the same?” The answer will vary by class — that’s the fun of using real data. Connect to the earlier lesson: a boxplot shows you medians and spread, but it hides the distribution shape.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="stress-by-chronotype-output" class="slide level2 output-location-slide"><h2>Stress by chronotype</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Boxplots comparing self-reported stress levels across chronotype groups (Morning, Evening, Neither), showing how stress varies by sleep preference." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="coding-excitement-vs.-coding-anxiety" class="slide level2">
+<h2>Coding excitement vs.&nbsp;coding anxiety</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> coding_excited, <span class="at">y =</span> coding_anxious)) <span class="sc">+</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Does Excitement Buffer Anxiety About Coding?"</span>,</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Excitement about learning to code (1–10)"</span>,</span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety about learning to code (1–10)"</span></span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>This is a continuous + continuous example with a psychologically interesting question. Use geom_jitter because many students gave the same integer responses, creating overplotting. Ask: “What do you notice? Can you be both excited and anxious?” (Yes — ambivalence is real.) The trend line gives a preview of correlation, which they’ll formalize in Session 17.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="coding-excitement-vs.-coding-anxiety-output" class="slide level2 output-location-slide"><h2>Coding excitement vs.&nbsp;coding anxiety</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Scatterplot of coding excitement versus coding anxiety scores, showing whether students who are more excited about coding also tend to be more or less anxious about it." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="caffeine-and-sleep" class="slide level2">
+<h2>Caffeine and sleep</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> caffeine_per_day, <span class="at">y =</span> sleep_hrs)) <span class="sc">+</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"More Caffeine, Less Sleep?"</span>,</span>
+<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Caffeinated drinks per day"</span>,</span>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Average hours of sleep per night"</span></span>
+<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>Another continuous + continuous example that students find relatable. The direction and strength of this relationship will vary by class — that’s fine. Ask: “Does this surprise you? What’s a possible confound?” (Maybe people who sleep less drink more caffeine to compensate, rather than caffeine causing poor sleep.) This is a natural correlation-vs-causation moment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section><section id="caffeine-and-sleep-output" class="slide level2 output-location-slide"><h2>Caffeine and sleep</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Scatterplot of caffeine drinks per day versus average hours of sleep, with a trend line showing whether caffeine consumption is associated with sleep duration." width="960"></p>
 </figure>
 </div>
 </div>

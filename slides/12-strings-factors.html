@@ -1220,6 +1220,129 @@ Levels: blue red</code></pre>
 </div>
 </section></section>
 <section>
+<section id="light-text-analysis" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Light text analysis</h1>
+
+</section>
+<section id="what-did-you-say-about-data" class="slide level2">
+<h2>What did you say about data?</h2>
+<p>On the class survey, you described your relationship with data in 1–2 words. Let’s see what you said.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb83-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
+<span id="cb83-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 1
+   data_words                                                                   
+   &lt;chr&gt;                                                                        
+ 1 natoque imperdiet ligula commodo! convallis accusamus tincidunt luctus viver…
+ 2 imperdiet. natoque morbi mattis! fringilla pede lectus tempor mi dignissim i…
+ 3 morbi et pede luctus at. sit wisi fermentum quis metus dui.                  
+ 4 fermentum cursus leo placerat erat sapien aliquam nunc cursus sed nec ipsum …
+ 5 sit eu gravida fringilla vulputate rutrum, sem nulla at platea. iaculis ut. …
+ 6 suspendisse tempus. dui. sapien mi quis dui integer montes sit eleifend? imp…
+ 7 suscipit temporibus mi eros integer blandit vestibulum. dui ridiculus sodale…
+ 8 morbi dapibus ullamcorper aliquam vestibulum molestie magnis ab malesuada co…
+ 9 morbi sed rutrum, sagittis. pede gravida euismod? lectus nonummy convallis p…
+10 tincidunt posuere nec nec fusce vestibulum! sagittis? venenatis nulla nec lo…</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Transition: “We’ve been cleaning strings and ordering factors. Now let’s do something fun with text data — your text data.” Show the raw responses. Students will laugh at some of the answers. This motivates the next step: how do we summarize open-ended text?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="tokenizing-text-with-tidytext" class="slide level2">
+<h2>Tokenizing text with tidytext</h2>
+<p><code>unnest_tokens()</code> splits text into individual words:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> class_survey <span class="sc">|&gt;</span></span>
+<span id="cb85-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
+<span id="cb85-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, data_words)</span>
+<span id="cb85-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-5"><a href="" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 615 × 1
+   word       
+   &lt;chr&gt;      
+ 1 natoque    
+ 2 imperdiet  
+ 3 ligula     
+ 4 commodo    
+ 5 convallis  
+ 6 accusamus  
+ 7 tincidunt  
+ 8 luctus     
+ 9 viverra    
+10 scelerisque
+# ℹ 605 more rows</code></pre>
+</div>
+</div>
+<p>Each row is now a single word.</p>
+<aside class="notes">
+<p>Explain: unnest_tokens takes a column of text and turns each word into its own row. The first argument is what to call the new column, the second is the source column. This is the foundation of text analysis — you can’t count words until they’re in separate rows.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="what-words-came-up-most" class="slide level2">
+<h2>What words came up most?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb87-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb87-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb87-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">word =</span> <span class="fu">fct_reorder</span>(word, n)) <span class="sc">|&gt;</span></span>
+<span id="cb87-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> word)) <span class="sc">+</span></span>
+<span id="cb87-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb87-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb87-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How Our Class Describes Their Relationship with Data"</span>,</span>
+<span id="cb87-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Count"</span>,</span>
+<span id="cb87-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb87-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb87-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>Walk through the pipeline: anti_join removes common filler words (“the”, “a”, “is”), count tallies each word, and fct_reorder puts them in order for the plot. Ask: “What themes do you see? Are people mostly positive, negative, or neutral?” This connects string skills, factor ordering, and visualization — a nice capstone moment. Point out that fct_reorder here does exactly what they learned earlier in the factors section.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section><section id="what-words-came-up-most-output" class="slide level2 output-location-slide"><h2>What words came up most?</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="12-strings-factors_files/figure-revealjs/unnamed-chunk-44-1.png" alt="Horizontal bar chart showing the most common words students used to describe their relationship with data, ordered by frequency." width="768"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
+<section>
 <section id="end-of-deck-exercise" class="title-slide slide level1 center" data-background-color="#e67e22">
 <h1>End-of-deck exercise</h1>
 
@@ -1228,11 +1351,11 @@ Levels: blue red</code></pre>
 <h2>Practice: Clean and visualize survey data</h2>
 <p>You have messy Likert scale data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb83-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
-<span id="cb83-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"strongly agree"</span>, <span class="st">"Agree"</span>, <span class="st">"NEUTRAL"</span>,</span>
-<span id="cb83-4"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"disagree"</span>, <span class="st">"Strongly Disagree"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb83-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb88-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb88-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"strongly agree"</span>, <span class="st">"Agree"</span>, <span class="st">"NEUTRAL"</span>,</span>
+<span id="cb88-4"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"disagree"</span>, <span class="st">"Strongly Disagree"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb88-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Clean the <code>response</code> variable to title case</li>

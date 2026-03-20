@@ -294,7 +294,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-3.1-the-bad-graph" id="toc-task-3.1-the-bad-graph" class="nav-link" data-scroll-target="#task-3.1-the-bad-graph">Task 3.1: The Bad Graph</a></li>
   <li><a href="#task-3.2-the-good-graph" id="toc-task-3.2-the-good-graph" class="nav-link" data-scroll-target="#task-3.2-the-good-graph">Task 3.2: The Good Graph</a></li>
   </ul></li>
-  <li><a href="#part-4-recreate-a-figure-15-points" id="toc-part-4-recreate-a-figure-15-points" class="nav-link" data-scroll-target="#part-4-recreate-a-figure-15-points">Part 4: Recreate a Figure (15 points)</a></li>
+  <li><a href="#part-4-recreate-a-figure-15-points" id="toc-part-4-recreate-a-figure-15-points" class="nav-link" data-scroll-target="#part-4-recreate-a-figure-15-points">Part 4: Recreate a Figure (15 points)</a>
+  <ul class="collapse">
+  <li><a href="#task-4.1" id="toc-task-4.1" class="nav-link" data-scroll-target="#task-4.1">Task 4.1</a></li>
+  <li><a href="#task-4.2" id="toc-task-4.2" class="nav-link" data-scroll-target="#task-4.2">Task 4.2</a></li>
+  </ul></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   <li><a href="#graduate-extension-publication-ready-figure" id="toc-graduate-extension-publication-ready-figure" class="nav-link" data-scroll-target="#graduate-extension-publication-ready-figure">Graduate Extension: Publication-Ready Figure</a>
   <ul class="collapse">
@@ -415,14 +419,53 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-4-recreate-a-figure-15-points" class="level2">
 <h2 class="anchored" data-anchor-id="part-4-recreate-a-figure-15-points">Part 4: Recreate a Figure (15 points)</h2>
-<p>Using the provided image on Canvas, recreate the figure as closely as possible. Pay attention to:</p>
+<p>This task uses data from a real psychology study on partisan bias in news evaluation. Participants were assigned to one of three teams (Team Spain, Team Greece, or No Team) and read news statements slanted toward one side or the other. The outcome is an acceptance threshold (<em>c</em>) from signal detection theory — higher values mean the participant required stronger evidence before accepting a statement as true.</p>
+<p>Download <code>partisan_bias.csv</code> from Canvas and save it in your <code>data/raw/</code> folder. The file has four columns:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 38%">
+<col style="width: 61%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Column</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>participant_id</code></td>
+<td>Unique participant identifier</td>
+</tr>
+<tr class="even">
+<td><code>team</code></td>
+<td>Group assignment: 1 = Team Spain, 2 = Team Greece, 3 = No Team</td>
+</tr>
+<tr class="odd">
+<td><code>SP_c</code></td>
+<td>Acceptance threshold for Pro-Spain statements</td>
+</tr>
+<tr class="even">
+<td><code>GR_c</code></td>
+<td>Acceptance threshold for Pro-Greece statements</td>
+</tr>
+</tbody>
+</table>
+<section id="task-4.1" class="level3">
+<h3 class="anchored" data-anchor-id="task-4.1">Task 4.1</h3>
+<p>Import the data and convert <code>team</code> from a number to a factor with labels “Spain”, “Greece”, and “No Team” (in that order).</p>
+</section>
+<section id="task-4.2" class="level3">
+<h3 class="anchored" data-anchor-id="task-4.2">Task 4.2</h3>
+<p>Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:</p>
 <ul>
-<li>Geom type</li>
-<li>Colors</li>
-<li>Labels</li>
-<li>Theme elements</li>
+<li>Geom type and positioning</li>
+<li>Error bars</li>
+<li>Axis labels and legend title</li>
+<li>Theme</li>
 </ul>
-<p>You won’t match it exactly, but get as close as you can.</p>
+<p>You won’t match it exactly — plain text axis labels are fine.</p>
+</section>
 </section>
 <section id="submission" class="level2">
 <h2 class="anchored" data-anchor-id="submission">Submission</h2>

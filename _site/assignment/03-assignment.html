@@ -304,6 +304,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-g.2" id="toc-task-g.2" class="nav-link" data-scroll-target="#task-g.2">Task G.2</a></li>
   <li><a href="#task-g.3" id="toc-task-g.3" class="nav-link" data-scroll-target="#task-g.3">Task G.3</a></li>
   <li><a href="#task-g.4" id="toc-task-g.4" class="nav-link" data-scroll-target="#task-g.4">Task G.4</a></li>
+  <li><a href="#task-g.5" id="toc-task-g.5" class="nav-link" data-scroll-target="#task-g.5">Task G.5</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -406,7 +407,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="part-3-importing-data-40-points" class="level2">
 <h2 class="anchored" data-anchor-id="part-3-importing-data-40-points">Part 3: Importing Data (40 points)</h2>
-<p>Download the provided data files from Canvas:</p>
+<p>Download the provided data files from Canvas and save them in your project’s <code>data/raw/</code> folder:</p>
 <ul>
 <li><code>survey_data.csv</code> — Survey responses with some messy formatting</li>
 <li><code>demographics.xlsx</code> — Participant demographics in Excel format</li>
@@ -443,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><label><input type="checkbox">Data joined correctly</label></li>
 <li><label><input type="checkbox">Script runs without errors</label></li>
 </ul>
-<p>Submit your <code>.R</code> file on Canvas.</p>
+<p>Submit your <code>.qmd</code> file <strong>and</strong> your rendered <code>.html</code> file on Canvas.</p>
 <hr>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -462,6 +463,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="graduate-extension-qualtrics-api" class="level2">
 <h2 class="anchored" data-anchor-id="graduate-extension-qualtrics-api">Graduate Extension: Qualtrics API</h2>
 <p>Most psychology researchers collect data through Qualtrics. Instead of logging in and downloading a CSV by hand, you can pull data directly into R using the <code>qualtRics</code> package — a workflow that scales to repeated data collection and eliminates manual steps that introduce error.</p>
+<p>For this extension you’ll pull data from the anonymous start-of-term survey that your classmates completed in Week 1. Because it was collected anonymously, the data are safe to work with directly — no masking needed.</p>
 <section id="setup-1" class="level3">
 <h3 class="anchored" data-anchor-id="setup-1">Setup</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("qualtRics")</span></span>
@@ -469,24 +471,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="task-g.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
-<p>Authenticate with the Qualtrics API using your UO API key and data center ID. Instructions for locating these in your Qualtrics account settings are posted on Canvas.</p>
+<p>Authenticate with the Qualtrics API using your UO API key and data center ID. You’ll find both in Qualtrics under Account Settings → Qualtrics IDs.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">qualtrics_api_credentials</span>(</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">api_key  =</span> <span class="st">"YOUR_API_KEY"</span>,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_url =</span> <span class="st">"YOUR_BASE_URL"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">base_url =</span> <span class="st">"YOUR_DATACENTER.qualtrics.com"</span></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-g.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
-<p>Pull responses from the shared course practice survey (survey ID posted on Canvas) using <code>fetch_survey()</code>. Print the first few rows and run <code>glimpse()</code> on the result.</p>
+<p>Pull responses from the start-of-term survey using <code>fetch_survey()</code>. The survey ID is posted on Canvas.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>survey_id <span class="ot">&lt;-</span> <span class="st">"SV_XXXXXXXXXXXXXXX"</span>  <span class="co"># replace with actual ID from Canvas</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>raw <span class="ot">&lt;-</span> <span class="fu">fetch_survey</span>(<span class="at">surveyID =</span> survey_id)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-g.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>
-<p>Compare the API output to the manually exported CSV version of the same survey (also on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match?</p>
+<p>The raw API output includes a lot of Qualtrics metadata columns (timing, location, status flags) alongside the actual responses. Select only the columns that correspond to the survey questions and give them informative names.</p>
 </section>
 <section id="task-g.4" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.4">Task G.4</h3>
-<p>Write a short reflection (~half a page, as a comment block in your script) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?</p>
-<p><strong>Submission:</strong> Add your code and reflection to the same <code>.R</code> file, clearly marked with a comment block: <code># === GRADUATE EXTENSION ===</code>.</p>
+<p>Compare your cleaned API output to the manually exported CSV version of the same survey (posted on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match exactly?</p>
+</section>
+<section id="task-g.5" class="level3">
+<h3 class="anchored" data-anchor-id="task-g.5">Task G.5</h3>
+<p>Write a short reflection (~half a page) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?</p>
+<p><strong>Submission:</strong> Add your code and reflection to your <code>.qmd</code> file under a clearly marked <code>## Graduate Extension</code> section.</p>
 
 
 </section>
