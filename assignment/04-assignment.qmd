@@ -87,14 +87,29 @@ Create a good version of the same data. In comments, explain your design choices
 
 ## Part 4: Recreate a Figure (15 points)
 
-Using the provided image on Canvas, recreate the figure as closely as possible. Pay attention to:
+This task uses data from a real psychology study on partisan bias in news evaluation. Participants were assigned to one of three teams (Team Spain, Team Greece, or No Team) and read news statements slanted toward one side or the other. The outcome is an acceptance threshold (*c*) from signal detection theory — higher values mean the participant required stronger evidence before accepting a statement as true.
 
-- Geom type
-- Colors
-- Labels
-- Theme elements
+Download `partisan_bias.csv` from Canvas and save it in your `data/raw/` folder. The file has four columns:
 
-You won't match it exactly, but get as close as you can.
+| Column | Description |
+|--------|-------------|
+| `participant_id` | Unique participant identifier |
+| `team` | Group assignment: 1 = Team Spain, 2 = Team Greece, 3 = No Team |
+| `SP_c` | Acceptance threshold for Pro-Spain statements |
+| `GR_c` | Acceptance threshold for Pro-Greece statements |
+
+### Task 4.1
+Import the data and convert `team` from a number to a factor with labels "Spain", "Greece", and "No Team" (in that order).
+
+### Task 4.2
+Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:
+
+- Geom type and positioning
+- Error bars
+- Axis labels and legend title
+- Theme
+
+You won't match it exactly — plain text axis labels are fine.
 
 ## Submission
 

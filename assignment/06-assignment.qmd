@@ -27,6 +27,10 @@ This assignment practices working with different data types: logical vectors, nu
 # Date
 
 library(tidyverse)
+library(tidytext)
+
+# If you haven't installed tidytext:
+# install.packages("tidytext")
 ```
 
 ## Part 1: Logical Vectors & Recoding (30 points)
@@ -113,6 +117,48 @@ Create a complete data cleaning pipeline for the survey data that:
 
 Use a single piped sequence.
 
+## Part 5: Text Analysis (15 points)
+
+Open-ended survey responses often contain valuable data. Here are responses from the same study:
+
+```r
+open_responses <- tibble(
+  id = 1:15,
+  response = c(
+    "I felt very stressed and anxious throughout the study",
+    "The tasks were challenging but I found them interesting",
+    "I was confused by some of the instructions at first",
+    "Participating made me feel nervous but also curious",
+    "The study was well organized and the instructions were clear",
+    "I felt overwhelmed at times but managed to stay focused",
+    "Some questions were confusing and hard to understand",
+    "I enjoyed the experience and learned something new",
+    "The tasks were repetitive and I lost focus near the end",
+    "I felt calm and confident during the experiment",
+    "It was stressful but I liked being part of research",
+    "The instructions were clear and easy to follow",
+    "I felt anxious about my performance on the tasks",
+    "Very interesting study about human behavior and emotion",
+    "I found the experience valuable and thought-provoking"
+  )
+)
+```
+
+### Task 5.1
+Use `unnest_tokens()` from the `tidytext` package to tokenize the responses into individual words.
+
+```r
+# Hint:
+open_responses |>
+  unnest_tokens(word, response)
+```
+
+### Task 5.2
+Remove common stop words (e.g., "the", "and", "I") using `anti_join(stop_words)`. How many unique words remain?
+
+### Task 5.3
+Count word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?
+
 ## Submission
 
 - [ ] Your `.qmd` file with all code and narrative
@@ -120,3 +166,4 @@ Use a single piped sequence.
 - [ ] All data cleaning operations work correctly
 - [ ] Factors are in correct order
 - [ ] Pipeline produces clean final dataset
+- [ ] Text analysis section complete with visualization

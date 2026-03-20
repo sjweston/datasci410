@@ -77,7 +77,7 @@ Using the wide format, create a new variable that is the sum of all three emotio
 
 ## Part 3: Importing Data (40 points)
 
-Download the provided data files from Canvas:
+Download the provided data files from Canvas and save them in your project's `data/raw/` folder:
 
 - `survey_data.csv` — Survey responses with some messy formatting
 - `demographics.xlsx` — Participant demographics in Excel format
@@ -111,7 +111,7 @@ Join the survey data with the demographics data by participant ID. How many part
 - [ ] Data joined correctly
 - [ ] Script runs without errors
 
-Submit your `.R` file on Canvas.
+Submit your `.qmd` file **and** your rendered `.html` file on Canvas.
 
 ---
 
@@ -124,6 +124,8 @@ Students enrolled in PSY 510 must complete the following extension in addition t
 
 Most psychology researchers collect data through Qualtrics. Instead of logging in and downloading a CSV by hand, you can pull data directly into R using the `qualtRics` package — a workflow that scales to repeated data collection and eliminates manual steps that introduce error.
 
+For this extension you'll pull data from the anonymous start-of-term survey that your classmates completed in Week 1. Because it was collected anonymously, the data are safe to work with directly — no masking needed.
+
 ### Setup
 
 ```r
@@ -133,25 +135,35 @@ library(qualtRics)
 
 ### Task G.1
 
-Authenticate with the Qualtrics API using your UO API key and data center ID. Instructions for locating these in your Qualtrics account settings are posted on Canvas.
+Authenticate with the Qualtrics API using your UO API key and data center ID. You'll find both in Qualtrics under Account Settings → Qualtrics IDs.
 
 ```r
 qualtrics_api_credentials(
   api_key  = "YOUR_API_KEY",
-  base_url = "YOUR_BASE_URL"
+  base_url = "YOUR_DATACENTER.qualtrics.com"
 )
 ```
 
 ### Task G.2
 
-Pull responses from the shared course practice survey (survey ID posted on Canvas) using `fetch_survey()`. Print the first few rows and run `glimpse()` on the result.
+Pull responses from the start-of-term survey using `fetch_survey()`. The survey ID is posted on Canvas.
+
+```r
+survey_id <- "SV_XXXXXXXXXXXXXXX"  # replace with actual ID from Canvas
+raw <- fetch_survey(surveyID = survey_id)
+glimpse(raw)
+```
 
 ### Task G.3
 
-Compare the API output to the manually exported CSV version of the same survey (also on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match?
+The raw API output includes a lot of Qualtrics metadata columns (timing, location, status flags) alongside the actual responses. Select only the columns that correspond to the survey questions and give them informative names.
 
 ### Task G.4
 
-Write a short reflection (~half a page, as a comment block in your script) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?
+Compare your cleaned API output to the manually exported CSV version of the same survey (posted on Canvas). Note at least two differences in column names, data types, or structure. What would you need to do to make them match exactly?
 
-**Submission:** Add your code and reflection to the same `.R` file, clearly marked with a comment block: `# === GRADUATE EXTENSION ===`.
+### Task G.5
+
+Write a short reflection (~half a page) answering: When would you use the API rather than a manual export in your own research? What are the tradeoffs in terms of effort, reliability, and reproducibility?
+
+**Submission:** Add your code and reflection to your `.qmd` file under a clearly marked `## Graduate Extension` section.
