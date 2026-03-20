@@ -108,7 +108,7 @@ Read the blockquote aloud — it's the course mission statement. The four bullet
 | Final project | 35% | Analyze a dataset of your choosing |
 
 ::: {.notes}
-Students fixate on grading — spend ~3 minutes walking through this clearly. Emphasize: quizzes are points-based but they can retake as many times as they'd like and you always take the best score, participation is about showing up and trying (not correctness), and the final project is the biggest piece. The 48-hour late policy applies to everything — mention it but don't belabor it now.
+Students fixate on grading — spend ~3 minutes walking through this clearly. Emphasize: quizzes are points-based but they can retake as many times as they'd like and you always take the best score, participation is about showing up and trying (not correctness) and the 2 lowest check-in scores are dropped, and the final project is the biggest piece. Mention the 48-hour late policy and the "life happens" extension token (one free 48-hour extension per student, email to request within one week of the due date). Don't belabor it now — just plant the seed so students know safety nets exist.
 :::
 
 ## Weekly assignments
@@ -120,7 +120,7 @@ Students fixate on grading — spend ~3 minutes walking through this clearly. Em
 
 . . .
 
-8 assignments total. Late submissions accepted up to 48 hours with a 10% daily penalty.
+8 assignments total. Late submissions accepted up to 48 hours with a 10% daily penalty. Plus one free "life happens" extension — email me within a week of the due date to use it.
 
 ## Reading quizzes
 
@@ -140,6 +140,7 @@ Every class, you'll work with a partner on a coding exercise.
 
 - Submit your attempt on Canvas before you leave
 - Graded on completion and good-faith effort, not correctness
+- **2 lowest scores dropped** — missing a class or two won't hurt your grade
 - This is your time to experiment, make mistakes, and learn
 
 ## The final project

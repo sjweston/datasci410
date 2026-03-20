@@ -26,9 +26,12 @@ execute:
 library(tidyverse)
 library(psych)
 
-# Load the Big Five personality dataset — this is our EDA playground
+# Load the Big Five personality dataset
 data(bfi)
 bfi <- as_tibble(bfi)
+
+# Load our class survey data
+class_survey <- read_csv("../data/class_survey.csv")
 ```
 
 # What is EDA? {background-color="#2c3e50"}
@@ -359,6 +362,83 @@ bfi |>
 
 ::: {.notes}
 Emphasize the documentation point. In psychology research, you need to justify every data cleaning decision in your methods section. "I removed 3 participants with ages over 80 because the study targeted 18-65 year olds" is fine. "I removed outliers" with no explanation is not. This connects to the reproducibility theme from Session 1.
+:::
+
+# Let's explore YOUR data {background-color="#2c3e50"}
+
+## Our class survey
+
+Remember that survey you filled out Week 1? Let's do some EDA on it.
+
+```{r}
+glimpse(class_survey)
+```
+
+::: {.notes}
+Transition: "We've been using the BFI dataset to practice EDA. Now let's see what our own class data looks like." Students perk up when it's their data. Walk through the glimpse output briefly — they should recognize the variable names from the survey they took.
+:::
+
+## How many tabs do you have open?
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+#| fig-alt: "Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution."
+ggplot(class_survey, aes(x = tabs_open)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(
+    title = "Browser Tabs Open During the Survey",
+    x = "Number of tabs",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+This variable almost always produces a beautiful right skew with outliers. Ask: "Who's the person with 80+ tabs?" Let students laugh. Then pivot: "Is that an outlier? Is it an error? Or is it just someone who doesn't close tabs?" This reinforces the earlier lesson — outliers are information, not mistakes.
+:::
+
+## How does our class sleep?
+
+```{r}
+#| output-location: slide
+#| fig-width: 10
+#| fig-height: 5
+#| fig-alt: "Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours."
+ggplot(class_survey, aes(x = sleep_hrs)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
+  labs(
+    title = "How Much Sleep Does Our Class Get?",
+    x = "Average hours of sleep per night",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+Compare this to the tabs distribution: "Notice how different the shape is. Sleep is roughly symmetric — most people cluster around 7 hours. Tabs was heavily skewed. That's EDA in action — you're noticing things."
+:::
+
+## Morning people or night owls?
+
+```{r}
+#| output-location: slide
+#| fig-width: 8
+#| fig-height: 5
+#| fig-alt: "Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither."
+ggplot(class_survey, aes(x = chronotype)) +
+  geom_bar(fill = "steelblue") +
+  labs(
+    title = "Chronotype Distribution in Our Class",
+    x = "Chronotype",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+A categorical variable from our own data. Ask: "Does this match what you'd expect from a class of college students?" Most college samples skew evening. Transition to the pair coding break.
 :::
 
 # Pair coding break {background-color="#e67e22"}

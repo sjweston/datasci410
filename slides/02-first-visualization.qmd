@@ -25,6 +25,7 @@ execute:
 #| include: false
 # Load packages for all slides
 library(tidyverse)
+class_survey <- read_csv("../data/class_survey.csv")
 ```
 
 # Why visualize? {background-color="#2c3e50"}
@@ -642,6 +643,32 @@ ggplot(psych_demo, aes(x = condition, y = anxiety, fill = condition)) +
 
 ::: {.notes}
 This is the "so what" bridge to psychology. Emphasize that the exact same template they just learned with car data works with any dataset — including their own research data. The simulated anxiety data uses realistic values (BAI scores typically range from 0–63). Ask: "What does this plot tell us about the treatment?" Make the point that even with a small simulated dataset, a boxplot immediately communicates the group difference.
+:::
+
+## Coming soon: YOUR data
+
+During Week 1, you filled out a short survey. By the end of this course, you'll be able to turn those responses into visualizations like this:
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 5
+#| fig-alt: "Histogram of the number of browser tabs students reported having open, showing a right-skewed distribution with most students clustered at low values and a few extreme outliers."
+ggplot(class_survey, aes(x = tabs_open)) +
+  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  labs(
+    title = "How many browser tabs do you have open right now?",
+    subtitle = "PSY 410 class survey",
+    x = "Number of tabs",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+That's **your** data. Every dot and bar in this course will eventually feel this personal.
+
+::: {.notes}
+This is a quick teaser — don't dwell here (30 seconds). The point is to create anticipation: "We'll come back to this data throughout the course." If students ask about the survey, remind them it's anonymous and we'll use it for in-class demos. If this slide needs to be cut for time, it's the first to go — everything before and after is higher priority.
 :::
 
 # Putting it together {background-color="#2c3e50"}

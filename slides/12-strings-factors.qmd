@@ -26,6 +26,10 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(tidytext)
+
+# Load our class survey data
+class_survey <- read_csv("../data/class_survey.csv")
 ```
 
 # The Power Play {background-color="#e67e22"}
@@ -662,6 +666,66 @@ colors
 . . .
 
 **Solution:** Convert to character first, or use `fct_expand()` to add levels.
+
+# Light text analysis {background-color="#2c3e50"}
+
+## What did you say about data?
+
+On the class survey, you described your relationship with data in 1–2 words. Let's see what you said.
+
+```{r}
+class_survey |>
+  select(data_words) |>
+  head(10)
+```
+
+::: {.notes}
+Transition: "We've been cleaning strings and ordering factors. Now let's do something fun with text data — your text data." Show the raw responses. Students will laugh at some of the answers. This motivates the next step: how do we summarize open-ended text?
+:::
+
+## Tokenizing text with tidytext
+
+`unnest_tokens()` splits text into individual words:
+
+```{r}
+words <- class_survey |>
+  select(data_words) |>
+  unnest_tokens(word, data_words)
+
+words
+```
+
+Each row is now a single word.
+
+::: {.notes}
+Explain: unnest_tokens takes a column of text and turns each word into its own row. The first argument is what to call the new column, the second is the source column. This is the foundation of text analysis — you can't count words until they're in separate rows.
+:::
+
+## What words came up most?
+
+```{r}
+#| output-location: slide
+#| fig-width: 8
+#| fig-height: 5
+#| fig-alt: "Horizontal bar chart showing the most common words students used to describe their relationship with data, ordered by frequency."
+words |>
+  anti_join(stop_words, by = "word") |>
+  count(word, sort = TRUE) |>
+  slice_head(n = 10) |>
+  mutate(word = fct_reorder(word, n)) |>
+  ggplot(aes(x = n, y = word)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "How Our Class Describes Their Relationship with Data",
+    x = "Count",
+    y = NULL
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+Walk through the pipeline: anti_join removes common filler words ("the", "a", "is"), count tallies each word, and fct_reorder puts them in order for the plot. Ask: "What themes do you see? Are people mostly positive, negative, or neutral?" This connects string skills, factor ordering, and visualization — a nice capstone moment. Point out that fct_reorder here does exactly what they learned earlier in the factors section.
+:::
 
 # End-of-deck exercise {background-color="#e67e22"}
 

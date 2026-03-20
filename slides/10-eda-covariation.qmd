@@ -28,6 +28,9 @@ execute:
 library(tidyverse)
 library(ggrain)
 library(patchwork)
+
+# Load our class survey data
+class_survey <- read_csv("../data/class_survey.csv")
 ```
 
 # From variation to covariation {background-color="#2c3e50"}
@@ -647,6 +650,67 @@ ggplot(mpg, aes(y = fct_infreq(class))) +
   ) +
   theme_minimal()
 ```
+
+# Your class data: Covariation {background-color="#2c3e50"}
+
+## Stress by chronotype
+
+```{r}
+#| output-location: slide
+#| fig-alt: "Boxplots comparing self-reported stress levels across chronotype groups (Morning, Evening, Neither), showing how stress varies by sleep preference."
+ggplot(class_survey, aes(x = chronotype, y = stress, fill = chronotype)) +
+  geom_boxplot(alpha = 0.7, show.legend = FALSE) +
+  labs(
+    title = "Are Night Owls More Stressed?",
+    x = "Chronotype",
+    y = "Current stress level (1–10)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+This is a categorical + continuous example from your own class. Ask: "Do night owls appear more stressed, or is it about the same?" The answer will vary by class — that's the fun of using real data. Connect to the earlier lesson: a boxplot shows you medians and spread, but it hides the distribution shape.
+:::
+
+## Coding excitement vs. coding anxiety
+
+```{r}
+#| output-location: slide
+#| fig-alt: "Scatterplot of coding excitement versus coding anxiety scores, showing whether students who are more excited about coding also tend to be more or less anxious about it."
+ggplot(class_survey, aes(x = coding_excited, y = coding_anxious)) +
+  geom_jitter(width = 0.2, height = 0.2, alpha = 0.6, size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "Does Excitement Buffer Anxiety About Coding?",
+    x = "Excitement about learning to code (1–10)",
+    y = "Anxiety about learning to code (1–10)"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+This is a continuous + continuous example with a psychologically interesting question. Use geom_jitter because many students gave the same integer responses, creating overplotting. Ask: "What do you notice? Can you be both excited and anxious?" (Yes — ambivalence is real.) The trend line gives a preview of correlation, which they'll formalize in Session 17.
+:::
+
+## Caffeine and sleep
+
+```{r}
+#| output-location: slide
+#| fig-alt: "Scatterplot of caffeine drinks per day versus average hours of sleep, with a trend line showing whether caffeine consumption is associated with sleep duration."
+ggplot(class_survey, aes(x = caffeine_per_day, y = sleep_hrs)) +
+  geom_jitter(width = 0.2, height = 0.2, alpha = 0.6, size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "steelblue") +
+  labs(
+    title = "More Caffeine, Less Sleep?",
+    x = "Caffeinated drinks per day",
+    y = "Average hours of sleep per night"
+  ) +
+  theme_minimal(base_size = 14)
+```
+
+::: {.notes}
+Another continuous + continuous example that students find relatable. The direction and strength of this relationship will vary by class — that's fine. Ask: "Does this surprise you? What's a possible confound?" (Maybe people who sleep less drink more caffeine to compensate, rather than caffeine causing poor sleep.) This is a natural correlation-vs-causation moment.
+:::
 
 # End-of-deck exercise {background-color="#e67e22"}
 
