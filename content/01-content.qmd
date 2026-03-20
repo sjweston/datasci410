@@ -13,8 +13,7 @@ date: "2026-03-30"
 
 ✅ **Setup tasks:**
 
-- Download and install [R](https://cloud.r-project.org)
-- Download and install [RStudio](https://posit.co/download/rstudio-desktop/)
+- Follow the [Installing R & RStudio](/resource/installation.qmd) guide to install R, RStudio, and the required packages
 
 ## During class
 

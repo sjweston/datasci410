@@ -15,11 +15,17 @@ All extensions are implemented directly in the assignment `.qmd` files under a `
 ### Assignment 3: Qualtrics API
 **File:** `assignment/03-assignment.qmd`
 
-Use the `qualtRics` package to authenticate with the Qualtrics API and pull survey data programmatically. Compare the API output to a manually exported CSV. Write a half-page reflection on the tradeoffs between the two approaches.
+Use the `qualtRics` package to authenticate with the Qualtrics API and pull the anonymous start-of-term course survey programmatically. Compare the API output to a manually exported CSV of the same survey. Write a half-page reflection on the tradeoffs between the two approaches.
 
-**Why it works:** Every psych grad student downloads Qualtrics data repeatedly. The API eliminates manual steps that introduce error and enables automation.
+**Survey setup:** The course uses two surveys at the start of term:
+1. **Canvas quiz** (required, identity-linked) — collects team formation info (prior experience, friend requests). Responses are tied to student names via Canvas; not shared with students.
+2. **Qualtrics fun survey** (optional, anonymous) — collects personality items, habits, and attitudes used in lecture demos. This is the survey used in the grad extension. Students verify completion via a code word entered on Canvas. Survey ID is in `qualtrics_config.R`.
 
-**Note:** Requires setting up a shared course practice survey with API access. Confirm that UO's Qualtrics plan supports student API tokens before spring.
+**Why it works:** Every psych grad student downloads Qualtrics data repeatedly. The API eliminates manual steps that introduce error and enables automation. Because the fun survey is anonymous by design, no data masking is required to use it as a teaching dataset.
+
+**Package:** `qualtRics`. Credentials and survey ID are stored in `qualtrics_config.R` (gitignored). Students will need to obtain their own API token from Qualtrics → Account Settings → Qualtrics IDs.
+
+**Note:** Confirm that UO's Qualtrics plan supports student API tokens before spring.
 
 ---
 
@@ -75,4 +81,4 @@ Write a `README.md` that meets data-sharing standards: project description, file
 - Extensions should not require entirely new skills outside the course — they extend what's already being taught.
 - Where possible, the extension should produce something the student can actually use (a script, a paragraph, a file) rather than just a deliverable for a grade.
 - AI documentation requirements apply equally to graduate extensions.
-- The Qualtrics API extension (A3) requires advance setup — confirm API access and create a shared practice survey before the semester starts.
+- The Qualtrics API extension (A3) uses the anonymous fun survey (not the Canvas team formation quiz). Survey ID goes in `qualtrics_config.R` once the survey is built. Confirm UO Qualtrics supports student API tokens before spring.

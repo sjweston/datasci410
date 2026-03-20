@@ -75,11 +75,29 @@ The pair coding exercises should match what's listed in `assignments-planning.md
 - **A3 is the first Quarto assignment.** It requires `.qmd` submission. All assignments from A3 onward are Quarto documents. A3 is assigned at Session 7 (the Quarto session) so students learn Quarto before they need it.
 - **Speaker notes added to all 18 slide decks.** Notes cover what to emphasize, timing guidance, common student misconceptions, transition cues, and exercise management tips. Access them by pressing S in the browser during a Reveal.js presentation.
 - **Late work policy: 48-hour grace period with 10% daily penalty.** Applies to both assignments and quizzes. After 48 hours, no submissions accepted. Final project milestones follow the same policy. Late submissions don't count toward the team challenge "on-time" points.
-- **Drop policies removed.** No more "drop lowest 1 assignment" or "drop lowest 2 quizzes." The 48-hour late policy replaces the drop policy as the safety net.
+- **In-class check-in drops.** The 2 lowest in-class check-in scores are dropped, effectively allowing students to miss up to 2 classes with no grade penalty. No drops on assignments or quizzes — the late policy and retake policy handle those.
+- **"Life happens" extension token.** Each student gets one free 48-hour extension on any assignment, no penalty, no questions asked. To use it, the student must email Sara within one week of the original due date (i.e., before the next assignment is due). Once the next assignment's due date has passed, the token can no longer be used for the earlier assignment. One token per student for the entire term.
 - **Quizzes are points-based, not completion-based.** Students can retake as many times as they want; we always take the best score. This replaced an earlier completion-based policy. All references to "completion-based" quizzes in planning docs have been updated.
 - **Final project presentation due Wed Jun 10** (finals week). 5-minute recorded video submitted to Canvas. Same 48-hour late policy applies.
 - **Final project dataset minimum is 20 observations** (not 100). Lowered to accommodate students in neuro labs or other fields with small clinical samples.
 - **Resource guides created.** Four step-by-step guides in `resource/`: `r-projects.qmd` (R Projects), `r-scripts.qmd` (R scripts for A1–A2), `quarto-docs.qmd` (Quarto docs for A3–A8), `common-errors.qmd` (common R error messages and fixes). Each assignment page links to the relevant guides via a tip callout. The resources sidebar also links to external cheatsheets (ggplot2, dplyr, tidyr, Quarto, RStudio IDE) and learning resources (R4DS, Posit Primers, Cédric Scherer's ggplot2 tutorial, Quarto getting started guide).
+- **palmerpenguins** needs to be installed for Assignments 4 and 5. Add to the package list students receive.
+- **Assignment schedule (canonical due dates):**
+
+| Asgn | Assigned | Due |
+|------|----------|-----|
+| A1 | Wed Apr 1 (S2) | Sun Apr 5 |
+| A2 | Wed Apr 8 (S4) | Sun Apr 12 |
+| A3 | Mon Apr 20 (S7) | Sun Apr 26 |
+| A4 | Mon Apr 27 (S9) | Sun May 3 |
+| A5 | Mon May 4 (S11) | Sun May 10 |
+| A6 | Mon May 11 (S13) | Sun May 17 |
+| A7 | Wed May 13 (S14) | Sun May 24 |
+| A8 | Wed May 27 (S16) | Sun May 31 |
+
+Note: A6 is due May 17 (Sunday before the May 18 no-class Monday) and A7 is due May 24 (Sunday before Memorial Day). Earlier docs incorrectly listed May 18 and May 25.
+
+- **Data files for A3** are in `files/data/`: `survey_data.csv` (messy CSV with "N/A" strings instead of blank, participant IDs 101–120) and `demographics.xlsx` (two sheets — Sheet 1 is a codebook, Sheet 2 has demographics for participants 101–118). Upload both to Canvas for students to download.
 
 ---
 
@@ -148,6 +166,15 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 - Static assets (images, handouts, bib files): `files/`
 - Planning docs (internal, not student-facing): root directory, `.md` files (e.g., `lecture-outline.md`, `assignments-planning.md`, `graduate-student-assignments.md`)
 - Student-facing site pages: root directory, `.qmd` files (e.g., `syllabus.qmd`, `schedule.qmd`)
+
+---
+
+## Obsidian vault
+
+Course notes live at:
+`/Users/sweston2/Library/Mobile Documents/iCloud~md~obsidian/Documents/brain/uo/03-teaching/data-science-410/`
+
+The index file is `0-data-science-410.md`. Reference notes (e.g., `quarto-commands.md`) live alongside it in the same folder.
 
 ---
 

@@ -74,25 +74,25 @@ website:
               file: content/05-content.qmd
             - text: "6: Data Import"
               file: content/06-content.qmd
-            - text: "7: Layers & Aesthetics"
+            - text: "7: Quarto & Reproducibility"
               file: content/07-content.qmd
-            - text: "8: Perception & Design"
+            - text: "8: Layers & Aesthetics"
               file: content/08-content.qmd
-            - text: "9: EDA — Variation"
+            - text: "9: Perception & Design"
               file: content/09-content.qmd
-            - text: "10: EDA — Covariation"
+            - text: "10: EDA — Variation"
               file: content/10-content.qmd
-            - text: "11: Data Types Grab Bag"
+            - text: "11: EDA — Covariation"
               file: content/11-content.qmd
-            - text: "12: Strings & Factors"
+            - text: "12: Data Types Grab Bag"
               file: content/12-content.qmd
-            - text: "13: Joins"
+            - text: "13: Strings, Factors & Text"
               file: content/13-content.qmd
-            - text: "14: Missing Data"
+            - text: "14: Joins"
               file: content/14-content.qmd
-            - text: "15: Storytelling with Data"
+            - text: "15: Missing Data"
               file: content/15-content.qmd
-            - text: "16: Quarto"
+            - text: "16: Storytelling with Data"
               file: content/16-content.qmd
             - text: "17: Correlation & Simple Regression"
               file: content/17-content.qmd
@@ -146,6 +146,8 @@ website:
             - resource/index.qmd
         - section: "Guides"
           contents:
+            - text: "Installing R & RStudio"
+              file: resource/installation.qmd
             - text: "Setting Up an R Project"
               file: resource/r-projects.qmd
             - text: "Using R Scripts"

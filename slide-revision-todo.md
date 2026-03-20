@@ -116,6 +116,7 @@ This doesn't need to happen on every slide — code-demo slides with titles like
 
 ### Session 01: Introduction & Setup
 - [x] **Bullet-heavy AI section:** Condensed from 5 slides to 3: (1) bicycle vs motorcycle framing, (2) metacognition trap, (3) building the helmet first. Cut "The future: When do we use AI?" — speculative content can be mentioned verbally.
+- [x] **Add "coding teaches abstract thinking" slide:** In the AI section, add a slide about how learning to code teaches you to think abstractly — even if students never code again or never use R after this class, they still benefit from doing the work. Frames the course's value beyond just technical skill.
 
 ### Session 02: Your First Visualization
 - [x] **No psychology data:** Added "Same template, psychology data" slide after the `mpg` demo showing a boxplot of condition vs anxiety scores using simulated BAI data.
@@ -184,18 +185,6 @@ These are worth doing but less urgent than the items above.
 
 ---
 
-## Text overflow detection (future task)
+## ~~Text overflow detection~~ — Done
 
-Some slides have text running off the slide boundary after the rhetoric revisions. This needs a systematic check-and-fix pass.
-
-**Possible approaches:**
-
-1. **Render + screenshot:** Render all 18 decks with `quarto render`, then use Puppeteer or Playwright to screenshot every slide and flag slides where content extends beyond the viewport. This could be automated with a script that checks each slide's scroll height vs. viewport height.
-
-2. **CSS guardrails:** Add CSS rules to `custom.scss` that prevent overflow — e.g., `overflow: hidden` on slide containers plus a visual debug mode (`outline: 2px solid red` on overflowing elements) that can be toggled during review.
-
-3. **Quarto render + browser dev tools:** Render each deck individually, open in browser, and use JavaScript (`document.querySelectorAll('.slide').forEach(s => { if (s.scrollHeight > s.clientHeight) console.warn(s.id) })`) to identify overflowing slides programmatically.
-
-4. **Preview tool approach:** Use Claude Code's preview tools to render each deck, take snapshots, and check for content that extends beyond the slide boundary.
-
-**Recommendation:** Approach 3 (JS-based overflow detection after render) is the most practical — it can be run as a one-liner after rendering each deck and produces a list of slide IDs to fix. Approach 2 (CSS guardrails) should be added as a permanent safeguard regardless.
+Text overflow detection completed.

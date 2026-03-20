@@ -82,6 +82,10 @@ Assignments and quizzes can be submitted up to **48 hours** past the deadline wi
 
 Final project milestones follow the same policy. If you're facing circumstances that prevent you from meeting deadlines, please reach out to me as soon as possible so we can make a plan.
 
+### "Life Happens" Extension
+
+Everyone has a rough week. Each student gets **one free 48-hour extension** on any assignment — no penalty, no questions asked. To use it, email me at {{< var instructor.email >}} **within one week of the original due date** (once the next assignment is due, it's too late). One token per student for the entire term.
+
 ### Collaboration
 
 You are encouraged to discuss approaches, strategies, and concepts with your classmates — especially your teammates. However, all code you submit must be your own. Do not copy code from another student or share your code for others to copy. If you discussed an approach with someone, that's great; just write the code yourself.
@@ -117,6 +121,20 @@ By building a strong foundation now, you'll be in a far better position to lever
 | In-Class Participation | 15% | Completion-based coding exercises |
 | Final Project | 35% | Includes proposal, draft, and final submission |
 
+### Grading Scale
+
+Final letter grades are based on the following cutoffs. I do not round — a 92.9% is an A-, not an A.
+
+| Grade | Percentage | Grade | Percentage |
+|-------|-----------|-------|-----------|
+| A+ | 99.0–100% | C+ | 77.0–79.9% |
+| A | 93.0–98.9% | C | 73.0–76.9% |
+| A- | 90.0–92.9% | C- | 70.0–72.9% |
+| B+ | 87.0–89.9% | D+ | 67.0–69.9% |
+| B | 83.0–86.9% | D | 63.0–66.9% |
+| B- | 80.0–82.9% | D- | 60.0–62.9% |
+| | | F | Below 60% |
+
 ### Weekly Coding Assignments (35%)
 
 Short, focused exercises that reinforce each session's content. These are due **Sunday at 11:59 PM** and are designed to take 1-2 hours outside of class. You'll have time during class to start these and ask questions.
@@ -129,7 +147,7 @@ Each quiz draws 5 random questions from a larger question bank. You can take eac
 
 ### In-Class Participation (15%)
 
-During each class, you'll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other.
+During each class, you'll work with a partner on coding exercises. These are graded on completion and good-faith effort, not correctness. This is your time to experiment, make mistakes, and learn from each other. Your **2 lowest check-in scores are dropped**, so missing a class or two won't hurt your grade.
 
 ### Final Project (35%)
 

@@ -1,45 +1,66 @@
-# Course Website Template
+# PSY 410/510: Data Science for Psychology
 
-A Quarto-based course website template.
+Course website and materials for **PSY 410/510: Data Science for Psychology** at the University of Oregon, Spring 2026.
 
-## How to use this template
+**Website:** [sarajweston.com/datasci410](https://sarajweston.com/datasci410/)
 
-1. Clone or download this repository
-2. Modify the configuration files:
-   - `_variables.yml`: Course and instructor information
-   - `_quarto.yml`: Site structure and navigation
-3. Add your content:
-   - `content/`: Lecture materials and readings
-   - `assignment/`: Assignment instructions
-   - `resource/`: Additional resources
-4. Build the site with `quarto render`
+## For instructors
 
-## Directory Structure
+If you're teaching or taking over this course, start here:
+
+**[Instructor Guide](instructor-guide.md)** — Complete operational manual covering pre-term setup, weekly workflow, session-by-session guide, team challenge operations, grading policies, website management, and everything else you need to run the course.
+
+**[CLAUDE.md](CLAUDE.md)** — Project rules and decision log. Read this to understand *why* things are set up the way they are.
+
+## Quick start
+
+1. Install [R](https://cloud.r-project.org/), [RStudio](https://posit.co/download/rstudio-desktop/), and [Quarto](https://quarto.org/)
+2. Clone this repository
+3. Update `_variables.yml` with your course information
+4. Run `quarto render` to build the site
+5. Render slides individually: `quarto render slides/02-first-visualization.qmd`
+
+## Directory structure
 
 ```
-├── _quarto.yml          # Main site configuration
-├── _variables.yml       # Course variables (edit this first!)
-├── index.qmd            # Homepage
-├── syllabus.qmd         # Syllabus page
-├── schedule.qmd         # Schedule page
-├── content/             # Course content
-│   ├── index.qmd
-│   └── 01-content.qmd   # Template for content pages
-├── assignment/          # Assignments
-│   ├── index.qmd
-│   └── 01-assignment.qmd # Template for assignments
-├── resource/            # Resources
-│   └── index.qmd
-├── files/               # Static files (images, PDFs, etc.)
-│   └── bib/             # Bibliography files
-└── html/                # Custom HTML templates and CSS
+├── _quarto.yml              # Site configuration
+├── _variables.yml           # Course metadata (instructor, dates, CRN)
+├── CLAUDE.md                # Project rules and decision log
+├── instructor-guide.md      # Complete instructor manual
+├── syllabus.qmd             # Student-facing syllabus
+├── schedule.qmd             # Student-facing schedule
+│
+├── slides/                  # Reveal.js slide decks (18 sessions)
+├── content/                 # Session content pages (18 sessions)
+├── assignment/              # Assignment instructions (8 assignments)
+├── project/                 # Final project milestones (4 stages)
+├── resource/                # Student resource guides
+├── quizzes/                 # Quiz question banks + QTI packages
+│
+├── files/                   # Static assets
+│   ├── data/                # Assignment data files
+│   ├── fun-challenges/      # Team challenge materials
+│   ├── scoreboard.qmd       # Weekly team scoreboard
+│   └── syllabus-print.pdf   # Printable syllabus
+│
+├── scripts/                 # Instructor scripts
+│   ├── team-sort.R          # Sort students into teams
+│   ├── update-team-points.R # Compute team points from Canvas
+│   └── clean-class-survey.R # Pull + clean Qualtrics survey data
+│
+├── data/                    # Student data (gitignored)
+└── html/                    # Custom CSS
 ```
 
-## Building the Site
+## Key documents
 
-1. Install [Quarto](https://quarto.org/)
-2. Run `quarto render` in the terminal
-3. The site will be in the `_site/` folder
+| Document | Purpose |
+|----------|---------|
+| [Instructor Guide](instructor-guide.md) | How to run the course (operational) |
+| [CLAUDE.md](CLAUDE.md) | Why things are the way they are (decisions) |
+| [lecture-outline.md](lecture-outline.md) | Session-by-session topic map |
+| [assignments-planning.md](assignments-planning.md) | Assignment design notes |
+| [team-challenge-planning.md](team-challenge-planning.md) | Team competition design |
 
 ## Licenses
 

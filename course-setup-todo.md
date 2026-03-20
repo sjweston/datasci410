@@ -29,15 +29,15 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 ### Gradebook & policies
 - [x] Set up gradebook categories and weights → Assignments 35%, Reading Quizzes 15%, In-Class Check-ins 15%, Project 35%, Team Challenges 0%. Weighted grading enabled.
 - [x] Configure late policy → 48-hour grace period, 10% daily penalty, applies to assignments and quizzes
-- [x] Decide how to handle quiz grading → completion-based, no drop policy
+- [x] Decide how to handle quiz grading → points-based, unlimited retakes, best score counts
 
 ### Assignments (8 total)
 - [x] Create all 8 assignment shells on Canvas (due dates and submission types configured)
-- [ ] Create rubrics for each assignment
+- [x] Create rubrics for each assignment
 
 ### Quizzes (10 total — one per week, due Sunday at 11:59 PM)
 - [x] Create all 10 reading quiz shells on Canvas (one per week, Weeks 1–10)
-- [ ] Set due dates: each Sunday at 11:59 PM (Sun Apr 5, Apr 12, Apr 19, Apr 26, May 3, May 10, May 17, May 24, May 31, Jun 7)
+- [x] Set due dates: each Sunday at 11:59 PM (Sun Apr 5, Apr 12, Apr 19, Apr 26, May 3, May 10, May 17, May 24, May 31, Jun 7)
 - [x] Configure quiz settings — best score (unlimited attempts, 5 random questions from bank, highest score counts)
 - [x] Build question bank for each quiz → `quizzes/` directory, 50 MC questions per quiz + QTI packages (.zip) for Canvas import
   - [x] Quiz 1: R4DS Ch 1, 2, 6 (85 questions — expanded from original 50)
@@ -50,32 +50,32 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
   - [x] Quiz 8: R4DS Ch 18
   - [x] Quiz 9: R4DS Ch 11
   - [x] Quiz 10: R4DS Ch 8, correlation & regression
-- [x] ~~Set drop policy~~ — removed; 48-hour late policy replaces drop policy
+- [x] ~~Set drop policy~~ — no drops on assignments or quizzes; 2 lowest in-class check-in scores dropped; "life happens" extension token added
 
 ### Final Project (3 checkpoints + presentation)
 - [x] Create submission points for each project milestone (due dates configured)
-- [ ] Create rubrics for each project milestone
+- [x] Create rubrics for each project milestone
 
 ### Course pages & content
-- [ ] Upload syllabus page
+- [x] Upload syllabus page
 - [x] Set up weekly modules → 10 modules (Week 1–10), unpublished, ready to populate with content links
-- [ ] Upload schedule / calendar
-- [ ] Upload handouts to Files (APA figure guidelines, etc.)
-- [ ] Create or link to content pages for each session
-- [ ] Add links to R4DS readings for each week
+- [x] Upload schedule / calendar
+- [x] Upload handouts to Files (APA figure guidelines, etc.)
+- [x] Create or link to content pages for each session
+- [x] Add links to R4DS readings for each week
 - [x] Create first-day announcement → scheduled for Mar 27 at 9:00 AM (Thu before first class)
 
 ### Housekeeping
 - [x] Set course start/end dates (set by admin)
 - [x] ~~Configure navigation menu~~ — skipped; not needed
-- [ ] Test student view to make sure everything looks right
+- [x] Test student view to make sure everything looks right
 
 ---
 
 ## Syllabus Updates
 
 - [x] Add team challenge description → added to `syllabus.qmd` and `slides/01-intro-setup.qmd`
-- [x] Update quiz grading language to reflect completion-based grading → updated in `syllabus.qmd` and slides
+- [x] Update quiz grading language → points-based (unlimited retakes, best score counts), updated in `syllabus.qmd` and slides
 - [x] Review grading breakdown — Participation 15% comes from individual pair coding submissions; challenge points are separate and don't affect grades
 - [x] Add collaboration policy → discuss freely, write your own code
 - [x] Add final project dataset requirements → real data, 20+ rows, no reuse from previous courses
@@ -90,8 +90,24 @@ Master to-do list for getting PSY 410 ready on Canvas and implementing the team 
 
 ---
 
+## For-Fun Survey (class dataset)
+
+- [ ] Finish building the for-fun survey (Qualtrics)
+- [ ] Put the survey on Canvas and the course website
+- [ ] Plan how to incorporate the survey data into lectures (which sessions reference it, how it's introduced)
+- [ ] Write R script to scrape (qualtRics package) and clean the survey data
+- [ ] Upload cleaned dataset to `files/data/` and reference it in relevant slide decks / assignments
+
+---
+
+## Syllabus PDF
+
+- [ ] Create a PDF version of the syllabus
+
+---
+
 ## Dependencies & Open Questions
 
 - Final enrollment count determines number of teams (8–10)
 - Survey must go out Session 1, teams announced Session 2
-- Quizzes changing to completion-based is a grading policy change — make sure syllabus reflects it clearly
+- ~~Quizzes changing to completion-based~~ — resolved; quizzes are points-based with unlimited retakes, syllabus updated

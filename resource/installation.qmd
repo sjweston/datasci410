@@ -1,0 +1,100 @@
+---
+title: "Installing R & RStudio"
+---
+
+This page walks you through installing everything you need for the course. Do this **before the first class** if possible — but if you run into trouble, bring your laptop to Session 1 and we'll help you get set up.
+
+## Step 1: Install R
+
+R is the programming language we'll use all term.
+
+1. Go to [https://cloud.r-project.org](https://cloud.r-project.org)
+2. Click the link for your operating system:
+   - **Mac:** Click "Download R for macOS," then download the `.pkg` file that matches your Mac (Apple Silicon for M1/M2/M3 chips, Intel for older Macs). Not sure which you have? Click the Apple menu → "About This Mac" and look for "Chip."
+   - **Windows:** Click "Download R for Windows" → "base" → "Download R" and run the `.exe` file.
+   - **Chromebook:** R doesn't run natively on Chromebooks. Use [Posit Cloud](https://posit.cloud/) instead (free tier is fine for this course). Let Dr. Weston know if this is your setup.
+3. Run the installer and accept all the defaults.
+
+## Step 2: Install RStudio
+
+RStudio is the application you'll actually work in. Think of R as the engine and RStudio as the car.
+
+1. Go to [https://posit.co/download/rstudio-desktop/](https://posit.co/download/rstudio-desktop/)
+2. Scroll down and download the free version for your operating system.
+3. Run the installer and accept all the defaults.
+4. Open RStudio (not R). You should see four panels.
+
+::: {.callout-important}
+## Open RStudio, not R
+
+After installation, you'll have two applications: R and RStudio. **Always open RStudio.** You should never need to open R directly. If you see a plain white console with no panels, you opened the wrong one.
+:::
+
+## Step 3: Verify R works
+
+In the **Console** panel (bottom-left in RStudio), type the following and press Enter:
+
+```r
+1 + 1
+```
+
+If you see `[1] 2`, you're good.
+
+## Step 4: Install required packages
+
+Packages add extra tools to R. Copy and paste this entire block into the Console and press Enter:
+
+```r
+install.packages(c(
+  "tidyverse",
+  "nycflights13",
+  "palmerpenguins",
+  "tidytext",
+  "broom",
+  "quarto"
+))
+```
+
+This will take a few minutes and produce a lot of text — that's normal. You only need to do this once.
+
+::: {.callout-tip}
+## If you see red text, don't panic
+
+R prints warnings and messages in red, but that doesn't mean something went wrong. Look for the word "Error" specifically. Warnings like "package was built under R version..." are fine and can be ignored.
+:::
+
+## Step 5: Check that packages loaded
+
+After installation finishes, run these lines one at a time:
+
+```r
+library(tidyverse)
+library(nycflights13)
+library(palmerpenguins)
+```
+
+If each one loads without an error, you're all set. You might see some messages — that's fine.
+
+## Step 6: See your first data
+
+Try this:
+
+```r
+glimpse(mpg)
+```
+
+You should see a table with 234 rows and 11 columns of car fuel economy data. If you do, everything is working.
+
+## Troubleshooting
+
+| Problem | Solution |
+|---------|----------|
+| "R is not recognized" or RStudio won't open | Make sure you installed R *first*, then RStudio. RStudio needs R to run. |
+| Package install fails with "non-zero exit status" | Try installing the problem package by itself: `install.packages("tidyverse")`. If it still fails, restart RStudio and try again. |
+| `library(tidyverse)` gives an error | Run `install.packages("tidyverse")` in the Console — you may have skipped Step 4. |
+| Everything is slow or freezing | Close other applications. Package installation is memory-intensive. |
+| "There is no package called..." | Run `install.packages("package_name")` with the exact package name. Remember: `install.packages()` is for installing, `library()` is for loading. You install once, you load every session. |
+| Mac asks for "Command Line Tools" | Click "Install" when prompted. This is normal on Macs and only happens once. |
+| Windows gives a "Rtools" warning | You can ignore this for our course. Rtools is only needed for building packages from source, which we won't do. |
+
+If you're stuck, bring your laptop to class or email Dr. Weston. Installation issues are common and fixable — don't stress about it.
