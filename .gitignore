@@ -1,3 +1,9 @@
+qualtrics_config.R
+data/class_survey.csv
+data/canvas_gradebook.csv
+data/team_points.csv
+data/team-formation-survey.csv
+data/team_rosters.csv
 .Rproj.user
 .Rhistory
 .RData
