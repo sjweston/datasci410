@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="07-layers-aesthetics_files/libs/quarto-html/tabby.min.js"></script>
-<script src="07-layers-aesthetics_files/libs/quarto-html/popper.min.js"></script>
-<script src="07-layers-aesthetics_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="07-layers-aesthetics_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="07-layers-aesthetics_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="07-layers-aesthetics_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="08-layers-aesthetics_files/libs/quarto-html/tabby.min.js"></script>
+<script src="08-layers-aesthetics_files/libs/quarto-html/popper.min.js"></script>
+<script src="08-layers-aesthetics_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="08-layers-aesthetics_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="08-layers-aesthetics_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="08-layers-aesthetics_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dr.&nbsp;Sara Weston">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="07-layers-aesthetics_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="07-layers-aesthetics_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="08-layers-aesthetics_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="08-layers-aesthetics_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,13 +95,13 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="07-layers-aesthetics_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="07-layers-aesthetics_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="08-layers-aesthetics_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="08-layers-aesthetics_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -228,7 +228,7 @@ Dr.&nbsp;Sara Weston
 <section id="same-data-two-stories" class="slide level2">
 <h2>Same data, two stories</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" alt="Side-by-side comparison of two plots using the same reaction time data. Version A is a plain bar chart of means that hides all variation. Version B overlays jittered individual data points, boxplots, and mean diamonds, revealing the full spread and overlap between Control and Treatment groups." width="960" class="r-stretch"><p>Both use the same data. The difference is <strong>layers</strong> — and the right layers tell the right story.</p>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" alt="Side-by-side comparison of two plots using the same reaction time data. Version A is a plain bar chart of means that hides all variation. Version B overlays jittered individual data points, boxplots, and mean diamonds, revealing the full spread and overlap between Control and Treatment groups." width="960" class="r-stretch"><p>Both use the same data. The difference is <strong>layers</strong> — and the right layers tell the right story.</p>
 <p>The wrong geom doesn’t just look bad — it can actively mislead.</p>
 <aside class="notes">
 <p>Spend ~2 minutes here. Ask students which version they’d trust more and why. The bar chart hides everything — the spread, outliers, individual data points. Version B tells the full story. This contrast motivates the entire session: choosing the right geom is a design decision, not just a coding one.</p>
@@ -340,14 +340,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Histogram of reaction times in milliseconds with 30ms bins, showing an approximately normal distribution centered around 500ms with a slight right skew." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Histogram of reaction times in milliseconds with 30ms bins, showing an approximately normal distribution centered around 500ms with a slight right skew." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="histogram-vs-density" class="slide level2">
 <h2>histogram vs density</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Side-by-side comparison of a histogram and density plot of reaction times. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing a similar roughly normal distribution." width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Side-by-side comparison of a histogram and density plot of reaction times. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing a similar roughly normal distribution." width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
 <aside class="notes">
 <p>Quick comparison — don’t belabor this. The key point is that density plots are better for comparing distributions across groups (you can overlay them), while histograms are better for seeing exact counts. Students sometimes get confused by the y-axis on density plots; reassure them that the area under the curve sums to 1, but they rarely need to interpret the y-axis value itself.</p>
 <style type="text/css">
@@ -381,7 +381,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Bar chart showing the count of observations in each experimental condition, with Control and Treatment groups having equal counts of 40 each." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Bar chart showing the count of observations in each experimental condition, with Control and Treatment groups having equal counts of 40 each." width="768"></p>
 </figure>
 </div>
 </div>
@@ -405,14 +405,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Boxplots comparing reaction time distributions for Control and Treatment conditions. The Control group has a slightly higher median and wider spread than the Treatment group." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Boxplots comparing reaction time distributions for Control and Treatment conditions. The Control group has a slightly higher median and wider spread than the Treatment group." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="boxplot-vs-violin" class="slide level2">
 <h2>boxplot vs violin</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Side-by-side comparison of boxplot and violin plot for reaction time by condition. The boxplot shows median, quartiles, and whiskers, while the violin plot reveals the full distribution shape including where data are most concentrated." width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Side-by-side comparison of boxplot and violin plot for reaction time by condition. The boxplot shows median, quartiles, and whiskers, while the violin plot reveals the full distribution shape including where data are most concentrated." width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
 <aside class="notes">
 <p>Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. Bimodal distributions look obvious in a violin but invisible in a boxplot. Mention that we’ll see an even better option (raincloud plots) in the next session.</p>
 <style type="text/css">
@@ -475,7 +475,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Bar chart showing mean reaction time by condition with 95% confidence interval error bars. The Treatment group mean is slightly lower than the Control group, with overlapping error bars." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Bar chart showing mean reaction time by condition with 95% confidence interval error bars. The Treatment group mean is slightly lower than the Control group, with overlapping error bars." width="768"></p>
 </figure>
 </div>
 </div>
@@ -598,7 +598,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Dot plot showing individual reaction times as jittered points for each condition, with black dots marking the group means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Dot plot showing individual reaction times as jittered points for each condition, with black dots marking the group means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics." width="768"></p>
 </figure>
 </div>
 </div>
@@ -734,14 +734,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Grouped bar chart showing mean reaction time by age group and condition with dodged bars and error bars. Control and Treatment bars are side by side within each age group, allowing direct comparison across both factors." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Grouped bar chart showing mean reaction time by age group and condition with dodged bars and error bars. Control and Treatment bars are side by side within each age group, allowing direct comparison across both factors." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="stack-and-fill" class="slide level2">
 <h2>stack and fill</h2>
 
-<img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Control and Treatment observations by age group, while the filled chart normalizes each bar to 100% to compare proportions directly." width="1152" class="r-stretch"></section>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Control and Treatment observations by age group, while the filled chart normalizes each bar to 100% to compare proportions directly." width="1152" class="r-stretch"></section>
 <section id="scales-controlling-axes-and-colors" class="slide level2">
 <h2>Scales: controlling axes and colors</h2>
 <aside class="notes">
@@ -790,7 +790,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Boxplots of reaction time by condition using custom colors: blue for Control and red for Treatment, demonstrating how scale_fill_manual() applies specific hex color codes to groups." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Boxplots of reaction time by condition using custom colors: blue for Control and red for Treatment, demonstrating how scale_fill_manual() applies specific hex color codes to groups." width="768"></p>
 </figure>
 </div>
 </div>
@@ -834,7 +834,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Horizontal boxplots of reaction time by condition, with categories on the y-axis and reaction time on the x-axis, demonstrating how flipped axes improve readability for categorical labels." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Horizontal boxplots of reaction time by condition, with categories on the y-axis and reaction time on the x-axis, demonstrating how flipped axes improve readability for categorical labels." width="768"></p>
 </figure>
 </div>
 </div>
@@ -882,7 +882,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="07-layers-aesthetics_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Polished figure combining jittered individual data points, boxplots, and diamond-shaped mean markers for reaction time by condition. Uses custom blue and red colors, informative title and subtitle, and a caption noting sample size and mean indicator." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Polished figure combining jittered individual data points, boxplots, and diamond-shaped mean markers for reaction time by condition. Uses custom blue and red colors, informative title and subtitle, and a caption noting sample size and mean indicator." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1015,20 +1015,20 @@ Dr.&nbsp;Sara Weston
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="07-layers-aesthetics_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="08-layers-aesthetics_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
