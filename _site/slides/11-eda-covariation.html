@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="10-eda-covariation_files/libs/quarto-html/tabby.min.js"></script>
-<script src="10-eda-covariation_files/libs/quarto-html/popper.min.js"></script>
-<script src="10-eda-covariation_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="10-eda-covariation_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="10-eda-covariation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="10-eda-covariation_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="11-eda-covariation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="11-eda-covariation_files/libs/quarto-html/popper.min.js"></script>
+<script src="11-eda-covariation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="11-eda-covariation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="11-eda-covariation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="11-eda-covariation_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dr.&nbsp;Sara Weston">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="11-eda-covariation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="11-eda-covariation_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,13 +95,13 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="10-eda-covariation_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="10-eda-covariation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="11-eda-covariation_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="11-eda-covariation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -269,7 +269,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 18.6…</code></pre>
+$ depression_post &lt;dbl&gt; 20.817283, 20.456254, 16.944924, 13.227615, 23.140762,…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -304,7 +304,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/boxplot-1.png" alt="Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, showing CBT has the lowest median depression score." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/boxplot-1.png" alt="Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, showing CBT has the lowest median depression score." width="960"></p>
 </figure>
 </div>
 </div>
@@ -316,7 +316,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, with annotations pointing to the median line, IQR box, whiskers, and outlier dots." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, with annotations pointing to the median line, IQR box, whiskers, and outlier dots." width="960"></p>
 </figure>
 </div>
 </div>
@@ -403,7 +403,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <section id="building-a-raincloud" class="slide level2">
 <h2>Building a raincloud</h2>
 
-<img data-src="10-eda-covariation_files/figure-revealjs/raincloud-1.png" alt="Horizontal raincloud plot of post-treatment depression scores by condition, combining violin shapes, boxplots, jittered points, and diamond-shaped means. CBT shows the lowest scores, followed by Mindfulness, then Control." width="960" class="r-stretch"></section>
+<img data-src="11-eda-covariation_files/figure-revealjs/raincloud-1.png" alt="Horizontal raincloud plot of post-treatment depression scores by condition, combining violin shapes, boxplots, jittered points, and diamond-shaped means. CBT shows the lowest scores, followed by Mindfulness, then Control." width="960" class="r-stretch"></section>
 <section class="slide level2">
 
 <div class="cell">
@@ -455,7 +455,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <h2>Why rainclouds are great</h2>
 <p>Compare these three views of the <strong>same data</strong>:</p>
 
-<img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Three-panel comparison of the same therapy data shown as a boxplot only, a violin plot only, and a full raincloud plot, demonstrating how rainclouds reveal the most information about distribution shape, summary statistics, and individual data points." width="1152" class="r-stretch"></section>
+<img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Three-panel comparison of the same therapy data shown as a boxplot only, a violin plot only, and a full raincloud plot, demonstrating how rainclouds reveal the most information about distribution shape, summary statistics, and individual data points." width="1152" class="r-stretch"></section>
 <section id="when-to-use-which" class="slide level2">
 <h2>When to use which</h2>
 <table class="caption-top">
@@ -552,11 +552,11 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <pre><code># A tibble: 6 × 2
   gender     diagnosis
   &lt;chr&gt;      &lt;chr&gt;    
-1 Non-binary Other    
-2 Male       Other    
-3 Male       Both     
-4 Female     Other    
-5 Non-binary Anxiety  
+1 Non-binary Both     
+2 Female     Anxiety  
+3 Male       Other    
+4 Female     Both     
+5 Male       Both     
 6 Non-binary Other    </code></pre>
 </div>
 </div>
@@ -593,7 +593,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each gender category (Female, Male, Non-binary)." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each gender category (Female, Male, Non-binary)." width="960"></p>
 </figure>
 </div>
 </div>
@@ -616,7 +616,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Side-by-side bar chart comparing diagnosis counts across gender groups, with separate bars for each diagnosis category placed next to each other within each gender." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Side-by-side bar chart comparing diagnosis counts across gender groups, with separate bars for each diagnosis category placed next to each other within each gender." width="960"></p>
 </figure>
 </div>
 </div>
@@ -652,7 +652,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Proportional stacked bar chart showing the relative proportion of each diagnosis within each gender group, with all bars normalized to 100%." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Proportional stacked bar chart showing the relative proportion of each diagnosis within each gender group, with all bars normalized to 100%." width="960"></p>
 </figure>
 </div>
 </div>
@@ -676,7 +676,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Bubble chart showing the co-occurrence of gender and diagnosis categories, where larger circles indicate more individuals with that combination." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Bubble chart showing the co-occurrence of gender and diagnosis categories, where larger circles indicate more individuals with that combination." width="960"></p>
 </figure>
 </div>
 </div>
@@ -715,7 +715,7 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Heatmap tile plot of diagnosis counts by gender, with color intensity (viridis scale) representing the number of individuals in each gender-diagnosis combination." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Heatmap tile plot of diagnosis counts by gender, with color intensity (viridis scale) representing the number of individuals in each gender-diagnosis combination." width="960"></p>
 </figure>
 </div>
 </div>
@@ -738,8 +738,8 @@ $ depression_post &lt;dbl&gt; 13.36129, 18.04607, 20.29539, 12.84468, 18.33361, 
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 49.20563, 30.99242, 23.14226, 45.92638, 22.77392, 24.044…
-$ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 260.50…</code></pre>
+$ age           &lt;dbl&gt; 23.16535, 24.21917, 28.05804, 41.73791, 56.98531, 19.185…
+$ reaction_time &lt;dbl&gt; 291.9136, 289.9209, 342.0351, 304.0829, 411.5414, 240.54…</code></pre>
 </div>
 </div>
 </section>
@@ -774,7 +774,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Scatterplot of reaction time versus age showing a positive trend where older participants tend to have slower reaction times." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Scatterplot of reaction time versus age showing a positive trend where older participants tend to have slower reaction times." width="960"></p>
 </figure>
 </div>
 </div>
@@ -810,7 +810,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Scatterplot of reaction time versus age with a linear trend line and confidence band, showing reaction time increases with age." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Scatterplot of reaction time versus age with a linear trend line and confidence band, showing reaction time increases with age." width="960"></p>
 </figure>
 </div>
 </div>
@@ -852,7 +852,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Scatterplot of 5,000 reaction time observations that appears as a dense, nearly solid mass of overlapping points, demonstrating the overplotting problem." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Scatterplot of 5,000 reaction time observations that appears as a dense, nearly solid mass of overlapping points, demonstrating the overplotting problem." width="960"></p>
 </figure>
 </div>
 </div>
@@ -883,7 +883,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Scatterplot of 5,000 reaction time observations using transparent points (alpha = 0.1), revealing that the densest concentration of data follows a positive linear trend." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Scatterplot of 5,000 reaction time observations using transparent points (alpha = 0.1), revealing that the densest concentration of data follows a positive linear trend." width="960"></p>
 </figure>
 </div>
 </div>
@@ -905,7 +905,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Two-dimensional bin plot of reaction time versus age, with rectangular bins colored by count using a viridis scale, showing highest density along the central trend." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Two-dimensional bin plot of reaction time versus age, with rectangular bins colored by count using a viridis scale, showing highest density along the central trend." width="960"></p>
 </figure>
 </div>
 </div>
@@ -927,7 +927,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Hexagonal bin plot of reaction time versus age, with hexagons colored by count using a viridis scale, showing highest density along the positive linear trend." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Hexagonal bin plot of reaction time versus age, with hexagons colored by count using a viridis scale, showing highest density along the positive linear trend." width="960"></p>
 </figure>
 </div>
 </div>
@@ -950,7 +950,7 @@ $ reaction_time &lt;dbl&gt; 367.7231, 226.8848, 198.5343, 343.8895, 290.8756, 26
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8072442</code></pre>
+<pre><code>[1] 0.7556987</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1073,7 +1073,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Scatterplot of highway MPG versus engine displacement with a linear trend line, showing a clear negative relationship where larger engines have lower fuel efficiency." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Scatterplot of highway MPG versus engine displacement with a linear trend line, showing a clear negative relationship where larger engines have lower fuel efficiency." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1109,7 +1109,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Scatterplot of highway MPG versus engine displacement with points colored by car type, revealing that the overall negative trend varies across vehicle classes like 2seaters and subcompacts." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Scatterplot of highway MPG versus engine displacement with points colored by car type, revealing that the overall negative trend varies across vehicle classes like 2seaters and subcompacts." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1130,7 +1130,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Horizontal bar chart of vehicle types ordered by frequency, showing SUVs as the most common type followed by compact and midsize cars." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Horizontal bar chart of vehicle types ordered by frequency, showing SUVs as the most common type followed by compact and midsize cars." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1171,7 +1171,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Boxplots comparing self-reported stress levels across chronotype groups (Morning, Evening, Neither), showing how stress varies by sleep preference." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Boxplots comparing self-reported stress levels across chronotype groups (Morning, Evening, Neither), showing how stress varies by sleep preference." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1207,7 +1207,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Scatterplot of coding excitement versus coding anxiety scores, showing whether students who are more excited about coding also tend to be more or less anxious about it." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Scatterplot of coding excitement versus coding anxiety scores, showing whether students who are more excited about coding also tend to be more or less anxious about it." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1242,7 +1242,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-covariation_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Scatterplot of caffeine drinks per day versus average hours of sleep, with a trend line showing whether caffeine consumption is associated with sleep duration." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Scatterplot of caffeine drinks per day versus average hours of sleep, with a trend line showing whether caffeine consumption is associated with sleep duration." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1351,20 +1351,20 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="10-eda-covariation_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="10-eda-covariation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="11-eda-covariation_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
