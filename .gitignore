@@ -17,3 +17,4 @@ _site/files/models/51.2.rds
 _site/files/models/m81.1.rds
 
 **/*.quarto_ipynb
+**/.DS_Store

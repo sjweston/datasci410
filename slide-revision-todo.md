@@ -177,11 +177,9 @@ These are worth doing but less urgent than the items above.
 
 ---
 
-## presentations/ folder consistency
+## ~~presentations/ folder consistency~~ — Consolidated
 
-- [x] **`deck_generation_prompt.md` references Beamer/LaTeX throughout** — added a note at the top clarifying this was written for Beamer and the PSY 410 course uses Quarto/Reveal.js. A full Quarto-native rewrite is a future project.
-- [x] **`README.md` "Silent Killers" section** — revised to include both Beamer-specific and Quarto/Reveal.js equivalent content (text overflow, code block width, figure sizing). ggplot visual errors section kept as universal.
-- [x] **The rhetoric principles themselves** (`rhetoric_of_decks.md`, `rhetoric_of_decks_full_essay.md`) are fully consistent with the course and don't need changes.
+The `presentations/` directory was consolidated during project cleanup. The core rhetoric principles are now in `files/slide-design-principles.md` and referenced in CLAUDE.md. Beamer-specific files were removed (not applicable to Quarto/Reveal.js).
 
 ---
 

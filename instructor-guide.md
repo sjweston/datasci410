@@ -485,8 +485,8 @@ quarto render slides/17-correlation-regression.qmd
 | `assignments-planning.md` | Internal assignment planning with in-class exercises |
 | `graduate-student-assignments.md` | Grad student extensions |
 | `team-challenge-planning.md` | Team challenge design and rules |
-| `course-setup-todo.md` | Pre-term setup checklist |
 | `instructor-guide.md` | This document |
+| `files/slide-design-principles.md` | Rhetoric and design principles for slide decks |
 
 ### Slides
 
