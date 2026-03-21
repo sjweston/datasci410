@@ -6,7 +6,7 @@ Working document for tracking rhetorical and consistency improvements across all
 
 ## Structural note: File numbering vs CLAUDE.md session order
 
-The slide files are still numbered in the **pre-Quarto-move** order. CLAUDE.md says Quarto moved to Session 7 (Apr 20), but `16-quarto.qmd` is dated May 27 and its footer says "Session 16." The slide files from 07 onward are all offset by one session from the CLAUDE.md calendar mapping. Additionally, no slide deck exists yet for **Session 17: Correlation & Simple Regression** — the file `17-practice-review.qmd` is the old Practice & Review session (mapped to Session 18 in CLAUDE.md). This renumbering is a separate task from the rhetoric changes below and should be handled deliberately.
+Slide files have been renumbered to match session numbers (completed March 2026). File numbers now correspond directly to session numbers (e.g., `07-quarto.qmd` = Session 7, `08-layers-aesthetics.qmd` = Session 8, etc.).
 
 ---
 
@@ -81,7 +81,7 @@ Per CLAUDE.md's anti-copy-paste policy:
 - [x] `04-data-transformation-2.qmd` — add `code-copy: false` to the YAML `revealjs:` block
 - [x] `05-data-tidying.qmd` — add `code-copy: false`
 - [x] `06-data-import.qmd` — add `code-copy: false`
-- [x] `07-layers-aesthetics.qmd` — add `code-copy: false`
+- [x] `08-layers-aesthetics.qmd` — add `code-copy: false`
 
 ---
 

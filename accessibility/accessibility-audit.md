@@ -52,12 +52,12 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 
 **Files affected (all in `slides/`):**
 - `02-first-visualization.qmd` — ~22 plots (highest count)
-- `07-layers-aesthetics.qmd` — ~15 plots
-- `08-perception-design.qmd` — ~12 plots
-- `09-eda-variation.qmd` — ~18 plots
-- `10-eda-covariation.qmd` — ~15 plots
+- `08-layers-aesthetics.qmd` — ~15 plots
+- `09-perception-design.qmd` — ~12 plots
+- `10-eda-variation.qmd` — ~18 plots
+- `11-eda-covariation.qmd` — ~15 plots
 - `17-correlation-regression.qmd` — ~8 plots
-- `03-data-transformation-1.qmd`, `04-data-transformation-2.qmd`, `05-data-tidying.qmd`, `06-data-import.qmd`, `11-data-types.qmd`, `12-strings-factors.qmd`, `13-joins.qmd`, `14-missing-data.qmd`, `15-storytelling.qmd`, `18-putting-it-together.qmd` — various counts
+- `03-data-transformation-1.qmd`, `04-data-transformation-2.qmd`, `05-data-tidying.qmd`, `06-data-import.qmd`, `12-data-types.qmd`, `13-strings-factors.qmd`, `14-joins.qmd`, `15-missing-data.qmd`, `16-storytelling.qmd`, `18-putting-it-together.qmd` — various counts
 
 **Note:** Content pages, assignment pages, and resource pages do **not** have this problem — only slides.
 
@@ -75,9 +75,9 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 |------|------|-------|-------------------|
 | `slides/01-intro-setup.qmd` | 326 | `file_cabinet.png` | "Filing cabinet representing organized project file structure" |
 | `slides/01-intro-setup.qmd` | 333 | `laundry-basket.jpg` | "Laundry basket representing disorganized files scattered without structure" |
-| `slides/11-data-types.qmd` | 306 | `rosenberg.png` | "Rosenberg Self-Esteem Scale questionnaire showing Likert-type response options" |
-| `slides/15-storytelling.qmd` | 851 | `class-identity.jpg` | Needs context — describe what the figure shows for the critique exercise |
-| `slides/15-storytelling.qmd` | 855 | `truth-sensitivity.jpg` | Needs context — describe what the figure shows for the critique exercise |
+| `slides/12-data-types.qmd` | 306 | `rosenberg.png` | "Rosenberg Self-Esteem Scale questionnaire showing Likert-type response options" |
+| `slides/16-storytelling.qmd` | 851 | `class-identity.jpg` | Needs context — describe what the figure shows for the critique exercise |
+| `slides/16-storytelling.qmd` | 855 | `truth-sensitivity.jpg` | Needs context — describe what the figure shows for the critique exercise |
 | `slides/18-putting-it-together.qmd` | 39 | `whole-game.png` (R4DS) | "R4DS data science workflow diagram: Import, Tidy, Transform, Visualize, Model, Communicate" |
 
 **Good news:** `slides/01-intro-setup.qmd` line 250 already has a proper `fig-alt` on the RStudio screenshot, so the pattern is established.

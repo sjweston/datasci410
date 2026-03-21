@@ -174,25 +174,25 @@ Send a Canvas announcement the week before classes start:
 | 4 | Wed Apr 8 | Data Transformation II | `04-data-transformation-2.qmd` | Assign A2 |
 | 5 | Mon Apr 13 | Data Tidying | `05-data-tidying.qmd` | Scoreboard |
 | 6 | Wed Apr 15 | Data Import | `06-data-import.qmd` | Ensure A3 data files are on Canvas |
-| 7 | Mon Apr 20 | Quarto & Reproducibility | `16-quarto.qmd` | **Note: file number mismatch — file 16, session 7.** Assign A3 |
-| 8 | Wed Apr 22 | Layers & Aesthetics | `07-layers-aesthetics.qmd` | File 07 = Session 8 |
-| 9 | Mon Apr 27 | Perception & Design | `08-perception-design.qmd` | Scoreboard; assign A4; ensure A4 figure + data on Canvas |
-| 10 | Wed Apr 29 | EDA — Variation | `09-eda-variation.qmd` | Class survey data used — run `scripts/clean-class-survey.R` if not done yet |
-| 11 | Mon May 4 | EDA — Covariation | `10-eda-covariation.qmd` | Scoreboard; assign A5; class survey data used |
-| 12 | Wed May 6 | Data Types Grab Bag | `11-data-types.qmd` | |
-| 13 | Mon May 11 | Strings, Factors & Text | `12-strings-factors.qmd` | Scoreboard + **Power Play** (top 2 teams choose boost or sabotage); assign A6; class survey `data_words` used for text analysis |
-| 14 | Wed May 13 | Joins | `13-joins.qmd` | Assign A7 |
+| 7 | Mon Apr 20 | Quarto & Reproducibility | `07-quarto.qmd` | Assign A3 |
+| 8 | Wed Apr 22 | Layers & Aesthetics | `08-layers-aesthetics.qmd` | |
+| 9 | Mon Apr 27 | Perception & Design | `09-perception-design.qmd` | Scoreboard; assign A4; ensure A4 figure + data on Canvas |
+| 10 | Wed Apr 29 | EDA — Variation | `10-eda-variation.qmd` | Class survey data used — run `scripts/clean-class-survey.R` if not done yet |
+| 11 | Mon May 4 | EDA — Covariation | `11-eda-covariation.qmd` | Scoreboard; assign A5; class survey data used |
+| 12 | Wed May 6 | Data Types Grab Bag | `12-data-types.qmd` | |
+| 13 | Mon May 11 | Strings, Factors & Text | `13-strings-factors.qmd` | Scoreboard + **Power Play** (top 2 teams choose boost or sabotage); assign A6; class survey `data_words` used for text analysis |
+| 14 | Wed May 13 | Joins | `14-joins.qmd` | Assign A7 |
 | — | Mon May 18 | *No class* | — | — |
-| 15 | Wed May 20 | Missing Data | `14-missing-data.qmd` | |
+| 15 | Wed May 20 | Missing Data | `15-missing-data.qmd` | |
 | — | Mon May 25 | *Memorial Day* | — | — |
-| 16 | Wed May 27 | Storytelling with Data | `15-storytelling.qmd` | Assign A8; distribute APA figure handout (`files/apa-figure-guidelines.md`) |
+| 16 | Wed May 27 | Storytelling with Data | `16-storytelling.qmd` | Assign A8; distribute APA figure handout (`files/apa-figure-guidelines.md`) |
 | 17 | Mon Jun 1 | Correlation & Simple Regression | `17-correlation-regression.qmd` | Scoreboard; class survey data used for live correlation/regression demos |
 | 18 | Wed Jun 3 | Putting It All Together | `18-putting-it-together.qmd` | Final scoreboard; announce winning team; celebrate |
 | — | Wed Jun 10 | *Finals week* | — | Video presentations due on Canvas |
 
-### Slide file numbering warning
+### Slide file numbering
 
-Slide file numbers do NOT match session numbers starting at Session 7. This is because the Quarto session was moved early in the curriculum but the files were never renumbered. The table above has the correct mapping. Consult `CLAUDE.md` if confused.
+Slide file numbers now match session numbers (e.g., `07-quarto.qmd` = Session 7). The renumbering was completed in March 2026.
 
 ---
 
@@ -432,9 +432,9 @@ Then re-render any slides that use class data:
 
 ```bash
 quarto render slides/02-first-visualization.qmd
-quarto render slides/09-eda-variation.qmd
-quarto render slides/10-eda-covariation.qmd
-quarto render slides/12-strings-factors.qmd
+quarto render slides/10-eda-variation.qmd
+quarto render slides/11-eda-covariation.qmd
+quarto render slides/13-strings-factors.qmd
 quarto render slides/17-correlation-regression.qmd
 ```
 

@@ -18,16 +18,16 @@ Decks 01–13 have been reviewed. Resume at deck 14.
 | `slides/04-data-transformation-2.qmd` | 4 | Transformation II | `[x]` | `[ ]` |
 | `slides/05-data-tidying.qmd` | 5 | Data Tidying | `[x]` | `[ ]` |
 | `slides/06-data-import.qmd` | 6 | Data Import | `[x]` | `[ ]` |
-| `slides/16-quarto.qmd` | 7 | Quarto & Reproducibility | `[x]` | `[ ]` |
-| `slides/07-layers-aesthetics.qmd` | 8 | Layers & Aesthetics | `[x]` | `[ ]` |
-| `slides/08-perception-design.qmd` | 9 | Perception & Design | `[x]` | `[ ]` |
-| `slides/09-eda-variation.qmd` | 10 | EDA — Variation | `[x]` | `[ ]` |
-| `slides/10-eda-covariation.qmd` | 11 | EDA — Covariation | `[x]` | `[ ]` |
-| `slides/11-data-types.qmd` | 12 | Data Types Grab Bag | `[x]` | `[ ]` |
-| `slides/12-strings-factors.qmd` | 13 | Strings, Factors & Text | `[x]` | `[ ]` |
-| `slides/13-joins.qmd` | 14 | Joins | `[x]` | `[ ]` |
-| `slides/14-missing-data.qmd` | 15 | Missing Data | `[ ]` | `[ ]` |
-| `slides/15-storytelling.qmd` | 16 | Storytelling with Data | `[ ]` | `[ ]` |
+| `slides/07-quarto.qmd` | 7 | Quarto & Reproducibility | `[x]` | `[ ]` |
+| `slides/08-layers-aesthetics.qmd` | 8 | Layers & Aesthetics | `[x]` | `[ ]` |
+| `slides/09-perception-design.qmd` | 9 | Perception & Design | `[x]` | `[ ]` |
+| `slides/10-eda-variation.qmd` | 10 | EDA — Variation | `[x]` | `[ ]` |
+| `slides/11-eda-covariation.qmd` | 11 | EDA — Covariation | `[x]` | `[ ]` |
+| `slides/12-data-types.qmd` | 12 | Data Types Grab Bag | `[x]` | `[ ]` |
+| `slides/13-strings-factors.qmd` | 13 | Strings, Factors & Text | `[x]` | `[ ]` |
+| `slides/14-joins.qmd` | 14 | Joins | `[x]` | `[ ]` |
+| `slides/15-missing-data.qmd` | 15 | Missing Data | `[ ]` | `[ ]` |
+| `slides/16-storytelling.qmd` | 16 | Storytelling with Data | `[ ]` | `[ ]` |
 | `slides/17-correlation-regression.qmd` | 17 | Correlation & Regression | `[ ]` | `[ ]` |
 | `slides/18-putting-it-together.qmd` | 18 | Putting It All Together | `[ ]` | `[ ]` |
 
