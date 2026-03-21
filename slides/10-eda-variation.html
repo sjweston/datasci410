@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="09-eda-variation_files/libs/quarto-html/tabby.min.js"></script>
-<script src="09-eda-variation_files/libs/quarto-html/popper.min.js"></script>
-<script src="09-eda-variation_files/libs/quarto-html/tippy.umd.min.js"></script>
-<link href="09-eda-variation_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="09-eda-variation_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="09-eda-variation_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+<script src="10-eda-variation_files/libs/quarto-html/tabby.min.js"></script>
+<script src="10-eda-variation_files/libs/quarto-html/popper.min.js"></script>
+<script src="10-eda-variation_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="10-eda-variation_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="10-eda-variation_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="10-eda-variation_files/libs/quarto-html/quarto-syntax-highlighting-065a5179aebd64318d7ea99d77b64a9e.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dr.&nbsp;Sara Weston">
@@ -14,8 +14,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="09-eda-variation_files/libs/revealjs/dist/reset.css">
-  <link rel="stylesheet" href="09-eda-variation_files/libs/revealjs/dist/reveal.css">
+  <link rel="stylesheet" href="10-eda-variation_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="10-eda-variation_files/libs/revealjs/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -95,13 +95,13 @@
     code span.vs { color: #032f62; } /* VerbatimString */
     code span.wa { color: #ff5555; } /* Warning */
   </style>
-  <link rel="stylesheet" href="09-eda-variation_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
-  <link href="09-eda-variation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <link rel="stylesheet" href="10-eda-variation_files/libs/revealjs/dist/theme/quarto-f74f6804abaaff7c7e6dac51130874be.css">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/font-awesome/css/all.css" rel="stylesheet">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/style.css" rel="stylesheet">
+  <link href="10-eda-variation_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
     .reveal div.sourceCode {
       margin: 0;
@@ -502,7 +502,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Histogram of participant ages with 5-year bins showing a strong right skew, with most participants in their teens to thirties and a long tail extending past age 60." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Histogram of participant ages with 5-year bins showing a strong right skew, with most participants in their teens to thirties and a long tail extending past age 60." width="960"></p>
 </figure>
 </div>
 </div>
@@ -510,7 +510,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <h2>Choosing binwidth</h2>
 <p>The binwidth matters a lot:</p>
 
-<img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Three histograms of age side by side comparing binwidths. Binwidth 1 is noisy with erratic spikes, binwidth 5 clearly shows the right-skewed shape, and binwidth 20 oversimplifies into just a few bars that hide the skew." width="1152" class="r-stretch"><p>There’s no “right” answer — try a few and pick the one that shows the shape clearly.</p>
+<img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Three histograms of age side by side comparing binwidths. Binwidth 1 is noisy with erratic spikes, binwidth 5 clearly shows the right-skewed shape, and binwidth 20 oversimplifies into just a few bars that hide the skew." width="1152" class="r-stretch"><p>There’s no “right” answer — try a few and pick the one that shows the shape clearly.</p>
 <aside class="notes">
 <p>Spend ~2 minutes comparing the three panels. Point to specific differences: binwidth=1 shows noisy spikes that are just sampling variability, binwidth=20 hides the right skew entirely. A common student question: “Which binwidth should I use on the assignment?” Answer: try a few, pick the one that shows the overall shape without too much noise. There is no single correct answer.</p>
 <style type="text/css">
@@ -557,7 +557,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Density plot of participant ages showing a smooth right-skewed curve that peaks around age 20 and gradually tapers off toward age 80." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Density plot of participant ages showing a smooth right-skewed curve that peaks around age 20 and gradually tapers off toward age 80." width="960"></p>
 </figure>
 </div>
 </div>
@@ -596,7 +596,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items." width="960"></p>
 </figure>
 </div>
 </div>
@@ -620,7 +620,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of gender distribution showing roughly twice as many female participants as male participants in the BFI sample." width="768"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of gender distribution showing roughly twice as many female participants as male participants in the BFI sample." width="768"></p>
 </figure>
 </div>
 </div>
@@ -704,7 +704,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers." width="960"></p>
 </figure>
 </div>
 </div>
@@ -740,7 +740,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers." width="960"></p>
 </figure>
 </div>
 </div>
@@ -887,7 +887,7 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution." width="960"></p>
 </figure>
 </div>
 </div>
@@ -922,7 +922,7 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours." width="960"></p>
 </figure>
 </div>
 </div>
@@ -956,7 +956,7 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither." width="768"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither." width="768"></p>
 </figure>
 </div>
 </div>
@@ -1073,7 +1073,7 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1153,7 +1153,7 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="09-eda-variation_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1287,20 +1287,20 @@ $ data_words        &lt;chr&gt; "natoque imperdiet ligula commodo! convallis acc
 </div></div>
 
   <script>window.backupDefine = window.define; window.define = undefined;</script>
-  <script src="09-eda-variation_files/libs/revealjs/dist/reveal.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/dist/reveal.js"></script>
   <!-- reveal.js plugins -->
-  <script src="09-eda-variation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/reveal-chalkboard/plugin.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
-  <script src="09-eda-variation_files/libs/revealjs/plugin/notes/notes.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/search/search.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
-  <script src="09-eda-variation_files/libs/revealjs/plugin/math/math.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="10-eda-variation_files/libs/revealjs/plugin/math/math.js"></script>
   <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
 
   <script>
