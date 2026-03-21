@@ -25,7 +25,8 @@ execute:
 #| include: false
 # Load packages for all slides
 library(tidyverse)
-class_survey <- read_csv("../data/class_survey.csv")
+library(here)
+class_survey <- read_csv(here("data/class_survey.csv"))
 ```
 
 # Why visualize? {background-color="#2c3e50"}
@@ -655,7 +656,7 @@ During Week 1, you filled out a short survey. By the end of this course, you'll 
 #| fig-height: 5
 #| fig-alt: "Histogram of the number of browser tabs students reported having open, showing a right-skewed distribution with most students clustered at low values and a few extreme outliers."
 ggplot(class_survey, aes(x = tabs_open)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
+  geom_histogram(fill = "steelblue", color = "white", bins = 30) +
   labs(
     title = "How many browser tabs do you have open right now?",
     subtitle = "PSY 410 class survey",
