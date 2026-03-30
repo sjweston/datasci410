@@ -32,8 +32,8 @@ course-logo: /files/img/course-logo.png
 
 - {{< fa user >}} &nbsp; {{< var ta.name >}}
 - {{< fa envelope >}} &nbsp; {{< var ta.email >}}
-- {{< fa university >}} &nbsp; {{< var ta.office >}}
-- {{< fa clock >}} &nbsp; {{< var ta.office_hours >}}
+- {{< fa video >}} &nbsp; [Zoom room]({{< var ta.office >}})
+- {{< fa calendar-check >}} &nbsp; [Book office hours]({{< var ta.appointment_url >}})
 :::
 
 ::: {.g-col-12 .g-col-sm-6 .g-col-md-4}

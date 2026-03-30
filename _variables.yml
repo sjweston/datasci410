@@ -29,8 +29,9 @@ course:
 ta:
   name: "Amala Someshwar"
   email: "asomeshw@uoregon.edu"
-  office: ""
+  office: "https://zoom.us/j/2621543633"
   office_hours: ""
+  appointment_url: "https://calendly.com/asomeshwar/15min"
 
 university:
   name: "University of Oregon"
