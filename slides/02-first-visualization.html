@@ -573,65 +573,6 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 </div>
 </div></section></section>
 <section>
-<section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>Pair coding break</h1>
-
-</section>
-<section id="your-turn-10-minutes" class="slide level2">
-<h2>Your turn: 10 minutes</h2>
-<p>With a partner, create a scatterplot using the <code>mpg</code> dataset:</p>
-<ol type="1">
-<li>Plot <code>cty</code> (x-axis) vs <code>hwy</code> (y-axis)</li>
-<li>Color points by <strong>fuel type</strong> (<code>fl</code>)</li>
-<li>Add a smooth trend line</li>
-<li>Give it a title and axis labels</li>
-<li>Who can make theirs look the best?</li>
-</ol>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>You have everything you need from the last few slides. Start with the basic template and build from there.</p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>Set a visible timer for 10 minutes. Circulate the room and help pairs who are stuck — the most common issues will be: forgetting the <code>+</code> between layers, putting <code>color</code> outside <code>aes()</code>, and not knowing how to add <code>geom_smooth()</code>. Encourage students to experiment beyond the requirements (try different colors, themes, alpha). For the “who can make it look the nicest” prompt, you might do a quick informal show-and-tell at the end. They haven’t learned <code>labs()</code> or themes yet, so don’t penalize anyone who doesn’t add them — but some students will figure it out from autocomplete.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
-<aside class="notes">
-<p>Give students 1 minute to submit. Emphasize that it doesn’t need to be perfect or even run — partial code is fine. This is about participation, not correctness. Transition: “Now that you’ve made a scatterplot, let’s see what other kinds of plots ggplot2 can make.”</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
 <section id="different-data-types-need-different-geoms" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Different data types need different geoms</h1>
 
@@ -700,7 +641,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Scatterplot of engine displacement versus highway mpg with a smoothed (loess) trend line and gray confidence band showing a negative curved relationship that levels off around 5 liters of displacement." width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Scatterplot of engine displacement versus highway mpg with a smoothed (loess) trend line and gray confidence band showing a negative curved relationship that levels off around 5 liters of displacement." width="960"></p>
 </figure>
 </div>
 </div>
@@ -717,7 +658,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Scatterplot of engine displacement versus highway mpg with a straight linear regression line and confidence band showing a clear negative linear trend — highway mpg decreases as engine size increases." width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Scatterplot of engine displacement versus highway mpg with a straight linear regression line and confidence band showing a clear negative linear trend — highway mpg decreases as engine size increases." width="960"></p>
 </figure>
 </div>
 </div>
@@ -743,16 +684,75 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="layering-geoms-output" class="slide level2 output-location-slide"><h2>Layering geoms</h2><div class="cell output-location-slide">
+</section><section id="layering-geoms-output" class="slide level2 output-location-slide"><h2>Layering geoms</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Scatterplot of engine displacement versus highway mpg colored by drive type (front, rear, 4-wheel) with separate linear trend lines for each group, showing that all three drive types have negative trends but at different levels." width="960"></p>
+<p><img data-src="02-first-visualization_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Scatterplot of engine displacement versus highway mpg colored by drive type (front, rear, 4-wheel) with separate linear trend lines for each group, showing that all three drive types have negative trends but at different levels." width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="geom_bar-categorical-data" class="slide level2">
+</div></section></section>
+<section>
+<section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Pair coding break</h1>
+
+</section>
+<section id="your-turn-10-minutes" class="slide level2">
+<h2>Your turn: 10 minutes</h2>
+<p>With a partner, create a scatterplot using the <code>mpg</code> dataset:</p>
+<ol type="1">
+<li>Plot <code>cty</code> (x-axis) vs <code>hwy</code> (y-axis)</li>
+<li>Color points by <strong>fuel type</strong> (<code>fl</code>)</li>
+<li>Add a smooth trend line</li>
+<li>Give it a title and axis labels</li>
+<li>Who can make theirs look the best?</li>
+</ol>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>You have everything you need from the last few slides. Start with the basic template and build from there.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Set a visible timer for 10 minutes. Circulate the room and help pairs who are stuck — the most common issues will be: forgetting the <code>+</code> between layers and putting <code>color</code> outside <code>aes()</code>. Encourage students to experiment beyond the requirements (try different colors, themes, alpha). For the “who can make it look the nicest” prompt, you might do a quick informal show-and-tell at the end. They haven’t learned <code>labs()</code> or themes yet, so don’t penalize anyone who doesn’t add them — but some students will figure it out from autocomplete.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="before-we-move-on" class="slide level2">
+<h2>Before we move on</h2>
+<p>📤 <strong>Upload your code to Canvas</strong> for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
+<aside class="notes">
+<p>Give students 1 minute to submit. Emphasize that it doesn’t need to be perfect or even run — partial code is fine. This is about participation, not correctness. Transition: “Now let’s look at some other geom types for different kinds of data.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="geom_bar-categorical-data" class="slide level2">
 <h2>geom_bar() — categorical data</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts of each car class</span></span>
@@ -942,20 +942,21 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <h2>Same template, psychology data</h2>
 <p>The ggplot template works the same way with any data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated experiment: condition vs. anxiety score</span></span>
-<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>psych_demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>), <span class="at">each =</span> <span class="dv">30</span>),</span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="dv">8</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">28</span>, <span class="at">sd =</span> <span class="dv">8</span>))</span>
-<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(psych_demo, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> anxiety, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment Group Reports Lower Anxiety"</span>,</span>
-<span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (BAI)"</span></span>
-<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">410</span>)  <span class="co"># Reproducible results</span></span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated experiment: condition vs. anxiety score</span></span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>psych_demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>), <span class="at">each =</span> <span class="dv">30</span>),</span>
+<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">35</span>, <span class="at">sd =</span> <span class="dv">8</span>), <span class="fu">rnorm</span>(<span class="dv">30</span>, <span class="at">mean =</span> <span class="dv">28</span>, <span class="at">sd =</span> <span class="dv">8</span>))</span>
+<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(psych_demo, <span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> anxiety, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>, <span class="at">show.legend =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment Group Reports Lower Anxiety"</span>,</span>
+<span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (BAI)"</span></span>
+<span id="cb21-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1025,7 +1026,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
 <li>Facet by <code>drv</code> (drive type)</li>
 <li>Save it with <code>ggsave()</code></li>
 </ol>
-<p>This is the first part of Assignment 1 — finish it before next class.</p>
+<p>This is the first part of Assignment 1.</p>
 <aside class="notes">
 <p>Give students ~10 minutes of independent work time here. Walk around and help. This exercise combines everything from the session: the basic template, color mapping, faceting, and saving. Students who finish early can experiment with themes, labels, or different geoms. Reveal the solution only if most students are stuck. Remind them that Assignment 1 is due Sunday at 11:59 PM and includes additional tasks beyond this exercise.</p>
 <style type="text/css">
