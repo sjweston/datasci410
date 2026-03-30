@@ -35,22 +35,22 @@ This wasn't fraud. These were real labs, following published methods, using real
 
 So what went wrong?
 
-::: {.notes}
-Spend ~5 minutes on this opening sequence. Let the "36%" land — pause after the reveal. This is the Open Science Collaboration (2015) study. Students may have heard of the replication crisis in intro psych but probably don't know the details. The goal is to frame data science skills as the *solution*, not just a technical requirement. Don't get into specific studies yet — the point is the systemic problem.
+::: notes
+Spend \~5 minutes on this opening sequence. Let the "36%" land — pause after the reveal. This is the Open Science Collaboration (2015) study. Students may have heard of the replication crisis in intro psych but probably don't know the details. The goal is to frame data science skills as the *solution*, not just a technical requirement. Don't get into specific studies yet — the point is the systemic problem.
 :::
 
 ## Many things went wrong
 
-- Analyses that couldn't be reproduced (even by the original authors)
-- Data that was cleaned by hand with no record of what changed
-- Figures that obscured rather than revealed patterns
-- Code that only worked on one person's laptop
+-   Analyses that couldn't be reproduced (even by the original authors)
+-   Data that was cleaned by hand with no record of what changed
+-   Figures that obscured rather than revealed patterns
+-   Code that only worked on one person's laptop
 
 . . .
 
 The replication crisis isn't just a statistics problem. It's a **workflow** problem.
 
-::: {.notes}
+::: notes
 The "workflow problem" reframe is the key insight. Students expect this to be a stats problem — redirect that assumption. This sets up the entire course narrative: every skill we teach is about building a better workflow. Transition: "So what does a better workflow look like? That's what this course is about."
 :::
 
@@ -66,57 +66,97 @@ Every technical skill we learn this quarter serves the same goal:
 
 That means learning to:
 
-- **Import** data without breaking it
-- **Transform** it transparently (with code, not clicks)
-- **Visualize** it to find patterns — and catch errors
-- **Communicate** what you found so others can verify it
+-   **Import** data without breaking it
+-   **Transform** it transparently (with code, not clicks)
+-   **Visualize** it to find patterns — and catch errors
+-   **Communicate** what you found so others can verify it
 
-::: {.notes}
-Read the blockquote aloud — it's the course mission statement. The four bullet points map directly to the four units of the course. Students don't need to memorize this now, but it gives them a roadmap. Spend ~2 minutes here.
+::: notes
+Read the blockquote aloud — it's the course mission statement. The four bullet points map directly to the four units of the course. Students don't need to memorize this now, but it gives them a roadmap. Spend \~2 minutes here.
 :::
 
 ## About this course
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
 **What we'll learn:**
 
-- Data visualization with ggplot2
-- Data transformation with dplyr
-- Data tidying with tidyr
-- Reproducible reports with Quarto
+-   Data visualization with ggplot2
+-   Data transformation with dplyr
+-   Data tidying with tidyr
+-   Reproducible reports with Quarto
 :::
 
 ::: {.column width="50%"}
 **Why it matters:**
 
-- Psychology is increasingly data-driven
-- These skills make your work reproducible
-- They transfer to any career that touches data
+-   Psychology is increasingly data-driven
+-   These skills make your work reproducible
+-   They transfer to any career that touches data
 :::
-::::
+:::::
+
+## About your instructor
+
+::::: columns
+::: {.column width="40%"}
+![Dr. Sara Weston](img/sara.jpg)
+:::
+
+::: {.column width="60%"}
+**Dr. Sara Weston**
+
+-   Associate Professor, Department of Psychology
+-   Research: personality, health, and aging
+-   I use R every day — and I remember what it was like to learn it
+:::
+:::::
+
+::: notes
+Keep this brief (\~1 minute). The goal is to be approachable. Mention that you use R in your own research so students see it as a real tool, not just a classroom exercise. Transition: "And I'm not the only one here to help you..."
+:::
+
+## About your GE
+
+::::: columns
+::: {.column width="40%"}
+![Amala Someshwar](img/amala.png)
+:::
+
+::: {.column width="60%"}
+**Amala Someshwar**
+
+-   5th-year PhD student in Dr. Weston's lab
+-   Research: adolescent relationships and self-esteem
+-   Defending her dissertation this term!
+:::
+:::::
+
+::: notes
+Introduce Amala warmly — she'll be a key resource for students during office hours and in-class exercises. Mention that she's defending her dissertation this term so students appreciate that she's a real researcher, not just a grader.
+:::
 
 # How this course works {background-color="#2c3e50"}
 
 ## Your grade
 
 | Component | Weight | What it is |
-|-----------|--------|------------|
+|--------------------------|-------------------|----------------------------|
 | Assignments | 35% | 8 weekly coding exercises |
-| Reading quizzes | 15% | 10 pre-class quizzes — unlimited retakes, best score counts |
+| Reading quizzes | 15% | 10 weekly quizzes — unlimited retakes, best score counts |
 | Participation | 15% | In-class pair coding submissions |
 | Final project | 35% | Analyze a dataset of your choosing |
 
-::: {.notes}
-Students fixate on grading — spend ~3 minutes walking through this clearly. Emphasize: quizzes are points-based but they can retake as many times as they'd like and you always take the best score, participation is about showing up and trying (not correctness) and the 2 lowest check-in scores are dropped, and the final project is the biggest piece. Mention the 48-hour late policy and the "life happens" extension token (one free 48-hour extension per student, email to request within one week of the due date). Don't belabor it now — just plant the seed so students know safety nets exist.
+::: notes
+Students fixate on grading — spend \~3 minutes walking through this clearly. Emphasize: quizzes are points-based but they can retake as many times as they'd like and you always take the best score, participation is about showing up and trying (not correctness) and the 2 lowest check-in scores are dropped, and the final project is the biggest piece. Mention the 48-hour late policy and the "life happens" extension token (one free 48-hour extension per student, email to request within one week of the due date). Don't belabor it now — just plant the seed so students know safety nets exist.
 :::
 
 ## Weekly assignments
 
-- Short, focused coding exercises that reinforce each session's content
-- Assigned on Wednesdays, due the following Sunday at 11:59 PM
-- Designed to take 1–2 hours outside of class
-- You'll get time during class to start and ask questions
+-   Short, focused coding exercises that reinforce each session's content
+-   Assigned on Wednesdays, due the following Sunday at 11:59 PM
+-   Designed to take 1–2 hours outside of class
+-   You'll get time during class to start and ask questions
 
 . . .
 
@@ -138,36 +178,36 @@ Each quiz pulls **5 random questions** from a larger bank. You can retake as man
 
 Every class, you'll work with a partner on a coding exercise.
 
-- Submit your attempt on Canvas before you leave
-- Graded on completion and good-faith effort, not correctness
-- **2 lowest scores dropped** — missing a class or two won't hurt your grade
-- This is your time to experiment, make mistakes, and learn
+-   Submit your attempt on Canvas before you leave
+-   Graded on completion and good-faith effort, not correctness
+-   **2 lowest scores dropped** — missing a class or two won't hurt your grade
+-   This is your time to experiment, make mistakes, and learn
 
 ## The final project
 
 A capstone project where you apply everything to a dataset you choose.
 
-| Milestone | When |
-|-----------|------|
-| Proposal | Week 5 — dataset and research questions |
-| Draft | Week 8 — working code and preliminary results |
-| Final report | Week 10 — polished Quarto document |
-| Presentation | Finals week — 5-minute share-out |
+| Milestone    | When                                          |
+|--------------|-----------------------------------------------|
+| Proposal     | Week 5 — dataset and research questions       |
+| Draft        | Week 8 — working code and preliminary results |
+| Final report | Week 10 — polished Quarto document            |
+| Presentation | Finals week — 5-minute share-out              |
 
 ## The team challenge
 
-::: {.notes}
-The team challenge should feel fun, not stressful. Emphasize that it doesn't affect grades — it's just a way to build community and motivate each other. Teams will be formed from the survey they take today, balanced by prior experience. The winning team gets a pizza celebration on the last day. Spend ~3 minutes on both team challenge slides.
+::: notes
+The team challenge should feel fun, not stressful. Emphasize that it doesn't affect grades — it's just a way to build community and motivate each other. Teams will be formed from the survey they take today, balanced by prior experience. The winning team gets a pizza celebration on the last day. Spend \~3 minutes on both team challenge slides.
 :::
 
 At the start of the term, you'll be placed on a team of 5–6 students.
 
 Throughout the quarter, your team earns points:
 
-- **Pair coding** — team gets a point when (nearly) everyone submits
-- **Assignments** — team gets a point when everyone submits on time
-- **Quizzes** — team with the highest average earns a point
-- **Fun challenges** — weekly mini-challenges outside of class
+-   **Pair coding** — team gets a point when (nearly) everyone submits
+-   **Assignments** — team gets a point when everyone submits on time
+-   **Quizzes** — team with the highest average earns a point
+-   **Fun challenges** — weekly mini-challenges outside of class
 
 ## The team challenge
 
@@ -183,66 +223,65 @@ We'll form teams based on a short survey you'll take today. Teams will be announ
 
 ## The old way vs. the new way
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
 **Point-and-click (SPSS, Excel)**
 
-- Hard to reproduce
-- Error-prone
-- Limited visualizations
-- Doesn't scale
+-   Hard to reproduce
+-   Error-prone
+-   Limited visualizations
+-   Doesn't scale
 :::
 
 ::: {.column width="50%"}
 **Code-based (R)**
 
-- Fully reproducible
-- Transparent & shareable
-- Unlimited customization
-- Handles any data size
+-   Fully reproducible
+-   Transparent & shareable
+-   Unlimited customization
+-   Handles any data size
 :::
-::::
+:::::
 
 ## Why R specifically?
 
 | What you need | R delivers |
-|---------------|------------|
+|----|----|
 | Free | Open source — no licenses, ever |
 | Built for data | Created by statisticians, not software engineers |
 | Psychology packages | `psych`, `lavaan`, `lme4`, `brms` |
 | Publication-quality figures | `ggplot2` — industry-leading |
 | Reproducibility | Quarto integration (we'll learn this) |
 
-::: {.notes}
-Students often ask "Why not Python?" Honest answer: both are great, but R's ecosystem is purpose-built for statistical analysis and psychology has strong R adoption. The packages listed here (`lavaan` for SEM, `lme4` for mixed models) are what they'll encounter in grad school or advanced stats courses. Don't spend more than ~2 minutes here — they'll see the proof through the course.
+::: notes
+Students often ask "Why not Python?" Honest answer: both are great, but R's ecosystem is purpose-built for statistical analysis and psychology has strong R adoption. The packages listed here (`lavaan` for SEM, `lme4` for mixed models) are what they'll encounter in grad school or advanced stats courses. Don't spend more than \~2 minutes here — they'll see the proof through the course.
 :::
 
 # Getting set up {background-color="#2c3e50"}
 
 ## What you need to install
 
-1. **R** — the programming language
-   - Download from [cloud.r-project.org](https://cloud.r-project.org)
-
-2. **RStudio** — the interface we'll use to write R
-   - Download from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
+1.  **R** — the programming language
+    -   Download from [cloud.r-project.org](https://cloud.r-project.org)
+2.  **RStudio** — the interface we'll use to write R
+    -   Download from [posit.co/download/rstudio-desktop](https://posit.co/download/rstudio-desktop/)
 
 . . .
 
-::: {.callout-important}
+::: callout-important
 Install R **first**, then RStudio. RStudio needs R to work!
 :::
 
-::: {.notes}
-Students should have installed R and RStudio before class (it was in the pre-class instructions), but expect ~20% to not have done it. Have them start installing now while you continue — installations take a few minutes. Common issues: Mac users need to choose the correct chip (Apple Silicon vs Intel); Windows users may need admin permissions. If someone is truly stuck, they can pair with a neighbor for today.
+::: notes
+Students should have installed R and RStudio before class (it was in the pre-class instructions), but expect \~20% to not have done it. Have them start installing now while you continue — installations take a few minutes. Common issues: Mac users need to choose the correct chip (Apple Silicon vs Intel); Windows users may need admin permissions. If someone is truly stuck, they can pair with a neighbor for today.
 :::
 
 ## R vs RStudio
 
 Think of it like this:
 
-- **R** is the engine of a car
-- **RStudio** is the dashboard, steering wheel, and GPS
+-   **R** is the engine of a car
+-   **RStudio** is the dashboard, steering wheel, and GPS
 
 You *could* drive with just an engine... but why would you?
 
@@ -250,17 +289,17 @@ You *could* drive with just an engine... but why would you?
 
 ![](img/rstudio-panes.png){fig-alt="RStudio interface showing four panes" width="80%"}
 
-::: {.notes}
+::: notes
 The four panes: Source (top-left), Console (bottom-left), Environment (top-right), Files/Plots/Help (bottom-right). Walk through each pane briefly — students will get to know them organically, so don't over-explain. The most important thing right now is that the Console is where code runs and Source is where you save code. The Environment pane will make more sense once they create objects.
 :::
 
 ## The four panes
 
-| Pane | What it does |
-|------|--------------|
-| **Source** (top-left) | Write and edit your code files |
-| **Console** (bottom-left) | Run code interactively, see output |
-| **Environment** (top-right) | See your data and objects |
+| Pane                                | What it does                         |
+|-----------------------|-------------------------------------------------|
+| **Source** (top-left)               | Write and edit your code files       |
+| **Console** (bottom-left)           | Run code interactively, see output   |
+| **Environment** (top-right)         | See your data and objects            |
 | **Files/Plots/Help** (bottom-right) | Navigate files, view plots, get help |
 
 ## Let's try it: The Console
@@ -280,13 +319,14 @@ Type in the Console and press Enter:
 
 Congrats — you just ran R code!
 
-::: {.notes}
+::: notes
 This is the first interactive moment — have everyone type `2 + 2` in their Console and press Enter. Wait until most people have done it. This tiny success matters: it proves R is working and they can make it do something. If anyone gets an error here, it's usually a sign R didn't install correctly.
 :::
 
 ## The assignment operator
 
 In R, we use `<-` to assign values to objects:
+
 ```{r}
 x <- 10
 ```
@@ -303,11 +343,11 @@ x + x
 
 . . .
 
-::: {.callout-tip}
+::: callout-tip
 **Keyboard shortcut:** Alt + - (Windows) or Option + - (Mac)
 :::
 
-::: {.notes}
+::: notes
 The assignment operator is a common early confusion. Students will try to use `=` (which works but isn't idiomatic R). Don't fight this battle too hard — just model `<-` consistently and they'll adopt it. The keyboard shortcut is worth demonstrating live — have everyone try it. Also note that the object `x` now appears in the Environment pane (top-right).
 :::
 
@@ -315,39 +355,35 @@ The assignment operator is a common early confusion. Students will try to use `=
 
 ## Two mental models
 
-::: {.notes}
-This filing cabinet vs. laundry basket metaphor (from Scott Cunningham's Gov 51 at Harvard) is one of the most important conceptual lessons in the course. Spend ~5 minutes on the two "mental models" slides combined. Most students have grown up with search-based file access (Spotlight, Google Drive) and have never thought about directory structure. The goal is to make them understand *why* organized folders matter for code — not just as a preference but as a functional requirement.
+::: notes
+This filing cabinet vs. laundry basket metaphor (from Scott Cunningham's Gov 51 at Harvard) is one of the most important conceptual lessons in the course. Spend \~5 minutes on the two "mental models" slides combined. Most students have grown up with search-based file access (Spotlight, Google Drive) and have never thought about directory structure. The goal is to make them understand *why* organized folders matter for code — not just as a preference but as a functional requirement.
 :::
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-
 ### The filing cabinet
 
 ![Filing cabinet with labeled drawers, representing an organized project file structure](img/file_cabinet.png)
 :::
 
 ::: {.column width="50%"}
-
 ### The laundry basket
 
 ![Overflowing laundry basket, representing files scattered without structure](img/laundry-basket.jpg)
-
 :::
-::::
+:::::
 
 ## Two mental models
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
-
 ### The filing cabinet
 
 Every piece of paper has a **place** where it *lives*.
 
 You navigate **to** that place to find it.
 
-```
+```         
 Documents/
 ├── psy410/
 │   ├── data/
@@ -356,11 +392,9 @@ Documents/
     ├── data/
     └── drafts/
 ```
-
 :::
 
 ::: {.column width="50%"}
-
 ### The laundry basket
 
 Everything is in **one pile**.
@@ -370,10 +404,8 @@ You **search** to find it.
 <br>
 
 *Google, Spotlight, Finder search, "Recent files"...*
-
 :::
-::::
-
+:::::
 
 ## Why coding requires the filing cabinet
 
@@ -391,61 +423,61 @@ If the file isn't exactly there, the code **breaks**. No fuzzy matching. No "did
 
 . . .
 
-::: {.callout-important}
+::: callout-important
 This is why we need to learn directory structure — even if it feels foreign.
 :::
 
-::: {.notes}
+::: notes
 This is the "aha" moment for the filing cabinet metaphor. When students get "file not found" errors later in the course, point them back to this concept. The code gives *directions*, not a *search query* — if the path is wrong, R can't find the file, period. This is the single most common source of frustration for beginners.
 :::
 
 ## Why use RStudio Projects?
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
 **Without projects:**
 
-- Files scattered everywhere
-- `setwd()` nightmares
-- "It works on my computer"
-- Lost work when switching tasks
+-   Files scattered everywhere
+-   `setwd()` nightmares
+-   "It works on my computer"
+-   Lost work when switching tasks
 :::
 
 ::: {.column width="50%"}
 **With projects:**
 
-- Everything in one folder
-- Paths just work
-- Share the whole folder
-- Easy to switch between projects
+-   Everything in one folder
+-   Paths just work
+-   Share the whole folder
+-   Easy to switch between projects
 :::
-::::
+:::::
 
 . . .
 
-::: {.callout-tip}
+::: callout-tip
 **The golden rule:** Someone else should be able to run your code and get the same results. That "someone else" includes Future You — who has forgotten everything.
 :::
 
 ## Creating a project
 
-1. File → New Project...
-2. Choose "New Directory" → "New Project"
-3. Name it (e.g., "psy410")
-4. Pick a location (Documents folder is fine)
-5. Click "Create Project"
+1.  File → New Project...
+2.  Choose "New Directory" → "New Project"
+3.  Name it (e.g., "psy410")
+4.  Pick a location (Documents folder is fine)
+5.  Click "Create Project"
 
 . . .
 
 You'll see a `.Rproj` file appear — this is your project file. From now on, double-click it to open your project.
 
-::: {.notes}
+::: notes
 Do this live — walk through the steps while students follow along. Pause after each step. The most common mistake is students creating the project inside another project, or not being able to find where they saved it. Encourage them to put it somewhere easy to find (Desktop or Documents). After creating the project, show them that the Files pane now shows the project directory.
 :::
 
 ## A standard project structure
 
-```
+```         
 psy410/
 ├── psy410.Rproj
 ├── data/
@@ -463,10 +495,10 @@ psy410/
 
 Two principles:
 
-1. **Raw data is sacred** — never modify original files
-2. **Outputs are disposable** — you can always regenerate them from code
+1.  **Raw data is sacred** — never modify original files
+2.  **Outputs are disposable** — you can always regenerate them from code
 
-::: {.notes}
+::: notes
 These two principles are worth repeating throughout the course. "Raw data is sacred" means never edit a CSV by hand — always use code to clean it, so there's a record. "Outputs are disposable" means if you lose a figure, you just re-run the code. This connects back to reproducibility: if your workflow is code-based, everything is recoverable.
 :::
 
@@ -474,30 +506,30 @@ These two principles are worth repeating throughout the course. "Raw data is sac
 
 Good names make code **self-documenting**. Bad names create confusion and bugs.
 
-:::: {.columns}
+::::: columns
 ::: {.column width="50%"}
 **Do this:**
 
-- `reaction_time`
-- `mean_anxiety`
-- `survey_clean.csv`
-- `01_clean_data.R`
+-   `reaction_time`
+-   `mean_anxiety`
+-   `survey_clean.csv`
+-   `01_clean_data.R`
 :::
 
 ::: {.column width="50%"}
 **Not this:**
 
-- `x1`, `temp`, `foo`
-- `AvgAnx` (hard to read)
-- `data_final_v2_REAL.csv`
-- `stuff.R`, `untitled3.R`
+-   `x1`, `temp`, `foo`
+-   `AvgAnx` (hard to read)
+-   `data_final_v2_REAL.csv`
+-   `stuff.R`, `untitled3.R`
 :::
-::::
+:::::
 
 The test: Can someone unfamiliar with your project understand what a variable contains or what a file does?
 
-::: {.notes}
-Get a quick laugh from the "data_final_v2_REAL.csv" example — everyone has done this. The naming slide is quick (~1 minute) but plants a seed. You'll reinforce good naming habits throughout the course, especially in the code style section of Session 4.
+::: notes
+Get a quick laugh from the "data_final_v2_REAL.csv" example — everyone has done this. The naming slide is quick (\~1 minute) but plants a seed. You'll reinforce good naming habits throughout the course, especially in the code style section of Session 4.
 :::
 
 ## R Scripts
@@ -506,8 +538,8 @@ R scripts (`.R` files) are where you write and save your code.
 
 To create one:
 
-1. File → New File → R Script
-2. Or press Ctrl/Cmd + Shift + N
+1.  File → New File → R Script
+2.  Or press Ctrl/Cmd + Shift + N
 
 . . .
 
@@ -515,13 +547,13 @@ To create one:
 
 ## Running code from a script
 
-- **Run one line:** Put cursor on line, press Ctrl/Cmd + Enter
-- **Run selection:** Highlight code, press Ctrl/Cmd + Enter
-- **Run entire script:** Ctrl/Cmd + Shift + Enter
+-   **Run one line:** Put cursor on line, press Ctrl/Cmd + Enter
+-   **Run selection:** Highlight code, press Ctrl/Cmd + Enter
+-   **Run entire script:** Ctrl/Cmd + Shift + Enter
 
 . . .
 
-::: {.callout-tip}
+::: callout-tip
 You'll use Ctrl/Cmd + Enter constantly. Memorize it!
 :::
 
@@ -559,20 +591,20 @@ library(tidyverse)
 
 The `tidyverse` is actually a collection of packages:
 
-| Package | Purpose |
-|---------|---------|
-| `ggplot2` | Data visualization |
-| `dplyr` | Data manipulation |
-| `tidyr` | Data tidying |
-| `readr` | Reading data files |
-| `tibble` | Modern data frames |
-| `stringr` | String manipulation |
-| `forcats` | Working with factors |
-| `purrr` | Functional programming |
+| Package   | Purpose                |
+|-----------|------------------------|
+| `ggplot2` | Data visualization     |
+| `dplyr`   | Data manipulation      |
+| `tidyr`   | Data tidying           |
+| `readr`   | Reading data files     |
+| `tibble`  | Modern data frames     |
+| `stringr` | String manipulation    |
+| `forcats` | Working with factors   |
+| `purrr`   | Functional programming |
 
 We'll use most of these throughout the course.
 
-::: {.notes}
+::: notes
 Don't go through every package — just note that `library(tidyverse)` loads them all at once. Students sometimes worry about memorizing all of these. Reassure them: we'll learn them one at a time, and they only need `library(tidyverse)` at the top of every script. We won't cover `purrr` in this course.
 :::
 
@@ -591,26 +623,26 @@ mpg
 
 ## Your turn!
 
-1. Create a new RStudio Project called "psy410"
-2. Inside it, create three folders: `data`, `scripts`, `output`
-3. Create a new R script in `scripts/` and save it as `01_practice.R`
-4. Install and load the tidyverse
-5. Run `glimpse(mpg)` and `glimpse(diamonds)`
-6. Save your script!
+1.  Create a new RStudio Project called "psy410"
+2.  Inside it, create three folders: `data`, `scripts`, `output`
+3.  Create a new R script in `scripts/` and save it as `01_practice.R`
+4.  Install and load the tidyverse
+5.  Run `glimpse(mpg)` and `glimpse(diamonds)`
+6.  Save your script!
 
-::: {.notes}
-Give students ~10 minutes for this. Walk around the room and help. The most common issues: (1) students who haven't installed R/RStudio yet — have them start installing now; (2) students who don't know how to create folders — show them the "New Folder" button in the Files pane; (3) `install.packages("tidyverse")` taking a long time — this is normal on first install, can take 3–5 minutes. If they finish early, encourage them to try other things: `nrow(mpg)`, `names(mpg)`, `head(mpg)`.
+::: notes
+Give students \~10 minutes for this. Walk around the room and help. The most common issues: (1) students who haven't installed R/RStudio yet — have them start installing now; (2) students who don't know how to create folders — show them the "New Folder" button in the Files pane; (3) `install.packages("tidyverse")` taking a long time — this is normal on first install, can take 3–5 minutes. If they finish early, encourage them to try other things: `nrow(mpg)`, `names(mpg)`, `head(mpg)`.
 :::
 
 # Getting help {background-color="#2c3e50"}
 
 ## When you're stuck
 
-1. **Use `?`** — e.g., `?mean` opens the help page
-2. **Google it** — seriously, everyone does this
-3. **Stack Overflow** — most R questions are answered there
-4. **R4DS book** — [r4ds.hadley.nz](https://r4ds.hadley.nz)
-5. **Ask me** — that's what I'm here for!
+1.  **Use `?`** — e.g., `?mean` opens the help page
+2.  **Google it** — seriously, everyone does this
+3.  **Stack Overflow** — most R questions are answered there
+4.  **R4DS book** — [r4ds.hadley.nz](https://r4ds.hadley.nz)
+5.  **Ask me** — that's what I'm here for!
 
 ## Reading help pages
 
@@ -620,10 +652,10 @@ Give students ~10 minutes for this. Walk around the room and help. The most comm
 
 Help pages include:
 
-- **Description** — what the function does
-- **Usage** — how to call it
-- **Arguments** — what inputs it takes
-- **Examples** — working code you can run
+-   **Description** — what the function does
+-   **Usage** — how to call it
+-   **Arguments** — what inputs it takes
+-   **Examples** — working code you can run
 
 The examples section is gold — run them!
 
@@ -642,13 +674,13 @@ maen(c(1, 2, 3))
 
 Read the error message carefully — R is trying to help you.
 
-::: {.notes}
+::: notes
 The typo example (`maen` instead of `mean`) is intentional — it shows the most common beginner error. Normalize errors loudly: "I make typos every single day. R will yell at you. That's fine." This sets the emotional tone for the whole course. Students who fear errors will freeze up; students who expect errors will debug and learn.
 :::
 
 # Why no AI? (Yet) {background-color="#2c3e50"}
 
----
+------------------------------------------------------------------------
 
 ## The bicycle vs. the motorcycle
 
@@ -658,58 +690,51 @@ Generative AI is more like a **motorcycle**. It provides the engine. But if you 
 
 Read Cat Hicks: ["Cognitive helmets for AI bicycles"](https://www.fightforthehuman.com/cognitive-helmets-for-the-ai-bicycle-part-1/)
 
-::: {.notes}
-The AI policy section should take ~5 minutes across the three slides. Anticipate pushback: some students will think banning AI is old-fashioned. The bicycle/motorcycle metaphor reframes it — we're not anti-AI, we're pro-fundamentals. The course AI policy (in the syllabus) allows AI for debugging help later in the term but not for generating assignment code. The key message: "I want you to be the pilot, not the passenger. We'll get to the motorcycle — but first, learn to balance."
+::: notes
+The AI policy section should take \~5 minutes across the three slides. Anticipate pushback: some students will think banning AI is old-fashioned. The bicycle/motorcycle metaphor reframes it — we're not anti-AI, we're pro-fundamentals. The course AI policy (in the syllabus) allows AI for debugging help later in the term but not for generating assignment code. The key message: "I want you to be the pilot, not the passenger. We'll get to the motorcycle — but first, learn to balance."
 :::
 
----
+------------------------------------------------------------------------
 
 ### The metacognition trap
 
 AI gives you a working answer immediately. It *feels* like you solved it.
 
-
 But you didn't build the **mental model** of *why* it works.
-
 
 When the AI hallucinates (which it will), **you cannot debug it.** You are stranded.
 
 Using AI now = skipping the gym but expecting to get strong.
 
----
+------------------------------------------------------------------------
 
 ### Building the helmet first
 
 Before we get on the motorcycle, we need a **cognitive helmet**:
 
-1. **Syntax literacy** — reading code as fluently as English
-2. **Debugging resilience** — emotional regulation when things break
-3. **Strategic friction** — breaking big problems into small pieces
-
+1.  **Syntax literacy** — reading code as fluently as English
+2.  **Debugging resilience** — emotional regulation when things break
+3.  **Strategic friction** — breaking big problems into small pieces
 
 That's what the many short assignments in this course build. The goal: **you** are the pilot, not the passenger.
 
----
+------------------------------------------------------------------------
 
 ### Coding teaches you to think differently
 
 Learning R isn't just about R. It's about a set of habits that transfer everywhere:
 
-. . .
-
-- **Breaking big problems into small steps** — instead of staring at a question, you ask: *what's the first concrete thing I can do?*
-- **Thinking in transformations** — data isn't a fixed object; it's something you act on, step by step
-- **Debugging as a skill** — forming a hypothesis, testing it, revising — this is just the scientific method
-
-. . .
+-   **Breaking big problems into small steps** — instead of staring at a question, you ask: *what's the first concrete thing I can do?*
+-   **Thinking in transformations** — data isn't a fixed object; it's something you act on, step by step
+-   **Debugging as a skill** — forming a hypothesis, testing it, revising — this is just the scientific method
 
 You may never write another line of R after June. **That's okay.** The thinking you build here will show up everywhere: in a lab, in a dissertation, in any job that asks you to solve a messy problem.
 
-::: {.notes}
-This slide is a morale investment — plant it early and reference it when students get frustrated later in the term. The core message: the struggle is the point. Decomposing problems, testing hypotheses, tolerating ambiguity — these are transferable cognitive habits, not just coding tricks. Psychology students in particular often don't see themselves as "technical people." This reframes the course as building a way of thinking, not just a skill set. Keep this short (~1–2 minutes) and deliver it warmly — it should feel like reassurance, not a lecture.
+::: notes
+This slide is a morale investment — plant it early and reference it when students get frustrated later in the term. The core message: the struggle is the point. Decomposing problems, testing hypotheses, tolerating ambiguity — these are transferable cognitive habits, not just coding tricks. Psychology students in particular often don't see themselves as "technical people." This reframes the course as building a way of thinking, not just a skill set. Keep this short (\~1–2 minutes) and deliver it warmly — it should feel like reassurance, not a lecture.
 :::
 
----
+------------------------------------------------------------------------
 
 ### The interview no one warns you about
 
@@ -721,7 +746,7 @@ You don't need to be ready for that by June. But every time you practice writing
 
 **Start now, so you're not starting from zero later.**
 
-::: {.notes}
+::: notes
 This slide lands well after the cognitive helmet framing — it gives students a concrete, career-relevant reason to practice without AI. Don't oversell the stakes ("you'll never get a job!") — the tone should be encouraging. The message: you're building a skill that compounds. Even if they're not headed for a data science career, being able to sit down and code without a crutch is a transferable confidence. Mention that live coding interviews are common in tech, research labs, and increasingly in social science positions that involve data work.
 :::
 
@@ -731,24 +756,24 @@ This slide lands well after the cognitive helmet framing — it gives students a
 
 **Read:**
 
-- [R4DS Ch 2: Workflow basics](https://r4ds.hadley.nz/workflow-basics)
-- [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
+-   [R4DS Ch 2: Workflow basics](https://r4ds.hadley.nz/workflow-basics)
+-   [R4DS Ch 6: Workflow: scripts and projects](https://r4ds.hadley.nz/workflow-scripts)
 
 **Do:**
 
-- Complete the **team formation survey** on Canvas (if you haven't already)
-- Install R and RStudio
-- Create your psy410 project with `data/`, `scripts/`, and `output/` folders
-- Install the tidyverse package
-- Poke around! Try things! Break stuff!
+-   Complete the **team formation survey** on Canvas (if you haven't already)
+-   Install R and RStudio
+-   Create your psy410 project with `data/`, `scripts/`, and `output/` folders
+-   Install the tidyverse package
+-   Poke around! Try things! Break stuff!
 
 ## Key takeaways
 
-1. **Psychology needs better data practices** — that's what this course builds
-2. **R is a tool** — like learning any tool, it takes practice
-3. **Organization matters** — filing cabinet, not laundry basket
-4. **Name things clearly** — your future self will thank you
-5. **Errors are learning opportunities** — read them, Google them
+1.  **Psychology needs better data practices** — that's what this course builds
+2.  **R is a tool** — like learning any tool, it takes practice
+3.  **Organization matters** — filing cabinet, not laundry basket
+4.  **Name things clearly** — your future self will thank you
+5.  **Errors are learning opportunities** — read them, Google them
 
 ## The one thing to remember
 
@@ -756,6 +781,6 @@ Every skill you learn in this course is a brick in a wall between you and the re
 
 See you Wednesday for your first visualization!
 
-::: {.notes}
+::: notes
 End on this line — it ties back to the opening and gives them a sense of purpose. Before dismissing, remind them of the to-do list on the previous slide: readings, team survey, install R/RStudio, create project, install tidyverse. The team survey is the most time-sensitive — teams need to be formed before Session 2.
 :::
