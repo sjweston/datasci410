@@ -278,7 +278,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
-  <li><a href="#part-1-pivoting-wide-to-long-35-points" id="toc-part-1-pivoting-wide-to-long-35-points" class="nav-link" data-scroll-target="#part-1-pivoting-wide-to-long-35-points">Part 1: Pivoting Wide to Long (35 points)</a>
+  <li><a href="#part-1-pivoting-wide-to-long-30-points" id="toc-part-1-pivoting-wide-to-long-30-points" class="nav-link" data-scroll-target="#part-1-pivoting-wide-to-long-30-points">Part 1: Pivoting Wide to Long (30 points)</a>
   <ul class="collapse">
   <li><a href="#task-1.1" id="toc-task-1.1" class="nav-link" data-scroll-target="#task-1.1">Task 1.1</a></li>
   <li><a href="#task-1.2" id="toc-task-1.2" class="nav-link" data-scroll-target="#task-1.2">Task 1.2</a></li>
@@ -289,13 +289,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#task-2.1" id="toc-task-2.1" class="nav-link" data-scroll-target="#task-2.1">Task 2.1</a></li>
   <li><a href="#task-2.2" id="toc-task-2.2" class="nav-link" data-scroll-target="#task-2.2">Task 2.2</a></li>
   </ul></li>
-  <li><a href="#part-3-importing-data-40-points" id="toc-part-3-importing-data-40-points" class="nav-link" data-scroll-target="#part-3-importing-data-40-points">Part 3: Importing Data (40 points)</a>
+  <li><a href="#part-3-importing-data-35-points" id="toc-part-3-importing-data-35-points" class="nav-link" data-scroll-target="#part-3-importing-data-35-points">Part 3: Importing Data (35 points)</a>
   <ul class="collapse">
   <li><a href="#task-3.1" id="toc-task-3.1" class="nav-link" data-scroll-target="#task-3.1">Task 3.1</a></li>
   <li><a href="#task-3.2" id="toc-task-3.2" class="nav-link" data-scroll-target="#task-3.2">Task 3.2</a></li>
   <li><a href="#task-3.3" id="toc-task-3.3" class="nav-link" data-scroll-target="#task-3.3">Task 3.3</a></li>
   <li><a href="#task-3.4" id="toc-task-3.4" class="nav-link" data-scroll-target="#task-3.4">Task 3.4</a></li>
   </ul></li>
+  <li><a href="#grading-note" id="toc-grading-note" class="nav-link" data-scroll-target="#grading-note">Grading Note</a></li>
   <li><a href="#submission" id="toc-submission" class="nav-link" data-scroll-target="#submission">Submission</a></li>
   <li><a href="#graduate-extension-qualtrics-api" id="toc-graduate-extension-qualtrics-api" class="nav-link" data-scroll-target="#graduate-extension-qualtrics-api">Graduate Extension: Qualtrics API</a>
   <ul class="collapse">
@@ -359,8 +360,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="part-1-pivoting-wide-to-long-35-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-1-pivoting-wide-to-long-35-points">Part 1: Pivoting Wide to Long (35 points)</h2>
+<section id="part-1-pivoting-wide-to-long-30-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-1-pivoting-wide-to-long-30-points">Part 1: Pivoting Wide to Long (30 points)</h2>
 <p>A researcher collected anxiety scores at three time points. The data is in “wide” format:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>anxiety_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant_id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
@@ -405,8 +406,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Using the wide format, create a new variable that is the sum of all three emotion ratings for each participant.</p>
 </section>
 </section>
-<section id="part-3-importing-data-40-points" class="level2">
-<h2 class="anchored" data-anchor-id="part-3-importing-data-40-points">Part 3: Importing Data (40 points)</h2>
+<section id="part-3-importing-data-35-points" class="level2">
+<h2 class="anchored" data-anchor-id="part-3-importing-data-35-points">Part 3: Importing Data (35 points)</h2>
 <p>Download the provided data files from Canvas and save them in your project’s <code>data/raw/</code> folder:</p>
 <ul>
 <li><code>survey_data.csv</code> — Survey responses with some messy formatting</li>
@@ -436,13 +437,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Join the survey data with the demographics data by participant ID. How many participants have complete data in both files?</p>
 </section>
 </section>
+<section id="grading-note" class="level2">
+<h2 class="anchored" data-anchor-id="grading-note">Grading Note</h2>
+<p><strong>Code runs without errors (10 points):</strong> Your document must render from start to finish without errors. Restart R and render your <code>.qmd</code> before submitting.</p>
+</section>
 <section id="submission" class="level2">
 <h2 class="anchored" data-anchor-id="submission">Submission</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">All pivot operations produce correct output</label></li>
 <li><label><input type="checkbox">CSV and Excel files imported successfully</label></li>
 <li><label><input type="checkbox">Data joined correctly</label></li>
-<li><label><input type="checkbox">Script runs without errors</label></li>
+<li><label><input type="checkbox">Document renders without errors</label></li>
 </ul>
 <p>Submit your <code>.qmd</code> file <strong>and</strong> your rendered <code>.html</code> file on Canvas.</p>
 <hr>
