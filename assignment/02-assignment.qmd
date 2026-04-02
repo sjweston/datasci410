@@ -33,7 +33,7 @@ library(nycflights13)
 # install.packages("nycflights13")
 ```
 
-## Part 1: Filtering and Arranging (30 points)
+## Part 1: Filtering and Arranging (25 points)
 
 ### Task 1.1
 Find all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?
@@ -66,7 +66,7 @@ Using `flights_subset`, create two new variables:
 ### Task 2.3
 What does a positive `delay_diff` mean? What does a negative value mean? Answer in a comment, then find a flight that "made up time" (arrived less delayed than it departed).
 
-## Part 3: Grouped Summaries (35 points)
+## Part 3: Grouped Summaries (30 points)
 
 ### Task 3.1
 Calculate the average departure delay for each carrier. Which carrier has the worst average delay?
@@ -96,6 +96,10 @@ Write a single piped sequence that:
 6. Arranges by mean delay (worst first)
 
 What are the top 3 worst destinations for United delays?
+
+## Grading Note
+
+**Code runs without errors (10 points):** Your script must run from start to finish without errors. Restart R and run the entire script before submitting.
 
 ## Submission
 

@@ -49,7 +49,7 @@ a) Use `glimpse()` to look at the structure of `mpg`. In a comment, note how man
 
 b) Use `?mpg` to read the documentation. In a comment, explain what `displ` and `hwy` represent.
 
-### Task 2: Create a basic scatterplot (20 points)
+### Task 2: Create a basic scatterplot (15 points)
 
 Create a scatterplot showing the relationship between engine displacement (`displ`) and highway fuel efficiency (`hwy`).
 
@@ -67,7 +67,7 @@ Modify your scatterplot to color the points by vehicle class (`class`).
 - The legend should appear automatically
 - Give the legend a clear title (hint: use `labs()`)
 
-### Task 4: Create faceted plots (25 points)
+### Task 4: Create faceted plots (20 points)
 
 Create the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (`drv`).
 
@@ -111,9 +111,10 @@ Submit your `.R` file on Canvas.
 | Task | Points |
 |------|--------|
 | Task 1: Data exploration | 10 |
-| Task 2: Basic scatterplot | 20 |
+| Task 2: Basic scatterplot | 15 |
 | Task 3: Color mapping | 20 |
-| Task 4: Faceting | 25 |
+| Task 4: Faceting | 20 |
 | Task 5: Saving plot | 15 |
 | Task 6: Reflection | 10 |
+| Code runs without errors | 10 |
 | **Total** | **100** |

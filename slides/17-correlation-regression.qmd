@@ -299,7 +299,7 @@ cor.test(study_data$therapy_hours, study_data$depression_post)
 
 ## Before we move on
 
-Upload your code to Canvas for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # Simple linear regression {background-color="#2c3e50"}
 

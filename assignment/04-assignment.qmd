@@ -29,7 +29,7 @@ This assignment focuses on creating publication-quality visualizations. You'll p
 library(tidyverse)
 ```
 
-## Part 1: Bar Charts with Error Bars (30 points)
+## Part 1: Bar Charts with Error Bars (25 points)
 
 Use the `palmerpenguins` dataset:
 
@@ -66,7 +66,7 @@ Create overlapping density plots of body mass, colored by species. Set transpare
 ### Task 2.3
 Create a boxplot of body mass by species. Then recreate it as a violin plot. In a comment, discuss what each shows that the other doesn't.
 
-## Part 3: The "Bad" and "Good" Graph (30 points)
+## Part 3: The "Bad" and "Good" Graph (25 points)
 
 Using any dataset of your choice (`mpg`, `penguins`, `diamonds`, etc.):
 
@@ -110,6 +110,10 @@ Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay
 - Theme
 
 You won't match it exactly — plain text axis labels are fine.
+
+## Grading Note
+
+**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
 
 ## Submission
 

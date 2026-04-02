@@ -56,7 +56,7 @@ format:
 - Your research question(s)
 - Why this is interesting
 
-### 3. Data Import & Cleaning (15 points)
+### 3. Data Import & Cleaning (10 points)
 
 - Load necessary packages
 - Import/load the data
@@ -69,7 +69,7 @@ format:
 - Appropriate use of ggplot2 features (labels, themes, etc.)
 - Brief interpretation of each visualization
 
-### 5. Main Analysis (25 points)
+### 5. Main Analysis (20 points)
 
 - Address your research question(s)
 - At least 1 publication-quality figure
@@ -111,11 +111,12 @@ Before submitting:
 |-----------|--------|
 | YAML header correct | 5 |
 | Introduction clear and complete | 10 |
-| Data import/cleaning well-documented | 15 |
+| Data import/cleaning well-documented | 10 |
 | Exploratory visualizations | 25 |
-| Main analysis addresses question | 25 |
+| Main analysis addresses question | 20 |
 | Inline code used effectively | 10 |
 | Conclusion thoughtful | 10 |
+| Code runs without errors | 10 |
 | **Total** | **100** |
 
 **Bonus (up to 5 points):** Exceptional visualization design, creative analysis, or going beyond requirements.

@@ -29,7 +29,7 @@ This assignment practices reshaping data with `pivot_longer()` and `pivot_wider(
 library(tidyverse)
 ```
 
-## Part 1: Pivoting Wide to Long (35 points)
+## Part 1: Pivoting Wide to Long (30 points)
 
 A researcher collected anxiety scores at three time points. The data is in "wide" format:
 
@@ -75,7 +75,7 @@ Pivot this to wide format so each emotion is its own column.
 ### Task 2.2
 Using the wide format, create a new variable that is the sum of all three emotion ratings for each participant.
 
-## Part 3: Importing Data (40 points)
+## Part 3: Importing Data (35 points)
 
 Download the provided data files from Canvas and save them in your project's `data/raw/` folder:
 
@@ -104,12 +104,16 @@ library(readxl)
 ### Task 3.4
 Join the survey data with the demographics data by participant ID. How many participants have complete data in both files?
 
+## Grading Note
+
+**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
+
 ## Submission
 
 - [ ] All pivot operations produce correct output
 - [ ] CSV and Excel files imported successfully
 - [ ] Data joined correctly
-- [ ] Script runs without errors
+- [ ] Document renders without errors
 
 Submit your `.qmd` file **and** your rendered `.html` file on Canvas.
 

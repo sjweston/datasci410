@@ -45,7 +45,7 @@ glimpse(bfi)
 
 This contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age, gender, and education.
 
-## Part 1: Exploring Distributions (30 points)
+## Part 1: Exploring Distributions (25 points)
 
 ### Task 1.1
 Create histograms for age and at least one personality item. What do you notice about the distributions?
@@ -56,7 +56,7 @@ Are there any outliers or unusual values in age? How would you identify them pro
 ### Task 1.3
 How much missing data is there? Create a summary showing the percentage of NA values for each variable.
 
-## Part 2: Exploring Relationships (35 points)
+## Part 2: Exploring Relationships (30 points)
 
 ### Task 2.1
 Create a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?
@@ -95,6 +95,10 @@ Write a 1-page (approximately 300-400 words) EDA report summarizing:
 4. **Next steps:** What would you investigate further?
 
 Write this as narrative text (not code comments) in your Quarto document.
+
+## Grading Note
+
+**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
 
 ## Submission
 

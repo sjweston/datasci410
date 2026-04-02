@@ -282,7 +282,7 @@ Set a timer for 10 minutes. Circulate and watch for: (1) forgetting `na.rm = TRU
 
 ## Before we move on
 
-📤 **Upload your code to Canvas** for participation credit. Paste what you have into today's in-class submission — it doesn't need to work perfectly.
+📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 ## What you can already do
 

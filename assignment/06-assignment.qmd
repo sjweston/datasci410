@@ -33,7 +33,7 @@ library(tidytext)
 # install.packages("tidytext")
 ```
 
-## Part 1: Logical Vectors & Recoding (30 points)
+## Part 1: Logical Vectors & Recoding (25 points)
 
 Here's a simulated survey dataset:
 
@@ -69,7 +69,7 @@ Create an `age_group` variable using `case_when()`:
 - "middle" if age >= 30 and age < 50
 - "older" if age >= 50
 
-## Part 2: Strings (25 points)
+## Part 2: Strings (20 points)
 
 Here's some messy demographic data:
 
@@ -90,7 +90,7 @@ Hint: Use `str_to_lower()` first, then `case_when()` or `if_else()`.
 ### Task 2.2
 Clean the `education` variable similarly. Standardize to "High School", "College", or "Graduate".
 
-## Part 3: Factors (30 points)
+## Part 3: Factors (20 points)
 
 ### Task 3.1
 Convert your cleaned `education` variable to a factor with levels in logical order: "High School", "College", "Graduate".
@@ -105,7 +105,7 @@ Create a bar chart of education levels. What happens if you didn't set the facto
 ### Task 3.3
 Using the survey data, create a factor version of `age_group` with levels in order: "young", "middle", "older". Then create a boxplot of `scale_mean` by `age_group`. The x-axis should be in the correct order.
 
-## Part 4: Putting It Together (15 points)
+## Part 4: Putting It Together (10 points)
 
 Create a complete data cleaning pipeline for the survey data that:
 
@@ -158,6 +158,10 @@ Remove common stop words (e.g., "the", "and", "I") using `anti_join(stop_words)`
 
 ### Task 5.3
 Count word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?
+
+## Grading Note
+
+**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
 
 ## Submission
 

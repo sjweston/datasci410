@@ -72,7 +72,7 @@ Use `anti_join()` to find:
 
 What might explain these discrepancies in a real study?
 
-## Part 2: Joining Data (35 points)
+## Part 2: Joining Data (30 points)
 
 ### Task 2.1
 Create a dataset that contains demographics and survey responses for **all participants who have both**. Use `inner_join()`. How many participants are in this dataset?
@@ -83,7 +83,7 @@ Create a dataset that keeps **all participants from demographics** and adds surv
 ### Task 2.3
 The task_data has multiple rows per participant (one per trial). First, summarize it to get mean reaction time and mean accuracy per participant. Then join this with your demographics + survey dataset.
 
-## Part 3: Missing Data Analysis (35 points)
+## Part 3: Missing Data Analysis (30 points)
 
 Using your joined dataset from Task 2.2:
 
@@ -118,6 +118,10 @@ Answer in comments:
 1. What are the risks of analyzing only complete cases?
 2. When might it be appropriate to exclude participants with missing data?
 3. How would you report the missing data in a research paper?
+
+## Grading Note
+
+**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
 
 ## Submission
 
