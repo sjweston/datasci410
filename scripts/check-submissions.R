@@ -117,3 +117,64 @@ if (n_fail > 0) {
 # ── Write CSV ─────────────────────────────────────────────────
 write_csv(results, output_csv)
 cat(sprintf("Results saved to: %s\n", output_csv))
+
+# ── Create de-identified copies ──────────────────────────────
+# Copies each submission under a random filename (no student info)
+# so files can be shared for pattern analysis without FERPA concerns.
+# A key file maps random IDs back to students (keep this private).
+anon_dir <- file.path(submissions_dir, "deidentified")
+dir.create(anon_dir, showWarnings = FALSE)
+
+results <- results |>
+  mutate(anon_id = replicate(n(), paste0(sample(c(letters, 0:9), 8, replace = TRUE), collapse = "")))
+
+results |>
+  rowwise() |>
+  group_walk(~ {
+    src <- file.path(submissions_dir, .x$file)
+    dest <- file.path(anon_dir, paste0(.x$anon_id, ".R"))
+
+    lines <- readLines(src, warn = FALSE)
+
+    # Build name variants to scrub from file contents
+    # Student name from filename is e.g. "smithjane"
+    raw_name <- .x$student
+    # Try to split into last + first (all lowercase, no separator)
+    # We can't know the split point, so search for common patterns
+    name_variants <- c(raw_name)
+
+    # Also scrub anything on comment lines that looks like a name header
+    lines <- str_replace(lines, "(?i)^(#\\s*)(your name|by:?|author:?|name:?)\\s+.*", "\\1[redacted]")
+
+    # Scrub the raw name (case-insensitive) anywhere it appears
+    for (v in name_variants) {
+      if (nchar(v) >= 4) {  # Only scrub if long enough to avoid false matches
+        lines <- str_replace_all(lines, regex(v, ignore_case = TRUE), "[redacted]")
+      }
+    }
+
+    # Also blank out the second comment line if it looks like a name
+    # (common pattern: line 1 = assignment title, line 2 = student name)
+    first_comments <- which(str_detect(head(lines, 10), "^#"))
+    if (length(first_comments) >= 2) {
+      name_line <- first_comments[2]
+      # If it's a short comment (just a name), redact it
+      content <- str_remove(lines[name_line], "^#\\s*")
+      if (nchar(str_squish(content)) > 0 &&
+          nchar(str_squish(content)) < 40 &&
+          !str_detect(content, "(?i)(assignment|date|library|install|setup)")) {
+        lines[name_line] <- "# [redacted]"
+      }
+    }
+
+    writeLines(lines, dest)
+  })
+
+# Write the key file (maps anon_id back to student — keep private!)
+key_csv <- file.path(submissions_dir, "deidentified_key.csv")
+results |>
+  select(student, file, anon_id, status) |>
+  write_csv(key_csv)
+
+cat(sprintf("\nDe-identified copies: %s/ (%d files)\n", anon_dir, nrow(results)))
+cat(sprintf("Key file (PRIVATE): %s\n", key_csv))

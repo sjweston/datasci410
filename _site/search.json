@@ -1248,11 +1248,11 @@
     ]
   },
   {
-    "objectID": "assignment/07-assignment.html#part-2-joining-data-35-points",
-    "href": "assignment/07-assignment.html#part-2-joining-data-35-points",
+    "objectID": "assignment/07-assignment.html#part-2-joining-data-30-points",
+    "href": "assignment/07-assignment.html#part-2-joining-data-30-points",
     "title": "Assignment 7: Joins & Missing Data",
-    "section": "Part 2: Joining Data (35 points)",
-    "text": "Part 2: Joining Data (35 points)\n\nTask 2.1\nCreate a dataset that contains demographics and survey responses for all participants who have both. Use inner_join(). How many participants are in this dataset?\n\n\nTask 2.2\nCreate a dataset that keeps all participants from demographics and adds survey responses where available. Use left_join(). How many participants have missing survey data?\n\n\nTask 2.3\nThe task_data has multiple rows per participant (one per trial). First, summarize it to get mean reaction time and mean accuracy per participant. Then join this with your demographics + survey dataset.",
+    "section": "Part 2: Joining Data (30 points)",
+    "text": "Part 2: Joining Data (30 points)\n\nTask 2.1\nCreate a dataset that contains demographics and survey responses for all participants who have both. Use inner_join(). How many participants are in this dataset?\n\n\nTask 2.2\nCreate a dataset that keeps all participants from demographics and adds survey responses where available. Use left_join(). How many participants have missing survey data?\n\n\nTask 2.3\nThe task_data has multiple rows per participant (one per trial). First, summarize it to get mean reaction time and mean accuracy per participant. Then join this with your demographics + survey dataset.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1260,11 +1260,11 @@
     ]
   },
   {
-    "objectID": "assignment/07-assignment.html#part-3-missing-data-analysis-35-points",
-    "href": "assignment/07-assignment.html#part-3-missing-data-analysis-35-points",
+    "objectID": "assignment/07-assignment.html#part-3-missing-data-analysis-30-points",
+    "href": "assignment/07-assignment.html#part-3-missing-data-analysis-30-points",
     "title": "Assignment 7: Joins & Missing Data",
-    "section": "Part 3: Missing Data Analysis (35 points)",
-    "text": "Part 3: Missing Data Analysis (35 points)\nUsing your joined dataset from Task 2.2:\n\nTask 3.1\nCreate a summary showing the number and percentage of missing values for each variable.\n\n\nTask 3.2\nIs missingness related to condition? Calculate the percentage of missing anxiety scores in each condition. Do the same for depression and stress.\n\n\nTask 3.3\nCreate a visualization showing the pattern of missingness across variables. You might use:\n# One approach - missing data heatmap\nyour_data |&gt;\n  mutate(across(everything(), ~is.na(.))) |&gt;\n  # ... continue to visualize\n\n\nTask 3.4\nCreate two versions of a summary:\n\nComplete cases only: Mean anxiety by condition, excluding any participants with missing data\nAvailable data: Mean anxiety by condition, using na.rm = TRUE\n\nDo the results differ? What are the implications?",
+    "section": "Part 3: Missing Data Analysis (30 points)",
+    "text": "Part 3: Missing Data Analysis (30 points)\nUsing your joined dataset from Task 2.2:\n\nTask 3.1\nCreate a summary showing the number and percentage of missing values for each variable.\n\n\nTask 3.2\nIs missingness related to condition? Calculate the percentage of missing anxiety scores in each condition. Do the same for depression and stress.\n\n\nTask 3.3\nCreate a visualization showing the pattern of missingness across variables. You might use:\n# One approach - missing data heatmap\nyour_data |&gt;\n  mutate(across(everything(), ~is.na(.))) |&gt;\n  # ... continue to visualize\n\n\nTask 3.4\nCreate two versions of a summary:\n\nComplete cases only: Mean anxiety by condition, excluding any participants with missing data\nAvailable data: Mean anxiety by condition, using na.rm = TRUE\n\nDo the results differ? What are the implications?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1277,6 +1277,18 @@
     "title": "Assignment 7: Joins & Missing Data",
     "section": "Part 4: Reflection (15 points)",
     "text": "Part 4: Reflection (15 points)\nAnswer in comments:\n\nWhat are the risks of analyzing only complete cases?\nWhen might it be appropriate to exclude participants with missing data?\nHow would you report the missing data in a research paper?",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "7: Joins & Missing Data"
+    ]
+  },
+  {
+    "objectID": "assignment/07-assignment.html#grading-note",
+    "href": "assignment/07-assignment.html#grading-note",
+    "title": "Assignment 7: Joins & Missing Data",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1356,11 +1368,11 @@
     ]
   },
   {
-    "objectID": "assignment/05-assignment.html#part-1-exploring-distributions-30-points",
-    "href": "assignment/05-assignment.html#part-1-exploring-distributions-30-points",
+    "objectID": "assignment/05-assignment.html#part-1-exploring-distributions-25-points",
+    "href": "assignment/05-assignment.html#part-1-exploring-distributions-25-points",
     "title": "Assignment 5: Exploratory Data Analysis",
-    "section": "Part 1: Exploring Distributions (30 points)",
-    "text": "Part 1: Exploring Distributions (30 points)\n\nTask 1.1\nCreate histograms for age and at least one personality item. What do you notice about the distributions?\n\n\nTask 1.2\nAre there any outliers or unusual values in age? How would you identify them programmatically? (Hint: consider values beyond 3 standard deviations, or use filter() with reasonable bounds)\n\n\nTask 1.3\nHow much missing data is there? Create a summary showing the percentage of NA values for each variable.",
+    "section": "Part 1: Exploring Distributions (25 points)",
+    "text": "Part 1: Exploring Distributions (25 points)\n\nTask 1.1\nCreate histograms for age and at least one personality item. What do you notice about the distributions?\n\n\nTask 1.2\nAre there any outliers or unusual values in age? How would you identify them programmatically? (Hint: consider values beyond 3 standard deviations, or use filter() with reasonable bounds)\n\n\nTask 1.3\nHow much missing data is there? Create a summary showing the percentage of NA values for each variable.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1368,11 +1380,11 @@
     ]
   },
   {
-    "objectID": "assignment/05-assignment.html#part-2-exploring-relationships-35-points",
-    "href": "assignment/05-assignment.html#part-2-exploring-relationships-35-points",
+    "objectID": "assignment/05-assignment.html#part-2-exploring-relationships-30-points",
+    "href": "assignment/05-assignment.html#part-2-exploring-relationships-30-points",
     "title": "Assignment 5: Exploratory Data Analysis",
-    "section": "Part 2: Exploring Relationships (35 points)",
-    "text": "Part 2: Exploring Relationships (35 points)\n\nTask 2.1\nCreate a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?\n\n\nTask 2.2\nCreate boxplots showing how one personality item differs by gender. Do you see a difference?\n\n\nTask 2.3\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint:\nbfi |&gt;\n  select(E1:E5) |&gt;\n  cor(use = \"complete.obs\") |&gt;\n  # then visualize...\nWhat do you notice? (Some items may be reverse-coded!)",
+    "section": "Part 2: Exploring Relationships (30 points)",
+    "text": "Part 2: Exploring Relationships (30 points)\n\nTask 2.1\nCreate a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?\n\n\nTask 2.2\nCreate boxplots showing how one personality item differs by gender. Do you see a difference?\n\n\nTask 2.3\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint:\nbfi |&gt;\n  select(E1:E5) |&gt;\n  cor(use = \"complete.obs\") |&gt;\n  # then visualize...\nWhat do you notice? (Some items may be reverse-coded!)",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1397,6 +1409,18 @@
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Part 4: EDA Report (15 points)",
     "text": "Part 4: EDA Report (15 points)\nWrite a 1-page (approximately 300-400 words) EDA report summarizing:\n\nThe data: Brief description of the dataset\nKey findings: 2-3 interesting patterns you discovered\nData quality issues: Missing data, outliers, or concerns\nNext steps: What would you investigate further?\n\nWrite this as narrative text (not code comments) in your Quarto document.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "5: Exploratory Data Analysis"
+    ]
+  },
+  {
+    "objectID": "assignment/05-assignment.html#grading-note",
+    "href": "assignment/05-assignment.html#grading-note",
+    "title": "Assignment 5: Exploratory Data Analysis",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1464,11 +1488,11 @@
     ]
   },
   {
-    "objectID": "assignment/03-assignment.html#part-1-pivoting-wide-to-long-35-points",
-    "href": "assignment/03-assignment.html#part-1-pivoting-wide-to-long-35-points",
+    "objectID": "assignment/03-assignment.html#part-1-pivoting-wide-to-long-30-points",
+    "href": "assignment/03-assignment.html#part-1-pivoting-wide-to-long-30-points",
     "title": "Assignment 3: Tidying & Importing Data",
-    "section": "Part 1: Pivoting Wide to Long (35 points)",
-    "text": "Part 1: Pivoting Wide to Long (35 points)\nA researcher collected anxiety scores at three time points. The data is in “wide” format:\nanxiety_wide &lt;- tibble(\n  participant_id = 1:5,\n  condition = c(\"treatment\", \"treatment\", \"control\", \"control\", \"treatment\"),\n  anxiety_t1 = c(45, 52, 48, 55, 42),\n  anxiety_t2 = c(38, 45, 47, 54, 35),\n  anxiety_t3 = c(32, 40, 46, 52, 30)\n)\n\nTask 1.1\nPivot this data to long format so you have columns for:\n\nparticipant_id\ncondition\ntime (values: “t1”, “t2”, “t3”)\nanxiety (the score)\n\n\n\nTask 1.2\nUsing your long dataset, calculate the mean anxiety score at each time point, separately for each condition.\n\n\nTask 1.3\nCreate a line plot showing anxiety over time, with separate lines for each condition. Add points for the individual observations.",
+    "section": "Part 1: Pivoting Wide to Long (30 points)",
+    "text": "Part 1: Pivoting Wide to Long (30 points)\nA researcher collected anxiety scores at three time points. The data is in “wide” format:\nanxiety_wide &lt;- tibble(\n  participant_id = 1:5,\n  condition = c(\"treatment\", \"treatment\", \"control\", \"control\", \"treatment\"),\n  anxiety_t1 = c(45, 52, 48, 55, 42),\n  anxiety_t2 = c(38, 45, 47, 54, 35),\n  anxiety_t3 = c(32, 40, 46, 52, 30)\n)\n\nTask 1.1\nPivot this data to long format so you have columns for:\n\nparticipant_id\ncondition\ntime (values: “t1”, “t2”, “t3”)\nanxiety (the score)\n\n\n\nTask 1.2\nUsing your long dataset, calculate the mean anxiety score at each time point, separately for each condition.\n\n\nTask 1.3\nCreate a line plot showing anxiety over time, with separate lines for each condition. Add points for the individual observations.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1488,11 +1512,23 @@
     ]
   },
   {
-    "objectID": "assignment/03-assignment.html#part-3-importing-data-40-points",
-    "href": "assignment/03-assignment.html#part-3-importing-data-40-points",
+    "objectID": "assignment/03-assignment.html#part-3-importing-data-35-points",
+    "href": "assignment/03-assignment.html#part-3-importing-data-35-points",
     "title": "Assignment 3: Tidying & Importing Data",
-    "section": "Part 3: Importing Data (40 points)",
-    "text": "Part 3: Importing Data (40 points)\nDownload the provided data files from Canvas and save them in your project’s data/raw/ folder:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here\n\n\nTask 3.4\nJoin the survey data with the demographics data by participant ID. How many participants have complete data in both files?",
+    "section": "Part 3: Importing Data (35 points)",
+    "text": "Part 3: Importing Data (35 points)\nDownload the provided data files from Canvas and save them in your project’s data/raw/ folder:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here\n\n\nTask 3.4\nJoin the survey data with the demographics data by participant ID. How many participants have complete data in both files?",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "3: Tidying & Import"
+    ]
+  },
+  {
+    "objectID": "assignment/03-assignment.html#grading-note",
+    "href": "assignment/03-assignment.html#grading-note",
+    "title": "Assignment 3: Tidying & Importing Data",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1504,7 +1540,7 @@
     "href": "assignment/03-assignment.html#submission",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nScript runs without errors\n\nSubmit your .qmd file and your rendered .html file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nDocument renders without errors\n\nSubmit your .qmd file and your rendered .html file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1564,7 +1600,7 @@
     "href": "assignment/01-assignment.html#tasks",
     "title": "Assignment 1: Getting Started with R",
     "section": "Tasks",
-    "text": "Tasks\n\nTask 1: Explore the data (10 points)\nUse the mpg dataset (loaded automatically with tidyverse).\n\nUse glimpse() to look at the structure of mpg. In a comment, note how many rows and columns there are.\nUse ?mpg to read the documentation. In a comment, explain what displ and hwy represent.\n\n\n\nTask 2: Create a basic scatterplot (20 points)\nCreate a scatterplot showing the relationship between engine displacement (displ) and highway fuel efficiency (hwy).\nYour plot should:\n\nHave displacement on the x-axis\nHave highway mpg on the y-axis\nInclude a clear title\nHave labeled axes (not just variable names)\n\n\n\nTask 3: Add color (20 points)\nModify your scatterplot to color the points by vehicle class (class).\n\nThe legend should appear automatically\nGive the legend a clear title (hint: use labs())\n\n\n\nTask 4: Create faceted plots (25 points)\nCreate the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (drv).\n\nUse facet_wrap()\nEach panel should be clearly labeled\n\n\n\nTask 5: Save your plot (15 points)\nSave your final faceted plot as a PNG file.\nggsave(\"mpg_faceted_plot.png\", width = 10, height = 6)\nVerify the file was created in your project folder.\n\n\nTask 6: Reflection (10 points)\nAt the bottom of your script, answer these questions in comments:\n# Reflection Questions:\n# 1. What relationship do you observe between engine size and fuel efficiency?\n# 2. Do all vehicle classes follow the same pattern?\n# 3. What was the most challenging part of this assignment?",
+    "text": "Tasks\n\nTask 1: Explore the data (10 points)\nUse the mpg dataset (loaded automatically with tidyverse).\n\nUse glimpse() to look at the structure of mpg. In a comment, note how many rows and columns there are.\nUse ?mpg to read the documentation. In a comment, explain what displ and hwy represent.\n\n\n\nTask 2: Create a basic scatterplot (15 points)\nCreate a scatterplot showing the relationship between engine displacement (displ) and highway fuel efficiency (hwy).\nYour plot should:\n\nHave displacement on the x-axis\nHave highway mpg on the y-axis\nInclude a clear title\nHave labeled axes (not just variable names)\n\n\n\nTask 3: Add color (20 points)\nModify your scatterplot to color the points by vehicle class (class).\n\nThe legend should appear automatically\nGive the legend a clear title (hint: use labs())\n\n\n\nTask 4: Create faceted plots (20 points)\nCreate the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (drv).\n\nUse facet_wrap()\nEach panel should be clearly labeled\n\n\n\nTask 5: Save your plot (15 points)\nSave your final faceted plot as a PNG file.\nggsave(\"mpg_faceted_plot.png\", width = 10, height = 6)\nVerify the file was created in your project folder.\n\n\nTask 6: Reflection (10 points)\nAt the bottom of your script, answer these questions in comments:\n# Reflection Questions:\n# 1. What relationship do you observe between engine size and fuel efficiency?\n# 2. Do all vehicle classes follow the same pattern?\n# 3. What was the most challenging part of this assignment?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1588,7 +1624,7 @@
     "href": "assignment/01-assignment.html#grading-rubric",
     "title": "Assignment 1: Getting Started with R",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\nTask 1: Data exploration\n10\n\n\nTask 2: Basic scatterplot\n20\n\n\nTask 3: Color mapping\n20\n\n\nTask 4: Faceting\n25\n\n\nTask 5: Saving plot\n15\n\n\nTask 6: Reflection\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\nTask 1: Data exploration\n10\n\n\nTask 2: Basic scatterplot\n15\n\n\nTask 3: Color mapping\n20\n\n\nTask 4: Faceting\n20\n\n\nTask 5: Saving plot\n15\n\n\nTask 6: Reflection\n10\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1632,11 +1668,11 @@
     ]
   },
   {
-    "objectID": "assignment/02-assignment.html#part-1-filtering-and-arranging-30-points",
-    "href": "assignment/02-assignment.html#part-1-filtering-and-arranging-30-points",
+    "objectID": "assignment/02-assignment.html#part-1-filtering-and-arranging-25-points",
+    "href": "assignment/02-assignment.html#part-1-filtering-and-arranging-25-points",
     "title": "Assignment 2: Data Transformation",
-    "section": "Part 1: Filtering and Arranging (30 points)",
-    "text": "Part 1: Filtering and Arranging (30 points)\n\nTask 1.1\nFind all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?\n\n\nTask 1.2\nOf those flights, which one had the longest departure delay? Use arrange() to find out. Report the carrier, destination, and delay time.\n\n\nTask 1.3\nFind all flights to Los Angeles (LAX) or San Francisco (SFO) that departed on time or early. How many were there?",
+    "section": "Part 1: Filtering and Arranging (25 points)",
+    "text": "Part 1: Filtering and Arranging (25 points)\n\nTask 1.1\nFind all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?\n\n\nTask 1.2\nOf those flights, which one had the longest departure delay? Use arrange() to find out. Report the carrier, destination, and delay time.\n\n\nTask 1.3\nFind all flights to Los Angeles (LAX) or San Francisco (SFO) that departed on time or early. How many were there?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1656,11 +1692,11 @@
     ]
   },
   {
-    "objectID": "assignment/02-assignment.html#part-3-grouped-summaries-35-points",
-    "href": "assignment/02-assignment.html#part-3-grouped-summaries-35-points",
+    "objectID": "assignment/02-assignment.html#part-3-grouped-summaries-30-points",
+    "href": "assignment/02-assignment.html#part-3-grouped-summaries-30-points",
     "title": "Assignment 2: Data Transformation",
-    "section": "Part 3: Grouped Summaries (35 points)",
-    "text": "Part 3: Grouped Summaries (35 points)\n\nTask 3.1\nCalculate the average departure delay for each carrier. Which carrier has the worst average delay?\n\n\nTask 3.2\nCalculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?\n\n\nTask 3.3\nCreate a summary table showing, for each carrier:\n\nAverage departure delay\nAverage arrival delay\nNumber of flights\nNumber of destinations served (n_distinct())\n\nArrange by number of flights (descending).",
+    "section": "Part 3: Grouped Summaries (30 points)",
+    "text": "Part 3: Grouped Summaries (30 points)\n\nTask 3.1\nCalculate the average departure delay for each carrier. Which carrier has the worst average delay?\n\n\nTask 3.2\nCalculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?\n\n\nTask 3.3\nCreate a summary table showing, for each carrier:\n\nAverage departure delay\nAverage arrival delay\nNumber of flights\nNumber of destinations served (n_distinct())\n\nArrange by number of flights (descending).",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1673,6 +1709,18 @@
     "title": "Assignment 2: Data Transformation",
     "section": "Putting It Together",
     "text": "Putting It Together\nWrite a single piped sequence that:\n\nFilters to United Airlines (UA) flights\nRemoves rows with missing arrival delay\nGroups by destination\nCalculates mean arrival delay and number of flights\nFilters to destinations with at least 100 flights\nArranges by mean delay (worst first)\n\nWhat are the top 3 worst destinations for United delays?",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "2: Data Transformation"
+    ]
+  },
+  {
+    "objectID": "assignment/02-assignment.html#grading-note",
+    "href": "assignment/02-assignment.html#grading-note",
+    "title": "Assignment 2: Data Transformation",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your script must run from start to finish without errors. Restart R and run the entire script before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1728,11 +1776,11 @@
     ]
   },
   {
-    "objectID": "assignment/04-assignment.html#part-1-bar-charts-with-error-bars-30-points",
-    "href": "assignment/04-assignment.html#part-1-bar-charts-with-error-bars-30-points",
+    "objectID": "assignment/04-assignment.html#part-1-bar-charts-with-error-bars-25-points",
+    "href": "assignment/04-assignment.html#part-1-bar-charts-with-error-bars-25-points",
     "title": "Assignment 4: Visualization Deep Dive",
-    "section": "Part 1: Bar Charts with Error Bars (30 points)",
-    "text": "Part 1: Bar Charts with Error Bars (30 points)\nUse the palmerpenguins dataset:\n# install.packages(\"palmerpenguins\")\nlibrary(palmerpenguins)\n\nTask 1.1\nCreate a summary table showing mean flipper length by species, including standard error.\n# Hint: SE = sd / sqrt(n)\n\n\nTask 1.2\nCreate a bar chart showing mean flipper length by species with error bars representing ±1 SE.\nYour plot should:\n\nHave clear axis labels (not variable names)\nUse a clean theme\nHave a descriptive title\nUse a colorblind-friendly palette (hint: scale_fill_viridis_d())",
+    "section": "Part 1: Bar Charts with Error Bars (25 points)",
+    "text": "Part 1: Bar Charts with Error Bars (25 points)\nUse the palmerpenguins dataset:\n# install.packages(\"palmerpenguins\")\nlibrary(palmerpenguins)\n\nTask 1.1\nCreate a summary table showing mean flipper length by species, including standard error.\n# Hint: SE = sd / sqrt(n)\n\n\nTask 1.2\nCreate a bar chart showing mean flipper length by species with error bars representing ±1 SE.\nYour plot should:\n\nHave clear axis labels (not variable names)\nUse a clean theme\nHave a descriptive title\nUse a colorblind-friendly palette (hint: scale_fill_viridis_d())",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1752,11 +1800,11 @@
     ]
   },
   {
-    "objectID": "assignment/04-assignment.html#part-3-the-bad-and-good-graph-30-points",
-    "href": "assignment/04-assignment.html#part-3-the-bad-and-good-graph-30-points",
+    "objectID": "assignment/04-assignment.html#part-3-the-bad-and-good-graph-25-points",
+    "href": "assignment/04-assignment.html#part-3-the-bad-and-good-graph-25-points",
     "title": "Assignment 4: Visualization Deep Dive",
-    "section": "Part 3: The “Bad” and “Good” Graph (30 points)",
-    "text": "Part 3: The “Bad” and “Good” Graph (30 points)\nUsing any dataset of your choice (mpg, penguins, diamonds, etc.):\n\nTask 3.1: The Bad Graph\nCreate an intentionally bad visualization that violates at least 4 design principles. In comments, list what makes it bad.\nExamples of “bad” choices:\n\n3D effects\nPie chart with many categories\nRainbow color scheme\nMissing labels\nMisleading axis\nExcessive chartjunk\n\n\n\nTask 3.2: The Good Graph\nCreate a good version of the same data. In comments, explain your design choices.",
+    "section": "Part 3: The “Bad” and “Good” Graph (25 points)",
+    "text": "Part 3: The “Bad” and “Good” Graph (25 points)\nUsing any dataset of your choice (mpg, penguins, diamonds, etc.):\n\nTask 3.1: The Bad Graph\nCreate an intentionally bad visualization that violates at least 4 design principles. In comments, list what makes it bad.\nExamples of “bad” choices:\n\n3D effects\nPie chart with many categories\nRainbow color scheme\nMissing labels\nMisleading axis\nExcessive chartjunk\n\n\n\nTask 3.2: The Good Graph\nCreate a good version of the same data. In comments, explain your design choices.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1769,6 +1817,18 @@
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Part 4: Recreate a Figure (15 points)",
     "text": "Part 4: Recreate a Figure (15 points)\nThis task uses data from a real psychology study on partisan bias in news evaluation. Participants were assigned to one of three teams (Team Spain, Team Greece, or No Team) and read news statements slanted toward one side or the other. The outcome is an acceptance threshold (c) from signal detection theory — higher values mean the participant required stronger evidence before accepting a statement as true.\nDownload partisan_bias.csv from Canvas and save it in your data/raw/ folder. The file has four columns:\n\n\n\n\n\n\n\nColumn\nDescription\n\n\n\n\nparticipant_id\nUnique participant identifier\n\n\nteam\nGroup assignment: 1 = Team Spain, 2 = Team Greece, 3 = No Team\n\n\nSP_c\nAcceptance threshold for Pro-Spain statements\n\n\nGR_c\nAcceptance threshold for Pro-Greece statements\n\n\n\n\nTask 4.1\nImport the data and convert team from a number to a factor with labels “Spain”, “Greece”, and “No Team” (in that order).\n\n\nTask 4.2\nRecreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:\n\nGeom type and positioning\nError bars\nAxis labels and legend title\nTheme\n\nYou won’t match it exactly — plain text axis labels are fine.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "4: Visualization Deep Dive"
+    ]
+  },
+  {
+    "objectID": "assignment/04-assignment.html#grading-note",
+    "href": "assignment/04-assignment.html#grading-note",
+    "title": "Assignment 4: Visualization Deep Dive",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1836,11 +1896,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-1-logical-vectors-recoding-30-points",
-    "href": "assignment/06-assignment.html#part-1-logical-vectors-recoding-30-points",
+    "objectID": "assignment/06-assignment.html#part-1-logical-vectors-recoding-25-points",
+    "href": "assignment/06-assignment.html#part-1-logical-vectors-recoding-25-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 1: Logical Vectors & Recoding (30 points)",
-    "text": "Part 1: Logical Vectors & Recoding (30 points)\nHere’s a simulated survey dataset:\nset.seed(410)  # For reproducibility\n\nsurvey &lt;- tibble(\n  id = 1:100,\n  age = round(rnorm(100, mean = 35, sd = 12)),\n  q1 = sample(1:7, 100, replace = TRUE),\n  q2 = sample(1:7, 100, replace = TRUE),\n  q3_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  q4 = sample(1:7, 100, replace = TRUE),\n  q5_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  attention_check = sample(c(4, 1:3, 5:7), 100, replace = TRUE,\n                           prob = c(0.85, rep(0.025, 6)))\n)\n\nTask 1.1\nCreate a logical variable passed_attention that is TRUE if attention_check == 4 and FALSE otherwise. How many participants passed?\n\n\nTask 1.2\nReverse-code q3_reverse and q5_reverse. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables q3 and q5 with the corrected values.\n\n\nTask 1.3\nCreate a scale_mean variable that is the mean of q1, q2, q3, q4, and q5 for each participant.\n\n\nTask 1.4\nCreate an age_group variable using case_when():\n\n“young” if age &lt; 30\n“middle” if age &gt;= 30 and age &lt; 50\n“older” if age &gt;= 50",
+    "section": "Part 1: Logical Vectors & Recoding (25 points)",
+    "text": "Part 1: Logical Vectors & Recoding (25 points)\nHere’s a simulated survey dataset:\nset.seed(410)  # For reproducibility\n\nsurvey &lt;- tibble(\n  id = 1:100,\n  age = round(rnorm(100, mean = 35, sd = 12)),\n  q1 = sample(1:7, 100, replace = TRUE),\n  q2 = sample(1:7, 100, replace = TRUE),\n  q3_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  q4 = sample(1:7, 100, replace = TRUE),\n  q5_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  attention_check = sample(c(4, 1:3, 5:7), 100, replace = TRUE,\n                           prob = c(0.85, rep(0.025, 6)))\n)\n\nTask 1.1\nCreate a logical variable passed_attention that is TRUE if attention_check == 4 and FALSE otherwise. How many participants passed?\n\n\nTask 1.2\nReverse-code q3_reverse and q5_reverse. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables q3 and q5 with the corrected values.\n\n\nTask 1.3\nCreate a scale_mean variable that is the mean of q1, q2, q3, q4, and q5 for each participant.\n\n\nTask 1.4\nCreate an age_group variable using case_when():\n\n“young” if age &lt; 30\n“middle” if age &gt;= 30 and age &lt; 50\n“older” if age &gt;= 50",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1848,11 +1908,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-2-strings-25-points",
-    "href": "assignment/06-assignment.html#part-2-strings-25-points",
+    "objectID": "assignment/06-assignment.html#part-2-strings-20-points",
+    "href": "assignment/06-assignment.html#part-2-strings-20-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 2: Strings (25 points)",
-    "text": "Part 2: Strings (25 points)\nHere’s some messy demographic data:\nmessy_demo &lt;- tibble(\n  id = 1:10,\n  gender = c(\"Male\", \"female\", \"FEMALE\", \"M\", \"F\", \"male\", \"Female\", \"m\", \"f\", \"Male\"),\n  education = c(\"high school\", \"High School\", \"college\", \"College\", \"graduate\",\n                \"COLLEGE\", \"Graduate\", \"high school\", \"Graduate\", \"college\")\n)\n\nTask 2.1\nClean the gender variable so all values are standardized to “Male” or “Female”.\nHint: Use str_to_lower() first, then case_when() or if_else().\n\n\nTask 2.2\nClean the education variable similarly. Standardize to “High School”, “College”, or “Graduate”.",
+    "section": "Part 2: Strings (20 points)",
+    "text": "Part 2: Strings (20 points)\nHere’s some messy demographic data:\nmessy_demo &lt;- tibble(\n  id = 1:10,\n  gender = c(\"Male\", \"female\", \"FEMALE\", \"M\", \"F\", \"male\", \"Female\", \"m\", \"f\", \"Male\"),\n  education = c(\"high school\", \"High School\", \"college\", \"College\", \"graduate\",\n                \"COLLEGE\", \"Graduate\", \"high school\", \"Graduate\", \"college\")\n)\n\nTask 2.1\nClean the gender variable so all values are standardized to “Male” or “Female”.\nHint: Use str_to_lower() first, then case_when() or if_else().\n\n\nTask 2.2\nClean the education variable similarly. Standardize to “High School”, “College”, or “Graduate”.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1860,11 +1920,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-3-factors-30-points",
-    "href": "assignment/06-assignment.html#part-3-factors-30-points",
+    "objectID": "assignment/06-assignment.html#part-3-factors-20-points",
+    "href": "assignment/06-assignment.html#part-3-factors-20-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 3: Factors (30 points)",
-    "text": "Part 3: Factors (30 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.\n\n\nTask 3.3\nUsing the survey data, create a factor version of age_group with levels in order: “young”, “middle”, “older”. Then create a boxplot of scale_mean by age_group. The x-axis should be in the correct order.",
+    "section": "Part 3: Factors (20 points)",
+    "text": "Part 3: Factors (20 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.\n\n\nTask 3.3\nUsing the survey data, create a factor version of age_group with levels in order: “young”, “middle”, “older”. Then create a boxplot of scale_mean by age_group. The x-axis should be in the correct order.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1872,11 +1932,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-4-putting-it-together-15-points",
-    "href": "assignment/06-assignment.html#part-4-putting-it-together-15-points",
+    "objectID": "assignment/06-assignment.html#part-4-putting-it-together-10-points",
+    "href": "assignment/06-assignment.html#part-4-putting-it-together-10-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 4: Putting It Together (15 points)",
-    "text": "Part 4: Putting It Together (15 points)\nCreate a complete data cleaning pipeline for the survey data that:\n\nFilters to participants who passed the attention check\nReverse-codes the necessary items\nCreates the scale mean\nCreates the age group factor (in correct order)\nSelects only id, age, age_group, and scale_mean\n\nUse a single piped sequence.",
+    "section": "Part 4: Putting It Together (10 points)",
+    "text": "Part 4: Putting It Together (10 points)\nCreate a complete data cleaning pipeline for the survey data that:\n\nFilters to participants who passed the attention check\nReverse-codes the necessary items\nCreates the scale mean\nCreates the age group factor (in correct order)\nSelects only id, age, age_group, and scale_mean\n\nUse a single piped sequence.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1889,6 +1949,18 @@
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Part 5: Text Analysis (15 points)",
     "text": "Part 5: Text Analysis (15 points)\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 5.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 5.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 5.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "6: Data Types"
+    ]
+  },
+  {
+    "objectID": "assignment/06-assignment.html#grading-note",
+    "href": "assignment/06-assignment.html#grading-note",
+    "title": "Assignment 6: Data Types & Wrangling",
+    "section": "Grading Note",
+    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1960,7 +2032,7 @@
     "href": "assignment/08-assignment.html#required-elements",
     "title": "Assignment 8: Reproducible Report",
     "section": "Required Elements",
-    "text": "Required Elements\nYour Quarto document must include:\n\n1. YAML Header (5 points)\n---\ntitle: \"Your Descriptive Title\"\nauthor: \"Your Name\"\ndate: today\nformat:\n  html:\n    toc: true\n    code-fold: true\n---\n\n\n2. Introduction (10 points)\n\nBrief description of the dataset\nYour research question(s)\nWhy this is interesting\n\n\n\n3. Data Import & Cleaning (15 points)\n\nLoad necessary packages\nImport/load the data\nAny cleaning or transformation needed\nUse code chunks with appropriate options\n\n\n\n4. Exploratory Analysis (25 points)\n\nAt least 2 visualizations exploring your data\nAppropriate use of ggplot2 features (labels, themes, etc.)\nBrief interpretation of each visualization\n\n\n\n5. Main Analysis (25 points)\n\nAddress your research question(s)\nAt least 1 publication-quality figure\nSummary statistics presented clearly (consider using knitr::kable() for tables)\n\n\n\n6. Inline Code (10 points)\nUse inline R code to report at least 3 statistics in your narrative text.\nExample:\nThe dataset contains `r nrow(data)` observations...\n\n\n7. Conclusion (10 points)\n\nSummary of key findings\nLimitations or caveats\nWhat you would explore next",
+    "text": "Required Elements\nYour Quarto document must include:\n\n1. YAML Header (5 points)\n---\ntitle: \"Your Descriptive Title\"\nauthor: \"Your Name\"\ndate: today\nformat:\n  html:\n    toc: true\n    code-fold: true\n---\n\n\n2. Introduction (10 points)\n\nBrief description of the dataset\nYour research question(s)\nWhy this is interesting\n\n\n\n3. Data Import & Cleaning (10 points)\n\nLoad necessary packages\nImport/load the data\nAny cleaning or transformation needed\nUse code chunks with appropriate options\n\n\n\n4. Exploratory Analysis (25 points)\n\nAt least 2 visualizations exploring your data\nAppropriate use of ggplot2 features (labels, themes, etc.)\nBrief interpretation of each visualization\n\n\n\n5. Main Analysis (20 points)\n\nAddress your research question(s)\nAt least 1 publication-quality figure\nSummary statistics presented clearly (consider using knitr::kable() for tables)\n\n\n\n6. Inline Code (10 points)\nUse inline R code to report at least 3 statistics in your narrative text.\nExample:\nThe dataset contains `r nrow(data)` observations...\n\n\n7. Conclusion (10 points)\n\nSummary of key findings\nLimitations or caveats\nWhat you would explore next",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1996,7 +2068,7 @@
     "href": "assignment/08-assignment.html#grading-rubric",
     "title": "Assignment 8: Reproducible Report",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nYAML header correct\n5\n\n\nIntroduction clear and complete\n10\n\n\nData import/cleaning well-documented\n15\n\n\nExploratory visualizations\n25\n\n\nMain analysis addresses question\n25\n\n\nInline code used effectively\n10\n\n\nConclusion thoughtful\n10\n\n\nTotal\n100\n\n\n\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nYAML header correct\n5\n\n\nIntroduction clear and complete\n10\n\n\nData import/cleaning well-documented\n10\n\n\nExploratory visualizations\n25\n\n\nMain analysis addresses question\n20\n\n\nInline code used effectively\n10\n\n\nConclusion thoughtful\n10\n\n\nCode runs without errors\n10\n\n\nTotal\n100\n\n\n\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
