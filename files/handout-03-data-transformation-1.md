@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -79,16 +81,4 @@ flights |>
 
 ## Check your work
 
-Compare your circled rows and your code with your partner's screen.
-
-**Expected filter conditions:** `carrier == "UA"`, `arr_delay > 120`, `dest == "LAX"`
-
-**Matching rows from the sample above:** Rows 2, 3, and 4 (UA, JFK, LAX, with arr_delay of 154, 149, and 169 — all > 120 minutes).
-
-**From the full dataset:** 129 flights match. EWR had 82, JFK had 47.
-
-**Expected code:**
-```
-flights |>
-  filter(carrier == "UA", arr_delay > 120, dest == "LAX")
-```
+Compare your circled rows and your code with your partner's screen. Do your answers match?

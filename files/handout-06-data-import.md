@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -82,27 +84,4 @@ Your answer: ___________________________________________________________________
 
 ## Check your work
 
-Compare your answers with your partner's screen.
-
-**Column type guesses:** `Participant ID` → character, `Age (years)` → numeric (double), `Gender` → character, `Score_1` → character (because "N/A" is text), `Score_2` → character (same reason), `Notes` → character.
-
-**Missing values:** 4 values should be NA: `-999` in Age, `N/A` in Gender, `N/A` in Score_1, `N/A` in Score_2.
-
-**Snake_case names:** `participant_id`, `age`, `gender`, `score_1`, `score_2`, `notes`
-
-**Expected code:**
-```
-messy <- read_csv("messy_survey.csv", na = c("N/A", "-999", ""))
-
-messy_clean <- messy |>
-  rename(
-    participant_id = `Participant ID`,
-    age = `Age (years)`,
-    gender = Gender,
-    score_1 = Score_1,
-    score_2 = Score_2,
-    notes = Notes
-  )
-```
-
-**Type change:** Yes — once R knows `"N/A"` is missing, the remaining values in `Score_1` and `Score_2` are all numbers, so R will guess them as numeric (double) instead of character.
+Compare your answers with your partner's screen. Do your type guesses, missing values, and code match?

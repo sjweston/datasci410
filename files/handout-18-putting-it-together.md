@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -95,33 +97,4 @@ sd_score = _____ (hint: use n-1 in the denominator)
 
 ## Check your work
 
-Compare your error list and corrected code with your partner's screen.
-
-**The 4 bugs:**
-
-| # | Line | What's wrong | Fix | Type |
-|---|------|-------------|-----|------|
-| 1 | `Study_data` vs `study_data` | Object created as `Study_data` (capital S) but referenced later as `study_data` (lowercase s) | Change creation to `study_data` (or change reference to `Study_data`) | (A) |
-| 2 | `filter(Group = "A")` | Single `=` is assignment, not comparison | Change to `==` | (B) |
-| 3 | `mean(score)` | Column is named `Score` (capital S), but code uses lowercase `score` | Change to `Score` | (A) |
-| 4 | Missing comma between `mean_score = mean(Score)` and `sd_score` | `summarize()` arguments need commas | Add `,` after `mean(Score)` | (C) |
-
-**Expected corrected code:**
-```
-library(tidyverse)
-
-study_data <- tibble(
-  id = 1:5,
-  Score = c(10, 15, 12, 18, 14),
-  Group = c("A", "B", "A", "B", "A")
-)
-
-study_data |>
-  filter(Group == "A") |>
-  summarize(
-    mean_score = mean(Score),
-    sd_score = sd(Score)
-  )
-```
-
-**Expected output:** Group A scores are 10, 12, 14. Mean = 12, SD = 2.
+Compare your error list and corrected code with your partner's screen. Did you find all 4 bugs?

@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -74,28 +76,4 @@ survey_wide |>
 
 ## Check your work
 
-Compare your long table and mean calculations with your partner's screen.
-
-**Long table:** 12 rows (3 participants x 4 items). Each response value comes from the original wide table.
-
-**Mean BDI scores:**
-
-| participant | sum | n | mean_bdi |
-|-------------|-----|---|----------|
-| 1           | 8   | 4 | 2.00     |
-| 2           | 4   | 4 | 1.00     |
-| 3           | 8   | 4 | 2.00     |
-
-**Highest mean:** Participants 1 and 3 are tied at 2.00.
-
-**Expected code:**
-```
-survey_wide |>
-  pivot_longer(
-    cols = starts_with("bdi"),
-    names_to = "item",
-    values_to = "response"
-  ) |>
-  group_by(participant) |>
-  summarize(mean_bdi = mean(response))
-```
+Compare your long table and mean calculations with your partner's screen. Do your answers match?

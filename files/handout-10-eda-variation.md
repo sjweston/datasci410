@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -110,23 +112,4 @@ penguins |> ggplot(aes(x = _______________)) +
 
 ## Check your work
 
-Compare your sketches and answers with your partner's screen.
-
-**Shape:** The distribution is **bimodal** — there are two humps because Gentoo penguins have much longer flippers (~217 mm average) than Adelie and Chinstrap penguins (~190 mm average). This is a great example of how a distribution's shape can reveal hidden groups.
-
-**IQR and fences:**
-- IQR = 213 - 190 = 23
-- Lower fence = 190 - 34.5 = 155.5
-- Upper fence = 213 + 34.5 = 247.5
-- No values fall outside these fences, so **no statistical outliers** by the 1.5x IQR rule.
-
-**Expected code:**
-```
-penguins |> ggplot(aes(x = flipper_length_mm)) +
-  geom_histogram(fill = "steelblue", color = "white") +
-  theme_minimal()
-
-penguins |> ggplot(aes(x = flipper_length_mm)) +
-  geom_boxplot() +
-  theme_minimal()
-```
+Compare your sketches, outlier calculations, and code with your partner's screen. Do your answers match?

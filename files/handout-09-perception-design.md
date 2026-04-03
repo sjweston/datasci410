@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -72,34 +74,4 @@ reaction_data |>
 
 ## Check your work
 
-Compare your problem list and rewritten code with your partner's screen.
-
-**Problems you should have found:**
-1. **Red/green colors** — inaccessible to colorblind viewers
-2. **`size = accuracy` mapping** — maps a binary variable to point size (meaningless)
-3. **Redundant `color` and `fill` aesthetics** — both do the same thing
-4. **Title says "data"** — uninformative, should convey a message
-5. **Axis labels are variable names** — `"condition"` and `"rt"` instead of readable labels
-6. **`theme_gray()`** — adds unnecessary visual clutter (gray background, gridlines)
-7. **Points drawn under boxplots** — geom order makes points hard to see
-
-**Expected clean version:**
-```
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
-  geom_jitter(width = 0.15, alpha = 0.3, size = 2, color = "gray50") +
-  geom_boxplot(alpha = 0.5, width = 0.4, outlier.shape = NA) +
-  scale_fill_manual(values = c("Control" = "#0072B2",
-                                "Treatment" = "#E69F00")) +
-  labs(
-    title = "Treatment Reduces Reaction Time",
-    x = "Condition",
-    y = "Reaction time (ms)",
-    caption = "N = 40 per condition. Points = individual observations."
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    legend.position = "none",
-    panel.grid = element_blank()
-  )
-```
+Compare your problem list and rewritten code with your partner's screen. Did you find at least 5 problems?

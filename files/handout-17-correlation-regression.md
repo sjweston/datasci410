@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -113,28 +115,4 @@ Your answer: ___________________________________________________________________
 
 ## Check your work
 
-Compare your scatterplot, predictions, and answers with your partner's screen.
-
-**Expected pattern:** Strong positive relationship — more social media use is associated with higher anxiety scores.
-
-**Expected correlation:** Around r = 0.97 (very strong positive — this is simulated data with a clear linear relationship).
-
-**Causation:** No. This is observational data. It's possible that anxious students turn to social media for comfort (reverse causation), or that a third variable (e.g., loneliness) drives both. We'd need an experiment to establish causation.
-
-**Expected code:**
-```
-cor(student_data$hours_social_media, student_data$gad7_score)
-
-model <- lm(gad7_score ~ hours_social_media, data = student_data)
-summary(model)
-
-ggplot(student_data, aes(x = hours_social_media, y = gad7_score)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(
-    title = "Social media use predicts higher anxiety",
-    x = "Daily social media use (hours)",
-    y = "Anxiety score (GAD-7)"
-  ) +
-  theme_minimal()
-```
+Compare your scatterplot, correlation estimate, and code with your partner's screen. Do your answers match?

@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -100,32 +102,4 @@ therapy_survey |>
 
 ## Check your work
 
-Compare your counts with your partner's screen.
-
-**NAs per variable:** id = 0, age = 2, baseline_depression = 1, followup_depression = 4, satisfaction = 3
-
-**Complete cases:** 4 (rows 1, 2, 4, 8)
-
-**After dropping missing followup:** Rows 1, 2, 4, 8 remain (4 rows)
-
-**Completion rate:** 4/8 = 0.50 = 50%
-
-**Pattern:** Participants 3, 6, and 7 are missing followup, satisfaction, AND other data. This clustering of missingness suggests these participants may have dropped out entirely — a common pattern in longitudinal studies where attrition affects multiple measures at once.
-
-**Expected code:**
-```
-therapy_survey |>
-  summarize(across(everything(), ~sum(is.na(.x))))
-
-therapy_survey |>
-  drop_na() |>
-  nrow()
-
-therapy_survey |>
-  drop_na(followup_depression)
-
-therapy_survey |>
-  summarize(
-    completion_rate = mean(!is.na(followup_depression))
-  )
-```
+Compare your counts, completion rate, and code with your partner's screen. Do your answers match?

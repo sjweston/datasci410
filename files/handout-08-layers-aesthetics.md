@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -89,25 +91,4 @@ reaction_data |>
 
 ## Check your work
 
-Compare your sketch and code with your partner's screen.
-
-**Mean RT from sample:** Control ≈ 524.5 ms, Treatment ≈ 482.1 ms
-
-**Layer order:** `geom_jitter` is listed first so the individual points are drawn *behind* the bars, not on top of them.
-
-**Expected code:**
-```
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
-  geom_jitter(width = 0.15, alpha = 0.4) +
-  stat_summary(fun = mean, geom = "bar", alpha = 0.6, width = 0.5) +
-  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
-  labs(
-    title = "Mean Reaction Time by Condition",
-    x = "Condition",
-    y = "Reaction time (ms)",
-    caption = "Error bars represent 95% confidence intervals."
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
+Compare your sketch and code with your partner's screen. Do your mean RT calculations and layer order match?
