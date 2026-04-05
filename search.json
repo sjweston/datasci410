@@ -1284,11 +1284,11 @@
     ]
   },
   {
-    "objectID": "assignment/07-assignment.html#grading-note",
-    "href": "assignment/07-assignment.html#grading-note",
+    "objectID": "assignment/07-assignment.html#grading-rubric",
+    "href": "assignment/07-assignment.html#grading-rubric",
     "title": "Assignment 7: Joins & Missing Data",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Understanding data\n15\n\n\nPart 2: Joining data\n30\n\n\nPart 3: Missing data analysis\n30\n\n\nPart 4: Reflection\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1416,11 +1416,11 @@
     ]
   },
   {
-    "objectID": "assignment/05-assignment.html#grading-note",
-    "href": "assignment/05-assignment.html#grading-note",
+    "objectID": "assignment/05-assignment.html#grading-rubric",
+    "href": "assignment/05-assignment.html#grading-rubric",
     "title": "Assignment 5: Exploratory Data Analysis",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Exploring distributions\n25\n\n\nPart 2: Exploring relationships\n30\n\n\nPart 3: Generating questions\n20\n\n\nPart 4: EDA report\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1524,11 +1524,11 @@
     ]
   },
   {
-    "objectID": "assignment/03-assignment.html#grading-note",
-    "href": "assignment/03-assignment.html#grading-note",
+    "objectID": "assignment/03-assignment.html#grading-rubric",
+    "href": "assignment/03-assignment.html#grading-rubric",
     "title": "Assignment 3: Tidying & Importing Data",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Pivoting wide to long\n30\n\n\nPart 2: Pivoting long to wide\n25\n\n\nPart 3: Importing data\n35\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1716,11 +1716,11 @@
     ]
   },
   {
-    "objectID": "assignment/02-assignment.html#grading-note",
-    "href": "assignment/02-assignment.html#grading-note",
+    "objectID": "assignment/02-assignment.html#grading-rubric",
+    "href": "assignment/02-assignment.html#grading-rubric",
     "title": "Assignment 2: Data Transformation",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your script must run from start to finish without errors. Restart R and run the entire script before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Filtering & Arranging\n25\n\n\nPart 2: Selecting & Mutating\n35\n\n\nPart 3: Grouped Summaries\n30\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1824,11 +1824,11 @@
     ]
   },
   {
-    "objectID": "assignment/04-assignment.html#grading-note",
-    "href": "assignment/04-assignment.html#grading-note",
+    "objectID": "assignment/04-assignment.html#grading-rubric",
+    "href": "assignment/04-assignment.html#grading-rubric",
     "title": "Assignment 4: Visualization Deep Dive",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Bar charts with error bars\n25\n\n\nPart 2: Distributions\n25\n\n\nPart 3: Bad and Good graph\n25\n\n\nPart 4: Recreate a figure\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1956,11 +1956,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#grading-note",
-    "href": "assignment/06-assignment.html#grading-note",
+    "objectID": "assignment/06-assignment.html#grading-rubric",
+    "href": "assignment/06-assignment.html#grading-rubric",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Grading Note",
-    "text": "Grading Note\nCode runs without errors (10 points): Your document must render from start to finish without errors. Restart R and render your .qmd before submitting.",
+    "section": "Grading Rubric",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Logical vectors & recoding\n25\n\n\nPart 2: Strings\n20\n\n\nPart 3: Factors\n20\n\n\nPart 4: Complete pipeline\n10\n\n\nPart 5: Text analysis\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2068,7 +2068,7 @@
     "href": "assignment/08-assignment.html#grading-rubric",
     "title": "Assignment 8: Reproducible Report",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nYAML header correct\n5\n\n\nIntroduction clear and complete\n10\n\n\nData import/cleaning well-documented\n10\n\n\nExploratory visualizations\n25\n\n\nMain analysis addresses question\n20\n\n\nInline code used effectively\n10\n\n\nConclusion thoughtful\n10\n\n\nCode runs without errors\n10\n\n\nTotal\n100\n\n\n\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nYAML header\n5\n\n\nIntroduction\n10\n\n\nData import & cleaning\n10\n\n\nExploratory analysis\n25\n\n\nMain analysis\n20\n\n\nInline code\n10\n\n\nConclusion\n10\n\n\nCode runs without errors\n10\n\n\nTotal\n100\n\n\n\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",

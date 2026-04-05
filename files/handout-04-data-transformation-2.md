@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -72,30 +74,4 @@ Your answer: ___________________________________________________________________
 
 ## Check your work
 
-Compare your summary table and code with your partner's screen.
-
-**Hand calculations from the sample:**
-
-| carrier | dep_delay values | sum | n | mean   |
-|---------|-----------------|-----|---|--------|
-| AA      | 8, -2, 14       | 20  | 3 | 6.67  |
-| DL      | -3, 5, -1       | 1   | 3 | 0.33  |
-| F9      | 25, 38, -4      | 59  | 3 | 19.67 |
-| UA      | 11, -6, 22      | 27  | 3 | 9.00  |
-
-**Worst carrier in the sample:** F9 (19.67 min average delay)
-
-**From the full dataset:** F9 is also the worst overall (20.2 min avg delay), but with only 685 flights. EV is close behind (20.0 min) with 54,173 flights — so high delay isn't always just a small-sample problem.
-
-**Expected code:**
-```
-flights |>
-  group_by(carrier) |>
-  summarize(
-    avg_delay = mean(dep_delay, na.rm = TRUE),
-    n_flights = n()
-  ) |>
-  arrange(desc(avg_delay))
-```
-
-**Why `na.rm = TRUE`?** Some flights have missing (`NA`) departure delay values. If we don't tell `mean()` to remove them, the whole average becomes `NA`. The `na.rm = TRUE` argument says "ignore the missing values and compute the mean from the rest."
+Compare your summary table and code with your partner's screen. Do your answers match?

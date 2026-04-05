@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -82,24 +84,4 @@ messy_survey |>
 
 ## Check your work
 
-Compare your cleaned values with your partner's screen.
-
-**Cleaned gender:** "female", "male", "female", "male", "non-binary"
-
-**Cleaned comments:** "Great Study!", "Too Long", "Very Interesting", "Confusing Instructions", "I Enjoyed This"
-
-**Negative comments:** Rows 2 and 4 — `is_negative` is TRUE for "too long" (contains "long") and "CONFUSING INSTRUCTIONS" (contains "confusing").
-
-**Expected code:**
-```
-messy_survey |>
-  mutate(
-    gender_clean = str_to_lower(str_trim(gender)),
-    comment_clean = str_to_title(str_trim(comment)),
-    is_negative = str_detect(
-      comment,
-      regex("long|confusing", ignore_case = TRUE)
-    )
-  ) |>
-  filter(is_negative)
-```
+Compare your cleaned values and code with your partner's screen. Do your answers match?
