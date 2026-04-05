@@ -104,9 +104,15 @@ library(readxl)
 ### Task 3.4
 Join the survey data with the demographics data by participant ID. How many participants have complete data in both files?
 
-## Grading Note
+## Grading Rubric
 
-**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
+| Component | Points |
+|-----------|--------|
+| Part 1: Pivoting wide to long | 30 |
+| Part 2: Pivoting long to wide | 25 |
+| Part 3: Importing data | 35 |
+| Code runs without errors | 10 |
+| **Total** | **100** |
 
 ## Submission
 

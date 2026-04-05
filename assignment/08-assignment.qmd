@@ -109,13 +109,13 @@ Before submitting:
 
 | Component | Points |
 |-----------|--------|
-| YAML header correct | 5 |
-| Introduction clear and complete | 10 |
-| Data import/cleaning well-documented | 10 |
-| Exploratory visualizations | 25 |
-| Main analysis addresses question | 20 |
-| Inline code used effectively | 10 |
-| Conclusion thoughtful | 10 |
+| YAML header | 5 |
+| Introduction | 10 |
+| Data import & cleaning | 10 |
+| Exploratory analysis | 25 |
+| Main analysis | 20 |
+| Inline code | 10 |
+| Conclusion | 10 |
 | Code runs without errors | 10 |
 | **Total** | **100** |
 

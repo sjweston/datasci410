@@ -111,9 +111,16 @@ Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay
 
 You won't match it exactly — plain text axis labels are fine.
 
-## Grading Note
+## Grading Rubric
 
-**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
+| Component | Points |
+|-----------|--------|
+| Part 1: Bar charts with error bars | 25 |
+| Part 2: Distributions | 25 |
+| Part 3: Bad and Good graph | 25 |
+| Part 4: Recreate a figure | 15 |
+| Code runs without errors | 10 |
+| **Total** | **100** |
 
 ## Submission
 

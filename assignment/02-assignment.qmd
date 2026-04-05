@@ -97,9 +97,15 @@ Write a single piped sequence that:
 
 What are the top 3 worst destinations for United delays?
 
-## Grading Note
+## Grading Rubric
 
-**Code runs without errors (10 points):** Your script must run from start to finish without errors. Restart R and run the entire script before submitting.
+| Component | Points |
+|-----------|--------|
+| Part 1: Filtering & Arranging | 25 |
+| Part 2: Selecting & Mutating | 35 |
+| Part 3: Grouped Summaries | 30 |
+| Code runs without errors | 10 |
+| **Total** | **100** |
 
 ## Submission
 

@@ -159,9 +159,17 @@ Remove common stop words (e.g., "the", "and", "I") using `anti_join(stop_words)`
 ### Task 5.3
 Count word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?
 
-## Grading Note
+## Grading Rubric
 
-**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
+| Component | Points |
+|-----------|--------|
+| Part 1: Logical vectors & recoding | 25 |
+| Part 2: Strings | 20 |
+| Part 3: Factors | 20 |
+| Part 4: Complete pipeline | 10 |
+| Part 5: Text analysis | 15 |
+| Code runs without errors | 10 |
+| **Total** | **100** |
 
 ## Submission
 

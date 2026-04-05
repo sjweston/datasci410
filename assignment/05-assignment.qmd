@@ -96,9 +96,16 @@ Write a 1-page (approximately 300-400 words) EDA report summarizing:
 
 Write this as narrative text (not code comments) in your Quarto document.
 
-## Grading Note
+## Grading Rubric
 
-**Code runs without errors (10 points):** Your document must render from start to finish without errors. Restart R and render your `.qmd` before submitting.
+| Component | Points |
+|-----------|--------|
+| Part 1: Exploring distributions | 25 |
+| Part 2: Exploring relationships | 30 |
+| Part 3: Generating questions | 20 |
+| Part 4: EDA report | 15 |
+| Code runs without errors | 10 |
+| **Total** | **100** |
 
 ## Submission
 
