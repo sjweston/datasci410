@@ -593,7 +593,7 @@ therapy_hours                    0.00       0.09       0.06          1.00</code>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
-<p>Upload your code to Canvas for participation credit. Paste what you have into today’s in-class submission — it doesn’t need to work perfectly.</p>
+<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
 </section></section>
 <section>
 <section id="simple-linear-regression" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -940,7 +940,7 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation: sleep and stress</span></span>
 <span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(class_survey<span class="sc">$</span>sleep_hrs, class_survey<span class="sc">$</span>stress, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2228903</code></pre>
+<pre><code>[1] -0.1750722</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -952,13 +952,13 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
     Pearson's product-moment correlation
 
 data:  class_survey$sleep_hrs and class_survey$stress
-t = 1.2099, df = 28, p-value = 0.2364
+t = -0.97395, df = 30, p-value = 0.3379
 alternative hypothesis: true correlation is not equal to 0
 95 percent confidence interval:
- -0.1493737  0.5398123
+ -0.4936316  0.1849099
 sample estimates:
-      cor 
-0.2228903 </code></pre>
+       cor 
+-0.1750722 </code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -995,24 +995,24 @@ sample estimates:
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">5.182</td>
-<td style="text-align: right;">0.791</td>
-<td style="text-align: right;">6.555</td>
-<td style="text-align: right;">0.000</td>
+<td style="text-align: right;">7.472</td>
+<td style="text-align: right;">2.462</td>
+<td style="text-align: right;">3.035</td>
+<td style="text-align: right;">0.005</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">sleep_hrs</td>
-<td style="text-align: right;">0.064</td>
-<td style="text-align: right;">0.053</td>
-<td style="text-align: right;">1.210</td>
-<td style="text-align: right;">0.236</td>
+<td style="text-align: right;">-0.329</td>
+<td style="text-align: right;">0.338</td>
+<td style="text-align: right;">-0.974</td>
+<td style="text-align: right;">0.338</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 <div class="fragment">
-<p><strong>In plain language:</strong> For each additional hour of sleep, stress changes by 0.06 points. Sleep explains 5% of the variation in stress.</p>
+<p><strong>In plain language:</strong> For each additional hour of sleep, stress changes by -0.33 points. Sleep explains 3% of the variation in stress.</p>
 </div>
 </section>
 <section id="visualize-the-relationship" class="slide level2">
@@ -1151,7 +1151,7 @@ sample estimates:
 <section id="end-of-deck-exercise" class="slide level2">
 <h2>End-of-deck exercise</h2>
 <aside class="notes">
-<p>This is individual work time (~10 minutes). The exercise mirrors the anxiety analysis but uses depression (phq9_total) instead, so students can apply the same workflow independently. Circulate and check that students can interpret their slope in a sentence – that’s the hardest part. Encourage students who finish early to try the bonus (broom::tidy table). Remind them that this exercise is also good practice for the final project if they have continuous variables.</p>
+<p>Individual work time (~10 minutes). Part A mirrors the anxiety analysis but uses depression (phq9_total), so students can apply the workflow independently. Circulate and check that students can interpret their slope in a sentence — that’s the hardest part. Once Part A is working, push students into Part B: this is the last class session before the final project is due, so any minute spent on their own data is high-value. For students whose project doesn’t have continuous variables, redirect them to figure polish or inline-code reporting instead of forcing a regression that doesn’t fit.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1163,7 +1163,7 @@ sample estimates:
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>Using the <code>study_data</code> dataset:</p>
+<p><strong>Part A — Practice on <code>study_data</code>:</strong></p>
 <ol type="1">
 <li>Run a regression predicting <code>phq9_total</code> (depression) from <code>hours_social_media</code></li>
 <li>What is the slope? Interpret it in a sentence.</li>
@@ -1171,6 +1171,8 @@ sample estimates:
 <li>Create a scatterplot with the regression line and report the key statistics in the subtitle</li>
 <li><strong>Bonus:</strong> Use <code>broom::tidy()</code> to create a clean results table</li>
 </ol>
+<p><strong>Part B — Head start on your final project:</strong></p>
+<p>If your final project has two continuous variables, fit <strong>one</strong> <code>lm()</code> on your own data and add the resulting figure to your report. Even if regression isn’t a central part of your project, a single well-interpreted model can strengthen your Results section. Not a fit for your data? Use the time to polish a figure instead — your project is due Wednesday.</p>
 </section></section>
 <section>
 <section id="fun-challenge-10-the-final-prediction" class="title-slide slide level1 center" data-background-color="#e67e22">

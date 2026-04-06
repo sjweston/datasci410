@@ -9,7 +9,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dr.&nbsp;Sara Weston">
-  <meta name="dcterms.date" content="2026-04-29">
+  <meta name="dcterms.date" content="2026-05-04">
   <title>Exploratory Data Analysis: Covariation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -206,7 +206,7 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 
-  <p class="date">2026-04-29</p>
+  <p class="date">2026-05-04</p>
 </section>
 
 <section>
@@ -269,7 +269,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 20.817283, 20.456254, 16.944924, 13.227615, 23.140762,…</code></pre>
+$ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649546,…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -531,6 +531,10 @@ $ depression_post &lt;dbl&gt; 20.817283, 20.456254, 16.944924, 13.227615, 23.140
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="before-we-move-on" class="slide level2">
+<h2>Before we move on</h2>
+<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
 </section></section>
 <section>
 <section id="categorical-categorical" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -550,14 +554,14 @@ $ depression_post &lt;dbl&gt; 20.817283, 20.456254, 16.944924, 13.227615, 23.140
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diagnosis_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
-  gender     diagnosis
-  &lt;chr&gt;      &lt;chr&gt;    
-1 Non-binary Both     
-2 Female     Anxiety  
-3 Male       Other    
-4 Female     Both     
-5 Male       Both     
-6 Non-binary Other    </code></pre>
+  gender     diagnosis 
+  &lt;chr&gt;      &lt;chr&gt;     
+1 Female     Depression
+2 Non-binary Both      
+3 Male       Anxiety   
+4 Female     Both      
+5 Male       Depression
+6 Female     Both      </code></pre>
 </div>
 </div>
 </section>
@@ -738,8 +742,8 @@ $ depression_post &lt;dbl&gt; 20.817283, 20.456254, 16.944924, 13.227615, 23.140
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 23.16535, 24.21917, 28.05804, 41.73791, 56.98531, 19.185…
-$ reaction_time &lt;dbl&gt; 291.9136, 289.9209, 342.0351, 304.0829, 411.5414, 240.54…</code></pre>
+$ age           &lt;dbl&gt; 29.12261, 30.22804, 57.21434, 61.74926, 24.44400, 41.734…
+$ reaction_time &lt;dbl&gt; 299.0378, 243.2861, 407.8086, 318.7054, 336.9006, 333.18…</code></pre>
 </div>
 </div>
 </section>
@@ -950,7 +954,7 @@ $ reaction_time &lt;dbl&gt; 291.9136, 289.9209, 342.0351, 304.0829, 411.5414, 24
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7556987</code></pre>
+<pre><code>[1] 0.7608872</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -1346,7 +1350,7 @@ $ class        &lt;chr&gt; "compact", "compact", "compact", "compact", "compact"
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>PSY 410 | Session 10</p>
+<p>PSY 410 | Session 11</p>
 </div>
 </div></div>
 
