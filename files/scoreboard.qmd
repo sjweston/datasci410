@@ -27,16 +27,14 @@ library(tidyverse)
 week <- 2  # Current week number
 
 scoreboard <- tribble(
-  ~team,              ~pair_coding, ~assignments, ~quizzes, ~fun_challenge,
-  "Team 1",           0,            0,            0,        0,
-  "Team 2",           0,            0,            0,        0,
-  "Team 3",           0,            0,            0,        0,
-  "Team 4",           0,            0,            0,        0,
-  "Team 5",           0,            0,            0,        0,
-  "Team 6",           0,            0,            0,        0,
-  "Team 7",           0,            0,            0,        0,
-  "Team 8",           0,            0,            0,        0,
-  "Team 9",           0,            0,            0,        0,
+  ~team,                      ~pair_coding, ~assignments, ~quizzes, ~fun_challenge,
+  "Coderunners",                 1,            1,            1,        2,
+  "Tyrannotitans",               1,            1,            1,        2,
+  "R-odents",                    1,            1,            0,        2,
+  "Rticokes",                    1,            1,            0,        2,
+  "The Black Cats",              1,            1,            0,        2,
+  "The Bosses",                  1,            1,            0,        2,
+  "Vitamin R",                   1,            1,            0,        2
 )
 
 # =====================================================================
