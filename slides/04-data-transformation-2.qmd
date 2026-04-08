@@ -610,34 +610,6 @@ participant_summaries |>
   theme(legend.position = "none")
 ```
 
-## Get a head start: Assignment 2
-
-Using the `experiment` data we just created:
-
-1. Filter to only accurate trials (`accuracy == 1`)
-2. Calculate mean RT **per participant** per condition
-3. Find the 5 participants with the **fastest** mean RT in each condition
-
-::: {.callout-tip}
-This uses everything from today — `filter()`, `group_by()`, `summarize()`, and `slice_min()`. Work through it step by step.
-:::
-
-```{r}
-#| echo: false
-#| eval: false
-# Solution (reveal after time is up)
-experiment |>
-  filter(accuracy == 1) |>
-  group_by(participant_id, condition) |>
-  summarize(mean_rt = mean(reaction_time), .groups = "drop") |>
-  group_by(condition) |>
-  slice_min(mean_rt, n = 5)
-```
-
-::: {.notes}
-Give students ~10 minutes of individual work time. This exercise requires chaining four operations and doing a second `group_by()` after the first summarize — that's the hard part. Hint if students are stuck: "Build the pipeline one line at a time. First just filter, run it, then add the group_by, run it, then add summarize..." This incremental approach is a skill in itself. Assignment 2 is assigned today, so mention that it builds on the same skills. Reveal the solution with ~2 minutes left.
-:::
-
 # Wrapping up {background-color="#2c3e50"}
 
 ## Today's additions
@@ -693,3 +665,22 @@ Next time: Data Tidying with tidyr
 ::: {.notes}
 End on this line — it connects today's skills directly to something students will encounter in every journal article they read. Remind them that Assignment 2 is now posted and due Sunday at 11:59 PM. Next session is Data Tidying (pivot_longer, pivot_wider), which is conceptually harder but builds on what they learned today.
 :::
+
+# Get a head start: Assignment 2 {background-color="#e67e22"}
+
+## Work on Assignment 2 — Part 3
+
+Using the `flights` data from `nycflights13`:
+
+- Calculate the average departure delay for each carrier. Which carrier has the worst average delay?
+
+- Calculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?
+
+- Create a summary table showing, for each carrier:
+
+  - Average departure delay
+  - Average arrival delay
+  - Number of flights
+  - Number of destinations served (`n_distinct()`)
+
+Arrange by number of flights (descending).
