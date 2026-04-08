@@ -1229,8 +1229,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
-</section>
-<section id="visualize-the-results-output" class="slide level2 output-location-slide"><h2>Visualize the results</h2><div class="cell output-location-slide">
+</section><section id="visualize-the-results-output" class="slide level2 output-location-slide"><h2>Visualize the results</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
@@ -1238,41 +1237,7 @@ Dr.&nbsp;Sara Weston
 </figure>
 </div>
 </div>
-</div></section><section id="get-a-head-start-assignment-2" class="slide level2">
-<h2>Get a head start: Assignment 2</h2>
-<p>Using the <code>experiment</code> data we just created:</p>
-<ol type="1">
-<li>Filter to only accurate trials (<code>accuracy == 1</code>)</li>
-<li>Calculate mean RT <strong>per participant</strong> per condition</li>
-<li>Find the 5 participants with the <strong>fastest</strong> mean RT in each condition</li>
-</ol>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<p>This uses everything from today — <code>filter()</code>, <code>group_by()</code>, <code>summarize()</code>, and <code>slice_min()</code>. Work through it step by step.</p>
-</div>
-</div>
-</div>
-<aside class="notes">
-<p>Give students ~10 minutes of individual work time. This exercise requires chaining four operations and doing a second <code>group_by()</code> after the first summarize — that’s the hard part. Hint if students are stuck: “Build the pipeline one line at a time. First just filter, run it, then add the group_by, run it, then add summarize…” This incremental approach is a skill in itself. Assignment 2 is assigned today, so mention that it builds on the same skills. Reveal the solution with ~2 minutes left.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
+</div></section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Wrapping up</h1>
@@ -1364,6 +1329,40 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="get-a-head-start-assignment-2" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Get a head start: Assignment 2</h1>
+
+</section>
+<section id="work-on-assignment-2-part-3" class="slide level2">
+<h2>Work on Assignment 2 — Part 3</h2>
+<p>Using the <code>flights</code> data from <code>nycflights13</code>:</p>
+<ul>
+<li><p>Calculate the average departure delay for each carrier. Which carrier has the worst average delay?</p></li>
+<li><p>Calculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?</p></li>
+<li><p>Create a summary table showing, for each carrier:</p>
+<ul>
+<li>Average departure delay</li>
+<li>Average arrival delay</li>
+<li>Number of flights</li>
+<li>Number of destinations served (<code>n_distinct()</code>)</li>
+</ul></li>
+</ul>
+<p>Arrange by number of flights (descending).</p>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Watch out for <code>NA</code>s — you’ll need <code>na.rm = TRUE</code> in your summary functions.</p>
+</div>
+</div>
+</div>
 
 </section></section>
     </div>
