@@ -2,13 +2,13 @@
 title: "Perception & Design"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "April 22, 2026"
+date: "April 27, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 8"
+    footer: "PSY 410 | Session 9"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github

@@ -64,8 +64,12 @@ Emphasize the word "verbs" — dplyr is designed so each function is an action w
 
 ## Our dataset: flights
 
-```{r}
+```{r, results = 'hide', message='hide', warning='hide'}
+library(tidyverse)
+library(nycflights13)  # For the flights dataset
 # All 336,776 flights departing NYC in 2013
+```
+```{r}
 glimpse(flights)
 ```
 

@@ -2,13 +2,13 @@
 title: "Layers & Aesthetics"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "April 20, 2026"
+date: "April 22, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 7"
+    footer: "PSY 410 | Session 8"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github

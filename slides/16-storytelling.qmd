@@ -2,13 +2,13 @@
 title: "Storytelling with Data"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 20, 2026"
+date: "May 27, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 15"
+    footer: "PSY 410 | Session 16"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
@@ -855,7 +855,7 @@ Not included in the figure itself:
 # End-of-deck exercise {background-color="#e67e22"}
 
 ::: {.notes}
-The end-of-deck exercise uses real published figures for critique practice. Give students ~5 minutes per figure to discuss with a partner, then debrief as a class. After the published figures, have them apply the same critical lens to their own final project drafts. If time is short, skip to the self-evaluation step.
+The end-of-deck exercise has two parts. First, ~5 minutes per published figure to critique with a partner, then debrief. Second, the A8 head-start: students pick a dataset and start a minimal Quarto report. Be explicit that A8 is NOT the final project — students conflate them every year. If time is short, skip the second figure and go straight to the A8 scaffolding so they can ask rendering questions while you're in the room.
 :::
 
 ## Critique these figures
@@ -875,9 +875,22 @@ For each figure, identify:
 
 ![Published figure showing truth sensitivity results — used as a critique exercise example](img/truth-sensitivity.jpg){fig-align="center" height="550"}
 
-## Now apply it to your own work
+## Head start: Assignment 8
 
-Apply these same questions to **your own final project draft**.
+Start the reproducible report due next week. Pick **one** dataset: `palmerpenguins::penguins`, `psych::bfi`, a `nycflights13::flights` subset, or your final project data.
+
+Build a minimal `.qmd` with:
+
+1. YAML header including `author`, `date`, `toc: true`, `code-fold: true`
+2. A 2–3 sentence intro stating your research question
+3. A setup chunk + `glimpse()` of your data
+4. **One** exploratory visualization with a caption (apply today's storytelling principles)
+5. **One** inline-code statistic in the narrative
+6. Render to HTML to confirm it works end-to-end
+
+::: {.callout-note}
+A8 is **not** your final project — it's a short, focused reproducible report. Your final project is due June 10 and will be much more substantial.
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 

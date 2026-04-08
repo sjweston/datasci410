@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -109,33 +111,4 @@ ggplot(stress_data, aes(x = stress, y = profession,
 
 ## Check your work
 
-Compare your sketch and code with your partner's screen.
-
-**Ranked professions:** Engineer (5.5), Admin (6.2), Retail (6.8), Teacher (7.2), Nurse (8.1)
-
-**Good title examples:** "Nurses report highest stress levels" or "Healthcare workers bear the heaviest stress burden"
-
-**Highlight:** Nurse — use a distinct color (e.g., steelblue) against gray for the rest.
-
-**Horizontal bars:** Better for categorical labels — profession names are easier to read horizontally than rotated 45 degrees.
-
-**Expected code:**
-```
-stress_data <- stress_data |>
-  mutate(
-    profession = fct_reorder(profession, stress),
-    highlight = if_else(profession == "Nurse", "yes", "no")
-  )
-
-ggplot(stress_data, aes(x = stress, y = profession, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("yes" = "steelblue", "no" = "gray70")) +
-  labs(
-    title = "Nurses report highest stress levels",
-    subtitle = "Mean stress ratings on 0-10 scale",
-    x = "Stress level",
-    y = NULL
-  ) +
-  theme_minimal() +
-  theme(legend.position = "none")
-```
+Compare your sketch and code with your partner's screen. Do your rankings, title, and highlighting choices match?

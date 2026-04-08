@@ -711,7 +711,10 @@ On your own:
 2. Calculate **mean RT by condition and time**
 3. Sketch (on paper or in ggplot) what you'd expect the plot to look like
 
-This is very close to what Assignment 3 will ask you to do.
+::: {.callout-tip}
+## A3 preview
+Assignment 3 combines **three** skills: pivoting (today), importing CSV/Excel (next class), and joining datasets. Today's exercise nails the pivoting piece — Wednesday will cover the rest.
+:::
 
 ```{r}
 #| echo: false
@@ -729,7 +732,7 @@ wide_rm |>
 ```
 
 ::: {.notes}
-This is individual work, not a pair exercise. Give ~10 minutes if time allows. This uses names_pattern, which is the hardest concept from today. If students are struggling, suggest they start with a simpler pivot (cols = -subject, without names_pattern) to at least get the long format, then try extracting condition and time. Mention that Assignment 3 will involve a very similar task, so this is genuine practice.
+This is individual work, not a pair exercise. Give ~10 minutes if time allows. This uses names_pattern, which is the hardest concept from today. If students are struggling, suggest they start with a simpler pivot (cols = -subject, without names_pattern) to at least get the long format, then try extracting condition and time. Use the A3 callout to set expectations: A3 spans three skills (pivot, import, join), and today only covers the first. That keeps students from panicking when they look at the assignment and see file imports they haven't learned yet.
 :::
 
 # Wrapping up {background-color="#2c3e50"}

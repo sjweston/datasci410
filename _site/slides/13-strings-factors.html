@@ -9,7 +9,7 @@
   <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Dr.&nbsp;Sara Weston">
-  <meta name="dcterms.date" content="2026-05-06">
+  <meta name="dcterms.date" content="2026-05-11">
   <title>Strings &amp; Factors</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -206,7 +206,7 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 
-  <p class="date">2026-05-06</p>
+  <p class="date">2026-05-11</p>
 </section>
 
 <section>
@@ -732,6 +732,10 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="before-we-move-on" class="slide level2">
+<h2>Before we move on</h2>
+<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
 </section></section>
 <section>
 <section id="factors" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1233,18 +1237,18 @@ Levels: blue red</code></pre>
 <span id="cb83-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 1
-   data_words                                                                   
-   &lt;chr&gt;                                                                        
- 1 natoque imperdiet ligula commodo! convallis accusamus tincidunt luctus viver…
- 2 imperdiet. natoque morbi mattis! fringilla pede lectus tempor mi dignissim i…
- 3 morbi et pede luctus at. sit wisi fermentum quis metus dui.                  
- 4 fermentum cursus leo placerat erat sapien aliquam nunc cursus sed nec ipsum …
- 5 sit eu gravida fringilla vulputate rutrum, sem nulla at platea. iaculis ut. …
- 6 suspendisse tempus. dui. sapien mi quis dui integer montes sit eleifend? imp…
- 7 suscipit temporibus mi eros integer blandit vestibulum. dui ridiculus sodale…
- 8 morbi dapibus ullamcorper aliquam vestibulum molestie magnis ab malesuada co…
- 9 morbi sed rutrum, sagittis. pede gravida euismod? lectus nonummy convallis p…
-10 tincidunt posuere nec nec fusce vestibulum! sagittis? venenatis nulla nec lo…</code></pre>
+   data_words                  
+   &lt;chr&gt;                       
+ 1 frustrating and overwhelming
+ 2 novel                       
+ 3 novice                      
+ 4 hopeful                     
+ 5 work-in-progress            
+ 6 big and scary               
+ 7 necessary                   
+ 8 theory adjacent             
+ 9 unrequited love             
+10 neutral                     </code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -1271,20 +1275,20 @@ Levels: blue red</code></pre>
 <span id="cb85-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb85-5"><a href="" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 615 × 1
-   word       
-   &lt;chr&gt;      
- 1 natoque    
- 2 imperdiet  
- 3 ligula     
- 4 commodo    
- 5 convallis  
- 6 accusamus  
- 7 tincidunt  
- 8 luctus     
- 9 viverra    
-10 scelerisque
-# ℹ 605 more rows</code></pre>
+<pre><code># A tibble: 77 × 1
+   word        
+   &lt;chr&gt;       
+ 1 frustrating 
+ 2 and         
+ 3 overwhelming
+ 4 novel       
+ 5 novice      
+ 6 hopeful     
+ 7 work        
+ 8 in          
+ 9 progress    
+10 big         
+# ℹ 67 more rows</code></pre>
 </div>
 </div>
 <p>Each row is now a single word.</p>
@@ -1363,9 +1367,17 @@ Levels: blue red</code></pre>
 <li>Create a bar chart showing response counts for each question</li>
 <li>Use <code>facet_wrap()</code> to make separate panels for each question</li>
 <li>Bonus: Use <code>fct_infreq()</code> to order responses by overall frequency</li>
+<li><strong>A6 preview</strong> — given an <code>open_responses</code> tibble with a <code>response</code> column, tokenize it and find the most common non-stopwords:</li>
 </ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb89-2"><a href="" aria-hidden="true" tabindex="-1"></a>open_responses <span class="sc">|&gt;</span></span>
+<span id="cb89-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, response) <span class="sc">|&gt;</span></span>
+<span id="cb89-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb89-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+</div>
 <aside class="notes">
-<p>Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like “agree” and “Agree.” The facet_wrap step is review from earlier visualization sessions. If students finish early, the bonus question (fct_infreq) is a good stretch goal.</p>
+<p>Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like “agree” and “Agree.” The facet_wrap step is review from earlier visualization sessions. If students finish early, the <code>fct_infreq()</code> bonus is a good stretch goal, and step 6 previews the tidytext workflow they’ll need for A6 Part 5 — emphasize that <code>unnest_tokens()</code> + <code>anti_join(stop_words)</code> is the standard pattern, no regex required.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1512,7 +1524,7 @@ Levels: blue red</code></pre>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p>PSY 410 | Session 12</p>
+<p>PSY 410 | Session 13</p>
 </div>
 </div></div>
 

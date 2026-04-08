@@ -598,16 +598,20 @@ aov(gad7_total ~ condition, data = study_data)
 ## End-of-deck exercise
 
 ::: {.notes}
-This is individual work time (~10 minutes). The exercise mirrors the anxiety analysis but uses depression (phq9_total) instead, so students can apply the same workflow independently. Circulate and check that students can interpret their slope in a sentence -- that's the hardest part. Encourage students who finish early to try the bonus (broom::tidy table). Remind them that this exercise is also good practice for the final project if they have continuous variables.
+Individual work time (~10 minutes). Part A mirrors the anxiety analysis but uses depression (phq9_total), so students can apply the workflow independently. Circulate and check that students can interpret their slope in a sentence — that's the hardest part. Once Part A is working, push students into Part B: this is the last class session before the final project is due, so any minute spent on their own data is high-value. For students whose project doesn't have continuous variables, redirect them to figure polish or inline-code reporting instead of forcing a regression that doesn't fit.
 :::
 
-Using the `study_data` dataset:
+**Part A — Practice on `study_data`:**
 
 1. Run a regression predicting `phq9_total` (depression) from `hours_social_media`
 2. What is the slope? Interpret it in a sentence.
 3. What is R²? Is social media use a good predictor of depression?
 4. Create a scatterplot with the regression line and report the key statistics in the subtitle
 5. **Bonus:** Use `broom::tidy()` to create a clean results table
+
+**Part B — Head start on your final project:**
+
+If your final project has two continuous variables, fit **one** `lm()` on your own data and add the resulting figure to your report. Even if regression isn't a central part of your project, a single well-interpreted model can strengthen your Results section. Not a fit for your data? Use the time to polish a figure instead — your project is due Wednesday.
 
 ```{r}
 #| echo: false

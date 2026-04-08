@@ -139,16 +139,18 @@ This is the key moment of the deck. Run the code and let the output land. Point 
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
-#| fig-alt: "Bar chart showing data split into three groups (A, B, C) with different values in each, illustrating how group_by() separates data so each group is summarized independently."
-tibble(
-  group = rep(c("A", "B", "C"), each = 4),
-  value = c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
-) |>
-  ggplot(aes(x = group, y = value, fill = group)) +
-  geom_col(position = "dodge") +
+#| fig-alt: "Bar chart of average departure delay by month, showing the result of the group_by(month) + summarize() pipeline from the previous slide."
+flights |>
+  group_by(month) |>
+  summarize(avg_delay = mean(dep_delay, na.rm = TRUE)) |>
+  ggplot(aes(x = factor(month), y = avg_delay)) +
+  geom_col(fill = "steelblue") +
   theme_minimal(base_size = 18) +
-  labs(title = "Data split by group", subtitle = "Each group gets summarized separately") +
-  theme(legend.position = "none")
+  labs(
+    title = "Average departure delay by month",
+    x = "Month",
+    y = "Average delay (minutes)"
+  )
 ```
 
 ## Group by multiple variables
@@ -191,37 +193,6 @@ summarize(..., .groups = "drop_last")
 
 ::: {.notes}
 Students will see this message and panic — reassure them it's informational, not an error. For this course, recommend `.groups = "drop"` as the safest default. The message appears because after summarizing two grouping variables, R keeps the first one grouped. You don't need to belabor `"keep"` vs `"drop_last"` — just tell them `"drop"` is the safe bet and move on. Spend ~2 minutes max.
-:::
-
-## Group by for psychology
-
-```{r}
-#| eval: false
-# Means by condition
-data |>
-  group_by(condition) |>
-  summarize(
-    mean_score = mean(score, na.rm = TRUE),
-    sd_score = sd(score, na.rm = TRUE),
-    n = n()
-  )
-```
-
-## Group by for psychology
-
-```{r}
-#| eval: false
-# Descriptives by condition AND gender
-data |>
-  group_by(condition, gender) |>
-  summarize(
-    m = mean(outcome),
-    se = sd(outcome) / sqrt(n())
-  )
-```
-
-::: {.notes}
-Pause on the standard error formula. Students from stats classes may recognize `sd / sqrt(n)`, but point out how elegant it is that `n()` works inline inside `summarize()`. These two psychology slides are important for framing — students need to see that group_by + summarize is exactly what SPSS "Descriptives > Split File" does, but more flexible.
 :::
 
 ## Multiple summaries at once

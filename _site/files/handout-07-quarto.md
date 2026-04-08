@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -73,35 +75,4 @@ The mean highway fuel economy is `r ______(______(mpg$hwy), 1)` miles per gallon
 
 ## Check your work
 
-Compare your handwritten document with your partner's rendered version.
-
-**Expected YAML:**
-```
----
-title: "Car Fuel Efficiency Analysis"
-author: "Your Name"
-date: "2026-04-20"
-format: html
----
-```
-
-**Expected code chunk:**
-````
-```{r}
-library(tidyverse)
-
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  labs(
-    x = "Engine size (L)",
-    y = "Highway MPG"
-  )
-```
-````
-
-**Expected inline code:**
-```
-The mean highway fuel economy is `r round(mean(mpg$hwy), 1)` miles per gallon.
-```
-
-The answer is 23.4 miles per gallon. When the document renders, the inline code is replaced with the computed number — no hard-coded values.
+Compare your handwritten document with your partner's rendered version. Do your YAML header, code chunk, and inline code match?

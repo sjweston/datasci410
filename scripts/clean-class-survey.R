@@ -16,9 +16,9 @@ source("qualtrics_config.R")
 
 # ── 2. Pull raw responses ───────────────────────────────────────────────────
 raw <- fetch_survey(
-  surveyID      = SURVEY_ID_WEEK1,
-  force_request = TRUE,       # always pull fresh
-  verbose       = FALSE
+  surveyID = SURVEY_ID_WEEK1,
+  force_request = TRUE, # always pull fresh
+  verbose = FALSE
 )
 
 cat("Pulled", nrow(raw), "responses from Qualtrics.\n")
@@ -33,7 +33,7 @@ cat("Pulled", nrow(raw), "responses from Qualtrics.\n")
 # adjust the column names here.
 survey <- raw |>
   select(
-    response_id   = ResponseId,
+    response_id = ResponseId,
     # Demographics / grouping
     major,
     year,
@@ -60,9 +60,16 @@ cat("Selected", ncol(survey), "columns.\n")
 # ── 5. Clean numeric columns ────────────────────────────────────────────────
 # Qualtrics sometimes imports numbers as character — force to numeric.
 numeric_cols <- c(
-  "sleep_hrs", "caffeine_per_day", "social_media_hrs", "tabs_open",
-  "stress", "coding_excited", "coding_anxious",
-  "personality_neur", "personality_extra", "personality_consc"
+  "sleep_hrs",
+  "caffeine_per_day",
+  "social_media_hrs",
+  "tabs_open",
+  "stress",
+  "coding_excited",
+  "coding_anxious",
+  "personality_neur",
+  "personality_extra",
+  "personality_consc"
 )
 
 survey <- survey |>
@@ -73,19 +80,31 @@ survey <- survey |>
 survey <- survey |>
   mutate(
     # Cap sleep at reasonable bounds (0-24)
-    sleep_hrs        = if_else(sleep_hrs < 0 | sleep_hrs > 24, NA_real_, sleep_hrs),
+    sleep_hrs = if_else(sleep_hrs < 0 | sleep_hrs > 24, NA_real_, sleep_hrs),
     # Cap social media (0-24)
-    social_media_hrs = if_else(social_media_hrs < 0 | social_media_hrs > 24, NA_real_, social_media_hrs),
+    social_media_hrs = if_else(
+      social_media_hrs < 0 | social_media_hrs > 24,
+      NA_real_,
+      social_media_hrs
+    ),
     # Caffeine: negative doesn't make sense
-    caffeine_per_day = if_else(caffeine_per_day < 0, NA_real_, caffeine_per_day),
+    caffeine_per_day = if_else(
+      caffeine_per_day < 0,
+      NA_real_,
+      caffeine_per_day
+    ),
     # Tabs: negative doesn't make sense
-    tabs_open        = if_else(tabs_open < 0, NA_real_, tabs_open)
+    tabs_open = if_else(tabs_open < 0, NA_real_, tabs_open)
   )
 
 # 1-10 scales: coerce out-of-range to NA
 scale_cols <- c(
-  "stress", "coding_excited", "coding_anxious",
-  "personality_neur", "personality_extra", "personality_consc"
+  "stress",
+  "coding_excited",
+  "coding_anxious",
+  "personality_neur",
+  "personality_extra",
+  "personality_consc"
 )
 
 survey <- survey |>
@@ -97,8 +116,8 @@ survey <- survey |>
 # ── 7. Clean categorical columns ────────────────────────────────────────────
 survey <- survey |>
   mutate(
-    major      = str_trim(major),
-    year       = str_trim(year),
+    major = str_trim(major),
+    year = str_trim(year),
     chronotype = str_trim(chronotype),
     data_words = str_trim(str_to_lower(data_words))
   )

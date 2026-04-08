@@ -2,13 +2,13 @@
 title: "Strings & Factors"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 6, 2026"
+date: "May 11, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 12"
+    footer: "PSY 410 | Session 13"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
@@ -752,9 +752,19 @@ likert_data <- tibble(
 3. Create a bar chart showing response counts for each question
 4. Use `facet_wrap()` to make separate panels for each question
 5. Bonus: Use `fct_infreq()` to order responses by overall frequency
+6. **A6 preview** — given an `open_responses` tibble with a `response` column, tokenize it and find the most common non-stopwords:
+
+```{r}
+#| eval: false
+library(tidytext)
+open_responses |>
+  unnest_tokens(word, response) |>
+  anti_join(stop_words, by = "word") |>
+  count(word, sort = TRUE)
+```
 
 ::: {.notes}
-Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like "agree" and "Agree." The facet_wrap step is review from earlier visualization sessions. If students finish early, the bonus question (fct_infreq) is a good stretch goal.
+Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like "agree" and "Agree." The facet_wrap step is review from earlier visualization sessions. If students finish early, the `fct_infreq()` bonus is a good stretch goal, and step 6 previews the tidytext workflow they'll need for A6 Part 5 — emphasize that `unnest_tokens()` + `anti_join(stop_words)` is the standard pattern, no regex required.
 :::
 
 ```{r}

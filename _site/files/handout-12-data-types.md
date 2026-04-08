@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -85,28 +87,4 @@ attention_data |>
 
 ## Check your work
 
-Compare your filled-in tables and code with your partner's screen.
-
-**`passed` column:** TRUE, FALSE, TRUE, FALSE, NA, TRUE. Note: `NA == 4` returns `NA`, not `FALSE`. This is a common gotcha in R.
-
-**`status` column:** Passed, Failed, Passed, Failed, No response, Passed
-
-**Why check `is.na()` first:** `case_when()` evaluates conditions top-to-bottom and uses the first match. If we checked `== 4` first, the NA row would return `NA` (not "Failed" or "No response"), because any comparison with NA returns NA.
-
-**Proportion:** 3 passed out of 5 non-NA values = 0.60 (60%)
-
-**Expected code:**
-```
-attention_data |>
-  mutate(
-    passed = attention_check == 4,
-    status = case_when(
-      is.na(attention_check) ~ "No response",
-      attention_check == 4   ~ "Passed",
-      .default               = "Failed"
-    )
-  )
-
-attention_data |>
-  summarize(prop_passed = mean(attention_check == 4, na.rm = TRUE))
-```
+Compare your filled-in tables and code with your partner's screen. Do your answers match?

@@ -2,13 +2,13 @@
 title: "Data Types: Logicals & Numbers"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 4, 2026"
+date: "May 6, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 11"
+    footer: "PSY 410 | Session 12"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github

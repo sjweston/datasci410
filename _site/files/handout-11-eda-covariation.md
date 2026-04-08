@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -112,22 +114,4 @@ Your answer: ___________________________________________________________________
 
 ## Check your work
 
-Compare your sketches and code with your partner's screen.
-
-**Why `replace = TRUE`:** We have 150 participants but only 3 gender categories. Without replacement, `sample()` can only draw 3 values.
-
-**Good geom choices:** `geom_boxplot()`, `geom_violin()`, `geom_jitter()`, `geom_point()`. Boxplot and violin are the most informative for group comparisons.
-
-**Expected code (boxplot version):**
-```
-ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
-  geom_boxplot() +
-  labs(
-    title = "Depression scores by gender",
-    x = "Gender",
-    y = "Depression score (BDI-II)"
-  ) +
-  theme_minimal()
-```
-
-**Expected finding:** No meaningful difference between genders — because we randomly assigned the labels, there's no real relationship. Any small differences are just random noise. This is a nice preview of the concept of a null effect.
+Compare your sketches and code with your partner's screen. Do your geom choices and code match?

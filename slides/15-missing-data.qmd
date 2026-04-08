@@ -2,13 +2,13 @@
 title: "Missing Data"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 13, 2026"
+date: "May 20, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 14"
+    footer: "PSY 410 | Session 15"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github

@@ -2,6 +2,8 @@
 
 **PSY 410 | Data Science for Psychology**
 
+**Name:** ______________________________ **Date:** ______________
+
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
@@ -103,29 +105,4 @@ sum(is.na(complete_data$___________________))
 
 ## Check your work
 
-Compare your joined tables with your partner's screen.
-
-**After Step 1:** Participant 5's condition is `NA` — they're in `baseline` but not in `treatment`, so `left_join()` keeps them but has no condition to fill in.
-
-**After Step 2:**
-
-| id | age | baseline_depression | condition | followup_depression |
-|----|-----|---------------------|-----------|---------------------|
-| 1  | 25  | 22                  | CBT       | 12                  |
-| 2  | 30  | 25                  | Control   | 23                  |
-| 3  | 22  | 18                  | CBT       | 10                  |
-| 4  | 35  | 30                  | Control   | NA                  |
-| 5  | 28  | 20                  | NA        | 18                  |
-
-**Missing followup:** 1 participant (id 4). They may have dropped out of the study between treatment and followup — a common issue in longitudinal psychology research.
-
-**Expected code:**
-```
-baseline_treatment <- baseline |>
-  left_join(treatment, by = "id")
-
-complete_data <- baseline_treatment |>
-  left_join(followup, by = "id")
-
-sum(is.na(complete_data$followup_depression))
-```
+Compare your joined tables and code with your partner's screen. Do your answers match?

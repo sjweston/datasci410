@@ -2,13 +2,13 @@
 title: "Reproducible Reports with Quarto"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 27, 2026"
+date: "April 20, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 16"
+    footer: "PSY 410 | Session 7"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
@@ -738,20 +738,24 @@ This connects back to Session 1's filing cabinet metaphor. A well-organized proj
 # End-of-deck exercise {background-color="#e67e22"}
 
 ::: {.notes}
-This exercise is a head start on Assignment 3 and also scaffolds the final project. Give students ~10 minutes of work time. They probably won't finish, and that's fine — the point is to get started and identify questions. Walk around and help with rendering errors, which will be frequent.
+This exercise is a direct head start on Assignment 3 — A3 is the first Quarto submission, so students should leave class with a working `.qmd` skeleton that imports both A3 data files. Give ~10 minutes. They probably won't finish, and that's fine — priority is a successful first render. Walk around and help with rendering errors, especially YAML indentation and missing package loads, which will be frequent. Remind them this same workflow is used for every assignment from A3 onward.
 :::
 
-## Create your final project draft
+## Head start: Assignment 3
 
-Convert your final project draft to a Quarto document (`.qmd`):
+Assignment 3 is your **first Quarto submission**. Start scaffolding it now:
 
-1. Structure it with sections: Introduction, Method, Results, Discussion
-2. Include a setup chunk, data import code, and 2-3 captioned visualizations
-3. Report at least one summary statistic with inline code
-4. Add a table of descriptive statistics with `kable()`
-5. Render to HTML and review
+1. Create a new `.qmd` with a YAML header (title, author, `format: html`)
+2. Add sections: Introduction, Data, Results
+3. Setup chunk that loads `tidyverse` and `readxl` (`#| include: false`)
+4. Import the A3 data files (`survey_data.csv`, `demographics.xlsx`)
+5. `glimpse()` each in its own chunk
+6. Report one summary statistic with **inline code** in the narrative
+7. Render to HTML — fix any errors before you leave class
 
-**This will become your final project report!**
+::: {.callout-tip}
+This is the workflow you'll use for every assignment from A3 onward.
+:::
 
 # Wrapping up {background-color="#2c3e50"}
 
