@@ -101,9 +101,6 @@ library(readxl)
 # Your code here
 ```
 
-### Task 3.4
-Join the survey data with the demographics data by participant ID. How many participants have complete data in both files?
-
 ## Grading Rubric
 
 | Component | Points |
@@ -118,7 +115,6 @@ Join the survey data with the demographics data by participant ID. How many part
 
 - [ ] All pivot operations produce correct output
 - [ ] CSV and Excel files imported successfully
-- [ ] Data joined correctly
 - [ ] Document renders without errors
 
 Submit your `.qmd` file **and** your rendered `.html` file on Canvas.

@@ -287,6 +287,33 @@ Dr.&nbsp;Sara Weston
 </blockquote>
 <p>The tools we’ve learned (ggplot2, dplyr) expect data in a specific format: <strong>tidy data</strong>.</p>
 </section>
+<section id="what-is-a-variable" class="slide level2">
+<h2>What is a variable?</h2>
+<p>A <strong>variable</strong> is a characteristic that can take on different values — but all those values are measuring or describing the <strong>same underlying thing</strong>.</p>
+<div class="fragment">
+<ul>
+<li><strong>pre</strong> and <strong>post</strong> aren’t separate variables — they’re values of <code>time</code></li>
+<li><strong>Fall 2024</strong>, <strong>Spring 2025</strong>, <strong>Fall 2025</strong> aren’t separate variables — they’re values of <code>semester</code></li>
+<li><strong>bdi_1</strong>, <strong>bdi_2</strong>, <strong>bdi_3</strong> aren’t separate variables — they’re values of <code>item</code></li>
+</ul>
+</div>
+<div class="fragment">
+<p>When multiple columns are really values of the same underlying thing, they belong in <strong>one column</strong>.</p>
+<aside class="notes">
+<p>This slide is critical — spend 2-3 minutes here. Students often struggle with tidy data rules because they don’t have a working definition of “variable.” Use the examples to show the pattern: the most common untidy problem is spreading one variable’s values across multiple columns. A useful question to ask: “If I asked you ‘what was the time point for this measurement?’, where would you find that answer in the wide format?” (It’s encoded in the column name — you can’t filter or plot by it.) “What about in the long format?” (There’s a column for it — easy.) That’s the practical payoff of the definition.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
 <section id="the-three-rules-of-tidy-data" class="slide level2">
 <h2>The three rules of tidy data</h2>
 <ol type="1">
@@ -593,16 +620,44 @@ Dr.&nbsp;Sara Weston
 <h1>pivot_longer()</h1>
 
 </section>
+<section id="recall-the-data-were-reshaping" class="slide level2">
+<h2>Recall: the data we’re reshaping</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+  student fall_2024 spring_2025 fall_2025
+  &lt;chr&gt;       &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+1 Alice          85          88        91
+2 Bob            78          82        85
+3 Carol          92          95        94</code></pre>
+</div>
+</div>
+<p><code>fall_2024</code>, <code>spring_2025</code>, <code>fall_2025</code> are <strong>values</strong> of a <code>semester</code> variable — not separate variables. Let’s fix that.</p>
+<aside class="notes">
+<p>Brief recall slide. Students saw wide_scores a few slides ago in the “Pattern 1” example, but may have lost track. Point to the column names and repeat: “These three column names are really values of a semester variable. Our job is to move them into a single column.” Then advance to the pivot_longer() demo.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="the-most-common-tidying-operation" class="slide level2">
 <h2>The most common tidying operation</h2>
 <p><code>pivot_longer()</code> takes wide data and makes it long:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> fall_2024<span class="sc">:</span>fall_2025,  <span class="co"># Which columns to pivot</span></span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"semester"</span>,        <span class="co"># New column for old column names</span></span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span>           <span class="co"># New column for values</span></span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_scores <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> fall_2024<span class="sc">:</span>fall_2025,  <span class="co"># Which columns to pivot</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"semester"</span>,        <span class="co"># New column for old column names</span></span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span>           <span class="co"># New column for values</span></span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   student semester    score
@@ -635,14 +690,44 @@ Dr.&nbsp;Sara Weston
 <section id="breaking-it-down" class="slide level2">
 <h2>Breaking it down</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(</span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> ...,        <span class="co"># Columns to reshape (use select helpers!)</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"..."</span>,  <span class="co"># Name for the new "names" column</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"..."</span>  <span class="co"># Name for the new "values" column</span></span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(</span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cols =</span> ...,        <span class="co"># Columns to reshape (use select helpers!)</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">names_to =</span> <span class="st">"..."</span>,  <span class="co"># Name for the new "names" column</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">values_to =</span> <span class="st">"..."</span>  <span class="co"># Name for the new "values" column</span></span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Emphasize that names_to and values_to take quoted strings (these are new column names you are inventing). Students will forget the quotes — it’s one of the most common errors. Also note that cols uses the same selection syntax they learned in select(), which helps it feel less foreign.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="whats-actually-happening" class="slide level2">
+<h2>What’s actually happening</h2>
+<div class="r-stack">
+<div class="fragment fade-in-then-out text-center">
+<p><img data-src="img/long-form.png" style="width:85.0%" alt="Diagram showing a wide data frame with 3 rows (participants A, B, C) and columns id, bp1, bp2 transforming into a long data frame with 6 rows, one per participant per measurement, with columns id, measurement, and value. Rows are color-coded by participant."></p>
+<p>Each participant gets one row per pivoted column — <strong>rows multiply</strong></p>
+</div>
+<div class="fragment fade-in-then-out text-center">
+<p><img data-src="img/long-form2.png" style="width:85.0%" alt="Same transformation diagram, now highlighting the column headers bp1 and bp2 in the wide format, showing they become values in the measurement column of the long data frame."></p>
+<p>The old column headers become <strong>values</strong> in the new <code>measurement</code> column</p>
+</div>
+<div class="fragment text-center">
+<p><img data-src="img/long-form3.png" style="width:85.0%" alt="Same transformation diagram, now highlighting individual cell values (100, 120, 140) in the wide format, showing they move into the value column of the long data frame."></p>
+<p>The cell values move into the new <code>value</code> column</p>
+</div>
+</div>
+<aside class="notes">
+<p>Click through the three images one at a time. Image 1: “Notice that 3 rows become 6 — each participant now has one row per measurement.” Image 2: “The old column headers, bp1 and bp2, become values inside a new column called ‘measurement’.” Image 3: “The actual numbers in those cells move into a new column called ‘value’.” Then connect back: “In our example, the column headers are semester names, and the values are scores.” Spend 2-3 minutes here — this visual model is more durable than the code explanation alone.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -659,18 +744,18 @@ Dr.&nbsp;Sara Weston
 <h2>Selecting columns to pivot</h2>
 <p>Use any of the <code>select()</code> helpers:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By name</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(fall_2024, spring_2025, fall_2025))</span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By range</span></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> fall_2024<span class="sc">:</span>fall_2025)</span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By pattern</span></span>
-<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"fall"</span>))</span>
-<span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"202"</span>))</span>
-<span id="cb13-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Everything except</span></span>
-<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>student)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By name</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(fall_2024, spring_2025, fall_2025))</span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By range</span></span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> fall_2024<span class="sc">:</span>fall_2025)</span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># By pattern</span></span>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"fall"</span>))</span>
+<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">contains</span>(<span class="st">"202"</span>))</span>
+<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Everything except</span></span>
+<span id="cb15-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>student)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Highlight the “everything except” pattern (cols = -student) — in practice, this is what students will use most often. When you have 50 BDI items and one ID column, you don’t want to list all 50 items. The negative selection is the practical shortcut.</p>
@@ -689,12 +774,12 @@ Dr.&nbsp;Sara Weston
 <section id="psychology-example-survey-items" class="slide level2">
 <h2>Psychology example: Survey items</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
-<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 3
    participant item  response
@@ -719,14 +804,14 @@ Dr.&nbsp;Sara Weston
 <h2>Extracting information from names</h2>
 <p>What if column names contain useful info? We want to extract the time point (t1, t2, t3).</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores at different time points</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t1 =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">95</span>, <span class="dv">110</span>),</span>
-<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t2 =</span> <span class="fu">c</span>(<span class="dv">105</span>, <span class="dv">100</span>, <span class="dv">115</span>),</span>
-<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t3 =</span> <span class="fu">c</span>(<span class="dv">108</span>, <span class="dv">102</span>, <span class="dv">120</span>)</span>
-<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Scores at different time points</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t1 =</span> <span class="fu">c</span>(<span class="dv">100</span>, <span class="dv">95</span>, <span class="dv">110</span>),</span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t2 =</span> <span class="fu">c</span>(<span class="dv">105</span>, <span class="dv">100</span>, <span class="dv">115</span>),</span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score_t3 =</span> <span class="fu">c</span>(<span class="dv">108</span>, <span class="dv">102</span>, <span class="dv">120</span>)</span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id score_t1 score_t2 score_t3
@@ -740,13 +825,13 @@ Dr.&nbsp;Sara Weston
 <section id="names_prefix-argument" class="slide level2">
 <h2>names_prefix argument</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="sc">|&gt;</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"score"</span>),</span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
-<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"score_"</span>,  <span class="co"># Remove this prefix from names</span></span>
-<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a>experiment_wide <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"score"</span>),</span>
+<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"score_"</span>,  <span class="co"># Remove this prefix from names</span></span>
+<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
      id time  score
@@ -780,13 +865,13 @@ Dr.&nbsp;Sara Weston
 <h2>names_pattern argument</h2>
 <p>For more complex parsing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names like "bdi_1", "anxiety_1", etc.</span></span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
-<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), <span class="at">bdi_2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="at">anxiety_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
-<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Column names like "bdi_1", "anxiety_1", etc.</span></span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>,</span>
+<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>), <span class="at">bdi_2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>), <span class="at">anxiety_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)</span>
+<span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
      id bdi_1 bdi_2 anxiety_1 anxiety_2
@@ -800,13 +885,13 @@ Dr.&nbsp;Sara Weston
 <h2>names_pattern argument</h2>
 <p>For more complex parsing:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="sc">|&gt;</span></span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>id,</span>
-<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"item"</span>),</span>
-<span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.+)_(.+)"</span>,  <span class="co"># Regex: anything_anything</span></span>
-<span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>multi_scale <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>id,</span>
+<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"item"</span>),</span>
+<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.+)_(.+)"</span>,  <span class="co"># Regex: anything_anything</span></span>
+<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 8 × 4
      id scale   item  response
@@ -838,15 +923,15 @@ Dr.&nbsp;Sara Weston
 <section id="pivoting-to-calculate-scale-scores" class="slide level2">
 <h2>Pivoting to calculate scale scores</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BDI total from long format</span></span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
-<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
-<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant) <span class="sc">|&gt;</span></span>
-<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">bdi_total =</span> <span class="fu">sum</span>(response))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Calculate BDI total from long format</span></span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"bdi"</span>),</span>
+<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant) <span class="sc">|&gt;</span></span>
+<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">bdi_total =</span> <span class="fu">sum</span>(response))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 2
   participant bdi_total
@@ -877,9 +962,18 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
-<p>We defined <code>survey_wide</code> earlier in this deck:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div>
+<details class="code-fold">
+<summary>Click to see the data setup</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_2 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_3 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">2</span>),</span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">bdi_4 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">1</span>)</span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>survey_wide</span></code></pre></div>
+</details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
   participant bdi_1 bdi_2 bdi_3 bdi_4
@@ -904,7 +998,7 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <aside class="notes">
-<p>Set a 10-minute timer. Circulate the room — the most common sticking point is getting the pivot_longer() arguments right. If pairs are stuck, ask: “Which columns do you want to pivot? What should the new columns be called?” After ~8 minutes, ask who has an answer. Participant 3 has the highest mean (2.0). Reveal the solution and walk through it line by line. Remind students to upload their code to Canvas before moving on.</p>
+<p>Set a 10-minute timer. Circulate the room — the most common sticking point is getting the pivot_longer() arguments right. If pairs are stuck, ask: “Which columns do you want to pivot? What should the new columns be called?” After ~8 minutes, ask who has an answer. Participants 1 and 3 are tied for the highest mean (both 2.0); Participant 2 has the lowest (1.0). Reveal the solution and walk through it line by line. Remind students to upload their code to Canvas before moving on.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -930,12 +1024,12 @@ Dr.&nbsp;Sara Weston
 <h2>The opposite operation</h2>
 <p>Sometimes you need to go from long to wide:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
-<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">3</span>),</span>
-<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>, <span class="dv">48</span>, <span class="dv">71</span>)</span>
-<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>long_data</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">3</span>),</span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>, <span class="dv">48</span>, <span class="dv">71</span>)</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>long_data</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   participant time  score
@@ -965,11 +1059,11 @@ Dr.&nbsp;Sara Weston
 <section id="pivot_wider-syntax" class="slide level2">
 <h2>pivot_wider() syntax</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">|&gt;</span></span>
-<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,   <span class="co"># Column to get new column names from</span></span>
-<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> score  <span class="co"># Column to get values from</span></span>
-<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_data <span class="sc">|&gt;</span></span>
+<span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,   <span class="co"># Column to get new column names from</span></span>
+<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> score  <span class="co"># Column to get values from</span></span>
+<span id="cb32-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   participant   pre  post
@@ -1005,14 +1099,14 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-value-columns" class="slide level2">
 <h2>Multiple value columns</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long data with multiple measures</span></span>
-<span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
-<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">2</span>),</span>
-<span id="cb32-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>),</span>
-<span id="cb32-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">480</span>, <span class="dv">520</span>, <span class="dv">490</span>)</span>
-<span id="cb32-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb32-8"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Long data with multiple measures</span></span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">time =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"pre"</span>, <span class="st">"post"</span>), <span class="dv">2</span>),</span>
+<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">45</span>, <span class="dv">62</span>, <span class="dv">52</span>, <span class="dv">58</span>),</span>
+<span id="cb34-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt =</span> <span class="fu">c</span>(<span class="dv">500</span>, <span class="dv">480</span>, <span class="dv">520</span>, <span class="dv">490</span>)</span>
+<span id="cb34-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb34-8"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
      id time  score    rt
@@ -1027,102 +1121,17 @@ Dr.&nbsp;Sara Weston
 <section id="multiple-value-columns-1" class="slide level2">
 <h2>Multiple value columns</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="sc">|&gt;</span></span>
-<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
-<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,</span>
-<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(score, rt)  <span class="co"># Multiple columns!</span></span>
-<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a>long_multi <span class="sc">|&gt;</span></span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> time,</span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> <span class="fu">c</span>(score, rt)  <span class="co"># Multiple columns!</span></span>
+<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
      id score_pre score_post rt_pre rt_post
   &lt;int&gt;     &lt;dbl&gt;      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
 1     1        45         62    500     480
 2     2        52         58    520     490</code></pre>
-</div>
-</div>
-</section></section>
-<section>
-<section id="separating-and-uniting" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Separating and uniting</h1>
-
-</section>
-<section id="separate_wider_delim" class="slide level2">
-<h2>separate_wider_delim()</h2>
-<p>Split one column into multiple:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_sex =</span> <span class="fu">c</span>(<span class="st">"25_M"</span>, <span class="st">"32_F"</span>, <span class="st">"28_F"</span>))<span class="sc">|&gt;</span></span>
-<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_delim</span>(</span>
-<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> age_sex,</span>
-<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">delim =</span> <span class="st">"_"</span>,</span>
-<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"sex"</span>)</span>
-<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-     id age   sex  
-  &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
-1     1 25    M    
-2     2 32    F    
-3     3 28    F    </code></pre>
-</div>
-</div>
-<aside class="notes">
-<p>This connects back to Pattern 2 from earlier (multiple variables in one column). You can move through separate/unite fairly quickly (~3 minutes total) — these are less commonly needed than the pivots, but students should know they exist. Note that the resulting age column is character, not numeric — they’d need mutate(age = as.numeric(age)) to use it as a number. This foreshadows data type issues in Session 6.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="separate_wider_regex" class="slide level2">
-<h2>separate_wider_regex()</h2>
-<p>For complex patterns:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">code =</span> <span class="fu">c</span>(<span class="st">"A123"</span>, <span class="st">"B456"</span>, <span class="st">"C789"</span>)</span>
-<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">separate_wider_regex</span>(</span>
-<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> code,</span>
-<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">patterns =</span> <span class="fu">c</span>(<span class="at">letter =</span> <span class="st">"[A-Z]"</span>, <span class="at">number =</span> <span class="st">"[0-9]+"</span>)</span>
-<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  letter number
-  &lt;chr&gt;  &lt;chr&gt; 
-1 A      123   
-2 B      456   
-3 C      789   </code></pre>
-</div>
-</div>
-</section>
-<section id="unite" class="slide level2">
-<h2>unite()</h2>
-<p>The opposite — combine columns:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="fu">c</span>(<span class="dv">2024</span>, <span class="dv">2024</span>, <span class="dv">2025</span>),</span>
-<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">month =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">6</span>, <span class="dv">1</span>),</span>
-<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">day =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">10</span>)</span>
-<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unite</span>(</span>
-<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">col =</span> <span class="st">"date"</span>,       <span class="co"># New column name</span></span>
-<span id="cb40-8"><a href="" aria-hidden="true" tabindex="-1"></a>    year, month, day,   <span class="co"># Columns to combine</span></span>
-<span id="cb40-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sep =</span> <span class="st">"-"</span>           <span class="co"># Separator</span></span>
-<span id="cb40-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 1
-  date     
-  &lt;chr&gt;    
-1 2024-1-15
-2 2024-6-20
-3 2025-1-10</code></pre>
 </div>
 </div>
 </section></section>
@@ -1134,15 +1143,15 @@ Dr.&nbsp;Sara Weston
 <section id="example-1-repeated-measures-experiment" class="slide level2">
 <h2>Example 1: Repeated measures experiment</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Data as you might receive it from SPSS</span></span>
-<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time1 =</span> <span class="fu">c</span>(<span class="dv">450</span>, <span class="dv">520</span>, <span class="dv">480</span>, <span class="dv">510</span>),</span>
-<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time2 =</span> <span class="fu">c</span>(<span class="dv">420</span>, <span class="dv">490</span>, <span class="dv">460</span>, <span class="dv">480</span>),</span>
-<span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time1 =</span> <span class="fu">c</span>(<span class="dv">480</span>, <span class="dv">540</span>, <span class="dv">500</span>, <span class="dv">530</span>),</span>
-<span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time2 =</span> <span class="fu">c</span>(<span class="dv">440</span>, <span class="dv">510</span>, <span class="dv">470</span>, <span class="dv">500</span>)</span>
-<span id="cb42-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Data as you might receive it from SPSS</span></span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb38-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb38-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time1 =</span> <span class="fu">c</span>(<span class="dv">450</span>, <span class="dv">520</span>, <span class="dv">480</span>, <span class="dv">510</span>),</span>
+<span id="cb38-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time2 =</span> <span class="fu">c</span>(<span class="dv">420</span>, <span class="dv">490</span>, <span class="dv">460</span>, <span class="dv">480</span>),</span>
+<span id="cb38-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time1 =</span> <span class="fu">c</span>(<span class="dv">480</span>, <span class="dv">540</span>, <span class="dv">500</span>, <span class="dv">530</span>),</span>
+<span id="cb38-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time2 =</span> <span class="fu">c</span>(<span class="dv">440</span>, <span class="dv">510</span>, <span class="dv">470</span>, <span class="dv">500</span>)</span>
+<span id="cb38-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-9"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
   subject cond_a_time1 cond_a_time2 cond_b_time1 cond_b_time2
@@ -1170,14 +1179,14 @@ Dr.&nbsp;Sara Weston
 <section id="tidying-repeated-measures" class="slide level2">
 <h2>Tidying repeated measures</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="ot">&lt;-</span> wide_rm <span class="sc">|&gt;</span></span>
-<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>subject,</span>
-<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"time"</span>),</span>
-<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"cond_(.+)_time(.+)"</span>,</span>
-<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rt"</span></span>
-<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb44-8"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="ot">&lt;-</span> wide_rm <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>subject,</span>
+<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"condition"</span>, <span class="st">"time"</span>),</span>
+<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"cond_(.+)_time(.+)"</span>,</span>
+<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"rt"</span></span>
+<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb40-8"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 16 × 4
    subject condition time     rt
@@ -1204,21 +1213,22 @@ Dr.&nbsp;Sara Weston
 <section id="now-we-can-analyze-it" class="slide level2">
 <h2>Now we can analyze it!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="sc">|&gt;</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> rt, <span class="at">color =</span> condition, <span class="at">group =</span> condition)) <span class="sc">+</span></span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"line"</span>) <span class="sc">+</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.1</span>) <span class="sc">+</span></span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition and Time"</span>,</span>
-<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time Point"</span>,</span>
-<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction Time (ms)"</span></span>
-<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>tidy_rm <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(condition, time) <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_rt =</span> <span class="fu">mean</span>(rt), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> time, <span class="at">y =</span> mean_rt, <span class="at">color =</span> condition, <span class="at">group =</span> condition)) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb42-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb42-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb42-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition and Time"</span>,</span>
+<span id="cb42-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Time Point"</span>,</span>
+<span id="cb42-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean Reaction Time (ms)"</span></span>
+<span id="cb42-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb42-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
-<p>This is the payoff — show that once the data is tidy, the ggplot code is straightforward. Refer back to the opening slide: “Remember when we couldn’t figure out what to put on the axes? Now we can.” Don’t explain stat_summary() in depth (that’s Session 8); just note that tidy data made this plot possible.</p>
+<p>This is the payoff — show that once the data is tidy, the ggplot code uses skills students already know: group_by(), summarize(), then geom_point() and geom_line(). Refer back to the opening slide: “Remember when we couldn’t figure out what to put on the axes? Now we can.” The pipeline also reinforces that tidying and summarizing go hand in hand.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1235,21 +1245,21 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="05-data-tidying_files/figure-revealjs/unnamed-chunk-30-1.png" alt="Line plot showing mean reaction times for conditions A and B at two time points, with error bars. Both conditions decrease from time 1 to time 2, with condition B consistently slower than condition A." width="960"></p>
+<p><img data-src="05-data-tidying_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Line plot showing mean reaction times for conditions A and B at two time points. Both conditions decrease from time 1 to time 2, with condition B consistently slower than condition A." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="example-2-questionnaire-with-subscales" class="slide level2">
 <h2>Example 2: Questionnaire with subscales</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw questionnaire data</span></span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pid =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anx_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">anx_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>), <span class="at">anx_3 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
-<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dep_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="at">dep_2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dep_3 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
-<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a>quest</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Raw questionnaire data</span></span>
+<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb43-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pid =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anx_1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">anx_2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>), <span class="at">anx_3 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">5</span>),</span>
+<span id="cb43-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dep_1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>), <span class="at">dep_2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dep_3 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb43-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-8"><a href="" aria-hidden="true" tabindex="-1"></a>quest</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 7
     pid anx_1 anx_2 anx_3 dep_1 dep_2 dep_3
@@ -1263,17 +1273,17 @@ Dr.&nbsp;Sara Weston
 <section id="example-2-questionnaire-with-subscales-1" class="slide level2">
 <h2>Example 2: Questionnaire with subscales</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy and calculate subscales</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="sc">|&gt;</span></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>pid,</span>
-<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"item"</span>),</span>
-<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.+)_(.+)"</span>,</span>
-<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb49-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb49-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(pid, scale) <span class="sc">|&gt;</span></span>
-<span id="cb49-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">subscale_mean =</span> <span class="fu">mean</span>(response), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb49-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> scale, <span class="at">values_from =</span> subscale_mean)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy and calculate subscales</span></span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>quest <span class="sc">|&gt;</span></span>
+<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="sc">-</span>pid,</span>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="fu">c</span>(<span class="st">"scale"</span>, <span class="st">"item"</span>),</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_pattern =</span> <span class="st">"(.+)_(.+)"</span>,</span>
+<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(pid, scale) <span class="sc">|&gt;</span></span>
+<span id="cb45-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">subscale_mean =</span> <span class="fu">mean</span>(response), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb45-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">names_from =</span> scale, <span class="at">values_from =</span> subscale_mean)</span></code></pre></div>
 </div>
 </section>
 <section id="example-2-questionnaire-with-subscales-2" class="slide level2">
@@ -1305,15 +1315,15 @@ Dr.&nbsp;Sara Weston
 <section id="example-3-multilevelnested-data" class="slide level2">
 <h2>Example 3: Multilevel/nested data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Students nested in classrooms</span></span>
-<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">classroom =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
-<span id="cb51-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pretest =</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">72</span>, <span class="dv">68</span>, <span class="dv">71</span>, <span class="dv">69</span>),</span>
-<span id="cb51-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">posttest =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">78</span>, <span class="dv">75</span>, <span class="dv">79</span>, <span class="dv">77</span>)</span>
-<span id="cb51-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb51-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb51-9"><a href="" aria-hidden="true" tabindex="-1"></a>students</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Students nested in classrooms</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">classroom =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>), <span class="at">each =</span> <span class="dv">3</span>),</span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">student =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>,</span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">pretest =</span> <span class="fu">c</span>(<span class="dv">70</span>, <span class="dv">75</span>, <span class="dv">72</span>, <span class="dv">68</span>, <span class="dv">71</span>, <span class="dv">69</span>),</span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">posttest =</span> <span class="fu">c</span>(<span class="dv">80</span>, <span class="dv">82</span>, <span class="dv">78</span>, <span class="dv">75</span>, <span class="dv">79</span>, <span class="dv">77</span>)</span>
+<span id="cb47-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb47-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-9"><a href="" aria-hidden="true" tabindex="-1"></a>students</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   classroom student pretest posttest
@@ -1330,13 +1340,13 @@ Dr.&nbsp;Sara Weston
 <section id="example-3-multilevelnested-data-1" class="slide level2">
 <h2>Example 3: Multilevel/nested data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy for analysis</span></span>
-<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="sc">|&gt;</span></span>
-<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(pretest, posttest),</span>
-<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
-<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tidy for analysis</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>students <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">c</span>(pretest, posttest),</span>
+<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"time"</span>,</span>
+<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"score"</span></span>
+<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 12 × 4
    classroom student time     score
@@ -1388,13 +1398,13 @@ Dr.&nbsp;Sara Weston
 <h2>Pitfall 2: Over-pivoting</h2>
 <p>Not everything needs to be long:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe this is fine as-is?</span></span>
-<span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
-<span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">28</span>),</span>
-<span id="cb55-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>),</span>
-<span id="cb55-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">88</span>)</span>
-<span id="cb55-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Maybe this is fine as-is?</span></span>
+<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(</span>
+<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">32</span>, <span class="dv">28</span>),</span>
+<span id="cb51-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>),</span>
+<span id="cb51-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">score =</span> <span class="fu">c</span>(<span class="dv">85</span>, <span class="dv">92</span>, <span class="dv">88</span>)</span>
+<span id="cb51-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <p>Age, gender, and score are <strong>different variables</strong> — keep them as columns.</p>
 </section>
@@ -1422,34 +1432,42 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 </section></section>
 <section>
-<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>Get a head start</h1>
+<section id="additional-practice" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Additional practice</h1>
 
 </section>
 <section id="try-it-yourself" class="slide level2">
 <h2>Try it yourself</h2>
-<p>We created <code>wide_rm</code> earlier — a repeated measures dataset:</p>
+<div class="cell">
+<details class="code-fold">
+<summary>Click to see the data setup</summary>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">subject =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time1 =</span> <span class="fu">c</span>(<span class="dv">450</span>, <span class="dv">520</span>, <span class="dv">480</span>, <span class="dv">510</span>),</span>
+<span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_a_time2 =</span> <span class="fu">c</span>(<span class="dv">420</span>, <span class="dv">490</span>, <span class="dv">460</span>, <span class="dv">480</span>),</span>
+<span id="cb52-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time1 =</span> <span class="fu">c</span>(<span class="dv">480</span>, <span class="dv">540</span>, <span class="dv">500</span>, <span class="dv">530</span>),</span>
+<span id="cb52-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">cond_b_time2 =</span> <span class="fu">c</span>(<span class="dv">440</span>, <span class="dv">510</span>, <span class="dv">470</span>, <span class="dv">500</span>)</span>
+<span id="cb52-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb52-8"><a href="" aria-hidden="true" tabindex="-1"></a>wide_rm</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  subject cond_a_time1 cond_a_time2 cond_b_time1 cond_b_time2
+    &lt;int&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;
+1       1          450          420          480          440
+2       2          520          490          540          510
+3       3          480          460          500          470
+4       4          510          480          530          500</code></pre>
+</div>
+</div>
 <p>On your own:</p>
 <ol type="1">
-<li>Pivot it to long format, extracting <strong>condition</strong> and <strong>time</strong> from the column names</li>
+<li>Pivot to long format, extracting <strong>condition</strong> and <strong>time</strong> from the column names</li>
 <li>Calculate <strong>mean RT by condition and time</strong></li>
-<li>Sketch (on paper or in ggplot) what you’d expect the plot to look like</li>
+<li>Bonus: make a line plot with condition on the x-axis and time mapped to color</li>
 </ol>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>A3 preview</strong></p>
-</div>
-<div class="callout-content">
-<p>Assignment 3 combines <strong>three</strong> skills: pivoting (today), importing CSV/Excel (next class), and joining datasets. Today’s exercise nails the pivoting piece — Wednesday will cover the rest.</p>
-</div>
-</div>
-</div>
 <aside class="notes">
-<p>This is individual work, not a pair exercise. Give ~10 minutes if time allows. This uses names_pattern, which is the hardest concept from today. If students are struggling, suggest they start with a simpler pivot (cols = -subject, without names_pattern) to at least get the long format, then try extracting condition and time. Use the A3 callout to set expectations: A3 spans three skills (pivot, import, join), and today only covers the first. That keeps students from panicking when they look at the assignment and see file imports they haven’t learned yet.</p>
+<p>Individual work — give ~10 minutes if time allows. This uses names_pattern, which is the most challenging concept from today. If students are stuck, suggest starting simpler: just use cols = -subject, names_to = “cond_time”, values_to = “rt” to at least get into long format, then worry about separating condition and time afterward. The bonus plot connects today’s reshaping to the ggplot skills from Sessions 2-3.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1484,14 +1502,6 @@ Dr.&nbsp;Sara Weston
 <tr class="even">
 <td><code>pivot_wider()</code></td>
 <td>Long → Wide</td>
-</tr>
-<tr class="odd">
-<td><code>separate_*()</code></td>
-<td>Split columns</td>
-</tr>
-<tr class="even">
-<td><code>unite()</code></td>
-<td>Combine columns</td>
 </tr>
 </tbody>
 </table>

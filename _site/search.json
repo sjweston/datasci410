@@ -1516,7 +1516,7 @@
     "href": "assignment/03-assignment.html#part-3-importing-data-35-points",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Part 3: Importing Data (35 points)",
-    "text": "Part 3: Importing Data (35 points)\nDownload the provided data files from Canvas and save them in your project’s data/raw/ folder:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here\n\n\nTask 3.4\nJoin the survey data with the demographics data by participant ID. How many participants have complete data in both files?",
+    "text": "Part 3: Importing Data (35 points)\nDownload the provided data files from Canvas and save them in your project’s data/raw/ folder:\n\nsurvey_data.csv — Survey responses with some messy formatting\ndemographics.xlsx — Participant demographics in Excel format\n\n\nTask 3.1\nImport survey_data.csv using read_csv(). Note any warnings or issues.\n\n\nTask 3.2\nThe CSV has some problems:\n\nMissing values are coded as “N/A” instead of blank\nSome columns have wrong types\n\nRe-import the data handling these issues using the appropriate read_csv() arguments (hint: na = and col_types =).\n\n\nTask 3.3\nImport demographics.xlsx using the readxl package. The data is on the second sheet.\nlibrary(readxl)\n# Your code here",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1540,7 +1540,7 @@
     "href": "assignment/03-assignment.html#submission",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Submission",
-    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nData joined correctly\nDocument renders without errors\n\nSubmit your .qmd file and your rendered .html file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
+    "text": "Submission\n\nAll pivot operations produce correct output\nCSV and Excel files imported successfully\nDocument renders without errors\n\nSubmit your .qmd file and your rendered .html file on Canvas.\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all tasks above.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
