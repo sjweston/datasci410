@@ -6,8 +6,6 @@
 
 *No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
 
----
-
 ## The data: `survey_wide`
 
 This dataset has BDI (Beck Depression Inventory) item scores for 3 participants in wide format:
@@ -20,13 +18,13 @@ This dataset has BDI (Beck Depression Inventory) item scores for 3 participants 
 
 Each column (`bdi_1` through `bdi_4`) is a separate BDI item score.
 
----
-
 ## The task (same as the slide exercise)
 
 Which participant has the highest mean BDI score?
 
 **Hint from the slides:** You'll need `pivot_longer()` followed by `group_by()` + `summarize()`.
+
+\newpage
 
 ### Your pen-and-paper version
 
@@ -71,8 +69,6 @@ survey_wide |>
   group_by(_________) |>
   summarize(mean_bdi = _______(response))
 ```
-
----
 
 ## Check your work
 
