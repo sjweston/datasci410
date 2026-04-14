@@ -17,5 +17,7 @@ _site/files/models/51.1.rds
 _site/files/models/51.2.rds
 _site/files/models/m81.1.rds
 
+deidentified/
+
 **/*.quarto_ipynb
 **/.DS_Store
