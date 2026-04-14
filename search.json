@@ -1295,7 +1295,7 @@
     "href": "assignment/07-assignment.html#grading-rubric",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Understanding data\n15\n\n\nPart 2: Joining data\n30\n\n\nPart 3: Missing data analysis\n30\n\n\nPart 4: Reflection\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Explore datasets and identify overlaps\n7\n\n\n1.2: Use anti_join() to find mismatches\n8\n\n\n2.1: inner_join() demographics + survey\n10\n\n\n2.2: left_join() demographics + survey\n10\n\n\n2.3: Summarize task data and join\n10\n\n\n3.1: Missing data summary (counts + percentages)\n7\n\n\n3.2: Missingness by condition\n8\n\n\n3.3: Missingness visualization\n7\n\n\n3.4: Complete cases vs. available data comparison\n8\n\n\nPart 4: Reflection (3 questions)\n15\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1427,7 +1427,7 @@
     "href": "assignment/05-assignment.html#grading-rubric",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Exploring distributions\n25\n\n\nPart 2: Exploring relationships\n30\n\n\nPart 3: Generating questions\n20\n\n\nPart 4: EDA report\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Histograms for age and personality item\n8\n\n\n1.2: Outlier detection in age\n8\n\n\n1.3: Missing data summary\n9\n\n\n2.1: Correlation matrix of E1–E5\n10\n\n\n2.2: Scatterplot of two Extraversion items\n10\n\n\n2.3: Boxplots by education level\n10\n\n\n3.1: Generate 3 research questions\n8\n\n\n3.2: Visualization + interpretation for one question\n12\n\n\nPart 4: EDA report (300–400 words)\n15\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1535,7 +1535,7 @@
     "href": "assignment/03-assignment.html#grading-rubric",
     "title": "Assignment 3: Tidying & Importing Data",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Pivoting wide to long\n30\n\n\nPart 2: Pivoting long to wide\n25\n\n\nPart 3: Importing data\n35\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Pivot to long format\n10\n\n\n1.2: Calculate means by time and condition\n10\n\n\n1.3: Create line plot\n10\n\n\n2.1: Pivot to wide format\n15\n\n\n2.2: Create sum of emotion ratings\n10\n\n\n3.1: Import CSV with read_csv()\n10\n\n\n3.2: Re-import handling NA values and column types\n15\n\n\n3.3: Import Excel with readxl\n10\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1835,7 +1835,7 @@
     "href": "assignment/04-assignment.html#grading-rubric",
     "title": "Assignment 4: Visualization Deep Dive",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Bar charts with error bars\n25\n\n\nPart 2: Distributions\n25\n\n\nPart 3: Bad and Good graph\n25\n\n\nPart 4: Recreate a figure\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Summary table (mean + SE by species)\n10\n\n\n1.2: Bar chart with error bars\n15\n\n\n2.1: Histogram with bin width exploration\n8\n\n\n2.2: Overlapping density plots by species\n8\n\n\n2.3: Boxplot vs. violin plot comparison\n9\n\n\n3.1: Intentionally bad visualization\n12\n\n\n3.2: Good visualization with design justification\n13\n\n\n4.1: Import data and convert team to factor\n5\n\n\n4.2: Recreate Figure 3\n10\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1979,7 +1979,7 @@
     "href": "assignment/06-assignment.html#grading-rubric",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Logical vectors & recoding\n25\n\n\nPart 2: Strings\n20\n\n\nPart 3: Factors (education)\n10\n\n\nPart 4: Factors (survey data)\n10\n\n\nPart 5: Complete pipeline\n10\n\n\nPart 6: Text analysis\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Create passed_attention logical variable\n6\n\n\n1.2: Reverse-code q3 and q5\n7\n\n\n1.3: Create scale_mean\n6\n\n\n1.4: Create age_group with case_when()\n6\n\n\n2.1: Clean major variable\n10\n\n\n2.2: Clean education variable\n10\n\n\n3.1: Convert education to ordered factor\n5\n\n\n3.2: Bar chart of education levels (both versions)\n5\n\n\n4.1: Age group factor + boxplot of scale_mean\n10\n\n\nPart 5: Complete data cleaning pipeline\n10\n\n\n6.1: Tokenize responses\n5\n\n\n6.2: Remove stop words\n5\n\n\n6.3: Word frequency bar chart\n5\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2087,7 +2087,7 @@
     "href": "assignment/08-assignment.html#grading-rubric",
     "title": "Assignment 8: Reproducible Report",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nYAML header\n5\n\n\nIntroduction\n10\n\n\nData import & cleaning\n10\n\n\nExploratory analysis\n25\n\n\nMain analysis\n20\n\n\nInline code\n10\n\n\nConclusion\n10\n\n\nCode runs without errors\n10\n\n\nTotal\n100\n\n\n\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
+    "text": "Grading Rubric\n\n\n\nSection\nPoints\n\n\n\n\nYAML header (title, author, date, format options)\n5\n\n\nIntroduction (dataset, question, motivation)\n10\n\n\nData import & cleaning\n10\n\n\nExploratory analysis (2+ visualizations with interpretation)\n25\n\n\nMain analysis (research question + publication-quality figure)\n20\n\n\nInline code (3+ statistics in narrative)\n10\n\n\nConclusion (findings, limitations, next steps)\n10\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per section: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.\nBonus (up to 5 points): Exceptional visualization design, creative analysis, or going beyond requirements.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
