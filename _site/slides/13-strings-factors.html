@@ -245,57 +245,57 @@ Dr.&nbsp;Sara Weston
 <h1>Strings: The basics</h1>
 
 </section>
-<section id="how-many-genders-are-in-this-dataset" class="slide level2">
-<h2>How many genders are in this dataset?</h2>
+<section id="how-many-majors-are-in-this-dataset" class="slide level2">
+<h2>How many majors are in this dataset?</h2>
 <div class="cell">
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
 <tr class="header">
 <th style="text-align: right;">id</th>
-<th style="text-align: left;">gender</th>
+<th style="text-align: left;">major</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: right;">1</td>
-<td style="text-align: left;">Male</td>
+<td style="text-align: left;">Psychology</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">2</td>
-<td style="text-align: left;">male</td>
+<td style="text-align: left;">psychology</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">3</td>
-<td style="text-align: left;">M</td>
+<td style="text-align: left;">Psych</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">4</td>
-<td style="text-align: left;">MALE</td>
+<td style="text-align: left;">PSYCHOLOGY</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">5</td>
-<td style="text-align: left;">Female</td>
+<td style="text-align: left;">Biology</td>
 </tr>
 <tr class="even">
 <td style="text-align: right;">6</td>
-<td style="text-align: left;">female</td>
+<td style="text-align: left;">biology</td>
 </tr>
 <tr class="odd">
 <td style="text-align: right;">7</td>
-<td style="text-align: left;">F</td>
+<td style="text-align: left;">Bio</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="how-many-genders-are-in-this-dataset-1" class="slide level2">
-<h2>How many genders are in this dataset?</h2>
+<section id="how-many-majors-are-in-this-dataset-1" class="slide level2">
+<h2>How many majors are in this dataset?</h2>
 <p>R says <strong>7</strong>. You meant <strong>2</strong>.</p>
 <p>The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.</p>
 <aside class="notes">
-<p>Start by showing the first slide (the table) and asking students “How many genders are in this dataset?” Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.</p>
+<p>Start by showing the first slide (the table) and asking students “How many majors are in this dataset?” Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -407,23 +407,23 @@ Dr.&nbsp;Sara Weston
 <section id="changing-case" class="slide level2">
 <h2>Changing case</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"MALE"</span>, <span class="st">"Female"</span>, <span class="st">"male"</span>, <span class="st">"FEMALE"</span>, <span class="st">"Male"</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"PSYCHOLOGY"</span>, <span class="st">"Biology"</span>, <span class="st">"psychology"</span>, <span class="st">"BIOLOGY"</span>, <span class="st">"Psychology"</span>)</span>
 <span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_lower</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "male"   "female" "male"   "female" "male"  </code></pre>
+<pre><code>[1] "psychology" "biology"    "psychology" "biology"    "psychology"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_upper</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "MALE"   "FEMALE" "MALE"   "FEMALE" "MALE"  </code></pre>
+<pre><code>[1] "PSYCHOLOGY" "BIOLOGY"    "PSYCHOLOGY" "BIOLOGY"    "PSYCHOLOGY"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">str_to_title</span>(messy_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "Male"   "Female" "Male"   "Female" "Male"  </code></pre>
+<pre><code>[1] "Psychology" "Biology"    "Psychology" "Biology"    "Psychology"</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p>Essential for cleaning demographic data!</p>
+<p>Essential for cleaning survey data!</p>
 <aside class="notes">
 <p>This is one of the most important slides in the deck. str_to_lower() alone solves a huge number of data cleaning problems. Run the code live and ask: “If you had to pick just one of these three functions, which would you use for cleaning survey data?” Answer: str_to_lower(), because it makes everything comparable regardless of how participants typed it.</p>
 <style type="text/css">
@@ -468,30 +468,30 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="psychology-example-cleaning-demographics" class="slide level2">
-<h2>Psychology example: Cleaning demographics</h2>
+<section id="psychology-example-cleaning-survey-responses" class="slide level2">
+<h2>Psychology example: Cleaning survey responses</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"  Female"</span>, <span class="st">"MALE  "</span>, <span class="st">"female"</span>, <span class="st">"Male"</span>, <span class="st">"  non-binary"</span>)</span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">major =</span> <span class="fu">c</span>(<span class="st">"  Psychology"</span>, <span class="st">"BIOLOGY  "</span>, <span class="st">"psychology"</span>, <span class="st">"Biology"</span>, <span class="st">"  sociology"</span>)</span>
 <span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender_clean =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(gender))</span>
+<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major_clean =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(major))</span>
 <span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
-  gender         gender_clean
-  &lt;chr&gt;          &lt;chr&gt;       
-1 "  Female"     female      
-2 "MALE  "       male        
-3 "female"       female      
-4 "Male"         male        
-5 "  non-binary" non-binary  </code></pre>
+  major          major_clean
+  &lt;chr&gt;          &lt;chr&gt;      
+1 "  Psychology" psychology 
+2 "BIOLOGY  "    biology    
+3 "psychology"   psychology 
+4 "Biology"      biology    
+5 "  sociology"  sociology  </code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>This is the payoff slide for the opening example. Walk through it step by step: “First we trim the spaces, then we lowercase everything.” Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |&gt; but nesting is fine for two functions. After cleaning, ask: “How many unique genders would R see now?” This connects directly back to the hook.</p>
+<p>This is the payoff slide for the opening example. Walk through it step by step: “First we trim the spaces, then we lowercase everything.” Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |&gt; but nesting is fine for two functions. After cleaning, ask: “How many unique majors would R see now?” This connects directly back to the hook.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -702,7 +702,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell">
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"  FEMALE"</span>, <span class="st">"male  "</span>, <span class="st">"Female"</span>, <span class="st">"MALE"</span>, <span class="st">"non-binary  "</span>),</span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">major =</span> <span class="fu">c</span>(<span class="st">"  PSYCHOLOGY"</span>, <span class="st">"biology  "</span>, <span class="st">"Psychology"</span>, <span class="st">"BIOLOGY"</span>, <span class="st">"sociology  "</span>),</span>
 <span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">comment =</span> <span class="fu">c</span>(</span>
 <span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Great study!"</span>,</span>
 <span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"too long"</span>,</span>
@@ -713,14 +713,14 @@ Dr.&nbsp;Sara Weston
 <span id="cb44-11"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
-<li>Clean <code>gender</code> to lowercase with no extra spaces</li>
+<li>Clean <code>major</code> to lowercase with no extra spaces</li>
 <li>Clean <code>comment</code> to title case with no extra spaces</li>
 <li>Create a logical column <code>is_negative</code> that is TRUE if the comment contains “long” or “confusing” (case-insensitive)</li>
 <li>Filter to only negative comments</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
 <aside class="notes">
-<p>Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(…)) or doing them in the wrong order (order does not matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for “or” — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.</p>
+<p>Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(…)) or doing them in the wrong order (order doesn’t matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for “or” — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -748,14 +748,14 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A character vector</span></span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>gender_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>, <span class="st">"Female"</span>, <span class="st">"Male"</span>)</span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>major_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Psychology"</span>, <span class="st">"Biology"</span>, <span class="st">"Biology"</span>, <span class="st">"Psychology"</span>)</span>
 <span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A factor</span></span>
-<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>gender_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(gender_char)</span>
-<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>gender_fct</span></code></pre></div>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(major_char)</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] Male   Female Female Male  
-Levels: Female Male</code></pre>
+<pre><code>[1] Psychology Biology    Biology    Psychology
+Levels: Biology Psychology</code></pre>
 </div>
 </div>
 </div>
@@ -1058,16 +1058,16 @@ Levels: Depression Anxiety Other</code></pre>
 </div></section><section id="fct_recode-rename-levels" class="slide level2">
 <h2>fct_recode(): Rename levels</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>gender <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"M"</span>, <span class="st">"F"</span>, <span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"NB"</span>))</span>
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a>major <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Psych"</span>, <span class="st">"Bio"</span>, <span class="st">"Bio"</span>, <span class="st">"Psych"</span>, <span class="st">"Soc"</span>))</span>
 <span id="cb67-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb67-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(gender,</span>
-<span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Male"</span> <span class="ot">=</span> <span class="st">"M"</span>,</span>
-<span id="cb67-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Female"</span> <span class="ot">=</span> <span class="st">"F"</span>,</span>
-<span id="cb67-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Non-binary"</span> <span class="ot">=</span> <span class="st">"NB"</span></span>
+<span id="cb67-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(major,</span>
+<span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Psychology"</span> <span class="ot">=</span> <span class="st">"Psych"</span>,</span>
+<span id="cb67-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Biology"</span> <span class="ot">=</span> <span class="st">"Bio"</span>,</span>
+<span id="cb67-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sociology"</span> <span class="ot">=</span> <span class="st">"Soc"</span></span>
 <span id="cb67-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] Male       Female     Female     Male       Non-binary
-Levels: Female Male Non-binary</code></pre>
+<pre><code>[1] Psychology Biology    Biology    Psychology Sociology 
+Levels: Biology Psychology Sociology</code></pre>
 </div>
 </div>
 </section>

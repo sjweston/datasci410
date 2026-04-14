@@ -682,18 +682,25 @@
     ]
   },
   {
-    "objectID": "files/scoreboard.html#week-2-standings",
-    "href": "files/scoreboard.html#week-2-standings",
+    "objectID": "files/scoreboard.html#week-3-standings",
+    "href": "files/scoreboard.html#week-3-standings",
     "title": "Team Challenge Scoreboard",
-    "section": "Week 2 Standings",
-    "text": "Week 2 Standings"
+    "section": "Week 3 Standings",
+    "text": "Week 3 Standings"
+  },
+  {
+    "objectID": "files/scoreboard.html#rankings-over-time",
+    "href": "files/scoreboard.html#rankings-over-time",
+    "title": "Team Challenge Scoreboard",
+    "section": "Rankings Over Time",
+    "text": "Rankings Over Time"
   },
   {
     "objectID": "files/scoreboard.html#point-breakdown",
     "href": "files/scoreboard.html#point-breakdown",
     "title": "Team Challenge Scoreboard",
     "section": "Point Breakdown",
-    "text": "Point Breakdown\n\n\n\n\n\n\n\n\n\n\n\n\n\nTeam\nPair Coding\nAssignments\nQuizzes\nFun Challenge\nTotal\n\n\n\n\nCoderunners\n1\n1\n1\n2\n5\n\n\nTyrannotitans\n1\n1\n1\n2\n5\n\n\nR-odents\n1\n1\n0\n2\n4\n\n\nRticokes\n1\n1\n0\n2\n4\n\n\nThe Black Cats\n1\n1\n0\n2\n4\n\n\nThe Bosses\n1\n1\n0\n2\n4\n\n\nVitamin R\n1\n1\n0\n2\n4"
+    "text": "Point Breakdown\n\n\n\n\n\n\n\n\n\n\n\n\n\nTeam\nPair Coding\nAssignments\nQuizzes\nFun Challenge\nTotal\n\n\n\n\nCoderunners\n3\n2\n2\n4\n11\n\n\nThe Black Cats\n3\n2\n2\n4\n11\n\n\nThe Bosses\n3\n2\n2\n4\n11\n\n\nR-odents\n2\n2\n2\n4\n10\n\n\nRticokes\n3\n2\n1\n4\n10\n\n\nTyrannotitans\n3\n1\n1\n4\n9\n\n\nVitamin R\n3\n2\n0\n4\n9"
   },
   {
     "objectID": "content/18-content.html",
@@ -832,7 +839,7 @@
     "href": "content/14-content.html#after-class",
     "title": "14: Joins",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  gender = c(\"Woman\", \"Man\", \"Woman\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
+    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  major = c(\"Psychology\", \"Sociology\", \"Psychology\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
     "crumbs": [
       "Content",
       "Course content",
@@ -1228,7 +1235,7 @@
     "href": "assignment/07-assignment.html#the-datasets",
     "title": "Assignment 7: Joins & Missing Data",
     "section": "The Datasets",
-    "text": "The Datasets\nA research study has data in three separate files:\n# Participant demographics\ndemographics &lt;- tibble(\n  participant_id = c(1, 2, 3, 4, 5, 6, 7, 8),\n  age = c(22, 35, 28, 41, 19, 33, 27, 45),\n  gender = c(\"F\", \"M\", \"F\", \"F\", \"M\", \"M\", \"F\", \"M\"),\n  condition = c(\"A\", \"B\", \"A\", \"B\", \"A\", \"B\", \"A\", \"B\")\n)\n\n# Survey responses (some participants didn't complete)\nsurvey_responses &lt;- tibble(\n  participant_id = c(1, 2, 3, 4, 6, 7, 9, 10),  # Note: 5, 8 missing; 9, 10 extra\n  anxiety = c(45, 32, 38, 41, 28, 52, 35, 40),\n  depression = c(12, 8, NA, 15, 6, 18, NA, 11),\n  stress = c(28, 22, 25, NA, 18, 32, 24, NA)\n)\n\n# Behavioral task data\ntask_data &lt;- tibble(\n  participant_id = c(1, 1, 2, 2, 3, 3, 5, 5, 6, 6),\n  trial = rep(1:2, 5),\n  reaction_time = c(450, 420, 380, 390, 410, 405, 520, 480, 370, 365),\n  accuracy = c(1, 1, 1, 0, 1, 1, 0, 1, 1, 1)\n)",
+    "text": "The Datasets\nA research study has data in three separate files:\n# Participant demographics\ndemographics &lt;- tibble(\n  participant_id = c(1, 2, 3, 4, 5, 6, 7, 8),\n  age = c(22, 35, 28, 41, 19, 33, 27, 45),\n  major = c(\"Psych\", \"Bio\", \"Psych\", \"Psych\", \"Bio\", \"Bio\", \"Psych\", \"Bio\"),\n  condition = c(\"A\", \"B\", \"A\", \"B\", \"A\", \"B\", \"A\", \"B\")\n)\n\n# Survey responses (some participants didn't complete)\nsurvey_responses &lt;- tibble(\n  participant_id = c(1, 2, 3, 4, 6, 7, 9, 10),  # Note: 5, 8 missing; 9, 10 extra\n  anxiety = c(45, 32, 38, 41, 28, 52, 35, 40),\n  depression = c(12, 8, NA, 15, 6, 18, NA, 11),\n  stress = c(28, 22, 25, NA, 18, 32, 24, NA)\n)\n\n# Behavioral task data\ntask_data &lt;- tibble(\n  participant_id = c(1, 1, 2, 2, 3, 3, 5, 5, 6, 6),\n  trial = rep(1:2, 5),\n  reaction_time = c(450, 420, 380, 390, 410, 405, 520, 480, 370, 365),\n  accuracy = c(1, 1, 1, 0, 1, 1, 0, 1, 1, 1)\n)",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1360,7 +1367,7 @@
     "href": "assignment/05-assignment.html#the-dataset",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "The Dataset",
-    "text": "The Dataset\nWe’ll use the Big Five Inventory (BFI) dataset from the psych package:\ndata(bfi)\nbfi &lt;- as_tibble(bfi)\nglimpse(bfi)\nThis contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age, gender, and education.",
+    "text": "The Dataset\nWe’ll use the Big Five Inventory (BFI) dataset from the psych package:\ndata(bfi)\nbfi &lt;- as_tibble(bfi)\nglimpse(bfi)\nThis contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age and education.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1384,7 +1391,7 @@
     "href": "assignment/05-assignment.html#part-2-exploring-relationships-30-points",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Part 2: Exploring Relationships (30 points)",
-    "text": "Part 2: Exploring Relationships (30 points)\n\nTask 2.1\nCreate a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?\n\n\nTask 2.2\nCreate boxplots showing how one personality item differs by gender. Do you see a difference?\n\n\nTask 2.3\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint:\nbfi |&gt;\n  select(E1:E5) |&gt;\n  cor(use = \"complete.obs\") |&gt;\n  # then visualize...\nWhat do you notice? (Some items may be reverse-coded!)",
+    "text": "Part 2: Exploring Relationships (30 points)\n\nTask 2.1\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint:\nbfi |&gt;\n  select(E1:E5) |&gt;\n  cor(use = \"complete.obs\") |&gt;\n  # then visualize...\nWhat do you notice? (Some items may be reverse-coded!)\n\n\nTask 2.2\nPick two Extraversion items that look interesting from your correlation matrix. Create a scatterplot of those two items with a trend line. Does the relationship match what the correlation matrix suggested?\n\n\nTask 2.3\nPick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1912,7 +1919,7 @@
     "href": "assignment/06-assignment.html#part-2-strings-20-points",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Part 2: Strings (20 points)",
-    "text": "Part 2: Strings (20 points)\nHere’s some messy demographic data:\nmessy_demo &lt;- tibble(\n  id = 1:10,\n  gender = c(\"Male\", \"female\", \"FEMALE\", \"M\", \"F\", \"male\", \"Female\", \"m\", \"f\", \"Male\"),\n  education = c(\"high school\", \"High School\", \"college\", \"College\", \"graduate\",\n                \"COLLEGE\", \"Graduate\", \"high school\", \"Graduate\", \"college\")\n)\n\nTask 2.1\nClean the gender variable so all values are standardized to “Male” or “Female”.\nHint: Use str_to_lower() first, then case_when() or if_else().\n\n\nTask 2.2\nClean the education variable similarly. Standardize to “High School”, “College”, or “Graduate”.",
+    "text": "Part 2: Strings (20 points)\nHere’s some messy demographic data:\nmessy_demo &lt;- tibble(\n  id = 1:10,\n  major = c(\"Psychology\", \"psychology\", \"PSYCHOLOGY\", \"Psych\", \"Bio\", \"biology\", \"Biology\", \"bio\", \"sociology\", \"Sociology\"),\n  education = c(\"high school\", \"High School\", \"college\", \"College\", \"graduate\",\n                \"COLLEGE\", \"Graduate\", \"high school\", \"Graduate\", \"college\")\n)\n\nTask 2.1\nClean the major variable so all values are standardized to “Psychology”, “Biology”, or “Sociology”.\nHint: Use str_to_lower() first, then case_when() to map abbreviations and full names to consistent labels.\n\n\nTask 2.2\nClean the education variable similarly. Standardize to “High School”, “College”, or “Graduate”.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1924,7 +1931,7 @@
     "href": "assignment/06-assignment.html#part-3-factors-20-points",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Part 3: Factors (20 points)",
-    "text": "Part 3: Factors (20 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.\n\n\nTask 3.3\nUsing the survey data, create a factor version of age_group with levels in order: “young”, “middle”, “older”. Then create a boxplot of scale_mean by age_group. The x-axis should be in the correct order.",
+    "text": "Part 3: Factors (20 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1932,11 +1939,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-4-putting-it-together-10-points",
-    "href": "assignment/06-assignment.html#part-4-putting-it-together-10-points",
+    "objectID": "assignment/06-assignment.html#part-4-factors-with-survey-data-10-points",
+    "href": "assignment/06-assignment.html#part-4-factors-with-survey-data-10-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 4: Putting It Together (10 points)",
-    "text": "Part 4: Putting It Together (10 points)\nCreate a complete data cleaning pipeline for the survey data that:\n\nFilters to participants who passed the attention check\nReverse-codes the necessary items\nCreates the scale mean\nCreates the age group factor (in correct order)\nSelects only id, age, age_group, and scale_mean\n\nUse a single piped sequence.",
+    "section": "Part 4: Factors with Survey Data (10 points)",
+    "text": "Part 4: Factors with Survey Data (10 points)\n\nTask 4.1\nUsing the survey data, create a factor version of age_group with levels in order: “young”, “middle”, “older”. Then create a boxplot of scale_mean by age_group. The x-axis should be in the correct order.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1944,11 +1951,23 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-5-text-analysis-15-points",
-    "href": "assignment/06-assignment.html#part-5-text-analysis-15-points",
+    "objectID": "assignment/06-assignment.html#part-5-putting-it-together-10-points",
+    "href": "assignment/06-assignment.html#part-5-putting-it-together-10-points",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 5: Text Analysis (15 points)",
-    "text": "Part 5: Text Analysis (15 points)\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 5.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 5.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 5.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
+    "section": "Part 5: Putting It Together (10 points)",
+    "text": "Part 5: Putting It Together (10 points)\nCreate a complete data cleaning pipeline for the survey data that:\n\nFilters to participants who passed the attention check\nReverse-codes the necessary items\nCreates the scale mean\nCreates the age group factor (in correct order)\nSelects only id, age, age_group, and scale_mean\n\nUse a single piped sequence.",
+    "crumbs": [
+      "Assignments",
+      "Weekly Assignments",
+      "6: Data Types"
+    ]
+  },
+  {
+    "objectID": "assignment/06-assignment.html#part-6-text-analysis-15-points",
+    "href": "assignment/06-assignment.html#part-6-text-analysis-15-points",
+    "title": "Assignment 6: Data Types & Wrangling",
+    "section": "Part 6: Text Analysis (15 points)",
+    "text": "Part 6: Text Analysis (15 points)\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 6.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 6.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 6.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1960,7 +1979,7 @@
     "href": "assignment/06-assignment.html#grading-rubric",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Logical vectors & recoding\n25\n\n\nPart 2: Strings\n20\n\n\nPart 3: Factors\n20\n\n\nPart 4: Complete pipeline\n10\n\n\nPart 5: Text analysis\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
+    "text": "Grading Rubric\n\n\n\nComponent\nPoints\n\n\n\n\nPart 1: Logical vectors & recoding\n25\n\n\nPart 2: Strings\n20\n\n\nPart 3: Factors (education)\n10\n\n\nPart 4: Factors (survey data)\n10\n\n\nPart 5: Complete pipeline\n10\n\n\nPart 6: Text analysis\n15\n\n\nCode runs without errors\n10\n\n\nTotal\n100",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2104,7 +2123,7 @@
     "href": "assignment/08-assignment.html#graduate-extension-parameterized-report",
     "title": "Assignment 8: Reproducible Report",
     "section": "Graduate Extension: Parameterized Report",
-    "text": "Graduate Extension: Parameterized Report\nA parameterized Quarto report can regenerate automatically for different inputs — different subgroups, conditions, time points, or datasets — by changing a single value. This is directly useful for anyone running multiple studies with the same measures, or generating participant-level summaries from a single template.\n\nTask G.1\nAdd a params block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:\nparams:\n  subset: \"all\"   # options: \"all\", \"Female\", \"Male\"\nOr, if using your final project dataset:\nparams:\n  data_file: \"data.csv\"\n\n\nTask G.2\nUse your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least two different parameter values by rendering it twice (from the command line or RStudio’s Knit menu → “Knit with Parameters”).\n# Example usage inside a code chunk:\nif (params$subset != \"all\") {\n  data &lt;- data |&gt; filter(gender == params$subset)\n}\n\n\nTask G.3\nIn a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.\nSubmission: Submit your .qmd and two rendered .html files (one per parameter value). Name them to reflect the parameter used (e.g., report-all.html, report-female.html).",
+    "text": "Graduate Extension: Parameterized Report\nA parameterized Quarto report can regenerate automatically for different inputs — different subgroups, conditions, time points, or datasets — by changing a single value. This is directly useful for anyone running multiple studies with the same measures, or generating participant-level summaries from a single template.\n\nTask G.1\nAdd a params block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:\nparams:\n  subset: \"all\"   # options: \"all\", \"Freshman\", \"Senior\"\nOr, if using your final project dataset:\nparams:\n  data_file: \"data.csv\"\n\n\nTask G.2\nUse your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least two different parameter values by rendering it twice (from the command line or RStudio’s Knit menu → “Knit with Parameters”).\n# Example usage inside a code chunk:\nif (params$subset != \"all\") {\n  data &lt;- data |&gt; filter(academic_year == params$subset)\n}\n\n\nTask G.3\nIn a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.\nSubmission: Submit your .qmd and two rendered .html files (one per parameter value). Name them to reflect the parameter used (e.g., report-all.html, report-freshman.html).",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -2248,7 +2267,7 @@
     "href": "content/05-content.html#after-class",
     "title": "5: Data Tidying",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nTake this wide dataset and make it tidy:\n\nwide_data &lt;- tibble(\n  participant = c(\"P1\", \"P2\", \"P3\"),\n  pre_test = c(45, 52, 48),\n  post_test = c(62, 58, 71)\n)\n\nPractice with survey data — pivot questionnaire items from columns to rows\nCreate a summary table and use pivot_wider() to format it nicely\nUse separate_wider_delim() to split a column like “age_gender” into separate columns\n\n\n\n\n\n\n\nImportantThe three rules of tidy data\n\n\n\n\nEach variable is a column\nEach observation is a row\nEach value is a cell\n\nWhen your data follows these rules, tidyverse tools (ggplot2, dplyr) work seamlessly!\n\n\n\nCommon patterns in psychology data\nRepeated measures:\n# Wide (common in SPSS)\ndata_wide &lt;- tibble(\n  id = 1:3,\n  time1 = c(50, 55, 48),\n  time2 = c(55, 58, 52)\n)\n\n# Tidy version\ndata_wide |&gt;\n  pivot_longer(\n    cols = starts_with(\"time\"),\n    names_to = \"time\",\n    values_to = \"score\"\n  )\nQuestionnaire items:\n# Calculate scale scores from long format\nsurvey |&gt;\n  pivot_longer(cols = starts_with(\"bdi_\")) |&gt;\n  group_by(participant) |&gt;\n  summarize(bdi_total = sum(value))",
+    "text": "After class\n✅ Practice:\n\nTake this wide dataset and make it tidy:\n\nwide_data &lt;- tibble(\n  participant = c(\"P1\", \"P2\", \"P3\"),\n  pre_test = c(45, 52, 48),\n  post_test = c(62, 58, 71)\n)\n\nPractice with survey data — pivot questionnaire items from columns to rows\nCreate a summary table and use pivot_wider() to format it nicely\nUse separate_wider_delim() to split a column like “age_year” into separate columns\n\n\n\n\n\n\n\nImportantThe three rules of tidy data\n\n\n\n\nEach variable is a column\nEach observation is a row\nEach value is a cell\n\nWhen your data follows these rules, tidyverse tools (ggplot2, dplyr) work seamlessly!\n\n\n\nCommon patterns in psychology data\nRepeated measures:\n# Wide (common in SPSS)\ndata_wide &lt;- tibble(\n  id = 1:3,\n  time1 = c(50, 55, 48),\n  time2 = c(55, 58, 52)\n)\n\n# Tidy version\ndata_wide |&gt;\n  pivot_longer(\n    cols = starts_with(\"time\"),\n    names_to = \"time\",\n    values_to = \"score\"\n  )\nQuestionnaire items:\n# Calculate scale scores from long format\nsurvey |&gt;\n  pivot_longer(cols = starts_with(\"bdi_\")) |&gt;\n  group_by(participant) |&gt;\n  summarize(bdi_total = sum(value))",
     "crumbs": [
       "Content",
       "Course content",
@@ -2392,7 +2411,7 @@
     "href": "content/11-content.html#after-class",
     "title": "11: EDA — Covariation",
     "section": "After class",
-    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and gender\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()",
+    "text": "After class\n✅ Practice:\nUsing the bfi dataset from the psych package:\n\nPick two personality items (e.g., E1 and A1). Make a scatterplot — is there a relationship?\nCreate boxplots of age grouped by education. What patterns do you see?\nUse geom_count() to visualize the relationship between education and a personality item\nTry adding alpha = 0.3 to a crowded scatterplot. Does it help?\nCalculate the correlation between two continuous variables using cor(x, y, use = \"complete.obs\")\n\n\n\n\n\n\n\nNoteCorrelation vs. causation\n\n\n\nFinding a relationship between two variables does not mean one causes the other. Always ask:\n\nCould there be a confounding variable?\nDoes the direction of causation make sense?\nIs this a meaningful effect or just a large sample?\n\nIn psychology, this distinction is critical — observational data can suggest hypotheses but rarely prove causation.\n\n\n\nOverplotting solutions\n# Too many points? Try these:\n\n# 1. Transparency\nggplot(data, aes(x, y)) + geom_point(alpha = 0.3)\n\n# 2. Jitter (adds random noise)\nggplot(data, aes(x, y)) + geom_jitter(width = 0.2, height = 0.2)\n\n# 3. 2D binning (heatmap-style)\nggplot(data, aes(x, y)) + geom_bin2d()",
     "crumbs": [
       "Content",
       "Course content",
@@ -2440,7 +2459,7 @@
     "href": "content/13-content.html#after-class",
     "title": "13: Strings, Factors & Text",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey demographics\nsurvey |&gt;\n  mutate(\n    gender = str_to_lower(str_trim(gender)),\n    gender = fct_recode(as_factor(gender),\n      \"Man\" = \"male\",\n      \"Man\" = \"m\",\n      \"Woman\" = \"female\",\n      \"Woman\" = \"f\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )",
+    "text": "After class\n✅ Practice:\n\nClean up a messy text column using str_trim() and str_to_lower() — try it on free-response demographic data\nUse str_detect() to filter rows where a column contains a specific word\nConvert a character column to a factor with factor(). What happens to the levels?\nReorder bars in a bar chart using fct_infreq() — most common category first\nUse fct_recode() to combine similar categories (e.g., “Male” and “male” and “M”)\n\n\n\n\n\n\n\nNoteWhy factors matter for plots\n\n\n\nBy default, R orders categories alphabetically. That’s rarely what you want in a plot. Factors let you control the order:\n# Alphabetical (default) — not great\nggplot(data, aes(x = condition)) + geom_bar()\n\n# Ordered by frequency — much better\nggplot(data, aes(x = fct_infreq(condition))) + geom_bar()\n\n# Custom order — you decide\ndata |&gt;\n  mutate(condition = fct_relevel(condition, \"Control\", \"Low\", \"High\")) |&gt;\n  ggplot(aes(x = condition)) + geom_bar()\n\n\n\nPsychology application: cleaning demographics\n# Common cleanup pipeline for survey data\nsurvey |&gt;\n  mutate(\n    major = str_to_lower(str_trim(major)),\n    major = fct_recode(as_factor(major),\n      \"Psychology\" = \"psychology\",\n      \"Psychology\" = \"psych\",\n      \"Biology\" = \"biology\",\n      \"Biology\" = \"bio\"\n    ),\n    education = fct_relevel(education,\n      \"High school\", \"Some college\", \"Bachelor's\", \"Graduate\"\n    )\n  )",
     "crumbs": [
       "Content",
       "Course content",

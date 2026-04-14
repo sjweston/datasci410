@@ -269,7 +269,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649546,…</code></pre>
+$ depression_post &lt;dbl&gt; 23.20174, 18.85562, 23.67800, 25.67393, 15.64227, 15.2…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -508,18 +508,18 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <h1>Pair coding break</h1>
 
 </section>
-<section id="your-turn-compare-by-gender" class="slide level2">
-<h2>Your turn: Compare by gender</h2>
-<p>Using the therapy data, explore whether depression scores differ by gender:</p>
+<section id="your-turn-compare-by-condition" class="slide level2">
+<h2>Your turn: Compare by condition</h2>
+<p>Using the therapy data, explore whether depression scores differ by treatment condition:</p>
 <ol type="1">
-<li>Add a <code>gender</code> variable to the data (use <code>sample()</code> to randomly assign “Male”, “Female”, “Non-binary”)</li>
-<li>Create a visualization showing depression scores by gender</li>
+<li>The <code>condition</code> variable is already in <code>therapy_data</code> — check its values with <code>count()</code></li>
+<li>Create a visualization showing depression scores by condition</li>
 <li>Try at least two different geom types</li>
 <li>Add appropriate labels</li>
 </ol>
 <p><strong>Time: 10 minutes</strong></p>
 <aside class="notes">
-<p>Circulate during this exercise. The main challenge is step 1: students need to add a column using mutate + sample(). Some may struggle with the sample() syntax — remind them of the arguments: values to choose from, number to draw, and replace = TRUE. If pairs finish early, ask them to add a facet_wrap(~condition) to see gender differences within each treatment group. Common error: forgetting replace = TRUE when the number of rows exceeds the number of categories.</p>
+<p>Circulate during this exercise. The main challenge is choosing appropriate geoms for a continuous-by-categorical comparison. If pairs finish early, ask them to also try faceting by condition instead of mapping it to x. Common question: “should I use a bar chart?” — redirect them toward boxplots, violin plots, or jitter, since the outcome variable is continuous.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -541,12 +541,12 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <h1>Categorical + Categorical</h1>
 
 </section>
-<section id="example-diagnosis-by-gender" class="slide level2">
-<h2>Example: Diagnosis by gender</h2>
+<section id="example-diagnosis-by-referral-source" class="slide level2">
+<h2>Example: Diagnosis by referral source</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated diagnostic data</span></span>
 <span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>, <span class="st">"Non-binary"</span>), <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">referral =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Self"</span>, <span class="st">"Physician"</span>, <span class="st">"School"</span>), <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
 <span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">diagnosis =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Both"</span>, <span class="st">"Other"</span>),</span>
 <span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>                     <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -554,14 +554,14 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diagnosis_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
-  gender     diagnosis 
-  &lt;chr&gt;      &lt;chr&gt;     
-1 Female     Depression
-2 Non-binary Both      
-3 Male       Anxiety   
-4 Female     Both      
-5 Male       Depression
-6 Female     Both      </code></pre>
+  referral  diagnosis 
+  &lt;chr&gt;     &lt;chr&gt;     
+1 Self      Depression
+2 Physician Both      
+3 Self      Depression
+4 Self      Depression
+5 Self      Depression
+6 School    Both      </code></pre>
 </div>
 </div>
 </section>
@@ -581,11 +581,11 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> referral, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
 <span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by referral source"</span>,</span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Referral source"</span>,</span>
 <span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
 <span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -597,18 +597,18 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each gender category (Female, Male, Non-binary)." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each referral source category (Physician, School, Self)." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="option-2-side-by-side-bars" class="slide level2">
 <h2>Option 2: Side-by-side bars</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> referral, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
 <span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by referral source"</span>,</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Referral source"</span>,</span>
 <span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span>,</span>
 <span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -620,14 +620,14 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Side-by-side bar chart comparing diagnosis counts across gender groups, with separate bars for each diagnosis category placed next to each other within each gender." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Side-by-side bar chart comparing diagnosis counts across referral sources, with separate bars for each diagnosis category placed next to each other within each referral source." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="option-3-proportions" class="slide level2">
 <h2>Option 3: Proportions</h2>
 <aside class="notes">
-<p>Highlight the difference between position = “dodge” (previous slide) and position = “fill” (this slide). “fill” normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: “If one gender group has 10 people and another has 100, this chart makes them look equally important. Is that a problem?” This gets students thinking about when proportions vs.&nbsp;counts are appropriate.</p>
+<p>Highlight the difference between position = “dodge” (previous slide) and position = “fill” (this slide). “fill” normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: “If one referral source has 10 people and another has 100, this chart makes them look equally important. Is that a problem?” This gets students thinking about when proportions vs.&nbsp;counts are appropriate.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -640,11 +640,11 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> referral, <span class="at">fill =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
 <span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis distribution by gender"</span>,</span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis distribution by referral source"</span>,</span>
+<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Referral source"</span>,</span>
 <span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Proportion"</span>,</span>
 <span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Diagnosis"</span></span>
 <span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -656,7 +656,7 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Proportional stacked bar chart showing the relative proportion of each diagnosis within each gender group, with all bars normalized to 100%." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Proportional stacked bar chart showing the relative proportion of each diagnosis within each referral source, with all bars normalized to 100%." width="960"></p>
 </figure>
 </div>
 </div>
@@ -664,11 +664,11 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <h2>Option 4: geom_count()</h2>
 <p>Shows the <em>size</em> of overlaps:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> diagnosis)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_data, <span class="fu">aes</span>(<span class="at">x =</span> referral, <span class="at">y =</span> diagnosis)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_count</span>() <span class="sc">+</span></span>
 <span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by referral source"</span>,</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Referral source"</span>,</span>
 <span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span>,</span>
 <span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="st">"Count"</span></span>
 <span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -680,7 +680,7 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Bubble chart showing the co-occurrence of gender and diagnosis categories, where larger circles indicate more individuals with that combination." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Bubble chart showing the co-occurrence of referral source and diagnosis categories, where larger circles indicate more individuals with that combination." width="960"></p>
 </figure>
 </div>
 </div>
@@ -701,14 +701,14 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
       }</style></aside>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis_counts <span class="ot">&lt;-</span> diagnosis_data <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender, diagnosis)</span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(referral, diagnosis)</span>
 <span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_counts, <span class="fu">aes</span>(<span class="at">x =</span> gender, <span class="at">y =</span> diagnosis, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(diagnosis_counts, <span class="fu">aes</span>(<span class="at">x =</span> referral, <span class="at">y =</span> diagnosis, <span class="at">fill =</span> n)) <span class="sc">+</span></span>
 <span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
 <span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_c</span>() <span class="sc">+</span></span>
 <span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by gender"</span>,</span>
-<span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
+<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Diagnosis by referral source"</span>,</span>
+<span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Referral source"</span>,</span>
 <span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span>,</span>
 <span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Count"</span></span>
 <span id="cb12-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
@@ -719,7 +719,7 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Heatmap tile plot of diagnosis counts by gender, with color intensity (viridis scale) representing the number of individuals in each gender-diagnosis combination." width="960"></p>
+<p><img data-src="11-eda-covariation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Heatmap tile plot of diagnosis counts by referral source, with color intensity (viridis scale) representing the number of individuals in each referral-diagnosis combination." width="960"></p>
 </figure>
 </div>
 </div>
@@ -742,8 +742,8 @@ $ depression_post &lt;dbl&gt; 20.121075, 13.952745, 13.230776, 14.089037, 19.649
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 29.12261, 30.22804, 57.21434, 61.74926, 24.44400, 41.734…
-$ reaction_time &lt;dbl&gt; 299.0378, 243.2861, 407.8086, 318.7054, 336.9006, 333.18…</code></pre>
+$ age           &lt;dbl&gt; 29.78096, 41.18981, 45.16241, 26.13830, 36.16281, 65.461…
+$ reaction_time &lt;dbl&gt; 296.5188, 233.5813, 330.4331, 305.2887, 332.5909, 421.41…</code></pre>
 </div>
 </div>
 </section>
@@ -954,7 +954,7 @@ $ reaction_time &lt;dbl&gt; 299.0378, 243.2861, 407.8086, 318.7054, 336.9006, 33
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7608872</code></pre>
+<pre><code>[1] 0.730654</code></pre>
 </div>
 </div>
 <div class="fragment">

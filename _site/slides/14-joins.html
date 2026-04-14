@@ -1158,7 +1158,7 @@ Dr.&nbsp;Sara Weston
 <span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a>demo <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
 <span id="cb45-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">ResponseId =</span> <span class="fu">c</span>(<span class="st">"R_1"</span>, <span class="st">"R_2"</span>, <span class="st">"R_3"</span>),</span>
 <span id="cb45-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">22</span>),</span>
-<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gender =</span> <span class="fu">c</span>(<span class="st">"Female"</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>)</span>
+<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">major =</span> <span class="fu">c</span>(<span class="st">"Psychology"</span>, <span class="st">"Sociology"</span>, <span class="st">"Psychology"</span>)</span>
 <span id="cb45-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <aside class="notes">
@@ -1182,11 +1182,11 @@ Dr.&nbsp;Sara Weston
 <span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(demo, <span class="at">by =</span> <span class="st">"ResponseId"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
-  ResponseId PHQ9_total GAD7_total   age gender
-  &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt; 
-1 R_1                12         10    25 Female
-2 R_2                18         15    30 Male  
-3 R_3                 8          6    22 Female</code></pre>
+  ResponseId PHQ9_total GAD7_total   age major     
+  &lt;chr&gt;           &lt;dbl&gt;      &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;     
+1 R_1                12         10    25 Psychology
+2 R_2                18         15    30 Sociology 
+3 R_3                 8          6    22 Psychology</code></pre>
 </div>
 </div>
 </section>

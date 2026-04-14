@@ -418,7 +418,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 </tr>
 <tr class="even">
 <td style="text-align: left;">gender</td>
-<td style="text-align: left;">1 = male, 2 = female</td>
+<td style="text-align: left;">1 = male, 2 = female (binary coding)</td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">education</td>
@@ -604,15 +604,18 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <h2>Categorical variables</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> gender)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Gender Distribution"</span>,</span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Gender"</span>,</span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Education Level Distribution"</span>,</span>
+<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education"</span>,</span>
+<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb8-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -620,7 +623,7 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of gender distribution showing roughly twice as many female participants as male participants in the BFI sample." width="768"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of education level distribution showing the most common levels are some college and college graduate in the BFI sample." width="768"></p>
 </figure>
 </div>
 </div>
@@ -629,14 +632,20 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts</span></span>
 <span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender)</span></code></pre></div>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
-  gender     n
-  &lt;chr&gt;  &lt;int&gt;
-1 Female  1881
-2 Male     919</code></pre>
+<pre><code># A tibble: 5 × 2
+  education        n
+  &lt;fct&gt;        &lt;int&gt;
+1 Some HS        224
+2 HS grad        292
+3 Some college  1249
+4 College grad   394
+5 Graduate       418</code></pre>
 </div>
 </div>
 </section>
@@ -645,15 +654,21 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportions</span></span>
 <span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">gender =</span> <span class="fu">ifelse</span>(gender <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"Male"</span>, <span class="st">"Female"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(gender) <span class="sc">|&gt;</span></span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">3</span>))</span></code></pre></div>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education) <span class="sc">|&gt;</span></span>
+<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">3</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 3
-  gender     n proportion
-  &lt;chr&gt;  &lt;int&gt;      &lt;dbl&gt;
-1 Female  1881      0.672
-2 Male     919      0.328</code></pre>
+<pre><code># A tibble: 5 × 3
+  education        n proportion
+  &lt;fct&gt;        &lt;int&gt;      &lt;dbl&gt;
+1 Some HS        224      0.087
+2 HS grad        292      0.113
+3 Some college  1249      0.485
+4 College grad   394      0.153
+5 Graduate       418      0.162</code></pre>
 </div>
 </div>
 </section></section>
@@ -1174,7 +1189,7 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 </ol>
 <p>That’s the core of EDA — noticing things and getting curious.</p>
 <aside class="notes">
-<p>Give students ~10 minutes of work time here. Frame this as a head start on Assignment 5, not as something they need to finish now. Circulate and help with code issues. If students are stuck on which 3 variables to pick, suggest one continuous (age), one discrete (a personality item), and one categorical (gender or education).</p>
+<p>Give students ~10 minutes of work time here. Frame this as a head start on Assignment 5, not as something they need to finish now. Circulate and help with code issues. If students are stuck on which 3 variables to pick, suggest one continuous (age), one discrete (a personality item), and one categorical (education).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

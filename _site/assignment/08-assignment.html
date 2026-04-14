@@ -531,7 +531,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
 <p>Add a <code>params</code> block to your YAML header defining at least one parameter. The parameter should meaningfully affect your analysis. For example:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">subset</span><span class="kw">:</span><span class="at"> </span><span class="st">"all"</span><span class="co">   # options: "all", "Female", "Male"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">subset</span><span class="kw">:</span><span class="at"> </span><span class="st">"all"</span><span class="co">   # options: "all", "Freshman", "Senior"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>Or, if using your final project dataset:</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode yaml code-with-copy"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">params</span><span class="kw">:</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">data_file</span><span class="kw">:</span><span class="at"> </span><span class="st">"data.csv"</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -541,13 +541,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Use your parameter somewhere in the analysis — to filter the data, set a plot title, or choose a file to import. Show that the document renders correctly for at least <strong>two different parameter values</strong> by rendering it twice (from the command line or RStudio’s Knit menu → “Knit with Parameters”).</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example usage inside a code chunk:</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (params<span class="sc">$</span>subset <span class="sc">!=</span> <span class="st">"all"</span>) {</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">filter</span>(gender <span class="sc">==</span> params<span class="sc">$</span>subset)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  data <span class="ot">&lt;-</span> data <span class="sc">|&gt;</span> <span class="fu">filter</span>(academic_year <span class="sc">==</span> params<span class="sc">$</span>subset)</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-g.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>
 <p>In a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.</p>
-<p><strong>Submission:</strong> Submit your <code>.qmd</code> and two rendered <code>.html</code> files (one per parameter value). Name them to reflect the parameter used (e.g., <code>report-all.html</code>, <code>report-female.html</code>).</p>
+<p><strong>Submission:</strong> Submit your <code>.qmd</code> and two rendered <code>.html</code> files (one per parameter value). Name them to reflect the parameter used (e.g., <code>report-all.html</code>, <code>report-freshman.html</code>).</p>
 
 
 </section>
