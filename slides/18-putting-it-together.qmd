@@ -76,8 +76,6 @@ set.seed(2026)
 social_media <- tibble(
   id = 1:200,
   age = sample(18:24, 200, replace = TRUE),
-  gender = sample(c("Male", "Female", "Non-binary", "Prefer not to say"),
-                  200, replace = TRUE),
   hours_social_media = rnorm(200, 4, 2),
   gad7_total = rnorm(200, 8, 5),  # Generalized Anxiety Disorder scale
   phq9_total = rnorm(200, 10, 6),  # Depression scale
@@ -189,19 +187,19 @@ cor_value
 This is a callback to Monday's session. Ask students to interpret the correlation in plain language before you advance to the finding. "What does a positive correlation mean here?" Students who were in Session 17 should be able to answer this. Note that we drop_na before computing the correlation -- reinforce the habit of handling missing data explicitly.
 :::
 
-## Step 6: Explore by gender
+## Step 6: Explore by academic year
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Scatterplot with separate colored trend lines for each gender, showing the positive relationship between social media use and anxiety holds across all gender groups."
-ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = gender)) +
+#| fig-alt: "Scatterplot with separate colored trend lines for each academic year, showing the positive relationship between social media use and anxiety holds across all year groups."
+ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = academic_year)) +
   geom_point(alpha = 0.5) +
   geom_smooth(method = "lm", se = FALSE) +
   labs(
-    title = "Social media-anxiety relationship holds across genders",
+    title = "Social media-anxiety relationship holds across academic years",
     x = "Daily social media use (hours)",
     y = "Anxiety score (GAD-7)",
-    color = "Gender"
+    color = "Academic year"
   ) +
   theme_minimal() +
   theme(legend.position = "top")
@@ -463,10 +461,10 @@ You can now learn inferential statistics:
 
 ```{r}
 #| eval: false
-# t-test
-t.test(gad7_total ~ gender, data = social_media_clean)
+# t-test (compare two groups)
+t.test(gad7_total ~ I(academic_year == "Freshman"), data = social_media_clean)
 
-# ANOVA
+# ANOVA (compare multiple groups)
 aov(gad7_total ~ academic_year, data = social_media_clean)
 
 # Regression

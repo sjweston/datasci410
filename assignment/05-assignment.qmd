@@ -43,7 +43,7 @@ bfi <- as_tibble(bfi)
 glimpse(bfi)
 ```
 
-This contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age, gender, and education.
+This contains responses from 2,800 participants on 25 personality items (5 per Big Five trait: Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness), plus age and education.
 
 ## Part 1: Exploring Distributions (25 points)
 
@@ -59,12 +59,6 @@ How much missing data is there? Create a summary showing the percentage of NA va
 ## Part 2: Exploring Relationships (30 points)
 
 ### Task 2.1
-Create a scatterplot of two personality items that you hypothesize might be related. Add a trend line. Was your hypothesis supported?
-
-### Task 2.2
-Create boxplots showing how one personality item differs by gender. Do you see a difference?
-
-### Task 2.3
 Create a correlation matrix visualization for the 5 Extraversion items (E1-E5).
 
 Hint:
@@ -76,6 +70,12 @@ bfi |>
 ```
 
 What do you notice? (Some items may be reverse-coded!)
+
+### Task 2.2
+Pick two Extraversion items that look interesting from your correlation matrix. Create a scatterplot of those two items with a trend line. Does the relationship match what the correlation matrix suggested?
+
+### Task 2.3
+Pick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?
 
 ## Part 3: Generating Questions (20 points)
 

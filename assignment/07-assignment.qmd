@@ -38,7 +38,7 @@ A research study has data in three separate files:
 demographics <- tibble(
   participant_id = c(1, 2, 3, 4, 5, 6, 7, 8),
   age = c(22, 35, 28, 41, 19, 33, 27, 45),
-  gender = c("F", "M", "F", "F", "M", "M", "F", "M"),
+  major = c("Psych", "Bio", "Psych", "Psych", "Bio", "Bio", "Psych", "Bio"),
   condition = c("A", "B", "A", "B", "A", "B", "A", "B")
 )
 

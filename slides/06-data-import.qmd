@@ -120,7 +120,7 @@ my_data <- read_csv("survey.csv",
   col_types = cols(
     participant_id = col_character(),  # Don't treat as number
     age = col_integer(),
-    gender = col_character(),
+    major = col_character(),
     score = col_double()
   )
 )
@@ -220,7 +220,7 @@ mess = messy |>
   rename(
     participant_id = `Participant ID`,
     age = `Age (years)`,
-    gender = Gender,
+    major = Major,
     score_1 = Score_1,
     score_2 = Score_2,
     notes = Notes
@@ -321,8 +321,8 @@ SPSS files often have **variable labels** and **value labels**:
 ```{r}
 #| eval: false
 # Labels are stored as attributes
-attr(spss_data$gender, "label")   # "Participant Gender"
-attr(spss_data$gender, "levels")  # 1="Male", 2="Female"
+attr(spss_data$condition, "label")   # "Treatment Condition"
+attr(spss_data$condition, "levels")  # 1="Control", 2="Treatment"
 
 # To drop labels and work with plain values:
 library(haven)

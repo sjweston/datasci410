@@ -84,15 +84,15 @@ data |>
 ### Psychology application: cleaning demographics
 
 ```r
-# Common cleanup pipeline for survey demographics
+# Common cleanup pipeline for survey data
 survey |>
   mutate(
-    gender = str_to_lower(str_trim(gender)),
-    gender = fct_recode(as_factor(gender),
-      "Man" = "male",
-      "Man" = "m",
-      "Woman" = "female",
-      "Woman" = "f"
+    major = str_to_lower(str_trim(major)),
+    major = fct_recode(as_factor(major),
+      "Psychology" = "psychology",
+      "Psychology" = "psych",
+      "Biology" = "biology",
+      "Biology" = "bio"
     ),
     education = fct_relevel(education,
       "High school", "Some college", "Bachelor's", "Graduate"

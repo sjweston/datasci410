@@ -60,7 +60,7 @@ wide_data <- tibble(
 
 2. Practice with survey data — pivot questionnaire items from columns to rows
 3. Create a summary table and use `pivot_wider()` to format it nicely
-4. Use `separate_wider_delim()` to split a column like "age_gender" into separate columns
+4. Use `separate_wider_delim()` to split a column like "age_year" into separate columns
 
 ::: {.callout-important}
 ## The three rules of tidy data

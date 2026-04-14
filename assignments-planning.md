@@ -164,7 +164,7 @@ What's the relationship between these two variables? Does it differ by group?
 Reverse-code these items and calculate the scale mean for each participant.
 
 **In-Class Exercise (Session 13):**
-Fix the messy "gender" column (has "M", "Male", "male", "MALE", etc.) and convert to a factor. Then: tokenize these open-ended responses and find the 10 most common words.
+Fix the messy "major" column (has "Psych", "Psychology", "psychology", "PSYCHOLOGY", etc.) and convert to a factor. Then: tokenize these open-ended responses and find the 10 most common words.
 
 ---
 

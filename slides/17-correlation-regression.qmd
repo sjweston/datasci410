@@ -587,7 +587,7 @@ Adding statistics is now just learning **new functions** in a language you alrea
 ```{r}
 #| eval: false
 # Multiple regression — same lm(), just add predictors
-lm(gad7_total ~ hours_social_media + age + gender, data = study_data)
+lm(gad7_total ~ hours_social_media + age + academic_year, data = study_data)
 
 # ANOVA — same idea
 aov(gad7_total ~ condition, data = study_data)

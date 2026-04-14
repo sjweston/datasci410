@@ -78,7 +78,7 @@ Most of the time, you want `left_join()` — it keeps everything in your main ta
 demographics <- tibble(
   participant_id = c("P01", "P02", "P03"),
   age = c(19, 22, 20),
-  gender = c("Woman", "Man", "Woman")
+  major = c("Psychology", "Sociology", "Psychology")
 )
 
 survey_scores <- tibble(

@@ -258,47 +258,42 @@ Quick reference slide — ~30 seconds. Emphasize that boxplots are still perfect
 
 # Pair coding break {background-color="#e67e22"}
 
-## Your turn: Compare by gender
+## Your turn: Compare by condition
 
-Using the therapy data, explore whether depression scores differ by gender:
+Using the therapy data, explore whether depression scores differ by treatment condition:
 
-1. Add a `gender` variable to the data (use `sample()` to randomly assign "Male", "Female", "Non-binary")
-2. Create a visualization showing depression scores by gender
+1. The `condition` variable is already in `therapy_data` — check its values with `count()`
+2. Create a visualization showing depression scores by condition
 3. Try at least two different geom types
 4. Add appropriate labels
 
 **Time: 10 minutes**
 
 ::: {.notes}
-Circulate during this exercise. The main challenge is step 1: students need to add a column using mutate + sample(). Some may struggle with the sample() syntax — remind them of the arguments: values to choose from, number to draw, and replace = TRUE. If pairs finish early, ask them to add a facet_wrap(~condition) to see gender differences within each treatment group. Common error: forgetting replace = TRUE when the number of rows exceeds the number of categories.
+Circulate during this exercise. The main challenge is choosing appropriate geoms for a continuous-by-categorical comparison. If pairs finish early, ask them to also try faceting by condition instead of mapping it to x. Common question: "should I use a bar chart?" — redirect them toward boxplots, violin plots, or jitter, since the outcome variable is continuous.
 :::
 
 ```{r}
 #| echo: false
 #| eval: false
 # SOLUTION
-therapy_data_gender <- therapy_data |>
-  mutate(gender = sample(c("Male", "Female", "Non-binary"),
-                         size = n(),
-                         replace = TRUE))
-
 # Boxplot version
-ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
   geom_boxplot() +
   labs(
-    title = "Depression scores by gender",
-    x = "Gender",
+    title = "Depression scores by treatment condition",
+    x = "Condition",
     y = "Depression score (BDI-II)"
   ) +
   theme_minimal()
 
 # Violin + jitter version
-ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
+ggplot(therapy_data, aes(x = condition, y = depression_post)) +
   geom_violin() +
   geom_jitter(width = 0.1, alpha = 0.3) +
   labs(
-    title = "Depression scores by gender",
-    x = "Gender",
+    title = "Depression scores by treatment condition",
+    x = "Condition",
     y = "Depression score (BDI-II)"
   ) +
   theme_minimal()
@@ -312,12 +307,12 @@ ggplot(therapy_data_gender, aes(x = gender, y = depression_post)) +
 
 # Categorical + Categorical {background-color="#2c3e50"}
 
-## Example: Diagnosis by gender
+## Example: Diagnosis by referral source
 
 ```{r}
 # Simulated diagnostic data
 diagnosis_data <- tibble(
-  gender = sample(c("Male", "Female", "Non-binary"), 200, replace = TRUE),
+  referral = sample(c("Self", "Physician", "School"), 200, replace = TRUE),
   diagnosis = sample(c("Depression", "Anxiety", "Both", "Other"),
                      200, replace = TRUE)
 )
@@ -333,12 +328,12 @@ The next five slides show five options for the same data. Move through them at a
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each gender category (Female, Male, Non-binary)."
-ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+#| fig-alt: "Stacked bar chart showing counts of diagnoses (Depression, Anxiety, Both, Other) stacked within each referral source category (Physician, School, Self)."
+ggplot(diagnosis_data, aes(x = referral, fill = diagnosis)) +
   geom_bar() +
   labs(
-    title = "Diagnosis by gender",
-    x = "Gender",
+    title = "Diagnosis by referral source",
+    x = "Referral source",
     y = "Count",
     fill = "Diagnosis"
   ) +
@@ -349,12 +344,12 @@ ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Side-by-side bar chart comparing diagnosis counts across gender groups, with separate bars for each diagnosis category placed next to each other within each gender."
-ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+#| fig-alt: "Side-by-side bar chart comparing diagnosis counts across referral sources, with separate bars for each diagnosis category placed next to each other within each referral source."
+ggplot(diagnosis_data, aes(x = referral, fill = diagnosis)) +
   geom_bar(position = "dodge") +
   labs(
-    title = "Diagnosis by gender",
-    x = "Gender",
+    title = "Diagnosis by referral source",
+    x = "Referral source",
     y = "Count",
     fill = "Diagnosis"
   ) +
@@ -364,17 +359,17 @@ ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
 ## Option 3: Proportions
 
 ::: {.notes}
-Highlight the difference between position = "dodge" (previous slide) and position = "fill" (this slide). "fill" normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: "If one gender group has 10 people and another has 100, this chart makes them look equally important. Is that a problem?" This gets students thinking about when proportions vs. counts are appropriate.
+Highlight the difference between position = "dodge" (previous slide) and position = "fill" (this slide). "fill" normalizes each bar to 100%, which makes it easy to compare proportions across groups but hides differences in group sizes. Ask: "If one referral source has 10 people and another has 100, this chart makes them look equally important. Is that a problem?" This gets students thinking about when proportions vs. counts are appropriate.
 :::
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Proportional stacked bar chart showing the relative proportion of each diagnosis within each gender group, with all bars normalized to 100%."
-ggplot(diagnosis_data, aes(x = gender, fill = diagnosis)) +
+#| fig-alt: "Proportional stacked bar chart showing the relative proportion of each diagnosis within each referral source, with all bars normalized to 100%."
+ggplot(diagnosis_data, aes(x = referral, fill = diagnosis)) +
   geom_bar(position = "fill") +
   labs(
-    title = "Diagnosis distribution by gender",
-    x = "Gender",
+    title = "Diagnosis distribution by referral source",
+    x = "Referral source",
     y = "Proportion",
     fill = "Diagnosis"
   ) +
@@ -387,12 +382,12 @@ Shows the *size* of overlaps:
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Bubble chart showing the co-occurrence of gender and diagnosis categories, where larger circles indicate more individuals with that combination."
-ggplot(diagnosis_data, aes(x = gender, y = diagnosis)) +
+#| fig-alt: "Bubble chart showing the co-occurrence of referral source and diagnosis categories, where larger circles indicate more individuals with that combination."
+ggplot(diagnosis_data, aes(x = referral, y = diagnosis)) +
   geom_count() +
   labs(
-    title = "Diagnosis by gender",
-    x = "Gender",
+    title = "Diagnosis by referral source",
+    x = "Referral source",
     y = "Diagnosis",
     size = "Count"
   ) +
@@ -407,16 +402,16 @@ geom_tile() is essentially a heatmap. Note that this requires pre-computing the 
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Heatmap tile plot of diagnosis counts by gender, with color intensity (viridis scale) representing the number of individuals in each gender-diagnosis combination."
+#| fig-alt: "Heatmap tile plot of diagnosis counts by referral source, with color intensity (viridis scale) representing the number of individuals in each referral-diagnosis combination."
 diagnosis_counts <- diagnosis_data |>
-  count(gender, diagnosis)
+  count(referral, diagnosis)
 
-ggplot(diagnosis_counts, aes(x = gender, y = diagnosis, fill = n)) +
+ggplot(diagnosis_counts, aes(x = referral, y = diagnosis, fill = n)) +
   geom_tile() +
   scale_fill_viridis_c() +
   labs(
-    title = "Diagnosis by gender",
-    x = "Gender",
+    title = "Diagnosis by referral source",
+    x = "Referral source",
     y = "Diagnosis",
     fill = "Count"
   ) +

@@ -13,12 +13,12 @@
 Here is the raw content of the CSV file. Imagine opening it in a text editor:
 
 ```
-Participant ID,Age (years),Gender,Score_1,Score_2,Notes
-P001,22,Female,4,3,
-P002,25,Male,3,N/A,transfer student
-P003,-999,Female,5,4,
+Participant ID,Age (years),Major,Score_1,Score_2,Notes
+P001,22,Psychology,4,3,
+P002,25,Biology,3,N/A,transfer student
+P003,-999,Psychology,5,4,
 P004,28,N/A,2,3,
-P005,31,Male,N/A,2,
+P005,31,Biology,N/A,2,
 ```
 
 ---
@@ -38,7 +38,7 @@ P005,31,Male,N/A,2,
 |-----------------|------------------------|----------------------|
 | Participant ID   | P001, P002             |                      |
 | Age (years)      | 22, 25, -999           |                      |
-| Gender           | Female, Male, N/A      |                      |
+| Major            | Female, Male, N/A      |                      |
 | Score_1          | 4, 3, 5, 2, N/A       |                      |
 | Score_2          | 3, N/A, 4, 3, 2       |                      |
 | Notes            | "", transfer student   |                      |
@@ -55,7 +55,7 @@ List them:
 |-----------------|----------------------|
 | Participant ID   |                      |
 | Age (years)      |                      |
-| Gender           |                      |
+| Major            |                      |
 | Score_1          |                      |
 | Score_2          |                      |
 | Notes            |                      |
@@ -69,7 +69,7 @@ messy_clean <- messy |>
   rename(
     ______________ = `Participant ID`,
     ______________ = `Age (years)`,
-    ______________ = Gender,
+    ______________ = Major,
     ______________ = Score_1,
     ______________ = Score_2,
     ______________ = Notes

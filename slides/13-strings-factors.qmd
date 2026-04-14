@@ -56,25 +56,25 @@ This is the Power Play — a mid-term twist to keep things interesting. Show the
 
 # Strings: The basics {background-color="#2c3e50"}
 
-## How many genders are in this dataset?
+## How many majors are in this dataset?
 
 ```{r}
 #| echo: false
 tibble(
   id = 1:7,
-  gender = c("Male", "male", "M", "MALE", "Female", "female ", "F")
+  major = c("Psychology", "psychology", "Psych", "PSYCHOLOGY", "Biology", "biology ", "Bio")
 ) |>
   knitr::kable()
 ```
 
-## How many genders are in this dataset?
+## How many majors are in this dataset?
 
 R says **7**. You meant **2**.
 
 The problem is inconsistent text — different cases, abbreviations, trailing spaces. Today we learn to fix that.
 
 ::: {.notes}
-Start by showing the first slide (the table) and asking students "How many genders are in this dataset?" Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.
+Start by showing the first slide (the table) and asking students "How many majors are in this dataset?" Let them look at the table and answer before revealing that R sees 7 unique values. This is the hook — the gap between what humans see and what R sees motivates the entire session. Spend ~2 minutes here.
 :::
 
 
@@ -141,7 +141,7 @@ tibble(responses) |>
 ## Changing case
 
 ```{r}
-messy_data <- c("MALE", "Female", "male", "FEMALE", "Male")
+messy_data <- c("PSYCHOLOGY", "Biology", "psychology", "BIOLOGY", "Psychology")
 
 str_to_lower(messy_data)
 str_to_upper(messy_data)
@@ -150,7 +150,7 @@ str_to_title(messy_data)
 
 . . .
 
-Essential for cleaning demographic data!
+Essential for cleaning survey data!
 
 ::: {.notes}
 This is one of the most important slides in the deck. str_to_lower() alone solves a huge number of data cleaning problems. Run the code live and ask: "If you had to pick just one of these three functions, which would you use for cleaning survey data?" Answer: str_to_lower(), because it makes everything comparable regardless of how participants typed it.
@@ -171,21 +171,21 @@ str_squish(messy_responses)       # Also reduce internal spaces
 Students often ask the difference between str_trim() and str_squish(). str_trim() only removes leading and trailing whitespace; str_squish() also collapses multiple internal spaces into one. For survey data, str_trim() is usually sufficient. Trailing spaces from Qualtrics exports are very common and invisible to the eye — this is why str_trim() matters.
 :::
 
-## Psychology example: Cleaning demographics
+## Psychology example: Cleaning survey responses
 
 ```{r}
 survey <- tibble(
-  gender = c("  Female", "MALE  ", "female", "Male", "  non-binary")
+  major = c("  Psychology", "BIOLOGY  ", "psychology", "Biology", "  sociology")
 )
 
 survey |>
   mutate(
-    gender_clean = str_to_lower(str_trim(gender))
+    major_clean = str_to_lower(str_trim(major))
   )
 ```
 
 ::: {.notes}
-This is the payoff slide for the opening example. Walk through it step by step: "First we trim the spaces, then we lowercase everything." Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |> but nesting is fine for two functions. After cleaning, ask: "How many unique genders would R see now?" This connects directly back to the hook.
+This is the payoff slide for the opening example. Walk through it step by step: "First we trim the spaces, then we lowercase everything." Point out the nesting — str_to_lower wraps str_trim. Students could also pipe these with |> but nesting is fine for two functions. After cleaning, ask: "How many unique majors would R see now?" This connects directly back to the hook.
 :::
 
 ## Detecting patterns
@@ -314,7 +314,7 @@ You have messy survey responses:
 ```{r}
 messy_survey <- tibble(
   id = 1:5,
-  gender = c("  FEMALE", "male  ", "Female", "MALE", "non-binary  "),
+  major = c("  PSYCHOLOGY", "biology  ", "Psychology", "BIOLOGY", "sociology  "),
   comment = c(
     "Great study!",
     "too long",
@@ -325,7 +325,7 @@ messy_survey <- tibble(
 )
 ```
 
-1. Clean `gender` to lowercase with no extra spaces
+1. Clean `major` to lowercase with no extra spaces
 2. Clean `comment` to title case with no extra spaces
 3. Create a logical column `is_negative` that is TRUE if the comment contains "long" or "confusing" (case-insensitive)
 4. Filter to only negative comments
@@ -333,7 +333,7 @@ messy_survey <- tibble(
 **Time: 10 minutes**
 
 ::: {.notes}
-Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(...)) or doing them in the wrong order (order does not matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for "or" — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.
+Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str_to_lower(str_trim(...)) or doing them in the wrong order (order doesn't matter here, but they may think it does), (2) for the is_negative column, students need the pipe (|) inside the regex pattern for "or" — remind them this is different from the logical OR operator, (3) students forgetting regex(ignore_case = TRUE). Walk through the solution afterward, emphasizing the cleaning-then-filtering workflow.
 :::
 
 ```{r}
@@ -342,7 +342,7 @@ Give 10 minutes. Common issues to watch for: (1) students forgetting to nest str
 # SOLUTION
 messy_survey |>
   mutate(
-    gender_clean = str_to_lower(str_trim(gender)),
+    major_clean = str_to_lower(str_trim(major)),
     comment_clean = str_to_title(str_trim(comment)),
     is_negative = str_detect(
       comment,
@@ -368,11 +368,11 @@ messy_survey |>
 
 ```{r}
 # A character vector
-gender_char <- c("Male", "Female", "Female", "Male")
+major_char <- c("Psychology", "Biology", "Biology", "Psychology")
 
 # A factor
-gender_fct <- factor(gender_char)
-gender_fct
+major_fct <- factor(major_char)
+major_fct
 ```
 
 . . .
@@ -564,12 +564,12 @@ tibble(diagnosis = factor(diagnosis)) |>
 ## fct_recode(): Rename levels
 
 ```{r}
-gender <- factor(c("M", "F", "F", "M", "NB"))
+major <- factor(c("Psych", "Bio", "Bio", "Psych", "Soc"))
 
-fct_recode(gender,
-  "Male" = "M",
-  "Female" = "F",
-  "Non-binary" = "NB"
+fct_recode(major,
+  "Psychology" = "Psych",
+  "Biology" = "Bio",
+  "Sociology" = "Soc"
 )
 ```
 

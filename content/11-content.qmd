@@ -58,7 +58,7 @@ Using the `bfi` dataset from the `psych` package:
 
 1. Pick two personality items (e.g., `E1` and `A1`). Make a scatterplot — is there a relationship?
 2. Create boxplots of `age` grouped by `education`. What patterns do you see?
-3. Use `geom_count()` to visualize the relationship between `education` and `gender`
+3. Use `geom_count()` to visualize the relationship between `education` and a personality item
 4. Try adding `alpha = 0.3` to a crowded scatterplot. Does it help?
 5. Calculate the correlation between two continuous variables using `cor(x, y, use = "complete.obs")`
 

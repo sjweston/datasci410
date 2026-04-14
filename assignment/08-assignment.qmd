@@ -157,7 +157,7 @@ Add a `params` block to your YAML header defining at least one parameter. The pa
 
 ```yaml
 params:
-  subset: "all"   # options: "all", "Female", "Male"
+  subset: "all"   # options: "all", "Freshman", "Senior"
 ```
 
 Or, if using your final project dataset:
@@ -174,7 +174,7 @@ Use your parameter somewhere in the analysis — to filter the data, set a plot 
 ```r
 # Example usage inside a code chunk:
 if (params$subset != "all") {
-  data <- data |> filter(gender == params$subset)
+  data <- data |> filter(academic_year == params$subset)
 }
 ```
 
@@ -182,4 +182,4 @@ if (params$subset != "all") {
 
 In a brief prose block in your Quarto document (not just a comment), describe one realistic scenario from your own research area where a parameterized report would save meaningful time or reduce error.
 
-**Submission:** Submit your `.qmd` and two rendered `.html` files (one per parameter value). Name them to reflect the parameter used (e.g., `report-all.html`, `report-female.html`).
+**Submission:** Submit your `.qmd` and two rendered `.html` files (one per parameter value). Name them to reflect the parameter used (e.g., `report-all.html`, `report-freshman.html`).
