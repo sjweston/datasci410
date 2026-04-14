@@ -12,13 +12,13 @@
 
 You have messy survey responses:
 
-| id | gender            | comment                   |
-|----|-------------------|---------------------------|
-| 1  | "  FEMALE"        | "Great study!"            |
-| 2  | "male  "          | "too long"                |
-| 3  | "Female"          | "  Very interesting  "    |
-| 4  | "MALE"            | "CONFUSING INSTRUCTIONS"  |
-| 5  | "non-binary  "    | "I enjoyed this"          |
+| id | major              | comment                   |
+|----|---------------------|---------------------------|
+| 1  | "  PSYCHOLOGY"      | "Great study!"            |
+| 2  | "biology  "         | "too long"                |
+| 3  | "Psychology"        | "  Very interesting  "    |
+| 4  | "BIOLOGY"           | "CONFUSING INSTRUCTIONS"  |
+| 5  | "sociology  "       | "I enjoyed this"          |
 
 Notice the extra spaces and inconsistent capitalization.
 
@@ -26,22 +26,22 @@ Notice the extra spaces and inconsistent capitalization.
 
 ## The task (same as the slide exercise)
 
-1. Clean `gender` to lowercase with no extra spaces
+1. Clean `major` to lowercase with no extra spaces
 2. Clean `comment` to title case with no extra spaces
 3. Create a logical column `is_negative` that is TRUE if the comment contains "long" or "confusing" (case-insensitive)
 4. Filter to only negative comments
 
 ### Your pen-and-paper version
 
-**Step 1: Clean `gender` by hand.** Apply `str_trim()` then `str_to_lower()` to each value:
+**Step 1: Clean `major` by hand.** Apply `str_trim()` then `str_to_lower()` to each value:
 
-| id | original gender | after `str_trim()` | after `str_to_lower()` |
+| id | original major | after `str_trim()` | after `str_to_lower()` |
 |----|----------------|---------------------|------------------------|
-| 1  | "  FEMALE"     |                     |                        |
-| 2  | "male  "       |                     |                        |
-| 3  | "Female"       |                     |                        |
-| 4  | "MALE"         |                     |                        |
-| 5  | "non-binary  " |                     |                        |
+| 1  | "  PSYCHOLOGY"  |                     |                        |
+| 2  | "biology  "     |                     |                        |
+| 3  | "Psychology"    |                     |                        |
+| 4  | "BIOLOGY"       |                     |                        |
+| 5  | "sociology  "   |                     |                        |
 
 **Step 2: Clean `comment` by hand.** Apply `str_trim()` then `str_to_title()`:
 
@@ -70,7 +70,7 @@ Notice the extra spaces and inconsistent capitalization.
 ```r
 messy_survey |>
   mutate(
-    gender_clean = str_to_______(str_______(gender)),
+    major_clean = str_to_______(str_______(major)),
     comment_clean = str_to_______(str_______(comment)),
     is_negative = str_detect(
       comment,

@@ -1136,7 +1136,7 @@ sample estimates:
 <p>Adding statistics is now just learning <strong>new functions</strong> in a language you already speak.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple regression — same lm(), just add predictors</span></span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age <span class="sc">+</span> gender, <span class="at">data =</span> study_data)</span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age <span class="sc">+</span> academic_year, <span class="at">data =</span> study_data)</span>
 <span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA — same idea</span></span>
 <span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> condition, <span class="at">data =</span> study_data)</span></code></pre></div>

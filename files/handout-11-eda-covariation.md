@@ -27,39 +27,31 @@ This dataset has post-treatment depression scores (BDI-II) for 150 participants 
 | Mindfulness  | 14.9            |
 | Mindfulness  | 11.3            |
 
-The exercise also asks you to add a `gender` variable using `sample()`.
+The exercise uses the `condition` variable already in the data.
 
 ---
 
 ## The task (same as the slide exercise)
 
-1. Add a `gender` variable to the data (use `sample()` to randomly assign "Male", "Female", "Non-binary")
-2. Create a visualization showing depression scores by gender
+1. The `condition` variable is already in `therapy_data` — check its values with `count()`
+2. Create a visualization showing depression scores by condition
 3. Try at least two different geom types
 4. Add appropriate labels
 
 ### Your pen-and-paper version
 
-**Step 1: Think about the `mutate` + `sample` step.** What would this code do?
+**Step 1: Think about the data.** The `condition` variable has three levels in this dataset. What are they?
 
-```r
-therapy_data |>
-  mutate(gender = sample(c("Male", "Female", "Non-binary"),
-                         size = n(), replace = TRUE))
-```
+1. _____________  2. _____________  3. _____________
 
-Why do we need `replace = TRUE`? _____________________________________________
-
-Why are we using `sample()` instead of real gender data? _______________________
-
-**Step 2: Plan two visualizations.** For comparing a continuous variable (`depression_post`) across groups (`gender`), which geom types make sense? List at least 3 options and star the two you'd choose:
+**Step 2: Plan two visualizations.** For comparing a continuous variable (`depression_post`) across groups (`condition`), which geom types make sense? List at least 3 options and star the two you'd choose:
 
 - `geom_____________`
 - `geom_____________`
 - `geom_____________`
 - `geom_____________`
 
-**Step 3: Sketch two plots.** Draw two different visualizations of depression scores by gender using the grid below.
+**Step 3: Sketch two plots.** Draw two different visualizations of depression scores by condition using the grid below.
 
 **Plot A** (geom type: ______________)
 
@@ -74,7 +66,7 @@ depression
 10 |
    |
  5 |_________________________________
-     Male    Female   Non-binary
+     CBT     Medication   Waitlist
 ```
 
 **Plot B** (geom type: ______________)
@@ -90,13 +82,13 @@ depression
 10 |
    |
  5 |_________________________________
-     Male    Female   Non-binary
+     CBT     Medication   Waitlist
 ```
 
 **Step 4: Write the code for one of your plots.** Fill in the blanks:
 
 ```r
-ggplot(therapy_data_gender, aes(x = _______, y = _______________)) +
+ggplot(therapy_data, aes(x = _______, y = _______________)) +
   geom_____________() +
   labs(
     title = "________________________________",
@@ -106,7 +98,7 @@ ggplot(therapy_data_gender, aes(x = _______, y = _______________)) +
   theme_minimal()
 ```
 
-**Step 5: Think about it.** Since we randomly assigned gender (it's not real data), would you expect to see a real difference between groups? Why or why not?
+**Step 5: Think about it.** Would you expect to see differences in depression scores across treatment conditions? Why or why not?
 
 Your answer: ___________________________________________________________________
 

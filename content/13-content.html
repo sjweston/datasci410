@@ -459,15 +459,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <section id="psychology-application-cleaning-demographics" class="level3">
 <h3 class="anchored" data-anchor-id="psychology-application-cleaning-demographics">Psychology application: cleaning demographics</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common cleanup pipeline for survey demographics</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Common cleanup pipeline for survey data</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(gender)),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">fct_recode</span>(<span class="fu">as_factor</span>(gender),</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Man"</span> <span class="ot">=</span> <span class="st">"male"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Man"</span> <span class="ot">=</span> <span class="st">"m"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Woman"</span> <span class="ot">=</span> <span class="st">"female"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Woman"</span> <span class="ot">=</span> <span class="st">"f"</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">str_to_lower</span>(<span class="fu">str_trim</span>(major)),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">fct_recode</span>(<span class="fu">as_factor</span>(major),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Psychology"</span> <span class="ot">=</span> <span class="st">"psychology"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Psychology"</span> <span class="ot">=</span> <span class="st">"psych"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Biology"</span> <span class="ot">=</span> <span class="st">"biology"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Biology"</span> <span class="ot">=</span> <span class="st">"bio"</span></span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    ),</span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">education =</span> <span class="fu">fct_relevel</span>(education,</span>
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High school"</span>, <span class="st">"Some college"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Graduate"</span></span>
