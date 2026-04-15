@@ -588,16 +588,22 @@ Dr.&nbsp;Sara Weston
 <section id="solution" class="slide level2">
 <h2>Solution</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"messy_survey.csv"</span>), <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>))</span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> messy <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant_id =</span> <span class="st">`</span><span class="at">Participant ID</span><span class="st">`</span>,</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>,</span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> Major,</span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_1 =</span> Score_1,</span>
-<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_2 =</span> Score_2,</span>
-<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">notes =</span> Notes</span>
-<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">here</span>(<span class="st">"data/messy_survey.csv"</span>), <span class="co">#the path depends on where you saved your data</span></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>),</span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="st">"cdciic"</span>)</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(messy)</span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>clean <span class="ot">&lt;-</span> messy <span class="sc">|&gt;</span></span>
+<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant_id =</span> <span class="st">`</span><span class="at">Participant ID</span><span class="st">`</span>,</span>
+<span id="cb11-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>,</span>
+<span id="cb11-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> Major,</span>
+<span id="cb11-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_1 =</span> Score_1,</span>
+<span id="cb11-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_2 =</span> Score_2,</span>
+<span id="cb11-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">notes =</span> Notes</span>
+<span id="cb11-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 </section></section>
 <section>
