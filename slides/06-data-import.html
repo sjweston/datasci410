@@ -266,6 +266,65 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
+<section id="the-file-path-problem" class="slide level2">
+<h2>The file path problem</h2>
+<p><code>read_csv()</code> needs to know <em>where</em> your file is:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># This works on your laptop...</span></span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"/Users/sara/Desktop/project/data/survey.csv"</span>)</span>
+<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ...but not on anyone else's. And not if you move the folder.</span></span></code></pre></div>
+</div>
+<div class="fragment">
+<p><strong>Hardcoded paths break.</strong> Share your code with a collaborator, move your project folder, or switch computers — and it’s broken.</p>
+<aside class="notes">
+<p>This is the number one “it worked yesterday” problem. Walk through the scenario: student emails code to their advisor, advisor opens it on their laptop, and it immediately errors because <code>/Users/sara/Desktop</code> doesn’t exist. Make this feel real — it happens constantly. The fix is to never use absolute paths and instead anchor paths to the project root.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="herehere-paths-that-always-work" class="slide level2">
+<h2>here::here() — paths that always work</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Build paths relative to your project root</span></span>
+<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data"</span>, <span class="st">"survey.csv"</span>))</span>
+<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Or use a single string with slashes</span></span>
+<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/survey.csv"</span>))</span>
+<span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># See where here() thinks your root is:</span></span>
+<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">here</span>()</span></code></pre></div>
+</div>
+<ul>
+<li><code>here()</code> finds your <strong>project root</strong> — where the <code>.Rproj</code> file lives</li>
+<li>Works on any machine, any operating system</li>
+<li>No more “works on my laptop” problems</li>
+</ul>
+<aside class="notes">
+<p><code>here</code> uses the presence of an <code>.Rproj</code> file (or a few other markers) to locate the project root, then builds paths from there. This means the same code runs on any collaborator’s machine as long as they have the same project folder structure. Show students how to run <code>here()</code> alone first — it prints the root path so they can confirm it’s pointing at the right place. The two-argument vs.&nbsp;single-string forms are equivalent; the multi-argument form is slightly more readable. This pairs naturally with the RStudio Projects content from Session 1.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="why-not-read.csv" class="slide level2">
 <h2>Why not read.csv()?</h2>
 <table class="caption-top">
@@ -322,11 +381,11 @@ Dr.&nbsp;Sara Weston
 <section id="what-read_csv-does-automatically" class="slide level2">
 <h2>What read_csv() does automatically</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># It figures out column types from the first 1000 rows</span></span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>)</span>
-<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># It tells you what it decided:</span></span>
-<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(my_data)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># It figures out column types from the first 1000 rows</span></span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>)</span>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># It tells you what it decided:</span></span>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(my_data)</span></code></pre></div>
 </div>
 <p>Types it recognizes: <code>dbl</code> (number), <code>chr</code> (text), <code>lgl</code> (TRUE/FALSE), <code>date</code>, <code>dttm</code> (date-time)</p>
 </section>
@@ -340,9 +399,9 @@ Dr.&nbsp;Sara Weston
 <li>Columns that are mostly empty</li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for problems after reading</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>)</span>
-<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(my_data)  <span class="co"># Shows any parsing issues</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for problems after reading</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>)</span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(my_data)  <span class="co"># Shows any parsing issues</span></span></code></pre></div>
 </div>
 <aside class="notes">
 <p>The participant ID example resonates most with psychology students. If IDs are “001”, “002”, “003”, R reads them as numbers 1, 2, 3 — losing the leading zeros. Ask: “Why does that matter?” It matters for merging datasets later, and it changes how the ID behaves in plots. Always run problems() after importing — make this a habit students build now.</p>
@@ -361,15 +420,15 @@ Dr.&nbsp;Sara Weston
 <section id="specifying-column-types" class="slide level2">
 <h2>Specifying column types</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tell read_csv() what types to use</span></span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>,</span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
-<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant_id =</span> <span class="fu">col_character</span>(),  <span class="co"># Don't treat as number</span></span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">col_integer</span>(),</span>
-<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">col_character</span>(),</span>
-<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score =</span> <span class="fu">col_double</span>()</span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Tell read_csv() what types to use</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>,</span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">col_types =</span> <span class="fu">cols</span>(</span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant_id =</span> <span class="fu">col_character</span>(),  <span class="co"># Don't treat as number</span></span>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">col_integer</span>(),</span>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">col_character</span>(),</span>
+<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score =</span> <span class="fu">col_double</span>()</span>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Frame this as: “When R guesses wrong, you override it.” Students don’t need to memorize every col_* function — the important ones are col_character() and col_double(). Mention that you can specify types for just the problem columns and let R guess the rest (using .default = col_guess() inside cols()). Spend ~2 minutes here.</p>
@@ -422,23 +481,23 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Compact version</span></span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>, <span class="at">col_types =</span> <span class="st">"cdiccc?"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Compact version</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>, <span class="at">col_types =</span> <span class="st">"cdiccc?"</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="handling-messy-headers" class="slide level2">
 <h2>Handling messy headers</h2>
 <p>Real data often has ugly column names:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip rows at the top (metadata, notes)</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Only read specific rows</span></span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>, <span class="at">n_max =</span> <span class="dv">100</span>)</span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns after import</span></span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>, <span class="at">score =</span> <span class="st">`</span><span class="at">Total Score</span><span class="st">`</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Skip rows at the top (metadata, notes)</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Only read specific rows</span></span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>, <span class="at">n_max =</span> <span class="dv">100</span>)</span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Rename columns after import</span></span>
+<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"messy.csv"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>, <span class="at">score =</span> <span class="st">`</span><span class="at">Total Score</span><span class="st">`</span>)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Point out the backticks around column names with spaces or special characters. Students will see this a lot with Qualtrics exports and Excel files. The backtick syntax confuses people — explain that R needs them because “Age (years)” isn’t a valid R name. The janitor::clean_names() function is a nice shortcut here if you want to mention it briefly, though it’s not required for this course.</p>
@@ -459,8 +518,8 @@ Dr.&nbsp;Sara Weston
 <p>By default, <code>read_csv()</code> recognizes these as NA:</p>
 <p><code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>""</code> (empty), <code>"."</code>, <code>"NULL"</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your own NA strings</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Add your own NA strings</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">read_csv</span>(<span class="st">"survey.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"NA"</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>))</span></code></pre></div>
 </div>
 <p>Psychology datasets often use <code>-999</code> or <code>99</code> as missing value codes!</p>
 <aside class="notes">
@@ -480,8 +539,8 @@ Dr.&nbsp;Sara Weston
 <section id="writing-csv-files" class="slide level2">
 <h2>Writing CSV files</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save your cleaned data</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(my_cleaned_data, <span class="st">"data/cleaned_survey.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Save your cleaned data</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(my_cleaned_data, <span class="fu">here</span>(<span class="st">"data/cleaned_survey.csv"</span>))</span></code></pre></div>
 </div>
 <p>Save intermediate cleaned files — don’t re-clean every time you start R.</p>
 <aside class="notes">
@@ -513,7 +572,7 @@ Dr.&nbsp;Sara Weston
 <li>What does <code>problems()</code> show you?</li>
 </ol>
 <aside class="notes">
-<p>Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument. After time is up, walk through the solution and ask: “Did anyone get something different from problems()?” Remind students to upload their code to Canvas.</p>
+<p>Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -526,9 +585,20 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
+<section id="solution" class="slide level2">
+<h2>Solution</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"messy_survey.csv"</span>), <span class="at">na =</span> <span class="fu">c</span>(<span class="st">"N/A"</span>, <span class="st">"-999"</span>, <span class="st">""</span>))</span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> messy <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">participant_id =</span> <span class="st">`</span><span class="at">Participant ID</span><span class="st">`</span>,</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="st">`</span><span class="at">Age (years)</span><span class="st">`</span>,</span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> Major,</span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_1 =</span> Score_1,</span>
+<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">score_2 =</span> Score_2,</span>
+<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">notes =</span> Notes</span>
+<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
 </section></section>
 <section>
 <section id="excel-files" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -539,19 +609,19 @@ Dr.&nbsp;Sara Weston
 <h2>readxl::read_excel()</h2>
 <p>Excel is everywhere in psychology. The <code>readxl</code> package handles it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)  <span class="co"># Or just use readxl:: directly</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet</span></span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>)</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific sheet</span></span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Demographics"</span>)</span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific range</span></span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>,</span>
-<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Scores"</span>,</span>
-<span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"A1:F50"</span></span>
-<span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)  <span class="co"># Or just use readxl:: directly</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read the first sheet</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>)</span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific sheet</span></span>
+<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"Demographics"</span>)</span>
+<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read a specific range</span></span>
+<span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>my_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"survey_results.xlsx"</span>,</span>
+<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">sheet =</span> <span class="st">"Scores"</span>,</span>
+<span id="cb12-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">range =</span> <span class="st">"A1:F50"</span></span>
+<span id="cb12-13"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Note that readxl is installed with tidyverse but not loaded by library(tidyverse) — you need to load it separately or use the readxl:: prefix. Students often ask “Why not just save as CSV first?” That’s a reasonable approach, but read_excel() handles it directly and avoids data loss from CSV conversion (e.g., Excel date formatting). Spend ~3 minutes on Excel; it’s familiar territory for most students.</p>
@@ -606,8 +676,8 @@ Dr.&nbsp;Sara Weston
 <section id="listing-sheet-names" class="slide level2">
 <h2>Listing sheet names</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in a file</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheet_names</span>(<span class="st">"survey_results.xlsx"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># See what sheets are in a file</span></span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">excel_sheet_names</span>(<span class="st">"survey_results.xlsx"</span>)</span></code></pre></div>
 </div>
 <p>Useful when you don’t know the file structure yet.</p>
 </section></section>
@@ -620,13 +690,13 @@ Dr.&nbsp;Sara Weston
 <h2>SPSS and SAS files</h2>
 <p>Psychology labs often have data in SPSS (<code>.sav</code>) or SAS formats:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SPSS</span></span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"study.sav"</span>)</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SAS</span></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>sas_data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"study.sas"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SPSS</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">read_sav</span>(<span class="st">"study.sav"</span>)</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Read SAS</span></span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>sas_data <span class="ot">&lt;-</span> <span class="fu">read_sas</span>(<span class="st">"study.sas"</span>)</span></code></pre></div>
 </div>
 <p>These return tibbles, just like <code>read_csv()</code>.</p>
 <aside class="notes">
@@ -647,13 +717,13 @@ Dr.&nbsp;Sara Weston
 <h2>A note about SPSS labels</h2>
 <p>SPSS files often have <strong>variable labels</strong> and <strong>value labels</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are stored as attributes</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>condition, <span class="st">"label"</span>)   <span class="co"># "Treatment Condition"</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>condition, <span class="st">"levels"</span>)  <span class="co"># 1="Control", 2="Treatment"</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># To drop labels and work with plain values:</span></span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
-<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">zap_labels</span>(spss_data)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Labels are stored as attributes</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>condition, <span class="st">"label"</span>)   <span class="co"># "Treatment Condition"</span></span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">attr</span>(spss_data<span class="sc">$</span>condition, <span class="st">"levels"</span>)  <span class="co"># 1="Control", 2="Treatment"</span></span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># To drop labels and work with plain values:</span></span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>spss_data <span class="ot">&lt;-</span> <span class="fu">zap_labels</span>(spss_data)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>This is a “just so you know” slide. Students don’t need to master haven labels right now, but they should know that SPSS files carry metadata that can cause unexpected behavior (e.g., a column that looks numeric but is actually a labelled vector). If they hit weird errors after importing a .sav file, zap_labels() is the quick fix. Move on fairly quickly.</p>
@@ -677,8 +747,8 @@ Dr.&nbsp;Sara Weston
 <li>The export includes metadata rows at the top — skip them:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Qualtrics CSVs typically have 3 header rows</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"my_survey_export.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Qualtrics CSVs typically have 3 header rows</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>qualtrics_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"my_survey_export.csv"</span>, <span class="at">skip =</span> <span class="dv">2</span>)</span></code></pre></div>
 </div>
 <ol start="3" type="1">
 <li>Clean up the automatic column names (they’re ugly)</li>
@@ -719,33 +789,33 @@ Dr.&nbsp;Sara Weston
 <section id="a-realistic-import-workflow" class="slide level2">
 <h2>A realistic import workflow</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Read the file</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"qualtrics_export.csv"</span>,</span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span>,</span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>)</span>
-<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check what you got</span></span>
-<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_data)</span>
-<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(raw_data)</span>
-<span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Rename columns</span></span>
-<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span></span>
-<span id="cb14-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
-<span id="cb14-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> ResponseId,</span>
-<span id="cb14-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> Q1,</span>
-<span id="cb14-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> Q2</span>
-<span id="cb14-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fix types if needed</span></span>
-<span id="cb14-20"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> clean_data <span class="sc">|&gt;</span></span>
-<span id="cb14-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb14-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">as.character</span>(id),</span>
-<span id="cb14-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">as.numeric</span>(age)</span>
-<span id="cb14-24"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-25"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Save the cleaned version</span></span>
-<span id="cb14-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean_data, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Read the file</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/qualtrics_export.csv"</span>),</span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">skip =</span> <span class="dv">2</span>,</span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"N/A"</span>, <span class="st">"-999"</span>)</span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check what you got</span></span>
+<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(raw_data)</span>
+<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(raw_data)</span>
+<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Rename columns</span></span>
+<span id="cb17-12"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> raw_data <span class="sc">|&gt;</span></span>
+<span id="cb17-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(</span>
+<span id="cb17-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> ResponseId,</span>
+<span id="cb17-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> Q1,</span>
+<span id="cb17-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">condition =</span> Q2</span>
+<span id="cb17-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-18"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Fix types if needed</span></span>
+<span id="cb17-20"><a href="" aria-hidden="true" tabindex="-1"></a>clean_data <span class="ot">&lt;-</span> clean_data <span class="sc">|&gt;</span></span>
+<span id="cb17-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb17-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">id =</span> <span class="fu">as.character</span>(id),</span>
+<span id="cb17-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">as.numeric</span>(age)</span>
+<span id="cb17-24"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb17-25"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-26"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 5. Save the cleaned version</span></span>
+<span id="cb17-27"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean_data, <span class="fu">here</span>(<span class="st">"data/clean_survey.csv"</span>))</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Walk through this as a complete workflow — this is the template students should internalize. Emphasize the order: read, check, rename, fix types, save. Students often want to skip step 2 (checking), but that’s where you catch problems before they propagate. This workflow is essentially what Assignment 3 will ask them to do end to end. Spend ~3 minutes walking through each step.</p>
@@ -765,17 +835,17 @@ Dr.&nbsp;Sara Weston
 <h2>Get a head start: Assignment 3</h2>
 <p>Try this mini-challenge before next class:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Import the messy CSV from the pair exercise</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/messy_survey.csv"</span>, <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"-999"</span>, <span class="st">"N/A"</span>))</span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check for problems</span></span>
-<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(messy)</span>
-<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Fix at least one column type issue with col_types or</span></span>
-<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    readr::parse_number()</span></span>
-<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Save your cleaned version</span></span>
-<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean, <span class="st">"data/clean_survey.csv"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Import the messy CSV from the pair exercise</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>messy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="fu">here</span>(<span class="st">"data/messy_survey.csv"</span>), <span class="at">na =</span> <span class="fu">c</span>(<span class="st">""</span>, <span class="st">"NA"</span>, <span class="st">"-999"</span>, <span class="st">"N/A"</span>))</span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Check for problems</span></span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">problems</span>(messy)</span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Fix at least one column type issue with col_types or</span></span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    readr::parse_number()</span></span>
+<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Save your cleaned version</span></span>
+<span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">write_csv</span>(clean, <span class="fu">here</span>(<span class="st">"data/clean_survey.csv"</span>))</span></code></pre></div>
 </div>
 <p>Assignment 3 will have you do this end to end with real messy data.</p>
 <aside class="notes">
@@ -792,7 +862,7 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="solution" class="slide level2">
+<section id="solution-1" class="slide level2">
 <h2>Solution</h2>
 </section></section>
 <section>
@@ -834,6 +904,10 @@ Dr.&nbsp;Sara Weston
 <td><code>col_types</code></td>
 <td>Control column types</td>
 </tr>
+<tr class="odd">
+<td><code>here()</code></td>
+<td>Build portable file paths</td>
+</tr>
 </tbody>
 </table>
 </section>
@@ -854,6 +928,7 @@ Dr.&nbsp;Sara Weston
 <h2>Key takeaways</h2>
 <ol type="1">
 <li><strong><code>read_csv()</code> is your default</strong> — it’s faster and smarter than <code>read.csv()</code></li>
+<li><strong>Use <code>here()</code> for file paths</strong> — <code>here("data/file.csv")</code> works on any machine</li>
 <li><strong>Check your imports</strong> — <code>glimpse()</code> and <code>problems()</code> are your friends</li>
 <li><strong>Name your missing values</strong> — psychology data loves <code>-999</code></li>
 <li><strong>Excel is tricky</strong> — use <code>readxl</code> and be suspicious of formatting</li>
