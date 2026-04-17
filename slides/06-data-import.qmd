@@ -24,6 +24,7 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(here)
 ```
 
 # Getting real data into R {background-color="#2c3e50"}
@@ -60,6 +61,50 @@ my_data <- read_csv("path/to/file.csv")
 
 ::: {.notes}
 Emphasize the file path — this is where students get stuck most often. Common issues: wrong working directory, file not in the project folder, using backslashes on Windows. If you're doing a live demo, show what happens when the path is wrong (a clear error message). Remind them about the RStudio Files pane for navigating to files.
+:::
+
+## The file path problem
+
+`read_csv()` needs to know *where* your file is:
+
+```{r}
+#| eval: false
+# This works on your laptop...
+my_data <- read_csv("/Users/sara/Desktop/project/data/survey.csv")
+
+# ...but not on anyone else's. And not if you move the folder.
+```
+
+. . .
+
+**Hardcoded paths break.** Share your code with a collaborator, move your project folder, or switch computers — and it's broken.
+
+::: {.notes}
+This is the number one "it worked yesterday" problem. Walk through the scenario: student emails code to their advisor, advisor opens it on their laptop, and it immediately errors because `/Users/sara/Desktop` doesn't exist. Make this feel real — it happens constantly. The fix is to never use absolute paths and instead anchor paths to the project root.
+:::
+
+## here::here() — paths that always work
+
+```{r}
+#| eval: false
+library(here)
+
+# Build paths relative to your project root
+my_data <- read_csv(here("data", "survey.csv"))
+
+# Or use a single string with slashes
+my_data <- read_csv(here("data/survey.csv"))
+
+# See where here() thinks your root is:
+here()
+```
+
+- `here()` finds your **project root** — where the `.Rproj` file lives
+- Works on any machine, any operating system
+- No more "works on my laptop" problems
+
+::: {.notes}
+`here` uses the presence of an `.Rproj` file (or a few other markers) to locate the project root, then builds paths from there. This means the same code runs on any collaborator's machine as long as they have the same project folder structure. Show students how to run `here()` alone first — it prints the root path so they can confirm it's pointing at the right place. The two-argument vs. single-string forms are equivalent; the multi-argument form is slightly more readable. This pairs naturally with the RStudio Projects content from Session 1.
 :::
 
 ## Why not read.csv()?
@@ -191,7 +236,7 @@ This is critical for psychology data. Many students will have worked with SPSS d
 ```{r}
 #| eval: false
 # Save your cleaned data
-write_csv(my_cleaned_data, "data/cleaned_survey.csv")
+write_csv(my_cleaned_data, here("data/cleaned_survey.csv"))
 ```
 
 Save intermediate cleaned files — don't re-clean every time you start R.
@@ -211,12 +256,25 @@ I've created a messy CSV file for you. [Download it here.](https://github.com/sj
 3. Rename the columns to clean snake_case names
 4. What does `problems()` show you?
 
+::: {.notes}
+Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument.
+:::
+
+---
+
+## Solution
+
 ```{r}
-#| echo: false
+#| echo: true
 #| eval: false
-# Solution (reveal after time is up)
-messy <- read_csv("messy_survey.csv", na = c("N/A", "-999", ""))
-mess = messy |>
+messy <- read_csv(
+  here("data/messy_survey.csv"), #the path depends on where you saved your data
+  na = c("N/A", "-999", ""),
+  col_types = "cdciic")
+
+problems(messy)
+
+clean <- messy |>
   rename(
     participant_id = `Participant ID`,
     age = `Age (years)`,
@@ -226,16 +284,6 @@ mess = messy |>
     notes = Notes
   )
 ```
-
-::: {.notes}
-Set a 10-minute timer. Make sure students have downloaded the CSV file before starting — this is a common bottleneck. Circulate and check that students are using read_csv() (underscore, not period). The most common mistake is forgetting to include all the NA strings in the na argument. After time is up, walk through the solution and ask: "Did anyone get something different from problems()?" Remind students to upload their code to Canvas.
-:::
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # Excel files {background-color="#2c3e50"}
 
@@ -364,7 +412,7 @@ This will be the most practically relevant slide for many students. Qualtrics ex
 ```{r}
 #| eval: false
 # 1. Read the file
-raw_data <- read_csv("qualtrics_export.csv",
+raw_data <- read_csv(here("data/qualtrics_export.csv"),
   skip = 2,
   na = c("", "N/A", "-999")
 )
@@ -389,7 +437,7 @@ clean_data <- clean_data |>
   )
 
 # 5. Save the cleaned version
-write_csv(clean_data, "data/clean_survey.csv")
+write_csv(clean_data, here("data/clean_survey.csv"))
 ```
 
 ::: {.notes}
@@ -403,7 +451,7 @@ Try this mini-challenge before next class:
 ```{r}
 #| eval: false
 # 1. Import the messy CSV from the pair exercise
-messy <- read_csv("data/messy_survey.csv", na = c("", "NA", "-999", "N/A"))
+messy <- read_csv(here("data/messy_survey.csv"), na = c("", "NA", "-999", "N/A"))
 
 # 2. Check for problems
 problems(messy)
@@ -412,7 +460,7 @@ problems(messy)
 #    readr::parse_number()
 
 # 4. Save your cleaned version
-write_csv(clean, "data/clean_survey.csv")
+write_csv(clean, here("data/clean_survey.csv"))
 ```
 
 Assignment 3 will have you do this end to end with real messy data.
@@ -427,7 +475,7 @@ This is individual work for the remaining class time (~10 minutes). Students who
 #| echo: false
 #| eval: false
 # Solution to end-of-deck exercise
-messy <- read_csv("data/messy_survey.csv",
+messy <- read_csv(here("data/messy_survey.csv"),
                   na = c("", "NA", "-999", "N/A"),
                   col_types = cols(
                     id = col_character(),
@@ -440,7 +488,7 @@ problems(messy)  # Check what readr flagged
 clean <- messy |>
   mutate(age = parse_number(age))
 
-write_csv(clean, "data/clean_survey.csv")
+write_csv(clean, here("data/clean_survey.csv"))
 ```
 
 # Wrapping up {background-color="#2c3e50"}
@@ -455,12 +503,13 @@ write_csv(clean, "data/clean_survey.csv")
 | `read_sav()` | Read SPSS files |
 | `problems()` | Check for import issues |
 | `col_types` | Control column types |
+| `here()` | Build portable file paths |
 
 ## Before next class
 
 📖 **Read:**
 
-- [R4DS Ch 9: Layers](https://r4ds.hadley.nz/layers)
+- [R4DS Ch 28: Quarto](https://r4ds.hadley.nz/quarto)
 
 ✅ **Practice:**
 
@@ -471,10 +520,11 @@ write_csv(clean, "data/clean_survey.csv")
 ## Key takeaways
 
 1. **`read_csv()` is your default** — it's faster and smarter than `read.csv()`
-2. **Check your imports** — `glimpse()` and `problems()` are your friends
-3. **Name your missing values** — psychology data loves `-999`
-4. **Excel is tricky** — use `readxl` and be suspicious of formatting
-5. **Save cleaned files** — don't re-clean every time
+2. **Use `here()` for file paths** — `here("data/file.csv")` works on any machine
+3. **Check your imports** — `glimpse()` and `problems()` are your friends
+4. **Name your missing values** — psychology data loves `-999`
+5. **Excel is tricky** — use `readxl` and be suspicious of formatting
+6. **Save cleaned files** — don't re-clean every time
 
 ::: {.notes}
 If you need to cut anything from this deck for time, the col_types shortcuts slide and the separate Excel "listing sheet names" slide are the most skippable. The core message students should leave with: always check your imports, and handle missing values at import time.
@@ -484,7 +534,7 @@ If you need to cut anything from this deck for time, the col_types shortcuts sli
 
 Your analysis is only as good as your import. Check it before you trust it.
 
-Next time: Layers & Aesthetics
+Next time: Quarto
 
 ::: {.notes}
 Remind students of the reading for next class (R4DS Ch 9: Layers). Next session moves back to ggplot2 with a deeper dive into layers and aesthetics. Preview: "Now that you can import and reshape your own data, we'll learn how to build more sophisticated visualizations with it."

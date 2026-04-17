@@ -1,11 +1,14 @@
 ---
 title: "Assignment 1: Getting Started with R"
 date: "2026-04-05"
+execute:
+  warning: false
+  message: false
 ---
 
 ```{r}
 #| include: false
-# This assignment covers Sessions 1-2
+library(tidyverse)
 ```
 
 ::: {.callout-note}
@@ -49,6 +52,31 @@ a) Use `glimpse()` to look at the structure of `mpg`. In a comment, note how man
 
 b) Use `?mpg` to read the documentation. In a comment, explain what `displ` and `hwy` represent.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+**Part a:** `glimpse()` gives you a quick overview of the structure.
+
+```{r}
+glimpse(mpg)
+# 234 rows, 11 columns
+```
+
+**Part b:** `?mpg` opens the help page in RStudio — run this in your console, it won't produce output in a document.
+
+```{r}
+#| eval: false
+?mpg
+```
+
+```r
+# displ: engine displacement, in litres — a measure of engine size.
+#         Larger values = bigger engine.
+# hwy: highway miles per gallon — fuel efficiency on the highway.
+#       Larger values = better fuel economy.
+```
+:::
+
 ### Task 2: Create a basic scatterplot (15 points)
 
 Create a scatterplot showing the relationship between engine displacement (`displ`) and highway fuel efficiency (`hwy`).
@@ -60,6 +88,22 @@ Your plot should:
 - Include a clear title
 - Have labeled axes (not just variable names)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  labs(
+    title = "Engine Size vs. Highway Fuel Efficiency",
+    x = "Engine Displacement (liters)",
+    y = "Highway MPG"
+  )
+```
+:::
+
 ### Task 3: Add color (20 points)
 
 Modify your scatterplot to color the points by vehicle class (`class`).
@@ -67,12 +111,49 @@ Modify your scatterplot to color the points by vehicle class (`class`).
 - The legend should appear automatically
 - Give the legend a clear title (hint: use `labs()`)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  labs(
+    title = "Engine Size vs. Highway Fuel Efficiency by Vehicle Class",
+    x = "Engine Displacement (liters)",
+    y = "Highway MPG",
+    color = "Vehicle Class"
+  )
+```
+:::
+
 ### Task 4: Create faceted plots (20 points)
 
 Create the same scatterplot (displacement vs highway mpg, colored by class), but now faceted by drive type (`drv`).
 
 - Use `facet_wrap()`
 - Each panel should be clearly labeled
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-width: 9
+#| fig-height: 4
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  facet_wrap(~drv) +
+  labs(
+    title = "Engine Size vs. Highway MPG by Drive Type",
+    x = "Engine Displacement (liters)",
+    y = "Highway MPG",
+    color = "Vehicle Class"
+  )
+```
+
+The three panels are `4` (four-wheel drive), `f` (front-wheel drive), and `r` (rear-wheel drive). Rear-wheel drive vehicles cluster at high displacement and low mpg — mostly sports cars and trucks.
+:::
 
 ### Task 5: Save your plot (15 points)
 
@@ -84,6 +165,36 @@ ggsave("mpg_faceted_plot.png", width = 10, height = 6)
 
 Verify the file was created in your project folder.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+`ggsave()` saves the most recently created plot. Run this immediately after your `ggplot()` code.
+
+```{r}
+#| eval: false
+ggsave("mpg_faceted_plot.png", width = 10, height = 6)
+```
+
+If you want to be explicit about which plot to save, store it in an object first:
+
+```{r}
+#| eval: false
+my_plot <- ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point() +
+  facet_wrap(~drv) +
+  labs(
+    title = "Engine Size vs. Highway MPG by Drive Type",
+    x = "Engine Displacement (liters)",
+    y = "Highway MPG",
+    color = "Vehicle Class"
+  )
+
+ggsave("mpg_faceted_plot.png", plot = my_plot, width = 10, height = 6)
+```
+
+Check your Files pane in RStudio — `mpg_faceted_plot.png` should appear in your project folder.
+:::
+
 ### Task 6: Reflection (10 points)
 
 At the bottom of your script, answer these questions in comments:
@@ -94,6 +205,32 @@ At the bottom of your script, answer these questions in comments:
 # 2. Do all vehicle classes follow the same pattern?
 # 3. What was the most challenging part of this assignment?
 ```
+
+::: {.callout-note collapse="true"}
+## Sample Answers
+
+Reflection questions don't have a single right answer, but here's what a strong response looks like:
+
+```r
+# 1. What relationship do you observe between engine size and fuel efficiency?
+# There is a clear negative relationship: as engine displacement increases,
+# highway fuel efficiency decreases. Larger engines tend to get fewer miles
+# per gallon.
+
+# 2. Do all vehicle classes follow the same pattern?
+# Mostly yes, but there are differences by class. SUVs and pickups cluster
+# in the high-displacement, low-mpg region. Compact and midsize cars cluster
+# in the low-displacement, high-mpg region. When faceted by drive type,
+# rear-wheel drive vehicles are almost entirely large-engine, low-efficiency
+# vehicles (sports cars and pickups). Front-wheel drive vehicles span a wider
+# range of engine sizes but have better fuel economy overall.
+
+# 3. What was the most challenging part of this assignment?
+# (Individual answer — common responses: file paths for ggsave, figuring out
+# where the PNG was saved, understanding the difference between color inside
+# vs. outside aes().)
+```
+:::
 
 ## Submission Checklist
 

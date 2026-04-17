@@ -121,14 +121,22 @@ Answer in comments:
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| Part 1: Understanding data | 15 |
-| Part 2: Joining data | 30 |
-| Part 3: Missing data analysis | 30 |
-| Part 4: Reflection | 15 |
-| Code runs without errors | 10 |
+| Task | Points |
+|------|--------|
+| 1.1: Explore datasets and identify overlaps | 7 |
+| 1.2: Use `anti_join()` to find mismatches | 8 |
+| 2.1: `inner_join()` demographics + survey | 10 |
+| 2.2: `left_join()` demographics + survey | 10 |
+| 2.3: Summarize task data and join | 10 |
+| 3.1: Missing data summary (counts + percentages) | 7 |
+| 3.2: Missingness by condition | 8 |
+| 3.3: Missingness visualization | 7 |
+| 3.4: Complete cases vs. available data comparison | 8 |
+| Part 4: Reflection (3 questions) | 15 |
+| QMD file knits without errors | 10 |
 | **Total** | **100** |
+
+**Grading scale per task:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
 
 ## Submission
 

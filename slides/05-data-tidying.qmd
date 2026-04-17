@@ -453,10 +453,17 @@ With a partner, figure out: Which participant has the highest mean BDI score?
 You'll need `pivot_longer()` followed by `group_by()` + `summarize()`. The column names start with `"bdi"` — that's a hint.
 :::
 
+::: {.notes}
+Set a 10-minute timer. Circulate the room — the most common sticking point is getting the pivot_longer() arguments right. If pairs are stuck, ask: "Which columns do you want to pivot? What should the new columns be called?" After ~8 minutes, ask who has an answer. Participants 1 and 3 are tied for the highest mean (both 2.0); Participant 2 has the lowest (1.0).
+:::
+
+---
+
+## Solution
+
 ```{r}
-#| echo: false
+#| echo: true
 #| eval: false
-# Solution (reveal after time is up)
 survey_wide |>
   pivot_longer(
     cols = starts_with("bdi"),
@@ -466,16 +473,6 @@ survey_wide |>
   group_by(participant) |>
   summarize(mean_bdi = mean(response))
 ```
-
-::: {.notes}
-Set a 10-minute timer. Circulate the room — the most common sticking point is getting the pivot_longer() arguments right. If pairs are stuck, ask: "Which columns do you want to pivot? What should the new columns be called?" After ~8 minutes, ask who has an answer. Participants 1 and 3 are tied for the highest mean (both 2.0); Participant 2 has the lowest (1.0). Reveal the solution and walk through it line by line. Remind students to upload their code to Canvas before moving on.
-:::
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # pivot_wider() {background-color="#2c3e50"}
 

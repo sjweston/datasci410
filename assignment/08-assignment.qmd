@@ -107,17 +107,19 @@ Before submitting:
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| YAML header | 5 |
-| Introduction | 10 |
+| Section | Points |
+|---------|--------|
+| YAML header (title, author, date, format options) | 5 |
+| Introduction (dataset, question, motivation) | 10 |
 | Data import & cleaning | 10 |
-| Exploratory analysis | 25 |
-| Main analysis | 20 |
-| Inline code | 10 |
-| Conclusion | 10 |
-| Code runs without errors | 10 |
+| Exploratory analysis (2+ visualizations with interpretation) | 25 |
+| Main analysis (research question + publication-quality figure) | 20 |
+| Inline code (3+ statistics in narrative) | 10 |
+| Conclusion (findings, limitations, next steps) | 10 |
+| QMD file knits without errors | 10 |
 | **Total** | **100** |
+
+**Grading scale per section:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
 
 **Bonus (up to 5 points):** Exceptional visualization design, creative analysis, or going beyond requirements.
 

@@ -191,6 +191,7 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ### Key Functions/Concepts
 - `read_csv()`, `write_csv()`
+- `here::here()` for portable file paths
 - `readxl::read_excel()`
 - `haven::read_sav()` (mention)
 - `problems()` for debugging imports

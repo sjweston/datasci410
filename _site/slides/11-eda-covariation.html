@@ -269,7 +269,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 23.20174, 18.85562, 23.67800, 25.67393, 15.64227, 15.2…</code></pre>
+$ depression_post &lt;dbl&gt; 30.564952, 18.194410, 23.767778, 13.872057, 14.982550,…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -556,12 +556,12 @@ $ depression_post &lt;dbl&gt; 23.20174, 18.85562, 23.67800, 25.67393, 15.64227, 
 <pre><code># A tibble: 6 × 2
   referral  diagnosis 
   &lt;chr&gt;     &lt;chr&gt;     
-1 Self      Depression
-2 Physician Both      
-3 Self      Depression
-4 Self      Depression
-5 Self      Depression
-6 School    Both      </code></pre>
+1 School    Other     
+2 School    Anxiety   
+3 Physician Depression
+4 Physician Other     
+5 School    Anxiety   
+6 Physician Both      </code></pre>
 </div>
 </div>
 </section>
@@ -742,8 +742,8 @@ $ depression_post &lt;dbl&gt; 23.20174, 18.85562, 23.67800, 25.67393, 15.64227, 
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 29.78096, 41.18981, 45.16241, 26.13830, 36.16281, 65.461…
-$ reaction_time &lt;dbl&gt; 296.5188, 233.5813, 330.4331, 305.2887, 332.5909, 421.41…</code></pre>
+$ age           &lt;dbl&gt; 27.17883, 26.05592, 30.18118, 39.07052, 39.63380, 35.655…
+$ reaction_time &lt;dbl&gt; 249.2162, 263.7907, 340.6669, 343.4887, 408.2452, 418.40…</code></pre>
 </div>
 </div>
 </section>
@@ -954,7 +954,7 @@ $ reaction_time &lt;dbl&gt; 296.5188, 233.5813, 330.4331, 305.2887, 332.5909, 42
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.730654</code></pre>
+<pre><code>[1] 0.7411782</code></pre>
 </div>
 </div>
 <div class="fragment">

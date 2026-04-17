@@ -113,14 +113,21 @@ You won't match it exactly — plain text axis labels are fine.
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| Part 1: Bar charts with error bars | 25 |
-| Part 2: Distributions | 25 |
-| Part 3: Bad and Good graph | 25 |
-| Part 4: Recreate a figure | 15 |
-| Code runs without errors | 10 |
+| Task | Points |
+|------|--------|
+| 1.1: Summary table (mean + SE by species) | 10 |
+| 1.2: Bar chart with error bars | 15 |
+| 2.1: Histogram with bin width exploration | 8 |
+| 2.2: Overlapping density plots by species | 8 |
+| 2.3: Boxplot vs. violin plot comparison | 9 |
+| 3.1: Intentionally bad visualization | 12 |
+| 3.2: Good visualization with design justification | 13 |
+| 4.1: Import data and convert team to factor | 5 |
+| 4.2: Recreate Figure 3 | 10 |
+| QMD file knits without errors | 10 |
 | **Total** | **100** |
+
+**Grading scale per task:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
 
 ## Submission
 

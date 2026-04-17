@@ -98,14 +98,21 @@ Write this as narrative text (not code comments) in your Quarto document.
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| Part 1: Exploring distributions | 25 |
-| Part 2: Exploring relationships | 30 |
-| Part 3: Generating questions | 20 |
-| Part 4: EDA report | 15 |
-| Code runs without errors | 10 |
+| Task | Points |
+|------|--------|
+| 1.1: Histograms for age and personality item | 8 |
+| 1.2: Outlier detection in age | 8 |
+| 1.3: Missing data summary | 9 |
+| 2.1: Correlation matrix of E1–E5 | 10 |
+| 2.2: Scatterplot of two Extraversion items | 10 |
+| 2.3: Boxplots by education level | 10 |
+| 3.1: Generate 3 research questions | 8 |
+| 3.2: Visualization + interpretation for one question | 12 |
+| Part 4: EDA report (300–400 words) | 15 |
+| QMD file knits without errors | 10 |
 | **Total** | **100** |
+
+**Grading scale per task:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
 
 ## Submission
 

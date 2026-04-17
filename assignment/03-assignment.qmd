@@ -103,13 +103,20 @@ library(readxl)
 
 ## Grading Rubric
 
-| Component | Points |
-|-----------|--------|
-| Part 1: Pivoting wide to long | 30 |
-| Part 2: Pivoting long to wide | 25 |
-| Part 3: Importing data | 35 |
-| Code runs without errors | 10 |
+| Task | Points |
+|------|--------|
+| 1.1: Pivot to long format | 10 |
+| 1.2: Calculate means by time and condition | 10 |
+| 1.3: Create line plot | 10 |
+| 2.1: Pivot to wide format | 15 |
+| 2.2: Create sum of emotion ratings | 10 |
+| 3.1: Import CSV with `read_csv()` | 10 |
+| 3.2: Re-import handling NA values and column types | 15 |
+| 3.3: Import Excel with `readxl` | 10 |
+| QMD file knits without errors | 10 |
 | **Total** | **100** |
+
+**Grading scale per task:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
 
 ## Submission
 

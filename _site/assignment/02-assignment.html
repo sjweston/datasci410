@@ -76,7 +76,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-4c7b890cc350be7067044af900615741.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-811e005a84cc6364435127520eb33ab7.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-bfcfb3c4e332bbc8fd1708f0091138e4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
 <link href="../site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
@@ -361,14 +361,122 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-1.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.1">Task 1.1</h3>
 <p>Find all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>jfk_june_delayed <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"JFK"</span>, month <span class="sc">==</span> <span class="dv">6</span>, dep_delay <span class="sc">&gt;</span> <span class="dv">60</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>jfk_june_delayed</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,185 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     6     1     1439           1300        99     1741           1555
+ 2  2013     6     1     1837           1650       107     2054           1914
+ 3  2013     6     1     2012           1710       182     2142           1915
+ 4  2013     6     1     2104           1919       105     2338           2220
+ 5  2013     6     1     2150           2031        79       37           2348
+ 6  2013     6     1     2209           1925       164     2345           2137
+ 7  2013     6     2       24           2245        99      133              1
+ 8  2013     6     2     1505           1355        70     1745           1643
+ 9  2013     6     2     1605           1455        70     1746           1640
+10  2013     6     2     1718           1600        78     1911           1833
+# ℹ 1,175 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(jfk_june_delayed)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1185</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="task-1.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.2">Task 1.2</h3>
 <p>Of those flights, which one had the longest departure delay? Use <code>arrange()</code> to find out. Report the carrier, destination, and delay time.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(origin <span class="sc">==</span> <span class="st">"JFK"</span>, month <span class="sc">==</span> <span class="dv">6</span>, dep_delay <span class="sc">&gt;</span> <span class="dv">60</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1,185 × 19
+    year month   day dep_time sched_dep_time dep_delay arr_time sched_arr_time
+   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
+ 1  2013     6    15     1432           1935      1137     1607           2120
+ 2  2013     6    27      959           1900       899     1236           2226
+ 3  2013     6    27      615           1705       790      853           2004
+ 4  2013     6    24      159           1735       504      432           2108
+ 5  2013     6     7     2359           1700       419      201           1830
+ 6  2013     6    23     1833           1200       393       NA           1507
+ 7  2013     6    13     1627            959       388     1815           1114
+ 8  2013     6    27      221           2000       381      309           2129
+ 9  2013     6    25     1421            805       376     1602            950
+10  2013     6     7       29           1818       371      336           2120
+# ℹ 1,175 more rows
+# ℹ 11 more variables: arr_delay &lt;dbl&gt;, carrier &lt;chr&gt;, flight &lt;int&gt;,
+#   tailnum &lt;chr&gt;, origin &lt;chr&gt;, dest &lt;chr&gt;, air_time &lt;dbl&gt;, distance &lt;dbl&gt;,
+#   hour &lt;dbl&gt;, minute &lt;dbl&gt;, time_hour &lt;dttm&gt;</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The first row is the worst offender — look at carrier, dest, and dep_delay.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="task-1.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.3">Task 1.3</h3>
 <p>Find all flights to Los Angeles (LAX) or San Francisco (SFO) that departed on time or early. How many were there?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"LAX"</span>, <span class="st">"SFO"</span>), dep_delay <span class="sc">&lt;=</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 17125</code></pre>
+</div>
+</div>
+<p><code>dep_delay &lt;= 0</code> captures both on-time (0) and early (negative) departures. A common mistake here is using <code>dest == "LAX" | dest == "SFO"</code> instead of <code>dest %in% c("LAX", "SFO")</code>. Both work, but <code>%in%</code> is cleaner when checking one variable against multiple values.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="part-2-selecting-and-mutating-35-points" class="level2">
@@ -384,6 +492,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>arr_delay</code></li>
 </ul>
 <p>Call this dataset <code>flights_subset</code>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>flights_subset <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(carrier, origin, dest, dep_delay, arr_delay)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>flights_subset</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 5
+   carrier origin dest  dep_delay arr_delay
+   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+ 1 UA      EWR    IAH           2        11
+ 2 UA      LGA    IAH           4        20
+ 3 AA      JFK    MIA           2        33
+ 4 B6      JFK    BQN          -1       -18
+ 5 DL      LGA    ATL          -6       -25
+ 6 UA      EWR    ORD          -4        12
+ 7 B6      EWR    FLL          -5        19
+ 8 EV      LGA    IAD          -3       -14
+ 9 B6      JFK    MCO          -3        -8
+10 AA      LGA    ORD          -2         8
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="task-2.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.2">Task 2.2</h3>
@@ -392,10 +537,118 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>delay_diff</code>: the difference between arrival delay and departure delay</li>
 <li><code>dep_delay_hrs</code>: the departure delay in hours (not minutes)</li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This builds on Task 2.1 — in your own script, make sure you’ve created <code>flights_subset</code> first.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>flights_subset <span class="ot">&lt;-</span> flights_subset <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">delay_diff =</span> arr_delay <span class="sc">-</span> dep_delay,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">dep_delay_hrs =</span> dep_delay <span class="sc">/</span> <span class="dv">60</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>flights_subset</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 336,776 × 7
+   carrier origin dest  dep_delay arr_delay delay_diff dep_delay_hrs
+   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+ 1 UA      EWR    IAH           2        11          9        0.0333
+ 2 UA      LGA    IAH           4        20         16        0.0667
+ 3 AA      JFK    MIA           2        33         31        0.0333
+ 4 B6      JFK    BQN          -1       -18        -17       -0.0167
+ 5 DL      LGA    ATL          -6       -25        -19       -0.1   
+ 6 UA      EWR    ORD          -4        12         16       -0.0667
+ 7 B6      EWR    FLL          -5        19         24       -0.0833
+ 8 EV      LGA    IAD          -3       -14        -11       -0.05  
+ 9 B6      JFK    MCO          -3        -8         -5       -0.05  
+10 AA      LGA    ORD          -2         8         10       -0.0333
+# ℹ 336,766 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="task-2.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.3">Task 2.3</h3>
 <p>What does a positive <code>delay_diff</code> mean? What does a negative value mean? Answer in a comment, then find a flight that “made up time” (arrived less delayed than it departed).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>This builds on Tasks 2.1 and 2.2 — <code>delay_diff</code> must exist in <code>flights_subset</code> before running this.</p>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A positive delay_diff means the flight arrived MORE delayed than it departed —</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co"># it lost additional time in the air (e.g., circling, headwinds).</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># A negative delay_diff means the flight "made up time" — it arrived</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co"># less delayed than it departed (e.g., favorable tailwinds, shorter route).</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>flights_subset <span class="sc">|&gt;</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dep_delay <span class="sc">&gt;</span> <span class="dv">0</span>, delay_diff <span class="sc">&lt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(delay_diff)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 83,728 × 7
+   carrier origin dest  dep_delay arr_delay delay_diff dep_delay_hrs
+   &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;         &lt;dbl&gt;
+ 1 EV      EWR    JAX         235       126       -109         3.92 
+ 2 HA      JFK    HNL          60       -27        -87         1    
+ 3 HA      JFK    HNL         206       126        -80         3.43 
+ 4 DL      JFK    SFO          17       -62        -79         0.283
+ 5 HA      JFK    HNL          24       -52        -76         0.4  
+ 6 UA      EWR    SNA          48       -26        -74         0.8  
+ 7 UA      EWR    SFO          34       -40        -74         0.567
+ 8 UA      EWR    SFO          31       -42        -73         0.517
+ 9 DL      JFK    LAX           9       -63        -72         0.15 
+10 UA      EWR    LAX          19       -53        -72         0.317
+# ℹ 83,718 more rows</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="part-3-grouped-summaries-30-points" class="level2">
@@ -403,10 +656,95 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-3.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.1">Task 3.1</h3>
 <p>Calculate the average departure delay for each carrier. Which carrier has the worst average delay?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(avg_dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 2
+   carrier avg_dep_delay
+   &lt;chr&gt;           &lt;dbl&gt;
+ 1 F9              20.2 
+ 2 EV              20.0 
+ 3 YV              19.0 
+ 4 FL              18.7 
+ 5 WN              17.7 
+ 6 9E              16.7 
+ 7 B6              13.0 
+ 8 VX              12.9 
+ 9 OO              12.6 
+10 UA              12.1 
+11 MQ              10.6 
+12 DL               9.26
+13 AA               8.59
+14 AS               5.80
+15 HA               4.90
+16 US               3.78</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Frontier Airlines (F9) has the worst average departure delay.</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># na.rm = TRUE is essential — without it, any carrier with even one</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a><span class="co"># missing value returns NA for the whole mean.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</div>
 </section>
 <section id="task-3.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.2">Task 3.2</h3>
 <p>Calculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, month) <span class="sc">|&gt;</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(origin, <span class="fu">desc</span>(avg_dep_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 36 × 3
+# Groups:   origin [3]
+   origin month avg_dep_delay
+   &lt;chr&gt;  &lt;int&gt;         &lt;dbl&gt;
+ 1 EWR        6         22.5 
+ 2 EWR        7         22.0 
+ 3 EWR       12         21.0 
+ 4 EWR        3         18.1 
+ 5 EWR        4         17.4 
+ 6 EWR        5         15.4 
+ 7 EWR        1         14.9 
+ 8 EWR        8         13.5 
+ 9 EWR        2         13.1 
+10 EWR       10          8.64
+# ℹ 26 more rows</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summer months (June/July) tend to be worst across all three airports.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p><code>group_by(origin, month)</code> groups by the combination of both variables, giving one row per airport-month pair.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-3.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.3">Task 3.3</h3>
@@ -418,6 +756,54 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Number of destinations served (<code>n_distinct()</code>)</li>
 </ul>
 <p>Arrange by number of flights (descending).</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_dep_delay =</span> <span class="fu">mean</span>(dep_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_arr_delay =</span> <span class="fu">mean</span>(arr_delay, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>(),</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_dest =</span> <span class="fu">n_distinct</span>(dest)</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_flights))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 5
+   carrier avg_dep_delay avg_arr_delay n_flights n_dest
+   &lt;chr&gt;           &lt;dbl&gt;         &lt;dbl&gt;     &lt;int&gt;  &lt;int&gt;
+ 1 UA              12.1          3.56      58665     47
+ 2 B6              13.0          9.46      54635     42
+ 3 EV              20.0         15.8       54173     61
+ 4 DL               9.26         1.64      48110     40
+ 5 AA               8.59         0.364     32729     19
+ 6 MQ              10.6         10.8       26397     20
+ 7 US               3.78         2.13      20536      6
+ 8 9E              16.7          7.38      18460     49
+ 9 WN              17.7          9.65      12275     11
+10 VX              12.9          1.76       5162      5
+11 FL              18.7         20.1        3260      3
+12 AS               5.80        -9.93        714      1
+13 F9              20.2         21.9         685      1
+14 YV              19.0         15.6         601      3
+15 HA               4.90        -6.92        342      1
+16 OO              12.6         11.9          32      5</code></pre>
+</div>
+</div>
+<p><code>n()</code> counts rows (total flights) while <code>n_distinct(dest)</code> counts unique values — these serve very different purposes.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="putting-it-together" class="level2">
@@ -432,6 +818,51 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Arranges by mean delay (worst first)</li>
 </ol>
 <p>What are the top 3 worst destinations for United delays?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>flights <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carrier <span class="sc">==</span> <span class="st">"UA"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(arr_delay)) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(dest) <span class="sc">|&gt;</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_arr_delay =</span> <span class="fu">mean</span>(arr_delay),</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_flights =</span> <span class="fu">n</span>()</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(n_flights <span class="sc">&gt;=</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_arr_delay))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 29 × 3
+   dest  mean_arr_delay n_flights
+   &lt;chr&gt;          &lt;dbl&gt;     &lt;int&gt;
+ 1 BQN            10.9        295
+ 2 ATL            10.5        102
+ 3 SAT             7.69       323
+ 4 MIA             6.66      1548
+ 5 CLE             6.41      1863
+ 6 ORD             6.07      6744
+ 7 SEA             5.83      1101
+ 8 PBI             5.41      1825
+ 9 FLL             5.25      2376
+10 DEN             5.16      3737
+# ℹ 19 more rows</code></pre>
+</div>
+</div>
+<p>A common mistake is putting <code>filter(n_flights &gt;= 100)</code> <em>before</em> <code>summarize()</code> — at that point, <code>n_flights</code> doesn’t exist yet. The filter on a summary variable always has to come after <code>summarize()</code>.</p>
+<p>Note: we don’t need <code>na.rm = TRUE</code> inside <code>mean()</code> here because <code>filter(!is.na(arr_delay))</code> already removed the missing rows. Both approaches work, but the explicit filter step makes the cleaning visible.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="grading-rubric" class="level2">
 <h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h2>

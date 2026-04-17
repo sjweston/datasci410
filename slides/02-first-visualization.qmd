@@ -325,12 +325,11 @@ You have everything you need from the last few slides. Start with the basic temp
 Set a visible timer for 10 minutes. Circulate the room and help pairs who are stuck — the most common issues will be: forgetting the `+` between layers and putting `color` outside `aes()`. Encourage students to experiment beyond the requirements (try different colors, themes, alpha). For the "who can make it look the nicest" prompt, you might do a quick informal show-and-tell at the end. They haven't learned `labs()` or themes yet, so don't penalize anyone who doesn't add them — but some students will figure it out from autocomplete.
 :::
 
----
+## Solution
 
 ```{r}
-#| echo: false
+#| echo: true
 #| eval: false
-# Solution (reveal after time is up)
 ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
   geom_point() +
   geom_smooth() +
@@ -342,14 +341,8 @@ ggplot(mpg, aes(x = cty, y = hwy, color = fl)) +
   )
 ```
 
-
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
-
 ::: {.notes}
-Give students 1 minute to submit. Emphasize that it doesn't need to be perfect or even run — partial code is fine. This is about participation, not correctness. Transition: "Now let's look at some other geom types for different kinds of data."
+Walk through the solution line by line. Transition: "Now let's look at some other geom types for different kinds of data."
 :::
 
 ## geom_bar() — categorical data

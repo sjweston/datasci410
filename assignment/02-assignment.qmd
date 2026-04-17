@@ -1,7 +1,16 @@
 ---
 title: "Assignment 2: Data Transformation"
 date: "2026-04-12"
+execute:
+  warning: false
+  message: false
 ---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(nycflights13)
+```
 
 ::: {.callout-note}
 ## Assignment Details
@@ -38,11 +47,47 @@ library(nycflights13)
 ### Task 1.1
 Find all flights that departed from JFK in June and were delayed by more than 1 hour. How many flights meet these criteria?
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+jfk_june_delayed <- flights |>
+  filter(origin == "JFK", month == 6, dep_delay > 60)
+
+jfk_june_delayed
+nrow(jfk_june_delayed)
+```
+:::
+
 ### Task 1.2
 Of those flights, which one had the longest departure delay? Use `arrange()` to find out. Report the carrier, destination, and delay time.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  filter(origin == "JFK", month == 6, dep_delay > 60) |>
+  arrange(desc(dep_delay))
+
+# The first row is the worst offender — look at carrier, dest, and dep_delay.
+```
+:::
+
 ### Task 1.3
 Find all flights to Los Angeles (LAX) or San Francisco (SFO) that departed on time or early. How many were there?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  filter(dest %in% c("LAX", "SFO"), dep_delay <= 0) |>
+  nrow()
+```
+
+`dep_delay <= 0` captures both on-time (0) and early (negative) departures. A common mistake here is using `dest == "LAX" | dest == "SFO"` instead of `dest %in% c("LAX", "SFO")`. Both work, but `%in%` is cleaner when checking one variable against multiple values.
+:::
 
 ## Part 2: Selecting and Mutating (35 points)
 
@@ -57,22 +102,101 @@ Create a new dataset that contains only:
 
 Call this dataset `flights_subset`.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights_subset <- flights |>
+  select(carrier, origin, dest, dep_delay, arr_delay)
+
+flights_subset
+```
+:::
+
 ### Task 2.2
 Using `flights_subset`, create two new variables:
 
 - `delay_diff`: the difference between arrival delay and departure delay
 - `dep_delay_hrs`: the departure delay in hours (not minutes)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+::: {.callout-tip}
+This builds on Task 2.1 — in your own script, make sure you've created `flights_subset` first.
+:::
+
+```{r}
+flights_subset <- flights_subset |>
+  mutate(
+    delay_diff = arr_delay - dep_delay,
+    dep_delay_hrs = dep_delay / 60
+  )
+
+flights_subset
+```
+:::
+
 ### Task 2.3
 What does a positive `delay_diff` mean? What does a negative value mean? Answer in a comment, then find a flight that "made up time" (arrived less delayed than it departed).
+
+::: {.callout-note collapse="true"}
+## Answer
+
+::: {.callout-tip}
+This builds on Tasks 2.1 and 2.2 — `delay_diff` must exist in `flights_subset` before running this.
+:::
+
+```{r}
+# A positive delay_diff means the flight arrived MORE delayed than it departed —
+# it lost additional time in the air (e.g., circling, headwinds).
+#
+# A negative delay_diff means the flight "made up time" — it arrived
+# less delayed than it departed (e.g., favorable tailwinds, shorter route).
+
+flights_subset |>
+  filter(dep_delay > 0, delay_diff < 0) |>
+  arrange(delay_diff)
+```
+:::
 
 ## Part 3: Grouped Summaries (30 points)
 
 ### Task 3.1
 Calculate the average departure delay for each carrier. Which carrier has the worst average delay?
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  group_by(carrier) |>
+  summarize(avg_dep_delay = mean(dep_delay, na.rm = TRUE)) |>
+  arrange(desc(avg_dep_delay))
+
+# Frontier Airlines (F9) has the worst average departure delay.
+# na.rm = TRUE is essential — without it, any carrier with even one
+# missing value returns NA for the whole mean.
+```
+:::
+
 ### Task 3.2
 Calculate the average departure delay for each origin airport, by month. Which month is the worst for delays at each airport?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  group_by(origin, month) |>
+  summarize(avg_dep_delay = mean(dep_delay, na.rm = TRUE)) |>
+  arrange(origin, desc(avg_dep_delay))
+
+# Summer months (June/July) tend to be worst across all three airports.
+```
+
+`group_by(origin, month)` groups by the combination of both variables, giving one row per airport-month pair.
+:::
 
 ### Task 3.3
 Create a summary table showing, for each carrier:
@@ -83,6 +207,24 @@ Create a summary table showing, for each carrier:
 - Number of destinations served (`n_distinct()`)
 
 Arrange by number of flights (descending).
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  group_by(carrier) |>
+  summarize(
+    avg_dep_delay = mean(dep_delay, na.rm = TRUE),
+    avg_arr_delay = mean(arr_delay, na.rm = TRUE),
+    n_flights = n(),
+    n_dest = n_distinct(dest)
+  ) |>
+  arrange(desc(n_flights))
+```
+
+`n()` counts rows (total flights) while `n_distinct(dest)` counts unique values — these serve very different purposes.
+:::
 
 ## Putting It Together
 
@@ -96,6 +238,27 @@ Write a single piped sequence that:
 6. Arranges by mean delay (worst first)
 
 What are the top 3 worst destinations for United delays?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+flights |>
+  filter(carrier == "UA") |>
+  filter(!is.na(arr_delay)) |>
+  group_by(dest) |>
+  summarize(
+    mean_arr_delay = mean(arr_delay),
+    n_flights = n()
+  ) |>
+  filter(n_flights >= 100) |>
+  arrange(desc(mean_arr_delay))
+```
+
+A common mistake is putting `filter(n_flights >= 100)` *before* `summarize()` — at that point, `n_flights` doesn't exist yet. The filter on a summary variable always has to come after `summarize()`.
+
+Note: we don't need `na.rm = TRUE` inside `mean()` here because `filter(!is.na(arr_delay))` already removed the missing rows. Both approaches work, but the explicit filter step makes the cleaning visible.
+:::
 
 ## Grading Rubric
 

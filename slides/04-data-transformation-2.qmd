@@ -232,10 +232,17 @@ With a partner, using the `flights` dataset:
 2. Which airline has the **worst** average delay?
 3. **Bonus:** Also calculate the number of flights per carrier. Does the worst airline just have fewer flights?
 
+::: {.notes}
+Set a timer for 10 minutes. Circulate and watch for: (1) forgetting `na.rm = TRUE` and getting NA results, (2) using `mean(dep_delay)` without `summarize()`, (3) not knowing how to sort descending (`desc()`). The bonus question is intentionally a "think about your data" prompt — Frontier (F9) has the worst average delay but relatively few flights. Good moment to talk about sample size and whether an average is trustworthy.
+:::
+
+---
+
+## Solution
+
 ```{r}
-#| echo: false
+#| echo: true
 #| eval: false
-# Solution (reveal after time is up)
 flights |>
   group_by(carrier) |>
   summarize(
@@ -244,16 +251,6 @@ flights |>
   ) |>
   arrange(desc(avg_delay))
 ```
-
-::: {.notes}
-Set a timer for 10 minutes. Circulate and watch for: (1) forgetting `na.rm = TRUE` and getting NA results, (2) using `mean(dep_delay)` without `summarize()`, (3) not knowing how to sort descending (`desc()`). The bonus question is intentionally a "think about your data" prompt — Frontier (F9) has the worst average delay but relatively few flights. This is a good moment to talk about sample size and whether an average is trustworthy. Reveal the solution after time is up.
-:::
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 ## What you can already do
 

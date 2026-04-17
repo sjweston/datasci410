@@ -283,20 +283,23 @@ pre.text, pre.sourceCode, .cell-output pre {
 // Remove margin on pre in output
 .cell-output pre {
   margin-bottom: 0;
-  color: #ffffff;
+  color: #f0ede4 !important;  // off-white; !important overrides callout text color
 }
 
 // Format output and plain text blocks like code
+// Slightly lighter than $monokai-bg (#2e3440) to visually distinguish output from source code
+$output-bg: #3b4252;
+
 .cell-output, pre.text {
   border: none;
   padding: .4em;
-  background-color: $monokai-bg;
-  border: 1px solid $monokai-bg;
+  background-color: $output-bg !important;  // !important keeps dark bg inside callouts
+  border: 1px solid $output-bg;
   border-radius: .25rem;
 }
 
 pre.text {
-  color: #ffffff;
+  color: #f0ede4 !important;
 }
 
 // Inline code styling (not in pre blocks)
@@ -305,5 +308,12 @@ li code,
 td code,
 .callout code {
   color: $sara !important;
+  background-color: transparent !important;
+}
+
+// Override for code inside output blocks — these live on a dark background
+// and must not inherit the inline code color from the rule above
+.cell-output pre code {
+  color: #f0ede4 !important;
   background-color: transparent !important;
 }
