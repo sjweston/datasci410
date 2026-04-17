@@ -26,12 +26,13 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(here)
 ```
 
 # What is literate programming? {background-color="#2c3e50"}
 
 ::: {.notes}
-This is Session 7 (Week 4, Mon Apr 20), even though the file is numbered 16. Quarto was moved earlier in the curriculum so students use it for all assignments from A3 onward. Assignment 3 (Tidying, Import & Quarto) is assigned today. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time. Open with the callback to Session 1 — this is the payoff for the replication crisis discussion.
+Session 7 (Week 4, Mon Apr 20). Quarto was moved earlier in the curriculum so students use it for all assignments from A3 onward. Assignment 3 (Tidying, Import & Quarto) is assigned today. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time. Open with the callback to Session 1 — this is the payoff for the replication crisis discussion.
 :::
 
 ## Remember Session 1?
@@ -57,7 +58,7 @@ Spend ~3 minutes on this opening. Let the callback land — they'll remember the
 **Step 1:** Analyze in R
 ```r
 # script.R
-data <- read_csv("data.csv")
+data <- read_csv(here("data.csv"))
 mean(data$depression)
 # 18.5
 ```
@@ -231,7 +232,7 @@ Surround R code with three backticks:
 ````markdown
 ```{{r}}
 # Load data
-data <- read_csv("depression_data.csv")
+data <- read_csv(here("data", "depression_data.csv"))
 
 # Compute mean
 mean(data$depression)
@@ -358,6 +359,59 @@ library(here)
 Emphasize the convention: every Quarto document should start with a setup chunk that loads packages and, optionally, reads in data. This is a habit they should build now. The `label: setup` name is conventional but not required; what matters is `include: false` so readers don't see the library loading messages.
 :::
 
+# Pair coding break {background-color="#e67e22"}
+
+::: {.notes}
+This is the main hands-on exercise. Give students 10 minutes. Walk around and help — the most common issues will be: YAML formatting errors (missing dashes, wrong indentation), forgetting to close code chunks, and render failures because of missing packages or objects. Remind them to create a new .qmd file from the RStudio menu (File > New File > Quarto Document), not by hand. They don't need to worry about inline code yet — that's coming after the break.
+:::
+
+## Your turn: Create a mini-report
+
+Create a new Quarto document (File → New File → Quarto Document):
+
+1. Add a YAML header with your name and title
+2. Write a short introduction (2-3 sentences)
+3. Create a code chunk that loads `tidyverse` and a dataset (try `mpg` — it's built into ggplot2, just type `mpg`)
+4. Create a visualization in its own chunk
+5. Render to HTML
+
+**Time: 10 minutes**
+
+```{r}
+#| echo: false
+#| eval: false
+
+# --- SOLUTION EXAMPLE ---
+# Save this as a .qmd file:
+
+# ---
+# title: "Car Fuel Efficiency Analysis"
+# author: "Your Name"
+# date: "2026-05-27"
+# format: html
+# ---
+
+# ## Introduction
+#
+# This report examines fuel efficiency in cars from the `mpg`
+# dataset. We explore the relationship between engine size and
+# highway fuel economy.
+
+library(tidyverse)
+
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(x = "Engine size (L)", y = "Highway MPG") +
+  theme_minimal()
+```
+
+---
+
+## Before we move on
+
+📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
+
 # Inline code {background-color="#2c3e50"}
 
 ::: {.notes}
@@ -424,181 +478,24 @@ The side-by-side layout shows the raw syntax on the left and the rendered result
 Use `round()` to control decimal places:
 
 ````{markdown}
-`r round(cor(x,y), 2)`
+`r round(mean(depression_scores), 2)`
 ````
 
-. . .
-
-Use `scales::percent()` for percentages:
-
-````{markdown}
-`r scales::percent(0.653)`
-````
-
-. . .
-
-Use `scales::comma()` for large numbers:
-
-````{markdown}
-`r scales::comma(15234)`
-````
+Without `round()`, you might get 15 decimal places. Always round inline results.
 
 ::: {.notes}
-These formatting functions are practical tools. `round()` is the one they'll use most — without it, inline code might print 15 decimal places. `scales::percent()` and `scales::comma()` are nice to know but not essential. If short on time, just cover `round()`.
+`round()` is the formatting function they'll use most. Emphasize: if your inline code prints something like 19.0000000000001, you forgot to round. The second argument is the number of decimal places. This is a habit to build now — every inline number should be rounded.
 :::
 
-# Pair coding break {background-color="#e67e22"}
+## A note on output formats
+
+Quarto can also render to **PDF** and **Word** — but these require installing additional (free) software.
+
+For this course, we'll stick with **HTML documents**. They're easy to create, easy to share, and work on any device.
 
 ::: {.notes}
-This is the main hands-on exercise. Give students 10 minutes. Walk around and help — the most common issues will be: YAML formatting errors (missing dashes, wrong indentation), forgetting to close code chunks, inline code syntax errors, and render failures because of missing packages or objects. Remind them to create a new .qmd file from the RStudio menu (File > New File > Quarto Document), not by hand.
+Keep this brief. If students ask: PDF requires a LaTeX installation (TinyTeX), Word output works out of the box but has less control over formatting. Both are free but add setup complexity we don't need right now. HTML is the simplest path and what they'll submit for assignments.
 :::
-
-## Your turn: Create a mini-report
-
-Create a new Quarto document (File → New File → Quarto Document):
-
-1. Add a YAML header with your name and title
-2. Write a short introduction (2-3 sentences)
-3. Create a code chunk that loads `tidyverse` and a dataset (try `mpg`)
-4. Create a visualization
-5. Write a sentence with inline code reporting a summary statistic
-6. Render to HTML
-
-**Time: 10 minutes**
-
-```{r}
-#| echo: false
-#| eval: false
-
-# --- SOLUTION EXAMPLE ---
-# Save this as a .qmd file:
-
-# ---
-# title: "Car Fuel Efficiency Analysis"
-# author: "Your Name"
-# date: "2026-05-27"
-# format: html
-# ---
-
-# ## Introduction
-#
-# This report examines fuel efficiency in cars from the `mpg`
-# dataset. We explore the relationship between engine size and
-# highway fuel economy.
-
-library(tidyverse)
-
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(x = "Engine size (L)", y = "Highway MPG") +
-  theme_minimal()
-
-# Use inline code to report:
-# "The mean highway fuel economy is [inline_expr] miles per gallon."
-round(mean(mpg$hwy), 1)
-```
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
-
-# Output formats {background-color="#2c3e50"}
-
-::: {.notes}
-Transition to the second half. Spend ~5 minutes on output formats — this is informational, not hands-on. For this course, students will primarily use HTML. But they should know that the same .qmd file can produce Word or PDF, which is relevant for their future work.
-:::
-
-## HTML (default)
-
-```yaml
----
-title: "My Report"
-format: html
----
-```
-
-**Pros:**
-
-- Interactive (can include interactive plots)
-- Easy to share (just send the file)
-- Works on any device
-- Can have code folding, tabs, etc.
-
-**Cons:**
-
-- Not suitable for print journals
-
-::: {.notes}
-HTML is the default and what students should use for this course. If students ask about sharing HTML files: the rendered .html is a single self-contained file that opens in any browser. No special software needed to view it.
-:::
-
-## PDF
-
-```yaml
----
-title: "My Report"
-format: pdf
----
-```
-
-**Pros:**
-
-- Print-ready
-- Professional appearance
-- Standard for journals
-
-**Cons:**
-
-- Requires LaTeX installation
-- Less flexible for complex layouts
-- Not interactive
-
-::: {.notes}
-Students will inevitably ask about PDF. The honest answer: PDF requires a LaTeX installation (like TinyTeX), which can be finicky to set up. Don't spend class time on it. If students want PDF for their final project, they can install TinyTeX with `quarto install tinytex` outside of class. For this course, HTML is fine.
-:::
-
-## Word
-
-```yaml
----
-title: "My Report"
-format: docx
----
-```
-
-**Pros:**
-
-- Collaborators can edit with Track Changes
-- Familiar to everyone
-- Required by some journals
-
-**Cons:**
-
-- Less control over formatting
-- Can be finicky with complex tables/figures
-
-## Multiple formats
-
-You can render to multiple formats:
-
-```yaml
----
-title: "My Report"
-format:
-  html:
-    toc: true
-  pdf:
-    toc: true
-  docx: default
----
-```
-
-. . .
-
-Then choose which to render in RStudio dropdown.
 
 # Tables {background-color="#2c3e50"}
 
@@ -607,6 +504,8 @@ Tables are a practical skill students need for their assignments and final proje
 :::
 
 ## Simple tables with kable()
+
+Table code goes **inside a code chunk**, just like plots. The `knitr::kable()` function turns a data frame into a nicely formatted table:
 
 ```{r}
 therapy_summary <- tibble(
@@ -672,8 +571,7 @@ Mention `gt` briefly as something that exists for when they need fancier tables,
 
 . . .
 
-4. **Use relative paths** — `here::here("data/file.csv")`
-5. **Cache expensive computations** — `#| cache: true`
+4. **Use `here()` for file paths** — `here("data", "file.csv")` always finds the project root
 
 ::: {.notes}
 "Render often" is the most important tip. Students who write an entire document and render at the end will hit a wall of errors and not know where they started. Encourage them to render after every new chunk or section. Also, naming chunks (`#| label: something`) means that when Quarto throws an error, it tells you which chunk failed — invaluable for debugging.
@@ -718,43 +616,19 @@ This maps directly to an APA-style paper. Point out that Quarto makes this struc
 ```
 project/
 ├── my-analysis.qmd
-├── data/
-│   └── survey_data.csv
-├── scripts/
-│   └── helper_functions.R
-└── output/
-    ├── my-analysis.html
-    └── figures/
+├── my-analysis.html
+└── data/
+    └── survey_data.csv
 ```
 
 . . .
 
 Keep your `.qmd` file in the root, data in `data/`, outputs separate.
 
-::: {.notes}
-This connects back to Session 1's filing cabinet metaphor. A well-organized project folder means anyone (including future you) can find the data, the code, and the output. The .qmd file goes in the root because it references everything else with relative paths. If students ask about `here::here()`, explain briefly that it always finds paths relative to the project root, avoiding the "it works on my laptop but not yours" problem.
-:::
-
-# End-of-deck exercise {background-color="#e67e22"}
+Use `here()` to build file paths: `read_csv(here("data", "survey_data.csv"))` always works, no matter where RStudio thinks the working directory is.
 
 ::: {.notes}
-This exercise is a direct head start on Assignment 3 — A3 is the first Quarto submission, so students should leave class with a working `.qmd` skeleton that imports both A3 data files. Give ~10 minutes. They probably won't finish, and that's fine — priority is a successful first render. Walk around and help with rendering errors, especially YAML indentation and missing package loads, which will be frequent. Remind them this same workflow is used for every assignment from A3 onward.
-:::
-
-## Head start: Assignment 3
-
-Assignment 3 is your **first Quarto submission**. Start scaffolding it now:
-
-1. Create a new `.qmd` with a YAML header (title, author, `format: html`)
-2. Add sections: Introduction, Data, Results
-3. Setup chunk that loads `tidyverse` and `readxl` (`#| include: false`)
-4. Import the A3 data files (`survey_data.csv`, `demographics.xlsx`)
-5. `glimpse()` each in its own chunk
-6. Report one summary statistic with **inline code** in the narrative
-7. Render to HTML — fix any errors before you leave class
-
-::: {.callout-tip}
-This is the workflow you'll use for every assignment from A3 onward.
+This connects back to Session 1's filing cabinet metaphor. A well-organized project folder means anyone (including future you) can find the data, the code, and the output. The .qmd file goes in the root because it references everything else with relative paths. Emphasize `here()` — it always finds paths relative to the project root, avoiding the "it works on my laptop but not yours" problem. They learned about `here` in Session 6 (Data Import); this is where it pays off.
 :::
 
 # Wrapping up {background-color="#2c3e50"}
@@ -806,8 +680,8 @@ This slide is motivational — "these slides" is a fun reveal (this very present
 - **Quarto documents** = YAML + markdown + code chunks
 - **Chunk options** (`echo`, `eval`, `include`) control what appears
 - **Inline code** embeds results in text — never hard-code numbers!
-- **Output formats** — HTML, PDF, Word from the same source
-- **Tables** — `knitr::kable()` for simple, `gt` for fancy
+- **Tables** — `knitr::kable()` inside code chunks for formatted tables
+- **`here()`** for file paths that always work
 - **Reproducibility** — future you will thank you
 
 ## Resources
@@ -821,16 +695,36 @@ This slide is motivational — "these slides" is a fun reveal (this very present
 
 📖 **Read:**
 
-- R4DS Ch 8: Workflow: getting help
+- R4DS Ch 9: Layers
 
 ✅ **Do:**
 
-- **Submit Assignment 8** — Create a complete reproducible report
-- Continue working on your final project
-- Practice rendering to different formats
+- Start working on **Assignment 3** — your first Quarto submission
 
 ## The one thing to remember
 
 Quarto means your analysis and your report are the same document. Change one, the other updates. That's reproducibility.
 
-See you Monday for practice & review!
+See you Wednesday for Layers & Aesthetics — we'll build on your ggplot skills with new geoms and customization options.
+
+# End-of-deck exercise {background-color="#e67e22"}
+
+::: {.notes}
+This exercise is a direct head start on Assignment 3 — A3 is the first Quarto submission, so students should leave class with a working `.qmd` skeleton that imports both A3 data files. Give ~10 minutes. They probably won't finish, and that's fine — priority is a successful first render. Walk around and help with rendering errors, especially YAML indentation and missing package loads, which will be frequent. Remind them this same workflow is used for every assignment from A3 onward.
+:::
+
+## Head start: Assignment 3
+
+Assignment 3 is your **first Quarto submission**. Start scaffolding it now:
+
+1. Create a new `.qmd` with a YAML header (title, author, `format: html`)
+2. Add sections: Introduction, Data, Results
+3. Setup chunk that loads `tidyverse`, `readxl`, and `here` (`#| include: false`)
+4. Import the A3 data files using `here()` (e.g., `read_csv(here("data", "survey_data.csv"))`)
+5. `glimpse()` each in its own chunk
+6. Report one summary statistic with **inline code** in the narrative
+7. Render to HTML — fix any errors before you leave class
+
+::: {.callout-tip}
+This is the workflow you'll use for every assignment from A3 onward.
+:::
