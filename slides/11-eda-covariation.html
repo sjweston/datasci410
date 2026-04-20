@@ -270,7 +270,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 17.859696, 16.665545, 9.601986, 19.877768, 19.070862, …</code></pre>
+$ depression_post &lt;dbl&gt; 12.74413, 22.35561, 26.64768, 26.41697, 14.50949, 18.9…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -555,14 +555,14 @@ $ depression_post &lt;dbl&gt; 17.859696, 16.665545, 9.601986, 19.877768, 19.0708
 <span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(diagnosis_data)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
-  referral  diagnosis
-  &lt;chr&gt;     &lt;chr&gt;    
-1 Self      Anxiety  
-2 Self      Other    
-3 Physician Other    
-4 Physician Anxiety  
-5 School    Other    
-6 Physician Anxiety  </code></pre>
+  referral  diagnosis 
+  &lt;chr&gt;     &lt;chr&gt;     
+1 School    Other     
+2 School    Depression
+3 Physician Anxiety   
+4 School    Depression
+5 School    Anxiety   
+6 Self      Other     </code></pre>
 </div>
 </div>
 </section>
@@ -743,8 +743,8 @@ $ depression_post &lt;dbl&gt; 17.859696, 16.665545, 9.601986, 19.877768, 19.0708
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 29.35101, 35.17477, 33.23575, 62.19349, 49.21511, 55.400…
-$ reaction_time &lt;dbl&gt; 286.3959, 326.1480, 327.0510, 415.9822, 420.4098, 313.66…</code></pre>
+$ age           &lt;dbl&gt; 31.59293, 31.50890, 19.65864, 43.65677, 39.92236, 61.052…
+$ reaction_time &lt;dbl&gt; 325.7398, 266.7404, 249.7062, 315.3078, 421.3998, 385.25…</code></pre>
 </div>
 </div>
 </section>
@@ -955,7 +955,7 @@ $ reaction_time &lt;dbl&gt; 286.3959, 326.1480, 327.0510, 415.9822, 420.4098, 31
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7642972</code></pre>
+<pre><code>[1] 0.7462142</code></pre>
 </div>
 </div>
 <div class="fragment">
