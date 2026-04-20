@@ -1,0 +1,91 @@
+/* TOC chip navigation — shows section breadcrumb along the bottom */
+.toc-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.92);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  z-index: 40;
+  font-family: "Source Sans Pro", Helvetica, sans-serif;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.toc-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.toc-chip {
+  background: #ecf0f1;
+  color: #5d6d7e;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 2px 8px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  line-height: 1.3;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+
+.toc-chip:hover {
+  background: #d5dbdb;
+  color: #2c3e50;
+}
+
+.toc-chip:focus-visible {
+  outline: 2px solid #e74c3c;
+  outline-offset: 2px;
+}
+
+.toc-chip.active {
+  background: #2c3e50;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+/* Push the Quarto footer above the TOC so they don't overlap */
+.reveal .footer,
+.reveal .slide-footer {
+  bottom: 30px !important;
+}
+
+/* Hide chalkboard plugin buttons (easel + paintbrush) — unused */
+.reveal .slide-chalkboard-buttons,
+.chalkboard-button,
+.notescanvas-button {
+  display: none !important;
+}
+
+/* Relocate the reveal-menu hamburger from bottom-left to top-left
+   so it doesn't sit on top of the TOC strip. */
+.slide-menu-button {
+  top: 8px !important;
+  left: 8px !important;
+  bottom: auto !important;
+}
+
+/* Hide in print/PDF export */
+.reveal.print-pdf .toc-nav,
+body.print-pdf .toc-nav,
+.print-pdf .toc-nav {
+  display: none !important;
+}
+
+.reveal.print-pdf .footer,
+body.print-pdf .footer {
+  bottom: 0 !important;
+}
