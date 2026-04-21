@@ -76,6 +76,21 @@
   bottom: auto !important;
 }
 
+/* Move the slide number from bottom-right (where it collides with the
+   TOC strip) to the top-right. */
+.reveal .slide-number {
+  top: 8px !important;
+  right: 10px !important;
+  bottom: auto !important;
+  left: auto !important;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 12px;
+  color: #95a5a6;
+  z-index: 50;
+}
+
 /* Hide in print/PDF export */
 .reveal.print-pdf .toc-nav,
 body.print-pdf .toc-nav,
