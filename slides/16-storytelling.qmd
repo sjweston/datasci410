@@ -14,6 +14,12 @@ format:
     highlight-style: github
     code-copy: false
     incremental: false
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="toc-nav.css">
+    include-after-body:
+      text: |
+        <script src="toc-nav.js"></script>
 execute:
   echo: true
   eval: true

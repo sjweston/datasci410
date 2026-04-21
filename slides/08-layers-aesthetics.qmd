@@ -14,6 +14,12 @@ format:
     highlight-style: github
     code-copy: false
     incremental: false
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="toc-nav.css">
+    include-after-body:
+      text: |
+        <script src="toc-nav.js"></script>
 execute:
   echo: true
   eval: true
@@ -24,58 +30,262 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(nycflights13)
 
-# Create a simulated psychology dataset we'll use throughout
+# A cleaned, manageable sample of flights we'll use throughout the deck.
 set.seed(123)
-reaction_data <- tibble(
-  participant = rep(1:40, each = 2),
-  condition = rep(c("Control", "Treatment"), 40),
-  rt = c(rnorm(40, mean = 520, sd = 60), rnorm(40, mean = 480, sd = 55)),
-  accuracy = c(rbinom(40, 1, 0.82), rbinom(40, 1, 0.88)),
-  age_group = rep(c("Young", "Young", "Older", "Older"), 20)
-) |>
-  mutate(rt = round(rt, 1))
+flights_sample <- flights |>
+  filter(!is.na(dep_delay), dep_delay > -30, dep_delay < 180) |>
+  mutate(
+    time_of_day = if_else(hour < 12, "Morning", "Afternoon/Evening"),
+    time_of_day = factor(time_of_day, levels = c("Morning", "Afternoon/Evening"))
+  ) |>
+  slice_sample(n = 500)
+```
+
+## Setup
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+library(showtext)
+
+showtext_auto()  # lets ggplot render Unicode symbols like ◀ ▶
+
+set.seed(422)
+some_flights <- flights |>
+  filter(carrier %in% c("9E", "B6", "HA")) |>
+  filter(!is.na(air_time)) |>
+  group_by(carrier) |>
+  slice_sample(n = 100)
+
+min_time <- min(some_flights$air_time)
+max_time <- max(some_flights$air_time)
+```
+
+::: {.notes}
+This first section (~25 min total) opens with a layered progression — each slide adds one thing to the previous figure. Walk through them without narrating the code; the code is folded on each slide so students can expand it later if curious. Every function (`stat_summary`, `geom_jitter`, `annotate`, `scale_fill_manual`, etc.) is taught later in the deck. Right now, the point is the visual story: what each layer reveals and what a barer version was hiding.
+:::
+
+## Base figure
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Bar chart of mean air_time by carrier. Three bars of different heights — 9E short, B6 medium, HA much taller."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  stat_summary(fun = "mean", geom = "bar")
+```
+
+## Remove legend and turn sideways
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "The same bar chart rotated so carriers appear on the left and air_time extends horizontally. Legend removed."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  stat_summary(fun = "mean", geom = "bar") +
+  guides(fill = "none") +
+  coord_flip()
+```
+
+## Boxplot
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Horizontal boxplots of air_time for each of three carriers. 9E and B6 have tight boxes at the low end; HA's box sits far to the right."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_boxplot() +
+  guides(fill = "none") +
+  coord_flip()
+```
+
+## Points
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Scatter plot showing every flight on a single horizontal line per carrier — points overlap heavily because the carrier axis is categorical."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time)) +
+  geom_point() +
+  coord_flip()
+```
+
+## Jitter
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same plot, but each point now jittered vertically so overlapping observations are visible. Three horizontal clouds, one per carrier."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time)) +
+  geom_jitter(width = .2) +
+  coord_flip()
+```
+
+## Colored
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "The jittered dot plot with each point filled by carrier and outlined in black using shape 21."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  coord_flip()
+```
+
+## Cleaner theme
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same plot with theme_minimal() applied — grey background replaced with white, gridlines subtler."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  coord_flip() +
+  theme_minimal()
+```
+
+## Better colors, remove legend
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same dot plot with a custom palette — teal for 9E, orange for B6, deep red-brown for HA. Legend removed."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  scale_fill_manual(values = c("9E" = "#15616d", "B6" = "#ff7d00", "HA" = "#78290f")) +
+  guides(fill = "none") +
+  coord_flip() +
+  theme_minimal()
+```
+
+## Clean up labels
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Dot plot with a title and the horizontal-axis values suffixed with ' min'. Default x and y labels removed."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  scale_y_continuous(labels = scales::label_number(suffix = " min")) +
+  scale_fill_manual(values = c("9E" = "#15616d", "B6" = "#ff7d00", "HA" = "#78290f")) +
+  guides(fill = "none") +
+  labs(x = NULL, y = NULL, title = "Air time by carrier") +
+  coord_flip() +
+  theme_minimal()
+```
+
+## Reference lines at min and max
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same dot plot with two vertical dashed reference lines marking the overall shortest and longest flights in the sample."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  geom_hline(yintercept = min_time, linetype = "dashed") +
+  geom_hline(yintercept = max_time, linetype = "dashed") +
+  scale_y_continuous(labels = scales::label_number(suffix = " min")) +
+  scale_fill_manual(values = c("9E" = "#15616d", "B6" = "#ff7d00", "HA" = "#78290f")) +
+  guides(fill = "none") +
+  labs(x = NULL, y = NULL, title = "Air time by carrier") +
+  coord_flip() +
+  theme_minimal()
+```
+
+## Annotate the extremes
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same plot with two small arrows and labels at the top — one pointing left to the shortest reference line, one pointing right to the longest."
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  geom_hline(yintercept = min_time, linetype = "dashed", alpha = .4) +
+  geom_hline(yintercept = max_time, linetype = "dashed", alpha = .4) +
+  annotate("text", x = 3.5, y = min_time, hjust = 0,
+           label = paste0("◀ shortest: ", min_time, " min"),
+           color = "grey30", size = 4) +
+  annotate("text", x = 3.5, y = max_time, hjust = 1,
+           label = paste0("longest: ", max_time, " min ▶"),
+           color = "grey30", size = 4) +
+  scale_x_discrete(expand = expansion(add = c(0.6, 1))) +
+  scale_y_continuous(labels = scales::label_number(suffix = " min")) +
+  scale_fill_manual(values = c("9E" = "#15616d", "B6" = "#ff7d00", "HA" = "#78290f")) +
+  guides(fill = "none") +
+  labs(x = NULL, y = NULL, title = "Air time by carrier") +
+  coord_flip(clip = "off") +
+  theme_minimal()
+```
+
+## Carrier labels inline
+
+```{r}
+#| code-fold: true
+#| fig-height: 4.5
+#| fig-width: 9
+#| fig-alt: "Same plot with the carrier tick labels on the left removed and replaced by inline labels sitting just below each row of dots: '9E • Endeavor Air', 'B6 • JetBlue', 'HA • Hawaiian Airlines'."
+carrier_labels <- some_flights |>
+  group_by(carrier) |>
+  summarize(mean_time = mean(air_time)) |>
+  mutate(name = c("9E • Endeavor Air", "B6 • JetBlue", "HA • Hawaiian Airlines"))
+
+some_flights |>
+  ggplot(aes(x = carrier, y = air_time, fill = carrier)) +
+  geom_jitter(width = .2, shape = 21, color = "black", stroke = .4) +
+  geom_hline(yintercept = min_time, linetype = "dashed", alpha = .4) +
+  geom_hline(yintercept = max_time, linetype = "dashed", alpha = .4) +
+  annotate("text", x = 3.5, y = min_time, hjust = 0,
+           label = paste0("◀ shortest: ", min_time, " min"),
+           color = "grey30", size = 4) +
+  annotate("text", x = 3.5, y = max_time, hjust = 1,
+           label = paste0("longest: ", max_time, " min ▶"),
+           color = "grey30", size = 4) +
+  geom_text(data = carrier_labels,
+            aes(x = carrier, y = mean_time, label = name),
+            inherit.aes = FALSE,
+            hjust = 0.5, nudge_x = -0.35,
+            fontface = "bold", size = 4.2) +
+  geom_text(data = carrier_labels,
+            aes(x = carrier, y = mean_time,
+                label = paste0("avg: ", round(mean_time), " min")),
+            inherit.aes = FALSE,
+            hjust = 0.5, nudge_x = -0.6,
+            size = 3.5, color = "grey30") +
+  scale_x_discrete(expand = expansion(add = c(0.8, 1)), labels = NULL) +
+  scale_y_continuous(labels = scales::label_number(suffix = " min")) +
+  scale_fill_manual(values = c("9E" = "#15616d", "B6" = "#ff7d00", "HA" = "#78290f")) +
+  guides(fill = "none") +
+  labs(x = NULL, y = NULL, title = "Air time by carrier") +
+  coord_flip(clip = "off") +
+  theme_minimal()
 ```
 
 # Choosing the right geom {background-color="#2c3e50"}
 
-::: {.notes}
-This first section (~25 min total) covers geom selection, distributions, and stat_summary(). The opening comparison is the hook — let it land before moving on.
-:::
-
-## Same data, two stories
-
-```{r}
-#| echo: false
-#| fig-width: 10
-#| fig-height: 3.5
-#| output-location: slide
-#| fig-alt: "Side-by-side comparison of two plots using the same reaction time data. Version A is a plain bar chart of means that hides all variation. Version B overlays jittered individual data points, boxplots, and mean diamonds, revealing the full spread and overlap between Control and Treatment groups."
-library(patchwork)
-
-p1 <- ggplot(reaction_data, aes(x = condition, y = rt)) +
-  geom_bar(stat = "summary", fun = mean, fill = "grey70") +
-  labs(title = "Version A", y = "Mean RT (ms)", x = NULL) +
-  theme_minimal(base_size = 14)
-
-p2 <- ggplot(reaction_data, aes(x = condition, y = rt, color = condition)) +
-  geom_jitter(width = 0.2, alpha = 0.5, size = 2) +
-  geom_boxplot(alpha = 0.3, width = 0.4, outlier.shape = NA) +
-  stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
-  labs(title = "Version B", y = "Mean RT (ms)", x = NULL) +
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none")
-
-p1 + p2
-```
-
-Both use the same data. The difference is **layers** — and the right layers tell the right story.
-
-The wrong geom doesn't just look bad — it can actively mislead.
-
-::: {.notes}
-Spend ~2 minutes here. Ask students which version they'd trust more and why. The bar chart hides everything — the spread, outliers, individual data points. Version B tells the full story. This contrast motivates the entire session: choosing the right geom is a design decision, not just a coding one.
-:::
 
 ## Geom selection guide
 
@@ -98,22 +308,22 @@ This table is a reference slide students will come back to. Don't read every row
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
-#| fig-alt: "Histogram of reaction times in milliseconds with 30ms bins, showing an approximately normal distribution centered around 500ms with a slight right skew."
-reaction_data |>
-  ggplot(aes(x = rt)) +
+#| fig-alt: "Histogram of departure delays in minutes with 10-minute bins, showing a right-skewed distribution: most flights depart close to on time, with a long tail of delayed flights."
+flights_sample |>
+  ggplot(aes(x = dep_delay)) +
   geom_histogram(
-    binwidth = 30, 
-    fill = "steelblue", 
+    binwidth = 10,
+    fill = "steelblue",
     color = "white") +
   labs(
-    title = "Distribution of Reaction Times",
-    x = "Reaction time (ms)"
+    title = "Distribution of Departure Delays",
+    x = "Departure delay (min)"
   ) +
   theme_minimal(base_size = 14)
 ```
 
 ::: {.notes}
-Walk through the code line by line. Emphasize `binwidth` — students will forget it and get the default "30 bins" warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. Students often ask what number to use; there's no single right answer, but for reaction times in the hundreds, 20-30 ms bins are reasonable.
+Walk through the code line by line. Emphasize `binwidth` — students will forget it and get the default "30 bins" warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. The right skew is a great teaching moment — real-world delay data almost always looks like this. Connect it back to psychology: reaction time distributions look similar.
 :::
 
 ## histogram vs density
@@ -122,19 +332,19 @@ Walk through the code line by line. Emphasize `binwidth` — students will forge
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
-#| fig-alt: "Side-by-side comparison of a histogram and density plot of reaction times. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing a similar roughly normal distribution."
+#| fig-alt: "Side-by-side comparison of a histogram and density plot of departure delays. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing the same right-skewed shape."
 library(patchwork)
 
-p1 <- reaction_data |>
-  ggplot(aes(x = rt)) +
-  geom_histogram(binwidth = 30, fill = "steelblue", color = "white") +
-  labs(title = "Histogram", x = "RT (ms)", y = "Count") +
+p1 <- flights_sample |>
+  ggplot(aes(x = dep_delay)) +
+  geom_histogram(binwidth = 10, fill = "steelblue", color = "white") +
+  labs(title = "Histogram", x = "Departure delay (min)", y = "Count") +
   theme_minimal(base_size = 14)
 
-p2 <- reaction_data |>
-  ggplot(aes(x = rt)) +
+p2 <- flights_sample |>
+  ggplot(aes(x = dep_delay)) +
   geom_density(fill = "steelblue", alpha = 0.5) +
-  labs(title = "Density plot", x = "RT (ms)", y = "Density") +
+  labs(title = "Density plot", x = "Departure delay (min)", y = "Density") +
   theme_minimal(base_size = 14)
 
 p1 + p2
@@ -152,13 +362,13 @@ Quick comparison — don't belabor this. The key point is that density plots are
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
-#| fig-alt: "Bar chart showing the count of observations in each experimental condition, with Control and Treatment groups having equal counts of 40 each."
-reaction_data |>
-  ggplot(aes(x = condition)) +
+#| fig-alt: "Bar chart showing the count of sampled flights by NYC airport of origin. EWR, JFK, and LGA each have a few hundred flights in the sample."
+flights_sample |>
+  ggplot(aes(x = origin)) +
   geom_bar(fill = "steelblue") +
   labs(
-    title = "Observations per Condition",
-    x = "Condition",
+    title = "Flights per NYC Airport",
+    x = "Origin airport",
     y = "Count"
   ) +
   theme_minimal(base_size = 14)
@@ -170,14 +380,14 @@ reaction_data |>
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
-#| fig-alt: "Boxplots comparing reaction time distributions for Control and Treatment conditions. The Control group has a slightly higher median and wider spread than the Treatment group."
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
+#| fig-alt: "Boxplots comparing departure delay distributions across the three NYC airports. Medians are close to zero at all three, with long upper whiskers reflecting the right-skewed tail."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin)) +
   geom_boxplot(alpha = 0.7) +
   labs(
-    title = "Reaction Time by Condition",
-    x = "Condition",
-    y = "Reaction time (ms)"
+    title = "Departure Delay by Airport",
+    x = "Origin airport",
+    y = "Departure delay (min)"
   ) +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
@@ -189,19 +399,19 @@ reaction_data |>
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
-#| fig-alt: "Side-by-side comparison of boxplot and violin plot for reaction time by condition. The boxplot shows median, quartiles, and whiskers, while the violin plot reveals the full distribution shape including where data are most concentrated."
+#| fig-alt: "Side-by-side comparison of boxplot and violin plot for departure delay by airport. The boxplot shows median, quartiles, and whiskers; the violin reveals the full right-skewed shape, with most density concentrated near zero and a long tail."
 
-p1 <- reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
+p1 <- flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin)) +
   geom_boxplot(alpha = 0.7) +
-  labs(title = "Boxplot", x = "Condition", y = "RT (ms)") +
+  labs(title = "Boxplot", x = "Origin", y = "Delay (min)") +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
 
-p2 <- reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
+p2 <- flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin)) +
   geom_violin(alpha = 0.5) +
-  labs(title = "Violin plot", x = "Condition", y = "RT (ms)") +
+  labs(title = "Violin plot", x = "Origin", y = "Delay (min)") +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
 
@@ -211,7 +421,32 @@ p1 + p2
 Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.
 
 ::: {.notes}
-Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. Bimodal distributions look obvious in a violin but invisible in a boxplot. Mention that we'll see an even better option (raincloud plots) in the next session.
+Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. The right-skewed tail of delays is much more obvious in the violin than the boxplot. Mention that we'll see an even better option (raincloud plots) in the next session.
+:::
+
+## Showing individual points: `geom_jitter()`
+
+When your x-axis is categorical, `geom_point()` would stack every observation on the same vertical line. `geom_jitter()` adds a small random horizontal wiggle so each point is visible.
+
+```{r}
+#| output-location: slide
+#| fig-width: 9
+#| fig-height: 5
+#| fig-alt: "Jittered dot plot of departure delays by NYC airport. Each point is a single flight, with horizontal jitter so overlapping points are visible. All three airports show a dense cluster near zero and a sparse tail of long delays."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, color = origin)) +
+  geom_jitter(width = 0.2, alpha = 0.4) +
+  labs(
+    title = "Every Flight, Plotted",
+    x = "Origin airport",
+    y = "Departure delay (min)"
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
+```
+
+::: {.notes}
+`width = 0.2` keeps points within each category's "lane." `alpha = 0.4` makes them semi-transparent so dense areas look darker. Flag both settings — students will want to tune them. We'll see `geom_jitter()` come back as the "raw data" layer under every summary plot in the rest of the deck.
 :::
 
 # stat_summary() {background-color="#2c3e50"}
@@ -230,21 +465,21 @@ Transition: "So far we've been plotting raw data. But in psychology, you'll almo
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
-#| fig-alt: "Bar chart showing mean reaction time by condition with 95% confidence interval error bars. The Treatment group mean is slightly lower than the Control group, with overlapping error bars."
-reaction_data |>
-  ggplot(aes(x = condition, y = rt)) +
+#| fig-alt: "Bar chart showing mean departure delay by airport with 95% confidence interval error bars. Means are close to each other across the three airports, with overlapping error bars."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay)) +
   stat_summary(
     fun = mean,
     geom = "bar",
     fill = "steelblue", width = 0.5) +
   stat_summary(
-    fun.data = mean_cl_normal, 
-    geom = "errorbar", 
+    fun.data = mean_cl_normal,
+    geom = "errorbar",
     width = 0.3) +
   labs(
-    title = "Mean Reaction Time by Condition",
-    x = "Condition",
-    y = "Reaction time (ms)"
+    title = "Mean Departure Delay by Airport",
+    x = "Origin airport",
+    y = "Departure delay (min)"
   ) +
   theme_minimal(base_size = 14)
 ```
@@ -280,7 +515,7 @@ This matters! Always state it in your figure caption.
 
 ```{r}
 #| eval: false
-# SE 
+# SE
 stat_summary(fun.data = mean_se, geom = "errorbar")
 
 # 95% CI (most common in psych)
@@ -291,10 +526,10 @@ stat_summary(fun.data = mean_cl_normal, geom = "errorbar")
 
 The APA Publication Manual (7th ed.) recommends showing individual data points alongside summary statistics whenever possible.
 
-Bar charts with error bars are ubiquitous in psychology — but they hide the *shape* of the data. Outliers, bimodality, and floor/ceiling effects all disappear behind a rectangle.
+Bar charts with error bars are ubiquitous in psychology — but they hide the *shape* of the data. Outliers, skew, and bimodality all disappear behind a rectangle.
 
 ::: {.notes}
-This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). Emphasize that the field is moving toward showing more data, not less.
+This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). The delay data makes the same point — the means look nearly identical, but the underlying distributions are wildly right-skewed.
 :::
 
 ## Adding individual data points
@@ -305,17 +540,17 @@ Error bars alone hide the data. Show the points too:
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
-#| fig-alt: "Dot plot showing individual reaction times as jittered points for each condition, with black dots marking the group means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics."
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, color = condition)) +
+#| fig-alt: "Dot plot showing individual flight delays as jittered points for each airport, with black dots marking airport means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, color = origin)) +
   geom_jitter(width = 0.15, alpha = 0.4, size = 2) +
   stat_summary(fun = mean, geom = "point", size = 4, color = "black") +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2, color = "black") +
   labs(
-    title = "Reaction Time by Condition",
-    subtitle = "Error bars = 95%CI. Individual points shown.",
-    x = "Condition",
-    y = "Reaction time (ms)"
+    title = "Departure Delay by Airport",
+    subtitle = "Error bars = 95% CI. Individual flights shown.",
+    x = "Origin airport",
+    y = "Departure delay (min)"
   ) +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
@@ -330,15 +565,15 @@ Walk through the layering order: jittered points go first (behind), then the sum
 ## Your turn: 10 minutes
 
 ::: {.notes}
-Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use `stat_summary()` twice (once for bar, once for error bars), (2) putting `geom_jitter()` after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in `labs()`. If pairs finish early, challenge them to add `age_group` as a facet or dodge variable. Reveal the solution after time is up.
+Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use `stat_summary()` twice (once for bar, once for error bars), (2) putting `geom_jitter()` after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in `labs()`. If pairs finish early, challenge them to add `time_of_day` as a facet or fill variable. Reveal the solution after time is up. Students should create their own `flights_sample` using the setup code shown on this slide (or you can share it in the chat).
 :::
 
-Using the `reaction_data` dataset:
+Using the `flights` dataset (filter to `!is.na(dep_delay)` first):
 
-1. Create a **bar chart with error bars** showing mean RT by condition
+1. Create a **bar chart with error bars** showing mean `dep_delay` by `origin`
 2. Add **individual data points** (jittered) behind the bars
-3. Color the bars by condition
-4. Add a caption noting that error bars show the 95% CI.
+3. Color the bars by `origin`
+4. Add a caption noting that error bars show the 95% CI
 
 ::: {.callout-tip}
 You'll need `stat_summary()` twice — once for the bar, once for the error bars. Look at the examples from the last few slides.
@@ -348,15 +583,16 @@ You'll need `stat_summary()` twice — once for the bar, once for the error bars
 #| echo: false
 #| eval: false
 # Solution (reveal after time is up)
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
-  geom_jitter(width = 0.15, alpha = 0.4) +
+flights |>
+  filter(!is.na(dep_delay)) |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin)) +
+  geom_jitter(width = 0.15, alpha = 0.2) +
   stat_summary(fun = mean, geom = "bar", alpha = 0.6, width = 0.5) +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
   labs(
-    title = "Mean Reaction Time by Condition",
-    x = "Condition",
-    y = "Reaction time (ms)",
+    title = "Mean Departure Delay by NYC Airport",
+    x = "Origin airport",
+    y = "Departure delay (min)",
     caption = "Error bars represent 95% confidence intervals."
   ) +
   theme_minimal(base_size = 14) +
@@ -396,16 +632,17 @@ This is the trickiest position adjustment. The key gotcha: when you dodge both t
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 5
-#| fig-alt: "Grouped bar chart showing mean reaction time by age group and condition with dodged bars and error bars. Control and Treatment bars are side by side within each age group, allowing direct comparison across both factors."
-reaction_data |>
-  ggplot(aes(x = age_group, y = rt, fill = condition)) +
+#| fig-alt: "Grouped bar chart showing mean departure delay by airport and time of day with dodged bars and error bars. Morning and Afternoon/Evening bars sit side by side within each airport, showing afternoon delays are consistently higher."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = time_of_day)) +
   stat_summary(fun = mean, geom = "bar", position = "dodge", width = 0.6) +
   stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
                position = position_dodge(0.6), width = 0.2) +
   labs(
-    title = "Reaction Time by Age Group and Condition",
-    x = "Age group",
-    y = "Mean RT (ms)"
+    title = "Departure Delay by Airport and Time of Day",
+    x = "Origin airport",
+    y = "Mean delay (min)",
+    fill = "Time of day"
   ) +
   theme_minimal(base_size = 14)
 ```
@@ -416,18 +653,18 @@ reaction_data |>
 #| echo: false
 #| fig-width: 12
 #| fig-height: 5
-#| fig-alt: "Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Control and Treatment observations by age group, while the filled chart normalizes each bar to 100% to compare proportions directly."
+#| fig-alt: "Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Morning and Afternoon/Evening flights at each airport; the filled chart normalizes each bar to 100% to compare proportions directly."
 
-p1 <- reaction_data |>
-  ggplot(aes(x = age_group, fill = condition)) +
+p1 <- flights_sample |>
+  ggplot(aes(x = origin, fill = time_of_day)) +
   geom_bar(position = "stack") +
-  labs(title = "Stacked (counts)", x = "Age group", y = "Count") +
+  labs(title = "Stacked (counts)", x = "Origin airport", y = "Count", fill = "Time of day") +
   theme_minimal(base_size = 14)
 
-p2 <- reaction_data |>
-  ggplot(aes(x = age_group, fill = condition)) +
+p2 <- flights_sample |>
+  ggplot(aes(x = origin, fill = time_of_day)) +
   geom_bar(position = "fill") +
-  labs(title = "Filled (proportions)", x = "Age group", y = "Proportion") +
+  labs(title = "Filled (proportions)", x = "Origin airport", y = "Proportion", fill = "Time of day") +
   theme_minimal(base_size = 14)
 
 p1 + p2
@@ -436,24 +673,18 @@ p1 + p2
 ## Scales: controlling axes and colors
 
 ::: {.notes}
-Spend ~3 minutes on this and the next slide together. Students don't need to memorize every scale function — they need to know the naming pattern: `scale_` + the aesthetic (`fill`, `color`, `x`, `y`) + `_` + the type (`manual`, `continuous`, `discrete`, `viridis`). Once they see the pattern, they can guess function names and use autocomplete.
+Spend ~3 minutes on this and the next slide together. Students don't need to memorize every scale function — they need to know the naming pattern: `scale_` + the aesthetic (`fill`, `color`, `x`, `y`) + `_` + the type (`manual`, `continuous`, `discrete`). Once they see the pattern, they can guess function names and use autocomplete.
 :::
 
 Scales translate data values into visual properties:
 
 ```{r}
 #| eval: false
-# Control axis range
-scale_y_continuous(limits = c(0, 800))
-
 # Control axis breaks (tick marks)
-scale_x_continuous(breaks = seq(400, 700, by = 50))
+scale_x_continuous(breaks = seq(0, 180, by = 30))
 
 # Set specific colors
-scale_fill_manual(values = c("Control" = "lightblue", "Treatment" = "coral"))
-
-# Use a colorblind-friendly palette
-scale_fill_viridis_d()
+scale_fill_manual(values = c("EWR" = "lightblue", "JFK" = "coral", "LGA" = "lightgreen"))
 ```
 
 ## scale_fill_manual()
@@ -462,17 +693,17 @@ scale_fill_viridis_d()
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
-#| fig-alt: "Boxplots of reaction time by condition using custom colors: blue for Control and red for Treatment, demonstrating how scale_fill_manual() applies specific hex color codes to groups."
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition)) +
+#| fig-alt: "Boxplots of departure delay by airport using custom colors: blue for EWR, red for JFK, and yellow for LGA, demonstrating how scale_fill_manual() applies specific hex color codes to groups."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin)) +
   geom_boxplot(alpha = 0.7) +
-  scale_fill_manual(values = c("Control" = "#3498db", "Treatment" = "#e74c3c")) +
-  labs(title = "Custom colors", x = "Condition", y = "RT (ms)") +
+  scale_fill_manual(values = c("EWR" = "#3498db", "JFK" = "#e74c3c", "LGA" = "#f1c40f")) +
+  labs(title = "Custom colors", x = "Origin airport", y = "Delay (min)") +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
 ```
 
-Use a website like [HTML color codes](https://htmlcolorcodes.com/color-picker/) to find the appropriate HEX code for your color. 
+Use a website like [HTML color codes](https://htmlcolorcodes.com/color-picker/) to find the appropriate HEX code for your color.
 
 ## Coordinate systems
 
@@ -486,9 +717,9 @@ The `coord_cartesian()` vs `scale_y_continuous(limits = ...)` distinction is cri
 coord_flip()
 
 # Zoom in without dropping data
-coord_cartesian(ylim = c(400, 600))
+coord_cartesian(ylim = c(-10, 30))
 # vs
-scale_y_continuous(limits = c(400, 600))  # This DROPS data outside the range!
+scale_y_continuous(limits = c(-10, 30))  # This DROPS data outside the range!
 ```
 
 ## coord_flip() in action
@@ -497,41 +728,43 @@ scale_y_continuous(limits = c(400, 600))  # This DROPS data outside the range!
 #| output-location: slide
 #| fig-width: 8
 #| fig-height: 5
-#| fig-alt: "Horizontal boxplots of reaction time by condition, with categories on the y-axis and reaction time on the x-axis, demonstrating how flipped axes improve readability for categorical labels."
-reaction_data |>
-  ggplot(aes(y = condition, x = rt, fill = condition)) +
+#| fig-alt: "Horizontal boxplots of departure delay by airport, with airport codes on the y-axis and delay on the x-axis, demonstrating how flipped axes improve readability for categorical labels."
+flights_sample |>
+  ggplot(aes(y = origin, x = dep_delay, fill = origin)) +
   geom_boxplot(alpha = 0.7) +
-  labs(title = "Flipped axes — better for category labels", y = "Condition", x = "RT (ms)") +
+  labs(title = "Flipped axes — better for category labels", y = "Origin airport", x = "Delay (min)") +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
 ```
 
 # Putting it together {background-color="#2c3e50"}
 
-## A polished psychology figure
+## A polished figure
 
 ::: {.notes}
-This is the "bringing it all together" slide. Walk through the code slowly, pointing out each layer and why it's there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for accessibility, and informative labels. This is roughly the quality you'd expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.
+This is the "bringing it all together" slide. Walk through the code slowly, pointing out each layer and why it's there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for distinction, and informative labels. This is roughly the quality you'd expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.
 :::
 
 ```{r}
 #| output-location: slide
 #| fig-width: 10
 #| fig-height: 6
-#| fig-alt: "Polished figure combining jittered individual data points, boxplots, and diamond-shaped mean markers for reaction time by condition. Uses custom blue and red colors, informative title and subtitle, and a caption noting sample size and mean indicator."
-reaction_data |>
-  ggplot(aes(x = condition, y = rt, fill = condition, color = condition)) +
-  geom_jitter(width = 0.2, alpha = 0.35, size = 2) +
+#| fig-alt: "Polished figure combining jittered individual flight delays, boxplots, and diamond-shaped mean markers for each NYC airport. Uses custom colors, informative title and subtitle, and a caption noting sample size and mean indicator."
+flights_sample |>
+  ggplot(aes(x = origin, y = dep_delay, fill = origin, color = origin)) +
+  geom_jitter(width = 0.2, alpha = 0.35, size = 1.5) +
+  # outlier.shape = NA hides boxplot outliers because geom_jitter already shows every point
   geom_boxplot(alpha = 0.5, width = 0.4, outlier.shape = NA) +
+  # shape = 18 is a solid diamond — draws attention to the mean
   stat_summary(fun = mean, geom = "point", shape = 18, size = 5, color = "black") +
-  scale_fill_manual(values = c("Control" = "#3498db", "Treatment" = "#e74c3c")) +
-  scale_color_manual(values = c("Control" = "#2980b9", "Treatment" = "#c0392b")) +
+  scale_fill_manual(values = c("EWR" = "#3498db", "JFK" = "#e74c3c", "LGA" = "#f1c40f")) +
+  scale_color_manual(values = c("EWR" = "#2980b9", "JFK" = "#c0392b", "LGA" = "#b7950b")) +
   labs(
-    title = "Treatment Reduces Reaction Time",
-    subtitle = "Individual data points, box summaries, and mean (diamond) shown",
-    x = "Condition",
-    y = "Reaction time (ms)",
-    caption = "N = 40 per condition. Diamond = mean."
+    title = "Departure Delays Are Similar Across NYC Airports",
+    subtitle = "Individual flights, box summaries, and mean (diamond) shown",
+    x = "Origin airport",
+    y = "Departure delay (min)",
+    caption = "N = 500 sampled flights. Diamond = mean."
   ) +
   theme_minimal(base_size = 14) +
   theme(legend.position = "none")
@@ -542,7 +775,7 @@ reaction_data |>
 ## Assignment 4 preview
 
 ::: {.notes}
-This is the head-start exercise (~10 min remaining). Students don't need to finish this in class — it's a bridge to Assignment 4. Encourage them to have fun making the "bad" version deliberately awful. If students seem finished early, suggest they try adding `facet_wrap(~age_group)` to any of today's plots as a preview of faceting.
+This is the head-start exercise (~10 min remaining). Students don't need to finish this in class — it's a bridge to Assignment 4. Encourage them to have fun making the "bad" version deliberately awful. If students seem finished early, suggest they try adding `facet_wrap(~time_of_day)` to any of today's plots as a preview of faceting.
 :::
 
 Assignment 4 will ask you to create "bad" and "good" versions of figures. Start experimenting:
@@ -561,6 +794,7 @@ Assignment 4 will ask you to create "bad" and "good" versions of figures. Start 
 | `geom_density()` | Smooth distribution estimate |
 | `geom_boxplot()` | Summary of continuous by categorical |
 | `geom_violin()` | Full distribution by categorical |
+| `geom_jitter()` | Individual points with horizontal wiggle |
 | `stat_summary()` | Calculate and display summary stats |
 | `position = "dodge"` | Side-by-side grouped plots |
 | `scale_fill_manual()` | Custom colors |

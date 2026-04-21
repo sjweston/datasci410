@@ -189,6 +189,7 @@
       margin-right: 0; 
     }
   </style>
+  <link rel="stylesheet" href="toc-nav.css">
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -208,11 +209,27 @@ Dr.&nbsp;Sara Weston
 
   <p class="date">2026-04-22</p>
 </section>
-<section>
-<section id="choosing-the-right-geom" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Choosing the right geom</h1>
+<section id="setup" class="slide level2">
+<h2>Setup</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
+<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()  <span class="co"># lets ggplot render Unicode symbols like ◀ ▶</span></span>
+<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">422</span>)</span>
+<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="ot">&lt;-</span> flights <span class="sc">|&gt;</span></span>
+<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(carrier <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"9E"</span>, <span class="st">"B6"</span>, <span class="st">"HA"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(air_time)) <span class="sc">|&gt;</span></span>
+<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_sample</span>(<span class="at">n =</span> <span class="dv">100</span>)</span>
+<span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="" aria-hidden="true" tabindex="-1"></a>min_time <span class="ot">&lt;-</span> <span class="fu">min</span>(some_flights<span class="sc">$</span>air_time)</span>
+<span id="cb1-15"><a href="" aria-hidden="true" tabindex="-1"></a>max_time <span class="ot">&lt;-</span> <span class="fu">max</span>(some_flights<span class="sc">$</span>air_time)</span></code></pre></div>
+</div>
 <aside class="notes">
-<p>This first section (~25 min total) covers geom selection, distributions, and stat_summary(). The opening comparison is the hook — let it land before moving on.</p>
+<p>This first section (~25 min total) opens with a layered progression — each slide adds one thing to the previous figure. Walk through them without narrating the code; the code is folded on each slide so students can expand it later if curious. Every function (<code>stat_summary</code>, <code>geom_jitter</code>, <code>annotate</code>, <code>scale_fill_manual</code>, etc.) is taught later in the deck. Right now, the point is the visual story: what each layer reveals and what a barer version was hiding.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -225,24 +242,227 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="same-data-two-stories" class="slide level2">
-<h2>Same data, two stories</h2>
+<section id="base-figure" class="slide level2">
+<h2>Base figure</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"bar"</span>)</span></code></pre></div>
+</details>
 
-<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-2-1.png" alt="Side-by-side comparison of two plots using the same reaction time data. Version A is a plain bar chart of means that hides all variation. Version B overlays jittered individual data points, boxplots, and mean diamonds, revealing the full spread and overlap between Control and Treatment groups." width="960" class="r-stretch"><p>Both use the same data. The difference is <strong>layers</strong> — and the right layers tell the right story.</p>
-<p>The wrong geom doesn’t just look bad — it can actively mislead.</p>
-<aside class="notes">
-<p>Spend ~2 minutes here. Ask students which version they’d trust more and why. The bar chart hides everything — the spread, outliers, individual data points. Version B tells the full story. This contrast motivates the entire session: choosing the right geom is a design decision, not just a coding one.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Bar chart of mean air_time by carrier. Three bars of different heights — 9E short, B6 medium, HA much taller." width="864" class="r-stretch"></section>
+<section id="remove-legend-and-turn-sideways" class="slide level2">
+<h2>Remove legend and turn sideways</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> <span class="st">"mean"</span>, <span class="at">geom =</span> <span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" alt="The same bar chart rotated so carriers appear on the left and air_time extends horizontally. Legend removed." width="864" class="r-stretch"></section>
+<section id="boxplot" class="slide level2">
+<h2>Boxplot</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Horizontal boxplots of air_time for each of three carriers. 9E and B6 have tight boxes at the low end; HA's box sits far to the right." width="864" class="r-stretch"></section>
+<section id="points" class="slide level2">
+<h2>Points</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time)) <span class="sc">+</span></span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Scatter plot showing every flight on a single horizontal line per carrier — points overlap heavily because the carrier axis is categorical." width="864" class="r-stretch"></section>
+<section id="jitter" class="slide level2">
+<h2>Jitter</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time)) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Same plot, but each point now jittered vertically so overlapping observations are visible. Three horizontal clouds, one per carrier." width="864" class="r-stretch"></section>
+<section id="colored" class="slide level2">
+<h2>Colored</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-8-1.png" alt="The jittered dot plot with each point filled by carrier and outlined in black using shape 21." width="864" class="r-stretch"></section>
+<section id="cleaner-theme" class="slide level2">
+<h2>Cleaner theme</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Same plot with theme_minimal() applied — grey background replaced with white, gridlines subtler." width="864" class="r-stretch"></section>
+<section id="better-colors-remove-legend" class="slide level2">
+<h2>Better colors, remove legend</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"9E"</span> <span class="ot">=</span> <span class="st">"#15616d"</span>, <span class="st">"B6"</span> <span class="ot">=</span> <span class="st">"#ff7d00"</span>, <span class="st">"HA"</span> <span class="ot">=</span> <span class="st">"#78290f"</span>)) <span class="sc">+</span></span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Same dot plot with a custom palette — teal for 9E, orange for B6, deep red-brown for HA. Legend removed." width="864" class="r-stretch"></section>
+<section id="clean-up-labels" class="slide level2">
+<h2>Clean up labels</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">suffix =</span> <span class="st">" min"</span>)) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"9E"</span> <span class="ot">=</span> <span class="st">"#15616d"</span>, <span class="st">"B6"</span> <span class="ot">=</span> <span class="st">"#ff7d00"</span>, <span class="st">"HA"</span> <span class="ot">=</span> <span class="st">"#78290f"</span>)) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Air time by carrier"</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb10-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Dot plot with a title and the horizontal-axis values suffixed with ' min'. Default x and y labels removed." width="864" class="r-stretch"></section>
+<section id="reference-lines-at-min-and-max" class="slide level2">
+<h2>Reference lines at min and max</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> min_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> max_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">suffix =</span> <span class="st">" min"</span>)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"9E"</span> <span class="ot">=</span> <span class="st">"#15616d"</span>, <span class="st">"B6"</span> <span class="ot">=</span> <span class="st">"#ff7d00"</span>, <span class="st">"HA"</span> <span class="ot">=</span> <span class="st">"#78290f"</span>)) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Air time by carrier"</span>) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb11-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Same dot plot with two vertical dashed reference lines marking the overall shortest and longest flights in the sample." width="864" class="r-stretch"></section>
+<section id="annotate-the-extremes" class="slide level2">
+<h2>Annotate the extremes</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> min_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> max_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.5</span>, <span class="at">y =</span> min_time, <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"◀ shortest: "</span>, min_time, <span class="st">" min"</span>),</span>
+<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"grey30"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.5</span>, <span class="at">y =</span> max_time, <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"longest: "</span>, max_time, <span class="st">" min ▶"</span>),</span>
+<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"grey30"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb12-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="fu">c</span>(<span class="fl">0.6</span>, <span class="dv">1</span>))) <span class="sc">+</span></span>
+<span id="cb12-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">suffix =</span> <span class="st">" min"</span>)) <span class="sc">+</span></span>
+<span id="cb12-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"9E"</span> <span class="ot">=</span> <span class="st">"#15616d"</span>, <span class="st">"B6"</span> <span class="ot">=</span> <span class="st">"#ff7d00"</span>, <span class="st">"HA"</span> <span class="ot">=</span> <span class="st">"#78290f"</span>)) <span class="sc">+</span></span>
+<span id="cb12-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb12-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Air time by carrier"</span>) <span class="sc">+</span></span>
+<span id="cb12-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb12-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Same plot with two small arrows and labels at the top — one pointing left to the shortest reference line, one pointing right to the longest." width="864" class="r-stretch"></section>
+<section id="carrier-labels-inline" class="slide level2">
+<h2>Carrier labels inline</h2>
+<div class="cell">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>carrier_labels <span class="ot">&lt;-</span> some_flights <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_time =</span> <span class="fu">mean</span>(air_time)) <span class="sc">|&gt;</span></span>
+<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">name =</span> <span class="fu">c</span>(<span class="st">"9E • Endeavor Air"</span>, <span class="st">"B6 • JetBlue"</span>, <span class="st">"HA • Hawaiian Airlines"</span>))</span>
+<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a>some_flights <span class="sc">|&gt;</span></span>
+<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> air_time, <span class="at">fill =</span> carrier)) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">2</span>, <span class="at">shape =</span> <span class="dv">21</span>, <span class="at">color =</span> <span class="st">"black"</span>, <span class="at">stroke =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> min_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> max_time, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">alpha =</span> .<span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.5</span>, <span class="at">y =</span> min_time, <span class="at">hjust =</span> <span class="dv">0</span>,</span>
+<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"◀ shortest: "</span>, min_time, <span class="st">" min"</span>),</span>
+<span id="cb13-13"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"grey30"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">3.5</span>, <span class="at">y =</span> max_time, <span class="at">hjust =</span> <span class="dv">1</span>,</span>
+<span id="cb13-15"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"longest: "</span>, max_time, <span class="st">" min ▶"</span>),</span>
+<span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"grey30"</span>, <span class="at">size =</span> <span class="dv">4</span>) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> carrier_labels,</span>
+<span id="cb13-18"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> mean_time, <span class="at">label =</span> name),</span>
+<span id="cb13-19"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-20"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.35</span>,</span>
+<span id="cb13-21"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">4.2</span>) <span class="sc">+</span></span>
+<span id="cb13-22"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="at">data =</span> carrier_labels,</span>
+<span id="cb13-23"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="fu">aes</span>(<span class="at">x =</span> carrier, <span class="at">y =</span> mean_time,</span>
+<span id="cb13-24"><a href="" aria-hidden="true" tabindex="-1"></a>                <span class="at">label =</span> <span class="fu">paste0</span>(<span class="st">"avg: "</span>, <span class="fu">round</span>(mean_time), <span class="st">" min"</span>)),</span>
+<span id="cb13-25"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">inherit.aes =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb13-26"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">nudge_x =</span> <span class="sc">-</span><span class="fl">0.6</span>,</span>
+<span id="cb13-27"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">size =</span> <span class="fl">3.5</span>, <span class="at">color =</span> <span class="st">"grey30"</span>) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">add =</span> <span class="fu">c</span>(<span class="fl">0.8</span>, <span class="dv">1</span>)), <span class="at">labels =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb13-29"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">suffix =</span> <span class="st">" min"</span>)) <span class="sc">+</span></span>
+<span id="cb13-30"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"9E"</span> <span class="ot">=</span> <span class="st">"#15616d"</span>, <span class="st">"B6"</span> <span class="ot">=</span> <span class="st">"#ff7d00"</span>, <span class="st">"HA"</span> <span class="ot">=</span> <span class="st">"#78290f"</span>)) <span class="sc">+</span></span>
+<span id="cb13-31"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="st">"none"</span>) <span class="sc">+</span></span>
+<span id="cb13-32"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>, <span class="at">title =</span> <span class="st">"Air time by carrier"</span>) <span class="sc">+</span></span>
+<span id="cb13-33"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>(<span class="at">clip =</span> <span class="st">"off"</span>) <span class="sc">+</span></span>
+<span id="cb13-34"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</details>
+
+</div>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Same plot with the carrier tick labels on the left removed and replaced by inline labels sitting just below each row of dots: '9E • Endeavor Air', 'B6 • JetBlue', 'HA • Hawaiian Airlines'." width="864" class="r-stretch"></section>
+<section>
+<section id="choosing-the-right-geom" class="title-slide slide level1 center" data-background-color="#2c3e50">
+<h1>Choosing the right geom</h1>
+
 </section>
 <section id="geom-selection-guide" class="slide level2">
 <h2>Geom selection guide</h2>
@@ -309,21 +529,21 @@ Dr.&nbsp;Sara Weston
 <section id="one-variable-distributions" class="slide level2">
 <h2>One variable: distributions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> rt)) <span class="sc">+</span></span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
-<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">30</span>, </span>
-<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>, </span>
-<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Reaction Times"</span>,</span>
-<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Reaction time (ms)"</span></span>
-<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> dep_delay)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">10</span>,</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>,</span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Departure Delays"</span>,</span>
+<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Departure delay (min)"</span></span>
+<span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
-<p>Walk through the code line by line. Emphasize <code>binwidth</code> — students will forget it and get the default “30 bins” warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. Students often ask what number to use; there’s no single right answer, but for reaction times in the hundreds, 20-30 ms bins are reasonable.</p>
+<p>Walk through the code line by line. Emphasize <code>binwidth</code> — students will forget it and get the default “30 bins” warning. A good rule of thumb: try a few binwidths and see what reveals the shape without being too choppy or too smooth. The right skew is a great teaching moment — real-world delay data almost always looks like this. Connect it back to psychology: reaction time distributions look similar.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -340,14 +560,14 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-3-1.png" alt="Histogram of reaction times in milliseconds with 30ms bins, showing an approximately normal distribution centered around 500ms with a slight right skew." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Histogram of departure delays in minutes with 10-minute bins, showing a right-skewed distribution: most flights depart close to on time, with a long tail of delayed flights." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="histogram-vs-density" class="slide level2">
 <h2>histogram vs density</h2>
 
-<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Side-by-side comparison of a histogram and density plot of reaction times. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing a similar roughly normal distribution." width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Side-by-side comparison of a histogram and density plot of departure delays. The histogram shows discrete count bins while the density plot shows a smooth continuous curve, both revealing the same right-skewed shape." width="1152" class="r-stretch"><p>Histogram = actual counts. Density = smoothed estimate of the shape.</p>
 <aside class="notes">
 <p>Quick comparison — don’t belabor this. The key point is that density plots are better for comparing distributions across groups (you can overlay them), while histograms are better for seeing exact counts. Students sometimes get confused by the y-axis on density plots; reassure them that the area under the curve sums to 1, but they rarely need to interpret the y-axis value itself.</p>
 <style type="text/css">
@@ -365,15 +585,15 @@ Dr.&nbsp;Sara Weston
 <section id="one-categorical-variable" class="slide level2">
 <h2>One categorical variable</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition)) <span class="sc">+</span></span>
-<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Observations per Condition"</span>,</span>
-<span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin)) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Flights per NYC Airport"</span>,</span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -381,23 +601,23 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Bar chart showing the count of observations in each experimental condition, with Control and Treatment groups having equal counts of 40 each." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Bar chart showing the count of sampled flights by NYC airport of origin. EWR, JFK, and LGA each have a few hundred flights in the sample." width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="one-continuous-one-categorical" class="slide level2">
 <h2>One continuous + one categorical</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
-<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
-<span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Departure Delay by Airport"</span>,</span>
+<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Departure delay (min)"</span></span>
+<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -405,16 +625,16 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Boxplots comparing reaction time distributions for Control and Treatment conditions. The Control group has a slightly higher median and wider spread than the Treatment group." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Boxplots comparing departure delay distributions across the three NYC airports. Medians are close to zero at all three, with long upper whiskers reflecting the right-skewed tail." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="boxplot-vs-violin" class="slide level2">
 <h2>boxplot vs violin</h2>
 
-<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Side-by-side comparison of boxplot and violin plot for reaction time by condition. The boxplot shows median, quartiles, and whiskers, while the violin plot reveals the full distribution shape including where data are most concentrated." width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Side-by-side comparison of boxplot and violin plot for departure delay by airport. The boxplot shows median, quartiles, and whiskers; the violin reveals the full right-skewed shape, with most density concentrated near zero and a long tail." width="1152" class="r-stretch"><p>Violin shows the full distribution shape. Boxplot shows summary stats. Both have their place.</p>
 <aside class="notes">
-<p>Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. Bimodal distributions look obvious in a violin but invisible in a boxplot. Mention that we’ll see an even better option (raincloud plots) in the next session.</p>
+<p>Students may not have seen violin plots before. Point out that a violin is essentially a mirrored density plot — it shows the full distribution shape, which a boxplot hides. The right-skewed tail of delays is much more obvious in the violin than the boxplot. Mention that we’ll see an even better option (raincloud plots) in the next session.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -426,7 +646,45 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section></section>
+</section>
+<section id="showing-individual-points-geom_jitter" class="slide level2">
+<h2>Showing individual points: <code>geom_jitter()</code></h2>
+<p>When your x-axis is categorical, <code>geom_point()</code> would stack every observation on the same vertical line. <code>geom_jitter()</code> adds a small random horizontal wiggle so each point is visible.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">color =</span> origin)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Every Flight, Plotted"</span>,</span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Departure delay (min)"</span></span>
+<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p><code>width = 0.2</code> keeps points within each category’s “lane.” <code>alpha = 0.4</code> makes them semi-transparent so dense areas look darker. Flag both settings — students will want to tune them. We’ll see <code>geom_jitter()</code> come back as the “raw data” layer under every summary plot in the rest of the deck.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section><section id="showing-individual-points-geom_jitter-output" class="slide level2 output-location-slide"><h2>Showing individual points: <code>geom_jitter()</code></h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Jittered dot plot of departure delays by NYC airport. Each point is a single flight, with horizontal jitter so overlapping points are visible. All three airports show a dense cluster near zero and a sparse tail of long delays." width="864"></p>
+</figure>
+</div>
+</div>
+</div></section></section>
 <section>
 <section id="stat_summary" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>stat_summary()</h1>
@@ -452,22 +710,22 @@ Dr.&nbsp;Sara Weston
 <section id="stat_summary-basics" class="slide level2">
 <h2>stat_summary() basics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt)) <span class="sc">+</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> mean,</span>
-<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"bar"</span>,</span>
-<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
-<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun.data =</span> mean_cl_normal, </span>
-<span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>, </span>
-<span id="cb4-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb4-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb4-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean Reaction Time by Condition"</span>,</span>
-<span id="cb4-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb4-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
-<span id="cb4-15"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb4-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun =</span> mean,</span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"bar"</span>,</span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(</span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fun.data =</span> mean_cl_normal,</span>
+<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb18-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">width =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb18-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean Departure Delay by Airport"</span>,</span>
+<span id="cb18-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Departure delay (min)"</span></span>
+<span id="cb18-15"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -475,18 +733,18 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Bar chart showing mean reaction time by condition with 95% confidence interval error bars. The Treatment group mean is slightly lower than the Control group, with overlapping error bars." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Bar chart showing mean departure delay by airport with 95% confidence interval error bars. Means are close to each other across the three airports, with overlapping error bars." width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="breaking-down-stat_summary" class="slide level2">
 <h2>Breaking down stat_summary()</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The bar (mean)</span></span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>)</span>
-<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The error bars (95% confidence interval)</span></span>
-<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The bar (mean)</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>)</span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The error bars (95% confidence interval)</span></span>
+<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
 </div>
 <ul>
 <li><code>fun</code> = the function to calculate (mean, median, etc.)</li>
@@ -537,19 +795,19 @@ Dr.&nbsp;Sara Weston
 </tbody>
 </table>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># SE </span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI (most common in psych)</span></span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># SE</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_se, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span>
+<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 95% CI (most common in psych)</span></span>
+<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>)</span></code></pre></div>
 </div>
 </section>
 <section id="why-does-this-matter" class="slide level2">
 <h2>Why does this matter?</h2>
 <p>The APA Publication Manual (7th ed.) recommends showing individual data points alongside summary statistics whenever possible.</p>
-<p>Bar charts with error bars are ubiquitous in psychology — but they hide the <em>shape</em> of the data. Outliers, bimodality, and floor/ceiling effects all disappear behind a rectangle.</p>
+<p>Bar charts with error bars are ubiquitous in psychology — but they hide the <em>shape</em> of the data. Outliers, skew, and bimodality all disappear behind a rectangle.</p>
 <aside class="notes">
-<p>This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). Emphasize that the field is moving toward showing more data, not less.</p>
+<p>This is a great moment to connect to the replication crisis discussion from Session 1. One reason problematic results went undetected for so long is that bar-and-error-bar plots hid the underlying data. If reviewers had seen the individual data points, they might have noticed impossible patterns (like the LaCour data). The delay data makes the same point — the means look nearly identical, but the underlying distributions are wildly right-skewed.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -566,19 +824,19 @@ Dr.&nbsp;Sara Weston
 <h2>Adding individual data points</h2>
 <p>Error bars alone hide the data. Show the points too:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
-<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Condition"</span>,</span>
-<span id="cb7-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Error bars = 95%CI. Individual points shown."</span>,</span>
-<span id="cb7-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb7-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span></span>
-<span id="cb7-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">color =</span> origin)) <span class="sc">+</span></span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">size =</span> <span class="dv">4</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Departure Delay by Airport"</span>,</span>
+<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Error bars = 95% CI. Individual flights shown."</span>,</span>
+<span id="cb21-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Departure delay (min)"</span></span>
+<span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -598,7 +856,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Dot plot showing individual reaction times as jittered points for each condition, with black dots marking the group means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Dot plot showing individual flight delays as jittered points for each airport, with black dots marking airport means and error bars showing 95% confidence intervals. Individual variation is clearly visible behind the summary statistics." width="768"></p>
 </figure>
 </div>
 </div>
@@ -611,7 +869,7 @@ Dr.&nbsp;Sara Weston
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
 <aside class="notes">
-<p>Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use <code>stat_summary()</code> twice (once for bar, once for error bars), (2) putting <code>geom_jitter()</code> after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in <code>labs()</code>. If pairs finish early, challenge them to add <code>age_group</code> as a facet or dodge variable. Reveal the solution after time is up.</p>
+<p>Give 10 minutes. Circulate actively — the most common issues will be: (1) forgetting to use <code>stat_summary()</code> twice (once for bar, once for error bars), (2) putting <code>geom_jitter()</code> after the bar so the points are hidden behind it, and (3) not knowing where to put the caption in <code>labs()</code>. If pairs finish early, challenge them to add <code>time_of_day</code> as a facet or fill variable. Reveal the solution after time is up. Students should create their own <code>flights_sample</code> using the setup code shown on this slide (or you can share it in the chat).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -623,12 +881,12 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-<p>Using the <code>reaction_data</code> dataset:</p>
+<p>Using the <code>flights</code> dataset (filter to <code>!is.na(dep_delay)</code> first):</p>
 <ol type="1">
-<li>Create a <strong>bar chart with error bars</strong> showing mean RT by condition</li>
+<li>Create a <strong>bar chart with error bars</strong> showing mean <code>dep_delay</code> by <code>origin</code></li>
 <li>Add <strong>individual data points</strong> (jittered) behind the bars</li>
-<li>Color the bars by condition</li>
-<li>Add a caption noting that error bars show the 95% CI.</li>
+<li>Color the bars by <code>origin</code></li>
+<li>Add a caption noting that error bars show the 95% CI</li>
 </ol>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -716,17 +974,18 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction Time by Age Group and Condition"</span>,</span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>,</span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean RT (ms)"</span></span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">fill =</span> time_of_day)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>, <span class="at">position =</span> <span class="st">"dodge"</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>,</span>
+<span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="at">position =</span> <span class="fu">position_dodge</span>(<span class="fl">0.6</span>), <span class="at">width =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb22-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Departure Delay by Airport and Time of Day"</span>,</span>
+<span id="cb22-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb22-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean delay (min)"</span>,</span>
+<span id="cb22-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Time of day"</span></span>
+<span id="cb22-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb22-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 </section>
@@ -734,18 +993,18 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Grouped bar chart showing mean reaction time by age group and condition with dodged bars and error bars. Control and Treatment bars are side by side within each age group, allowing direct comparison across both factors." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Grouped bar chart showing mean departure delay by airport and time of day with dodged bars and error bars. Morning and Afternoon/Evening bars sit side by side within each airport, showing afternoon delays are consistently higher." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="stack-and-fill" class="slide level2">
 <h2>stack and fill</h2>
 
-<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Control and Treatment observations by age group, while the filled chart normalizes each bar to 100% to compare proportions directly." width="1152" class="r-stretch"></section>
+<img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Side-by-side comparison of stacked and filled bar charts. The stacked chart shows raw counts of Morning and Afternoon/Evening flights at each airport; the filled chart normalizes each bar to 100% to compare proportions directly." width="1152" class="r-stretch"></section>
 <section id="scales-controlling-axes-and-colors" class="slide level2">
 <h2>Scales: controlling axes and colors</h2>
 <aside class="notes">
-<p>Spend ~3 minutes on this and the next slide together. Students don’t need to memorize every scale function — they need to know the naming pattern: <code>scale_</code> + the aesthetic (<code>fill</code>, <code>color</code>, <code>x</code>, <code>y</code>) + <code>_</code> + the type (<code>manual</code>, <code>continuous</code>, <code>discrete</code>, <code>viridis</code>). Once they see the pattern, they can guess function names and use autocomplete.</p>
+<p>Spend ~3 minutes on this and the next slide together. Students don’t need to memorize every scale function — they need to know the naming pattern: <code>scale_</code> + the aesthetic (<code>fill</code>, <code>color</code>, <code>x</code>, <code>y</code>) + <code>_</code> + the type (<code>manual</code>, <code>continuous</code>, <code>discrete</code>). Once they see the pattern, they can guess function names and use autocomplete.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -759,29 +1018,23 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 <p>Scales translate data values into visual properties:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis range</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">800</span>))</span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis breaks (tick marks)</span></span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">400</span>, <span class="dv">700</span>, <span class="at">by =</span> <span class="dv">50</span>))</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Set specific colors</span></span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"lightblue"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"coral"</span>))</span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use a colorblind-friendly palette</span></span>
-<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Control axis breaks (tick marks)</span></span>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">180</span>, <span class="at">by =</span> <span class="dv">30</span>))</span>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Set specific colors</span></span>
+<span id="cb23-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EWR"</span> <span class="ot">=</span> <span class="st">"lightblue"</span>, <span class="st">"JFK"</span> <span class="ot">=</span> <span class="st">"coral"</span>, <span class="st">"LGA"</span> <span class="ot">=</span> <span class="st">"lightgreen"</span>))</span></code></pre></div>
 </div>
 </section>
 <section id="scale_fill_manual" class="slide level2">
 <h2>scale_fill_manual()</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>)) <span class="sc">+</span></span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Custom colors"</span>, <span class="at">x =</span> <span class="st">"Condition"</span>, <span class="at">y =</span> <span class="st">"RT (ms)"</span>) <span class="sc">+</span></span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EWR"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"JFK"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>, <span class="st">"LGA"</span> <span class="ot">=</span> <span class="st">"#f1c40f"</span>)) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Custom colors"</span>, <span class="at">x =</span> <span class="st">"Origin airport"</span>, <span class="at">y =</span> <span class="st">"Delay (min)"</span>) <span class="sc">+</span></span>
+<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 <p>Use a website like <a href="https://htmlcolorcodes.com/color-picker/">HTML color codes</a> to find the appropriate HEX code for your color.</p>
@@ -790,7 +1043,7 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Boxplots of reaction time by condition using custom colors: blue for Control and red for Treatment, demonstrating how scale_fill_manual() applies specific hex color codes to groups." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Boxplots of departure delay by airport using custom colors: blue for EWR, red for JFK, and yellow for LGA, demonstrating how scale_fill_manual() applies specific hex color codes to groups." width="768"></p>
 </figure>
 </div>
 </div>
@@ -810,31 +1063,31 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip x and y (great for long category labels)</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_flip</span>()</span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in without dropping data</span></span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">600</span>))</span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># vs</span></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">400</span>, <span class="dv">600</span>))  <span class="co"># This DROPS data outside the range!</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Flip x and y (great for long category labels)</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_flip</span>()</span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Zoom in without dropping data</span></span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">30</span>))</span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># vs</span></span>
+<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">10</span>, <span class="dv">30</span>))  <span class="co"># This DROPS data outside the range!</span></span></code></pre></div>
 </div>
 </section>
 <section id="coord_flip-in-action" class="slide level2">
 <h2>coord_flip() in action</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> condition, <span class="at">x =</span> rt, <span class="at">fill =</span> condition)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Flipped axes — better for category labels"</span>, <span class="at">y =</span> <span class="st">"Condition"</span>, <span class="at">x =</span> <span class="st">"RT (ms)"</span>) <span class="sc">+</span></span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> origin, <span class="at">x =</span> dep_delay, <span class="at">fill =</span> origin)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Flipped axes — better for category labels"</span>, <span class="at">y =</span> <span class="st">"Origin airport"</span>, <span class="at">x =</span> <span class="st">"Delay (min)"</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section><section id="coord_flip-in-action-output" class="slide level2 output-location-slide"><h2>coord_flip() in action</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Horizontal boxplots of reaction time by condition, with categories on the y-axis and reaction time on the x-axis, demonstrating how flipped axes improve readability for categorical labels." width="768"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-31-1.png" alt="Horizontal boxplots of departure delay by airport, with airport codes on the y-axis and delay on the x-axis, demonstrating how flipped axes improve readability for categorical labels." width="768"></p>
 </figure>
 </div>
 </div>
@@ -844,10 +1097,10 @@ Dr.&nbsp;Sara Weston
 <h1>Putting it together</h1>
 
 </section>
-<section id="a-polished-psychology-figure" class="slide level2">
-<h2>A polished psychology figure</h2>
+<section id="a-polished-figure" class="slide level2">
+<h2>A polished figure</h2>
 <aside class="notes">
-<p>This is the “bringing it all together” slide. Walk through the code slowly, pointing out each layer and why it’s there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for accessibility, and informative labels. This is roughly the quality you’d expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.</p>
+<p>This is the “bringing it all together” slide. Walk through the code slowly, pointing out each layer and why it’s there: jittered points for raw data, boxplot for summary, stat_summary diamond for the mean, manual colors for distinction, and informative labels. This is roughly the quality you’d expect in a journal submission. Students should aim for this level on Assignment 4 and the final project.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -860,29 +1113,31 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>)) <span class="sc">+</span></span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"#2980b9"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>)) <span class="sc">+</span></span>
-<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment Reduces Reaction Time"</span>,</span>
-<span id="cb13-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Individual data points, box summaries, and mean (diamond) shown"</span>,</span>
-<span id="cb13-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Condition"</span>,</span>
-<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Reaction time (ms)"</span>,</span>
-<span id="cb13-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"N = 40 per condition. Diamond = mean."</span></span>
-<span id="cb13-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>flights_sample <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> origin, <span class="at">y =</span> dep_delay, <span class="at">fill =</span> origin, <span class="at">color =</span> origin)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.35</span>, <span class="at">size =</span> <span class="fl">1.5</span>) <span class="sc">+</span></span>
+<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># outlier.shape = NA hides boxplot outliers because geom_jitter already shows every point</span></span>
+<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">width =</span> <span class="fl">0.4</span>, <span class="at">outlier.shape =</span> <span class="cn">NA</span>) <span class="sc">+</span></span>
+<span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># shape = 18 is a solid diamond — draws attention to the mean</span></span>
+<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"point"</span>, <span class="at">shape =</span> <span class="dv">18</span>, <span class="at">size =</span> <span class="dv">5</span>, <span class="at">color =</span> <span class="st">"black"</span>) <span class="sc">+</span></span>
+<span id="cb27-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EWR"</span> <span class="ot">=</span> <span class="st">"#3498db"</span>, <span class="st">"JFK"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span>, <span class="st">"LGA"</span> <span class="ot">=</span> <span class="st">"#f1c40f"</span>)) <span class="sc">+</span></span>
+<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"EWR"</span> <span class="ot">=</span> <span class="st">"#2980b9"</span>, <span class="st">"JFK"</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>, <span class="st">"LGA"</span> <span class="ot">=</span> <span class="st">"#b7950b"</span>)) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb27-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Departure Delays Are Similar Across NYC Airports"</span>,</span>
+<span id="cb27-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Individual flights, box summaries, and mean (diamond) shown"</span>,</span>
+<span id="cb27-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Origin airport"</span>,</span>
+<span id="cb27-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Departure delay (min)"</span>,</span>
+<span id="cb27-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"N = 500 sampled flights. Diamond = mean."</span></span>
+<span id="cb27-16"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb27-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
-</section><section id="a-polished-psychology-figure-output" class="slide level2 output-location-slide"><h2>A polished psychology figure</h2><div class="cell output-location-slide">
+</section><section id="a-polished-figure-output" class="slide level2 output-location-slide"><h2>A polished figure</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Polished figure combining jittered individual data points, boxplots, and diamond-shaped mean markers for reaction time by condition. Uses custom blue and red colors, informative title and subtitle, and a caption noting sample size and mean indicator." width="960"></p>
+<p><img data-src="08-layers-aesthetics_files/figure-revealjs/unnamed-chunk-32-1.png" alt="Polished figure combining jittered individual flight delays, boxplots, and diamond-shaped mean markers for each NYC airport. Uses custom colors, informative title and subtitle, and a caption noting sample size and mean indicator." width="960"></p>
 </figure>
 </div>
 </div>
@@ -895,7 +1150,7 @@ Dr.&nbsp;Sara Weston
 <section id="assignment-4-preview" class="slide level2">
 <h2>Assignment 4 preview</h2>
 <aside class="notes">
-<p>This is the head-start exercise (~10 min remaining). Students don’t need to finish this in class — it’s a bridge to Assignment 4. Encourage them to have fun making the “bad” version deliberately awful. If students seem finished early, suggest they try adding <code>facet_wrap(~age_group)</code> to any of today’s plots as a preview of faceting.</p>
+<p>This is the head-start exercise (~10 min remaining). Students don’t need to finish this in class — it’s a bridge to Assignment 4. Encourage them to have fun making the “bad” version deliberately awful. If students seem finished early, suggest they try adding <code>facet_wrap(~time_of_day)</code> to any of today’s plots as a preview of faceting.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -946,18 +1201,22 @@ Dr.&nbsp;Sara Weston
 <td>Full distribution by categorical</td>
 </tr>
 <tr class="odd">
+<td><code>geom_jitter()</code></td>
+<td>Individual points with horizontal wiggle</td>
+</tr>
+<tr class="even">
 <td><code>stat_summary()</code></td>
 <td>Calculate and display summary stats</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>position = "dodge"</code></td>
 <td>Side-by-side grouped plots</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>scale_fill_manual()</code></td>
 <td>Custom colors</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td><code>coord_flip()</code></td>
 <td>Swap axes</td>
 </tr>
@@ -1368,6 +1627,7 @@ Dr.&nbsp;Sara Weston
         }
       });
       </script>
+    <script src="toc-nav.js"></script>
     
 
 </body></html>

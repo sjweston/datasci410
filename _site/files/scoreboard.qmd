@@ -18,18 +18,19 @@ execute:
 #| label: setup
 library(tidyverse)
 library(ggrepel)
+library(here)
 
 # =====================================================================
 # Data loaded from CSVs produced by scripts/update-team-points.R
 # =====================================================================
 
-scoreboard <- read_csv("../team_points.csv", show_col_types = FALSE) |>
+scoreboard <- read_csv(here("team_points.csv"), show_col_types = FALSE) |>
   mutate(
     total = pair_coding + assignments + quizzes + fun_challenge,
     team_name = fct_reorder(team_name, total)
   )
 
-rankings <- read_csv("../team_rankings.csv", show_col_types = FALSE)
+rankings <- read_csv(here("team_rankings.csv"), show_col_types = FALSE)
 
 current_week = rankings |> 
   filter(week_points > 0)  |> 

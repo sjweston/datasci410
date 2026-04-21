@@ -14,6 +14,12 @@ format:
     highlight-style: github
     code-copy: false
     incremental: false
+    include-in-header:
+      text: |
+        <link rel="stylesheet" href="toc-nav.css">
+    include-after-body:
+      text: |
+        <script src="toc-nav.js"></script>
 execute:
   echo: true
   eval: true
@@ -377,40 +383,38 @@ Create a new Quarto document (File → New File → Quarto Document):
 
 **Time: 10 minutes**
 
+## Solution: Create a mini-report {background-color="#e67e22"}
+
 ```{r}
-#| echo: false
+#| echo: true
 #| eval: false
 
-# --- SOLUTION EXAMPLE ---
-# Save this as a .qmd file:
+# Save this as a .qmd file, then click Render:
 
 # ---
 # title: "Car Fuel Efficiency Analysis"
 # author: "Your Name"
-# date: "2026-05-27"
+# date: today
 # format: html
 # ---
 
 # ## Introduction
-#
-# This report examines fuel efficiency in cars from the `mpg`
-# dataset. We explore the relationship between engine size and
-# highway fuel economy.
+# This report examines fuel efficiency using the `mpg` dataset.
+# We explore the relationship between engine size and highway economy.
 
-library(tidyverse)
+# ```{r}
+# #| include: false
+# library(tidyverse)
+# ```
 
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(x = "Engine size (L)", y = "Highway MPG") +
-  theme_minimal()
+# ```{r}
+# ggplot(mpg, aes(x = displ, y = hwy)) +
+#   geom_point() +
+#   geom_smooth(method = "lm") +
+#   labs(x = "Engine size (L)", y = "Highway MPG") +
+#   theme_minimal()
+# ```
 ```
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # Inline code {background-color="#2c3e50"}
 
@@ -728,3 +732,51 @@ Assignment 3 is your **first Quarto submission**. Start scaffolding it now:
 ::: {.callout-tip}
 This is the workflow you'll use for every assignment from A3 onward.
 :::
+
+```{r}
+#| echo: true
+#| eval: false
+
+# --- SOLUTION EXAMPLE ---
+# Save this as a .qmd file (e.g., assignment-3.qmd):
+
+# ---
+# title: "Assignment 3"
+# author: "Your Name"
+# date: today
+# format: html
+# ---
+
+# ## Setup
+
+# ```{r}
+# #| label: setup
+# #| include: false
+# library(tidyverse)
+# library(readxl)
+# library(here)
+# ```
+
+# ## Introduction
+# This report imports and explores two datasets related to [topic].
+
+# ## Data
+
+# ```{r}
+# #| label: load-survey
+# survey_data <- read_csv(here("data", "survey_data.csv"),
+#                         na = "N/A")
+# glimpse(survey_data)
+# ```
+
+# ```{r}
+# #| label: load-demographics
+# demographics <- read_excel(here("data", "demographics.xlsx"),
+#                            sheet = 2)
+# glimpse(demographics)
+# ```
+
+# ## Results
+# The survey included `r nrow(survey_data)` participants.
+# The mean age was `r round(mean(demographics$age, na.rm = TRUE), 1)` years.
+```
