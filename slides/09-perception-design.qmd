@@ -133,36 +133,149 @@ Your eye goes to the red points, the big points, and the outlier — instantly.
 Ask students: "Where did your eye go first in each panel?" The answer should be obvious and immediate — that's the whole point. The practical takeaway: use color to highlight your key finding, not to decorate. If everything is colorful, nothing pops.
 :::
 
-## Gestalt principles (brief)
+## Working memory limits what you can encode
 
-The brain groups things automatically:
+::: {.notes}
+This is direct cognitive psychology. Cowan (2001) revised Miller's "7 ± 2" downward — the real capacity is closer to 4 chunks. The visualization implication: each aesthetic you use (color, shape, size) occupies a working memory slot. Eight-category legends fail because readers literally cannot hold all eight color-group mappings in memory while reading the figure. This is the scientific basis for the "max 5 colors" rule of thumb. Spend ~3 minutes here and connect it back to the preattentive slide: just because a viewer *notices* something (preattentive) doesn't mean they can *track* it across categories (working memory).
+:::
 
-- **Proximity** — things close together feel like a group
-- **Similarity** — things that look alike feel like a group
-- **Enclosure** — things inside a border feel like a group
+Research suggests working memory holds roughly **4 items** at a time (Cowan, 2001).
+
+In data visualization, this means:
+
+- Limit categorical groups in a legend to **4–5 maximum**
+- Each additional aesthetic (color, shape, size) uses up a "slot"
+- If you have 8 conditions, consider **faceting** rather than overlapping
 
 ```{r}
 #| echo: false
-#| fig-width: 8
-#| fig-height: 4
-#| fig-alt: "Scatterplot showing two visually distinct clusters of points separated by empty space, demonstrating the Gestalt principle of proximity — nearby points are perceived as belonging to the same group."
-# Proximity example
-tibble(
-  x = c(1, 1.2, 1.1, 3, 3.2, 3.1),
-  y = c(1, 1.3, 0.8, 1, 1.2, 0.9),
-  group = c("A","A","A","B","B","B")
+#| fig-width: 12
+#| fig-height: 3.5
+#| fig-alt: "Two side-by-side bar charts: the left has 4 clearly distinguishable groups using a Set2 palette; the right has 8 groups where colors become hard to tell apart, illustrating how working memory limits categorical encoding in figures."
+p_wm1 <- tibble(
+  group = paste("Group", LETTERS[1:4]),
+  value = c(4.2, 3.8, 5.1, 2.9)
 ) |>
-  ggplot(aes(x, y, color = group)) +
-  geom_point(size = 6) +
-  scale_color_manual(values = c("A" = "steelblue", "B" = "coral")) +
-  labs(title = "Proximity: two clusters feel like two groups") +
-  theme_minimal(base_size = 14) +
-  theme(legend.position = "none", axis.text = element_blank(), axis.title = element_blank())
+  ggplot(aes(x = group, y = value, fill = group)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set2") +
+  labs(title = "4 groups — manageable", x = NULL, y = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+
+p_wm2 <- tibble(
+  group = paste("Group", LETTERS[1:8]),
+  value = c(4.2, 3.8, 5.1, 2.9, 3.5, 4.8, 2.2, 3.9)
+) |>
+  ggplot(aes(x = group, y = value, fill = group)) +
+  geom_col() +
+  scale_fill_brewer(palette = "Set1") +
+  labs(title = "8 groups — hard to track", x = NULL, y = NULL) +
+  theme_minimal(base_size = 13) +
+  theme(legend.position = "none")
+
+p_wm1 + p_wm2
 ```
 
+## Gestalt principles: how the brain groups things
+
 ::: {.notes}
-Keep Gestalt brief — 1-2 minutes. Students don't need to memorize the terms, just the intuition: your brain groups things that are close together, look similar, or are enclosed together. This matters for figure design because spacing and visual similarity communicate grouping whether you intend it or not. Facets use proximity; color-coding uses similarity.
+Give students a moment to look at each panel before reading the label. The proximity demo is obvious — two clusters, same color, same size. Similarity is more interesting: identical positions, but color alone makes two groups pop out. Enclosure shows up everywhere: annotation boxes, facet borders, legend boxes. All three operate automatically and unconsciously — whether or not you designed them in. This is a 5-minute slide; use the fragment reveals to pace the conversation.
 :::
+
+The brain automatically groups visual elements — whether you intend it or not.
+
+::: {.columns}
+
+::: {.column width="33%" .fragment}
+**Proximity**
+
+```{r}
+#| echo: false
+#| fig-height: 2.5
+#| fig-width: 3.2
+#| fig-alt: "Six gray dots arranged in two tight clusters separated by empty space — demonstrating the Gestalt principle of proximity."
+tibble(
+  x = c(1, 1.2, 1.1, 3, 3.2, 3.1),
+  y = c(1, 1.3, 0.8, 1, 1.2, 0.9)
+) |>
+  ggplot(aes(x, y)) +
+  geom_point(size = 8, color = "steelblue") +
+  labs(title = "Close → grouped") +
+  theme_void(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+*Nearby items feel like a group*
+:::
+
+::: {.column width="33%" .fragment}
+**Similarity**
+
+```{r}
+#| echo: false
+#| fig-height: 2.5
+#| fig-width: 3.2
+#| fig-alt: "Six dots in a row, alternating blue and orange — demonstrating Gestalt similarity grouping by color."
+tibble(
+  x = 1:6,
+  y = rep(1, 6),
+  grp = rep(c("A", "B"), 3)
+) |>
+  ggplot(aes(x, y, color = grp)) +
+  geom_point(size = 8) +
+  scale_color_manual(values = c("A" = "steelblue", "B" = "coral")) +
+  labs(title = "Same look → grouped") +
+  theme_void(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"),
+        legend.position = "none")
+```
+
+*Same appearance = same group*
+:::
+
+::: {.column width="33%" .fragment}
+**Enclosure**
+
+```{r}
+#| echo: false
+#| fig-height: 2.5
+#| fig-width: 3.2
+#| fig-alt: "Two clusters of gray dots, each enclosed by a shaded rectangle — demonstrating the Gestalt principle of enclosure."
+tibble(
+  x = c(1, 1.2, 1.1, 3, 3.2, 3.1),
+  y = c(1, 1.3, 0.8, 1, 1.2, 0.9)
+) |>
+  ggplot(aes(x, y)) +
+  annotate("rect", xmin = 0.7, xmax = 1.5, ymin = 0.5, ymax = 1.6,
+           fill = "lightblue", alpha = 0.4, color = "steelblue", linewidth = 0.8) +
+  annotate("rect", xmin = 2.7, xmax = 3.5, ymin = 0.6, ymax = 1.5,
+           fill = "#fff3cd", alpha = 0.8, color = "goldenrod", linewidth = 0.8) +
+  geom_point(size = 8, color = "gray40") +
+  labs(title = "Inside border → grouped") +
+  theme_void(base_size = 13) +
+  theme(plot.title = element_text(hjust = 0.5, face = "bold"))
+```
+
+*Inside a border = same group*
+:::
+
+:::
+
+## Gestalt principles show up everywhere in ggplot2
+
+::: {.notes}
+This is the "so what?" slide for Gestalt. Students often treat these principles as abstract theory — this slide makes them concrete and actionable. The key insight: every ggplot2 function that creates grouping or spatial structure (facets, color scales, annotation boxes) is activating these principles automatically. Good designers make this work for them; bad designers accidentally create misleading groupings. Spend 2–3 minutes. The `annotate("rect")` example is a useful technique they haven't seen yet.
+:::
+
+| Principle | How it shows up in your figures |
+|-----------|----------------------------------|
+| **Proximity** | `facet_wrap()` puts related panels side by side |
+| **Similarity** | Color-coding makes same-group points feel connected |
+| **Enclosure** | A shaded background or border sets a group apart |
+| **Continuity** | Connecting points across time implies a single trend |
+
+These groupings happen whether you design them or not — use them intentionally.
 
 # Color theory {background-color="#2c3e50"}
 
@@ -180,6 +293,45 @@ Using the wrong type is one of the most common visualization mistakes.
 This is a high-value slide — spend ~3 minutes here. The most common mistake: using a qualitative palette for ordered data (like a rainbow for low-to-high), or using a sequential palette for unrelated categories. Ask students: "If you had data on anxiety levels from low to high, which palette type?" (Sequential.) "If you had data on four different therapy types?" (Qualitative.) Test their intuition before moving to examples.
 :::
 
+## First question: `fill` or `color`?
+
+::: {.notes}
+This slide introduces the two-family structure. Every scale_ function starts with either `scale_fill_` or `scale_color_` — which one depends on the aesthetic the student mapped in `aes()`. This is a pattern they've seen already with `scale_fill_manual` and `scale_color_manual` in session 8. The new idea is that the same pattern applies to every other palette function. Keep this short — 1–2 minutes — and emphasize it's the same pattern they already know.
+:::
+
+Which aesthetic did you map in `aes()`? That tells you which scale family to use.
+
+```{r}
+#| eval: false
+# Geoms with `fill=`: bars, boxplots, tiles, density
+ggplot(data, aes(x, y, fill = group)) + geom_boxplot() +
+  scale_fill_manual(values = c(...))     # ← scale_fill_*
+
+# Geoms with `color=`: points, lines
+ggplot(data, aes(x, y, color = group)) + geom_point() +
+  scale_color_manual(values = c(...))    # ← scale_color_*
+```
+
+Same pattern, just swap `fill` for `color` throughout.
+
+## Second question: which palette?
+
+::: {.notes}
+Now that they know which family (`fill` vs `color`), they need to pick a palette. This table organizes the choice by data type, which is how students should be thinking about it. The `_c` vs `_d` distinction is the single most common point of confusion — call it out explicitly. Reassure students that `viridis` is already built into ggplot2 — no new package to install. Spend 3 minutes on this slide; students will come back to it as a reference.
+:::
+
+Match the palette to your data:
+
+| Your data | Function |
+|-----------|----------|
+| Continuous numeric (e.g., reaction time) | `scale_fill_viridis_c()` |
+| Ordered categories (e.g., dosage levels) | `scale_fill_viridis_d()` |
+| Qualitative groups (e.g., therapy type) | `scale_fill_brewer(palette = "Set2")` |
+| Diverging from a midpoint (e.g., change scores) | `scale_fill_distiller(palette = "RdBu")` |
+| Hand-picked colors | `scale_fill_manual(values = c(...))` |
+
+**`_c` for numeric, `_d` for character/factor.** Same options work for `scale_color_*`.
+
 ## Sequential palettes
 
 ```{r}
@@ -192,6 +344,29 @@ tibble(x = 1:10, y = rep(1, 10), val = 1:10) |>
   geom_tile(width = 0.9) +
   scale_fill_viridis_c() +
   labs(title = "viridis (sequential) — great for continuous data") +
+  theme_minimal(base_size = 14) +
+  theme(axis.text = element_blank(), axis.title = element_blank(), legend.position = "bottom")
+```
+
+## Diverging palettes
+
+::: {.notes}
+The key concept here: a diverging palette has a meaningful midpoint, usually white or a neutral color. Values above and below the midpoint get contrasting hues. In psychology, pre–post difference scores are a clean example — zero means "no change," positive means "got worse," negative means "got better." Students often try to use sequential palettes for diverging data — the result is that the negative values and positive values look like they're on the same continuum with no center. Ask: "If I have anxiety change scores from -5 (better) to +5 (worse), which palette type?" (Diverging.) Correlation matrices are another classic use case but we won't cover correlations until Session 17.
+:::
+
+Use when values diverge from a meaningful **midpoint** — often 0 or a baseline.
+
+```{r}
+#| echo: false
+#| fig-width: 10
+#| fig-height: 4
+#| fig-alt: "A row of ten tiles colored with the RdBu diverging palette, transitioning from dark blue on the left through white in the middle to dark red on the right, illustrating how diverging palettes encode values relative to a midpoint."
+tibble(x = 1:10, y = rep(1, 10), val = seq(-1, 1, length.out = 10)) |>
+  ggplot(aes(x, y, fill = val)) +
+  geom_tile(width = 0.9) +
+  scale_fill_distiller(palette = "RdBu") +
+  labs(title = "RdBu (diverging) — for data with a meaningful midpoint",
+       subtitle = "Psychology examples: pre–post change scores, effect sizes, difference from baseline") +
   theme_minimal(base_size = 14) +
   theme(axis.text = element_blank(), axis.title = element_blank(), legend.position = "bottom")
 ```
@@ -265,6 +440,38 @@ p1 + p2
 Let the side-by-side comparison speak for itself. The blue-orange version on the right is distinguishable to virtually all viewers. You can mention that some journals now require colorblind-accessible figures. The hex codes shown earlier (#0072B2, #E69F00, #009E73) are from the Okabe-Ito palette — a safe default students can copy into any project.
 :::
 
+## Why cluttered figures fail: cognitive load theory
+
+::: {.notes}
+Cognitive load theory (Sweller, 1988) was developed to explain why instructional design matters — and it translates directly to data visualization. The three-type model gives students a vocabulary for critiquing figures: "the gridlines add extraneous load," "the uninformative title doesn't build germane load." Spend ~3 minutes here, then connect forward: the declutter checklist on the next slides is how we operationalize this theory. Students who have taken cognitive psych or educational psych will recognize this framework.
+:::
+
+Cognitive load theory (Sweller, 1988) says mental effort has three components:
+
+::: {.columns}
+::: {.column width="33%"}
+**Intrinsic load**
+
+The complexity of the data itself — you can't reduce it
+:::
+::: {.column width="33%"}
+**Extraneous load**
+
+Clutter, noise, redundant elements — *this is what we control*
+:::
+::: {.column width="33%"}
+**Germane load**
+
+The insight the reader builds — what we're trying to maximize
+:::
+:::
+
+. . .
+
+Every gray background, redundant legend, and unlabeled variable is **extraneous load** — it taxes working memory without adding information.
+
+**Design goal: minimize extraneous, maximize germane.**
+
 # Decluttering {background-color="#2c3e50"}
 
 ## The default is cluttered
@@ -326,23 +533,41 @@ Ask: does this element help the reader understand the data?
 :::
 :::
 
-## theme() for fine control
+## Meet the `element_*` family
 
 ::: {.notes}
-Don't try to teach every theme() option — there are dozens. The goal is for students to know that theme() exists and to see the pattern: each element gets a function like `element_blank()` (remove it), `element_text()` (style text), `element_line()` (style lines), or `element_rect()` (style rectangles). They can look up specific options in the ggplot2 documentation. The most common ones they'll use are `legend.position`, `panel.grid`, and `plot.title`.
+Before showing a full theme() call, introduce the vocabulary. Every non-data piece of a ggplot — the title, the axis ticks, the panel background, the gridlines — is one of four kinds of thing: text, a line, a rectangle, or blank (invisible). Once students internalize this, theme() stops feeling random. Spend 2–3 minutes on this slide. Ask: "The axis label — is that text, a line, or a rectangle?" (Text.) "The panel background?" (Rectangle.) "The gridlines?" (Lines.) That builds the mental model.
 :::
+
+Every non-data piece of a ggplot is one of four kinds of thing:
+
+| Function | Key arguments | Used for |
+|----------|---------------|----------|
+| `element_text()` | `size`, `face`, `color`, `hjust` | Titles, axis text, legend text |
+| `element_line()` | `color`, `linewidth` | Axis lines, gridlines, ticks |
+| `element_rect()` | `fill`, `color` | Panel background, legend box |
+| `element_blank()` | — | Removes the element entirely |
+
+## `theme()` puts elements to use
+
+::: {.notes}
+Now that students know the four element types, theme() makes sense: you name a piece of the plot on the left side of `=`, and assign an element function on the right to style it. Walk through each line of the example and ask students to identify which element type is being used and why. The `?theme` tip is important — there are ~90 arguments and no one memorizes them all; students should know where to look.
+:::
+
+Inside `theme()`, name the piece of the plot, then assign an `element_*` function to style it:
 
 ```{r}
 #| eval: false
 theme(
-  legend.position = "none",                    # Remove legend
-  axis.ticks = element_blank(),                # Remove tick marks
-  panel.grid = element_blank(),                # Remove gridlines
-  plot.title = element_text(face = "bold"),    # Bold the title
-  axis.text = element_text(size = 10),         # Font size
-  plot.caption = element_text(hjust = 0)       # Left-align caption
+  plot.title      = element_text(face = "bold", size = 16),  # text → bold, larger
+  panel.grid      = element_line(color = "gray90"),           # lines → subtle gray
+  plot.background = element_rect(fill = "white"),             # rect → white background
+  axis.ticks      = element_blank(),                          # blank → remove ticks
+  legend.position = "none"                                    # special: just "none"/"top"/etc.
 )
 ```
+
+Not sure what an argument is called? Run `?theme` — there are ~90 options.
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -362,6 +587,24 @@ Think about: colors, legend, labels, theme, size mapping, and whether every aest
 
 ## Your turn: 10 minutes
 
+First, run this to create the dataset:
+
+```{r}
+#| code-fold: true
+#| code-summary: "Data setup (click to expand)"
+set.seed(123)
+reaction_data <- tibble(
+  participant = rep(1:40, each = 2),
+  condition   = rep(c("Control", "Treatment"), 40),
+  rt          = c(rnorm(40, mean = 520, sd = 60), rnorm(40, mean = 480, sd = 55)),
+  accuracy    = c(rbinom(40, 1, 0.82), rbinom(40, 1, 0.88)),
+  age_group   = rep(c("Young", "Young", "Older", "Older"), 20)
+) |>
+  mutate(rt = round(rt, 1))
+```
+
+Now fix this:
+
 ```{r}
 #| fig-alt: "Deliberately cluttered scatterplot with red and green colors, points sized by a binary variable, redundant color and fill mappings, uninformative title, and the default gray theme — students are asked to redesign it."
 # The cluttered version — fix this!
@@ -371,8 +614,7 @@ reaction_data |>
   geom_boxplot(alpha = 0.3) +
   scale_fill_manual(values = c("Control" = "red", "Treatment" = "green")) +
   scale_color_manual(values = c("Control" = "red", "Treatment" = "green")) +
-  labs(x = "condition", y = "rt") +
-  ggtitle("data") +
+  labs(x = "condition", y = "rt", title = "data") +
   theme_gray()
 ```
 
@@ -417,7 +659,7 @@ This section (~10 min) is the second lecture block. It transitions from "how to 
 #| echo: false
 #| fig-width: 7
 #| fig-height: 4
-#| fig-alt: "Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 470 instead of 0, making a small ~40 ms difference appear dramatically large."
+#| fig-alt: "Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 478 instead of 0, making a small ~40 ms difference appear dramatically large."
 # Bad: Truncated y-axis exaggerates difference
 reaction_data |>
   group_by(condition) |>
@@ -425,7 +667,7 @@ reaction_data |>
   ggplot(aes(x = condition, y = mean_rt, fill = condition)) +
   geom_col() +
   scale_fill_manual(values = c("Control" = "grey60", "Treatment" = "grey40")) +
-  coord_cartesian(ylim = c(470, 530)) +
+  coord_cartesian(ylim = c(478, 522)) +
   labs(title = "Treatment Reduces Reaction Time",
        y = "Mean RT (ms)", x = NULL) +
   theme_minimal(base_size = 14) +
@@ -434,7 +676,7 @@ reaction_data |>
 
 . . .
 
-**The problem:** The y-axis starts at 470, not 0. The difference looks massive — but it's only ~40 ms. A truncated axis exaggerates the effect.
+**The problem:** The y-axis starts at 478, not 0. The difference looks massive — but it's only ~40 ms. A truncated axis exaggerates the effect.
 
 ::: {.notes}
 Students often ask: "But isn't it sometimes okay to not start at zero?" Good question. For bar charts, no — the bar height represents the value, so truncating is always misleading. For line charts or dot plots, it can be acceptable because the position (not the area) encodes the value. This nuance matters and comes up in the storytelling session (Session 16) too.
@@ -542,11 +784,14 @@ Start experimenting now:
 
 ## Key takeaways
 
-1. **Preattentive attributes** guide the eye — use them intentionally
-2. **Match your palette type** to your data (sequential, diverging, qualitative)
-3. **Design for colorblindness** — always
-4. **Declutter ruthlessly** — every element must earn its place
-5. **Critical evaluation** — always ask whether each element adds information
+1. **Preattentive processing** — your brain detects color, size, and position before conscious thought
+2. **Working memory** — limit categories to 4–5; every aesthetic uses a slot
+3. **Gestalt principles** — proximity, similarity, and enclosure create grouping automatically
+4. **Cognitive load** — minimize extraneous clutter so the insight can land
+5. **Palette choice** — match sequential, diverging, or qualitative to your data type
+6. **Design for colorblindness** — always; 1 in 12 men has color vision deficiency
+
+These are not design opinions — they are perceptual psychology.
 
 ## The one thing to remember
 
