@@ -21,7 +21,10 @@ We'll cover:
 
 - Strings — creating, combining, and basic cleaning
 - `str_to_lower()`, `str_to_upper()`, `str_trim()` for cleanup
-- `str_detect()` and `str_replace()` for simple pattern matching
+- `str_c()` and `glue()` for combining strings
+- `str_detect()` and `str_replace()` for pattern matching
+- Regular expressions — simple patterns with `regex()` and `ignore_case = TRUE`
+- Light text analysis: tokenizing open-ended responses with `tidytext::unnest_tokens()`
 - Factors — categorical data with a fixed set of levels
 - Why factor order matters for plots and tables
 - Reordering factors: `fct_relevel()`, `fct_reorder()`, `fct_infreq()`

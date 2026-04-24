@@ -146,7 +146,7 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 - Color theory and accessibility
 - Psychology-specific visualizations: error bars, interaction plots, raincloud plots
 
-📖 **Read:** TBD (supplementary materials on visual perception)
+📖 **Optional:** Knaflic, *Storytelling with Data*, Ch 1–3
 
 ::: {.callout-tip}
 ## Assigned

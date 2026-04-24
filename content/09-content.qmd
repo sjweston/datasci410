@@ -7,12 +7,9 @@ date: "2026-04-27"
 
 📖 **Reading:**
 
-- [Kang, M. (2016). Checklist: Does Your Data Visualization Say What You Think It Says?](https://mediashift.org/2016/02/checklist-does-your-data-visualization-say-what-you-think-it-says/)
-- [Rowe, S. (2022, May 24) Don't hide the crucial findings.](https://www.storytellingwithdata.com/blog/dont-hide-the-crucial-findings)
-- [Cisneros, M. (2022, June 14). Showing off the insights vs. showing off.](https://www.storytellingwithdata.com/blog/showing-the-insights-vs-showing-off)
-- [Esselman, A. (2022, June 23) Declutter a dual y-axis chart.](https://www.storytellingwithdata.com/blog/declutter-a-dual-y-axis-chart)
-- [Rowe, S. (2022, November 14) A diverging bar chart makeover: how to tackle the challenge of scope creep.](https://www.storytellingwithdata.com/blog/a-diverging-bar-makeover-how-to-tackle-the-challenge-of-scope-creep)
-- Optional: Knaflic, *Storytelling with Data*, Ch 1–3
+No required reading this session.
+
+- Optional: Knaflic, *Storytelling with Data*, Ch 1–3 — a practitioner-friendly introduction to visual perception and decluttering that maps well to today's topics.
 
 ::: {.callout-important}
 ## Assignment 3 is due today
@@ -29,7 +26,8 @@ We'll cover:
 - Color theory: sequential, diverging, and qualitative palettes
 - Colorblind-friendly design (and why it matters)
 - Decluttering: removing the visual noise
-- Psychology-specific figures: error bars, interaction plots, raincloud plots
+- Psychology-specific figures: error bars, interaction plots
+- Critical evaluation: spotting misleading and ineffective figures
 - Putting it all together with `theme()` customization
 
 ::: {.callout-tip}
@@ -63,7 +61,7 @@ We'll cover:
 1. Take a plot you made earlier in the course. Identify 3 things that could be decluttered.
 2. Recreate it using only `theme_minimal()` — what disappears? What stays?
 3. Try switching your color palette to `scale_fill_viridis_d()`. Does it change the story?
-4. Create a raincloud plot (violin + boxplot + jitter) for any grouped data you have
+4. Find a figure in a news article or published paper. Critique it using the decluttering checklist — what would you change?
 5. Make a "bad" version of a figure on purpose — violate as many design principles as you can. Then fix it.
 
 ::: {.callout-note}

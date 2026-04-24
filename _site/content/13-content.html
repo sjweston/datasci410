@@ -388,7 +388,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>Strings — creating, combining, and basic cleaning</li>
 <li><code>str_to_lower()</code>, <code>str_to_upper()</code>, <code>str_trim()</code> for cleanup</li>
-<li><code>str_detect()</code> and <code>str_replace()</code> for simple pattern matching</li>
+<li><code>str_c()</code> and <code>glue()</code> for combining strings</li>
+<li><code>str_detect()</code> and <code>str_replace()</code> for pattern matching</li>
+<li>Regular expressions — simple patterns with <code>regex()</code> and <code>ignore_case = TRUE</code></li>
+<li>Light text analysis: tokenizing open-ended responses with <code>tidytext::unnest_tokens()</code></li>
 <li>Factors — categorical data with a fixed set of levels</li>
 <li>Why factor order matters for plots and tables</li>
 <li>Reordering factors: <code>fct_relevel()</code>, <code>fct_reorder()</code>, <code>fct_infreq()</code></li>

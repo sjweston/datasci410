@@ -303,8 +303,8 @@ This outline maps every lecture with specific topics, functions, and readings. T
 - `geom_errorbar()`, `geom_linerange()`
 
 ### Readings (before class)
-- Supplementary: Visual perception principles (TBD)
-- Optional: Knaflic, Storytelling with Data, Ch 1-3
+- No required reading
+- Optional: Knaflic, *Storytelling with Data*, Ch 1–3
 
 ### Assignment
 - **Assigned:** Assignment 4 (Visualization Deep Dive)

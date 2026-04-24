@@ -19,7 +19,7 @@ date: "2026-05-04"
 We'll cover:
 
 - Exploring covariation — relationships between variables
-- Categorical + continuous: boxplots, violin plots, `geom_freqpoly()` with color
+- Categorical + continuous: boxplots, violin plots, raincloud plots (`geom_rain()`), `geom_freqpoly()` with color
 - Categorical + categorical: `geom_count()`, `geom_tile()` with counts
 - Continuous + continuous: scatterplots and trend lines
 - Dealing with overplotting: alpha, jitter, binning
