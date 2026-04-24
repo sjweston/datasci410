@@ -313,17 +313,10 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="gestalt-principles-brief" class="slide level2">
-<h2>Gestalt principles (brief)</h2>
-<p>The brain groups things automatically:</p>
-<ul>
-<li><strong>Proximity</strong> — things close together feel like a group</li>
-<li><strong>Similarity</strong> — things that look alike feel like a group</li>
-<li><strong>Enclosure</strong> — things inside a border feel like a group</li>
-</ul>
-
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Scatterplot showing two visually distinct clusters of points separated by empty space, demonstrating the Gestalt principle of proximity — nearby points are perceived as belonging to the same group." width="768" class="r-stretch"><aside class="notes">
-<p>Keep Gestalt brief — 1-2 minutes. Students don’t need to memorize the terms, just the intuition: your brain groups things that are close together, look similar, or are enclosed together. This matters for figure design because spacing and visual similarity communicate grouping whether you intend it or not. Facets use proximity; color-coding uses similarity.</p>
+<section id="working-memory-limits-what-you-can-encode" class="slide level2">
+<h2>Working memory limits what you can encode</h2>
+<aside class="notes">
+<p>This is direct cognitive psychology. Cowan (2001) revised Miller’s “7 ± 2” downward — the real capacity is closer to 4 chunks. The visualization implication: each aesthetic you use (color, shape, size) occupies a working memory slot. Eight-category legends fail because readers literally cannot hold all eight color-group mappings in memory while reading the figure. This is the scientific basis for the “max 5 colors” rule of thumb. Spend ~3 minutes here and connect it back to the preattentive slide: just because a viewer <em>notices</em> something (preattentive) doesn’t mean they can <em>track</em> it across categories (working memory).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -335,6 +328,116 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<p>Research suggests working memory holds roughly <strong>4 items</strong> at a time (Cowan, 2001).</p>
+<p>In data visualization, this means:</p>
+<ul>
+<li>Limit categorical groups in a legend to <strong>4–5 maximum</strong></li>
+<li>Each additional aesthetic (color, shape, size) uses up a “slot”</li>
+<li>If you have 8 conditions, consider <strong>faceting</strong> rather than overlapping</li>
+</ul>
+
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-4-1.png" alt="Two side-by-side bar charts: the left has 4 clearly distinguishable groups using a Set2 palette; the right has 8 groups where colors become hard to tell apart, illustrating how working memory limits categorical encoding in figures." width="1152" class="r-stretch"></section>
+<section id="gestalt-principles-how-the-brain-groups-things" class="slide level2">
+<h2>Gestalt principles: how the brain groups things</h2>
+<aside class="notes">
+<p>Give students a moment to look at each panel before reading the label. The proximity demo is obvious — two clusters, same color, same size. Similarity is more interesting: identical positions, but color alone makes two groups pop out. Enclosure shows up everywhere: annotation boxes, facet borders, legend boxes. All three operate automatically and unconsciously — whether or not you designed them in. This is a 5-minute slide; use the fragment reveals to pace the conversation.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>The brain automatically groups visual elements — whether you intend it or not.</p>
+<div class="columns">
+<div class="column fragment" style="width:33%;">
+<p><strong>Proximity</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-5-1.png" alt="Six gray dots arranged in two tight clusters separated by empty space — demonstrating the Gestalt principle of proximity." width="307"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Nearby items feel like a group</em></p>
+</div><div class="column fragment" style="width:33%;">
+<p><strong>Similarity</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-6-1.png" alt="Six dots in a row, alternating blue and orange — demonstrating Gestalt similarity grouping by color." width="307"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Same appearance = same group</em></p>
+</div><div class="column fragment" style="width:33%;">
+<p><strong>Enclosure</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Two clusters of gray dots, each enclosed by a shaded rectangle — demonstrating the Gestalt principle of enclosure." width="307"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><em>Inside a border = same group</em></p>
+</div></div>
+</section>
+<section id="gestalt-principles-show-up-everywhere-in-ggplot2" class="slide level2">
+<h2>Gestalt principles show up everywhere in ggplot2</h2>
+<aside class="notes">
+<p>This is the “so what?” slide for Gestalt. Students often treat these principles as abstract theory — this slide makes them concrete and actionable. The key insight: every ggplot2 function that creates grouping or spatial structure (facets, color scales, annotation boxes) is activating these principles automatically. Good designers make this work for them; bad designers accidentally create misleading groupings. Spend 2–3 minutes. The <code>annotate("rect")</code> example is a useful technique they haven’t seen yet.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<table class="caption-top">
+<colgroup>
+<col style="width: 24%">
+<col style="width: 75%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principle</th>
+<th>How it shows up in your figures</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Proximity</strong></td>
+<td><code>facet_wrap()</code> puts related panels side by side</td>
+</tr>
+<tr class="even">
+<td><strong>Similarity</strong></td>
+<td>Color-coding makes same-group points feel connected</td>
+</tr>
+<tr class="odd">
+<td><strong>Enclosure</strong></td>
+<td>A shaded background or border sets a group apart</td>
+</tr>
+<tr class="even">
+<td><strong>Continuity</strong></td>
+<td>Connecting points across time implies a single trend</td>
+</tr>
+</tbody>
+</table>
+<p>These groupings happen whether you design them or not — use them intentionally.</p>
 </section></section>
 <section>
 <section id="color-theory" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -389,14 +492,111 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
+<section id="first-question-fill-or-color" class="slide level2">
+<h2>First question: <code>fill</code> or <code>color</code>?</h2>
+<aside class="notes">
+<p>This slide introduces the two-family structure. Every scale_ function starts with either <code>scale_fill_</code> or <code>scale_color_</code> — which one depends on the aesthetic the student mapped in <code>aes()</code>. This is a pattern they’ve seen already with <code>scale_fill_manual</code> and <code>scale_color_manual</code> in session 8. The new idea is that the same pattern applies to every other palette function. Keep this short — 1–2 minutes — and emphasize it’s the same pattern they already know.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Which aesthetic did you map in <code>aes()</code>? That tells you which scale family to use.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Geoms with `fill=`: bars, boxplots, tiles, density</span></span>
+<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y, <span class="at">fill =</span> group)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(...))     <span class="co"># ← scale_fill_*</span></span>
+<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Geoms with `color=`: points, lines</span></span>
+<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(x, y, <span class="at">color =</span> group)) <span class="sc">+</span> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(...))    <span class="co"># ← scale_color_*</span></span></code></pre></div>
+</div>
+<p>Same pattern, just swap <code>fill</code> for <code>color</code> throughout.</p>
+</section>
+<section id="second-question-which-palette" class="slide level2">
+<h2>Second question: which palette?</h2>
+<aside class="notes">
+<p>Now that they know which family (<code>fill</code> vs <code>color</code>), they need to pick a palette. This table organizes the choice by data type, which is how students should be thinking about it. The <code>_c</code> vs <code>_d</code> distinction is the single most common point of confusion — call it out explicitly. Reassure students that <code>viridis</code> is already built into ggplot2 — no new package to install. Spend 3 minutes on this slide; students will come back to it as a reference.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Match the palette to your data:</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 52%">
+<col style="width: 47%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Your data</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Continuous numeric (e.g., reaction time)</td>
+<td><code>scale_fill_viridis_c()</code></td>
+</tr>
+<tr class="even">
+<td>Ordered categories (e.g., dosage levels)</td>
+<td><code>scale_fill_viridis_d()</code></td>
+</tr>
+<tr class="odd">
+<td>Qualitative groups (e.g., therapy type)</td>
+<td><code>scale_fill_brewer(palette = "Set2")</code></td>
+</tr>
+<tr class="even">
+<td>Diverging from a midpoint (e.g., change scores)</td>
+<td><code>scale_fill_distiller(palette = "RdBu")</code></td>
+</tr>
+<tr class="odd">
+<td>Hand-picked colors</td>
+<td><code>scale_fill_manual(values = c(...))</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong><code>_c</code> for numeric, <code>_d</code> for character/factor.</strong> Same options work for <code>scale_color_*</code>.</p>
+</section>
 <section id="sequential-palettes" class="slide level2">
 <h2>Sequential palettes</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-5-1.png" alt="A row of ten tiles colored with the viridis sequential palette, transitioning smoothly from dark purple on the left to bright yellow on the right, illustrating how sequential palettes encode low-to-high values." width="960" class="r-stretch"></section>
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-9-1.png" alt="A row of ten tiles colored with the viridis sequential palette, transitioning smoothly from dark purple on the left to bright yellow on the right, illustrating how sequential palettes encode low-to-high values." width="960" class="r-stretch"></section>
+<section id="diverging-palettes" class="slide level2">
+<h2>Diverging palettes</h2>
+<aside class="notes">
+<p>The key concept here: a diverging palette has a meaningful midpoint, usually white or a neutral color. Values above and below the midpoint get contrasting hues. In psychology, pre–post difference scores are a clean example — zero means “no change,” positive means “got worse,” negative means “got better.” Students often try to use sequential palettes for diverging data — the result is that the negative values and positive values look like they’re on the same continuum with no center. Ask: “If I have anxiety change scores from -5 (better) to +5 (worse), which palette type?” (Diverging.) Correlation matrices are another classic use case but we won’t cover correlations until Session 17.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Use when values diverge from a meaningful <strong>midpoint</strong> — often 0 or a baseline.</p>
+
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-10-1.png" alt="A row of ten tiles colored with the RdBu diverging palette, transitioning from dark blue on the left through white in the middle to dark red on the right, illustrating how diverging palettes encode values relative to a midpoint." width="960" class="r-stretch"></section>
 <section id="qualitative-palettes" class="slide level2">
 <h2>Qualitative palettes</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-6-1.png" alt="A row of eight tiles in distinct pastel colors from the ColorBrewer Set2 qualitative palette, showing how each category gets a visually distinguishable hue with no implied ordering." width="960" class="r-stretch"></section>
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-11-1.png" alt="A row of eight tiles in distinct pastel colors from the ColorBrewer Set2 qualitative palette, showing how each category gets a visually distinguishable hue with no implied ordering." width="960" class="r-stretch"></section>
 <section id="colorblind-friendly-choices" class="slide level2">
 <h2>Colorblind-friendly choices</h2>
 <aside class="notes">
@@ -414,22 +614,22 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 <p>About 8% of men have some form of color vision deficiency. Red-green is the most common.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># viridis is colorblind-safe AND sequential</span></span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()   <span class="co"># discrete</span></span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_c</span>()   <span class="co"># continuous</span></span>
-<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ColorBrewer palettes designed for colorblindness</span></span>
-<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span>
-<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Or set colors manually with safe choices</span></span>
-<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#0072B2"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#009E73"</span>))</span>
-<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># (blue, orange, green — distinguishable for most color vision types)</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># viridis is colorblind-safe AND sequential</span></span>
+<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_d</span>()   <span class="co"># discrete</span></span>
+<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_viridis_c</span>()   <span class="co"># continuous</span></span>
+<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ColorBrewer palettes designed for colorblindness</span></span>
+<span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette =</span> <span class="st">"Set2"</span>)</span>
+<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Or set colors manually with safe choices</span></span>
+<span id="cb2-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"#0072B2"</span>, <span class="st">"#E69F00"</span>, <span class="st">"#009E73"</span>))</span>
+<span id="cb2-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># (blue, orange, green — distinguishable for most color vision types)</span></span></code></pre></div>
 </div>
 </section>
 <section id="a-bad-color-choice-vs-a-good-one" class="slide level2">
 <h2>A bad color choice vs a good one</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Side-by-side comparison of two boxplots: the left uses red and green fills that are indistinguishable to colorblind viewers, while the right uses blue and orange fills that are accessible to virtually all viewers." width="1152" class="r-stretch"><aside class="notes">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Side-by-side comparison of two boxplots: the left uses red and green fills that are indistinguishable to colorblind viewers, while the right uses blue and orange fills that are accessible to virtually all viewers." width="1152" class="r-stretch"><aside class="notes">
 <p>Let the side-by-side comparison speak for itself. The blue-orange version on the right is distinguishable to virtually all viewers. You can mention that some journals now require colorblind-accessible figures. The hex codes shown earlier (#0072B2, #E69F00, #009E73) are from the Okabe-Ito palette — a safe default students can copy into any project.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -442,6 +642,38 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="why-cluttered-figures-fail-cognitive-load-theory" class="slide level2">
+<h2>Why cluttered figures fail: cognitive load theory</h2>
+<aside class="notes">
+<p>Cognitive load theory (Sweller, 1988) was developed to explain why instructional design matters — and it translates directly to data visualization. The three-type model gives students a vocabulary for critiquing figures: “the gridlines add extraneous load,” “the uninformative title doesn’t build germane load.” Spend ~3 minutes here, then connect forward: the declutter checklist on the next slides is how we operationalize this theory. Students who have taken cognitive psych or educational psych will recognize this framework.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Cognitive load theory (Sweller, 1988) says mental effort has three components:</p>
+<div class="columns">
+<div class="column" style="width:33%;">
+<p><strong>Intrinsic load</strong></p>
+<p>The complexity of the data itself — you can’t reduce it</p>
+</div><div class="column" style="width:33%;">
+<p><strong>Extraneous load</strong></p>
+<p>Clutter, noise, redundant elements — <em>this is what we control</em></p>
+</div><div class="column" style="width:33%;">
+<p><strong>Germane load</strong></p>
+<p>The insight the reader builds — what we’re trying to maximize</p>
+</div></div>
+<div class="fragment">
+<p>Every gray background, redundant legend, and unlabeled variable is <strong>extraneous load</strong> — it taxes working memory without adding information.</p>
+<p><strong>Design goal: minimize extraneous, maximize germane.</strong></p>
+</div>
 </section></section>
 <section>
 <section id="decluttering" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -465,7 +697,7 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 <p>ggplot2’s default theme adds a lot of visual noise. Compare:</p>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Side-by-side comparison of the same boxplot using ggplot2's default gray theme on the left versus the cleaner minimal theme on the right, showing how removing the gray background, heavy gridlines, and redundant legend reduces visual clutter." width="1152" class="r-stretch"></section>
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Side-by-side comparison of the same boxplot using ggplot2's default gray theme on the left versus the cleaner minimal theme on the right, showing how removing the gray background, heavy gridlines, and redundant legend reduces visual clutter." width="1152" class="r-stretch"></section>
 <section id="the-declutter-checklist" class="slide level2">
 <h2>The declutter checklist</h2>
 <aside class="notes">
@@ -537,10 +769,10 @@ Dr.&nbsp;Sara Weston
 </table>
 </div></div>
 </section>
-<section id="theme-for-fine-control" class="slide level2">
-<h2>theme() for fine control</h2>
+<section id="meet-the-element_-family" class="slide level2">
+<h2>Meet the <code>element_*</code> family</h2>
 <aside class="notes">
-<p>Don’t try to teach every theme() option — there are dozens. The goal is for students to know that theme() exists and to see the pattern: each element gets a function like <code>element_blank()</code> (remove it), <code>element_text()</code> (style text), <code>element_line()</code> (style lines), or <code>element_rect()</code> (style rectangles). They can look up specific options in the ggplot2 documentation. The most common ones they’ll use are <code>legend.position</code>, <code>panel.grid</code>, and <code>plot.title</code>.</p>
+<p>Before showing a full theme() call, introduce the vocabulary. Every non-data piece of a ggplot — the title, the axis ticks, the panel background, the gridlines — is one of four kinds of thing: text, a line, a rectangle, or blank (invisible). Once students internalize this, theme() stops feeling random. Spend 2–3 minutes on this slide. Ask: “The axis label — is that text, a line, or a rectangle?” (Text.) “The panel background?” (Rectangle.) “The gridlines?” (Lines.) That builds the mental model.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -552,16 +784,70 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+<p>Every non-data piece of a ggplot is one of four kinds of thing:</p>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 28%">
+<col style="width: 42%">
+<col style="width: 28%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Key arguments</th>
+<th>Used for</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>element_text()</code></td>
+<td><code>size</code>, <code>face</code>, <code>color</code>, <code>hjust</code></td>
+<td>Titles, axis text, legend text</td>
+</tr>
+<tr class="even">
+<td><code>element_line()</code></td>
+<td><code>color</code>, <code>linewidth</code></td>
+<td>Axis lines, gridlines, ticks</td>
+</tr>
+<tr class="odd">
+<td><code>element_rect()</code></td>
+<td><code>fill</code>, <code>color</code></td>
+<td>Panel background, legend box</td>
+</tr>
+<tr class="even">
+<td><code>element_blank()</code></td>
+<td>—</td>
+<td>Removes the element entirely</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="theme-puts-elements-to-use" class="slide level2">
+<h2><code>theme()</code> puts elements to use</h2>
+<aside class="notes">
+<p>Now that students know the four element types, theme() makes sense: you name a piece of the plot on the left side of <code>=</code>, and assign an element function on the right to style it. Walk through each line of the example and ask students to identify which element type is being used and why. The <code>?theme</code> tip is important — there are ~90 arguments and no one memorizes them all; students should know where to look.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>Inside <code>theme()</code>, name the piece of the plot, then assign an <code>element_*</code> function to style it:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(</span>
-<span id="cb2-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"none"</span>,                    <span class="co"># Remove legend</span></span>
-<span id="cb2-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>(),                <span class="co"># Remove tick marks</span></span>
-<span id="cb2-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),                <span class="co"># Remove gridlines</span></span>
-<span id="cb2-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>),    <span class="co"># Bold the title</span></span>
-<span id="cb2-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),         <span class="co"># Font size</span></span>
-<span id="cb2-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>)       <span class="co"># Left-align caption</span></span>
-<span id="cb2-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">theme</span>(</span>
+<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.title      =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>),  <span class="co"># text → bold, larger</span></span>
+<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">panel.grid      =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray90"</span>),           <span class="co"># lines → subtle gray</span></span>
+<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>),             <span class="co"># rect → white background</span></span>
+<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">axis.ticks      =</span> <span class="fu">element_blank</span>(),                          <span class="co"># blank → remove ticks</span></span>
+<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">legend.position =</span> <span class="st">"none"</span>                                    <span class="co"># special: just "none"/"top"/etc.</span></span>
+<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
+<p>Not sure what an argument is called? Run <code>?theme</code> — there are ~90 options.</p>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
@@ -601,20 +887,35 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="your-turn-10-minutes-1" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
+<p>First, run this to create the dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The cluttered version — fix this!</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition, <span class="at">size =</span> accuracy)) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb3-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
-<span id="cb3-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
-<span id="cb3-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"condition"</span>, <span class="at">y =</span> <span class="st">"rt"</span>) <span class="sc">+</span></span>
-<span id="cb3-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggtitle</span>(<span class="st">"data"</span>) <span class="sc">+</span></span>
-<span id="cb3-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
+<details class="code-fold">
+<summary>Data setup (click to expand)</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">rep</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">40</span>, <span class="at">each =</span> <span class="dv">2</span>),</span>
+<span id="cb4-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition   =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>), <span class="dv">40</span>),</span>
+<span id="cb4-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">rt          =</span> <span class="fu">c</span>(<span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">520</span>, <span class="at">sd =</span> <span class="dv">60</span>), <span class="fu">rnorm</span>(<span class="dv">40</span>, <span class="at">mean =</span> <span class="dv">480</span>, <span class="at">sd =</span> <span class="dv">55</span>)),</span>
+<span id="cb4-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">accuracy    =</span> <span class="fu">c</span>(<span class="fu">rbinom</span>(<span class="dv">40</span>, <span class="dv">1</span>, <span class="fl">0.82</span>), <span class="fu">rbinom</span>(<span class="dv">40</span>, <span class="dv">1</span>, <span class="fl">0.88</span>)),</span>
+<span id="cb4-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group   =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Young"</span>, <span class="st">"Young"</span>, <span class="st">"Older"</span>, <span class="st">"Older"</span>), <span class="dv">20</span>)</span>
+<span id="cb4-8"><a href="" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
+<span id="cb4-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rt =</span> <span class="fu">round</span>(rt, <span class="dv">1</span>))</span></code></pre></div>
+</details>
+</div>
+<p>Now fix this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># The cluttered version — fix this!</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt, <span class="at">fill =</span> condition, <span class="at">color =</span> condition, <span class="at">size =</span> accuracy)) <span class="sc">+</span></span>
+<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
+<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"Treatment"</span> <span class="ot">=</span> <span class="st">"green"</span>)) <span class="sc">+</span></span>
+<span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"condition"</span>, <span class="at">y =</span> <span class="st">"rt"</span>, <span class="at">title =</span> <span class="st">"data"</span>) <span class="sc">+</span></span>
+<span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_gray</span>()</span></code></pre></div>
 
 </div>
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Deliberately cluttered scatterplot with red and green colors, points sized by a binary variable, redundant color and fill mappings, uninformative title, and the default gray theme — students are asked to redesign it." width="960" class="r-stretch"></section>
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Deliberately cluttered scatterplot with red and green colors, points sized by a binary variable, redundant color and fill mappings, uninformative title, and the default gray theme — students are asked to redesign it." width="960" class="r-stretch"></section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
 <p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
@@ -639,8 +940,8 @@ Dr.&nbsp;Sara Weston
 <section id="whats-wrong-here-1-of-3" class="slide level2">
 <h2>What’s wrong here? (1 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 470 instead of 0, making a small ~40 ms difference appear dramatically large." width="672" class="r-stretch"><div class="fragment">
-<p><strong>The problem:</strong> The y-axis starts at 470, not 0. The difference looks massive — but it’s only ~40 ms. A truncated axis exaggerates the effect.</p>
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 478 instead of 0, making a small ~40 ms difference appear dramatically large." width="672" class="r-stretch"><div class="fragment">
+<p><strong>The problem:</strong> The y-axis starts at 478, not 0. The difference looks massive — but it’s only ~40 ms. A truncated axis exaggerates the effect.</p>
 <aside class="notes">
 <p>Students often ask: “But isn’t it sometimes okay to not start at zero?” Good question. For bar charts, no — the bar height represents the value, so truncating is always misleading. For line charts or dot plots, it can be acceptable because the position (not the area) encodes the value. This nuance matters and comes up in the storytelling session (Session 16) too.</p>
 <style type="text/css">
@@ -659,14 +960,14 @@ Dr.&nbsp;Sara Weston
 <section id="whats-wrong-here-2-of-3" class="slide level2">
 <h2>What’s wrong here? (2 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Boxplot with red and green fills, a yellow background, heavy gridlines, variable names as axis labels, and the uninformative title 'Boxplot' — demonstrating multiple common design mistakes at once." width="672" class="r-stretch"><div class="fragment">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Boxplot with red and green fills, a yellow background, heavy gridlines, variable names as axis labels, and the uninformative title 'Boxplot' — demonstrating multiple common design mistakes at once." width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problems:</strong> Red-green palette (colorblind-unfriendly). Title says “Boxplot” (a label, not a finding). Variable names as labels. Distracting background color and gridlines.</p>
 </div>
 </section>
 <section id="whats-wrong-here-3-of-3" class="slide level2">
 <h2>What’s wrong here? (3 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Pie chart showing reaction times arbitrarily binned into Fast, Medium, and Slow categories, hiding the continuous distribution, individual observations, and any comparison between conditions." width="672" class="r-stretch"><div class="fragment">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Pie chart showing reaction times arbitrarily binned into Fast, Medium, and Slow categories, hiding the continuous distribution, individual observations, and any comparison between conditions." width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problems:</strong> Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.</p>
 <aside class="notes">
 <p>This is the strongest example because it shows a cascade of bad decisions: first they binned continuous data (losing information), then they used a pie chart (making comparison harder), and they dropped the condition variable entirely. Each step destroyed information. The lesson: your choice of chart type determines what story you can tell. A pie chart here makes it impossible to compare conditions or see the distribution.</p>
@@ -752,12 +1053,14 @@ Dr.&nbsp;Sara Weston
 <section id="key-takeaways" class="slide level2">
 <h2>Key takeaways</h2>
 <ol type="1">
-<li><strong>Preattentive attributes</strong> guide the eye — use them intentionally</li>
-<li><strong>Match your palette type</strong> to your data (sequential, diverging, qualitative)</li>
-<li><strong>Design for colorblindness</strong> — always</li>
-<li><strong>Declutter ruthlessly</strong> — every element must earn its place</li>
-<li><strong>Critical evaluation</strong> — always ask whether each element adds information</li>
+<li><strong>Preattentive processing</strong> — your brain detects color, size, and position before conscious thought</li>
+<li><strong>Working memory</strong> — limit categories to 4–5; every aesthetic uses a slot</li>
+<li><strong>Gestalt principles</strong> — proximity, similarity, and enclosure create grouping automatically</li>
+<li><strong>Cognitive load</strong> — minimize extraneous clutter so the insight can land</li>
+<li><strong>Palette choice</strong> — match sequential, diverging, or qualitative to your data type</li>
+<li><strong>Design for colorblindness</strong> — always; 1 in 12 men has color vision deficiency</li>
 </ol>
+<p>These are not design opinions — they are perceptual psychology.</p>
 </section>
 <section id="the-one-thing-to-remember" class="slide level2">
 <h2>The one thing to remember</h2>
