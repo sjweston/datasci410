@@ -9,7 +9,7 @@
 #   1. In Canvas: Grades → Export → Download CSV
 #   2. Save as canvas_gradebook.csv (overwrites the old one)
 #   3. Source this script
-#   4. Render files/scoreboard.qmd (reads team_points.csv and team_rankings.csv)
+#   4. Copy the printed scoreboard code into files/scoreboard.qmd
 #
 # =============================================================================
 
@@ -187,10 +187,15 @@ cat("Current date:", format(Sys.Date()), "→ Week", current_week,
 
 
 # ── Helper: did the student submit? ──────────────────────────────────────────
-# A submission counts if the cell is not blank and not zero.
+# A submission counts if the cell parses to a positive number.
+# Non-numeric Canvas codes ("EX", "MI", letter grades, etc.) and blanks
+# count as "not submitted." Coercing first prevents NA from leaking into
+# downstream sums — a single non-numeric cell would otherwise silently
+# turn the whole team's category total into NA → 0.
 
 submitted <- function(x) {
-  !is.na(x) & x != "" & as.numeric(x) > 0
+  num <- suppressWarnings(as.numeric(x))
+  !is.na(num) & num > 0
 }
 
 
@@ -222,7 +227,7 @@ if (length(pair_coding_cols) > 0) {
 
 
 # ── Category 2: Assignment submission (1 pt per assignment) ──────────────────
-# Team earns 1 point if all members submitted.
+# Team earns 1 point if all-but-one members submitted.
 
 if (length(assignment_cols) > 0) {
   assignment_points <- map_dfr(assignment_cols, function(col) {
@@ -440,6 +445,27 @@ rankings_wide |>
   print()
 
 cat("\nRankings saved to:", rankings_file, "\n\n")
+
+
+# ── Print scoreboard code ───────────────────────────────────────────────────
+# Copy-paste this into files/scoreboard.qmd
+
+cat("=" |> strrep(60), "\n")
+cat("COPY THIS INTO files/scoreboard.qmd:\n")
+cat("=" |> strrep(60), "\n\n")
+
+cat("scoreboard <- tribble(\n")
+cat('  ~team,', paste0(rep(' ' , 20), collapse = ''),
+    '~pair_coding, ~assignments, ~quizzes, ~fun_challenge,\n')
+for (i in seq_len(nrow(points))) {
+  row <- points[i, ]
+  comma <- if (i < nrow(points)) "," else ""
+  cat(sprintf('  %-30s %d,            %d,            %d,        %d%s\n',
+              paste0('"', row$team_name, '",'),
+              row$pair_coding, row$assignments,
+              row$quizzes, row$fun_challenge, comma))
+}
+cat(")\n")
 
 
 # ── Diagnostic: why did each team lose points? ─────────────────────────────

@@ -1,0 +1,35 @@
+response_id,major,year,chronotype,sleep_hrs,caffeine_per_day,social_media_hrs,tabs_open,stress,coding_excited,coding_anxious,personality_neur,personality_extra,personality_consc,data_words
+R_7Fkq5bRdEYWENih,Psychology,Junior,Evening person,8,2,7,363,4,7,8,9,8,8,frustrating and overwhelming
+R_7mni7E59hbZtnha,Neuroscience,Senior,Morning person,6,1,2,10,NA,6,NA,NA,NA,3,novel
+R_7BKhLj1XlkKC5Hz,Psychology,Junior,Morning person,9,2,1,2,3,8,8,9,2,NA,novice
+R_740rxl4QFx2rgVB,Psychology,Junior,Neither,9,1,3,11,3,6,8,7,6,7,hopeful
+R_5KhHNNVmhpMyF3z,Neuroscience,Senior,Evening person,7,2,2,6,2,NA,5,NA,5,NA,work-in-progress
+R_1gJE082MJONDMsN,Psychology,Senior,Evening person,7,1,8,26,6,7,7,NA,4,7,big and scary
+R_10SY8BowRSd2Zlf,Psychology,Other,Morning person,7,0.15,0.33,7,6,7,6,NA,8,NA,necessary
+R_1e8rqtIAOTnqJ95,Psychology,Other,Evening person,7,1.5,1,27,6,NA,5,7,7,6,theory adjacent
+R_5eKNYDtLZDZLPpK,Psychology,Senior,Evening person,7,1.3,1,12,2,5,4,8,9,8,unrequited love
+R_1vS9sal8Nx1cjeh,Psychology,Junior,Evening person,7,1,8,9,5,5,5,NA,7,8,neutral
+R_3HXmz14ehGCbC43,Neuroscience,Senior,Evening person,7,2.5,4.5,6,3,6,8,NA,6,8,barely friends
+R_5iwNvDPQvawsZxp,Psychology,Junior,Evening person,7,1,4,6,6,8,7,9,9,7,almost none
+R_5B1lZYalrVPYV57,Psychology,Senior,Evening person,8,1,2.5,246,7,8,3,NA,6,4,casual situationship
+R_7s4ZE1Kl0DUNp95,Neuroscience,Other,Morning person,7,1,4,22,6,5,NA,NA,5,5,not great
+R_179ZB28nvyLd2up,Neuroscience,Senior,Evening person,6,0,2,5,7,5,8,NA,7,5,"uncertain, surrounded"
+R_321PR4vekAqddnj,Human Physiology,Senior,Morning person,6.5,3,0,15,7,6,9,NA,5,9,interesting (derogatory).
+R_6XjKQvX1aapvFvc,Psychology,Other,Evening person,7,1,1,15,7,7,4,8,7,7,indifferent
+R_6fCeKyFHy49U74m,Neuroscience,Senior,Neither,7.5,0,1,7,4,8,8,8,6,6,brutal
+R_37xJQ4EpQ1ctz6g,Neuroscience,Junior,Evening person,9,0,2,48,4,8,6,4,3,3,curious
+R_10OfJcn0bDcSW19,Psychology,Senior,Morning person,6,0,4,12,5,8,8,6,NA,NA,complicated
+R_5cjhl6Ji57yuyel,Psychology,Senior,Evening person,5,3,6,13,NA,NA,NA,7,7,NA,not good
+R_3fpEnbKIS1SEt3T,Psychology,Junior,Evening person,8,2,3,1000,5,7,8,6,6,6,"intriguing, intimidating"
+R_1eXcQpNZUiV8cLd,Neuroscience,Senior,Evening person,7,0.5,4,20,7,5,NA,NA,NA,NA,unfamiliar beginner
+R_1fdv9eXUr8vtm1j,Neuroscience,Junior,Evening person,8,0,5,4,6,NA,NA,8,5,7,i have never coded before and it makes me nervous to not be good at something.
+R_7PTusZU6rowVxOb,Psychology,Senior,Evening person,6,2,3,11,6,5,6,3,7,4,"curious, confused"
+R_5M6a7rLruPTEfjT,Psychology,Junior,Neither,5,1,1,1,5,7,5,8,4,NA,fun weird
+R_5LePLfMDhTtIoRb,Psychology,Junior,Evening person,8,2,0.5,6,7,9,NA,8,8,6,i have almost no experience
+R_7yNdwXlENmc04OB,Psychology,Senior,Morning person,6,2,3,4,8,NA,9,8,5,8,complicated
+R_1I4geamVk3sLpN1,Neuroscience,Senior,Morning person,8,3,1,3,8,3,7,8,8,8,uh oh
+R_3YEXDmDHjxBs2Zs,Psychology,Senior,Morning person,7.5,2,4,3,3,9,3,7,7,NA,"difficult, trying, interesting"
+R_3ilDki3gFepRyGj,Psychology,Senior,Evening person,8,2,4,11,5,8,6,7,5,3,"master, slave"
+R_7FR7L78049W9hJE,Psychology,Senior,Evening person,7,3,3,7,3,6,9,6,5,2,underdeveloped
+R_61WMSUEyehIRMRW,Neuroscience,Senior,Evening person,8,0.5,1.5,12,5,6,NA,4,8,3,good
+R_7h0FOuCMG6yt7z3,Neuroscience,Senior,Evening person,6,0,2,23,2,5,6,6,4,6,love-hate

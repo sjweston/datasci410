@@ -27,41 +27,56 @@ This assignment focuses on creating publication-quality visualizations. You'll p
 # Date
 
 library(tidyverse)
+library(palmerpenguins)  # install.packages("palmerpenguins") if needed
 ```
 
 ## Part 1: Bar Charts with Error Bars (25 points)
 
-Use the `palmerpenguins` dataset:
-
-```r
-# install.packages("palmerpenguins")
-library(palmerpenguins)
-```
+Use the `palmerpenguins` dataset.
 
 ### Task 1.1
-Create a summary table showing mean flipper length by species, including standard error.
+Create a summary table showing mean flipper length, standard deviation (SD), and sample size (N) for each species.
 
 ```r
-# Hint: SE = sd / sqrt(n)
+# Hint: use group_by() + summarize() with mean(), sd(), and n().
+# Don't forget na.rm = TRUE for the mean and sd.
 ```
 
 ### Task 1.2
-Create a bar chart showing mean flipper length by species with error bars representing ±1 SE.
+Create a bar chart showing mean flipper length by species with error bars representing the **95% confidence interval**. Use `stat_summary()` for both the bar and the error bars — this is the pattern from the Session 8 slides.
 
 Your plot should:
 
 - Have clear axis labels (not variable names)
 - Use a clean theme
-- Have a descriptive title
+- Have a descriptive title that names what the error bars represent (or include it in a caption)
 - Use a colorblind-friendly palette (hint: `scale_fill_viridis_d()`)
+
+::: {.callout-tip}
+## Hint
+You'll need `stat_summary()` twice — once for the bar and once for the error bars:
+
+```r
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+  stat_summary(fun = mean, geom = "bar") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2)
+```
+
+`mean_cl_normal` returns the 95% confidence interval (the Session 8 slides note this is the most common error bar in psychology).
+:::
 
 ## Part 2: Distributions (25 points)
 
 ### Task 2.1
-Create a histogram of penguin body mass. Experiment with different bin widths. In a comment, explain what bin width you chose and why.
+Create a histogram of penguin body mass. Try at least three different bin widths in your scratch work to see how the shape changes, then submit a single histogram with the bin width you think works best. In a comment, say what bin width you chose and why.
 
 ### Task 2.2
 Create overlapping density plots of body mass, colored by species. Set transparency so all distributions are visible.
+
+::: {.callout-tip}
+## Hint
+To color the densities by species, set `fill = species` inside `aes()`, then add `alpha = 0.5` (or similar) inside `geom_density()` to make the overlap visible.
+:::
 
 ### Task 2.3
 Create a boxplot of body mass by species. Then recreate it as a violin plot. In a comment, discuss what each shows that the other doesn't.
@@ -73,14 +88,15 @@ Using any dataset of your choice (`mpg`, `penguins`, `diamonds`, etc.):
 ### Task 3.1: The Bad Graph
 Create an intentionally bad visualization that violates at least 4 design principles. In comments, list what makes it bad.
 
-Examples of "bad" choices:
+Examples of "bad" choices (pick things you can actually do in ggplot2):
 
-- 3D effects
-- Pie chart with many categories
-- Rainbow color scheme
-- Missing labels
-- Misleading axis
-- Excessive chartjunk
+- Rainbow color scheme (`scale_color_gradientn(colors = rainbow(7))`)
+- Missing or unhelpful axis labels (variable names instead of plain English)
+- Truncated y-axis that exaggerates differences (`coord_cartesian(ylim = ...)`)
+- Way too many categories shown with the same palette
+- Overlapping text or unreadable font sizes
+- Chartjunk: garish background colors, redundant gridlines, distracting fills
+- A geom that doesn't fit the data (e.g., a line plot connecting unordered categories)
 
 ### Task 3.2: The Good Graph
 Create a good version of the same data. In comments, explain your design choices.
@@ -101,6 +117,17 @@ Download `partisan_bias.csv` from Canvas and save it in your `data/raw/` folder.
 ### Task 4.1
 Import the data and convert `team` from a number to a factor with labels "Spain", "Greece", and "No Team" (in that order).
 
+::: {.callout-tip}
+## Hint
+The safest way to recode is to specify both `levels` and `labels` so the mapping is explicit:
+
+```r
+mutate(team = factor(team,
+                     levels = c(1, 2, 3),
+                     labels = c("Spain", "Greece", "No Team")))
+```
+:::
+
 ### Task 4.2
 Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:
 
@@ -111,11 +138,16 @@ Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay
 
 You won't match it exactly — plain text axis labels are fine.
 
+::: {.callout-tip}
+## Hint
+The data has `SP_c` and `GR_c` as two separate columns (one row per participant). To plot acceptance threshold by team and statement type, you'll need to **pivot to long format first** so that statement type becomes one column and the *c* value becomes another. Look back at Session 5 (Data Tidying) for `pivot_longer()`.
+:::
+
 ## Grading Rubric
 
 | Task | Points |
-|------|--------|
-| 1.1: Summary table (mean + SE by species) | 10 |
+|------|:------:|
+| 1.1: Summary table (mean, SD, N by species) | 10 |
 | 1.2: Bar chart with error bars | 15 |
 | 2.1: Histogram with bin width exploration | 8 |
 | 2.2: Overlapping density plots by species | 8 |
@@ -127,7 +159,12 @@ You won't match it exactly — plain text axis labels are fine.
 | QMD file knits without errors | 10 |
 | **Total** | **100** |
 
-**Grading scale per task:** Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
+Each task is graded on a 4-level scale: full credit, full minus one (small slip), half credit (one major error), or none (not attempted or multiple major errors). "QMD file knits" refers to whether the Quarto document renders successfully, not whether individual code produces correct output.
+
+::: {.callout-tip}
+## If a chunk won't run
+If you can't get a particular chunk to work, set `#| eval: false` at the top of that chunk so the rest of the document still renders. You'll lose points on the task itself, but you'll keep the 10 points for the file knitting cleanly.
+:::
 
 ## Submission
 
@@ -162,9 +199,15 @@ ggsave("publication_figure.tiff",
 
 ### Task G.2
 
-Write a figure caption in APA style — the kind you would include in a manuscript. It should describe what the figure shows, define any abbreviations, and state what the error bars represent (if applicable). Refer to the APA figure guidelines handout from Session 16.
+Write a figure caption in APA style — the kind you would include in a manuscript. A good APA caption:
 
-Include the caption as a comment directly above your `ggsave()` call.
+- Starts with a bold figure number and title (e.g., **Figure 1.** *Mean Flipper Length by Species*)
+- Describes what the figure shows in one or two sentences
+- Defines any abbreviations
+- States what the error bars represent (if applicable) and the *N*
+- Stands alone — a reader who hasn't read the paper should understand the figure
+
+Include the caption as a comment directly above your `ggsave()` call. (We'll cover APA figure conventions in more depth in Session 16; for now, a thoughtful caption is all that's needed.)
 
 ### Task G.3
 

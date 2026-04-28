@@ -916,10 +916,36 @@ Dr.&nbsp;Sara Weston
 
 </div>
 <img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Deliberately cluttered scatterplot with red and green colors, points sized by a binary variable, redundant color and fill mappings, uninformative title, and the default gray theme — students are asked to redesign it." width="960" class="r-stretch"></section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
-</section></section>
+<section id="solution-redesigned-reaction-time-figure" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Redesigned reaction time figure</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>reaction_data <span class="sc">|&gt;</span></span>
+<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> condition, <span class="at">y =</span> rt,</span>
+<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">fill =</span> condition,</span>
+<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> condition)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> .<span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_viridis_d</span>() <span class="sc">+</span></span>
+<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb6-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> scales<span class="sc">::</span><span class="fu">label_number</span>(<span class="at">suffix =</span> <span class="st">" ms"</span>)) <span class="sc">+</span></span>
+<span id="cb6-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb6-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb6-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Reaction time by condition and accuracy"</span>,</span>
+<span id="cb6-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Reaction time in miliseconds; 0 = inaccurate, 1 = accurate"</span></span>
+<span id="cb6-16"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb6-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>accuracy,</span>
+<span id="cb6-18"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">labeller =</span> <span class="fu">as_labeller</span>(<span class="fu">c</span>(<span class="st">"0"</span> <span class="ot">=</span> <span class="st">"incorrect"</span>, <span class="st">"1"</span> <span class="ot">=</span> <span class="st">"correct"</span>))) <span class="sc">+</span></span>
+<span id="cb6-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb6-20"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb6-21"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title.position =</span> <span class="st">"plot"</span>)</span></code></pre></div>
+</div>
+</section>
+<section id="solution-output" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: output</h2>
+
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Boxplots with jittered points showing reaction time by condition (Control vs Treatment), faceted by accuracy ('incorrect' vs 'correct'). Viridis fill and color, ms-suffixed y-axis, minimal black-and-white theme, no legend." width="864" class="r-stretch"></section></section>
 <section>
 <section id="critiquing-bad-graphs" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Critiquing bad graphs</h1>
@@ -940,7 +966,7 @@ Dr.&nbsp;Sara Weston
 <section id="whats-wrong-here-1-of-3" class="slide level2">
 <h2>What’s wrong here? (1 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 478 instead of 0, making a small ~40 ms difference appear dramatically large." width="672" class="r-stretch"><div class="fragment">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Bar chart comparing mean reaction times for Control and Treatment conditions where the y-axis starts at 478 instead of 0, making a small ~40 ms difference appear dramatically large." width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problem:</strong> The y-axis starts at 478, not 0. The difference looks massive — but it’s only ~40 ms. A truncated axis exaggerates the effect.</p>
 <aside class="notes">
 <p>Students often ask: “But isn’t it sometimes okay to not start at zero?” Good question. For bar charts, no — the bar height represents the value, so truncating is always misleading. For line charts or dot plots, it can be acceptable because the position (not the area) encodes the value. This nuance matters and comes up in the storytelling session (Session 16) too.</p>
@@ -960,14 +986,14 @@ Dr.&nbsp;Sara Weston
 <section id="whats-wrong-here-2-of-3" class="slide level2">
 <h2>What’s wrong here? (2 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Boxplot with red and green fills, a yellow background, heavy gridlines, variable names as axis labels, and the uninformative title 'Boxplot' — demonstrating multiple common design mistakes at once." width="672" class="r-stretch"><div class="fragment">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Boxplot with red and green fills, a yellow background, heavy gridlines, variable names as axis labels, and the uninformative title 'Boxplot' — demonstrating multiple common design mistakes at once." width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problems:</strong> Red-green palette (colorblind-unfriendly). Title says “Boxplot” (a label, not a finding). Variable names as labels. Distracting background color and gridlines.</p>
 </div>
 </section>
 <section id="whats-wrong-here-3-of-3" class="slide level2">
 <h2>What’s wrong here? (3 of 3)</h2>
 
-<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Pie chart showing reaction times arbitrarily binned into Fast, Medium, and Slow categories, hiding the continuous distribution, individual observations, and any comparison between conditions." width="672" class="r-stretch"><div class="fragment">
+<img data-src="09-perception-design_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Pie chart showing reaction times arbitrarily binned into Fast, Medium, and Slow categories, hiding the continuous distribution, individual observations, and any comparison between conditions." width="672" class="r-stretch"><div class="fragment">
 <p><strong>The problems:</strong> Continuous data was binned into arbitrary categories, then displayed as a pie chart. We lost the actual reaction times, the condition comparison, and the ability to see distributions. A histogram or density plot would show far more.</p>
 <aside class="notes">
 <p>This is the strongest example because it shows a cascade of bad decisions: first they binned continuous data (losing information), then they used a pie chart (making comparison harder), and they dropped the condition variable entirely. Each step destroyed information. The lesson: your choice of chart type determines what story you can tell. A pie chart here makes it impossible to compare conditions or see the distribution.</p>

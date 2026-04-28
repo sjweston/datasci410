@@ -358,39 +358,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Your Name</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Date</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)  <span class="co"># install.packages("palmerpenguins") if needed</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="part-1-bar-charts-with-error-bars-25-points" class="level2">
 <h2 class="anchored" data-anchor-id="part-1-bar-charts-with-error-bars-25-points">Part 1: Bar Charts with Error Bars (25 points)</h2>
-<p>Use the <code>palmerpenguins</code> dataset:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("palmerpenguins")</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palmerpenguins)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use the <code>palmerpenguins</code> dataset.</p>
 <section id="task-1.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.1">Task 1.1</h3>
-<p>Create a summary table showing mean flipper length by species, including standard error.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: SE = sd / sqrt(n)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create a summary table showing mean flipper length, standard deviation (SD), and sample size (N) for each species.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: use group_by() + summarize() with mean(), sd(), and n().</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't forget na.rm = TRUE for the mean and sd.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-1.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.2">Task 1.2</h3>
-<p>Create a bar chart showing mean flipper length by species with error bars representing ±1 SE.</p>
+<p>Create a bar chart showing mean flipper length by species with error bars representing the <strong>95% confidence interval</strong>. Use <code>stat_summary()</code> for both the bar and the error bars — this is the pattern from the Session 8 slides.</p>
 <p>Your plot should:</p>
 <ul>
 <li>Have clear axis labels (not variable names)</li>
 <li>Use a clean theme</li>
-<li>Have a descriptive title</li>
+<li>Have a descriptive title that names what the error bars represent (or include it in a caption)</li>
 <li>Use a colorblind-friendly palette (hint: <code>scale_fill_viridis_d()</code>)</li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You’ll need <code>stat_summary()</code> twice — once for the bar and once for the error bars:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> flipper_length_mm, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>mean_cl_normal</code> returns the 95% confidence interval (the Session 8 slides note this is the most common error bar in psychology).</p>
+</div>
+</div>
 </section>
 </section>
 <section id="part-2-distributions-25-points" class="level2">
 <h2 class="anchored" data-anchor-id="part-2-distributions-25-points">Part 2: Distributions (25 points)</h2>
 <section id="task-2.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.1">Task 2.1</h3>
-<p>Create a histogram of penguin body mass. Experiment with different bin widths. In a comment, explain what bin width you chose and why.</p>
+<p>Create a histogram of penguin body mass. Try at least three different bin widths in your scratch work to see how the shape changes, then submit a single histogram with the bin width you think works best. In a comment, say what bin width you chose and why.</p>
 </section>
 <section id="task-2.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.2">Task 2.2</h3>
 <p>Create overlapping density plots of body mass, colored by species. Set transparency so all distributions are visible.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To color the densities by species, set <code>fill = species</code> inside <code>aes()</code>, then add <code>alpha = 0.5</code> (or similar) inside <code>geom_density()</code> to make the overlap visible.</p>
+</div>
+</div>
 </section>
 <section id="task-2.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.3">Task 2.3</h3>
@@ -403,14 +433,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-3.1-the-bad-graph" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.1-the-bad-graph">Task 3.1: The Bad Graph</h3>
 <p>Create an intentionally bad visualization that violates at least 4 design principles. In comments, list what makes it bad.</p>
-<p>Examples of “bad” choices:</p>
+<p>Examples of “bad” choices (pick things you can actually do in ggplot2):</p>
 <ul>
-<li>3D effects</li>
-<li>Pie chart with many categories</li>
-<li>Rainbow color scheme</li>
-<li>Missing labels</li>
-<li>Misleading axis</li>
-<li>Excessive chartjunk</li>
+<li>Rainbow color scheme (<code>scale_color_gradientn(colors = rainbow(7))</code>)</li>
+<li>Missing or unhelpful axis labels (variable names instead of plain English)</li>
+<li>Truncated y-axis that exaggerates differences (<code>coord_cartesian(ylim = ...)</code>)</li>
+<li>Way too many categories shown with the same palette</li>
+<li>Overlapping text or unreadable font sizes</li>
+<li>Chartjunk: garish background colors, redundant gridlines, distracting fills</li>
+<li>A geom that doesn’t fit the data (e.g., a line plot connecting unordered categories)</li>
 </ul>
 </section>
 <section id="task-3.2-the-good-graph" class="level3">
@@ -455,6 +486,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-4.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-4.1">Task 4.1</h3>
 <p>Import the data and convert <code>team</code> from a number to a factor with labels “Spain”, “Greece”, and “No Team” (in that order).</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The safest way to recode is to specify both <code>levels</code> and <code>labels</code> so the mapping is explicit:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">factor</span>(team,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"Greece"</span>, <span class="st">"No Team"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 </section>
 <section id="task-4.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-4.2">Task 4.2</h3>
@@ -466,6 +513,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Theme</li>
 </ul>
 <p>You won’t match it exactly — plain text axis labels are fine.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Hint
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>The data has <code>SP_c</code> and <code>GR_c</code> as two separate columns (one row per participant). To plot acceptance threshold by team and statement type, you’ll need to <strong>pivot to long format first</strong> so that statement type becomes one column and the <em>c</em> value becomes another. Look back at Session 5 (Data Tidying) for <code>pivot_longer()</code>.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="grading-rubric" class="level2">
@@ -474,57 +534,70 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th>Task</th>
-<th>Points</th>
+<th style="text-align: center;">Points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1.1: Summary table (mean + SE by species)</td>
-<td>10</td>
+<td>1.1: Summary table (mean, SD, N by species)</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="even">
 <td>1.2: Bar chart with error bars</td>
-<td>15</td>
+<td style="text-align: center;">15</td>
 </tr>
 <tr class="odd">
 <td>2.1: Histogram with bin width exploration</td>
-<td>8</td>
+<td style="text-align: center;">8</td>
 </tr>
 <tr class="even">
 <td>2.2: Overlapping density plots by species</td>
-<td>8</td>
+<td style="text-align: center;">8</td>
 </tr>
 <tr class="odd">
 <td>2.3: Boxplot vs.&nbsp;violin plot comparison</td>
-<td>9</td>
+<td style="text-align: center;">9</td>
 </tr>
 <tr class="even">
 <td>3.1: Intentionally bad visualization</td>
-<td>12</td>
+<td style="text-align: center;">12</td>
 </tr>
 <tr class="odd">
 <td>3.2: Good visualization with design justification</td>
-<td>13</td>
+<td style="text-align: center;">13</td>
 </tr>
 <tr class="even">
 <td>4.1: Import data and convert team to factor</td>
-<td>5</td>
+<td style="text-align: center;">5</td>
 </tr>
 <tr class="odd">
 <td>4.2: Recreate Figure 3</td>
-<td>10</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="even">
 <td>QMD file knits without errors</td>
-<td>10</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td><strong>100</strong></td>
+<td style="text-align: center;"><strong>100</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Grading scale per task:</strong> Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.</p>
+<p>Each task is graded on a 4-level scale: full credit, full minus one (small slip), half credit (one major error), or none (not attempted or multiple major errors). “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>If a chunk won’t run
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you can’t get a particular chunk to work, set <code>#| eval: false</code> at the top of that chunk so the rest of the document still renders. You’ll lose points on the task itself, but you’ll keep the 10 points for the file knitting cleanly.</p>
+</div>
+</div>
 </section>
 <section id="submission" class="level2">
 <h2 class="anchored" data-anchor-id="submission">Submission</h2>
@@ -555,16 +628,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-g.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
 <p>Choose the figure you’re most proud of from Parts 1–3. Look up the author guidelines for one real journal in your area (<em>Psychological Science</em>, <em>JPSP</em>, <em>Emotion</em>, or similar) and save the figure at <strong>300 dpi</strong> with dimensions matching their specifications.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — adjust width/height to your target journal's specs:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"publication_figure.tiff"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot  =</span> my_plot,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="fl">3.5</span>, <span class="at">height =</span> <span class="dv">3</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — adjust width/height to your target journal's specs:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"publication_figure.tiff"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot  =</span> my_plot,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="fl">3.5</span>, <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-g.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
-<p>Write a figure caption in APA style — the kind you would include in a manuscript. It should describe what the figure shows, define any abbreviations, and state what the error bars represent (if applicable). Refer to the APA figure guidelines handout from Session 16.</p>
-<p>Include the caption as a comment directly above your <code>ggsave()</code> call.</p>
+<p>Write a figure caption in APA style — the kind you would include in a manuscript. A good APA caption:</p>
+<ul>
+<li>Starts with a bold figure number and title (e.g., <strong>Figure 1.</strong> <em>Mean Flipper Length by Species</em>)</li>
+<li>Describes what the figure shows in one or two sentences</li>
+<li>Defines any abbreviations</li>
+<li>States what the error bars represent (if applicable) and the <em>N</em></li>
+<li>Stands alone — a reader who hasn’t read the paper should understand the figure</li>
+</ul>
+<p>Include the caption as a comment directly above your <code>ggsave()</code> call. (We’ll cover APA figure conventions in more depth in Session 16; for now, a thoughtful caption is all that’s needed.)</p>
 </section>
 <section id="task-g.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.3">Task G.3</h3>

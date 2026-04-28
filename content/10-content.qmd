@@ -11,7 +11,7 @@ date: "2026-04-29"
 
 ::: {.callout-warning}
 ## Final Project Proposal is due today
-Submit your dataset selection, research questions, and initial plan before class.
+Submit your dataset selection, research questions, and initial plan by the end of the day.
 :::
 
 ## During class

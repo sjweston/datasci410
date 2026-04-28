@@ -15,6 +15,8 @@ Always keep these in mind. If something we're about to do would conflict with an
 - **`graduate-student-assignments.md`** — Planning doc for grad student extensions. Currently the Qualtrics API extension on Assignment 3 is the priority. Add to this as we develop more extensions.
 - **`team-challenge-planning.md`** — Design doc for the team-based competition system: team formation, point categories, reward structure, open questions.
 - **`instructor-guide.md`** — Comprehensive operations manual for running the course: pre-term setup, weekly workflow, session-by-session guide, grading policies, team challenge operations, data pipeline, and end-of-term checklist.
+- **`grading-instructions.md`** — General grading guidance (point allocation, partial credit, code quality, edge cases). Read this before grading any assignment.
+- **`grading-rubrics.md`** — Detailed per-assignment rubrics with explicit "what Full / −1 / Half / None looks like" descriptions per criterion. Used by Sara, the GE, and Claude for consistent grading. The student-facing assignment files show only point totals; the full 4-level rubric lives here and is mirrored to Canvas. **Always consult this file when asked to help grade.**
 - **`files/slide-design-principles.md`** — Rhetoric and design principles for slide decks (the Three Laws, Aristotle's modes, narrative structure, visual grammar, MB/MC equivalence, common failures). Reference this when creating or substantially revising any slide deck.
 
 ---
