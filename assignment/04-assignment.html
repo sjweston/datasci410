@@ -366,17 +366,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Use the <code>palmerpenguins</code> dataset.</p>
 <section id="task-1.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.1">Task 1.1</h3>
-<p>Create a summary table showing mean flipper length by species, including standard error.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: SE = sd / sqrt(n)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Create a summary table showing mean flipper length, standard deviation (SD), and sample size (N) for each species.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hint: use group_by() + summarize() with mean(), sd(), and n().</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Don't forget na.rm = TRUE for the mean and sd.</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-1.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.2">Task 1.2</h3>
-<p>Using the summary table you built in Task 1.1, create a bar chart showing mean flipper length by species with error bars representing ±1 SE.</p>
+<p>Create a bar chart showing mean flipper length by species with error bars representing the <strong>95% confidence interval</strong>. Use <code>stat_summary()</code> for both the bar and the error bars — this is the pattern from the Session 8 slides.</p>
 <p>Your plot should:</p>
 <ul>
 <li>Have clear axis labels (not variable names)</li>
 <li>Use a clean theme</li>
-<li>Have a descriptive title</li>
+<li>Have a descriptive title that names what the error bars represent (or include it in a caption)</li>
 <li>Use a colorblind-friendly palette (hint: <code>scale_fill_viridis_d()</code>)</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -389,7 +390,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Pipe your Task 1.1 summary into <code>ggplot()</code>, then use <code>geom_col()</code> for the bars and <code>geom_errorbar(aes(ymin = mean - se, ymax = mean + se), width = 0.2)</code> for the error bars. This is a different approach from the <code>stat_summary()</code> pattern in the Session 8 slides — both work, but here we want you to plot the table you just built.</p>
+<p>You’ll need <code>stat_summary()</code> twice — once for the bar and once for the error bars:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(penguins, <span class="fu">aes</span>(<span class="at">x =</span> species, <span class="at">y =</span> flipper_length_mm, <span class="at">fill =</span> species)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">"bar"</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data =</span> mean_cl_normal, <span class="at">geom =</span> <span class="st">"errorbar"</span>, <span class="at">width =</span> <span class="fl">0.2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>mean_cl_normal</code> returns the 95% confidence interval (the Session 8 slides note this is the most common error bar in psychology).</p>
 </div>
 </div>
 </section>
@@ -492,9 +497,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-body-container callout-body">
 <p>The safest way to recode is to specify both <code>levels</code> and <code>labels</code> so the mapping is explicit:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">factor</span>(team,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"Greece"</span>, <span class="st">"No Team"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mutate</span>(<span class="at">team =</span> <span class="fu">factor</span>(team,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                     <span class="at">levels =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Spain"</span>, <span class="st">"Greece"</span>, <span class="st">"No Team"</span>)))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </section>
@@ -529,57 +534,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <thead>
 <tr class="header">
 <th>Task</th>
-<th>Points</th>
+<th style="text-align: center;">Points</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1.1: Summary table (mean + SE by species)</td>
-<td>10</td>
+<td>1.1: Summary table (mean, SD, N by species)</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="even">
 <td>1.2: Bar chart with error bars</td>
-<td>15</td>
+<td style="text-align: center;">15</td>
 </tr>
 <tr class="odd">
 <td>2.1: Histogram with bin width exploration</td>
-<td>8</td>
+<td style="text-align: center;">8</td>
 </tr>
 <tr class="even">
 <td>2.2: Overlapping density plots by species</td>
-<td>8</td>
+<td style="text-align: center;">8</td>
 </tr>
 <tr class="odd">
 <td>2.3: Boxplot vs.&nbsp;violin plot comparison</td>
-<td>9</td>
+<td style="text-align: center;">9</td>
 </tr>
 <tr class="even">
 <td>3.1: Intentionally bad visualization</td>
-<td>12</td>
+<td style="text-align: center;">12</td>
 </tr>
 <tr class="odd">
 <td>3.2: Good visualization with design justification</td>
-<td>13</td>
+<td style="text-align: center;">13</td>
 </tr>
 <tr class="even">
 <td>4.1: Import data and convert team to factor</td>
-<td>5</td>
+<td style="text-align: center;">5</td>
 </tr>
 <tr class="odd">
 <td>4.2: Recreate Figure 3</td>
-<td>10</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="even">
 <td>QMD file knits without errors</td>
-<td>10</td>
+<td style="text-align: center;">10</td>
 </tr>
 <tr class="odd">
 <td><strong>Total</strong></td>
-<td><strong>100</strong></td>
+<td style="text-align: center;"><strong>100</strong></td>
 </tr>
 </tbody>
 </table>
-<p><strong>Grading scale per task:</strong> Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.</p>
+<p>Each task is graded on a 4-level scale: full credit, full minus one (small slip), half credit (one major error), or none (not attempted or multiple major errors). “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -623,11 +628,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-g.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.1">Task G.1</h3>
 <p>Choose the figure you’re most proud of from Parts 1–3. Look up the author guidelines for one real journal in your area (<em>Psychological Science</em>, <em>JPSP</em>, <em>Emotion</em>, or similar) and save the figure at <strong>300 dpi</strong> with dimensions matching their specifications.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — adjust width/height to your target journal's specs:</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"publication_figure.tiff"</span>,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot  =</span> my_plot,</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="fl">3.5</span>, <span class="at">height =</span> <span class="dv">3</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Example — adjust width/height to your target journal's specs:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="st">"publication_figure.tiff"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">plot  =</span> my_plot,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">width =</span> <span class="fl">3.5</span>, <span class="at">height =</span> <span class="dv">3</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">units =</span> <span class="st">"in"</span>, <span class="at">dpi =</span> <span class="dv">300</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="task-g.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-g.2">Task G.2</h3>
