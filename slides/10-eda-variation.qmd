@@ -50,8 +50,12 @@ Before you run a single statistical test, you should know your data well enough 
 
 That's what EDA gives you — **no surprises**.
 
+. . .
+
+It's also how you catch problems early: rows that didn't load, codes that weren't recoded, "999" sneaking in as a real age.
+
 ::: {.notes}
-Open by asking students: "How many of you have ever run an analysis and been confused by the results?" This is the problem EDA solves. Spend ~2 minutes here. The goal is to frame EDA not as busywork but as something that saves time and prevents mistakes.
+Open by asking students: "How many of you have ever run an analysis and been confused by the results?" This is the problem EDA solves. Spend ~2 minutes here. Frame EDA two ways: (1) it tells you what your data look like before you analyze them, and (2) it's the last line of defense against data that loaded wrong, wasn't cleaned, or has miscoded values. A surprising number of "weird results" turn out to be a column that read in as character, or a missing-value sentinel that wasn't converted to NA. EDA is how you catch that.
 :::
 
 ## Exploratory vs. confirmatory
@@ -63,15 +67,30 @@ Open by asking students: "How many of you have ever run an analysis and been con
 | **Questions** | Open-ended | Pre-specified |
 | **Output** | Visualizations, hunches | p-values, conclusions |
 
-EDA comes **first.** You can't test a hypothesis you didn't notice.
+The two roles get mixed up if you do them on the same data. **Preregistration** keeps them honest: you write your confirmatory hypotheses down *before* you peek.
 
 ::: {.notes}
-Students sometimes think EDA is optional or that it's what you do when you don't have a hypothesis. Emphasize that even in confirmatory research, EDA is step one. It tells you whether your data even look the way you expect. If they've taken stats, connect to the idea of checking assumptions.
+Students sometimes think EDA is optional or that it's what you do when you don't have a hypothesis. Emphasize that even in confirmatory research, EDA is step one — it tells you whether your data look the way you expect. The risk is that exploration generates a hypothesis and then you "confirm" it on the same data — that's HARKing / p-hacking. Preregistration (registering your hypotheses on OSF or AsPredicted before looking at the data) is the standard tool researchers use to keep exploration and confirmation separate. Connect back to the replication-crisis opening from Session 1.
+:::
+
+## A cleaner pattern: split your data
+
+If you're worried about exploring and testing on the same dataset, use multiple datasets:
+
+- **Dataset 1** → EDA. Look around. Generate ideas.
+- **Dataset 2** → Confirm ideas from Set 1. Then EDA on Set 2 → new ideas.
+- **Dataset 3** → Confirm ideas from Sets 1 & 2. Then EDA on Set 3 → new ideas.
+- ... and so on.
+
+Each new dataset gets one shot at confirmation, then becomes fair game for exploration.
+
+::: {.notes}
+This is the iterative cycle that mature research programs use — sometimes called "replication chains" or "rolling confirmation." You can also do this within one dataset by holding out a portion (a "lockbox" or train/test split). The point: EDA generates hypotheses, and confirmation has to happen on data that didn't generate them. Spend ~1 minute here. This isn't something they'll do in this class, but it's the right mental model going forward.
 :::
 
 ## Good EDA means looking before you test
 
-> "EDA is an attitude, not a technique."  
+> "EDA is an attitude, not a technique."
 > — John Tukey
 
 - Ask questions
@@ -103,13 +122,14 @@ Quick roadmap slide — spend ~30 seconds. This orients students on the two-sess
 ## Our dataset: Big Five Personality
 
 ```{r}
-glimpse(bfi)
+dim(bfi)
+names(bfi)
 ```
 
 25 items measuring five personality factors (Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness) + demographics.
 
 ::: {.notes}
-Walk through the glimpse() output. Point out the variable names, number of rows (~2800), and that some columns are integers (survey items on a 1-6 scale) while age is continuous. Students often ask what A1, C3, etc. stand for — the next slide covers that. If they've taken personality psych, ask what the Big Five are.
+Point out the dimensions (~2800 rows, 28 columns) and walk through the names. Five blocks of five items (A1–A5, C1–C5, E1–E5, N1–N5, O1–O5) plus three demographic columns. The next slide covers what each item code means. If students have taken personality psych, ask what the Big Five are.
 :::
 
 ## What's in here
@@ -156,17 +176,15 @@ Run this live and walk through the output. Point out the NA counts in the summar
 #| fig-alt: "Histogram of participant ages with 5-year bins showing a strong right skew, with most participants in their teens to thirties and a long tail extending past age 60."
 bfi |>
   ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  labs(
-    title = "Distribution of Age",
-    x = "Age (years)",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_histogram(binwidth = 5, fill = "#2c7fb8", color = "white") +
+  labs(x = "Age (years)", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ::: {.notes}
-This is the first histogram of the session. Walk through the code line by line: the pipe into ggplot, the aes() mapping, and then geom_histogram(). Emphasize that binwidth is a choice, not a default — ggplot will warn them if they don't set it. Ask students to describe the shape: right-skewed, most people are young. Spend ~3 minutes here since this is a core geom.
+This is the first histogram of the session. Walk through the code line by line: the pipe into ggplot, the aes() mapping, and then geom_histogram(). Emphasize that binwidth is a choice, not a default — ggplot will warn them if they don't set it. Ask students to describe the shape: right-skewed, most people are young. Spend ~3 minutes here since this is a core geom. Note that we're skipping titles for these EDA plots — titles matter for the final report, not for the explore-loop.
 :::
 
 ## Choosing binwidth
@@ -180,20 +198,24 @@ The binwidth matters a lot:
 #| fig-alt: "Three histograms of age side by side comparing binwidths. Binwidth 1 is noisy with erratic spikes, binwidth 5 clearly shows the right-skewed shape, and binwidth 20 oversimplifies into just a few bars that hide the skew."
 library(patchwork)
 
+clean <- theme_minimal(base_size = 13) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
+
 p1 <- bfi |> ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
-  labs(title = "binwidth = 1 (too narrow)", x = "Age") +
-  theme_minimal(base_size = 13)
+  geom_histogram(binwidth = 1, fill = "#2c7fb8", color = "white") +
+  labs(title = "binwidth = 1 (too narrow)", x = "Age", y = "Count") +
+  clean
 
 p2 <- bfi |> ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  labs(title = "binwidth = 5 (good)", x = "Age") +
-  theme_minimal(base_size = 13)
+  geom_histogram(binwidth = 5, fill = "#2c7fb8", color = "white") +
+  labs(title = "binwidth = 5 (good)", x = "Age", y = "Count") +
+  clean
 
 p3 <- bfi |> ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 20, fill = "steelblue", color = "white") +
-  labs(title = "binwidth = 20 (too wide)", x = "Age") +
-  theme_minimal(base_size = 13)
+  geom_histogram(binwidth = 20, fill = "#2c7fb8", color = "white") +
+  labs(title = "binwidth = 20 (too wide)", x = "Age", y = "Count") +
+  clean
 
 p1 + p2 + p3
 ```
@@ -213,13 +235,11 @@ Spend ~2 minutes comparing the three panels. Point to specific differences: binw
 #| fig-alt: "Density plot of participant ages showing a smooth right-skewed curve that peaks around age 20 and gradually tapers off toward age 80."
 bfi |>
   ggplot(aes(x = age)) +
-  geom_density(fill = "steelblue", alpha = 0.5) +
-  labs(
-    title = "Distribution of Age (Density)",
-    x = "Age (years)",
-    y = "Density"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_density(fill = "#2c7fb8", alpha = 0.6, color = "#2c7fb8") +
+  labs(x = "Age (years)", y = "Density") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ::: {.notes}
@@ -230,25 +250,64 @@ Briefly explain that density plots are like a smoothed histogram — the y-axis 
 
 ```{r}
 #| output-location: slide
-#| fig-width: 10
-#| fig-height: 5
-#| fig-alt: "Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items."
+#| fig-width: 11
+#| fig-height: 4.5
+#| fig-alt: "Five small bar charts side by side showing the response distribution for each Extraversion item on a 1 to 6 scale. Item descriptions appear above each panel. The two reverse-scored items (E1, E2) skew toward lower values while E3, E4, and E5 skew toward higher values."
 # All Extraversion items
+item_labels <- c(
+  E1 = "E1\nDon't talk a lot. (R)",
+  E2 = "E2\nFind it difficult to\napproach others. (R)",
+  E3 = "E3\nKnow how to\ncaptivate people.",
+  E4 = "E4\nMake friends easily.",
+  E5 = "E5\nTake charge."
+)
+
 bfi |>
   select(E1:E5) |>
   pivot_longer(everything(), names_to = "item", values_to = "response") |>
-  ggplot(aes(x = response, fill = item)) +
-  geom_bar(position = "dodge") +
+  ggplot(aes(x = response)) +
+  geom_bar(fill = "#2c7fb8") +
+  facet_wrap(~ item, nrow = 1, labeller = as_labeller(item_labels)) +
+  scale_x_continuous(breaks = 1:6) +
   labs(
-    title = "Extraversion Item Responses",
-    x = "Response (1–6)",
-    y = "Count"
+    title = "Distribution of responses to Extraversion items",
+    x = NULL,
+    y = NULL,
+    caption = "Scale: 1 = Very inaccurate, 6 = Very accurate.   (R) = reverse-scored."
   ) +
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 12) +
+  theme(panel.grid = element_blank(),
+        axis.line.x = element_line(color = "gray70"),
+        axis.line.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank(),
+        strip.text = element_text(lineheight = 1.1),
+        plot.caption = element_text(hjust = 0, size = 10))
 ```
 
 ::: {.notes}
-This slide introduces pivot_longer in a practical context — students saw it in the tidying session but may need a reminder. The key insight here is that some items look different from others: E1 and E2 might have different distributions because some items are reverse-scored. If a student notices this, it's a great teaching moment about reverse coding in personality measures. Don't dwell on pivot_longer mechanics; the focus is the visualization.
+This slide introduces pivot_longer in a practical context — students saw it in the tidying session but may need a reminder. The key insight: E1 and E2 are reverse-scored ("(R)" in the caption), which is why they skew opposite to E3, E4, E5. Use this to introduce the idea that survey items don't all point the same direction — to compute a meaningful Extraversion score, you'd reverse-score E1 and E2 first. Students saw this idea briefly in the tidying session; this is the natural place to reinforce it. Don't dwell on pivot_longer mechanics; the focus is the visualization.
+:::
+
+## A quick aside: `factor()`
+
+Education is stored as numbers (`1`–`5`), but the numbers are *codes*, not measurements. `factor()` turns them into ordered categories with readable labels:
+
+```{r}
+#| eval: false
+factor(education,
+       levels = 1:5,
+       labels = c("Some HS", "HS grad", "Some college",
+                  "College grad", "Graduate"))
+```
+
+- `levels` = the values currently in the data (in the order you want them)
+- `labels` = what to show instead
+
+We'll come back to factors in detail in a later session — for now, just know this is how we attach labels to numeric codes.
+
+::: {.notes}
+Spend ~1 minute. Students don't need a deep understanding of factors yet — just enough to read the next few slides without confusion. The full treatment is in Session 13 (Strings, Factors & Text). Reassure them: factors look like character vectors but remember an order, which is exactly what you want for things like education levels or Likert scales.
 :::
 
 ## Categorical variables
@@ -264,13 +323,11 @@ bfi |>
     levels = 1:5,
     labels = c("Some HS", "HS grad", "Some college", "College grad", "Graduate"))) |>
   ggplot(aes(x = education)) +
-  geom_bar(fill = "steelblue") +
-  labs(
-    title = "Education Level Distribution",
-    x = "Education",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_bar(fill = "#2c7fb8") +
+  labs(x = "Education", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ## Counts and proportions
@@ -295,8 +352,26 @@ bfi |>
     levels = 1:5,
     labels = c("Some HS", "HS grad", "Some college", "College grad", "Graduate"))) |>
   count(education) |>
-  mutate(proportion = round(n / sum(n), 3))
+  mutate(proportion = n / sum(n))
 ```
+
+## Don't round inside the data frame
+
+Keep the full precision in your data. Round only when you're **displaying** it:
+
+```{r}
+#| eval: false
+bfi |>
+  count(education) |>
+  mutate(proportion = n / sum(n)) |>
+  knitr::kable(digits = 2)
+```
+
+If you round in the data frame, you've thrown away precision you can't get back. If you round at display, the underlying data is still exact.
+
+::: {.notes}
+Quick aside — ~30 seconds. The point is the habit: data frames hold data, display functions handle formatting. Students will encounter this again with reports in Session 16; foreshadow that they'll use `kable()` a lot in Quarto.
+:::
 
 # Outliers {background-color="#2c3e50"}
 
@@ -323,13 +398,11 @@ This is one of the most important slides in the deck. Spend ~3 minutes here. Stu
 #| fig-alt: "Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers."
 bfi |>
   ggplot(aes(x = age)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  labs(
-    title = "Age Distribution — Any Outliers?",
-    x = "Age (years)",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_histogram(binwidth = 5, fill = "#2c7fb8", color = "white") +
+  labs(x = "Age (years)", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ## Spotting outliers with boxplots
@@ -341,12 +414,13 @@ bfi |>
 #| fig-alt: "Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers."
 bfi |>
   ggplot(aes(x = age)) +
-  geom_boxplot(fill = "steelblue", alpha = 0.7) +
-  labs(
-    title = "Age — Boxplot Shows Outliers as Points",
-    x = "Age (years)"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_boxplot(fill = "#2c7fb8", alpha = 0.7) +
+  labs(x = "Age (years)") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line.x = element_line(color = "gray70"),
+        axis.text.y = element_blank(),
+        axis.ticks.y = element_blank())
 ```
 
 Points beyond the whiskers are flagged as outliers by the 1.5×IQR rule.
@@ -386,11 +460,18 @@ Emphasize the documentation point. In psychology research, you need to justify e
 Remember that survey you filled out Week 1? Let's do some EDA on it.
 
 ```{r}
+#| eval: false
+class_survey <- read_csv(
+  "https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/class_survey.csv"
+)
+```
+
+```{r}
 glimpse(class_survey)
 ```
 
 ::: {.notes}
-Transition: "We've been using the BFI dataset to practice EDA. Now let's see what our own class data looks like." Students perk up when it's their data. Walk through the glimpse output briefly — they should recognize the variable names from the survey they took.
+Transition: "We've been using the BFI dataset to practice EDA. Now let's see what our own class data looks like." Walk students through the URL load — they can paste this directly into their console; no download needed because `read_csv()` accepts URLs. Students perk up when it's their data. Walk through the glimpse output briefly — they should recognize the variable names from the survey they took.
 :::
 
 ## How many tabs do you have open?
@@ -401,13 +482,11 @@ Transition: "We've been using the BFI dataset to practice EDA. Now let's see wha
 #| fig-height: 5
 #| fig-alt: "Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution."
 ggplot(class_survey, aes(x = tabs_open)) +
-  geom_histogram(binwidth = 5, fill = "steelblue", color = "white") +
-  labs(
-    title = "Browser Tabs Open During the Survey",
-    x = "Number of tabs",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_histogram(binwidth = 5, fill = "#2c7fb8", color = "white") +
+  labs(x = "Number of tabs", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ::: {.notes}
@@ -422,13 +501,11 @@ This variable almost always produces a beautiful right skew with outliers. Ask: 
 #| fig-height: 5
 #| fig-alt: "Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours."
 ggplot(class_survey, aes(x = sleep_hrs)) +
-  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
-  labs(
-    title = "How Much Sleep Does Our Class Get?",
-    x = "Average hours of sleep per night",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_histogram(binwidth = 1, fill = "#2c7fb8", color = "white") +
+  labs(x = "Average hours of sleep per night", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ::: {.notes}
@@ -443,13 +520,11 @@ Compare this to the tabs distribution: "Notice how different the shape is. Sleep
 #| fig-height: 5
 #| fig-alt: "Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither."
 ggplot(class_survey, aes(x = chronotype)) +
-  geom_bar(fill = "steelblue") +
-  labs(
-    title = "Chronotype Distribution in Our Class",
-    x = "Chronotype",
-    y = "Count"
-  ) +
-  theme_minimal(base_size = 14)
+  geom_bar(fill = "#2c7fb8") +
+  labs(x = "Chronotype", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ::: {.notes}
@@ -460,30 +535,36 @@ A categorical variable from our own data. Ask: "Does this match what you'd expec
 
 ## Your turn: 10 minutes
 
-Using the `penguins` dataset (from the `palmerpenguins` package):
+Using the `class_survey` data, look at the distribution of **`social_media_hrs`** (self-reported hours per day on social media):
 
-1. Plot the distribution of **flipper_length_mm** — what shape is it?
-2. Check for **outliers** in flipper length. Are any values suspicious?
+1. Plot the distribution — what shape is it?
+2. Check for **outliers**. Are any values suspicious?
+3. What does this tell you about our class?
 
 ::: {.callout-tip}
-Try both a histogram and a boxplot. They show different things. Use `summary()` first to get oriented.
+Try both a histogram and a boxplot. They show different things. Use `summary(class_survey$social_media_hrs)` first to get oriented.
 :::
 
 ::: {.notes}
-Circulate during this exercise. Common issues: students forget to load palmerpenguins, or they get a warning about removed rows (that's the missing data — point it out as a natural segue to the next section). The flipper length distribution is bimodal — this is a great moment to ask "why might there be two peaks?" (Answer: different species have different flipper lengths.) If pairs finish early, suggest they try body_mass_g or bill_length_mm.
+Circulate during this exercise. Common issues: students forget to load `class_survey`, or they pick a binwidth that's too small/large. The distribution will likely be right-skewed with a few extreme values — this is a great moment to ask "is the person who said 12 hours/day an outlier, an error, or just honest?" If pairs finish early, suggest they compare to `caffeine_per_day` or `tabs_open`.
 :::
 
 ```{r}
 #| echo: false
 #| eval: false
 # Solution (reveal after time is up)
-library(palmerpenguins)
-penguins |> ggplot(aes(x = flipper_length_mm)) +
-  geom_histogram(fill = "steelblue", color = "white") +
-  theme_minimal()
+ggplot(class_survey, aes(x = social_media_hrs)) +
+  geom_histogram(binwidth = 1, fill = "#2c7fb8", color = "white") +
+  labs(x = "Social media (hours/day)", y = "Count") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 
 # Outlier check
-penguins |> ggplot(aes(x = flipper_length_mm)) + geom_boxplot() + theme_minimal()
+ggplot(class_survey, aes(x = social_media_hrs)) +
+  geom_boxplot(fill = "#2c7fb8", alpha = 0.7) +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank())
 ```
 
 ---
@@ -494,7 +575,7 @@ penguins |> ggplot(aes(x = flipper_length_mm)) + geom_boxplot() + theme_minimal(
 
 # Missing data — a first look {background-color="#2c3e50"}
 
-## Missing data is everywhere
+## Missing data are everywhere
 
 ```{r}
 # How much missing data do we have?
@@ -522,14 +603,12 @@ bfi |>
   filter(pct_missing > 0) |>
   arrange(desc(pct_missing)) |>
   ggplot(aes(x = reorder(variable, pct_missing), y = pct_missing)) +
-  geom_col(fill = "steelblue") +
+  geom_col(fill = "#2c7fb8") +
   coord_flip() +
-  labs(
-    title = "Percentage of Missing Values by Variable",
-    x = "Variable",
-    y = "% Missing"
-  ) +
-  theme_minimal(base_size = 14)
+  labs(x = "Variable", y = "% Missing") +
+  theme_minimal(base_size = 14) +
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"))
 ```
 
 ## Why it matters for EDA
@@ -575,32 +654,13 @@ bfi |>
     "College grad", "Graduate degree"
   ))) |>
   ggplot(aes(x = education)) +
-  geom_bar(fill = "steelblue") +
-  labs(
-    title = "Education Level in the BFI Sample",
-    x = "Education level",
-    y = "Count"
-  ) +
+  geom_bar(fill = "#2c7fb8") +
+  labs(x = "Education level", y = "Count") +
   theme_minimal(base_size = 14) +
-  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+  theme(panel.grid = element_blank(),
+        axis.line = element_line(color = "gray70"),
+        axis.text.x = element_text(angle = 30, hjust = 1))
 ```
-
-# Get a head start {background-color="#e67e22"}
-
-## Assignment 5 preview
-
-Assignment 5 will have you do a full EDA on a psychology dataset. Start now:
-
-1. Load `bfi` and run `glimpse()` and `summary()`
-2. Pick **3 variables** and create distributions for each
-3. For each one: What shape is it? Any outliers? Any missing data?
-4. Write down **one question** each distribution makes you want to ask
-
-That's the core of EDA — noticing things and getting curious.
-
-::: {.notes}
-Give students ~10 minutes of work time here. Frame this as a head start on Assignment 5, not as something they need to finish now. Circulate and help with code issues. If students are stuck on which 3 variables to pick, suggest one continuous (age), one discrete (a personality item), and one categorical (education).
-:::
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -644,5 +704,21 @@ EDA isn't a step you finish. It's the habit of looking at your data before you b
 Next time: EDA — Covariation
 
 ::: {.notes}
-End on this line. Remind students that the reading for next time is R4DS Ch 10 sections 10.5-10.6 (covariation). No assignment is due or assigned today, but the Final Project Proposal is due soon — check the schedule. Next session picks up exactly where this one leaves off.
+Remind students that the reading for next time is R4DS Ch 10 sections 10.5–10.6 (covariation). No assignment is due or assigned today, but the Final Project Proposal is due soon — check the schedule. The next slide gives them a head start on Assignment 5; if there's time left in class, work through it together, otherwise frame it as homework.
+:::
+
+# Get a head start {background-color="#e67e22"}
+
+## Assignment 4: Part 2 (Distributions)
+
+Open Assignment 4 and start **Part 2**. You have everything you need:
+
+1. **2.1** — Histogram of penguin body mass. Try ≥3 binwidths in your scratch work; submit the one that best shows the shape, with a comment explaining why.
+2. **2.2** — Overlapping density plots of body mass, colored by species, with transparency.
+3. **2.3** — Boxplot of body mass by species, then violin plot. Comment on what each shows that the other doesn't.
+
+Due **Sunday, May 3 at 11:59 PM**.
+
+::: {.notes}
+Give students ~10 minutes of work time here if class time allows. Part 2 of A4 is a perfect match for today's material — histograms, densities, and boxplots all just covered. Circulate and help with code issues. Common stumbles: forgetting `library(palmerpenguins)`, missing `na.rm = TRUE` in summaries, picking a binwidth that's too small/large. If pairs finish early, point them to Part 1 (bar chart with error bars from Session 8 material) or Part 3 (the bad-graph / good-graph exercise from Session 9).
 :::

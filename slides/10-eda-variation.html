@@ -219,8 +219,11 @@ Dr.&nbsp;Sara Weston
 <p>Before you run a single statistical test, you should know your data well enough to predict what the results will look like.</p>
 <div class="fragment">
 <p>That’s what EDA gives you — <strong>no surprises</strong>.</p>
+</div>
+<div class="fragment">
+<p>It’s also how you catch problems early: rows that didn’t load, codes that weren’t recoded, “999” sneaking in as a real age.</p>
 <aside class="notes">
-<p>Open by asking students: “How many of you have ever run an analysis and been confused by the results?” This is the problem EDA solves. Spend ~2 minutes here. The goal is to frame EDA not as busywork but as something that saves time and prevents mistakes.</p>
+<p>Open by asking students: “How many of you have ever run an analysis and been confused by the results?” This is the problem EDA solves. Spend ~2 minutes here. Frame EDA two ways: (1) it tells you what your data look like before you analyze them, and (2) it’s the last line of defense against data that loaded wrong, wasn’t cleaned, or has miscoded values. A surprising number of “weird results” turn out to be a column that read in as character, or a missing-value sentinel that wasn’t converted to NA. EDA is how you catch that.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -267,9 +270,33 @@ Dr.&nbsp;Sara Weston
 </tr>
 </tbody>
 </table>
-<p>EDA comes <strong>first.</strong> You can’t test a hypothesis you didn’t notice.</p>
+<p>The two roles get mixed up if you do them on the same data. <strong>Preregistration</strong> keeps them honest: you write your confirmatory hypotheses down <em>before</em> you peek.</p>
 <aside class="notes">
-<p>Students sometimes think EDA is optional or that it’s what you do when you don’t have a hypothesis. Emphasize that even in confirmatory research, EDA is step one. It tells you whether your data even look the way you expect. If they’ve taken stats, connect to the idea of checking assumptions.</p>
+<p>Students sometimes think EDA is optional or that it’s what you do when you don’t have a hypothesis. Emphasize that even in confirmatory research, EDA is step one — it tells you whether your data look the way you expect. The risk is that exploration generates a hypothesis and then you “confirm” it on the same data — that’s HARKing / p-hacking. Preregistration (registering your hypotheses on OSF or AsPredicted before looking at the data) is the standard tool researchers use to keep exploration and confirmation separate. Connect back to the replication-crisis opening from Session 1.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="a-cleaner-pattern-split-your-data" class="slide level2">
+<h2>A cleaner pattern: split your data</h2>
+<p>If you’re worried about exploring and testing on the same dataset, use multiple datasets:</p>
+<ul>
+<li><strong>Dataset 1</strong> → EDA. Look around. Generate ideas.</li>
+<li><strong>Dataset 2</strong> → Confirm ideas from Set 1. Then EDA on Set 2 → new ideas.</li>
+<li><strong>Dataset 3</strong> → Confirm ideas from Sets 1 &amp; 2. Then EDA on Set 3 → new ideas.</li>
+<li>… and so on.</li>
+</ul>
+<p>Each new dataset gets one shot at confirmation, then becomes fair game for exploration.</p>
+<aside class="notes">
+<p>This is the iterative cycle that mature research programs use — sometimes called “replication chains” or “rolling confirmation.” You can also do this within one dataset by holding out a portion (a “lockbox” or train/test split). The point: EDA generates hypotheses, and confirmation has to happen on data that didn’t generate them. Spend ~1 minute here. This isn’t something they’ll do in this class, but it’s the right mental model going forward.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -285,8 +312,7 @@ Dr.&nbsp;Sara Weston
 <section id="good-eda-means-looking-before-you-test" class="slide level2">
 <h2>Good EDA means looking before you test</h2>
 <blockquote>
-<p>“EDA is an attitude, not a technique.”<br>
-— John Tukey</p>
+<p>“EDA is an attitude, not a technique.” — John Tukey</p>
 </blockquote>
 <ul>
 <li>Ask questions</li>
@@ -336,43 +362,22 @@ Dr.&nbsp;Sara Weston
 <section id="our-dataset-big-five-personality" class="slide level2">
 <h2>Our dataset: Big Five Personality</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(bfi)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(bfi)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 2,800
-Columns: 28
-$ A1        &lt;int&gt; 2, 2, 5, 4, 2, 6, 2, 4, 4, 2, 4, 2, 5, 5, 4, 4, 4, 5, 4, 4, …
-$ A2        &lt;int&gt; 4, 4, 4, 4, 3, 6, 5, 3, 3, 5, 4, 5, 5, 5, 5, 3, 6, 5, 4, 4, …
-$ A3        &lt;int&gt; 3, 5, 5, 6, 3, 5, 5, 1, 6, 6, 5, 5, 5, 5, 2, 6, 6, 5, 5, 6, …
-$ A4        &lt;int&gt; 4, 2, 4, 5, 4, 6, 3, 5, 3, 6, 6, 5, 6, 6, 2, 6, 2, 4, 4, 5, …
-$ A5        &lt;int&gt; 4, 5, 4, 5, 5, 5, 5, 1, 3, 5, 5, 5, 4, 6, 1, 3, 5, 5, 3, 5, …
-$ C1        &lt;int&gt; 2, 5, 4, 4, 4, 6, 5, 3, 6, 6, 4, 5, 5, 4, 5, 5, 4, 5, 5, 1, …
-$ C2        &lt;int&gt; 3, 4, 5, 4, 4, 6, 4, 2, 6, 5, 3, 4, 4, 4, 5, 5, 4, 5, 4, 1, …
-$ C3        &lt;int&gt; 3, 4, 4, 3, 5, 6, 4, 4, 3, 6, 5, 5, 3, 4, 5, 5, 4, 5, 5, 1, …
-$ C4        &lt;int&gt; 4, 3, 2, 5, 3, 1, 2, 2, 4, 2, 3, 4, 2, 2, 2, 3, 4, 4, 4, 5, …
-$ C5        &lt;int&gt; 4, 4, 5, 5, 2, 3, 3, 4, 5, 1, 2, 5, 2, 1, 2, 5, 4, 3, 6, 6, …
-$ E1        &lt;int&gt; 3, 1, 2, 5, 2, 2, 4, 3, 5, 2, 1, 3, 3, 2, 3, 1, 1, 2, 1, 1, …
-$ E2        &lt;int&gt; 3, 1, 4, 3, 2, 1, 3, 6, 3, 2, 3, 3, 3, 2, 4, 1, 2, 2, 2, 1, …
-$ E3        &lt;int&gt; 3, 6, 4, 4, 5, 6, 4, 4, NA, 4, 2, 4, 3, 4, 3, 6, 5, 4, 4, 4,…
-$ E4        &lt;int&gt; 4, 4, 4, 4, 4, 5, 5, 2, 4, 5, 5, 5, 2, 6, 6, 6, 5, 6, 5, 5, …
-$ E5        &lt;int&gt; 4, 3, 5, 4, 5, 6, 5, 1, 3, 5, 4, 4, 4, 5, 5, 4, 5, 6, 5, 6, …
-$ N1        &lt;int&gt; 3, 3, 4, 2, 2, 3, 1, 6, 5, 5, 3, 4, 1, 1, 2, 4, 4, 6, 5, 5, …
-$ N2        &lt;int&gt; 4, 3, 5, 5, 3, 5, 2, 3, 5, 5, 3, 5, 2, 1, 4, 5, 4, 5, 6, 5, …
-$ N3        &lt;int&gt; 2, 3, 4, 2, 4, 2, 2, 2, 2, 5, 4, 3, 2, 1, 2, 4, 4, 5, 5, 5, …
-$ N4        &lt;int&gt; 2, 5, 2, 4, 4, 2, 1, 6, 3, 2, 2, 2, 2, 2, 2, 5, 4, 4, 5, 1, …
-$ N5        &lt;int&gt; 3, 5, 3, 1, 3, 3, 1, 4, 3, 4, 3, NA, 2, 1, 3, 5, 5, 4, 2, 1,…
-$ O1        &lt;int&gt; 3, 4, 4, 3, 3, 4, 5, 3, 6, 5, 5, 4, 4, 5, 5, 6, 5, 5, 4, 4, …
-$ O2        &lt;int&gt; 6, 2, 2, 3, 3, 3, 2, 2, 6, 1, 3, 6, 2, 3, 2, 6, 1, 1, 2, 1, …
-$ O3        &lt;int&gt; 3, 4, 5, 4, 4, 5, 5, 4, 6, 5, 5, 4, 4, 4, 5, 6, 5, 4, 2, 5, …
-$ O4        &lt;int&gt; 4, 3, 5, 3, 3, 6, 6, 5, 6, 5, 6, 5, 5, 4, 5, 3, 6, 5, 4, 3, …
-$ O5        &lt;int&gt; 3, 3, 2, 5, 3, 1, 1, 3, 1, 2, 3, 4, 2, 4, 5, 2, 3, 4, 2, 2, …
-$ gender    &lt;int&gt; 1, 2, 2, 2, 1, 2, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 2, 1, 2, 2, …
-$ education &lt;int&gt; NA, NA, NA, NA, NA, 3, NA, 2, 1, NA, 1, NA, NA, NA, 1, NA, N…
-$ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 17, …</code></pre>
+<pre><code>[1] 2800   28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(bfi)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] "A1"        "A2"        "A3"        "A4"        "A5"        "C1"       
+ [7] "C2"        "C3"        "C4"        "C5"        "E1"        "E2"       
+[13] "E3"        "E4"        "E5"        "N1"        "N2"        "N3"       
+[19] "N4"        "N5"        "O1"        "O2"        "O3"        "O4"       
+[25] "O5"        "gender"    "education" "age"      </code></pre>
 </div>
 </div>
 <p>25 items measuring five personality factors (Agreeableness, Conscientiousness, Extraversion, Neuroticism, Openness) + demographics.</p>
 <aside class="notes">
-<p>Walk through the glimpse() output. Point out the variable names, number of rows (~2800), and that some columns are integers (survey items on a 1-6 scale) while age is continuous. Students often ask what A1, C3, etc. stand for — the next slide covers that. If they’ve taken personality psych, ask what the Big Five are.</p>
+<p>Point out the dimensions (~2800 rows, 28 columns) and walk through the names. Five blocks of five items (A1–A5, C1–C5, E1–E5, N1–N5, O1–O5) plus three demographic columns. The next slide covers what each item code means. If students have taken personality psych, ask what the Big Five are.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -442,9 +447,9 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <section id="start-simple-summary-statistics" class="slide level2">
 <h2>Start simple: summary statistics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, education) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, education) <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summary</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      age            gender        education   
  Min.   : 3.00   Min.   :1.000   Min.   :1.00  
@@ -474,19 +479,17 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <section id="histograms-the-workhorse" class="slide level2">
 <h2>Histograms: the workhorse</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb5-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb5-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb5-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Age"</span>,</span>
-<span id="cb5-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb5-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb5-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb5-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
-<p>This is the first histogram of the session. Walk through the code line by line: the pipe into ggplot, the aes() mapping, and then geom_histogram(). Emphasize that binwidth is a choice, not a default — ggplot will warn them if they don’t set it. Ask students to describe the shape: right-skewed, most people are young. Spend ~3 minutes here since this is a core geom.</p>
+<p>This is the first histogram of the session. Walk through the code line by line: the pipe into ggplot, the aes() mapping, and then geom_histogram(). Emphasize that binwidth is a choice, not a default — ggplot will warn them if they don’t set it. Ask students to describe the shape: right-skewed, most people are young. Spend ~3 minutes here since this is a core geom. Note that we’re skipping titles for these EDA plots — titles matter for the final report, not for the explore-loop.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -529,15 +532,13 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <section id="density-plots-smooth-alternative" class="slide level2">
 <h2>Density plots: smooth alternative</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Age (Density)"</span>,</span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Density"</span></span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">color =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Density"</span>) <span class="sc">+</span></span>
+<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -565,22 +566,40 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 </div></section><section id="exploring-survey-items" class="slide level2">
 <h2>Exploring survey items</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All Extraversion items</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(E1<span class="sc">:</span>E5) <span class="sc">|&gt;</span></span>
-<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"item"</span>, <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> response, <span class="at">fill =</span> item)) <span class="sc">+</span></span>
-<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"dodge"</span>) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Extraversion Item Responses"</span>,</span>
-<span id="cb7-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Response (1–6)"</span>,</span>
-<span id="cb7-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb7-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># All Extraversion items</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>item_labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">E1 =</span> <span class="st">"E1</span><span class="sc">\n</span><span class="st">Don't talk a lot. (R)"</span>,</span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">E2 =</span> <span class="st">"E2</span><span class="sc">\n</span><span class="st">Find it difficult to</span><span class="sc">\n</span><span class="st">approach others. (R)"</span>,</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">E3 =</span> <span class="st">"E3</span><span class="sc">\n</span><span class="st">Know how to</span><span class="sc">\n</span><span class="st">captivate people."</span>,</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">E4 =</span> <span class="st">"E4</span><span class="sc">\n</span><span class="st">Make friends easily."</span>,</span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">E5 =</span> <span class="st">"E5</span><span class="sc">\n</span><span class="st">Take charge."</span></span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(E1<span class="sc">:</span>E5) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"item"</span>, <span class="at">values_to =</span> <span class="st">"response"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb9-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb9-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> item, <span class="at">nrow =</span> <span class="dv">1</span>, <span class="at">labeller =</span> <span class="fu">as_labeller</span>(item_labels)) <span class="sc">+</span></span>
+<span id="cb9-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb9-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-18"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of responses to Extraversion items"</span>,</span>
+<span id="cb9-19"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span>,</span>
+<span id="cb9-21"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">"Scale: 1 = Very inaccurate, 6 = Very accurate.   (R) = reverse-scored."</span></span>
+<span id="cb9-22"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-23"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">12</span>) <span class="sc">+</span></span>
+<span id="cb9-24"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-25"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>),</span>
+<span id="cb9-26"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-27"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-28"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb9-29"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">lineheight =</span> <span class="fl">1.1</span>),</span>
+<span id="cb9-30"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">hjust =</span> <span class="dv">0</span>, <span class="at">size =</span> <span class="dv">10</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
-<p>This slide introduces pivot_longer in a practical context — students saw it in the tidying session but may need a reminder. The key insight here is that some items look different from others: E1 and E2 might have different distributions because some items are reverse-scored. If a student notices this, it’s a great teaching moment about reverse coding in personality measures. Don’t dwell on pivot_longer mechanics; the focus is the visualization.</p>
+<p>This slide introduces pivot_longer in a practical context — students saw it in the tidying session but may need a reminder. The key insight: E1 and E2 are reverse-scored (“(R)” in the caption), which is why they skew opposite to E3, E4, E5. Use this to introduce the idea that survey items don’t all point the same direction — to compute a meaningful Extraversion score, you’d reverse-score E1 and E2 first. Students saw this idea briefly in the tidying session; this is the natural place to reinforce it. Don’t dwell on pivot_longer mechanics; the focus is the visualization.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -597,26 +616,52 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Grouped bar chart of responses to five Extraversion items on a 1 to 6 scale. Items show different response patterns, with some skewing toward higher values and others toward lower values, reflecting reverse-scored items." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-8-1.png" alt="Five small bar charts side by side showing the response distribution for each Extraversion item on a 1 to 6 scale. Item descriptions appear above each panel. The two reverse-scored items (E1, E2) skew toward lower values while E3, E4, and E5 skew toward higher values." width="1056"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="categorical-variables" class="slide level2">
+</div></section><section id="a-quick-aside-factor" class="slide level2">
+<h2>A quick aside: <code>factor()</code></h2>
+<p>Education is stored as numbers (<code>1</code>–<code>5</code>), but the numbers are <em>codes</em>, not measurements. <code>factor()</code> turns them into ordered categories with readable labels:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(education,</span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>,</span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>                  <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))</span></code></pre></div>
+</div>
+<ul>
+<li><code>levels</code> = the values currently in the data (in the order you want them)</li>
+<li><code>labels</code> = what to show instead</li>
+</ul>
+<p>We’ll come back to factors in detail in a later session — for now, just know this is how we attach labels to numeric codes.</p>
+<aside class="notes">
+<p>Spend ~1 minute. Students don’t need a deep understanding of factors yet — just enough to read the next few slides without confusion. The full treatment is in Session 13 (Strings, Factors &amp; Text). Reassure them: factors look like character vectors but remember an order, which is exactly what you want for things like education levels or Likert scales.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="categorical-variables" class="slide level2">
 <h2>Categorical variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb8-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
-<span id="cb8-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
-<span id="cb8-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb8-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb8-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb8-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Education Level Distribution"</span>,</span>
-<span id="cb8-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education"</span>,</span>
-<span id="cb8-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb8-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb8-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
+<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Education"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb11-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb11-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb11-11"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 </section>
@@ -624,20 +669,20 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Bar chart of education level distribution showing the most common levels are some college and college graduate in the BFI sample." width="768"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Bar chart of education level distribution showing the most common levels are some college and college graduate in the BFI sample." width="768"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="counts-and-proportions" class="slide level2">
 <h2>Counts and proportions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Counts</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   education        n
@@ -653,25 +698,49 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <section id="counts-and-proportions-1" class="slide level2">
 <h2>Counts and proportions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportions</span></span>
-<span id="cb11-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb11-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
-<span id="cb11-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
-<span id="cb11-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb11-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
-<span id="cb11-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education) <span class="sc">|&gt;</span></span>
-<span id="cb11-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n), <span class="dv">3</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Proportions</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Some HS"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>, <span class="st">"College grad"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education) <span class="sc">|&gt;</span></span>
+<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 3
   education        n proportion
   &lt;fct&gt;        &lt;int&gt;      &lt;dbl&gt;
-1 Some HS        224      0.087
-2 HS grad        292      0.113
-3 Some college  1249      0.485
-4 College grad   394      0.153
-5 Graduate       418      0.162</code></pre>
+1 Some HS        224     0.0869
+2 HS grad        292     0.113 
+3 Some college  1249     0.485 
+4 College grad   394     0.153 
+5 Graduate       418     0.162 </code></pre>
 </div>
 </div>
+</section>
+<section id="dont-round-inside-the-data-frame" class="slide level2">
+<h2>Don’t round inside the data frame</h2>
+<p>Keep the full precision in your data. Round only when you’re <strong>displaying</strong> it:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(education) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">proportion =</span> n <span class="sc">/</span> <span class="fu">sum</span>(n)) <span class="sc">|&gt;</span></span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">2</span>)</span></code></pre></div>
+</div>
+<p>If you round in the data frame, you’ve thrown away precision you can’t get back. If you round at display, the underlying data is still exact.</p>
+<aside class="notes">
+<p>Quick aside — ~30 seconds. The point is the habit: data frames hold data, display functions handle formatting. Students will encounter this again with reports in Session 16; foreshadow that they’ll use <code>kable()</code> a lot in Quarto.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="outliers" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -704,15 +773,13 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <section id="spotting-outliers-visually" class="slide level2">
 <h2>Spotting outliers visually</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Age Distribution — Any Outliers?"</span>,</span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 </section>
@@ -720,21 +787,22 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-14-1.png" alt="Histogram of participant ages with 5-year bins highlighting the right-skewed distribution, with a handful of participants beyond age 60 that could be considered outliers." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="spotting-outliers-with-boxplots" class="slide level2">
 <h2>Spotting outliers with boxplots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Age — Boxplot Shows Outliers as Points"</span>,</span>
-<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span></span>
-<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Age (years)"</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line.x =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>),</span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.ticks.y =</span> <span class="fu">element_blank</span>())</span></code></pre></div>
 </div>
 
 <p>Points beyond the whiskers are flagged as outliers by the 1.5×IQR rule.</p>
@@ -756,17 +824,17 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Horizontal boxplot of participant ages with the median around age 28, the box spanning roughly 20 to 40, and individual points plotted beyond the upper whisker indicating older outliers." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="investigating-outliers-programmatically" class="slide level2">
 <h2>Investigating outliers programmatically</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find unusually old or young participants</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">60</span>) <span class="sc">|&gt;</span></span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, education)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Find unusually old or young participants</span></span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&gt;</span> <span class="dv">60</span>) <span class="sc">|&gt;</span></span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(age, gender, education)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 22 × 3
      age gender education
@@ -837,7 +905,12 @@ $ age       &lt;int&gt; 16, 18, 17, 17, 17, 21, 18, 19, 19, 17, 21, 16, 16, 16, 
 <h2>Our class survey</h2>
 <p>Remember that survey you filled out Week 1? Let’s do some EDA on it.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(class_survey)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/class_survey.csv"</span></span>
+<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(class_survey)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 34
 Columns: 15
@@ -859,7 +932,7 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 </div>
 </div>
 <aside class="notes">
-<p>Transition: “We’ve been using the BFI dataset to practice EDA. Now let’s see what our own class data looks like.” Students perk up when it’s their data. Walk through the glimpse output briefly — they should recognize the variable names from the survey they took.</p>
+<p>Transition: “We’ve been using the BFI dataset to practice EDA. Now let’s see what our own class data looks like.” Walk students through the URL load — they can paste this directly into their console; no download needed because <code>read_csv()</code> accepts URLs. Students perk up when it’s their data. Walk through the glimpse output briefly — they should recognize the variable names from the survey they took.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -875,14 +948,12 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="how-many-tabs-do-you-have-open" class="slide level2">
 <h2>How many tabs do you have open?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> tabs_open)) <span class="sc">+</span></span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Browser Tabs Open During the Survey"</span>,</span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of tabs"</span>,</span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> tabs_open)) <span class="sc">+</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">5</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Number of tabs"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -903,21 +974,19 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-19-1.png" alt="Histogram of browser tabs open showing a right-skewed distribution, with most students reporting fewer than 20 tabs and a few extreme values stretching the distribution." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="how-does-our-class-sleep" class="slide level2">
 <h2>How does our class sleep?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hrs)) <span class="sc">+</span></span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How Much Sleep Does Our Class Get?"</span>,</span>
-<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Average hours of sleep per night"</span>,</span>
-<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hrs)) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"#2c7fb8"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Average hours of sleep per night"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -938,21 +1007,19 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-20-1.png" alt="Histogram of average hours of sleep per night reported by students, showing the distribution centered around 7 hours." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="morning-people-or-night-owls" class="slide level2">
 <h2>Morning people or night owls?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> chronotype)) <span class="sc">+</span></span>
-<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Chronotype Distribution in Our Class"</span>,</span>
-<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Chronotype"</span>,</span>
-<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> chronotype)) <span class="sc">+</span></span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Chronotype"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -972,7 +1039,7 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-18-1.png" alt="Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither." width="768"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Bar chart of chronotype distribution showing counts of students who identify as morning person, evening person, or neither." width="768"></p>
 </figure>
 </div>
 </div>
@@ -984,10 +1051,11 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 </section>
 <section id="your-turn-10-minutes" class="slide level2">
 <h2>Your turn: 10 minutes</h2>
-<p>Using the <code>penguins</code> dataset (from the <code>palmerpenguins</code> package):</p>
+<p>Using the <code>class_survey</code> data, look at the distribution of <strong><code>social_media_hrs</code></strong> (self-reported hours per day on social media):</p>
 <ol type="1">
-<li>Plot the distribution of <strong>flipper_length_mm</strong> — what shape is it?</li>
-<li>Check for <strong>outliers</strong> in flipper length. Are any values suspicious?</li>
+<li>Plot the distribution — what shape is it?</li>
+<li>Check for <strong>outliers</strong>. Are any values suspicious?</li>
+<li>What does this tell you about our class?</li>
 </ol>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -998,12 +1066,12 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <p><strong>Tip</strong></p>
 </div>
 <div class="callout-content">
-<p>Try both a histogram and a boxplot. They show different things. Use <code>summary()</code> first to get oriented.</p>
+<p>Try both a histogram and a boxplot. They show different things. Use <code>summary(class_survey$social_media_hrs)</code> first to get oriented.</p>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>Circulate during this exercise. Common issues: students forget to load palmerpenguins, or they get a warning about removed rows (that’s the missing data — point it out as a natural segue to the next section). The flipper length distribution is bimodal — this is a great moment to ask “why might there be two peaks?” (Answer: different species have different flipper lengths.) If pairs finish early, suggest they try body_mass_g or bill_length_mm.</p>
+<p>Circulate during this exercise. Common issues: students forget to load <code>class_survey</code>, or they pick a binwidth that’s too small/large. The distribution will likely be right-skewed with a few extreme values — this is a great moment to ask “is the person who said 12 hours/day an outlier, an error, or just honest?” If pairs finish early, suggest they compare to <code>caffeine_per_day</code> or <code>tabs_open</code>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1025,14 +1093,14 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <h1>Missing data — a first look</h1>
 
 </section>
-<section id="missing-data-is-everywhere" class="slide level2">
-<h2>Missing data is everywhere</h2>
+<section id="missing-data-are-everywhere" class="slide level2">
+<h2>Missing data are everywhere</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How much missing data do we have?</span></span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
-<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"n_missing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb22-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_missing))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How much missing data do we have?</span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
+<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"n_missing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_missing))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 28 × 2
    variable  n_missing
@@ -1067,21 +1135,19 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="visualizing-missingness" class="slide level2">
 <h2>Visualizing missingness</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
-<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"pct_missing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_missing =</span> pct_missing <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_missing <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing)) <span class="sc">|&gt;</span></span>
-<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, pct_missing), <span class="at">y =</span> pct_missing)) <span class="sc">+</span></span>
-<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb24-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb24-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Percentage of Missing Values by Variable"</span>,</span>
-<span id="cb24-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Variable"</span>,</span>
-<span id="cb24-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"% Missing"</span></span>
-<span id="cb24-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb24-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"pct_missing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_missing =</span> pct_missing <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_missing <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing)) <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, pct_missing), <span class="at">y =</span> pct_missing)) <span class="sc">+</span></span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb29-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variable"</span>, <span class="at">y =</span> <span class="st">"% Missing"</span>) <span class="sc">+</span></span>
+<span id="cb29-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb29-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 </section>
@@ -1089,7 +1155,7 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-21-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1147,62 +1213,31 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="putting-it-together-a-mini-eda" class="slide level2">
 <h2>Putting it together: a mini-EDA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Education distribution — what does it look like?</span></span>
-<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"HS incomplete"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>,</span>
-<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College grad"</span>, <span class="st">"Graduate degree"</span></span>
-<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ))) <span class="sc">|&gt;</span></span>
-<span id="cb25-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
-<span id="cb25-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb25-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb25-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Education Level in the BFI Sample"</span>,</span>
-<span id="cb25-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education level"</span>,</span>
-<span id="cb25-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb25-14"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb25-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb25-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Education distribution — what does it look like?</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"HS incomplete"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>,</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College grad"</span>, <span class="st">"Graduate degree"</span></span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ))) <span class="sc">|&gt;</span></span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Education level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb30-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>),</span>
+<span id="cb30-14"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 </div>
 
 </section><section id="putting-it-together-a-mini-eda-output" class="slide level2 output-location-slide"><h2>Putting it together: a mini-EDA</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section></section>
-<section>
-<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>Get a head start</h1>
-
-</section>
-<section id="assignment-5-preview" class="slide level2">
-<h2>Assignment 5 preview</h2>
-<p>Assignment 5 will have you do a full EDA on a psychology dataset. Start now:</p>
-<ol type="1">
-<li>Load <code>bfi</code> and run <code>glimpse()</code> and <code>summary()</code></li>
-<li>Pick <strong>3 variables</strong> and create distributions for each</li>
-<li>For each one: What shape is it? Any outliers? Any missing data?</li>
-<li>Write down <strong>one question</strong> each distribution makes you want to ask</li>
-</ol>
-<p>That’s the core of EDA — noticing things and getting curious.</p>
-<aside class="notes">
-<p>Give students ~10 minutes of work time here. Frame this as a head start on Assignment 5, not as something they need to finish now. Circulate and help with code issues. If students are stuck on which 3 variables to pick, suggest one continuous (age), one discrete (a personality item), and one categorical (education).</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Wrapping up</h1>
@@ -1281,7 +1316,35 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <p>EDA isn’t a step you finish. It’s the habit of looking at your data before you believe anything about it.</p>
 <p>Next time: EDA — Covariation</p>
 <aside class="notes">
-<p>End on this line. Remind students that the reading for next time is R4DS Ch 10 sections 10.5-10.6 (covariation). No assignment is due or assigned today, but the Final Project Proposal is due soon — check the schedule. Next session picks up exactly where this one leaves off.</p>
+<p>Remind students that the reading for next time is R4DS Ch 10 sections 10.5–10.6 (covariation). No assignment is due or assigned today, but the Final Project Proposal is due soon — check the schedule. The next slide gives them a head start on Assignment 5; if there’s time left in class, work through it together, otherwise frame it as homework.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>Get a head start</h1>
+
+</section>
+<section id="assignment-4-part-2-distributions" class="slide level2">
+<h2>Assignment 4: Part 2 (Distributions)</h2>
+<p>Open Assignment 4 and start <strong>Part 2</strong>. You have everything you need:</p>
+<ol type="1">
+<li><strong>2.1</strong> — Histogram of penguin body mass. Try ≥3 binwidths in your scratch work; submit the one that best shows the shape, with a comment explaining why.</li>
+<li><strong>2.2</strong> — Overlapping density plots of body mass, colored by species, with transparency.</li>
+<li><strong>2.3</strong> — Boxplot of body mass by species, then violin plot. Comment on what each shows that the other doesn’t.</li>
+</ol>
+<p>Due <strong>Sunday, May 3 at 11:59 PM</strong>.</p>
+<aside class="notes">
+<p>Give students ~10 minutes of work time here if class time allows. Part 2 of A4 is a perfect match for today’s material — histograms, densities, and boxplots all just covered. Circulate and help with code issues. Common stumbles: forgetting <code>library(palmerpenguins)</code>, missing <code>na.rm = TRUE</code> in summaries, picking a binwidth that’s too small/large. If pairs finish early, point them to Part 1 (bar chart with error bars from Session 8 material) or Part 3 (the bad-graph / good-graph exercise from Session 9).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
