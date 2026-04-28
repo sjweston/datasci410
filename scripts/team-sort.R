@@ -20,10 +20,10 @@ library(tidyverse)
 # -----------------------------------------------------------------------------
 
 # Path to Canvas survey export CSV
-survey_file <- "data/team-formation-survey.csv"
+survey_file <- "data/private/team-formation-survey.csv"
 
 # Path to class roster CSV (names in "Last, First" format)
-roster_file <- "data/class-roster.csv"
+roster_file <- "data/private/class-roster.csv"
 
 # Target team size (script will calculate number of teams from class size)
 target_team_size <- 5
@@ -36,7 +36,7 @@ col_spreadsheet <- "5238529: How comfortable are you with spreadsheets (Excel, G
 col_friend      <- "5238530: (Optional) Is there someone in this class you'd like to be on a team with? Enter their name below. We'll try to honor one request per person, but can't guarantee it."
 
 # Output file
-output_file <- "data/team_rosters.csv"
+output_file <- "data/private/team_rosters.csv"
 
 
 # -----------------------------------------------------------------------------

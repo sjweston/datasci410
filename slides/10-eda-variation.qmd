@@ -462,7 +462,7 @@ Remember that survey you filled out Week 1? Let's do some EDA on it.
 ```{r}
 #| eval: false
 class_survey <- read_csv(
-  "https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/class_survey.csv"
+  "https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/data/class_survey.csv"
 )
 ```
 

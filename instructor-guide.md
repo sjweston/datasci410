@@ -139,7 +139,7 @@ Send a Canvas announcement the week before classes start:
 
 ### Before each Monday class
 
-1. **Update the scoreboard:** Export Canvas gradebook → save as `data/canvas_gradebook.csv` → run `source("scripts/update-team-points.R")` → copy the printed `tribble()` code into `files/scoreboard.qmd` → render: `quarto render files/scoreboard.qmd`
+1. **Update the scoreboard:** Export Canvas gradebook → save as `data/private/canvas_gradebook.csv` → run `source("scripts/update-team-points.R")` → copy the printed `tribble()` code into `files/scoreboard.qmd` → render: `quarto render files/scoreboard.qmd`
 2. **Review slides:** Open the slide deck for today's session. Press `S` to read the speaker notes. Note any timing guidance.
 3. **Check Canvas:** Make sure any new assignments or quizzes are published and visible.
 
@@ -202,10 +202,10 @@ Slide file numbers now match session numbers (e.g., `07-quarto.qmd` = Session 7)
 
 1. Team Formation Survey closes Wednesday of Week 1 at 11:59 PM
 2. Export results from Canvas: Quiz → Quiz Statistics → Student Analysis → Download CSV
-3. Save as `data/team-formation-survey.csv`
+3. Save as `data/private/team-formation-survey.csv`
 4. Run `source("scripts/team-sort.R")`
 5. Review output — check that friend pairs were honored and experience is balanced
-6. Save roster output (`data/team_rosters.csv`)
+6. Save roster output (`data/private/team_rosters.csv`)
 7. Announce teams in Session 2. Distribute the team challenge handout.
 8. Create Canvas groups matching the team assignments
 
@@ -509,11 +509,11 @@ quarto render slides/17-correlation-regression.qmd
 
 | Path | Purpose |
 |------|---------|
-| `data/team-formation-survey.csv` | Raw survey responses with student names |
-| `data/team_rosters.csv` | Student → team mapping |
-| `data/canvas_gradebook.csv` | Canvas grade export |
-| `data/team_points.csv` | Computed team points |
-| `data/class_survey.csv` | Cleaned anonymous survey for lecture demos |
+| `data/private/team-formation-survey.csv` | Raw survey responses with student names (gitignored) |
+| `data/private/team_rosters.csv` | Student → team mapping (gitignored) |
+| `data/private/canvas_gradebook.csv` | Canvas grade export (gitignored) |
+| `data/private/team_points.csv` | Computed team points (gitignored) |
+| `data/class_survey.csv` | Cleaned anonymous survey for lecture demos (public — served via raw.githubusercontent.com) |
 
 ### Static assets
 
@@ -593,4 +593,4 @@ The full audit is in `accessibility/accessibility-audit.md`. All current slide d
 - [ ] Note what worked and what to change in a post-mortem (consider adding to this guide)
 - [ ] If re-running the course: update dates in `_variables.yml`, `schedule.qmd`, and all 18 slide YAML headers
 - [ ] Regenerate the Qualtrics survey (or reset it) for new responses
-- [ ] Clear `data/` files (student data from the old term)
+- [ ] Clear `data/private/` files (student data from the old term)

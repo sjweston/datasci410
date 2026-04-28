@@ -7,7 +7,7 @@
 #
 # Weekly workflow:
 #   1. In Canvas: Grades → Export → Download CSV
-#   2. Save as canvas_gradebook.csv (overwrites the old one)
+#   2. Save as data/private/canvas_gradebook.csv (overwrites the old one)
 #   3. Source this script
 #   4. Copy the printed scoreboard code into files/scoreboard.qmd
 #
@@ -18,10 +18,10 @@ library(tidyverse)
 # ── Configuration ────────────────────────────────────────────────────────────
 
 # File paths
-roster_file    <- "team_rosters.csv"
-gradebook_file <- "canvas_gradebook.csv"
-output_file    <- "team_points.csv"
-rankings_file  <- "team_rankings.csv"
+roster_file    <- "data/private/team_rosters.csv"
+gradebook_file <- "data/private/canvas_gradebook.csv"
+output_file    <- "data/private/team_points.csv"
+rankings_file  <- "data/private/team_rankings.csv"
 
 # Team names — update after Session 2 when students choose names.
 # Keys are team numbers (from roster), values are display names.

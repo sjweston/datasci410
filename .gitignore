@@ -1,21 +1,13 @@
 qualtrics_config.R
-data/class_survey.csv
-data/canvas_gradebook.csv
-data/team_points.csv
-data/team-formation-survey.csv
-data/team_rosters.csv
-Data/class-roster.csv
+data/private/
+
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 /.quarto/
-.Rhistory
-/_site/files/models
-/files/models
-_site/files/models/51.1.rds
-_site/files/models/51.2.rds
-_site/files/models/m81.1.rds
+/_site/
+Rplots.pdf
 
 deidentified/
 
