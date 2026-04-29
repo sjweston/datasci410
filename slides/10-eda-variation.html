@@ -1084,10 +1084,37 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
-</section></section>
+<section id="solution-social-media-hours" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Social media hours</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> social_media_hrs)) <span class="sc">+</span></span>
+<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(</span>
+<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">binwidth =</span> <span class="dv">2</span>,</span>
+<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"navy"</span>,</span>
+<span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(</span>
+<span id="cb27-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">6</span>, <span class="dv">8</span>)</span>
+<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb27-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-12"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb27-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> social_media_hrs)) <span class="sc">+</span></span>
+<span id="cb27-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(</span>
+<span id="cb27-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"lightgrey"</span>,</span>
+<span id="cb27-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"navy"</span></span>
+<span id="cb27-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb27-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+</div>
+</section>
+<section id="solution-histogram" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: histogram</h2>
+
+<img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-23-1.png" alt="Histogram of self-reported social media hours per day with binwidth of 2, navy fill and white borders, x-axis breaks at 0, 2, 4, 6, 8, and a minimal theme." width="864" class="r-stretch"></section>
+<section id="solution-boxplot" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: boxplot</h2>
+
+<img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Horizontal boxplot of self-reported social media hours per day with light grey fill and navy outline, on a black-and-white theme. Outliers appear as individual points beyond the upper whisker." width="864" class="r-stretch"></section></section>
 <section>
 <section id="missing-data-a-first-look" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Missing data — a first look</h1>
@@ -1096,11 +1123,11 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="missing-data-are-everywhere" class="slide level2">
 <h2>Missing data are everywhere</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How much missing data do we have?</span></span>
-<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
-<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"n_missing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_missing))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># How much missing data do we have?</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"n_missing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n_missing))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 28 × 2
    variable  n_missing
@@ -1135,19 +1162,19 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="visualizing-missingness" class="slide level2">
 <h2>Visualizing missingness</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"pct_missing"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_missing =</span> pct_missing <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_missing <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
-<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing)) <span class="sc">|&gt;</span></span>
-<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, pct_missing), <span class="at">y =</span> pct_missing)) <span class="sc">+</span></span>
-<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
-<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
-<span id="cb29-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variable"</span>, <span class="at">y =</span> <span class="st">"% Missing"</span>) <span class="sc">+</span></span>
-<span id="cb29-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb29-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb29-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.)))) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"pct_missing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct_missing =</span> pct_missing <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(pct_missing <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="sc">|&gt;</span></span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing)) <span class="sc">|&gt;</span></span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(variable, pct_missing), <span class="at">y =</span> pct_missing)) <span class="sc">+</span></span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Variable"</span>, <span class="at">y =</span> <span class="st">"% Missing"</span>) <span class="sc">+</span></span>
+<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb30-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>))</span></code></pre></div>
 </div>
 
 </section>
@@ -1155,7 +1182,7 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Horizontal bar chart showing the percentage of missing values for each variable that has any missingness. Education has the highest rate at around 7 percent, followed by several personality items with lower rates." width="960"></p>
 </figure>
 </div>
 </div>
@@ -1213,27 +1240,27 @@ $ data_words        &lt;chr&gt; "frustrating and overwhelming", "novel", "novice
 <section id="putting-it-together-a-mini-eda" class="slide level2">
 <h2>Putting it together: a mini-EDA</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Education distribution — what does it look like?</span></span>
-<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
-<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">labels =</span> <span class="fu">c</span>(</span>
-<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"HS incomplete"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>,</span>
-<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College grad"</span>, <span class="st">"Graduate degree"</span></span>
-<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ))) <span class="sc">|&gt;</span></span>
-<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
-<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
-<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Education level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
-<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb30-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>),</span>
-<span id="cb30-14"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Education distribution — what does it look like?</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education, <span class="at">labels =</span> <span class="fu">c</span>(</span>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"HS incomplete"</span>, <span class="st">"HS grad"</span>, <span class="st">"Some college"</span>,</span>
+<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"College grad"</span>, <span class="st">"Graduate degree"</span></span>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ))) <span class="sc">|&gt;</span></span>
+<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education)) <span class="sc">+</span></span>
+<span id="cb31-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">"#2c7fb8"</span>) <span class="sc">+</span></span>
+<span id="cb31-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Education level"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb31-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb31-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb31-13"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.line =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"gray70"</span>),</span>
+<span id="cb31-14"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">30</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 </div>
 
 </section><section id="putting-it-together-a-mini-eda-output" class="slide level2 output-location-slide"><h2>Putting it together: a mini-EDA</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
+<p><img data-src="10-eda-variation_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Bar chart of education levels in the BFI sample showing the most common category is some college, followed by college graduate and high school graduate, with fewer participants at the extremes of high school incomplete and graduate degree." width="960"></p>
 </figure>
 </div>
 </div>

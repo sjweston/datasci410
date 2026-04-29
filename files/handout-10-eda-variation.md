@@ -34,12 +34,13 @@ A few rows from the data:
 
 ```
 Count
+  ^
   |
   |
   |
-  |____________________________________
-   0    2    4    6    8
-        social_media_hrs
+  |
+  +----|----|----|----|----|--->
+       0    2    4    6    8       social_media_hrs
 ```
 
 **Step 2: What shape do you expect?** Circle one:
@@ -50,11 +51,14 @@ Why? (Hint: where do the median and mean sit relative to each other?) __________
 
 ___________________________________________________________________________________
 
-**Step 3: Sketch a boxplot.** Box from Q1 (___) to Q3 (___). Median at ___. Whiskers to min/max (or 1.5 × IQR).
+\newpage
+
+**Step 3: Sketch a boxplot.** Box from Q1 (___) to Q3 (___). Median at ___. Whiskers to min/max (or 1.5 × IQR, whichever is closer).
 
 ```
-   |__|___|_____|______|___|
-   0       2       4      6       8
+       |    |    |    |    |
+  +----|----|----|----|----|--->
+       0    2    4    6    8       social_media_hrs
 ```
 
 **Step 4: Outlier check.** Compute the IQR and fences:
