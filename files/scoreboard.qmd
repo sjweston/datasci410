@@ -45,6 +45,10 @@ scoreboard <- scoreboard |>
   mutate(is_leader = total == max_pts & total > 0)
 ```
 
+## Congratulations Dr. Amala Someshwar!
+
+---
+
 ## Week `r current_week` Standings
 
 ```{r}
