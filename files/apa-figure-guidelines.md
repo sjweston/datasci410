@@ -1,6 +1,6 @@
 # APA Figure Guidelines — Quick Reference
 
-**PSY 410 Handout | Session 15**
+**PSY 410 Handout | Session 16**
 
 This is a practical reference for formatting figures when you need them to look publication-ready — for papers, posters, or reports. APA 7th edition provides guidelines, but journals vary in how strictly they enforce them. The conventions below are the ones that actually matter most.
 

@@ -217,14 +217,45 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="a-published-error" class="slide level2">
 <h2>A published error</h2>
-<p>A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg Self-Esteem Scale. Item 3 is reverse-coded.</p>
+<p>A participant rates these three items from the Rosenberg Self-Esteem Scale on a 1–5 scale (1 = Strongly Disagree, 5 = Strongly Agree):</p>
+<table class="caption-top">
+<colgroup>
+<col style="width: 5%">
+<col style="width: 85%">
+<col style="width: 10%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>#</th>
+<th>Item</th>
+<th>Resp.</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>I feel that I am a person of worth, at least on an equal plane with others.</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>I feel that I have a number of good qualities.</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>All in all, I am inclined to feel that I am a failure.</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
 <div class="fragment">
-<p>What’s their total score?</p>
+<p>What’s their self-esteem score so far?</p>
 </div>
 <div class="fragment">
-<p>If you said 15, you forgot to reverse-code — <code>2</code> should become <code>(5 + 1) - 2 = 4</code>, making the real total <strong>17</strong>. This kind of mistake happens in published papers, and it lives in how you handle data types.</p>
+<p>If you said <strong>9</strong>, you forgot that item 3 is reverse-coded — a <code>2</code> should become <code>(5 + 1) - 2 = 4</code>, making the real total <strong>11</strong>. Mistakes like this happen in published papers, and they live in how you handle data types.</p>
 <aside class="notes">
-<p>Spend ~3 minutes here. Let students answer out loud before revealing the catch. This hooks them because it shows that “just adding numbers” is not always correct — data types and scoring decisions matter. Mention that reverse-coding errors are genuinely common in published work.</p>
+<p>Spend ~3 minutes here. Let students answer out loud before revealing the catch — most will say 9 for the total (or 3.0 if they took the mean). The correct values are 11 for the total and 3.67 for the mean, once item 3 is reversed. The point is that the wording of item 3 (“I am inclined to feel that I am a failure”) is going in the opposite direction of items 1 and 2, so a high response actually means <em>low</em> self-esteem. The student has to notice that themselves. Mention that reverse-coding errors are genuinely common in published work.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -952,22 +983,8 @@ Dr.&nbsp;Sara Weston
 <pre><code>[1] 20.5</code></pre>
 </div>
 </div>
-<div class="fragment">
-<div class="callout callout-warning callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Warning</strong></p>
-</div>
-<div class="callout-content">
-<p><strong>Think carefully</strong> — Should you exclude missing values? Or is missingness meaningful?</p>
-</div>
-</div>
-</div>
 <aside class="notes">
-<p>Pause on the callout. This is a conceptual point, not a coding one. Ask students: “If 20% of participants skipped the depression items, does that tell you something?” In psychology, missingness is often not random — people skip sensitive questions. This foreshadows the missing data session (Session 15).</p>
+<p>Quickly mention the conceptual side: dropping NAs is the easy default, but it is not always the right call. In psychology, missingness is often not random — people skip sensitive questions. We will come back to this in Session 14.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -979,7 +996,6 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</div>
 </section>
 <section id="counting-non-missing-values" class="slide level2">
 <h2>Counting non-missing values</h2>
@@ -1085,17 +1101,82 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 </div>
 </section>
-<section id="option-2-sum-with-na.rm" class="slide level2">
-<h2>Option 2: Sum with na.rm</h2>
-<p>We can’t use <code>na.rm</code> directly in <code>mutate()</code> with <code>+</code>, but we can use <code>sum()</code>:</p>
+<section id="a-new-tool-rowwise" class="slide level2">
+<h2>A new tool: rowwise()</h2>
+<p>By default, <code>mutate()</code> works <strong>column-wise</strong> — <code>sum()</code> and <code>mean()</code> inside it see entire columns, not individual rows.</p>
+<div class="fragment">
+<p>For scale scoring we need the opposite: combine values <em>across</em> columns <em>within</em> a single participant.</p>
+</div>
+<div class="fragment">
+<p><code>rowwise()</code> switches <code>mutate()</code> into <strong>row-by-row mode</strong>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
-<span id="cb70-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span>  <span class="co"># Work row-by-row</span></span>
-<span id="cb70-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb70-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
-<span id="cb70-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb70-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb70-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="sc">|&gt;</span></span>
+<span id="cb70-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span>     <span class="co"># switch to row-by-row mode</span></span>
+<span id="cb70-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(...) <span class="sc">|&gt;</span>   <span class="co"># now sees one row at a time</span></span>
+<span id="cb70-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()        <span class="co"># switch back when done</span></span></code></pre></div>
+</div>
+<aside class="notes">
+<p>This is a conceptual setup slide — do not run any code. Walk through the metaphor: by default mutate is “looking at all participants at once for one column”; rowwise flips it to “looking at all columns for one participant in turn.” Pause on the three-step pattern (rowwise → mutate → ungroup) and warn that forgetting ungroup() leaves the data row-grouped, which makes later operations slow and surprising. Tell students they will see this pattern over and over today.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="why-rowwise-matters" class="slide level2">
+<h2>Why rowwise() matters</h2>
+<p>Without it, <code>sum()</code> collapses across the whole column — the same number for every row:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<span id="cb71-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb71-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
+<span id="cb71-4"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb71-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 6
+     id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_total
+  &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;         &lt;dbl&gt;
+1     1        3        4        3        4            42
+2     2        2        3        2        3            42
+3     3        4        5        4       NA            42
+4     4       NA        2        1        2            42</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>That’s not what we want.</p>
+<aside class="notes">
+<p>Run this and let the output speak for itself. Every row gets the same total — the sum of all values across all participants and items. This is the “wrong” version that motivates rowwise() on the next slide. Ask: “Why is the total identical for every participant?”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="option-2-sum-with-na.rm-rowwise" class="slide level2">
+<h2>Option 2: Sum with na.rm + rowwise()</h2>
+<p>Now combine <code>sum(..., na.rm = TRUE)</code> with <code>rowwise()</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<span id="cb73-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb73-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb73-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
+<span id="cb73-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb73-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb73-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
      id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_total
@@ -1107,7 +1188,7 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <aside class="notes">
-<p>rowwise() is new and important. Explain that by default, mutate works column-wise — sum() would add up the entire column. rowwise() tells R to work one row at a time. Warn students that they must ungroup() afterward, or subsequent operations will still be row-by-row and run slowly.</p>
+<p>This is the payoff. Each participant now gets their own total, and NA values are dropped instead of poisoning the sum. Compare side-by-side with the previous slide if students need to see the difference. Remind them again to ungroup() — this is the most common bug in scale-scoring code.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1123,13 +1204,13 @@ Dr.&nbsp;Sara Weston
 <section id="computing-mean-scores" class="slide level2">
 <h2>Computing mean scores</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
-<span id="cb72-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb72-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb72-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
-<span id="cb72-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb72-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb72-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<span id="cb75-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb75-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb75-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4),</span>
+<span id="cb75-5"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb75-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb75-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 6
      id anxiety1 anxiety2 anxiety3 anxiety4 anxiety_mean
@@ -1172,18 +1253,18 @@ Dr.&nbsp;Sara Weston
 <section id="cleaner-approach-pivot-then-summarize" class="slide level2">
 <h2>Cleaner approach: pivot then summarize</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
-<span id="cb74-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
-<span id="cb74-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"anxiety"</span>),</span>
-<span id="cb74-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
-<span id="cb74-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
-<span id="cb74-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb74-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
-<span id="cb74-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb74-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_items =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(response))</span>
-<span id="cb74-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(</span>
+<span id="cb77-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">cols =</span> <span class="fu">starts_with</span>(<span class="st">"anxiety"</span>),</span>
+<span id="cb77-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_to =</span> <span class="st">"item"</span>,</span>
+<span id="cb77-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_to =</span> <span class="st">"response"</span></span>
+<span id="cb77-6"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb77-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(id) <span class="sc">|&gt;</span></span>
+<span id="cb77-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb77-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">mean</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb77-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_total =</span> <span class="fu">sum</span>(response, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb77-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_items =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(response))</span>
+<span id="cb77-12"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1238,17 +1319,17 @@ Dr.&nbsp;Sara Weston
 <section id="implementing-a-missingness-rule" class="slide level2">
 <h2>Implementing a missingness rule</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
-<span id="cb76-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb76-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb76-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_answered =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4))),</span>
-<span id="cb76-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">if_else</span>(</span>
-<span id="cb76-6"><a href="" aria-hidden="true" tabindex="-1"></a>      n_answered <span class="sc">&gt;=</span> <span class="dv">3</span>,  <span class="co"># At least 3 of 4 items</span></span>
-<span id="cb76-7"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mean</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb76-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span>  <span class="co"># NA if too many missing</span></span>
-<span id="cb76-9"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb76-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb76-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a>scale_data <span class="sc">|&gt;</span></span>
+<span id="cb79-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb79-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb79-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_answered =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4))),</span>
+<span id="cb79-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_mean =</span> <span class="fu">if_else</span>(</span>
+<span id="cb79-6"><a href="" aria-hidden="true" tabindex="-1"></a>      n_answered <span class="sc">&gt;=</span> <span class="dv">3</span>,  <span class="co"># At least 3 of 4 items</span></span>
+<span id="cb79-7"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mean</span>(<span class="fu">c</span>(anxiety1, anxiety2, anxiety3, anxiety4), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb79-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="cn">NA_real_</span>  <span class="co"># NA if too many missing</span></span>
+<span id="cb79-9"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb79-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb79-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 7
      id anxiety1 anxiety2 anxiety3 anxiety4 n_answered anxiety_mean
@@ -1264,29 +1345,29 @@ Dr.&nbsp;Sara Weston
 <h2>More complex scales: Subscales</h2>
 <p>Some measures have multiple subscales:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb78-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
-<span id="cb78-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Depression items</span></span>
-<span id="cb78-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_d1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="at">dass_d2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
-<span id="cb78-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Anxiety items</span></span>
-<span id="cb78-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_a1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="at">dass_a2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>),</span>
-<span id="cb78-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stress items</span></span>
-<span id="cb78-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_s1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dass_s2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
-<span id="cb78-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>,</span>
+<span id="cb81-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Depression items</span></span>
+<span id="cb81-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_d1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>), <span class="at">dass_d2 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">2</span>),</span>
+<span id="cb81-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Anxiety items</span></span>
+<span id="cb81-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_a1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>), <span class="at">dass_a2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">3</span>),</span>
+<span id="cb81-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Stress items</span></span>
+<span id="cb81-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">dass_s1 =</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">2</span>, <span class="dv">4</span>), <span class="at">dass_s2 =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">4</span>)</span>
+<span id="cb81-9"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="computing-subscales" class="slide level2">
 <h2>Computing subscales</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="sc">|&gt;</span></span>
-<span id="cb79-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb79-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb79-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_d1, dass_d2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb79-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_a1, dass_a2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb79-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">stress =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_s1, dass_s2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb79-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
-<span id="cb79-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
-<span id="cb79-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, depression, anxiety, stress)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="" aria-hidden="true" tabindex="-1"></a>dass_data <span class="sc">|&gt;</span></span>
+<span id="cb82-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb82-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb82-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_d1, dass_d2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb82-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_a1, dass_a2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb82-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">stress =</span> <span class="fu">mean</span>(<span class="fu">c</span>(dass_s1, dass_s2), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb82-7"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb82-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">|&gt;</span></span>
+<span id="cb82-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, depression, anxiety, stress)</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1312,47 +1393,6 @@ Dr.&nbsp;Sara Weston
 3     3        1.5     2.5    4  </code></pre>
 </div>
 </div></section></section>
-<section>
-<section id="end-of-deck-exercise" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>End-of-deck exercise</h1>
-
-</section>
-<section id="practice-score-the-phq-9" class="slide level2">
-<h2>Practice: Score the PHQ-9</h2>
-<p>The PHQ-9 is a 9-item depression screener (0-3 scale):</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a>phq_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb81-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb81-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="cn">NA</span>),</span>
-<span id="cb81-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq3 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
-<span id="cb81-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq4 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb81-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq5 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb81-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq6 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
-<span id="cb81-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq7 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
-<span id="cb81-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq8 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb81-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq9 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
-<span id="cb81-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-</div>
-<ol type="1">
-<li>Compute a <strong>total score</strong> (sum of all 9 items)</li>
-<li>Only compute the score if <strong>at least 7 items</strong> are answered</li>
-<li>Create a <strong>severity category</strong>: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)</li>
-</ol>
-<aside class="notes">
-<p>Give ~10 minutes for this exercise. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. Circulate and help with the case_when cutoffs — students often get the boundary conditions wrong (e.g., using &lt; instead of &lt;=). The solution uses c_across(), which is a nice shortcut to show when reviewing. If time is short, have students start and finish as homework.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Wrapping up</h1>
@@ -1390,9 +1430,50 @@ Dr.&nbsp;Sara Weston
 <section id="the-one-thing-to-remember" class="slide level2">
 <h2>The one thing to remember</h2>
 <p>Scoring a scale correctly is the most common data task in psychology — and the easiest place to introduce errors.</p>
-<p>See you Wednesday for strings and factors!</p>
+<p>See you Monday for strings and factors!</p>
 <aside class="notes">
-<p>End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide.</p>
+<p>End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide. The PHQ-9 practice exercise that follows is for them to try on their own time as a bridge to the next assignment.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="on-your-own" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>On your own</h1>
+
+</section>
+<section id="practice-score-the-phq-9" class="slide level2">
+<h2>Practice: Score the PHQ-9</h2>
+<p>The PHQ-9 is a 9-item depression screener (0-3 scale):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="" aria-hidden="true" tabindex="-1"></a>phq_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb84-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb84-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq1 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb84-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq2 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="cn">NA</span>),</span>
+<span id="cb84-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq3 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>),</span>
+<span id="cb84-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq4 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="cn">NA</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb84-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq5 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb84-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq6 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">3</span>),</span>
+<span id="cb84-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq7 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb84-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq8 =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">1</span>),</span>
+<span id="cb84-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq9 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">2</span>)</span>
+<span id="cb84-12"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+<ol type="1">
+<li>Compute a <strong>total score</strong> (sum of all 9 items)</li>
+<li>Only compute the score if <strong>at least 7 items</strong> are answered</li>
+<li>Create a <strong>severity category</strong>: Minimal (0-4), Mild (5-9), Moderate (10-14), Moderately Severe (15-19), Severe (20-27)</li>
+</ol>
+<aside class="notes">
+<p>This is a take-home exercise — students do not need to finish it in class. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. The solution uses c_across(), which is a nice shortcut. If a student asks during office hours, watch for the case_when cutoffs — they often get the boundary conditions wrong (e.g., using &lt; instead of &lt;=).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

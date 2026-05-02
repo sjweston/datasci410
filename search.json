@@ -46,7 +46,7 @@
     "href": "syllabus.html#course-schedule-overview",
     "title": "Syllabus",
     "section": "Course Schedule Overview",
-    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction & Setup, First Visualization\n1, 2, 6\n\n\n2\nData Transformation I & II\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nQuarto & Reproducibility, Layers & Aesthetics\n28, 9\n\n\n5\nPerception & Design, EDA — Variation\n10\n\n\n6\nEDA — Covariation, Data Types\n10, 12, 13\n\n\n7\nStrings, Factors & Text, Joins\n14, 16, 19\n\n\n8\nMissing Data\n18\n\n\n9\nStorytelling with Data\n11\n\n\n10\nCorrelation & Regression, Putting It All Together\n8"
+    "text": "Course Schedule Overview\nThe course is organized into 10 weeks with 18 class sessions. See the Schedule page for detailed topics and readings.\n\n\n\nWeek\nTopics\nR4DS Chapters\n\n\n\n\n1\nIntroduction & Setup, First Visualization\n1, 2, 6\n\n\n2\nData Transformation I & II\n3, 4\n\n\n3\nData Tidying & Import\n5, 7, 20\n\n\n4\nQuarto & Reproducibility, Layers & Aesthetics\n28, 9\n\n\n5\nPerception & Design, EDA — Variation\n10\n\n\n6\nEDA — Covariation, Data Types\n10, 12, 13\n\n\n7\nStrings, Factors & Text, Missing Data\n14, 16, 18\n\n\n8\nJoins\n19\n\n\n9\nStorytelling with Data\n11\n\n\n10\nCorrelation & Regression, Putting It All Together\n8"
   },
   {
     "objectID": "syllabus.html#course-policies",
@@ -386,7 +386,7 @@
     "href": "resource/index.html#session-handouts",
     "title": "Resources",
     "section": "Session Handouts",
-    "text": "Session Handouts\nPrintable reference sheets for each class session — key functions, syntax, and tips on one page.\n\nWeeks 1–3Weeks 4–6Weeks 7–10Other Handouts\n\n\n\n\n\nSession\nHandout\n\n\n\n\n2: Your First Visualization\nPDF\n\n\n3: Data Transformation I\nPDF\n\n\n4: Data Transformation II\nPDF\n\n\n5: Data Tidying\nPDF\n\n\n6: Data Import\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n7: Quarto & Reproducibility\nPDF\n\n\n8: Layers & Aesthetics\nPDF\n\n\n9: Perception & Design\nPDF\n\n\n10: EDA — Variation\nPDF\n\n\n11: EDA — Covariation\nPDF\n\n\n12: Data Types\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n13: Strings, Factors & Text\nPDF\n\n\n14: Joins\nPDF\n\n\n15: Missing Data\nPDF\n\n\n16: Storytelling with Data\nPDF\n\n\n17: Correlation & Regression\nPDF\n\n\n18: Putting It All Together\nPDF\n\n\n\n\n\n\n\n\nHandout\nDescription\n\n\n\n\nAPA Figure Guidelines\nFormatting figures for journal submissions\n\n\nData Visualization Principles\nKey design principles at a glance",
+    "text": "Session Handouts\nPrintable reference sheets for each class session — key functions, syntax, and tips on one page.\n\nWeeks 1–3Weeks 4–6Weeks 7–10Other Handouts\n\n\n\n\n\nSession\nHandout\n\n\n\n\n2: Your First Visualization\nPDF\n\n\n3: Data Transformation I\nPDF\n\n\n4: Data Transformation II\nPDF\n\n\n5: Data Tidying\nPDF\n\n\n6: Data Import\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n7: Quarto & Reproducibility\nPDF\n\n\n8: Layers & Aesthetics\nPDF\n\n\n9: Perception & Design\nPDF\n\n\n10: EDA — Variation\nPDF\n\n\n11: EDA — Covariation\nPDF\n\n\n12: Data Types\nPDF\n\n\n\n\n\n\n\n\nSession\nHandout\n\n\n\n\n13: Strings, Factors & Text\nPDF\n\n\n14: Missing Data\nPDF\n\n\n15: Joins\nPDF\n\n\n16: Storytelling with Data\nPDF\n\n\n17: Correlation & Regression\nPDF\n\n\n18: Putting It All Together\nPDF\n\n\n\n\n\n\n\n\nHandout\nDescription\n\n\n\n\nAPA Figure Guidelines\nFormatting figures for journal submissions\n\n\nData Visualization Principles\nKey design principles at a glance",
     "crumbs": [
       "Resources",
       "Overview",
@@ -614,7 +614,7 @@
     "href": "project/03-final-report.html#how-this-will-be-graded",
     "title": "Milestone 3: Final Report",
     "section": "How this will be graded",
-    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nReflection — honest, thoughtful\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.\n\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all requirements above.",
+    "text": "How this will be graded\n\n\n\n\n\n\n\nComponent\nPoints\n\n\n\n\nIntroduction — clear, well-motivated\n5\n\n\nData description — complete, includes summary table\n5\n\n\nVisualizations — 4-6 figures, polished, appropriate\n20\n\n\nNarrative — interpretation is clear, connected to questions\n10\n\n\nDiscussion — thoughtful reflection on findings and limitations\n5\n\n\nReflection — honest, thoughtful\n5\n\n\nReproducibility — renders cleanly, inline code, relative paths\n5\n\n\nCode quality — organized, readable, well-commented\n5\n\n\nTotal\n60\n\n\n\n\n\n\n\n\n\nTipWhat makes an A-level report?\n\n\n\nAn excellent report doesn’t just show data — it tells a story. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 16 as you finalize your report.\n\n\n\n\n\n\n\n\n\nNotePSY 510 (Graduate Students)\n\n\n\nStudents enrolled in PSY 510 must complete the following extension in addition to all requirements above.",
     "crumbs": [
       "Project",
       "Milestones",
@@ -772,7 +772,7 @@
   {
     "objectID": "content/15-content.html",
     "href": "content/15-content.html",
-    "title": "15: Missing Data",
+    "title": "15: Joins",
     "section": "",
     "text": "Content for Wednesday, May 20, 2026",
     "crumbs": [
@@ -784,9 +784,9 @@
   {
     "objectID": "content/15-content.html#before-class",
     "href": "content/15-content.html#before-class",
-    "title": "15: Missing Data",
+    "title": "15: Joins",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values\n\n\n\n\n\n\n\nImportantAssignment 6 is due today\n\n\n\nAssignment 6: Data Types & Wrangling — due Sunday, May 17 at 11:59 PM.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class.",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins\n\n\n\n\n\n\n\nImportantAssignment 6 was due Sunday\n\n\n\nAssignment 6: Data Types & Wrangling — was due Sunday, May 17 at 11:59 PM.\n\n\n\n\n\n\n\n\nImportantFinal Project Draft is due today\n\n\n\nSubmit your working code and preliminary visualizations before class.",
     "crumbs": [
       "Content",
       "Course content",
@@ -796,9 +796,9 @@
   {
     "objectID": "content/15-content.html#during-class",
     "href": "content/15-content.html#during-class",
-    "title": "15: Missing Data",
+    "title": "15: Joins",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -808,9 +808,9 @@
   {
     "objectID": "content/15-content.html#after-class",
     "href": "content/15-content.html#after-class",
-    "title": "15: Missing Data",
+    "title": "15: Joins",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))",
+    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  major = c(\"Psychology\", \"Sociology\", \"Psychology\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
     "crumbs": [
       "Content",
       "Course content",
@@ -2106,7 +2106,7 @@
     "href": "assignment/index.html#assignment-schedule",
     "title": "Assignments",
     "section": "Assignment Schedule",
-    "text": "Assignment Schedule\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nSun Apr 5\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nSun Apr 12\n\n\n3: Tidying, Import & Quarto\npivot, read_csv, Quarto\nMon Apr 20\nSun Apr 26\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nMon Apr 27\nSun May 3\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nMon May 4\nSun May 10\n\n\n6: Data Types & Wrangling\nlogicals, strings, factors\nMon May 11\nSun May 17\n\n\n7: Joins & Missing Data\njoins, NA handling\nWed May 13\nSun May 24\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nSun May 31",
+    "text": "Assignment Schedule\n\n\n\nAssignment\nTopic\nAssigned\nDue\n\n\n\n\n1: Getting Started\nRStudio, ggplot2 basics\nWed Apr 1\nSun Apr 5\n\n\n2: Data Transformation\ndplyr verbs, pipe\nWed Apr 8\nSun Apr 12\n\n\n3: Tidying, Import & Quarto\npivot, read_csv, Quarto\nMon Apr 20\nSun Apr 26\n\n\n4: Visualization Deep Dive\ngeoms, scales, design\nMon Apr 27\nSun May 3\n\n\n5: Exploratory Data Analysis\ndistributions, relationships\nMon May 4\nSun May 10\n\n\n6: Data Types & Wrangling\nlogicals, strings, factors\nMon May 11\nSun May 17\n\n\n7: Joins & Missing Data\nNA handling, joins\nWed May 13\nSun May 24\n\n\n8: Reproducible Report\nQuarto document\nWed May 27\nSun May 31",
     "crumbs": [
       "Assignments",
       "Overview",
@@ -2440,7 +2440,7 @@
   {
     "objectID": "content/14-content.html",
     "href": "content/14-content.html",
-    "title": "14: Joins",
+    "title": "14: Missing Data",
     "section": "",
     "text": "Content for Wednesday, May 13, 2026",
     "crumbs": [
@@ -2452,9 +2452,9 @@
   {
     "objectID": "content/14-content.html#before-class",
     "href": "content/14-content.html#before-class",
-    "title": "14: Joins",
+    "title": "14: Missing Data",
     "section": "Before class",
-    "text": "Before class\n📖 Reading:\n\nR4DS Ch 19: Joins",
+    "text": "Before class\n📖 Reading:\n\nR4DS Ch 18: Missing values\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due Sunday, May 24 at 11:59 PM. The missing-data half is fair game now; we’ll cover joins next class.",
     "crumbs": [
       "Content",
       "Course content",
@@ -2464,9 +2464,9 @@
   {
     "objectID": "content/14-content.html#during-class",
     "href": "content/14-content.html#during-class",
-    "title": "14: Joins",
+    "title": "14: Missing Data",
     "section": "During class",
-    "text": "During class\nWe’ll cover:\n\nWhy join data? Psychology data often lives in multiple tables\nKeys — primary keys and foreign keys\nMutating joins (add columns from another table):\n\nleft_join() — keep all rows from the left table\ninner_join() — keep only matching rows\nright_join() and full_join()\n\nFiltering joins (use one table to filter another):\n\nsemi_join() — keep rows that have a match\nanti_join() — keep rows that don’t have a match\n\nCommon issues: many-to-many, missing keys, duplicates\n\n\n\n\n\n\n\nTipAssignment 7 is assigned today\n\n\n\nAssignment 7: Joins & Missing Data — due Sunday, May 24 at 11:59 PM.\n\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
+    "text": "During class\nWe’ll cover:\n\nWhy missing data matters in psychology — attrition, non-response, skip patterns\nExplicit vs. implicit missing values\nCounting and exploring missingness patterns\ndrop_na() — complete case analysis (listwise deletion)\nreplace_na() — filling in known values\nfill() — carrying values forward/backward\ncomplete() — making implicit missing values explicit\nWhen not to fill — don’t make up data!\nBrief mention: multiple imputation exists (beyond this course)\n\n\nSlides\n\n   View slides in new tab\n\n\n   Download PDF\n\n\n\nEmbedded slides",
     "crumbs": [
       "Content",
       "Course content",
@@ -2476,9 +2476,9 @@
   {
     "objectID": "content/14-content.html#after-class",
     "href": "content/14-content.html#after-class",
-    "title": "14: Joins",
+    "title": "14: Missing Data",
     "section": "After class",
-    "text": "After class\n✅ Practice:\n\nCreate two small tibbles with a shared key column. Practice left_join(), inner_join(), and full_join() — what’s different about the output?\nUse anti_join() to find participants who are in one dataset but not another (a common quality check)\nTry joining by multiple keys using by = c(\"id\", \"timepoint\")\nWhat happens when a key isn’t unique? Try it and see\nThink about your final project: do you need to combine multiple tables?\n\n\n\n\n\n\n\nNoteWhich join do you need?\n\n\n\nMost of the time, you want left_join() — it keeps everything in your main table and adds columns from the second table where there’s a match.\n\n\n\nJoin\nKeeps\n\n\n\n\nleft_join(x, y)\nAll rows from x, matching rows from y\n\n\ninner_join(x, y)\nOnly rows that match in both\n\n\nfull_join(x, y)\nAll rows from both tables\n\n\nanti_join(x, y)\nRows in x with no match in y\n\n\n\n\n\n\nPsychology application: combining data sources\n# Participant demographics + survey responses\ndemographics &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P03\"),\n  age = c(19, 22, 20),\n  major = c(\"Psychology\", \"Sociology\", \"Psychology\")\n)\n\nsurvey_scores &lt;- tibble(\n  participant_id = c(\"P01\", \"P02\", \"P04\"),\n  anxiety_score = c(34, 28, 41)\n)\n\n# Keep all participants, add scores where available\ndemographics |&gt;\n  left_join(survey_scores, by = \"participant_id\")\n\n# Find who's missing survey data\ndemographics |&gt;\n  anti_join(survey_scores, by = \"participant_id\")",
+    "text": "After class\n✅ Practice:\n\nCount the number of NAs in each column of a dataset using summarize(across(everything(), ~sum(is.na(.x))))\nUse drop_na() on a specific column vs. the whole dataset — what’s the difference in rows lost?\nTry replace_na() to fill missing values with a sensible default (e.g., 0 for “no response”)\nUse complete() to make implicit missing values explicit in a longitudinal dataset\nThink critically: when is it okay to drop missing data? When is it dangerous?\n\n\n\n\n\n\n\nNoteMissing data is information\n\n\n\nMissing values aren’t just annoying — they can tell you something. Before dropping or filling NAs, ask:\n\nWhy is this value missing? (Didn’t answer? Wasn’t asked? Data entry error?)\nIs the missingness random? If participants who dropped out were systematically different, dropping them biases your results\nHow much is missing? A few values vs. 40% of a column require different strategies\n\nDocument your decisions about missing data — your future self (and reviewers) will thank you.\n\n\n\nCounting missing values\n# Quick summary of missingness across all columns\ndata |&gt;\n  summarize(\n    across(everything(), ~sum(is.na(.x)))\n  ) |&gt;\n  pivot_longer(everything(),\n    names_to = \"variable\",\n    values_to = \"n_missing\"\n  ) |&gt;\n  arrange(desc(n_missing))",
     "crumbs": [
       "Content",
       "Course content",
@@ -2719,7 +2719,7 @@
     "href": "project/04-presentation.html#what-to-cover",
     "title": "Milestone 4: Presentation",
     "section": "What to cover",
-    "text": "What to cover\n\n1. The setup (about 1 minute)\n\nWhat is your dataset?\nWhat question(s) were you trying to answer?\nKeep this brief — the figures are the star of the show\n\n\n\n2. Your key findings (about 3 minutes)\n\nWalk the audience through 2-3 of your best visualizations\nFor each figure, explain:\n\nWhat it shows (read the plot for the audience)\nWhat the takeaway is (the “so what?”)\n\nUse the storytelling principles from Session 15: lead with the finding, not the method\n\n\n\n3. One reflection (about 1 minute)\nShare one of the following:\n\nSomething surprising you discovered\nA challenge you overcame\nSomething you’d do differently next time\nWhat you’re most proud of",
+    "text": "What to cover\n\n1. The setup (about 1 minute)\n\nWhat is your dataset?\nWhat question(s) were you trying to answer?\nKeep this brief — the figures are the star of the show\n\n\n\n2. Your key findings (about 3 minutes)\n\nWalk the audience through 2-3 of your best visualizations\nFor each figure, explain:\n\nWhat it shows (read the plot for the audience)\nWhat the takeaway is (the “so what?”)\n\nUse the storytelling principles from Session 16: lead with the finding, not the method\n\n\n\n3. One reflection (about 1 minute)\nShare one of the following:\n\nSomething surprising you discovered\nA challenge you overcame\nSomething you’d do differently next time\nWhat you’re most proud of",
     "crumbs": [
       "Project",
       "Milestones",
@@ -3111,14 +3111,14 @@
     "href": "schedule.html#week-7",
     "title": "Schedule",
     "section": "Week 7: Data Wrangling",
-    "text": "Week 7: Data Wrangling\n\nSession 13: Strings, Factors & Text\nMonday, May 11\n\nBasic string cleaning: str_to_lower(), str_trim(), str_replace()\nWorking with categorical variables (factors)\nLight text analysis: tokenizing and counting open-ended survey responses\n\n📖 Read: R4DS Ch 14: Strings (sections 14.1–14.3) | R4DS Ch 16: Factors\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 6: Data Types & Wrangling\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 5: Exploratory Data Analysis — Due Sunday, May 10 at 11:59 PM\n\n\n\n\nSession 14: Joins\nWednesday, May 13\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 7: Joins & Missing Data"
+    "text": "Week 7: Data Wrangling\n\nSession 13: Strings, Factors & Text\nMonday, May 11\n\nBasic string cleaning: str_to_lower(), str_trim(), str_replace()\nWorking with categorical variables (factors)\nLight text analysis: tokenizing and counting open-ended survey responses\n\n📖 Read: R4DS Ch 14: Strings (sections 14.1–14.3) | R4DS Ch 16: Factors\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 6: Data Types & Wrangling\n\n\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 5: Exploratory Data Analysis — Due Sunday, May 10 at 11:59 PM\n\n\n\n\nSession 14: Missing Data\nWednesday, May 13\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values\n\n\n\n\n\n\nTipAssigned\n\n\n\nAssignment 7: Joins & Missing Data"
   },
   {
     "objectID": "schedule.html#week-8",
     "href": "schedule.html#week-8",
     "title": "Schedule",
-    "section": "Week 8: Missing Data",
-    "text": "Week 8: Missing Data\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\nUse this time to work on your final project draft!\n\n\n\n\nSession 15: Missing Data\nWednesday, May 20\n\nImplicit vs. explicit missing values\nPatterns of missingness\nStrategies for handling missing data in psychological research\n\n📖 Read: R4DS Ch 18: Missing values\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 6: Data Types & Wrangling — Due Sunday, May 17 at 11:59 PM\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Draft Due — Working code, preliminary visualizations"
+    "section": "Week 8: Joins",
+    "text": "Week 8: Joins\n\nMonday, May 18\n\n\n\n\n\n\nWarningNo Class\n\n\n\nUse this time to work on your final project draft!\n\n\n\n\nSession 15: Joins\nWednesday, May 20\n\nPrimary keys and foreign keys\nMutating joins: left_join(), inner_join(), etc.\nFiltering joins: semi_join(), anti_join()\n\n📖 Read: R4DS Ch 19: Joins\n\n\n\n\n\n\nImportant📋 Assignment Due\n\n\n\nAssignment 6: Data Types & Wrangling — Due Sunday, May 17 at 11:59 PM\n\n\n\n\n\n\n\n\nWarning📝 Project Milestone\n\n\n\nFinal Project Draft Due — Working code, preliminary visualizations"
   },
   {
     "objectID": "schedule.html#week-9",

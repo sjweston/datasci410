@@ -270,7 +270,7 @@ Dr.&nbsp;Sara Weston
 <pre><code>Rows: 150
 Columns: 2
 $ condition       &lt;chr&gt; "Control", "Control", "Control", "Control", "Control",…
-$ depression_post &lt;dbl&gt; 26.559783, 18.316721, 13.498250, 28.065713, 16.112715,…</code></pre>
+$ depression_post &lt;dbl&gt; 10.322840, 19.810435, 19.234806, 19.058651, 23.269446,…</code></pre>
 </div>
 </div>
 <aside class="notes">
@@ -540,12 +540,12 @@ $ depression_post &lt;dbl&gt; 26.559783, 18.316721, 13.498250, 28.065713, 16.112
 <pre><code># A tibble: 6 × 2
   referral  diagnosis 
   &lt;chr&gt;     &lt;chr&gt;     
-1 Self      Anxiety   
+1 School    Both      
 2 Physician Depression
-3 Self      Other     
-4 Self      Depression
-5 Physician Both      
-6 School    Other     </code></pre>
+3 Physician Depression
+4 Physician Anxiety   
+5 Physician Other     
+6 Self      Both      </code></pre>
 </div>
 </div>
 </section>
@@ -662,8 +662,8 @@ $ depression_post &lt;dbl&gt; 26.559783, 18.316721, 13.498250, 28.065713, 16.112
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 100
 Columns: 2
-$ age           &lt;dbl&gt; 38.00245, 37.89727, 67.53066, 63.82036, 18.76507, 47.552…
-$ reaction_time &lt;dbl&gt; 255.5022, 408.5319, 362.0651, 427.6740, 268.7969, 326.06…</code></pre>
+$ age           &lt;dbl&gt; 43.53466, 46.08907, 55.75717, 42.43055, 51.37091, 64.599…
+$ reaction_time &lt;dbl&gt; 390.1471, 307.7071, 368.6429, 304.2600, 413.9945, 425.64…</code></pre>
 </div>
 </div>
 </section>
@@ -852,7 +852,7 @@ $ reaction_time &lt;dbl&gt; 255.5022, 408.5319, 362.0651, 427.6740, 268.7969, 32
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(rt_data<span class="sc">$</span>age, rt_data<span class="sc">$</span>reaction_time)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7604132</code></pre>
+<pre><code>[1] 0.6894228</code></pre>
 </div>
 </div>
 <div class="fragment">
