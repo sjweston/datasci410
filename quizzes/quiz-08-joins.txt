@@ -1,0 +1,97 @@
+Quiz title: Quiz 8: Joins (R4DS Ch. 19)
+
+1. In R4DS, why do we need **joins**?
+a) To stack datasets on top of each other
+*b) Because data often comes in multiple related tables, and we need to combine them using shared variables
+c) To sort data by multiple columns
+d) To convert between data types
+
+2. A **primary key** is:
+a) The first column in any data frame
+*b) A variable (or set of variables) that uniquely identifies each row in its own table
+c) A password for accessing the data
+d) The most important variable in the dataset
+
+3. A **foreign key** is:
+a) A key from a non-English dataset
+b) A variable that uniquely identifies rows in its own table
+*c) A variable in one table that corresponds to the primary key in another table
+d) A key that has been removed from the dataset
+
+4. What does `left_join(x, y)` do?
+*a) Keeps all rows from x and adds matching columns from y; fills NA where there is no match
+b) Keeps only rows that appear in both x and y
+c) Keeps all rows from y and adds matching columns from x
+d) Removes rows from x that appear in y
+
+5. What does `right_join(x, y)` do?
+a) Keeps all rows from x
+*b) Keeps all rows from y and adds matching columns from x; fills NA where there is no match
+c) Keeps only rows that appear in both x and y
+d) Keeps all rows from both x and y
+
+6. What does `inner_join(x, y)` do?
+a) Keeps all rows from both tables
+b) Keeps all rows from x
+*c) Keeps only rows that have a match in both x and y
+d) Keeps rows from x that do NOT match y
+
+7. What does `full_join(x, y)` do?
+a) Keeps only matching rows
+b) Keeps all rows from x only
+c) Keeps all rows from y only
+*d) Keeps all rows from both x and y, filling NA where matches are missing
+
+8. What does `semi_join(x, y)` do?
+a) Keeps all columns from both x and y
+*b) Keeps rows of x that have a match in y, but does NOT add any columns from y
+c) Keeps half the rows of x
+d) Keeps rows of x that do NOT match y
+
+9. What does `anti_join(x, y)` do?
+a) Keeps rows that appear in both tables
+b) Removes all columns from y
+*c) Keeps rows of x that do NOT have a match in y
+d) Returns the opposite of a full join
+
+10. A researcher has a participant table and a survey-response table. They want to keep all participants even if some haven't responded yet. Which join should they use?
+a) `inner_join(participants, responses)`
+*b) `left_join(participants, responses)`
+c) `anti_join(participants, responses)`
+d) `semi_join(participants, responses)`
+
+11. A researcher wants to find which participants have NOT completed the survey. Which join helps?
+a) `left_join(participants, responses)`
+b) `inner_join(participants, responses)`
+c) `semi_join(participants, responses)`
+*d) `anti_join(participants, responses)`
+
+12. In dplyr joins, the `by` argument (or `join_by()`) specifies:
+a) Which rows to keep
+b) The type of join to perform
+*c) Which column(s) to match between the two tables
+d) The order of the output
+
+13. If the matching columns have **different names** in the two tables, how do you specify the join?
+a) Rename the columns first — there is no other way
+b) `by = c("name1", "name2")`
+*c) `join_by(name_in_x == name_in_y)`
+d) `by = name1 ~ name2`
+
+14. What happens when a key in the left table matches multiple rows in the right table during a `left_join()`?
+a) Only the first match is kept
+b) An error is thrown
+*c) The left-table row is duplicated — once for each matching right-table row
+d) The extra matches are silently dropped
+
+15. R4DS warns about **many-to-many** joins. When do these occur?
+a) When both tables have exactly one matching row per key
+*b) When duplicate key values exist in BOTH tables, causing an explosion of rows
+c) When the tables have different numbers of columns
+d) When using `full_join()` instead of `left_join()`
+
+16. Before performing a join, R4DS recommends checking that your key actually uniquely identifies rows. Which approach helps verify this?
+a) `glimpse()` the data
+b) `str()` on the key column
+*c) Count the keys and look for any with count greater than 1 (e.g., using `count()` and `filter(n > 1)`)
+d) Run the join and check for errors afterward

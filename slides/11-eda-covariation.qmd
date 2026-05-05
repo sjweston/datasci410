@@ -93,41 +93,49 @@ Walk through the simulated data structure. Emphasize that this is simulated — 
 ```{r}
 #| label: boxplot
 #| output-location: slide
-#| fig-alt: "Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, showing CBT has the lowest median depression score."
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_boxplot() +
+#| fig-width: 8
+#| fig-height: 5
+#| fig-alt: "Boxplot of post-treatment depression scores across Control, CBT, and Mindfulness groups using colorblind-safe fills, showing CBT has the lowest median depression score."
+ggplot(therapy_data,
+       aes(x = condition, y = depression_post, fill = condition)) +
+  geom_boxplot(alpha = 0.7, show.legend = FALSE) +
+  scale_fill_manual(values = c(
+    "Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
   labs(
-    title = "Post-treatment depression scores by condition",
-    x = "Treatment condition",
+    title = "CBT shows the lowest depression scores",
+    x = NULL,
     y = "Depression score (BDI-II)"
   ) +
-  theme_minimal()
+  theme_minimal(base_size = 14) +
+  theme(panel.grid.major.x = element_blank())
 ```
 
 ## What boxplots show
 
 :::: {.columns}
-::: {.column width="40%"}
+::: {.column width="65%"}
 
 ```{r}
 #| ref.label: boxplot
 #| echo: false
-#| fig-alt: "Boxplot comparing post-treatment depression scores across Control, CBT, and Mindfulness groups, with annotations pointing to the median line, IQR box, whiskers, and outlier dots."
+#| fig-width: 8
+#| fig-height: 6
+#| fig-alt: "Boxplot of post-treatment depression scores across Control, CBT, and Mindfulness groups, with colorblind-safe fills."
 ```
 
 :::
 
-::: {.column width="60%"}
+::: {.column width="35%"}
 - **Line in middle:** median
-- **Box:** 25th to 75th percentile (IQR)
-- **Whiskers:** extend to 1.5 × IQR
-- **Dots:** outliers beyond whiskers
-:::
-::::
+- **Box:** 25th–75th percentile (IQR)
+- **Whiskers:** 1.5 × IQR
+- **Dots:** outliers
 
 . . .
 
-Great for comparing distributions, but they hide the actual data points.
+Great for comparison — but they hide the actual data.
+:::
+::::
 
 ::: {.notes}
 Spend ~2 minutes on the anatomy of boxplots. Students may have seen boxplots in stats but not know the mechanics. Draw attention to the specific components: "The line in the middle is NOT the mean — it's the median." This is a common misconception. Ask students: "Based on this boxplot, which treatment looks most effective?" (CBT has the lowest median.)
@@ -155,7 +163,7 @@ This slide motivates the next section on raincloud plots. The key point: boxplot
 
 Raincloud plots combine three elements:
 
-  1. **Violin** (distribution shape)
+  1. **Density curve** (distribution shape)
   2. **Boxplot** (summary stats)
   3. **Jittered points** (individual data)
 
@@ -164,7 +172,7 @@ They're increasingly popular in psychology publications because they show **ever
 Use the `ggrain` package. ([More details here.](https://cran.r-project.org/web/packages/ggrain/vignettes/ggrain.html))
 
 ::: {.notes}
-Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expected in psychology journals — if students go on to do research, they'll encounter these. The name comes from the shape: the violin is the "cloud" and the jittered points are the "rain." The ggrain package makes them easy; without it, you'd need to layer violin + boxplot + jitter manually. Students do NOT need to memorize the ggrain syntax for the assignment — boxplots are fine — but exposure here is valuable.
+Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expected in psychology journals — if students go on to do research, they'll encounter these. The name comes from the shape: the half-density on top is the "cloud" and the jittered points below are the "rain." (Note: a violin is a *mirrored* density; rainclouds use just one side, so "density" is the more accurate label.) The ggrain package makes them easy; without it, you'd need to layer density + boxplot + jitter manually. Students do NOT need to memorize the ggrain syntax for the assignment — boxplots are fine — but exposure here is valuable.
 :::
 
 ## Building a raincloud
@@ -174,7 +182,7 @@ Spend ~3 minutes on this conceptual intro. Raincloud plots are increasingly expe
 #| fig-width: 10
 #| fig-height: 6
 #| echo: false
-#| fig-alt: "Horizontal raincloud plot of post-treatment depression scores by condition, combining violin shapes, boxplots, jittered points, and diamond-shaped means. CBT shows the lowest scores, followed by Mindfulness, then Control."
+#| fig-alt: "Horizontal raincloud plot of post-treatment depression scores by condition, combining one-sided density curves, boxplots, jittered points, and diamond-shaped means. CBT shows the lowest scores, followed by Mindfulness, then Control."
 
 library(ggrain)
 therapy_data |>
@@ -196,7 +204,7 @@ therapy_data |>
     values = c("Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
   labs(
     title = "Post-Treatment Depression by Condition",
-    subtitle = "Diamond = mean. Violin = distribution. Box = IQR. Dots = individual scores.",
+    subtitle = "Diamond = mean. Density = distribution. Box = IQR. Dots = individual scores.",
     x = "Treatment condition",
     y = "Depression score (BDI-II)"
   ) +
@@ -218,91 +226,61 @@ therapy_data |>
 Walk through the code on this slide since the previous slide just showed the output. Point out the key pieces: geom_rain() does the heavy lifting, stat_summary adds the mean diamond, and coord_flip() makes it horizontal. Don't get bogged down in the color scale code. The important takeaway is that geom_rain() gives you violin + box + points in one function call.
 :::
 
-## Why rainclouds are great
-
-Compare these three views of the **same data**:
-
-```{r}
-#| echo: false
-#| fig-width: 12
-#| fig-height: 7
-#| fig-alt: "Three-panel comparison of the same therapy data shown as a boxplot only, a violin plot only, and a full raincloud plot, demonstrating how rainclouds reveal the most information about distribution shape, summary statistics, and individual data points."
-library(patchwork)
-
-p1 <- ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_boxplot(fill = "lightblue") +
-  labs(title = "Boxplot only", y = "Depression score") +
-  theme_minimal()
-
-p2 <- ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_violin(fill = "lightblue") +
-  labs(title = "Violin only", y = "Depression score") +
-  theme_minimal()
-
-p3 <- ggplot(therapy_data, aes(x = condition, y = depression_post, fill = condition)) +
-  geom_rain(alpha = 0.6) +
-  scale_fill_manual(values = c("Control" = "#0072B2", "CBT" = "#E69F00", "Mindfulness" = "#009E73")) +
-  labs(title = "Raincloud: all the information", y = "Depression score") +
-  coord_flip() +
-  theme_minimal() +
-  theme(legend.position = "none")
-
-p1 + p2 + p3 + plot_layout(ncol = 1)
-```
-
 ## When to use which
 
-| Plot type | Shows | Best for |
-|-----------|-------|----------|
-| **Boxplot** | Median, IQR, outliers | Quick comparison, large datasets |
-| **Raincloud** | Distribution + summary + raw data | Psychology papers, presentations, publications |
-| **Violin + jitter** | Distribution + raw data | Alternative to raincloud, simpler to code |
+:::: {.columns}
+::: {.column width="50%"}
+### Boxplot
+- Median, IQR, outliers
+- Fast to read
+- Best for **quick EDA** and large datasets where individual points would clutter
+:::
+
+::: {.column width="50%"}
+### Raincloud
+- Density + summary + raw data
+- Shows shape, sample size, and outliers all at once
+- Best for **publications and presentations**
+:::
+::::
 
 ::: {.notes}
-Quick reference slide — ~30 seconds. Emphasize that boxplots are still perfectly fine for EDA and assignments. Rainclouds are the ideal for final presentations and publications. Violin + jitter is a good middle ground if ggrain isn't installed.
+Quick reference slide — ~30 seconds. Emphasize that boxplots are still perfectly fine for EDA and assignments. Rainclouds are the ideal for final presentations and publications.
 :::
 
 # Pair coding break {background-color="#e67e22"}
 
-## Your turn: Compare by condition
+## Your turn: Build a raincloud
 
-Using the therapy data, explore whether depression scores differ by treatment condition:
+Using `therapy_data`, build a **raincloud plot** of depression scores by condition.
 
-1. The `condition` variable is already in `therapy_data` — check its values with `count()`
-2. Create a visualization showing depression scores by condition
-3. Try at least two different geom types
-4. Add appropriate labels
+1. Load `ggrain`
+2. Map `x = condition`, `y = depression_post`, and `fill = condition`
+3. Add `geom_rain()`
+4. Give it an informative title and labeled axes
 
 **Time: 10 minutes**
 
 ::: {.notes}
-Circulate during this exercise. The main challenge is choosing appropriate geoms for a continuous-by-categorical comparison. If pairs finish early, ask them to also try faceting by condition instead of mapping it to x. Common question: "should I use a bar chart?" — redirect them toward boxplots, violin plots, or jitter, since the outcome variable is continuous.
+Circulate during this exercise. The main thing students will trip on is forgetting to load ggrain or forgetting the fill aesthetic. If pairs finish early, ask them to add `coord_flip()` for a horizontal layout, or layer in `stat_summary()` to add the mean. Common question: "do I need a separate scale_fill_manual?" — no, they can let ggplot pick defaults; we're not optimizing colors here.
 :::
 
 ```{r}
 #| echo: false
 #| eval: false
 # SOLUTION
-# Boxplot version
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_boxplot() +
-  labs(
-    title = "Depression scores by treatment condition",
-    x = "Condition",
-    y = "Depression score (BDI-II)"
-  ) +
-  theme_minimal()
+library(ggrain)
 
-# Violin + jitter version
-ggplot(therapy_data, aes(x = condition, y = depression_post)) +
-  geom_violin() +
-  geom_jitter(width = 0.1, alpha = 0.3) +
+ggplot(therapy_data,
+       aes(x = condition, y = depression_post, fill = condition)) +
+  geom_rain(alpha = 0.6) +
   labs(
     title = "Depression scores by treatment condition",
-    x = "Condition",
+    x = NULL,
     y = "Depression score (BDI-II)"
   ) +
-  theme_minimal()
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
 ```
 
 ---
@@ -329,7 +307,7 @@ head(diagnosis_data)
 ## Option 1: Stacked bar chart
 
 ::: {.notes}
-The next five slides show five options for the same data. Move through them at a moderate pace (~1 minute each). For stacked bars, point out the problem: it's hard to compare the sizes of non-bottom segments across groups because they don't share a common baseline. This is a perceptual limitation, not a coding one.
+The next three slides show three options for the same data. Move through them at a moderate pace (~1 minute each). For stacked bars, point out the problem: it's hard to compare the sizes of non-bottom segments across groups because they don't share a common baseline. This is a perceptual limitation, not a coding one.
 :::
 
 ```{r}
@@ -378,48 +356,6 @@ ggplot(diagnosis_data, aes(x = referral, fill = diagnosis)) +
     x = "Referral source",
     y = "Proportion",
     fill = "Diagnosis"
-  ) +
-  theme_minimal()
-```
-
-## Option 4: geom_count()
-
-Shows the *size* of overlaps:
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bubble chart showing the co-occurrence of referral source and diagnosis categories, where larger circles indicate more individuals with that combination."
-ggplot(diagnosis_data, aes(x = referral, y = diagnosis)) +
-  geom_count() +
-  labs(
-    title = "Diagnosis by referral source",
-    x = "Referral source",
-    y = "Diagnosis",
-    size = "Count"
-  ) +
-  theme_minimal()
-```
-
-## Option 5: Tile with counts
-
-::: {.notes}
-geom_tile() is essentially a heatmap. Note that this requires pre-computing the counts with count() before piping into ggplot — this is different from the previous options where geom_bar() computed counts automatically. The viridis color scale is colorblind-friendly. This approach works best with many categories on both axes; with only 3x4, a bar chart is probably clearer. Still worth showing so students have it in their toolkit.
-:::
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Heatmap tile plot of diagnosis counts by referral source, with color intensity (viridis scale) representing the number of individuals in each referral-diagnosis combination."
-diagnosis_counts <- diagnosis_data |>
-  count(referral, diagnosis)
-
-ggplot(diagnosis_counts, aes(x = referral, y = diagnosis, fill = n)) +
-  geom_tile() +
-  scale_fill_viridis_c() +
-  labs(
-    title = "Diagnosis by referral source",
-    x = "Referral source",
-    y = "Diagnosis",
-    fill = "Count"
   ) +
   theme_minimal()
 ```
@@ -534,21 +470,6 @@ ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
   theme_minimal()
 ```
 
-## Solution 3: geom_hex()
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Hexagonal bin plot of reaction time versus age, with hexagons colored by count using a viridis scale, showing highest density along the positive linear trend."
-ggplot(big_rt_data, aes(x = age, y = reaction_time)) +
-  geom_hex() +
-  scale_fill_viridis_c() +
-  labs(
-    title = "Hexagonal bins",
-    fill = "Count"
-  ) +
-  theme_minimal()
-```
-
 ## Correlation coefficient
 
 ::: {.notes}
@@ -598,65 +519,6 @@ Covariation suggests a relationship, but doesn't prove one variable *causes* the
 ::: {.notes}
 Spend ~3 minutes here — this is conceptually the most important slide in the deck. Walk through each question with the age/reaction-time example: (1) Could it be coincidence? With 100 data points and a clear trend, probably not. (2) What's the mechanism? Cognitive processing speed declines with age. (3) Is there a confound? Maybe older participants have different levels of education, health, or motivation. The correlation vs. causation callout connects directly to what they learned in stats — reinforce it here.
 :::
-
-## Real data example
-
-Let's explore a real dataset: `mpg` (fuel economy data)
-
-```{r}
-glimpse(mpg)
-```
-
-## Question 1: Does engine size affect fuel economy?
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Scatterplot of highway MPG versus engine displacement with a linear trend line, showing a clear negative relationship where larger engines have lower fuel efficiency."
-ggplot(mpg, aes(x = displ, y = hwy)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  labs(
-    title = "Larger engines are less fuel efficient",
-    x = "Engine displacement (liters)",
-    y = "Highway MPG"
-  ) +
-  theme_minimal()
-```
-
-## Question 2: Does this vary by car type?
-
-::: {.notes}
-This slide demonstrates a key EDA move: adding a third variable via color. Walk through the insight: some car types (2seater, subcompact) break the overall trend — they have small engines but aren't particularly fuel-efficient, or they have large engines but are surprisingly efficient. This is a confound in action: the relationship between engine size and fuel economy depends on the type of car.
-:::
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Scatterplot of highway MPG versus engine displacement with points colored by car type, revealing that the overall negative trend varies across vehicle classes like 2seaters and subcompacts."
-ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
-  geom_point() +
-  labs(
-    title = "Engine size vs fuel economy by car type",
-    x = "Engine displacement (liters)",
-    y = "Highway MPG",
-    color = "Car type"
-  ) +
-  theme_minimal()
-```
-
-## Question 3: Which car types are most common?
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Horizontal bar chart of vehicle types ordered by frequency, showing SUVs as the most common type followed by compact and midsize cars."
-ggplot(mpg, aes(y = fct_infreq(class))) +
-  geom_bar() +
-  labs(
-    title = "SUVs are the most common vehicle type",
-    x = "Count",
-    y = "Car type"
-  ) +
-  theme_minimal()
-```
 
 # Your class data: Covariation {background-color="#2c3e50"}
 
@@ -719,74 +581,16 @@ ggplot(class_survey, aes(x = caffeine_per_day, y = sleep_hrs)) +
 Another continuous + continuous example that students find relatable. The direction and strength of this relationship will vary by class — that's fine. Ask: "Does this surprise you? What's a possible confound?" (Maybe people who sleep less drink more caffeine to compensate, rather than caffeine causing poor sleep.) This is a natural correlation-vs-causation moment.
 :::
 
-# End-of-deck exercise {background-color="#e67e22"}
-
-## Your final project proposal
-
-For your final project, you'll need to:
-
-1. Choose a dataset with at least 2-3 variables of interest
-2. Formulate 2-3 research questions about relationships in the data
-3. Plan visualizations to explore those relationships
-
-**Exercise:** Start exploring potential datasets. Find one that interests you and create 2-3 exploratory visualizations showing different types of covariation (categorical + continuous, continuous + continuous, etc.).
-
-This will form the basis of your proposal, **due today!**
-
-::: {.notes}
-Give students ~10 minutes of work time here. This exercise doubles as final project proposal prep — the proposal is due today, so this is their chance to get started or polish what they have. If students don't have a dataset yet, suggest palmerpenguins, mpg, or the bfi data from last session. Circulate and help students think about which variable combinations are interesting. Remind them that the proposal only needs 2-3 research questions and planned visualizations, not finished analyses.
-:::
-
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION (example using palmerpenguins)
-library(palmerpenguins)
-
-# Continuous + continuous
-ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
-  geom_point(aes(color = species)) +
-  geom_smooth(method = "lm") +
-  labs(
-    title = "Penguins with longer flippers tend to be heavier",
-    x = "Flipper length (mm)",
-    y = "Body mass (g)"
-  ) +
-  theme_minimal()
-
-# Categorical + continuous
-ggplot(penguins, aes(x = species, y = bill_length_mm)) +
-  geom_violin() +
-  geom_jitter(width = 0.1, alpha = 0.3) +
-  labs(
-    title = "Bill length varies by species",
-    x = "Species",
-    y = "Bill length (mm)"
-  ) +
-  theme_minimal()
-
-# Categorical + categorical
-ggplot(penguins, aes(x = species, fill = island)) +
-  geom_bar(position = "fill") +
-  labs(
-    title = "Penguin species are found on different islands",
-    x = "Species",
-    y = "Proportion",
-    fill = "Island"
-  ) +
-  theme_minimal()
-```
-
 # Wrapping up {background-color="#2c3e50"}
 
 ## Key takeaways
 
 1. **Covariation = relationships** between variables
 2. **Different plot types** for different variable combinations:
-   - Categorical + continuous: boxplot, raincloud plots
-   - Categorical + categorical: bar charts, tiles, geom_count()
-   - Continuous + continuous: scatterplot, 2D bins, hex
-3. **Raincloud plots** are the gold standard for psychology — they show distribution, summary stats, and raw data
+   - Categorical + continuous: boxplot, raincloud
+   - Categorical + categorical: stacked, dodged, or proportional bars
+   - Continuous + continuous: scatterplot (with alpha or 2D bins for big data)
+3. **Rainclouds** show distribution, summary stats, and raw data all at once
 4. **Watch for overplotting** — use alpha, jitter, or binning
 5. **Always visualize first** before computing correlations
 6. **Patterns suggest but don't prove** causation
@@ -804,16 +608,31 @@ Quick summary — ~1 minute. If you're short on time, let students read this sli
 
 ✅ **Do:**
 
-- Submit Assignment 5
-- Submit your Final Project Proposal (due today!)
-- Start thinking about how you'll compute scale scores (next session)
+- Get started on Assignment 5 (due Sun May 10)
+- Start thinking about how you'll compute scale scores — that's where we're headed Wednesday
 
 ## The one thing to remember
 
 Relationships hide in data. Your job is to make them visible — carefully, honestly.
 
-See you Monday for data types and scale scoring!
+See you Wednesday!
 
 ::: {.notes}
-End on this closing line. Remind students: Assignment 4 is due, Assignment 5 (EDA) is now assigned, and the Final Project Proposal is due today. Next session shifts from visualization to data types — logical vectors, numbers, and computing scale scores (like averaging personality items into composite scores). That will connect directly back to the BFI data they've been exploring.
+End on this closing line. Remind students: Assignment 5 (EDA on the BFI dataset) was assigned today and is due Sunday May 10. Next session shifts from visualization to data types — logical vectors, numbers, and computing scale scores (like averaging personality items into composite scores). That connects directly to A5, which uses the BFI data.
 :::
+
+# Get a head start {background-color="#e67e22"}
+
+## Assignment 5 preview
+
+Assignment 5 asks you to do EDA on the **BFI** personality dataset. Two of the tasks line up directly with what we did today:
+
+- **Task 2.2:** Scatterplot of two Extraversion items with a trend line
+- **Task 2.3:** Boxplots of one Extraversion item by education level
+
+If you have time tonight, take a first pass at either one — the code patterns are the same as today's class survey examples.
+
+::: {.notes}
+This isn't an in-class exercise — it's an "if you have time" head start on A5. Students who want momentum can attempt Task 2.2 (a continuous-by-continuous scatterplot, just like today's coding-excitement-vs-anxiety plot) or Task 2.3 (a categorical-by-continuous boxplot, just like today's stress-by-chronotype plot). Remind them they'll need `library(psych)` and `data(bfi)` to load the dataset.
+:::
+

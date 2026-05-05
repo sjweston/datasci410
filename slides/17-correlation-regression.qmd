@@ -205,7 +205,7 @@ study_data |>
 Each cell is the correlation between the row variable and the column variable. The diagonal is always 1 (a variable correlates perfectly with itself).
 
 ::: {.notes}
-Point out two features: the diagonal of 1s (a variable always correlates perfectly with itself) and the symmetry (top-right mirrors bottom-left). Ask students to find the strongest relationship in the matrix. Note the use = "complete.obs" argument -- briefly mention this handles missing data by using only complete pairs, connecting back to Session 15.
+Point out two features: the diagonal of 1s (a variable always correlates perfectly with itself) and the symmetry (top-right mirrors bottom-left). Ask students to find the strongest relationship in the matrix. Note the use = "complete.obs" argument -- briefly mention this handles missing data by using only complete pairs, connecting back to Session 14.
 :::
 
 ## Visualizing a correlation matrix

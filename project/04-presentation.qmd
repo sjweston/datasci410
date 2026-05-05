@@ -48,7 +48,7 @@ Any of these tools work:
 - For each figure, explain:
   - What it shows (read the plot for the audience)
   - What the takeaway is (the "so what?")
-- Use the storytelling principles from Session 15: lead with the finding, not the method
+- Use the storytelling principles from Session 16: lead with the finding, not the method
 
 ### 3. One reflection (about 1 minute)
 

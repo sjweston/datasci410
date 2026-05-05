@@ -2,13 +2,13 @@
 title: "Missing Data"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 20, 2026"
+date: "May 13, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 15"
+    footer: "PSY 410 | Session 14"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
@@ -49,7 +49,7 @@ If you just delete their data, you might be throwing away the most important par
 Today we learn to detect, explore, and handle missing data honestly.
 
 ::: {.notes}
-Welcome students back — there was no class on Monday, so acknowledge the gap. Ask if anyone ran into NAs on their final project data over the break. The 30-50% statistic is a real number from attrition research and tends to surprise students. Emphasize the word "honestly" — this session is as much about research ethics and transparency as it is about R functions. Spend ~2 minutes on this opening.
+Ask if anyone ran into NAs while exploring data for their final project. The 30-50% statistic is a real number from attrition research and tends to surprise students. Emphasize the word "honestly" — this session is as much about research ethics and transparency as it is about R functions. Spend ~2 minutes on this opening.
 :::
 
 # Types of missing data {background-color="#2c3e50"}
@@ -71,7 +71,7 @@ survey
 The `NA` values are obvious.
 
 ::: {.notes}
-Students have seen NA before (it appeared whenever they did a left_join last session that did not match), but this is the first time we treat it as a topic in its own right. Make sure they understand that NA means "we do not know" — not zero, not blank, not "no answer." R treats NA differently from any other value, which is why things like `NA == NA` return NA, not TRUE. You do not need to go deep on that quirk, but mention it because students will stumble on it eventually.
+Students have seen NA before (it shows up whenever a function can't compute a value, or when data is missing from a CSV), but this is the first time we treat it as a topic in its own right. Make sure they understand that NA means "we do not know" — not zero, not blank, not "no answer." R treats NA differently from any other value, which is why things like `NA == NA` return NA, not TRUE. You do not need to go deep on that quirk, but mention it because students will stumble on it eventually.
 :::
 
 ## Implicit missing: Rows don't exist
@@ -93,7 +93,7 @@ appointments
 Who didn't show up? You can't tell because they're not in the data!
 
 ::: {.notes}
-This distinction (explicit vs. implicit) is one of the most important conceptual takeaways. Ask students: "Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?" The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. Connect it to last session: when we used anti_join to find dropouts, we were detecting implicit missingness.
+This distinction (explicit vs. implicit) is one of the most important conceptual takeaways. Ask students: "Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?" The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. Foreshadow that next session's joins lecture gives us another tool for finding implicit missingness (anti_join).
 :::
 
 ## Why implicit missing matters
@@ -137,7 +137,7 @@ sum(is.na(survey))
 ```
 
 ::: {.notes}
-Walk through these two functions as the first step in any missing-data analysis. The any() check is a quick yes/no diagnostic; sum() tells you the scale of the problem. Point out that is.na() returns TRUE/FALSE, and since R treats TRUE as 1 and FALSE as 0, sum() counts the TRUEs. This is the same logic they used with sum(!is.na()) in last session's exercise.
+Walk through these two functions as the first step in any missing-data analysis. The any() check is a quick yes/no diagnostic; sum() tells you the scale of the problem. Point out that is.na() returns TRUE/FALSE, and since R treats TRUE as 1 and FALSE as 0, sum() counts the TRUEs — a useful trick that recurs throughout the tidyverse.
 :::
 
 ## NAs by column
@@ -654,7 +654,7 @@ Keep this brief — ~2 minutes. The goal is awareness, not instruction. Students
 ## Practice: Longitudinal missing data
 
 ::: {.notes}
-This end-of-deck exercise ties together joins (from last session) and missing data (from today). Task 1 uses complete(), task 2 uses left_join(), and tasks 3-5 require combining summarize, filter, and group_by with missing data logic. Give students ~10 minutes. If they get stuck on task 5 (computing change scores for complete cases only), suggest they filter for waves 1 and 3 first, then check that both values are non-missing before computing the difference. This exercise is directly relevant to Assignment 7.
+This end-of-deck exercise focuses entirely on the missing-data tools from today (no joins yet — that's next session). Task 1 uses complete(), tasks 2-3 combine summarize and filter with missing data logic, and task 4 requires thinking carefully about complete cases. Give students ~10 minutes. If they get stuck on task 4 (computing change scores for complete cases only), suggest they filter for waves 1 and 3 first, then check that both values are non-missing before computing the difference. This exercise is directly relevant to Assignment 7.
 :::
 
 You have a three-wave study:
@@ -666,21 +666,14 @@ longitudinal_study <- tibble(
   depression = c(25, 20, 15, 30, 28, 22, 18, 16, 20, NA),
   anxiety = c(28, 25, 22, 32, NA, 24, 20, 18, 22, 19)
 )
-
-demographics <- tibble(
-  participant = 1:4,
-  age = c(22, 30, 25, 28),
-  condition = c("Treatment", "Control", "Treatment", "Control")
-)
 ```
 
 ## Your tasks
 
 1. Make implicit missing waves **explicit** using `complete()`
-2. Join the demographics data
-3. Count how many assessments each participant completed
-4. Check if completion differs by treatment condition
-5. Compute mean depression change (wave 1 to wave 3) for participants with complete data on those waves
+2. Count how many assessments each participant completed
+3. What percentage of participants completed all three waves?
+4. Compute mean depression change (wave 1 to wave 3) for participants with complete data on those waves
 
 ```{r}
 #| echo: false
@@ -693,38 +686,31 @@ long_complete <- longitudinal_study |>
 
 long_complete
 
-# 2. Join demographics
-long_with_demo <- long_complete |>
-  left_join(demographics, by = "participant")
-
-# 3. Count assessments per participant
-long_with_demo |>
+# 2. Count assessments per participant
+long_complete |>
   group_by(participant) |>
   summarize(
     n_assessments = sum(!is.na(depression))
   )
 
-# 4. Completion by condition
-long_with_demo |>
-  group_by(participant, condition) |>
+# 3. Percentage completing all 3 waves
+long_complete |>
+  group_by(participant) |>
   summarize(
-    n_complete = sum(!is.na(depression)),
-    .groups = "drop"
+    n_assessments = sum(!is.na(depression))
   ) |>
-  group_by(condition) |>
   summarize(
-    mean_completed = mean(n_complete)
+    pct_complete = mean(n_assessments == 3)
   )
 
-# 5. Depression change for complete cases
+# 4. Depression change for complete cases
 longitudinal_study |>
   filter(wave %in% c(1, 3)) |>
   group_by(participant) |>
   filter(n() == 2 & all(!is.na(depression))) |>  # Both waves present and non-missing
   summarize(
     change = depression[wave == 1] - depression[wave == 3]
-  ) |>
-  left_join(demographics, by = "participant")
+  )
 ```
 
 # Wrapping up {background-color="#2c3e50"}
@@ -780,20 +766,20 @@ longitudinal_study |>
 
 📖 **Read:**
 
-- R4DS Ch 11: Communication
+- R4DS Ch 19: Joins
 
 ✅ **Do:**
 
-- Submit Assignment 7
-- Check your final project for missing data
-- Draft your final project report
+- Start Assignment 7 — the missing-data half is fair game now
+- Check your own final project data for missingness
+- Draft your final project report (due next Wednesday)
 
 ## The one thing to remember
 
 Missing data isn't a problem to solve — it's information about your study. Treat it that way.
 
-See you Wednesday for storytelling with data!
+See you Wednesday for joins!
 
 ::: {.notes}
-End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results. Remind them that Assignment 7 (Joins and Missing Data) is now assigned, Assignment 6 is due, and their final project draft is also due. Next session (after Memorial Day) is Storytelling with Data.
+End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results. Remind them that Assignment 7 (Joins and Missing Data) was assigned today and is due Sun May 24, and that the final project draft is due next Wednesday (May 20). Next session covers joins, which pairs naturally with missing data — joins are a major source of NAs, and anti_join gives us another tool for finding implicit missingness.
 :::

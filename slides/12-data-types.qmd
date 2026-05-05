@@ -38,21 +38,30 @@ library(tidyverse)
 
 ## A published error
 
-A participant scores 4, 3, 2, 5, 1 on five items of the Rosenberg
-Self-Esteem Scale. Item 3 is reverse-coded.
+A participant rates these three items from the Rosenberg Self-Esteem
+Scale on a 1–5 scale (1 = Strongly Disagree, 5 = Strongly Agree):
+
+| # | Item | Resp. |
+|---|------|-------|
+| 1 | I feel that I am a person of worth, at least on an equal plane with others. | 4 |
+| 2 | I feel that I have a number of good qualities. | 3 |
+| 3 | All in all, I am inclined to feel that I am a failure. | 2 |
+
+: {tbl-colwidths="[5,85,10]"}
 
 . . .
 
-What's their total score?
+What's their self-esteem score so far?
 
 . . .
 
-If you said 15, you forgot to reverse-code — `2` should become
-`(5 + 1) - 2 = 4`, making the real total **17**. This kind of mistake
-happens in published papers, and it lives in how you handle data types.
+If you said **9**, you forgot that item 3 is reverse-coded — a `2`
+should become `(5 + 1) - 2 = 4`, making the real total **11**. Mistakes
+like this happen in published papers, and they live in how you handle
+data types.
 
 ::: {.notes}
-Spend ~3 minutes here. Let students answer out loud before revealing the catch. This hooks them because it shows that "just adding numbers" is not always correct — data types and scoring decisions matter. Mention that reverse-coding errors are genuinely common in published work.
+Spend ~3 minutes here. Let students answer out loud before revealing the catch — most will say 9 for the total (or 3.0 if they took the mean). The correct values are 11 for the total and 3.67 for the mean, once item 3 is reversed. The point is that the wording of item 3 ("I am inclined to feel that I am a failure") is going in the opposite direction of items 1 and 2, so a high response actually means *low* self-esteem. The student has to notice that themselves. Mention that reverse-coding errors are genuinely common in published work.
 :::
 
 ## Everything in R is a type
@@ -495,15 +504,8 @@ mean(scores)              # Returns NA
 mean(scores, na.rm = TRUE)  # Ignores NA
 ```
 
-. . .
-
-::: callout-warning
-**Think carefully** — Should you exclude missing values? Or is
-missingness meaningful?
-:::
-
 ::: {.notes}
-Pause on the callout. This is a conceptual point, not a coding one. Ask students: "If 20% of participants skipped the depression items, does that tell you something?" In psychology, missingness is often not random — people skip sensitive questions. This foreshadows the missing data session (Session 15).
+Quickly mention the conceptual side: dropping NAs is the easy default, but it is not always the right call. In psychology, missingness is often not random — people skip sensitive questions. We will come back to this in Session 14.
 :::
 
 
@@ -568,14 +570,60 @@ scale_data |>
 Let the output speak for itself — students will see participant 4 gets NA for the total even though they answered 3 out of 4 items. Ask: "Is that what we want?" This motivates the next slide.
 :::
 
-## Option 2: Sum with na.rm
+## A new tool: rowwise()
 
-We can't use `na.rm` directly in `mutate()` with `+`, but we can use
-`sum()`:
+By default, `mutate()` works **column-wise** — `sum()` and `mean()`
+inside it see entire columns, not individual rows.
+
+. . .
+
+For scale scoring we need the opposite: combine values *across*
+columns *within* a single participant.
+
+. . .
+
+`rowwise()` switches `mutate()` into **row-by-row mode**:
+
+```{r}
+#| eval: false
+data |>
+  rowwise() |>     # switch to row-by-row mode
+  mutate(...) |>   # now sees one row at a time
+  ungroup()        # switch back when done
+```
+
+::: {.notes}
+This is a conceptual setup slide — do not run any code. Walk through the metaphor: by default mutate is "looking at all participants at once for one column"; rowwise flips it to "looking at all columns for one participant in turn." Pause on the three-step pattern (rowwise → mutate → ungroup) and warn that forgetting ungroup() leaves the data row-grouped, which makes later operations slow and surprising. Tell students they will see this pattern over and over today.
+:::
+
+## Why rowwise() matters
+
+Without it, `sum()` collapses across the whole column — the same number
+for every row:
 
 ```{r}
 scale_data |>
-  rowwise() |>  # Work row-by-row
+  mutate(
+    anxiety_total = sum(c(anxiety1, anxiety2, anxiety3, anxiety4),
+                        na.rm = TRUE)
+  )
+```
+
+. . .
+
+That's not what we want.
+
+::: {.notes}
+Run this and let the output speak for itself. Every row gets the same total — the sum of all values across all participants and items. This is the "wrong" version that motivates rowwise() on the next slide. Ask: "Why is the total identical for every participant?"
+:::
+
+## Option 2: Sum with na.rm + rowwise()
+
+Now combine `sum(..., na.rm = TRUE)` with `rowwise()`:
+
+```{r}
+scale_data |>
+  rowwise() |>
   mutate(
     anxiety_total = sum(c(anxiety1, anxiety2, anxiety3, anxiety4),
                         na.rm = TRUE)
@@ -584,7 +632,7 @@ scale_data |>
 ```
 
 ::: {.notes}
-rowwise() is new and important. Explain that by default, mutate works column-wise — sum() would add up the entire column. rowwise() tells R to work one row at a time. Warn students that they must ungroup() afterward, or subsequent operations will still be row-by-row and run slowly.
+This is the payoff. Each participant now gets their own total, and NA values are dropped instead of poisoning the sum. Compare side-by-side with the previous slide if students need to see the difference. Remind them again to ungroup() — this is the most common bug in scale-scoring code.
 :::
 
 ## Computing mean scores
@@ -700,67 +748,6 @@ dass_data |>
 Mention that real scales like the DASS-21 have 7 items per subscale, not 2. The pattern is the same — just more columns in the c() call. If students ask about automating the column selection, you can preview c_across() but do not spend long on it; it appears in the end-of-deck solution.
 :::
 
-# End-of-deck exercise {background-color="#e67e22"}
-
-## Practice: Score the PHQ-9
-
-The PHQ-9 is a 9-item depression screener (0-3 scale):
-
-```{r}
-phq_data <- tibble(
-  participant = 1:5,
-  phq1 = c(2, 1, 3, 0, 2),
-  phq2 = c(2, 0, 3, 1, NA),
-  phq3 = c(1, 1, 2, 0, 2),
-  phq4 = c(2, NA, 3, 0, 1),
-  phq5 = c(1, 0, 3, 1, 2),
-  phq6 = c(2, 1, 2, 0, 3),
-  phq7 = c(1, 1, 3, 1, 2),
-  phq8 = c(2, 0, 2, 0, 1),
-  phq9 = c(1, 1, 3, 0, 2)
-)
-```
-
-1.  Compute a **total score** (sum of all 9 items)
-2.  Only compute the score if **at least 7 items** are answered
-3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate
-    (10-14), Moderately Severe (15-19), Severe (20-27)
-
-::: {.notes}
-Give ~10 minutes for this exercise. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. Circulate and help with the case_when cutoffs — students often get the boundary conditions wrong (e.g., using < instead of <=). The solution uses c_across(), which is a nice shortcut to show when reviewing. If time is short, have students start and finish as homework.
-:::
-
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
-phq_data |>
-  rowwise() |>
-  mutate(
-    # Count items answered
-    n_answered = sum(!is.na(c_across(phq1:phq9))),
-
-    # Compute total only if enough items
-    phq_total = if_else(
-      n_answered >= 7,
-      sum(c_across(phq1:phq9), na.rm = TRUE),
-      NA_real_
-    ),
-
-    # Create severity category
-    severity = case_when(
-      is.na(phq_total) ~ "Missing",
-      phq_total <= 4 ~ "Minimal",
-      phq_total <= 9 ~ "Mild",
-      phq_total <= 14 ~ "Moderate",
-      phq_total <= 19 ~ "Moderately Severe",
-      phq_total <= 27 ~ "Severe"
-    )
-  ) |>
-  ungroup() |>
-  select(participant, phq_total, n_answered, severity)
-```
-
 # Wrapping up {background-color="#2c3e50"}
 
 ## Key takeaways
@@ -794,9 +781,70 @@ phq_data |>
 Scoring a scale correctly is the most common data task in psychology —
 and the easiest place to introduce errors.
 
-See you Wednesday for strings and factors!
+See you Monday for strings and factors!
 
 ::: {.notes}
-End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide.
+End on this takeaway. Remind students that Assignment 5 is due before next class, and the reading for next session is R4DS Ch 14 (just sections 14.1-14.3) and Ch 16 on factors. Preview that next class covers strings and factors — the other two data types from the opening slide. The PHQ-9 practice exercise that follows is for them to try on their own time as a bridge to the next assignment.
 :::
+
+# On your own {background-color="#e67e22"}
+
+## Practice: Score the PHQ-9
+
+The PHQ-9 is a 9-item depression screener (0-3 scale):
+
+```{r}
+phq_data <- tibble(
+  participant = 1:5,
+  phq1 = c(2, 1, 3, 0, 2),
+  phq2 = c(2, 0, 3, 1, NA),
+  phq3 = c(1, 1, 2, 0, 2),
+  phq4 = c(2, NA, 3, 0, 1),
+  phq5 = c(1, 0, 3, 1, 2),
+  phq6 = c(2, 1, 2, 0, 3),
+  phq7 = c(1, 1, 3, 1, 2),
+  phq8 = c(2, 0, 2, 0, 1),
+  phq9 = c(1, 1, 3, 0, 2)
+)
+```
+
+1.  Compute a **total score** (sum of all 9 items)
+2.  Only compute the score if **at least 7 items** are answered
+3.  Create a **severity category**: Minimal (0-4), Mild (5-9), Moderate
+    (10-14), Moderately Severe (15-19), Severe (20-27)
+
+::: {.notes}
+This is a take-home exercise — students do not need to finish it in class. It ties together everything from today: rowwise(), sum with na.rm, if_else for the missingness threshold, and case_when for severity categories. The solution uses c_across(), which is a nice shortcut. If a student asks during office hours, watch for the case_when cutoffs — they often get the boundary conditions wrong (e.g., using < instead of <=).
+:::
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+phq_data |>
+  rowwise() |>
+  mutate(
+    # Count items answered
+    n_answered = sum(!is.na(c_across(phq1:phq9))),
+
+    # Compute total only if enough items
+    phq_total = if_else(
+      n_answered >= 7,
+      sum(c_across(phq1:phq9), na.rm = TRUE),
+      NA_real_
+    ),
+
+    # Create severity category
+    severity = case_when(
+      is.na(phq_total) ~ "Missing",
+      phq_total <= 4 ~ "Minimal",
+      phq_total <= 9 ~ "Mild",
+      phq_total <= 14 ~ "Moderate",
+      phq_total <= 19 ~ "Moderately Severe",
+      phq_total <= 27 ~ "Severe"
+    )
+  ) |>
+  ungroup() |>
+  select(participant, phq_total, n_answered, severity)
+```
 

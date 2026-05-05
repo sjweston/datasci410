@@ -2,13 +2,13 @@
 title: "Joins"
 subtitle: "PSY 410: Data Science for Psychology"
 author: "Dr. Sara Weston"
-date: "May 13, 2026"
+date: "May 20, 2026"
 format:
   revealjs:
     theme: [default, custom.scss]
     slide-number: true
     preview-links: auto
-    footer: "PSY 410 | Session 14"
+    footer: "PSY 410 | Session 15"
     chalkboard: true
     code-line-numbers: false
     highlight-style: github
@@ -388,7 +388,7 @@ participants |>
 Every participant appears, with `NA` where data is missing.
 
 ::: {.notes}
-Point out that full_join() gives you the most complete picture — nobody is dropped. But it also means you may have rows with lots of NAs, which connects directly to next session on missing data. This is a nice foreshadowing moment.
+Point out that full_join() gives you the most complete picture — nobody is dropped. But it also means you may have rows with lots of NAs — exactly the kind of explicit missingness we discussed last session. Good moment to call back to drop_na(), replace_na(), and the "make implicit missing explicit" idea: full_join() does the same job, just for combining tables.
 :::
 
 ## Visualizing full_join()
@@ -536,7 +536,7 @@ followup <- tibble(
 **Time: 10 minutes**
 
 ::: {.notes}
-Circulate during the exercise. The most common mistake is using inner_join() instead of left_join(), which silently drops participant 5 in step 1. If pairs finish early, ask them to figure out which participants are missing followup data and whether missingness is related to condition. That bridges to the filtering joins section and next week's missing data session. When time is up, walk through the solution and emphasize step 3 — the sum(is.na()) pattern will come back next session.
+Circulate during the exercise. The most common mistake is using inner_join() instead of left_join(), which silently drops participant 5 in step 1. If pairs finish early, ask them to figure out which participants are missing followup data and whether missingness is related to condition. That bridges to the filtering joins section. When time is up, walk through the solution and emphasize step 3 — the sum(is.na()) pattern is the same one they used last session for missing data.
 :::
 
 ```{r}
@@ -981,11 +981,11 @@ Walk through this flowchart as a decision tree. Consider having students practic
 
 📖 **Read:**
 
-- R4DS Ch 18: Missing values
+- R4DS Ch 11: Communication
 
 ✅ **Do:**
 
-- Submit Assignment 6
+- Finish Assignment 7 (due Sun May 24)
 - Check if your final project needs joins
 - Practice joining your own data files
 
@@ -993,8 +993,8 @@ Walk through this flowchart as a decision tree. Consider having students practic
 
 If your data lives in separate files, joins are how you ask a question that spans all of them.
 
-See you Wednesday for handling missing data!
+See you Wednesday for storytelling with data!
 
 ::: {.notes}
-End strong on this takeaway. Remind students that Assignment 6 is due before next class, and that they should check whether their final project data will require any joins — if so, now is the time to start thinking about what the key variable is. Next session covers missing data, which pairs naturally with joins since joins often introduce NAs.
+End strong on this takeaway. Remind students that Assignment 7 (Joins and Missing Data) is due Sunday May 24 — both halves of the assignment are now fair game. Note that Memorial Day is the following Monday so the next class is Wednesday May 27 (Storytelling with Data). The final project draft was due today, so they should now be working on cleaning and analyzing their own data with all the tools they've learned.
 :::

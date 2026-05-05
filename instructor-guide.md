@@ -181,9 +181,9 @@ Send a Canvas announcement the week before classes start:
 | 11 | Mon May 4 | EDA — Covariation | `11-eda-covariation.qmd` | Scoreboard; assign A5; class survey data used |
 | 12 | Wed May 6 | Data Types Grab Bag | `12-data-types.qmd` | |
 | 13 | Mon May 11 | Strings, Factors & Text | `13-strings-factors.qmd` | Scoreboard + **Power Play** (top 2 teams choose boost or sabotage); assign A6; class survey `data_words` used for text analysis |
-| 14 | Wed May 13 | Joins | `14-joins.qmd` | Assign A7 |
+| 14 | Wed May 13 | Missing Data | `14-missing-data.qmd` | Assign A7 |
 | — | Mon May 18 | *No class* | — | — |
-| 15 | Wed May 20 | Missing Data | `15-missing-data.qmd` | |
+| 15 | Wed May 20 | Joins | `15-joins.qmd` | |
 | — | Mon May 25 | *Memorial Day* | — | — |
 | 16 | Wed May 27 | Storytelling with Data | `16-storytelling.qmd` | Assign A8; distribute APA figure handout (`files/apa-figure-guidelines.md`) |
 | 17 | Mon Jun 1 | Correlation & Simple Regression | `17-correlation-regression.qmd` | Scoreboard; class survey data used for live correlation/regression demos |
@@ -272,7 +272,7 @@ The winning team gets a non-grade reward (pizza party or equivalent). Budget and
 | A4 | Mon Apr 27 (S9) | Sun May 3 | Visualization deep dive | `.qmd` + rendered HTML |
 | A5 | Mon May 4 (S11) | Sun May 10 | EDA | `.qmd` + rendered HTML |
 | A6 | Mon May 11 (S13) | Sun May 17 | Data types, strings, factors | `.qmd` + rendered HTML |
-| A7 | Wed May 13 (S14) | Sun May 24 | Joins & missing data | `.qmd` + rendered HTML |
+| A7 | Wed May 13 (S14) | Sun May 24 | Missing data & joins | `.qmd` + rendered HTML |
 | A8 | Wed May 27 (S16) | Sun May 31 | Reproducible report | `.qmd` + rendered HTML |
 
 - A1–A2 are R scripts. A3–A8 are Quarto documents (`.qmd` submission required).

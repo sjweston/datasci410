@@ -4,112 +4,82 @@
 
 **Name:** ______________________________ **Date:** ______________
 
-*No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
+*No laptop today? Work with a partner who has one and compare answers at the end.*
 
----
+## The data: `class_survey` (N = 34)
 
-## The data: `penguins`
+You'll focus on **`social_media_hrs`** — self-reported hours per day on social media.
 
-This dataset (from `palmerpenguins`) has measurements of 344 penguins from three species. Here's a summary of the variable you'll focus on:
+| Min | Q1 | Median | Mean | Q3 | Max | NAs |
+|-----|----|--------|------|----|-----|-----|
+| 0.00 | 1.00 | 2.75 | 2.92 | 4.00 | 8.00 | 0 |
 
-**`flipper_length_mm`** (flipper length in millimeters):
+A few rows from the data:
 
-| Statistic | Value |
-|-----------|-------|
-| Min       | 172   |
-| 1st Qu.   | 190   |
-| Median    | 197   |
-| Mean      | 200.9 |
-| 3rd Qu.   | 213   |
-| Max       | 231   |
-| NAs       | 2     |
-
-**Species breakdown:** Adelie (152), Chinstrap (68), Gentoo (124)
-
-Here are 10 representative rows:
-
-| species   | island    | flipper_length_mm | body_mass_g | sex    |
-|-----------|-----------|-------------------|-------------|--------|
-| Adelie    | Torgersen | 181               | 3750        | male   |
-| Adelie    | Torgersen | 186               | 3800        | female |
-| Adelie    | Torgersen | 195               | 3250        | female |
-| Adelie    | Torgersen | NA                | NA          | NA     |
-| Adelie    | Torgersen | 193               | 3450        | female |
-| Chinstrap | Dream     | 192               | 3500        | female |
-| Chinstrap | Dream     | 196               | 3900        | male   |
-| Gentoo    | Biscoe    | 217               | 4500        | female |
-| Gentoo    | Biscoe    | 230               | 5200        | male   |
-| Gentoo    | Biscoe    | 221               | 5150        | male   |
-
----
+| major        | year   | social_media_hrs | sleep_hrs | tabs_open |
+|--------------|--------|------------------|-----------|-----------|
+| Psychology   | Junior | 7.00             | 8         | 363       |
+| Psychology   | Junior | 1.00             | 9         | 2         |
+| Psychology   | Other  | 0.33             | 7         | 7         |
+| Psychology   | Senior | 8.00             | 7         | 26        |
+| Neuroscience | Senior | 4.50             | 7         | 6         |
 
 ## The task (same as the slide exercise)
 
-1. Plot the distribution of **flipper_length_mm** — what shape is it?
-2. Check for **outliers** in flipper length. Are any values suspicious?
+1. Plot the distribution of **`social_media_hrs`** — what shape is it?
+2. Check for **outliers**. Are any values suspicious?
+3. What does this tell you about our class?
 
-### Your pen-and-paper version
-
-**Step 1: Sketch a histogram.** Using the summary statistics above, draw a rough histogram on the grid below. Think about where most values fall (between Q1 and Q3) and the overall range.
+**Step 1: Sketch a histogram.** Using the summary stats, sketch the shape:
 
 ```
 Count
+  ^
   |
   |
   |
   |
-  |
-  |___________________________________________
-  170  180  190  200  210  220  230
-              flipper_length_mm
+  +----|----|----|----|----|--->
+       0    2    4    6    8       social_media_hrs
 ```
 
 **Step 2: What shape do you expect?** Circle one:
 
-- Symmetric / bell-shaped
-- Right-skewed (tail to the right)
-- Left-skewed (tail to the left)
-- Bimodal (two humps)
+Symmetric / bell-shaped • Right-skewed • Left-skewed • Bimodal
 
-Why? (Hint: look at the species breakdown and the sample rows. Do all species have similar flipper lengths?)
+Why? (Hint: where do the median and mean sit relative to each other?) ___________________
 
-Your answer: ___________________________________________________________________
+___________________________________________________________________________________
 
-**Step 3: Sketch a boxplot.** Using the summary statistics, draw a boxplot:
+\newpage
 
-- Draw the box from Q1 (___) to Q3 (___)
-- Draw the median line at ___
-- Draw whiskers extending to the min and max (or 1.5 x IQR, whichever is closer)
+**Step 3: Sketch a boxplot.** Box from Q1 (___) to Q3 (___). Median at ___. Whiskers to min/max (or 1.5 × IQR, whichever is closer).
 
 ```
-  |__|___|_____|______|___|__|
-  170       190     210      230
+       |    |    |    |    |
+  +----|----|----|----|----|--->
+       0    2    4    6    8       social_media_hrs
 ```
 
-**Step 4: Outlier check.** Calculate the IQR and outlier fences:
+**Step 4: Outlier check.** Compute the IQR and fences:
 
-- IQR = Q3 - Q1 = ___ - ___ = ___
-- Lower fence = Q1 - 1.5 x IQR = ___ - ___ = ___
-- Upper fence = Q3 + 1.5 x IQR = ___ + ___ = ___
+- IQR = Q3 − Q1 = ___ − ___ = ___
+- Lower fence = Q1 − 1.5 × IQR = ___      Upper fence = Q3 + 1.5 × IQR = ___
 
-Are any values in the summary statistics beyond these fences? _____
+Any values beyond these fences? _____ Suspicious or just honest? _________________________
 
-**Step 5: Write the code.** What code would produce these plots?
+**Step 5: Write the code.** Fill in the blanks:
 
 ```r
 # Histogram
-penguins |> ggplot(aes(x = _______________)) +
-  geom____________(fill = "steelblue", color = "white") +
+ggplot(class_survey, aes(x = ________________)) +
+  geom_____________(binwidth = 1, fill = "#2c7fb8", color = "white") +
   theme_minimal()
 
 # Boxplot
-penguins |> ggplot(aes(x = _______________)) +
-  geom____________() +
+ggplot(class_survey, aes(x = ________________)) +
+  geom_____________() +
   theme_minimal()
 ```
 
----
-
-## Check your work
-
-Compare your sketches, outlier calculations, and code with your partner's screen. Do your answers match?
+**Check your work.** Compare your sketches, fences, and code with your partner's screen. Do your answers match what the actual plots show?

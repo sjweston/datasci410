@@ -3,6 +3,7 @@ project:
   render:
     - "*.qmd"
     - "!slides/"
+    - "!files/scoreboard.qmd"
   resources:
     - "files/"
     - "slides/*.html"
@@ -90,9 +91,9 @@ website:
               file: content/12-content.qmd
             - text: "13: Strings, Factors & Text"
               file: content/13-content.qmd
-            - text: "14: Joins"
+            - text: "14: Missing Data"
               file: content/14-content.qmd
-            - text: "15: Missing Data"
+            - text: "15: Joins"
               file: content/15-content.qmd
             - text: "16: Storytelling with Data"
               file: content/16-content.qmd

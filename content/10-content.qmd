@@ -7,7 +7,7 @@ date: "2026-04-29"
 
 📖 **Reading:**
 
-- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/eda) (sections 10.1–10.4)
+- [R4DS Ch 10: Exploratory data analysis](https://r4ds.hadley.nz/EDA) (sections 10.1–10.4)
 
 ::: {.callout-warning}
 ## Final Project Proposal is due today

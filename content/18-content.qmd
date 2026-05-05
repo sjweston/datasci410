@@ -5,7 +5,9 @@ date: "2026-06-03"
 
 ## Before class
 
-No new reading today — focus on finishing your final project report!
+📖 **Reading:**
+
+- [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)
 
 ::: {.callout-important}
 ## Final Project Report is due today
@@ -63,7 +65,7 @@ We'll cover:
 - [Posit Recipes](https://posit.cloud/learn/recipes) — quick how-to guides for common tasks
 - [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) — weekly community data visualization challenge
 - [R-Ladies](https://rladies.org/) — global community for gender minorities in R
-- [Posit Community](https://community.rstudio.com/) — friendly Q&A forum
+- [Posit Community](https://forum.posit.co/) — friendly Q&A forum
 :::
 
 ### The skills you've built

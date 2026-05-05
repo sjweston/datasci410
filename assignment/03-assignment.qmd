@@ -1,7 +1,30 @@
 ---
 title: "Assignment 3: Tidying & Importing Data"
 date: "2026-04-26"
+execute:
+  warning: false
+  message: false
 ---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(readxl)
+
+anxiety_wide <- tibble(
+  participant_id = 1:5,
+  condition = c("treatment", "treatment", "control", "control", "treatment"),
+  anxiety_t1 = c(45, 52, 48, 55, 42),
+  anxiety_t2 = c(38, 45, 47, 54, 35),
+  anxiety_t3 = c(32, 40, 46, 52, 30)
+)
+
+emotions_long <- tibble(
+  participant = rep(1:4, each = 3),
+  emotion = rep(c("happy", "sad", "anxious"), 4),
+  rating = c(7, 2, 3, 5, 4, 6, 8, 1, 2, 6, 5, 4)
+)
+```
 
 ::: {.callout-note}
 ## Assignment Details
@@ -51,11 +74,67 @@ Pivot this data to long format so you have columns for:
 - `time` (values: "t1", "t2", "t3")
 - `anxiety` (the score)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+anxiety_long <- anxiety_wide |>
+  pivot_longer(
+    cols = starts_with("anxiety_"),
+    names_to = "time",
+    values_to = "anxiety",
+    names_prefix = "anxiety_"
+  )
+
+anxiety_long
+```
+
+`names_prefix = "anxiety_"` strips the prefix so you get clean labels (`t1`, `t2`, `t3`) instead of `anxiety_t1`, etc.
+:::
+
 ### Task 1.2
 Using your long dataset, calculate the mean anxiety score at each time point, separately for each condition.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+::: {.callout-tip}
+This builds on Task 1.1 — `anxiety_long` must exist first.
+:::
+
+```{r}
+anxiety_means <- anxiety_long |>
+  group_by(condition, time) |>
+  summarise(mean_anxiety = mean(anxiety), .groups = "drop")
+
+anxiety_means
+```
+:::
+
 ### Task 1.3
 Create a line plot showing anxiety over time, with separate lines for each condition. Add points for the individual observations.
+
+::: {.callout-note collapse="true"}
+## Answer
+
+The cleanest version uses `stat_summary()` so the line is computed from the data and the individual observations are still visible as points.
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+#| fig-alt: "Line plot of anxiety scores at three time points (t1, t2, t3), with separate lines for treatment and control conditions and individual participant observations shown as points. Treatment shows a clear decline; control stays roughly flat."
+ggplot(anxiety_long, aes(x = time, y = anxiety,
+                         colour = condition, group = condition)) +
+  geom_point(alpha = 0.6) +
+  stat_summary(fun = mean, geom = "line", linewidth = 1) +
+  labs(
+    title = "Anxiety over time by condition",
+    x = "Time point",
+    y = "Anxiety score",
+    colour = "Condition"
+  )
+```
+:::
 
 ## Part 2: Pivoting Long to Wide (25 points)
 
@@ -72,8 +151,34 @@ emotions_long <- tibble(
 ### Task 2.1
 Pivot this to wide format so each emotion is its own column.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+emotions_wide <- emotions_long |>
+  pivot_wider(names_from = emotion, values_from = rating)
+
+emotions_wide
+```
+
+The column order (`happy / sad / anxious`) reflects the order the emotions appear in the data. That's fine.
+:::
+
 ### Task 2.2
 Using the wide format, create a new variable that is the sum of all three emotion ratings for each participant.
+
+::: {.callout-note collapse="true"}
+## Answer
+
+::: {.callout-tip}
+This builds on Task 2.1 — `emotions_wide` must exist first.
+:::
+
+```{r}
+emotions_wide |>
+  mutate(total = happy + sad + anxious)
+```
+:::
 
 ## Part 3: Importing Data (35 points)
 
@@ -85,6 +190,17 @@ Download the provided data files from Canvas and save them in your project's `da
 ### Task 3.1
 Import `survey_data.csv` using `read_csv()`. Note any warnings or issues.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+survey_first <- read_csv("../files/data/survey_data.csv")
+glimpse(survey_first)
+```
+
+Notice that `post_anxiety` and `post_wellbeing` come in as **character** instead of numeric. That's because the literal string `"N/A"` appears in those columns, and `read_csv()` doesn't know it's meant to represent a missing value. We'll fix that in Task 3.2.
+:::
+
 ### Task 3.2
 The CSV has some problems:
 
@@ -93,6 +209,35 @@ The CSV has some problems:
 
 Re-import the data handling these issues using the appropriate `read_csv()` arguments (hint: `na = ` and `col_types = `).
 
+::: {.callout-note collapse="true"}
+## Answer
+
+Setting `na = "N/A"` is enough on its own — once the strings are treated as missing, the columns parse as numeric automatically.
+
+```{r}
+survey <- read_csv("../files/data/survey_data.csv", na = "N/A")
+glimpse(survey)
+```
+
+If you want to be explicit about column types, you can add `col_types`:
+
+```{r}
+#| eval: false
+read_csv(
+  "../files/data/survey_data.csv",
+  na = "N/A",
+  col_types = cols(
+    participant_id  = col_integer(),
+    condition       = col_character(),
+    pre_anxiety     = col_double(),
+    post_anxiety    = col_double(),
+    pre_wellbeing   = col_double(),
+    post_wellbeing  = col_double()
+  )
+)
+```
+:::
+
 ### Task 3.3
 Import `demographics.xlsx` using the `readxl` package. The data is on the second sheet.
 
@@ -100,6 +245,17 @@ Import `demographics.xlsx` using the `readxl` package. The data is on the second
 library(readxl)
 # Your code here
 ```
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+demographics <- read_excel("../files/data/demographics.xlsx", sheet = 2)
+demographics
+```
+
+You can also reference the sheet by name (`sheet = "demographics"`), which is more readable. **Watch out:** sheet 1 is the codebook (5 rows describing each variable), not the demographics data. Make sure you're pulling sheet 2.
+:::
 
 ## Grading Rubric
 

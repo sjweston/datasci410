@@ -45,6 +45,7 @@ scoreboard <- scoreboard |>
   mutate(is_leader = total == max_pts & total > 0)
 ```
 
+
 ## Week `r current_week` Standings
 
 ```{r}
@@ -102,7 +103,7 @@ label_data <- rankings_filtered |>
 
 rankings_filtered |>
   ggplot(aes(x = week, y = rank, color = team_name, group = team_name)) +
-  geom_line(linewidth = 1.5) +
+  geom_line(linewidth = 1.5, alpha=.7) +
   geom_point(size = 3) +
   geom_text_repel(
     data = label_data,

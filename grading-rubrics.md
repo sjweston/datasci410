@@ -30,12 +30,14 @@ When uncertain between two levels, default to the higher one and leave a comment
 
 ### Task 1.2 — Bar chart with error bars (15 pts)
 
+**Grade tightly.** The assignment hint reproduced the `stat_summary()` + `mean_cl_normal` pattern verbatim, and the task bullets enumerated every polish requirement (plain-English labels, title naming the error bars, viridis palette, clean theme). The core mechanics shouldn't be a stumbling block; what's being assessed here is whether students followed through on the polish.
+
 | Level | Pts | Looks like |
 |-------|:---:|------------|
 | Full  | 15  | Bar chart of mean flipper length by species using `stat_summary()` for both the bar (`fun = mean, geom = "bar"`) and the error bars (`fun.data = mean_cl_normal, geom = "errorbar"`) — i.e., 95% CI; title, caption, or labels make clear what the error bars represent; plain-English axis labels; viridis palette; clean theme like `theme_minimal()`. |
-| −1    | 14  | Correct `stat_summary()` + `mean_cl_normal` pattern but missing one polish item — variable names left on axes, no title, default grey theme, default colors instead of viridis, or the error-bar type isn't named anywhere on the plot. |
-| Half  | 7.5 | Plot exists but is missing error bars entirely, OR error bars use the wrong statistic (`mean_se`, SD, or unspecified), OR uses a hand-built `geom_col()` + `geom_errorbar()` instead of `stat_summary()` (accept the result if the math is right, but the assignment asked for `stat_summary()`), OR not grouped by species. |
-| None  | 0   | No plot, or plot has neither species grouping nor any summary statistic. |
+| −1    | 14  | Correct `stat_summary()` + `mean_cl_normal` pattern, all polish items present except one — e.g., axis label still `flipper_length_mm`, or no title, or default theme, or default colors instead of viridis. |
+| Half  | 7.5 | Correct `stat_summary()` + `mean_cl_normal` pattern but two or more polish items missing ("did the main task and no extra stuff"). Also use this level if the plot uses a hand-built `geom_col()` + `geom_errorbar()` with the right math instead of `stat_summary()`, since the assignment specifically required `stat_summary()`. |
+| None  | 0   | Error bars missing or wrong statistic (`mean_se`, SD, unspecified), OR not grouped by species, OR no plot. |
 
 ### Task 2.1 — Histogram with bin width exploration (8 pts)
 

@@ -65,8 +65,8 @@ The course is organized into 10 weeks with 18 class sessions. See the [Schedule]
 | 4 | Quarto & Reproducibility, Layers & Aesthetics | 28, 9 |
 | 5 | Perception & Design, EDA — Variation | 10 |
 | 6 | EDA — Covariation, Data Types | 10, 12, 13 |
-| 7 | Strings, Factors & Text, Joins | 14, 16, 19 |
-| 8 | Missing Data | 18 |
+| 7 | Strings, Factors & Text, Missing Data | 14, 16, 18 |
+| 8 | Joins | 19 |
 | 9 | Storytelling with Data | 11 |
 | 10 | Correlation & Regression, Putting It All Together | 8 |
 

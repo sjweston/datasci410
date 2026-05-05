@@ -169,19 +169,22 @@ Fix the messy "major" column (has "Psych", "Psychology", "psychology", "PSYCHOLO
 ---
 
 ### Assignment 7: Joins & Missing Data
-**Assigned:** Session 14 (Wed Week 8, after Joins)
+**Assigned:** Session 14 (Wed Week 7, after Missing Data)
 **Due:** Sunday, May 24 at 11:59 PM
-**Topics:** joins, keys, missing values, complete cases
+**Topics:** missing values, complete cases, joins, keys
 **Format:** Quarto document
 
 **Tasks:**
+- [ ] Analyze patterns of missingness in a dataset
+- [ ] Create a complete-case analysis vs. a missing-handled analysis
 - [ ] Merge two related datasets (e.g., participant demographics + survey responses)
 - [ ] Identify participants who are in one dataset but not the other
-- [ ] Analyze patterns of missingness
-- [ ] Create a complete-case analysis vs. a missing-handled analysis
 - [ ] Reflect on implications for your conclusions
 
 **In-Class Exercise (Session 14):**
+Use `complete()` and `drop_na()` on a longitudinal dataset with implicit and explicit missingness. Decide which strategy fits this study and justify it.
+
+**In-Class Exercise (Session 15):**
 Join these two tables. Why are some rows missing? How would you handle this?
 
 ---
@@ -296,4 +299,4 @@ Question banks are in `quizzes/` with QTI packages (.zip) for Canvas import.
 - `tidytext` (Session 13, Assignment 6)
 - `broom` (Session 17)
 - `corrplot` or `ggcorrplot` (Session 17, optional)
-- `naniar` (Session 15, mention only)
+- `naniar` (Session 14, mention only)

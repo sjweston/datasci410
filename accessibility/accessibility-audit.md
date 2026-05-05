@@ -57,7 +57,7 @@ ggplot(mpg, aes(x = displ, y = hwy)) +
 - `10-eda-variation.qmd` — ~18 plots
 - `11-eda-covariation.qmd` — ~15 plots
 - `17-correlation-regression.qmd` — ~8 plots
-- `03-data-transformation-1.qmd`, `04-data-transformation-2.qmd`, `05-data-tidying.qmd`, `06-data-import.qmd`, `12-data-types.qmd`, `13-strings-factors.qmd`, `14-joins.qmd`, `15-missing-data.qmd`, `16-storytelling.qmd`, `18-putting-it-together.qmd` — various counts
+- `03-data-transformation-1.qmd`, `04-data-transformation-2.qmd`, `05-data-tidying.qmd`, `06-data-import.qmd`, `12-data-types.qmd`, `13-strings-factors.qmd`, `14-missing-data.qmd`, `15-joins.qmd`, `16-storytelling.qmd`, `18-putting-it-together.qmd` — various counts
 
 **Note:** Content pages, assignment pages, and resource pages do **not** have this problem — only slides.
 

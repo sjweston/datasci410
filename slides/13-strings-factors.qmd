@@ -855,11 +855,11 @@ likert_data_clean |>
 
 📖 **Read:**
 
-- R4DS Ch 19: Joins
+- R4DS Ch 18: Missing values
 
 ✅ **Do:**
 
-- Submit Assignment 6
+- Start Assignment 6
 - Check your final project data for string/factor issues
 - Practice cleaning demographic variables
 
@@ -867,9 +867,9 @@ likert_data_clean |>
 
 Messy categories turn into messy results. `str_to_lower()` and `factor()` are your first line of defense.
 
-See you Monday for joins!
+See you Wednesday for missing data!
 
 ::: {.notes}
-Remind students that Assignment 6 is now assigned and Assignment 5 is due. The reading for next class is R4DS Ch 19 on joins. Preview that joins let you combine two different datasets — e.g., matching participant demographics to their response data. Encourage students to check their final project data for string and factor issues this week.
+Remind students that Assignment 6 is now assigned and Assignment 5 was due Sunday. The reading for next class is R4DS Ch 18 on missing values. Preview that missing data is one of the most common issues in psychology research — attrition, skipped questions, lost waves — and that we'll learn how to detect and handle it. Encourage students to check their final project data for string and factor issues this week.
 :::
 

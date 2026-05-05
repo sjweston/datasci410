@@ -112,7 +112,7 @@ social_media |>
 ```
 
 ::: {.notes}
-Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: "What do you notice about the missing data? Which variables have it? How much?" This connects directly back to Session 15 on missing data.
+Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: "What do you notice about the missing data? Which variables have it? How much?" This connects directly back to Session 14 on missing data.
 :::
 
 ## Step 2: Clean the data
@@ -138,7 +138,7 @@ social_media_clean <- social_media |>
 ```
 
 ::: {.notes}
-Walk through each cleaning decision and explain the reasoning. "Why drop_na on the outcome variable?" Because you can't analyze what you can't measure. "Why create categories?" Because clinical cutoffs make the continuous scores more interpretable. "Why reorder academic year?" Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 15), case_when (Session 4), factor levels (Session 12).
+Walk through each cleaning decision and explain the reasoning. "Why drop_na on the outcome variable?" Because you can't analyze what you can't measure. "Why create categories?" Because clinical cutoffs make the continuous scores more interpretable. "Why reorder academic year?" Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 14), case_when (Session 4), factor levels (Session 12).
 :::
 
 ## Step 3: Descriptive statistics

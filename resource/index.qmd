@@ -45,8 +45,8 @@ Printable reference sheets for each class session — key functions, syntax, and
 | Session | Handout |
 |---------|---------|
 | 13: Strings, Factors & Text | [PDF](/files/handouts-pdf/handout-13-strings-factors.pdf) |
-| 14: Joins | [PDF](/files/handouts-pdf/handout-14-joins.pdf) |
-| 15: Missing Data | [PDF](/files/handouts-pdf/handout-15-missing-data.pdf) |
+| 14: Missing Data | [PDF](/files/handouts-pdf/handout-14-missing-data.pdf) |
+| 15: Joins | [PDF](/files/handouts-pdf/handout-15-joins.pdf) |
 | 16: Storytelling with Data | [PDF](/files/handouts-pdf/handout-16-storytelling.pdf) |
 | 17: Correlation & Regression | [PDF](/files/handouts-pdf/handout-17-correlation-regression.pdf) |
 | 18: Putting It All Together | [PDF](/files/handouts-pdf/handout-18-putting-it-together.pdf) |

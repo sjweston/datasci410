@@ -7,7 +7,7 @@ date: "2026-06-01"
 
 📖 **Reading:**
 
-- [R4DS Ch 8: Workflow: getting help](https://r4ds.hadley.nz/workflow-help)
+*A reading on correlation and simple regression will be posted here.*
 
 ::: {.callout-important}
 ## Assignment 8 is due today

@@ -122,9 +122,9 @@ Note: A6 is due May 17 (Sunday before the May 18 no-class Monday) and A7 is due 
 | 11 | Mon May 4 | EDA — Covariation |
 | 12 | Wed May 6 | Data Types Grab Bag |
 | 13 | Mon May 11 | Strings, Factors & Text |
-| 14 | Wed May 13 | Joins |
+| 14 | Wed May 13 | Missing Data |
 | — | Mon May 18 | *No class* |
-| 15 | Wed May 20 | Missing Data |
+| 15 | Wed May 20 | Joins |
 | — | Mon May 25 | *Memorial Day* |
 | 16 | Wed May 27 | Storytelling with Data |
 | 17 | Mon Jun 1 | Correlation & Simple Regression |

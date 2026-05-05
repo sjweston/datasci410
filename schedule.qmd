@@ -227,14 +227,14 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 [Assignment 5: Exploratory Data Analysis](/assignment/05-assignment.qmd) — Due Sunday, May 10 at 11:59 PM
 :::
 
-### Session 14: Joins
+### Session 14: Missing Data
 **Wednesday, May 13**
 
-- Primary keys and foreign keys
-- Mutating joins: `left_join()`, `inner_join()`, etc.
-- Filtering joins: `semi_join()`, `anti_join()`
+- Implicit vs. explicit missing values
+- Patterns of missingness
+- Strategies for handling missing data in psychological research
 
-📖 **Read:** [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
+📖 **Read:** [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
 
 ::: {.callout-tip}
 ## Assigned
@@ -243,7 +243,7 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 
 ---
 
-## Week 8: Missing Data {#week-8}
+## Week 8: Joins {#week-8}
 
 ### Monday, May 18
 
@@ -252,14 +252,14 @@ Below is the schedule for {{< var course.number >}}: {{< var course.title >}}.
 Use this time to work on your final project draft!
 :::
 
-### Session 15: Missing Data
+### Session 15: Joins
 **Wednesday, May 20**
 
-- Implicit vs. explicit missing values
-- Patterns of missingness
-- Strategies for handling missing data in psychological research
+- Primary keys and foreign keys
+- Mutating joins: `left_join()`, `inner_join()`, etc.
+- Filtering joins: `semi_join()`, `anti_join()`
 
-📖 **Read:** [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
+📖 **Read:** [R4DS Ch 19: Joins](https://r4ds.hadley.nz/joins)
 
 ::: {.callout-important}
 ## 📋 Assignment Due

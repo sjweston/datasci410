@@ -549,29 +549,67 @@ Try both a histogram and a boxplot. They show different things. Use `summary(cla
 Circulate during this exercise. Common issues: students forget to load `class_survey`, or they pick a binwidth that's too small/large. The distribution will likely be right-skewed with a few extreme values — this is a great moment to ask "is the person who said 12 hours/day an outlier, an error, or just honest?" If pairs finish early, suggest they compare to `caffeine_per_day` or `tabs_open`.
 :::
 
-```{r}
-#| echo: false
-#| eval: false
-# Solution (reveal after time is up)
-ggplot(class_survey, aes(x = social_media_hrs)) +
-  geom_histogram(binwidth = 1, fill = "#2c7fb8", color = "white") +
-  labs(x = "Social media (hours/day)", y = "Count") +
-  theme_minimal(base_size = 14) +
-  theme(panel.grid = element_blank(),
-        axis.line = element_line(color = "gray70"))
+## Solution: Social media hours {background-color="#e67e22"}
 
-# Outlier check
-ggplot(class_survey, aes(x = social_media_hrs)) +
-  geom_boxplot(fill = "#2c7fb8", alpha = 0.7) +
-  theme_minimal(base_size = 14) +
-  theme(panel.grid = element_blank())
+```{r}
+#| echo: true
+#| eval: false
+class_survey |>
+  ggplot(aes(x = social_media_hrs)) +
+  geom_histogram(
+    binwidth = 2,
+    fill = "navy",
+    color = "white") +
+  scale_x_continuous(
+    breaks = c(0, 2, 4, 6, 8)
+  ) +
+  theme_minimal()
+
+class_survey |>
+  ggplot(aes(x = social_media_hrs)) +
+  geom_boxplot(
+    fill = "lightgrey",
+    color = "navy"
+  ) +
+  theme_bw()
 ```
 
----
+## Solution: histogram {background-color="#e67e22"}
 
-## Before we move on
+```{r}
+#| echo: false
+#| eval: true
+#| fig-width: 9
+#| fig-height: 5
+#| fig-alt: "Histogram of self-reported social media hours per day with binwidth of 2, navy fill and white borders, x-axis breaks at 0, 2, 4, 6, 8, and a minimal theme."
+class_survey |>
+  ggplot(aes(x = social_media_hrs)) +
+  geom_histogram(
+    binwidth = 2,
+    fill = "navy",
+    color = "white") +
+  scale_x_continuous(
+    breaks = c(0, 2, 4, 6, 8)
+  ) +
+  theme_minimal()
+```
 
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
+## Solution: boxplot {background-color="#e67e22"}
+
+```{r}
+#| echo: false
+#| eval: true
+#| fig-width: 9
+#| fig-height: 4
+#| fig-alt: "Horizontal boxplot of self-reported social media hours per day with light grey fill and navy outline, on a black-and-white theme. Outliers appear as individual points beyond the upper whisker."
+class_survey |>
+  ggplot(aes(x = social_media_hrs)) +
+  geom_boxplot(
+    fill = "lightgrey",
+    color = "navy"
+  ) +
+  theme_bw()
+```
 
 # Missing data — a first look {background-color="#2c3e50"}
 

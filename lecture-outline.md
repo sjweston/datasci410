@@ -453,46 +453,8 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ---
 
-## Session 14: Joins
+## Session 14: Missing Data
 **Wednesday, May 13**
-
-### Topics
-- Why join data?
-  - Data often lives in multiple tables
-  - Participant info + survey responses
-  - Longitudinal data across timepoints
-- Keys
-  - Primary keys (unique identifier in a table)
-  - Foreign keys (reference to another table's primary key)
-  - Checking for unique keys
-- Mutating joins (add columns)
-  - `left_join()` — keep all rows from left
-  - `right_join()` — keep all rows from right
-  - `inner_join()` — keep only matching rows
-  - `full_join()` — keep all rows from both
-- Filtering joins (filter rows)
-  - `semi_join()` — keep rows that have a match
-  - `anti_join()` — keep rows that DON'T have a match
-- Common issues
-  - Many-to-many relationships
-  - Missing keys
-  - Duplicate keys
-
-### Key Functions/Concepts
-- `left_join()`, `right_join()`, `inner_join()`, `full_join()`
-- `semi_join()`, `anti_join()`
-- `by` argument for specifying keys
-
-### Readings (before class)
-- R4DS Ch 19: Joins
-
-### Assignment
-- **Assigned:** Assignment 7 (Joins & Missing Data)
-
----
-
-## Session 15: Missing Data
-**Wednesday, May 20** *(no class Monday May 18)*
 
 ### Topics
 - Why missing data matters in psychology
@@ -523,6 +485,44 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ### Readings (before class)
 - R4DS Ch 18: Missing values
+
+### Assignment
+- **Assigned:** Assignment 7 (Joins & Missing Data)
+
+---
+
+## Session 15: Joins
+**Wednesday, May 20** *(no class Monday May 18)*
+
+### Topics
+- Why join data?
+  - Data often lives in multiple tables
+  - Participant info + survey responses
+  - Longitudinal data across timepoints
+- Keys
+  - Primary keys (unique identifier in a table)
+  - Foreign keys (reference to another table's primary key)
+  - Checking for unique keys
+- Mutating joins (add columns)
+  - `left_join()` — keep all rows from left
+  - `right_join()` — keep all rows from right
+  - `inner_join()` — keep only matching rows
+  - `full_join()` — keep all rows from both
+- Filtering joins (filter rows)
+  - `semi_join()` — keep rows that have a match
+  - `anti_join()` — keep rows that DON'T have a match
+- Common issues
+  - Many-to-many relationships
+  - Missing keys
+  - Duplicate keys
+
+### Key Functions/Concepts
+- `left_join()`, `right_join()`, `inner_join()`, `full_join()`
+- `semi_join()`, `anti_join()`
+- `by` argument for specifying keys
+
+### Readings (before class)
+- R4DS Ch 19: Joins
 
 ### Assignments
 - **Due:** Assignment 6

@@ -1,4 +1,4 @@
-# Session 15: Missing Data — Pen-and-Paper Pair Exercise
+# Session 14: Missing Data — Pen-and-Paper Pair Exercise
 
 **PSY 410 | Data Science for Psychology**
 

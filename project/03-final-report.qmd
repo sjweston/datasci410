@@ -110,7 +110,7 @@ Your report should include **4-6 publication-ready figures** total. Each figure 
 ::: {.callout-tip}
 ## What makes an A-level report?
 
-An excellent report doesn't just show data — it tells a **story**. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 15 as you finalize your report.
+An excellent report doesn't just show data — it tells a **story**. The figures are chosen deliberately to answer specific questions, the narrative guides the reader through your findings, and the whole document feels like a coherent piece of work (not a collection of disconnected plots). Review the storytelling principles from Session 16 as you finalize your report.
 :::
 
 ---

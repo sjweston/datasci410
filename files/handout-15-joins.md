@@ -1,4 +1,4 @@
-# Session 14: Joins — Pen-and-Paper Pair Exercise
+# Session 15: Joins — Pen-and-Paper Pair Exercise
 
 **PSY 410 | Data Science for Psychology**
 
