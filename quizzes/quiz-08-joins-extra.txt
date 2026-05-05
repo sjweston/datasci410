@@ -1,0 +1,191 @@
+Quiz title: Quiz 8: Joins — Extra Questions (R4DS Ch. 19)
+
+1. What does this code do?
+
+    participants |>
+      left_join(survey, by = "id") |>
+      left_join(scores, by = "id")
+
+*a) Combines all three tables, keeping every row from `participants` and adding columns from the others where matches exist
+b) Returns only participants who appear in all three tables
+c) Throws an error because you can't chain joins
+d) Combines the three tables into a long-format data frame
+
+2. You join two tables. The left has 100 rows, the right has 80 rows, and 70 IDs appear in both. How many rows will `inner_join(left, right, by = "id")` return?
+a) 100
+b) 80
+*c) 70
+d) 180
+
+3. With the same setup (100 left, 80 right, 70 in common), how many rows will `left_join(left, right, by = "id")` return?
+*a) 100
+b) 70
+c) 80
+d) 180
+
+4. Same setup again. How many rows will `full_join(left, right, by = "id")` return?
+a) 100
+b) 70
+*c) 110
+d) 180
+
+5. Same setup. How many rows will `anti_join(left, right, by = "id")` return?
+a) 0
+b) 10
+*c) 30
+d) 70
+
+6. A longitudinal dataset has columns `id` and `wave`, where each (id, wave) pair is unique. To join it to a wave-specific scores table also keyed by (id, wave), the correct `by` is:
+a) `by = "id"`
+*b) `by = c("id", "wave")`
+c) `by = "wave"`
+d) Pivot the data to wide format first
+
+7. You have two CSV files with the same columns — survey responses from Wave 1 and Wave 2. To stack them into one long table, use:
+*a) `bind_rows()`
+b) `left_join()`
+c) `full_join()`
+d) `inner_join()`
+
+8. When would you use `bind_cols()` instead of a join?
+a) When the two tables have different numbers of rows
+*b) When the two tables already have rows in the same order with no shared key column
+c) When you want to filter rows
+d) When you want to keep only matching rows
+
+9. You have a table with one row per participant per session (columns: `participant_id`, `session_num`, `score`). What is the primary key?
+a) `participant_id`
+b) `session_num`
+*c) The combination of `participant_id` and `session_num`
+d) `score`
+
+10. In R4DS, a "surrogate key" is:
+a) A key from a different table
+b) A key that contains missing values
+*c) An artificial key (often a row number) added when no natural unique identifier exists
+d) A key that has been encrypted
+
+11. You write `survey |> left_join(participants, by = "id")`. Which rows are kept?
+*a) All rows from `survey`, plus matching columns from `participants`
+b) All rows from `participants`, plus matching columns from `survey`
+c) Only rows that appear in both tables
+d) All rows from both tables
+
+12. Is `a |> left_join(b)` equivalent to `b |> left_join(a)`?
+a) Yes — the result is identical
+*b) No — the "left" table determines which rows are kept, so the row sets differ
+c) Only if all keys match
+d) Only when using `inner_join()` instead
+
+13. You want to add demographics to your survey responses, but only for adult participants (age 18+). The cleanest approach is:
+a) `survey |> left_join(demographics)` then `filter(age >= 18)` (works but loads more data than needed)
+*b) `survey |> left_join(demographics |> filter(age >= 18))`
+c) `survey |> inner_join(demographics)` (this doesn't filter by age at all)
+d) Joins can't be combined with filtering
+
+14. A common danger of `inner_join()` in psychology research is:
+a) It always returns more rows than expected
+b) It can't handle NA values
+*c) It silently drops rows without a match — you may lose participants without realizing it
+d) It changes the column order
+
+15. You want to keep only the survey responses from participants who appear in your master roster. The cleanest tool is:
+a) `inner_join(survey, roster, by = "id")` then drop extra columns
+*b) `semi_join(survey, roster, by = "id")`
+c) `anti_join(survey, roster, by = "id")`
+d) `bind_rows(survey, roster)`
+
+16. You have an `enrolled` table (everyone who signed up) and a `completed` table (everyone who finished). To find dropouts, use:
+a) `enrolled |> inner_join(completed, by = "id")`
+*b) `enrolled |> anti_join(completed, by = "id")`
+c) `completed |> anti_join(enrolled, by = "id")`
+d) `full_join(enrolled, completed, by = "id")`
+
+17. An `anti_join()` returns:
+a) All columns from both tables
+*b) Only the columns from the left (first) table — no columns are added from the right
+c) Only the matching columns
+d) The same columns as `inner_join()` would
+
+18. What does this return?
+
+    participants |>
+      inner_join(survey, by = "id") |>
+      count(condition)
+
+a) Number of participants per condition in the participants table
+*b) Number of participants per condition who also have survey data
+c) Number of survey responses per condition (regardless of the participants table)
+d) An error
+
+19. After a join, the result has unexpectedly many more rows than the left table. The most likely cause is:
+*a) Duplicate keys in the right table — each duplicate produces an extra matched row
+b) Missing values in the key column
+c) Different column orders
+d) Different file formats
+
+20. In dplyr 1.1+, joins where both tables have duplicate keys (a many-to-many join) require you to:
+a) Set `na_matches = "na"`
+*b) Acknowledge it explicitly with `relationship = "many-to-many"`
+c) Pre-filter for unique keys
+d) Use `full_join()` instead
+
+21. You're joining `responses` (which has column `subject_id`) and `demographics` (which has column `participant`). Which `by` is correct?
+a) `by = c("subject_id", "participant")`
+b) `by = list(subject_id = participant)`
+*c) `by = join_by(subject_id == participant)`
+d) `by = subject_id ~ participant`
+
+22. If a row in the LEFT table matches 3 rows in the right table during a `left_join()`, what happens?
+a) Only the first match is kept
+b) An error is thrown
+*c) The left row is duplicated three times — once for each match
+d) The matches are silently dropped
+
+23. Before joining, R4DS recommends checking for duplicate keys with:
+*a) `df |> count(id) |> filter(n > 1)`
+b) `duplicated(df$id)` only
+c) `summary(df)`
+d) `glimpse(df)`
+
+24. You want the mean depression score for each treatment condition, where `condition` lives in `demographics` and `depression` lives in `surveys`. The right approach is:
+a) Joins are not needed
+*b) Join `surveys` to `demographics`, then `group_by(condition) |> summarize(mean(depression))`
+c) Use `summarize()` first, then join
+d) Use `bind_cols()` instead
+
+25. After `participants |> left_join(survey, by = "id")`, NA values in the new survey columns mean:
+*a) That participant didn't have a matching row in `survey`
+b) That participant filled in "NA" as their response
+c) An error occurred during the join
+d) The survey table is empty
+
+26. When is `inner_join()` preferable to `left_join()`?
+a) Always — it's safer
+*b) When you only want to analyze participants who have data in both tables and you've already documented attrition
+c) When the right table is bigger
+d) Never — always use `left_join()`
+
+27. You have demographics in wide format (one row per participant) and trial data in long format (many rows per participant). What does `left_join(trials, demographics, by = "id")` produce?
+*a) One row per trial, with the participant's demographic info repeated across their trials
+b) One row per participant
+c) An error because of the format mismatch
+d) The trials table reshaped to wide format
+
+28. The key difference between **mutating** joins and **filtering** joins is:
+a) Mutating joins are faster
+b) Filtering joins are deprecated in dplyr 1.1
+*c) Mutating joins add columns from the right table; filtering joins only keep or remove rows of the left table without adding columns
+d) Filtering joins use `filter()` internally
+
+29. In R4DS, a "natural key" is:
+a) Any key that contains numbers
+*b) A key made from existing variable(s) that meaningfully identify each row (like `participant_id`)
+c) A key generated by R automatically
+d) A key that doesn't change over time
+
+30. You have a `qualtrics` export with a `ResponseId` column and a `task_data` table with a `subject` column. The two columns hold the same identifier but are named differently. The most modern dplyr syntax to join them is:
+*a) `qualtrics |> left_join(task_data, by = join_by(ResponseId == subject))`
+b) `qualtrics |> left_join(task_data, by = ResponseId)`
+c) `qualtrics |> left_join(task_data, on = "ResponseId")`
+d) Rename one of the columns first — it's the only way
