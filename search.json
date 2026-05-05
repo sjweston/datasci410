@@ -1412,7 +1412,7 @@
     "href": "assignment/05-assignment.html#part-2-exploring-relationships-30-points",
     "title": "Assignment 5: Exploratory Data Analysis",
     "section": "Part 2: Exploring Relationships (30 points)",
-    "text": "Part 2: Exploring Relationships (30 points)\n\nTask 2.1\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint:\nbfi |&gt;\n  select(E1:E5) |&gt;\n  cor(use = \"complete.obs\") |&gt;\n  # then visualize...\nWhat do you notice? (Some items may be reverse-coded!)\n\n\nTask 2.2\nPick two Extraversion items that look interesting from your correlation matrix. Create a scatterplot of those two items with a trend line. Does the relationship match what the correlation matrix suggested?\n\n\nTask 2.3\nPick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?",
+    "text": "Part 2: Exploring Relationships (30 points)\n\nTask 2.1\nCreate a correlation matrix visualization for the 5 Extraversion items (E1-E5).\nHint: cor() doesn’t know how to handle missing values by default — if any participant skipped any item, you’ll get NAs everywhere. Pass use = \"complete.obs\" to tell it to compute correlations using only participants who answered every item.\nWhat do you notice? (Some items may be reverse-coded!)\n\n\nTask 2.2\nPick two Extraversion items that look interesting from your correlation matrix. Create a scatterplot of those two items with a trend line. Does the relationship match what the correlation matrix suggested?\n\n\nTask 2.3\nPick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",

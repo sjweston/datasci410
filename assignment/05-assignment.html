@@ -385,11 +385,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-2.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.1">Task 2.1</h3>
 <p>Create a correlation matrix visualization for the 5 Extraversion items (E1-E5).</p>
-<p>Hint:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(E1<span class="sc">:</span>E5) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># then visualize...</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Hint: <code>cor()</code> doesn’t know how to handle missing values by default — if any participant skipped any item, you’ll get <code>NA</code>s everywhere. Pass <code>use = "complete.obs"</code> to tell it to compute correlations using only participants who answered every item.</p>
 <p>What do you notice? (Some items may be reverse-coded!)</p>
 </section>
 <section id="task-2.2" class="level3">
