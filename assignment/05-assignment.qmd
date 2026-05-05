@@ -51,31 +51,25 @@ This contains responses from 2,800 participants on 25 personality items (5 per B
 Create histograms for age and at least one personality item. What do you notice about the distributions?
 
 ### Task 1.2
-Are there any outliers or unusual values in age? How would you identify them programmatically? (Hint: consider values beyond 3 standard deviations, or use `filter()` with reasonable bounds)
+Are there any outliers or unusual values in age? How would you identify them programmatically? (Hint: use `filter()` with reasonable bounds.)
 
 ### Task 1.3
-How much missing data is there? Create a summary showing the percentage of NA values for each variable.
+How much missing data is there? Create a summary showing the percentage of NA values for each variable. (Hint: see the missing-data section of the [Session 10 slides](../slides/10-eda-variation.html) — the `across()` + `mean(is.na(.))` pattern is what you want.)
 
 ## Part 2: Exploring Relationships (30 points)
 
 ### Task 2.1
-Create a correlation matrix visualization for the 5 Extraversion items (E1-E5).
+Pick two Extraversion items (e.g., E1 and E2). Compute the correlation between them and briefly interpret the result. Are the items positively or negatively related? Does the strength surprise you given that both are supposed to measure the same trait? (Some items may be reverse-coded!)
 
-Hint:
-```r
-bfi |>
-  select(E1:E5) |>
-  cor(use = "complete.obs") |>
-  # then visualize...
-```
-
-What do you notice? (Some items may be reverse-coded!)
+Hint: `cor()` doesn't know how to handle missing values by default — if any participant skipped either item, you'll get `NA`. Pass `use = "complete.obs"` to tell it to compute the correlation using only participants who answered both items.
 
 ### Task 2.2
-Pick two Extraversion items that look interesting from your correlation matrix. Create a scatterplot of those two items with a trend line. Does the relationship match what the correlation matrix suggested?
+Make a scatterplot of those same two items with a trend line. Does the visual relationship match what the correlation in Task 2.1 suggested?
 
 ### Task 2.3
 Pick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?
+
+Hint: education is stored as numeric codes (1–5), so ggplot will treat it as continuous and give you one squashed boxplot. See the factor section of the [Session 10 slides](../slides/10-eda-variation.html) for how to convert it to a labeled factor first.
 
 ## Part 3: Generating Questions (20 points)
 
@@ -103,8 +97,8 @@ Write this as narrative text (not code comments) in your Quarto document.
 | 1.1: Histograms for age and personality item | 8 |
 | 1.2: Outlier detection in age | 8 |
 | 1.3: Missing data summary | 9 |
-| 2.1: Correlation matrix of E1–E5 | 10 |
-| 2.2: Scatterplot of two Extraversion items | 10 |
+| 2.1: Correlation between two Extraversion items + interpretation | 10 |
+| 2.2: Scatterplot of those two items with trend line | 10 |
 | 2.3: Boxplots by education level | 10 |
 | 3.1: Generate 3 research questions | 8 |
 | 3.2: Visualization + interpretation for one question | 12 |
