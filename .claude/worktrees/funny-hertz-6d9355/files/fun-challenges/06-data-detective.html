@@ -1,0 +1,73 @@
+<div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; max-width: 800px; margin: 0 auto; color: #2d3b45;">
+
+  <!-- Header -->
+  <div style="background: linear-gradient(135deg, #e67e22, #d35400); color: white; padding: 24px 30px; border-radius: 8px; margin-bottom: 20px;">
+    <h1 style="margin: 0 0 4px 0; font-size: 24px; font-weight: 700;">Fun Challenge 6: Data Detective</h1>
+    <p style="margin: 0; font-size: 15px; opacity: 0.9;">Due: Sunday, May 10 at 11:59 PM</p>
+  </div>
+
+  <!-- Intro -->
+  <div style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 22px 26px; margin-bottom: 20px;">
+    <p style="margin: 0 0 16px 0; font-size: 15px; line-height: 1.6;">You've been given a dataset (<strong>06-data-detective.csv</strong>) from a fictional psychology study on the relationship between sleep, stress, and exam performance in college students.</p>
+
+    <h2 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; color: #2d3b45;">Variables</h2>
+    <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 8px;">
+      <tr style="border-bottom: 2px solid #e67e22;">
+        <th style="text-align: left; padding: 8px 12px; font-weight: 600;">Variable</th>
+        <th style="text-align: left; padding: 8px 12px; font-weight: 600;">Description</th>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">student_id</code></td>
+        <td style="padding: 8px 12px;">Unique ID</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">hours_sleep</code></td>
+        <td style="padding: 8px 12px;">Average hours of sleep per night (self-reported)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">stress_level</code></td>
+        <td style="padding: 8px 12px;">Perceived stress score (1&ndash;10 scale)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">exam_score</code></td>
+        <td style="padding: 8px 12px;">Final exam score (0&ndash;100)</td>
+      </tr>
+      <tr style="border-bottom: 1px solid #eee;">
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">study_hours</code></td>
+        <td style="padding: 8px 12px;">Weekly study hours (self-reported)</td>
+      </tr>
+      <tr>
+        <td style="padding: 8px 12px;"><code style="background: #f5f5f5; padding: 2px 6px; border-radius: 3px; font-size: 13px; color: #2d3b45;">year</code></td>
+        <td style="padding: 8px 12px;">Year in college (1 = freshman, 2 = sophomore, 3 = junior, 4 = senior)</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Task -->
+  <div style="background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 22px 26px; margin-bottom: 20px;">
+    <h2 style="font-size: 18px; font-weight: 600; margin: 0 0 12px 0; color: #2d3b45;">Your Job</h2>
+    <p style="margin: 0 0 14px 0; font-size: 15px; line-height: 1.6;"><strong>Something is weird about this data.</strong> Your job is to figure out what.</p>
+
+    <ol style="margin: 0 0 16px 0; padding-left: 22px; font-size: 15px; line-height: 1.8;">
+      <li>Make <strong>at least 3 plots</strong> exploring the variables and relationships.</li>
+      <li>Identify the <strong>two unusual things</strong> hidden in the data.</li>
+      <li>For each anomaly, explain:
+        <ul style="margin: 6px 0 4px 0; padding-left: 20px;">
+          <li><strong>What</strong> you found</li>
+          <li><strong>How</strong> you found it (which plot or summary revealed it)</li>
+          <li><strong>What might have gone wrong</strong> in the study</li>
+        </ul>
+      </li>
+    </ol>
+
+    <div style="background: #fdf2e9; border-left: 4px solid #e67e22; padding: 12px 16px; border-radius: 0 6px 6px 0;">
+      <p style="margin: 0; font-size: 14px; line-height: 1.5;"><strong>Hint:</strong> Look at distributions, relationships between variables, and whether the data makes sense given what you know about college students.</p>
+    </div>
+  </div>
+
+  <!-- Submit box -->
+  <div style="background: #fef9e7; border: 1px solid #f0d87e; border-radius: 6px; padding: 16px 20px;">
+    <p style="margin: 0; font-size: 14px;"><strong>Submit:</strong> A Quarto document or R script with your plots, code, and written explanations. One submission per team.</p>
+  </div>
+
+</div>
