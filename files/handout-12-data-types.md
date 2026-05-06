@@ -31,33 +31,20 @@ You have survey data with a 1–7 attention check item where the correct answer 
 
 ### Your pen-and-paper version
 
-**Step 1: Create the `passed` column by hand.** For each row, evaluate `attention_check == 4`:
+**Steps 1 & 2: Fill in `passed` and `status` for each row.** `passed` is `TRUE` when `attention_check == 4`. `status` uses `case_when()` logic — check conditions in order ("No response" for NA, "Passed" for 4, "Failed" otherwise).
 
-| participant_id | attention_check | passed |
-|----------------|-----------------|--------|
-| 1              | 4               |        |
-| 2              | 3               |        |
-| 3              | 4               |        |
-| 4              | 7               |        |
-| 5              | NA              |        |
-| 6              | 4               |        |
+| participant_id | attention_check | passed | status |
+|----------------|-----------------|--------|--------|
+| 1              | 4               |        |        |
+| 2              | 3               |        |        |
+| 3              | 4               |        |        |
+| 4              | 7               |        |        |
+| 5              | NA              |        |        |
+| 6              | 4               |        |        |
 
 **Tricky question:** What does `NA == 4` return? (Not `FALSE`!) _____
 
-**Step 2: Create the `status` column.** This requires `case_when()` logic — check conditions in order. Fill in:
-
-| participant_id | attention_check | status        |
-|----------------|-----------------|---------------|
-| 1              | 4               |               |
-| 2              | 3               |               |
-| 3              | 4               |               |
-| 4              | 7               |               |
-| 5              | NA              |               |
-| 6              | 4               |               |
-
-**Why do we need to check for `is.na()` first in `case_when()`?**
-
-Your answer: ___________________________________________________________________
+**Why do we need to check for `is.na()` first in `case_when()`?** ____________________________________________________
 
 **Step 3: Calculate the proportion who passed.** Using `mean(x == 4, na.rm = TRUE)`:
 
