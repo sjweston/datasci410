@@ -224,6 +224,8 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Today we learn to detect, explore, and handle missing data honestly.</p>
 <aside class="notes">
+<p><strong>PACING (~80 min total):</strong> Why missing data matters (~5). Types of missing data (~8). Exploring missing data (~10). Handling missing data (~15). Implicit→explicit (~8). Pair coding (~10). Mechanisms + reporting (~12). Multiple imputation (~2). Wrap-up (~5). If running short, cut the multiple imputation section entirely and shorten the MCAR/MAR/MNAR examples — the reporting paragraph at the end is the more important takeaway.</p>
+<p><strong>A6 reminder:</strong> Make sure to flag at the top of class (and again at the end) that Assignment 6 is due Sunday May 17 at 11:59 PM — that’s this weekend, so it’s the most pressing deadline on their plate.</p>
 <p>Ask if anyone ran into NAs while exploring data for their final project. The 30-50% statistic is a real number from attrition research and tends to surprise students. Emphasize the word “honestly” — this session is as much about research ethics and transparency as it is about R functions. Spend ~2 minutes on this opening.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -304,7 +306,7 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Who didn’t show up? You can’t tell because they’re not in the data!</p>
 <aside class="notes">
-<p>This distinction (explicit vs.&nbsp;implicit) is one of the most important conceptual takeaways. Ask students: “Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?” The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. Foreshadow that next session’s joins lecture gives us another tool for finding implicit missingness (anti_join).</p>
+<p>This distinction (explicit vs.&nbsp;implicit) is one of the most important conceptual takeaways. Ask students: “Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?” The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. We will see complete() later in this deck as the main tool for surfacing implicit missingness within a single dataset.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -408,12 +410,13 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="better-approach-across" class="slide level2">
 <h2>Better approach: across()</h2>
+<p><code>across(columns, function)</code> applies the same function to multiple columns at once:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
 <span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
 <span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">everything</span>(),</span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x))</span>
+<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">everything</span>(),       <span class="co"># which columns: all of them</span></span>
+<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.x))    <span class="co"># what to do: count NAs (.x = "this column")</span></span>
 <span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
 <span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -423,25 +426,8 @@ Dr.&nbsp;Sara Weston
 1     0     2          2       1</code></pre>
 </div>
 </div>
-<div class="fragment">
-<p>Or as proportions:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">everything</span>(),</span>
-<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span><span class="fu">mean</span>(<span class="fu">is.na</span>(.x))</span>
-<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-     id   age depression anxiety
-  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-1     0 0.333      0.333   0.167</code></pre>
-</div>
-</div>
 <aside class="notes">
-<p>The across() + everything() pattern is new for most students. Explain the tilde (~) shorthand as “for each column, do this.” The proportion version (using mean() instead of sum()) is especially useful for reporting — you can say “33% of participants were missing age data.” Students often ask whether to report counts or proportions; the answer is both, ideally. Spend ~3 minutes on this slide since the syntax is unfamiliar.</p>
+<p>The across() + everything() pattern is essentially new for most students — they only saw it briefly in Session 10 and were told to focus on output, not mechanics. Walk through the anatomy slowly: across() takes (1) which columns and (2) what to do to each. The tilde (~) plus .x is shorthand for “for each column, do this.” Spend ~3 minutes on this slide since the syntax is unfamiliar.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -453,50 +439,49 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</div>
 </section>
-<section id="which-rows-have-missing-data" class="slide level2">
-<h2>Which rows have missing data?</h2>
+<section id="or-as-proportions" class="slide level2">
+<h2>Or as proportions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Show only rows with any NA</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_any</span>(<span class="fu">everything</span>(), is.na))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 4
-     id   age depression anxiety
-  &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-1     2    NA         18      20
-2     3    30         NA      12
-3     4    22         10      NA
-4     5    NA         15      18
-5     6    28         NA      16</code></pre>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Show only complete cases</span></span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">if_all</span>(<span class="fu">everything</span>(), <span class="sc">~!</span><span class="fu">is.na</span>(.x)))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(</span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">everything</span>(),</span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.x))</span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
      id   age depression anxiety
-  &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-1     1    25         12      15</code></pre>
+  &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
+1     0 0.333      0.333   0.167</code></pre>
 </div>
 </div>
-</div>
+<aside class="notes">
+<p>Swapping sum() for mean() turns counts into proportions — a useful trick that reuses the TRUE = 1 / FALSE = 0 idea. This is especially useful for reporting: “33% of participants were missing age data.” Students often ask whether to report counts or proportions; the answer is both, ideally.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="visualizing-missingness" class="slide level2">
 <h2>Visualizing missingness</h2>
 <p>The <code>naniar</code> package provides great visualization tools:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual summary</span></span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(survey)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Visual summary</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">vis_miss</span>(survey)</span></code></pre></div>
 
 </div>
-<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-12-1.png" alt="Heatmap showing the pattern of missing values across all variables in the survey data. Each row is a participant and each column is a variable, with missing cells highlighted to reveal where data gaps occur." width="960" class="r-stretch"><aside class="notes">
+<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Heatmap showing the pattern of missing values across all variables in the survey data. Each row is a participant and each column is a variable, with missing cells highlighted to reveal where data gaps occur." width="960" class="r-stretch"><aside class="notes">
 <p>The naniar package is optional — students do not need to install it for assignments. But the vis_miss() plot is a great diagnostic tool worth showing. Each column is a variable, each row is a participant, and missing cells are colored. This gives an immediate visual sense of where the holes are. If naniar is not installed on your machine, you can skip this live and just show the rendered output.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -509,17 +494,6 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="patterns-of-missingness" class="slide level2">
-<h2>Patterns of missingness</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Are certain combinations of variables missing together?</span></span>
-<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">gg_miss_upset</span>(survey)</span></code></pre></div>
-
-</div>
-<img data-src="14-missing-data_files/figure-revealjs/unnamed-chunk-13-1.png" alt="Upset plot showing which combinations of variables have missing values in the same rows, revealing whether missingness clusters across specific variable pairs." width="960" class="r-stretch"><div class="fragment">
-<p>This shows which combinations of variables are missing in the same rows.</p>
-</div>
 </section></section>
 <section>
 <section id="handling-missing-data" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -530,20 +504,8 @@ Dr.&nbsp;Sara Weston
 <h2>Strategy 1: Complete case analysis</h2>
 <p><strong>Complete case analysis</strong> (listwise deletion) removes any row with <em>any</em> <code>NA</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Base R way</span></span>
-<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">na.omit</span>(survey)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 4
-     id   age depression anxiety
-  &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;   &lt;dbl&gt;
-1     1    25         12      15</code></pre>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># tidyverse way</span></span>
-<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 4
      id   age depression anxiety
@@ -552,7 +514,7 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 <aside class="notes">
-<p>Transition cue: “Now that we know how to find missing data, let’s talk about what to do about it.” Present both the base R and tidyverse approaches so students recognize na.omit() when they see it in other people’s code, but encourage them to use drop_na() for consistency with the tidyverse workflow. Students often default to this strategy because it is the simplest — the next slide shows why that can be dangerous.</p>
+<p>Transition cue: “Now that we know how to find missing data, let’s talk about what to do about it.” Students often default to this strategy because it is the simplest — the next slide shows why that can be dangerous. (Aside, if students ever see <code>na.omit()</code> elsewhere: it’s the base R equivalent of <code>drop_na()</code> — same behavior.)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -564,20 +526,19 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</div>
 </section>
 <section id="dangers-of-complete-case-analysis" class="slide level2">
 <h2>Dangers of complete case analysis</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Started with 6 participants</span></span>
-<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(survey)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Started with 6 participants</span></span>
+<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(survey)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Only 2 complete cases</span></span>
-<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
-<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Only 2 complete cases</span></span>
+<span id="cb22-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb22-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb22-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1</code></pre>
 </div>
@@ -615,9 +576,9 @@ Dr.&nbsp;Sara Weston
 <h2>Selective dropping</h2>
 <p>Only drop rows missing <em>specific</em> variables:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop only if depression is missing</span></span>
-<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(depression)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop only if depression is missing</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(depression)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 4
      id   age depression anxiety
@@ -628,11 +589,13 @@ Dr.&nbsp;Sara Weston
 4     5    NA         15      18</code></pre>
 </div>
 </div>
-<div class="fragment">
+</section>
+<section id="drop-on-multiple-variables" class="slide level2">
+<h2>Drop on multiple variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop only if depression OR anxiety is missing</span></span>
-<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(depression, anxiety)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop only if depression OR anxiety is missing</span></span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(depression, anxiety)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id   age depression anxiety
@@ -640,7 +603,6 @@ Dr.&nbsp;Sara Weston
 1     1    25         12      15
 2     2    NA         18      20
 3     5    NA         15      18</code></pre>
-</div>
 </div>
 </div>
 </section>
@@ -678,14 +640,14 @@ Dr.&nbsp;Sara Weston
 <h2>Strategy 2: Filling values</h2>
 <p>Sometimes you can <strong>reasonably fill</strong> missing values:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Carry forward the last observation</span></span>
-<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mood =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
-<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="sc">|&gt;</span></span>
-<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(mood)  <span class="co"># Fills downward by default</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Carry forward the last observation</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">day =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mood =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>, <span class="dv">6</span>)</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="sc">|&gt;</span></span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(mood)  <span class="co"># Fills downward by default</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
     day  mood
@@ -714,9 +676,9 @@ Dr.&nbsp;Sara Weston
 <section id="fill-directions" class="slide level2">
 <h2>Fill directions</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill upward</span></span>
-<span id="cb37-2"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="sc">|&gt;</span></span>
-<span id="cb37-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(mood, <span class="at">.direction =</span> <span class="st">"up"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill upward</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(mood, <span class="at">.direction =</span> <span class="st">"up"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
     day  mood
@@ -726,23 +688,6 @@ Dr.&nbsp;Sara Weston
 3     3     4
 4     4     4
 5     5     6</code></pre>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill both ways</span></span>
-<span id="cb39-2"><a href="" aria-hidden="true" tabindex="-1"></a>time_series <span class="sc">|&gt;</span></span>
-<span id="cb39-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fill</span>(mood, <span class="at">.direction =</span> <span class="st">"updown"</span>)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 2
-    day  mood
-  &lt;int&gt; &lt;dbl&gt;
-1     1     5
-2     2     4
-3     3     4
-4     4     4
-5     5     6</code></pre>
-</div>
 </div>
 </div>
 </section>
@@ -773,12 +718,12 @@ Dr.&nbsp;Sara Weston
 <section id="strategy-3-replace-with-a-specific-value" class="slide level2">
 <h2>Strategy 3: Replace with a specific value</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace NAs with a value</span></span>
-<span id="cb41-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb41-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb41-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">replace_na</span>(age, <span class="dv">99</span>),  <span class="co"># Code 99 = "no response"</span></span>
-<span id="cb41-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">replace_na</span>(depression, <span class="sc">-</span><span class="dv">999</span>)  <span class="co"># Obvious invalid code</span></span>
-<span id="cb41-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Replace NAs with a value</span></span>
+<span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age =</span> <span class="fu">replace_na</span>(age, <span class="dv">99</span>),  <span class="co"># Code 99 = "no response"</span></span>
+<span id="cb32-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">depression =</span> <span class="fu">replace_na</span>(depression, <span class="sc">-</span><span class="dv">999</span>)  <span class="co"># Obvious invalid code</span></span>
+<span id="cb32-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
      id   age depression anxiety
@@ -825,12 +770,12 @@ Dr.&nbsp;Sara Weston
 <h2>Strategy 4: Leave them as NA</h2>
 <p>Often the best approach is to <strong>keep NAs</strong> and handle them in analysis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Most functions have na.rm argument</span></span>
-<span id="cb43-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
-<span id="cb43-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb43-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb43-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_depression =</span> <span class="fu">mean</span>(depression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb43-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Most functions have na.rm argument</span></span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a>survey <span class="sc">|&gt;</span></span>
+<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_depression =</span> <span class="fu">mean</span>(depression, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb34-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   mean_age mean_depression
@@ -865,13 +810,13 @@ Dr.&nbsp;Sara Weston
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</span>
-<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">timepoint =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">14</span>)</span>
-<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>),</span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">timepoint =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">14</span>)</span>
+<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 3
@@ -893,8 +838,8 @@ Dr.&nbsp;Sara Weston
 <section id="complete-make-implicit-missing-explicit" class="slide level2">
 <h2>complete(): Make implicit missing explicit</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
+<span id="cb38-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
   participant timepoint depression
@@ -913,7 +858,7 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Now we can see: Participant 2 missing timepoint 3, Participant 3 missing timepoint 2.</p>
 <aside class="notes">
-<p>complete() is the key function for this section. It generates every combination of the variables you specify and fills in NA where data is missing. Walk through the output carefully: the original data had 7 rows, but with 3 participants and 3 timepoints there should be 9 rows. The 2 new rows (with NAs for depression) represent the implicit missing data that is now explicit. This is conceptually similar to what students did with anti_join last session, but complete() does it in one step and keeps everything in a single table.</p>
+<p>complete() is the key function for this section. It generates every combination of the variables you specify and fills in NA where data is missing. Walk through the output carefully: the original data had 7 rows, but with 3 participants and 3 timepoints there should be 9 rows. The 2 new rows (with NAs for depression) represent the implicit missing data that is now explicit. complete() is the cleanest way to surface implicit missingness within a single dataset — one function generates the grid and exposes the gaps.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -931,13 +876,13 @@ Dr.&nbsp;Sara Weston
 <h2>Why this matters</h2>
 <p>Makes dropout visible for analysis:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint) <span class="sc">|&gt;</span></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(timepoint) <span class="sc">|&gt;</span></span>
-<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb49-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_completed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(depression)),</span>
-<span id="cb49-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(depression))</span>
-<span id="cb49-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(timepoint) <span class="sc">|&gt;</span></span>
+<span id="cb40-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb40-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_completed =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(depression)),</span>
+<span id="cb40-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(depression))</span>
+<span id="cb40-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 3
   timepoint n_completed n_missing
@@ -948,15 +893,15 @@ Dr.&nbsp;Sara Weston
 </div>
 </div>
 </section>
-<section id="filling-after-completing" class="slide level2">
-<h2>Filling after completing</h2>
-<p>Common pattern: make implicit explicit, then fill with a value:</p>
+<section id="flagging-completion" class="slide level2">
+<h2>Flagging completion</h2>
+<p>Common pattern: make implicit explicit, then flag who completed each timepoint:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
-<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint) <span class="sc">|&gt;</span></span>
-<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">completed =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(depression), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
-<span id="cb51-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="" aria-hidden="true" tabindex="-1"></a>study_completion <span class="sc">|&gt;</span></span>
+<span id="cb42-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, timepoint) <span class="sc">|&gt;</span></span>
+<span id="cb42-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb42-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">completed =</span> <span class="fu">if_else</span>(<span class="fu">is.na</span>(depression), <span class="cn">FALSE</span>, <span class="cn">TRUE</span>)</span>
+<span id="cb42-5"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 4
   participant timepoint depression completed
@@ -972,6 +917,7 @@ Dr.&nbsp;Sara Weston
 9           3         3         14 TRUE     </code></pre>
 </div>
 </div>
+<p>This <code>completed</code> flag is the building block for attrition analysis — coming up later in the deck.</p>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">
@@ -982,13 +928,13 @@ Dr.&nbsp;Sara Weston
 <h2>Your turn: Analyze missing data patterns</h2>
 <p>You have survey data from a therapy study:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
-<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="cn">NA</span>, <span class="dv">35</span>, <span class="dv">26</span>),</span>
-<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="cn">NA</span>, <span class="dv">21</span>),</span>
-<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">23</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">16</span>),</span>
-<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">satisfaction =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
-<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb44-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>,</span>
+<span id="cb44-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="cn">NA</span>, <span class="dv">22</span>, <span class="dv">28</span>, <span class="cn">NA</span>, <span class="dv">35</span>, <span class="dv">26</span>),</span>
+<span id="cb44-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">25</span>, <span class="dv">18</span>, <span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="cn">NA</span>, <span class="dv">21</span>),</span>
+<span id="cb44-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">23</span>, <span class="cn">NA</span>, <span class="dv">15</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">16</span>),</span>
+<span id="cb44-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">satisfaction =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">3</span>, <span class="cn">NA</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">5</span>)</span>
+<span id="cb44-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>How many participants are missing baseline data? Followup data?</li>
@@ -1101,50 +1047,88 @@ Dr.&nbsp;Sara Weston
 <h2>Attrition analysis</h2>
 <p>In longitudinal studies, always check <em>who</em> drops out:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">9</span>)</span>
-<span id="cb54-2"><a href="" aria-hidden="true" tabindex="-1"></a>baseline <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb54-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb54-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
-<span id="cb54-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">5</span>)</span>
-<span id="cb54-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb54-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-8"><a href="" aria-hidden="true" tabindex="-1"></a>completers <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb54-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">10</span>)  </span>
-<span id="cb54-10"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">17</span>, <span class="dv">22</span>),</span>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">18</span>)</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a>study</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 4
+      id condition baseline_depression followup_depression
+   &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;               &lt;dbl&gt;
+ 1     1 Treatment                  22                  15
+ 2     2 Treatment                  18                  12
+ 3     3 Treatment                  25                  NA
+ 4     4 Treatment                  20                  NA
+ 5     5 Treatment                  24                  NA
+ 6     6 Control                    19                  14
+ 7     7 Control                    21                  13
+ 8     8 Control                    23                  11
+ 9     9 Control                    17                  16
+10    10 Control                    22                  18</code></pre>
+</div>
+</div>
+<p>A missing followup score = a dropout.</p>
+<aside class="notes">
+<p>This whole section is about applying the missing-data lens — <code>is.na(followup_depression)</code> identifies dropouts directly. Walk through the data: rows 3, 4, 5 are missing followup. Rows 1–5 are Treatment, so all three dropouts are in the Treatment condition. Set up the next slide as: “let’s confirm that programmatically.”</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="who-dropped-out" class="slide level2">
+<h2>Who dropped out?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 4
+     id condition baseline_depression followup_depression
+  &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;               &lt;dbl&gt;
+1     3 Treatment                  25                  NA
+2     4 Treatment                  20                  NA
+3     5 Treatment                  24                  NA</code></pre>
+</div>
 </div>
 </section>
-<section id="attrition-by-condition" class="slide level2">
-<h2>Attrition by condition</h2>
+<section id="dropout-by-condition" class="slide level2">
+<h2>Dropout by condition</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Who dropped out?</span></span>
-<span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
-<span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(completers, <span class="at">by =</span> <span class="st">"id"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression)) <span class="sc">|&gt;</span></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 3
-     id condition baseline_depression
-  &lt;int&gt; &lt;chr&gt;                   &lt;dbl&gt;
-1     4 Treatment                18.6
-2     5 Treatment                22.2
-3     6 Control                  14.1</code></pre>
-</div>
-</div>
-</section>
-<section id="attrition-by-condition-1" class="slide level2">
-<h2>Attrition by condition</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>baseline <span class="sc">|&gt;</span></span>
-<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(completers, <span class="at">by =</span> <span class="st">"id"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 2
+<pre><code># A tibble: 1 × 2
   condition     n
   &lt;chr&gt;     &lt;int&gt;
-1 Control       1
-2 Treatment     2</code></pre>
+1 Treatment     3</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p>More dropouts from Treatment condition — this could bias results!</p>
+<p>All dropouts are from the Treatment condition — this could seriously bias results!</p>
+<aside class="notes">
+<p>This is the punchline. If treatment dropouts are systematically different from completers (e.g., the treatment was unpleasant for some subset), then comparing post-treatment scores between conditions is comparing the people who <em>tolerated</em> the treatment to the full Control group — apples to oranges. Tie this to the MNAR discussion: this is exactly the kind of pattern that creates serious bias.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </div>
 </section>
 <section id="reporting-missing-data" class="slide level2">
@@ -1159,10 +1143,10 @@ Dr.&nbsp;Sara Weston
 <div class="fragment">
 <p>Example:</p>
 <blockquote>
-<p>“Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24) or treatment condition (χ² = 0.8, p = .37). Analyses used complete case analysis (N = 60).”</p>
+<p>“Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24). Analyses used complete case analysis (N = 60).”</p>
 </blockquote>
 <aside class="notes">
-<p>Read the example paragraph aloud. This is the kind of reporting students should aim for in their final projects. They do not need to run t-tests or chi-squared tests for this class, but they should at minimum report the count and percentage of missing data and state how they handled it. This connects back to Session 1 and Session 16 themes about transparency and reproducibility.</p>
+<p>Read the example paragraph aloud. This is the kind of reporting students should aim for in their final projects — at minimum, the count and percentage of missing data and a statement about how they handled it. They are not expected to run inferential tests for this course; the t-test in the example is just to show what a published version of this paragraph might look like. If a student asks how to test whether dropout is related to a categorical variable like condition (as we just demoed), the standard tool is a chi-squared test of independence — but it is well outside the scope of this course. This connects back to Session 1 and Session 16 themes about transparency and reproducibility.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1220,45 +1204,6 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </div>
-</section></section>
-<section>
-<section id="end-of-deck-exercise" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>End-of-deck exercise</h1>
-
-</section>
-<section id="practice-longitudinal-missing-data" class="slide level2">
-<h2>Practice: Longitudinal missing data</h2>
-<aside class="notes">
-<p>This end-of-deck exercise focuses entirely on the missing-data tools from today (no joins yet — that’s next session). Task 1 uses complete(), tasks 2-3 combine summarize and filter with missing data logic, and task 4 requires thinking carefully about complete cases. Give students ~10 minutes. If they get stuck on task 4 (computing change scores for complete cases only), suggest they filter for waves 1 and 3 first, then check that both values are non-missing before computing the difference. This exercise is directly relevant to Assignment 7.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<p>You have a three-wave study:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal_study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb59-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>),</span>
-<span id="cb59-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">wave =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb59-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="cn">NA</span>),</span>
-<span id="cb59-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">32</span>, <span class="cn">NA</span>, <span class="dv">24</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
-<span id="cb59-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-</div>
-</section>
-<section id="your-tasks" class="slide level2">
-<h2>Your tasks</h2>
-<ol type="1">
-<li>Make implicit missing waves <strong>explicit</strong> using <code>complete()</code></li>
-<li>Count how many assessments each participant completed</li>
-<li>What percentage of participants completed all three waves?</li>
-<li>Compute mean depression change (wave 1 to wave 3) for participants with complete data on those waves</li>
-</ol>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1356,9 +1301,10 @@ Dr.&nbsp;Sara Weston
 </ul>
 <p>✅ <strong>Do:</strong></p>
 <ul>
+<li>⚠️ <strong>Finish Assignment 6 — due Sunday May 17 at 11:59 PM</strong></li>
 <li>Start Assignment 7 — the missing-data half is fair game now</li>
+<li>Submit your final project draft (due next Wednesday before class)</li>
 <li>Check your own final project data for missingness</li>
-<li>Draft your final project report (due next Wednesday)</li>
 </ul>
 </section>
 <section id="the-one-thing-to-remember" class="slide level2">
@@ -1366,7 +1312,10 @@ Dr.&nbsp;Sara Weston
 <p>Missing data isn’t a problem to solve — it’s information about your study. Treat it that way.</p>
 <p>See you Wednesday for joins!</p>
 <aside class="notes">
-<p>End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results. Remind them that Assignment 7 (Joins and Missing Data) was assigned today and is due Sun May 24, and that the final project draft is due next Wednesday (May 20). Next session covers joins, which pairs naturally with missing data — joins are a major source of NAs, and anti_join gives us another tool for finding implicit missingness.</p>
+<p>End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results.</p>
+<p><strong>Three deadlines to call out by name:</strong> 1. <strong>Assignment 6 is due Sunday May 17 at 11:59 PM</strong> — that’s the most pressing. Linger on this one — it’s only 4 days away. 2. Assignment 7 (Joins + Missing Data) was assigned today, due Sunday May 24. Tell them the missing-data half is doable now; joins comes Wednesday. 3. Final project <strong>draft</strong> (not the final report) is due next Wednesday May 20 before class.</p>
+<p>Next session covers joins, which pairs naturally with missing data — joins are a major source of NAs.</p>
+<p>The on-your-own exercise that follows is a take-home practice — point students to it but do not work through it in class.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1378,6 +1327,45 @@ Dr.&nbsp;Sara Weston
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section></section>
+<section>
+<section id="on-your-own" class="title-slide slide level1 center" data-background-color="#e67e22">
+<h1>On your own</h1>
+
+</section>
+<section id="practice-longitudinal-missing-data" class="slide level2">
+<h2>Practice: Longitudinal missing data</h2>
+<aside class="notes">
+<p>This is a take-home exercise — students do not need to finish it in class. It focuses entirely on the missing-data tools from today (no joins yet — that’s next session). Task 1 uses complete(), tasks 2-3 combine summarize and filter with missing data logic, and task 4 reshapes wide and computes a change score. If they get stuck on task 4 in office hours, remind them: pivot_wider (Session 5) takes them from one-row-per-observation to one-row-per-participant, which is what they need for a wave-1-vs-wave-3 comparison. This exercise is directly relevant to Assignment 7.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+<p>You have a three-wave study:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal_study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>),</span>
+<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">wave =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="cn">NA</span>),</span>
+<span id="cb51-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">32</span>, <span class="cn">NA</span>, <span class="dv">24</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
+<span id="cb51-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+</div>
+</section>
+<section id="your-tasks" class="slide level2">
+<h2>Your tasks</h2>
+<ol type="1">
+<li>Make implicit missing waves <strong>explicit</strong> using <code>complete()</code></li>
+<li>Count how many assessments each participant completed</li>
+<li>What percentage of participants completed all three waves?</li>
+<li>Reshape the depression data so each participant has one row with columns for wave 1, 2, and 3. Then compute the wave-1-to-wave-3 change for participants with both timepoints. What’s the mean change?</li>
+</ol>
 
 </section></section>
     </div>
