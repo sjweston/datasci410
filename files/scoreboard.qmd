@@ -19,6 +19,7 @@ execute:
 library(tidyverse)
 library(ggrepel)
 library(here)
+library(gt)
 
 # =====================================================================
 # Data loaded from CSVs produced by scripts/update-team-points.R
@@ -43,6 +44,11 @@ current_week = rankings |>
 max_pts <- max(scoreboard$total)
 scoreboard <- scoreboard |>
   mutate(is_leader = total == max_pts & total > 0)
+
+# Shared values for the rankings charts
+n_teams <- n_distinct(rankings$team_name)
+rankings_filtered <- rankings |> filter(week < current_week)
+last_week <- max(rankings_filtered$week)
 ```
 
 
@@ -86,27 +92,29 @@ ggplot(scoreboard, aes(x = total, y = team_name, fill = is_leader)) +
 ## Rankings Over Time
 
 ```{r}
-#| label: rankings-chart
+#| label: rankings-option2-dodge
 #| fig-width: 10
 #| fig-height: 5.5
-#| fig-alt: "Bump chart showing team rankings over time, with rank on the y-axis (1 at top) and week on the x-axis. Each team is a colored line."
+#| fig-alt: "Bump chart of team ranks over time, with tied teams nudged slightly apart so overlapping lines remain visible."
 
-n_teams <- n_distinct(rankings$team_name)
+rankings_dodged <- rankings_filtered |>
+  arrange(week, rank, team_name) |>
+  group_by(week, rank) |>
+  mutate(
+    tie_offset = (row_number() - (n() + 1) / 2) * 0.18,
+    display_rank = rank + tie_offset
+  ) |>
+  ungroup()
 
-rankings_filtered <- rankings |>
-  filter(week < current_week)
-
-last_week <- max(rankings_filtered$week)
-
-label_data <- rankings_filtered |>
+label_data_dodge <- rankings_dodged |>
   filter(week == last_week)
 
-rankings_filtered |>
-  ggplot(aes(x = week, y = rank, color = team_name, group = team_name)) +
-  geom_line(linewidth = 1.5, alpha=.7) +
+rankings_dodged |>
+  ggplot(aes(x = week, y = display_rank, color = team_name, group = team_name)) +
+  geom_line(linewidth = 1.5, alpha = .7) +
   geom_point(size = 3) +
   geom_text_repel(
-    data = label_data,
+    data = label_data_dodge,
     aes(label = team_name),
     nudge_x = 0.3,
     direction = "y",
@@ -127,10 +135,7 @@ rankings_filtered |>
     expand = expansion(mult = c(0.05, 0.25))
   ) +
   scale_color_brewer(palette = "Set2") +
-  labs(
-    x = NULL,
-    y = NULL
-  ) +
+  labs(x = NULL, y = NULL) +
   theme_minimal(base_size = 18) +
   theme(
     legend.position = "none",
@@ -138,6 +143,52 @@ rankings_filtered |>
     axis.text.y = element_text(face = "bold")
   )
 ```
+
+---
+
+## Cumulative Points
+
+```{r}
+#| label: rankings-option1-points
+#| fig-width: 10
+#| fig-height: 5.5
+#| fig-alt: "Line chart showing cumulative team points over time, with teams spreading apart as the term progresses."
+
+label_data_pts <- rankings_filtered |>
+  filter(week == last_week)
+
+rankings_filtered |>
+  ggplot(aes(x = week, y = cumulative, color = team_name, group = team_name)) +
+  geom_line(linewidth = 1.5, alpha = .7) +
+  geom_point(size = 3) +
+  geom_text_repel(
+    data = label_data_pts,
+    aes(label = team_name),
+    nudge_x = 0.3,
+    direction = "y",
+    hjust = 0,
+    segment.size = 0.3,
+    segment.color = "gray70",
+    size = 5,
+    fontface = "bold",
+    show.legend = FALSE
+  ) +
+  scale_x_continuous(
+    breaks = seq_len(max(rankings$week)),
+    labels = \(x) paste0("Wk ", x),
+    expand = expansion(mult = c(0.05, 0.25))
+  ) +
+  scale_color_brewer(palette = "Set2") +
+  labs(x = NULL, y = "Cumulative points") +
+  theme_minimal(base_size = 18) +
+  theme(
+    legend.position = "none",
+    panel.grid = element_blank(),
+    axis.text.y = element_text(face = "bold")
+  )
+```
+
+
 
 ---
 
@@ -156,5 +207,20 @@ scoreboard |>
     `Fun Challenge` = fun_challenge,
     Total = total
   ) |>
-  knitr::kable(align = c("l", "c", "c", "c", "c", "c"))
+  gt() |>
+  data_color(
+    columns = c(`Pair Coding`, Assignments, Quizzes, `Fun Challenge`, Total),
+    palette = "Oranges",
+    na_color = "white"
+  ) |>
+  cols_align(align = "center", columns = -Team) |>
+  cols_align(align = "left", columns = Team) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(columns = Total)
+  ) |>
+  tab_options(
+    table.font.size = px(20),
+    column_labels.font.weight = "bold"
+  )
 ```

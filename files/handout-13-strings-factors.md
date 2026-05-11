@@ -33,35 +33,35 @@ Notice the extra spaces and inconsistent capitalization.
 
 ### Your pen-and-paper version
 
-**Step 1: Clean `major` by hand.** Apply `str_trim()` then `str_to_lower()` to each value:
+**Step 1: Clean `major`.** Apply `str_trim()` then `str_to_lower()`. Write the final value:
 
-| id | original major | after `str_trim()` | after `str_to_lower()` |
-|----|----------------|---------------------|------------------------|
-| 1  | "  PSYCHOLOGY"  |                     |                        |
-| 2  | "biology  "     |                     |                        |
-| 3  | "Psychology"    |                     |                        |
-| 4  | "BIOLOGY"       |                     |                        |
-| 5  | "sociology  "   |                     |                        |
+| id | major (raw)    | major (clean) |
+|----|----------------|---------------|
+| 1  | "  PSYCHOLOGY" |               |
+| 2  | "biology  "    |               |
+| 3  | "Psychology"   |               |
+| 4  | "BIOLOGY"      |               |
+| 5  | "sociology  "  |               |
 
-**Step 2: Clean `comment` by hand.** Apply `str_trim()` then `str_to_title()`:
+**Step 2: Clean `comment`.** Apply `str_trim()` then `str_to_title()`. Write the final value:
 
-| id | original comment           | after `str_trim()`         | after `str_to_title()`     |
-|----|---------------------------|---------------------------|---------------------------|
-| 1  | "Great study!"            |                           |                           |
-| 2  | "too long"                |                           |                           |
-| 3  | "  Very interesting  "    |                           |                           |
-| 4  | "CONFUSING INSTRUCTIONS"  |                           |                           |
-| 5  | "I enjoyed this"          |                           |                           |
+| id | comment (raw)            | comment (clean) |
+|----|--------------------------|-----------------|
+| 1  | "Great study!"           |                 |
+| 2  | "too long"               |                 |
+| 3  | "  Very interesting  "   |                 |
+| 4  | "CONFUSING INSTRUCTIONS" |                 |
+| 5  | "I enjoyed this"         |                 |
 
-**Step 3: Detect negative comments.** Check if each original comment contains "long" or "confusing" (ignoring case):
+**Step 3: Detect negative comments.** TRUE if the original comment contains "long" or "confusing" (case-insensitive):
 
-| id | comment                   | contains "long"? | contains "confusing"? | is_negative |
-|----|---------------------------|:-:|:-:|:-:|
-| 1  | "Great study!"            |   |   |   |
-| 2  | "too long"                |   |   |   |
-| 3  | "  Very interesting  "    |   |   |   |
-| 4  | "CONFUSING INSTRUCTIONS"  |   |   |   |
-| 5  | "I enjoyed this"          |   |   |   |
+| id | comment                   | is_negative |
+|----|---------------------------|:-:|
+| 1  | "Great study!"            |   |
+| 2  | "too long"                |   |
+| 3  | "  Very interesting  "    |   |
+| 4  | "CONFUSING INSTRUCTIONS"  |   |
+| 5  | "I enjoyed this"          |   |
 
 **Which rows survive `filter(is_negative)`?** Rows _____ and _____
 
