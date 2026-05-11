@@ -768,9 +768,24 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
+<section id="solution-clean-text-data" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Clean text data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>messy_survey <span class="sc">|&gt;</span></span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clean up major variable</span></span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">str_to_lower</span>(major),</span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">major =</span> <span class="fu">str_trim</span>(major),</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># clean up comment variable</span></span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="fu">str_trim</span>(comment),</span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">comment =</span> <span class="fu">str_to_title</span>(comment),</span>
+<span id="cb46-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># make is_neg column</span></span>
+<span id="cb46-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_negative =</span> <span class="fu">str_detect</span>(comment, <span class="st">"Long"</span>) <span class="sc">|</span> <span class="fu">str_detect</span>(comment, <span class="st">"Confusing"</span>),</span>
+<span id="cb46-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_negative =</span> <span class="fu">str_detect</span>(comment, <span class="fu">regex</span>(<span class="st">"long"</span>, <span class="at">ignore_case =</span> T)) <span class="sc">|</span></span>
+<span id="cb46-12"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">str_detect</span>(comment, <span class="fu">regex</span>(<span class="st">"confusing"</span>, <span class="at">ignore_case =</span> T))</span>
+<span id="cb46-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb46-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(is_negative)</span></code></pre></div>
+</div>
 </section></section>
 <section>
 <section id="factors" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -782,12 +797,12 @@ Dr.&nbsp;Sara Weston
 <p><strong>Factors</strong> are R’s way of representing categorical data with a fixed set of possible values.</p>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A character vector</span></span>
-<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>major_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Psychology"</span>, <span class="st">"Biology"</span>, <span class="st">"Biology"</span>, <span class="st">"Psychology"</span>)</span>
-<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A factor</span></span>
-<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(major_char)</span>
-<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A character vector</span></span>
+<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>major_char <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Psychology"</span>, <span class="st">"Biology"</span>, <span class="st">"Biology"</span>, <span class="st">"Psychology"</span>)</span>
+<span id="cb47-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># A factor</span></span>
+<span id="cb47-5"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct <span class="ot">&lt;-</span> <span class="fu">factor</span>(major_char)</span>
+<span id="cb47-6"><a href="" aria-hidden="true" tabindex="-1"></a>major_fct</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Psychology Biology    Biology    Psychology
 Levels: Biology Psychology</code></pre>
@@ -823,10 +838,10 @@ Levels: Biology Psychology</code></pre>
 <section id="creating-factors" class="slide level2">
 <h2>Creating factors</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
-<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb48-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Let R choose levels (alphabetical)</span></span>
-<span id="cb48-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>condition <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>, <span class="st">"Treatment"</span>, <span class="st">"Control"</span>)</span>
+<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Let R choose levels (alphabetical)</span></span>
+<span id="cb49-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Control   Treatment Treatment Control  
 Levels: Control Treatment</code></pre>
@@ -834,8 +849,8 @@ Levels: Control Treatment</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify levels explicitly</span></span>
-<span id="cb50-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify levels explicitly</span></span>
+<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(condition, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Control"</span>, <span class="st">"Treatment"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Control   Treatment Treatment Control  
 Levels: Control Treatment</code></pre>
@@ -859,10 +874,10 @@ Levels: Control Treatment</code></pre>
 <section id="order-matters" class="slide level2">
 <h2>Order matters!</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Disagree"</span>)</span>
-<span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Alphabetical order (default)</span></span>
-<span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Disagree"</span>)</span>
+<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Alphabetical order (default)</span></span>
+<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Agree             Disagree          Strongly Agree    Agree            
 [5] Strongly Disagree
@@ -871,10 +886,10 @@ Levels: Agree Disagree Strongly Agree Strongly Disagree</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Logical order</span></span>
-<span id="cb54-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb54-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
-<span id="cb54-4"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Logical order</span></span>
+<span id="cb55-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">factor</span>(likert, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb55-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
+<span id="cb55-4"><a href="" aria-hidden="true" tabindex="-1"></a>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Agree             Disagree          Strongly Agree    Agree            
 [5] Strongly Disagree
@@ -899,16 +914,16 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
           display:block!important;
       }</style></aside>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb56-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>,</span>
-<span id="cb56-3"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Strongly Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Disagree"</span>)</span>
-<span id="cb56-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb56-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Without factor ordering</span></span>
-<span id="cb56-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
-<span id="cb56-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb56-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Alphabetical order (confusing!)"</span>) <span class="sc">+</span></span>
-<span id="cb56-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">c</span>(<span class="st">"Agree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Strongly Agree"</span>, <span class="st">"Agree"</span>,</span>
+<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Strongly Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Disagree"</span>)</span>
+<span id="cb57-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb57-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Without factor ordering</span></span>
+<span id="cb57-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb57-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb57-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Alphabetical order (confusing!)"</span>) <span class="sc">+</span></span>
+<span id="cb57-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -916,24 +931,24 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-27-1.png" alt="Bar chart of Likert responses in alphabetical order, making the progression from Disagree to Strongly Agree hard to follow because categories are scrambled." width="960"></p>
+<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Bar chart of Likert responses in alphabetical order, making the progression from Disagree to Strongly Agree hard to follow because categories are scrambled." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fixed-with-factor-ordering" class="slide level2">
 <h2>Fixed with factor ordering</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> survey_data <span class="sc">|&gt;</span></span>
-<span id="cb57-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb57-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> <span class="fu">c</span>(</span>
-<span id="cb57-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
-<span id="cb57-5"><a href="" aria-hidden="true" tabindex="-1"></a>    ))</span>
-<span id="cb57-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb57-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb57-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
-<span id="cb57-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb57-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Logical order (much better!)"</span>) <span class="sc">+</span></span>
-<span id="cb57-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a>survey_data <span class="ot">&lt;-</span> survey_data <span class="sc">|&gt;</span></span>
+<span id="cb58-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb58-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb58-4"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
+<span id="cb58-5"><a href="" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb58-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb58-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(survey_data, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb58-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb58-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Logical order (much better!)"</span>) <span class="sc">+</span></span>
+<span id="cb58-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -941,7 +956,7 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-28-1.png" alt="Bar chart of Likert responses reordered from Strongly Disagree to Strongly Agree, showing a clear progression that matches how the scale is meant to be read." width="960"></p>
+<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-29-1.png" alt="Bar chart of Likert responses reordered from Strongly Disagree to Strongly Agree, showing a clear progression that matches how the scale is meant to be read." width="960"></p>
 </figure>
 </div>
 </div>
@@ -974,8 +989,8 @@ Levels: Strongly Disagree Disagree Agree Strongly Agree</code></pre>
 <section id="fct_relevel-manual-reordering" class="slide level2">
 <h2>fct_relevel(): Manual reordering</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="" aria-hidden="true" tabindex="-1"></a>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>, <span class="st">"High School"</span>))</span>
-<span id="cb58-2"><a href="" aria-hidden="true" tabindex="-1"></a>education</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="" aria-hidden="true" tabindex="-1"></a>education <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>, <span class="st">"High School"</span>))</span>
+<span id="cb59-2"><a href="" aria-hidden="true" tabindex="-1"></a>education</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] High School Bachelor's  Master's    High School
 Levels: Bachelor's High School Master's</code></pre>
@@ -983,8 +998,8 @@ Levels: Bachelor's High School Master's</code></pre>
 </div>
 <div class="fragment">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in logical order</span></span>
-<span id="cb60-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(education, <span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Put in logical order</span></span>
+<span id="cb61-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_relevel</span>(education, <span class="st">"High School"</span>, <span class="st">"Bachelor's"</span>, <span class="st">"Master's"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] High School Bachelor's  Master's    High School
 Levels: High School Bachelor's Master's</code></pre>
@@ -1009,13 +1024,13 @@ Levels: High School Bachelor's Master's</code></pre>
       }</style></aside>
 <p>Extremely useful for plots!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb62-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>, <span class="st">"Mindfulness"</span>, <span class="st">"Medication"</span>),</span>
-<span id="cb62-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_improvement =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
-<span id="cb62-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb62-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb62-6"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
-<span id="cb62-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb63-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>, <span class="st">"Mindfulness"</span>, <span class="st">"Medication"</span>),</span>
+<span id="cb63-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">mean_improvement =</span> <span class="fu">c</span>(<span class="dv">12</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">10</span>)</span>
+<span id="cb63-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb63-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-6"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
+<span id="cb63-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 2
   condition   mean_improvement
@@ -1030,16 +1045,16 @@ Levels: High School Bachelor's Master's</code></pre>
 <section id="fct_reorder-in-action" class="slide level2">
 <h2>fct_reorder() in action</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
-<span id="cb64-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement)) <span class="sc">|&gt;</span></span>
-<span id="cb64-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_improvement, <span class="at">y =</span> condition)) <span class="sc">+</span></span>
-<span id="cb64-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb64-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb64-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment effectiveness (ordered by improvement)"</span>,</span>
-<span id="cb64-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean improvement"</span>,</span>
-<span id="cb64-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Treatment condition"</span></span>
-<span id="cb64-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb64-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a>therapy <span class="sc">|&gt;</span></span>
+<span id="cb65-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">condition =</span> <span class="fu">fct_reorder</span>(condition, mean_improvement)) <span class="sc">|&gt;</span></span>
+<span id="cb65-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> mean_improvement, <span class="at">y =</span> condition)) <span class="sc">+</span></span>
+<span id="cb65-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb65-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb65-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Treatment effectiveness (ordered by improvement)"</span>,</span>
+<span id="cb65-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Mean improvement"</span>,</span>
+<span id="cb65-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Treatment condition"</span></span>
+<span id="cb65-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb65-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -1047,18 +1062,18 @@ Levels: High School Bachelor's Master's</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-32-1.png" alt="Horizontal bar chart showing four therapy conditions ordered by mean improvement, with CBT highest and Control lowest, demonstrating how fct_reorder arranges categories by a numeric variable." width="960"></p>
+<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-33-1.png" alt="Horizontal bar chart showing four therapy conditions ordered by mean improvement, with CBT highest and Control lowest, demonstrating how fct_reorder arranges categories by a numeric variable." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fct_infreq-order-by-frequency" class="slide level2">
 <h2>fct_infreq(): Order by frequency</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>, <span class="st">"Other"</span>,</span>
-<span id="cb65-2"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>)</span>
-<span id="cb65-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb65-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Order from most to least common</span></span>
-<span id="cb65-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(<span class="fu">factor</span>(diagnosis))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>, <span class="st">"Other"</span>,</span>
+<span id="cb66-2"><a href="" aria-hidden="true" tabindex="-1"></a>               <span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Depression"</span>)</span>
+<span id="cb66-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Order from most to least common</span></span>
+<span id="cb66-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_infreq</span>(<span class="fu">factor</span>(diagnosis))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression Anxiety    Depression Other      Depression Anxiety    Anxiety   
 [8] Depression
@@ -1069,16 +1084,16 @@ Levels: Depression Anxiety Other</code></pre>
 <section id="fct_infreq-in-plots" class="slide level2">
 <h2>fct_infreq() in plots</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">diagnosis =</span> <span class="fu">factor</span>(diagnosis)) <span class="sc">|&gt;</span></span>
-<span id="cb67-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diagnosis =</span> <span class="fu">fct_infreq</span>(diagnosis)) <span class="sc">|&gt;</span></span>
-<span id="cb67-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diagnosis)) <span class="sc">+</span>  <span class="co"># Note: y instead of x to read easily</span></span>
-<span id="cb67-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
-<span id="cb67-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb67-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most common diagnoses first"</span>,</span>
-<span id="cb67-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Count"</span>,</span>
-<span id="cb67-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span></span>
-<span id="cb67-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb67-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tibble</span>(<span class="at">diagnosis =</span> <span class="fu">factor</span>(diagnosis)) <span class="sc">|&gt;</span></span>
+<span id="cb68-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">diagnosis =</span> <span class="fu">fct_infreq</span>(diagnosis)) <span class="sc">|&gt;</span></span>
+<span id="cb68-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> diagnosis)) <span class="sc">+</span>  <span class="co"># Note: y instead of x to read easily</span></span>
+<span id="cb68-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb68-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb68-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most common diagnoses first"</span>,</span>
+<span id="cb68-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Count"</span>,</span>
+<span id="cb68-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Diagnosis"</span></span>
+<span id="cb68-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb68-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
 </section>
@@ -1086,20 +1101,20 @@ Levels: Depression Anxiety Other</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-34-1.png" alt="Horizontal bar chart of diagnosis categories ordered by frequency, with Depression most common and Other least common, showing how fct_infreq sorts categories from most to least frequent." width="960"></p>
+<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-35-1.png" alt="Horizontal bar chart of diagnosis categories ordered by frequency, with Depression most common and Other least common, showing how fct_infreq sorts categories from most to least frequent." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="fct_recode-rename-levels" class="slide level2">
 <h2>fct_recode(): Rename levels</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="" aria-hidden="true" tabindex="-1"></a>major <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Psych"</span>, <span class="st">"Bio"</span>, <span class="st">"Bio"</span>, <span class="st">"Psych"</span>, <span class="st">"Soc"</span>))</span>
-<span id="cb68-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb68-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(major,</span>
-<span id="cb68-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Psychology"</span> <span class="ot">=</span> <span class="st">"Psych"</span>,</span>
-<span id="cb68-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Biology"</span> <span class="ot">=</span> <span class="st">"Bio"</span>,</span>
-<span id="cb68-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sociology"</span> <span class="ot">=</span> <span class="st">"Soc"</span></span>
-<span id="cb68-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="" aria-hidden="true" tabindex="-1"></a>major <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Psych"</span>, <span class="st">"Bio"</span>, <span class="st">"Bio"</span>, <span class="st">"Psych"</span>, <span class="st">"Soc"</span>))</span>
+<span id="cb69-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb69-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_recode</span>(major,</span>
+<span id="cb69-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Psychology"</span> <span class="ot">=</span> <span class="st">"Psych"</span>,</span>
+<span id="cb69-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Biology"</span> <span class="ot">=</span> <span class="st">"Bio"</span>,</span>
+<span id="cb69-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Sociology"</span> <span class="ot">=</span> <span class="st">"Soc"</span></span>
+<span id="cb69-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Psychology Biology    Biology    Psychology Sociology 
 Levels: Biology Psychology Sociology</code></pre>
@@ -1110,13 +1125,13 @@ Levels: Biology Psychology Sociology</code></pre>
 <h2>fct_collapse(): Combine levels</h2>
 <p>Useful for grouping rare categories:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>,</span>
-<span id="cb70-2"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"Social Anxiety"</span>))</span>
-<span id="cb70-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb70-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_collapse</span>(diagnosis,</span>
-<span id="cb70-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Depression =</span> <span class="st">"MDD"</span>,</span>
-<span id="cb70-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Anxiety =</span> <span class="fu">c</span>(<span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>, <span class="st">"Social Anxiety"</span>)</span>
-<span id="cb70-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="" aria-hidden="true" tabindex="-1"></a>diagnosis <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>,</span>
+<span id="cb71-2"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"MDD"</span>, <span class="st">"GAD"</span>, <span class="st">"Social Anxiety"</span>))</span>
+<span id="cb71-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb71-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_collapse</span>(diagnosis,</span>
+<span id="cb71-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Depression =</span> <span class="st">"MDD"</span>,</span>
+<span id="cb71-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Anxiety =</span> <span class="fu">c</span>(<span class="st">"GAD"</span>, <span class="st">"OCD"</span>, <span class="st">"PTSD"</span>, <span class="st">"Panic Disorder"</span>, <span class="st">"Social Anxiety"</span>)</span>
+<span id="cb71-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression Anxiety    Anxiety    Anxiety    Anxiety    Depression Anxiety   
 [8] Anxiety   
@@ -1140,12 +1155,12 @@ Levels: Anxiety Depression</code></pre>
 <section id="psychology-example-recoding-demographics" class="slide level2">
 <h2>Psychology example: Recoding demographics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb72-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"18-25"</span>, <span class="st">"36-45"</span>, <span class="st">"26-35"</span>, <span class="st">"46+"</span>),</span>
-<span id="cb72-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">education =</span> <span class="fu">c</span>(<span class="st">"HS"</span>, <span class="st">"BA"</span>, <span class="st">"BA"</span>, <span class="st">"MA"</span>, <span class="st">"HS"</span>, <span class="st">"PhD"</span>)</span>
-<span id="cb72-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb72-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb72-6"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb73-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age_group =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"18-25"</span>, <span class="st">"36-45"</span>, <span class="st">"26-35"</span>, <span class="st">"46+"</span>),</span>
+<span id="cb73-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">education =</span> <span class="fu">c</span>(<span class="st">"HS"</span>, <span class="st">"BA"</span>, <span class="st">"BA"</span>, <span class="st">"MA"</span>, <span class="st">"HS"</span>, <span class="st">"PhD"</span>)</span>
+<span id="cb73-4"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-6"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   age_group education
@@ -1162,16 +1177,16 @@ Levels: Anxiety Depression</code></pre>
 <section id="recoding-demographics" class="slide level2">
 <h2>Recoding demographics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="sc">|&gt;</span></span>
-<span id="cb74-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb74-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">factor</span>(age_group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"36-45"</span>, <span class="st">"46+"</span>)),</span>
-<span id="cb74-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">education =</span> <span class="fu">fct_recode</span>(<span class="fu">factor</span>(education),</span>
-<span id="cb74-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High School"</span> <span class="ot">=</span> <span class="st">"HS"</span>,</span>
-<span id="cb74-6"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bachelor's"</span>  <span class="ot">=</span> <span class="st">"BA"</span>,</span>
-<span id="cb74-7"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Master's"</span>    <span class="ot">=</span> <span class="st">"MA"</span>,</span>
-<span id="cb74-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Doctorate"</span>   <span class="ot">=</span> <span class="st">"PhD"</span></span>
-<span id="cb74-9"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb74-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="" aria-hidden="true" tabindex="-1"></a>demo_data <span class="sc">|&gt;</span></span>
+<span id="cb75-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb75-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">factor</span>(age_group, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"18-25"</span>, <span class="st">"26-35"</span>, <span class="st">"36-45"</span>, <span class="st">"46+"</span>)),</span>
+<span id="cb75-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">education =</span> <span class="fu">fct_recode</span>(<span class="fu">factor</span>(education),</span>
+<span id="cb75-5"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"High School"</span> <span class="ot">=</span> <span class="st">"HS"</span>,</span>
+<span id="cb75-6"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Bachelor's"</span>  <span class="ot">=</span> <span class="st">"BA"</span>,</span>
+<span id="cb75-7"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Master's"</span>    <span class="ot">=</span> <span class="st">"MA"</span>,</span>
+<span id="cb75-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Doctorate"</span>   <span class="ot">=</span> <span class="st">"PhD"</span></span>
+<span id="cb75-9"><a href="" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb75-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 2
   age_group education  
@@ -1189,9 +1204,9 @@ Levels: Anxiety Depression</code></pre>
 <h2>Dropping unused levels</h2>
 <p>After filtering, factors keep old levels:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="" aria-hidden="true" tabindex="-1"></a>all_diagnoses <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Other"</span>))</span>
-<span id="cb76-2"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression <span class="ot">&lt;-</span> all_diagnoses[all_diagnoses <span class="sc">==</span> <span class="st">"Depression"</span>]</span>
-<span id="cb76-3"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="" aria-hidden="true" tabindex="-1"></a>all_diagnoses <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"Depression"</span>, <span class="st">"Anxiety"</span>, <span class="st">"Other"</span>))</span>
+<span id="cb77-2"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression <span class="ot">&lt;-</span> all_diagnoses[all_diagnoses <span class="sc">==</span> <span class="st">"Depression"</span>]</span>
+<span id="cb77-3"><a href="" aria-hidden="true" tabindex="-1"></a>just_depression</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression
 Levels: Anxiety Depression Other</code></pre>
@@ -1200,7 +1215,7 @@ Levels: Anxiety Depression Other</code></pre>
 <div class="fragment">
 <p>Use <code>fct_drop()</code> to remove them:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_drop</span>(just_depression)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">fct_drop</span>(just_depression)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] Depression
 Levels: Depression</code></pre>
@@ -1225,8 +1240,8 @@ Levels: Depression</code></pre>
 <h2>Common factor issues</h2>
 <p><strong>Problem 1:</strong> Factors created from numbers</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="" aria-hidden="true" tabindex="-1"></a>age_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>))</span>
-<span id="cb80-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_factor)  <span class="co"># Error! It's not numeric anymore</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="" aria-hidden="true" tabindex="-1"></a>age_factor <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">30</span>, <span class="dv">25</span>, <span class="dv">40</span>))</span>
+<span id="cb81-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(age_factor)  <span class="co"># Error! It's not numeric anymore</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] NA</code></pre>
 </div>
@@ -1234,7 +1249,7 @@ Levels: Depression</code></pre>
 <div class="fragment">
 <p><strong>Solution:</strong> Convert back to numeric carefully:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(age_factor))  <span class="co"># Correct way</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">as.numeric</span>(<span class="fu">as.character</span>(age_factor))  <span class="co"># Correct way</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 25 30 25 40</code></pre>
 </div>
@@ -1258,11 +1273,11 @@ Levels: Depression</code></pre>
 <h2>Common factor issues</h2>
 <p><strong>Problem 2:</strong> Factors behave differently than strings</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span>
-<span id="cb84-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb84-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Can't just add new values</span></span>
-<span id="cb84-4"><a href="" aria-hidden="true" tabindex="-1"></a>colors[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"green"</span>  <span class="co"># This creates NA!</span></span>
-<span id="cb84-5"><a href="" aria-hidden="true" tabindex="-1"></a>colors</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="" aria-hidden="true" tabindex="-1"></a>colors <span class="ot">&lt;-</span> <span class="fu">factor</span>(<span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>))</span>
+<span id="cb85-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb85-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Can't just add new values</span></span>
+<span id="cb85-4"><a href="" aria-hidden="true" tabindex="-1"></a>colors[<span class="dv">3</span>] <span class="ot">&lt;-</span> <span class="st">"green"</span>  <span class="co"># This creates NA!</span></span>
+<span id="cb85-5"><a href="" aria-hidden="true" tabindex="-1"></a>colors</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] red  blue &lt;NA&gt;
 Levels: blue red</code></pre>
@@ -1281,14 +1296,14 @@ Levels: blue red</code></pre>
 <h2>What did you say about data?</h2>
 <p>On the class survey, you described your relationship with data in 1–2 words. Let’s see what you said.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
-<span id="cb86-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/data/class_survey.csv"</span></span>
-<span id="cb86-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(</span>
+<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/data/class_survey.csv"</span></span>
+<span id="cb87-3"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
-<span id="cb87-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
-<span id="cb87-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb88-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
+<span id="cb88-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 1
    data_words                  
@@ -1323,11 +1338,11 @@ Levels: blue red</code></pre>
 <h2>Tokenizing text with tidytext</h2>
 <p><code>unnest_tokens()</code> splits text into individual words:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> class_survey <span class="sc">|&gt;</span></span>
-<span id="cb89-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
-<span id="cb89-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, data_words)</span>
-<span id="cb89-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb89-5"><a href="" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="ot">&lt;-</span> class_survey <span class="sc">|&gt;</span></span>
+<span id="cb90-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
+<span id="cb90-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, data_words)</span>
+<span id="cb90-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb90-5"><a href="" aria-hidden="true" tabindex="-1"></a>words</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 77 × 1
    word        
@@ -1363,10 +1378,10 @@ Levels: blue red</code></pre>
 <section id="words-alone-arent-enough" class="slide level2">
 <h2>Words alone aren’t enough</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
-<span id="cb91-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb91-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb91-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb92-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb92-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb92-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">5</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 5 × 2
   word            n
@@ -1398,18 +1413,18 @@ Levels: blue red</code></pre>
 <h2>How does our class feel about data?</h2>
 <p><code>tidytext</code> ships with the <strong>Bing lexicon</strong> — ~6,800 English words tagged <code>positive</code> or <code>negative</code>. We can <code>inner_join()</code> to keep only the words our class used <em>and</em> the lexicon recognized.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
-<span id="cb93-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb93-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment) <span class="sc">|&gt;</span></span>
-<span id="cb93-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sentiment, <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
-<span id="cb93-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb93-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"negative"</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>, <span class="st">"positive"</span> <span class="ot">=</span> <span class="st">"#27ae60"</span>)) <span class="sc">+</span></span>
-<span id="cb93-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb93-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How our class feels about data"</span>,</span>
-<span id="cb93-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Words"</span></span>
-<span id="cb93-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb93-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb93-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb94-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb94-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(sentiment) <span class="sc">|&gt;</span></span>
+<span id="cb94-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> sentiment, <span class="at">y =</span> n, <span class="at">fill =</span> sentiment)) <span class="sc">+</span></span>
+<span id="cb94-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb94-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"negative"</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>, <span class="st">"positive"</span> <span class="ot">=</span> <span class="st">"#27ae60"</span>)) <span class="sc">+</span></span>
+<span id="cb94-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb94-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"How our class feels about data"</span>,</span>
+<span id="cb94-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Words"</span></span>
+<span id="cb94-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb94-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb94-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1430,16 +1445,16 @@ Levels: blue red</code></pre>
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-48-1.png" alt="Bar chart comparing the count of positive vs negative words in class survey responses about data, with negative words outnumbering positive ones." width="672"></p>
+<p><img data-src="13-strings-factors_files/figure-revealjs/unnamed-chunk-49-1.png" alt="Bar chart comparing the count of positive vs negative words in class survey responses about data, with negative words outnumbering positive ones." width="672"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="which-words-drove-the-score" class="slide level2">
 <h2>Which words drove the score?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
-<span id="cb94-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb94-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="" aria-hidden="true" tabindex="-1"></a>words <span class="sc">|&gt;</span></span>
+<span id="cb95-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb95-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, sentiment, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 × 3
    word        sentiment     n
@@ -1476,12 +1491,12 @@ Levels: blue red</code></pre>
 <h2>Where did “good” actually come from?</h2>
 <p><code>unnest_tokens(..., drop = FALSE)</code> keeps the source phrase so we can spot-check:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
-<span id="cb96-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
-<span id="cb96-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, data_words, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
-<span id="cb96-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb96-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"good"</span>, <span class="st">"great"</span>, <span class="st">"love"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb96-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data_words =</span> <span class="fu">str_trunc</span>(data_words, <span class="dv">35</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb97-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(data_words) <span class="sc">|&gt;</span></span>
+<span id="cb97-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, data_words, <span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb97-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">"bing"</span>), <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb97-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(word <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"good"</span>, <span class="st">"great"</span>, <span class="st">"love"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb97-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">data_words =</span> <span class="fu">str_trunc</span>(data_words, <span class="dv">35</span>))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
   data_words                          word  sentiment
@@ -1520,11 +1535,11 @@ Levels: blue red</code></pre>
 <h2>Practice: Clean and visualize survey data</h2>
 <p>You have messy Likert scale data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb98-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
-<span id="cb98-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"strongly agree"</span>, <span class="st">"Agree"</span>, <span class="st">"NEUTRAL"</span>,</span>
-<span id="cb98-4"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"disagree"</span>, <span class="st">"Strongly Disagree"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb98-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb99-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">question =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Q1"</span>, <span class="st">"Q2"</span>, <span class="st">"Q3"</span>), <span class="at">each =</span> <span class="dv">10</span>),</span>
+<span id="cb99-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">response =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"strongly agree"</span>, <span class="st">"Agree"</span>, <span class="st">"NEUTRAL"</span>,</span>
+<span id="cb99-4"><a href="" aria-hidden="true" tabindex="-1"></a>                      <span class="st">"disagree"</span>, <span class="st">"Strongly Disagree"</span>), <span class="dv">30</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb99-5"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 <ol type="1">
 <li>Clean the <code>response</code> variable to title case</li>
@@ -1535,11 +1550,11 @@ Levels: blue red</code></pre>
 <li><strong>A6 preview</strong> — given an <code>open_responses</code> tibble with a <code>response</code> column, tokenize it and find the most common non-stopwords:</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
-<span id="cb99-2"><a href="" aria-hidden="true" tabindex="-1"></a>open_responses <span class="sc">|&gt;</span></span>
-<span id="cb99-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, response) <span class="sc">|&gt;</span></span>
-<span id="cb99-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb99-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidytext)</span>
+<span id="cb100-2"><a href="" aria-hidden="true" tabindex="-1"></a>open_responses <span class="sc">|&gt;</span></span>
+<span id="cb100-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest_tokens</span>(word, response) <span class="sc">|&gt;</span></span>
+<span id="cb100-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">anti_join</span>(stop_words, <span class="at">by =</span> <span class="st">"word"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb100-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(word, <span class="at">sort =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Give ~10 minutes. This exercise ties together strings and factors: students must first clean the text (str_to_title), then convert to a factor with proper ordering, then plot. Watch for students who forget to clean before converting to factor, which creates duplicate levels like “agree” and “Agree.” The facet_wrap step is review from earlier visualization sessions. If students finish early, the <code>fct_infreq()</code> bonus is a good stretch goal, and step 6 previews the tidytext workflow they’ll need for A6 Part 5 — emphasize that <code>unnest_tokens()</code> + <code>anti_join(stop_words)</code> is the standard pattern, no regex required.</p>
@@ -1554,6 +1569,39 @@ Levels: blue red</code></pre>
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="solution-clean-and-visualize-survey-data" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Clean and visualize survey data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data_clean <span class="ot">&lt;-</span> likert_data <span class="sc">|&gt;</span></span>
+<span id="cb101-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb101-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Clean to title case</span></span>
+<span id="cb101-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">response =</span> <span class="fu">str_to_title</span>(response),</span>
+<span id="cb101-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Convert to factor with logical order</span></span>
+<span id="cb101-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">response =</span> <span class="fu">factor</span>(response, <span class="at">levels =</span> <span class="fu">c</span>(</span>
+<span id="cb101-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="st">"Strongly Disagree"</span>, <span class="st">"Disagree"</span>, <span class="st">"Neutral"</span>, <span class="st">"Agree"</span>, <span class="st">"Strongly Agree"</span></span>
+<span id="cb101-9"><a href="" aria-hidden="true" tabindex="-1"></a>    ))</span>
+<span id="cb101-10"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb101-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Basic plot with facets</span></span>
+<span id="cb101-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(likert_data_clean, <span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb101-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb101-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>question) <span class="sc">+</span></span>
+<span id="cb101-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Survey responses by question"</span>,</span>
+<span id="cb101-17"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Response"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb101-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb101-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span>
+<span id="cb101-20"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-21"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Bonus: order by frequency</span></span>
+<span id="cb101-22"><a href="" aria-hidden="true" tabindex="-1"></a>likert_data_clean <span class="sc">|&gt;</span></span>
+<span id="cb101-23"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">response =</span> <span class="fu">fct_infreq</span>(response)) <span class="sc">|&gt;</span></span>
+<span id="cb101-24"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> response)) <span class="sc">+</span></span>
+<span id="cb101-25"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb101-26"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>question) <span class="sc">+</span></span>
+<span id="cb101-27"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb101-28"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+</div>
 </section></section>
 <section>
 <section id="wrapping-up" class="title-slide slide level1 center" data-background-color="#2c3e50">
