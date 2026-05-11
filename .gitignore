@@ -13,3 +13,5 @@ deidentified/
 
 **/*.quarto_ipynb
 **/.DS_Store
+
+.claude/
