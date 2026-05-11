@@ -209,9 +209,9 @@ feedback <- c(
 str_detect(feedback, "clear")
 ```
 
-. . .
+## Detecting patterns in `filter()`
 
-Use in `filter()`:
+`str_detect()` returns `TRUE`/`FALSE` — exactly what `filter()` needs:
 
 ```{r}
 tibble(feedback) |>
@@ -219,7 +219,7 @@ tibble(feedback) |>
 ```
 
 ::: {.notes}
-Emphasize the filter() integration — str_detect() returns TRUE/FALSE, which is exactly what filter() needs. This connects back to last session on logicals. Students will use this pattern frequently for things like "find all participants who mentioned anxiety in their open-ended response."
+This is the workhorse pattern: pair str_detect() with filter() to keep only rows whose text matches. Connects back to last session on logicals. Students will use this constantly for things like "find all participants who mentioned anxiety in their open-ended response."
 :::
 
 ## Case-insensitive detection
@@ -244,23 +244,44 @@ The regex() wrapper with ignore_case is essential for real survey data where you
 
 ## Replacing text
 
+Open-ended responses often have repeated words:
+
 ```{r}
-responses <- c("Strongly Disagree", "Disagree", "Strongly Agree", "Agree")
+responses <- c(
+  "very very tired",
+  "very stressed and very anxious",
+  "I felt fine"
+)
 
-# Replace first match
-str_replace(responses, "Strongly ", "Very ")
+# Replace the first match in each string
+str_replace(responses, "very", "extremely")
 
-# Replace all matches
-str_replace_all(responses, "Strongly ", "Very ")
+# Replace every match in each string
+str_replace_all(responses, "very", "extremely")
+```
+
+::: {.notes}
+Run both lines and have students compare the output side by side. The first call only swaps the first "very" in each string — the second "very" stays put. str_replace_all() catches both. Stress that "first match" means first within each element of the vector, not just the first element.
+:::
+
+## Multiple replacements
+
+Imagine clinical notes with diagnosis abbreviations scattered inside the text:
+
+```{r}
+notes <- c(
+  "Patient presented with MDD symptoms",
+  "Differential: MDD vs GAD",
+  "Family history of OCD and GAD"
+)
 ```
 
 ## Multiple replacements
 
-```{r}
-diagnosis <- c("MDD", "GAD", "MDD", "OCD", "GAD")
+Pass a named vector to `str_replace_all()` to expand them **wherever they appear**:
 
-# Replace multiple patterns at once
-str_replace_all(diagnosis, c(
+```{r}
+str_replace_all(notes, c(
   "MDD" = "Major Depressive Disorder",
   "GAD" = "Generalized Anxiety Disorder",
   "OCD" = "Obsessive-Compulsive Disorder"
@@ -268,7 +289,7 @@ str_replace_all(diagnosis, c(
 ```
 
 ::: {.notes}
-The named vector approach to str_replace_all() is very handy for recoding abbreviations in real data. Emphasize this pattern — students will use it for diagnosis codes, condition labels, and other abbreviation-heavy data. Move fairly quickly through this slide.
+This is what str_replace_all() does that case_when() can't: it edits substrings inside longer text, not whole values. case_when() would only work if every cell were exactly "MDD" or "GAD" — here the abbreviations are buried in clinical notes. This is the realistic version of working with free-text data.
 :::
 
 ## Extracting parts of strings
@@ -331,9 +352,11 @@ messy_survey <- tibble(
 )
 ```
 
+## Your turn: Clean text data
+
 1. Clean `major` to lowercase with no extra spaces
 2. Clean `comment` to title case with no extra spaces
-3. Create a logical column `is_negative` that is TRUE if the comment contains "long" or "confusing" (case-insensitive)
+3. Create a logical column `is_negative` that is `TRUE` if the comment contains "long" or "confusing" (case-insensitive)
 4. Filter to only negative comments
 
 **Time: 10 minutes**
@@ -605,17 +628,20 @@ demo_data <- tibble(
   education = c("HS", "BA", "BA", "MA", "HS", "PhD")
 )
 
+demo_data
+```
+
+## Recoding demographics
+
+```{r}
 demo_data |>
   mutate(
-    # Order age groups logically
     age_group = factor(age_group, levels = c("18-25", "26-35", "36-45", "46+")),
-
-    # Expand education codes
     education = fct_recode(factor(education),
       "High School" = "HS",
-      "Bachelor's" = "BA",
-      "Master's" = "MA",
-      "Doctorate" = "PhD"
+      "Bachelor's"  = "BA",
+      "Master's"    = "MA",
+      "Doctorate"   = "PhD"
     )
   )
 ```
@@ -686,13 +712,20 @@ colors
 On the class survey, you described your relationship with data in 1–2 words. Let's see what you said.
 
 ```{r}
+#| eval: false
+class_survey <- read_csv(
+  "https://raw.githubusercontent.com/sjweston/datasci410/refs/heads/main/data/class_survey.csv"
+)
+```
+
+```{r}
 class_survey |>
   select(data_words) |>
   head(10)
 ```
 
 ::: {.notes}
-Transition: "We've been cleaning strings and ordering factors. Now let's do something fun with text data — your text data." Show the raw responses. Students will laugh at some of the answers. This motivates the next step: how do we summarize open-ended text?
+Transition: "We've been cleaning strings and ordering factors. Now let's do something fun with text data — your text data." Remind students this is the same URL pattern they used in Session 10 — read_csv() can take a URL directly, no download needed. Show the raw responses. Students will laugh at some of the answers. This motivates the next step: how do we summarize open-ended text?
 :::
 
 ## Tokenizing text with tidytext
@@ -713,30 +746,83 @@ Each row is now a single word.
 Explain: unnest_tokens takes a column of text and turns each word into its own row. The first argument is what to call the new column, the second is the source column. This is the foundation of text analysis — you can't count words until they're in separate rows.
 :::
 
-## What words came up most?
+## Words alone aren't enough
 
 ```{r}
-#| output-location: slide
-#| fig-width: 8
-#| fig-height: 5
-#| fig-alt: "Horizontal bar chart showing the most common words students used to describe their relationship with data, ordered by frequency."
 words |>
   anti_join(stop_words, by = "word") |>
   count(word, sort = TRUE) |>
-  slice_head(n = 10) |>
-  mutate(word = fct_reorder(word, n)) |>
-  ggplot(aes(x = n, y = word)) +
-  geom_col(fill = "steelblue") +
+  slice_head(n = 5)
+```
+
+Most words appeared just once. Counting alone won't tell us much.
+
+But every word carries a **feeling** — positive, negative, neutral. Can we measure *that*?
+
+::: {.notes}
+Run the count live so students see the flat distribution — a couple words at 2, most at 1. Ask: "What can we conclude from this?" Answer: not much. Then pivot: "But each word carries a feeling. Let's measure the feelings instead of the words."
+:::
+
+## How does our class feel about data?
+
+`tidytext` ships with the **Bing lexicon** — ~6,800 English words tagged `positive` or `negative`. We can `inner_join()` to keep only the words our class used *and* the lexicon recognized.
+
+```{r}
+#| output-location: slide
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-alt: "Bar chart comparing the count of positive vs negative words in class survey responses about data, with negative words outnumbering positive ones."
+words |>
+  inner_join(get_sentiments("bing"), by = "word") |>
+  count(sentiment) |>
+  ggplot(aes(x = sentiment, y = n, fill = sentiment)) +
+  geom_col() +
+  scale_fill_manual(values = c("negative" = "#c0392b", "positive" = "#27ae60")) +
   labs(
-    title = "How Our Class Describes Their Relationship with Data",
-    x = "Count",
-    y = NULL
+    title = "How our class feels about data",
+    x = NULL, y = "Words"
   ) +
-  theme_minimal(base_size = 14)
+  theme_minimal(base_size = 14) +
+  theme(legend.position = "none")
 ```
 
 ::: {.notes}
-Walk through the pipeline: anti_join removes common filler words ("the", "a", "is"), count tallies each word, and fct_reorder puts them in order for the plot. Ask: "What themes do you see? Are people mostly positive, negative, or neutral?" This connects string skills, factor ordering, and visualization — a nice capstone moment. Point out that fct_reorder here does exactly what they learned earlier in the factors section.
+Walk through the pipeline: inner_join keeps only the words tagged in the lexicon (most filler words drop out — "the", "psychology", "data" itself), then count by sentiment, then plot. The bars are close — about 17 negative to 14 positive. Resist the urge to declare a verdict here. Instead, plant the seed: "It looks roughly balanced. But should we trust that? Let's look at the actual words."
+:::
+
+## Which words drove the score?
+
+```{r}
+words |>
+  inner_join(get_sentiments("bing"), by = "word") |>
+  count(word, sentiment, sort = TRUE)
+```
+
+Read carefully — did the lexicon get every word **right**?
+
+::: {.notes}
+This is the setup. Notice "good" leads the positive list with 3 hits, and "great", "love" are also tagged positive. Don't explain why yet — push them to look at the *original phrases* on the next slide.
+:::
+
+## Where did "good" actually come from?
+
+`unnest_tokens(..., drop = FALSE)` keeps the source phrase so we can spot-check:
+
+```{r}
+class_survey |>
+  select(data_words) |>
+  unnest_tokens(word, data_words, drop = FALSE) |>
+  inner_join(get_sentiments("bing"), by = "word") |>
+  filter(word %in% c("good", "great", "love")) |>
+  mutate(data_words = str_trunc(data_words, 35))
+```
+
+. . .
+
+Out of 8 "scored" tokens, the lexicon got **one** right.
+
+::: {.notes}
+This is the payoff. Walk down the table column by column: "not good" → bing scores "good" as positive (negation lost). "not great" → same problem. "unrequited love" → "love" tagged positive (the whole phrase is sad). "master, slave" → split mechanically into one positive + one negative, ignoring that it's a metaphor about being controlled by data. "love-hate" → only "love" is here (positive); "hate" was already in the table on the previous slide as negative — one phrase contributed to both columns. Only the standalone "good" actually means "good." So while the bars on the previous chart looked roughly balanced (17 vs 14), the *real* sentiment is much more negative. The takeaway: sentiment lexicons can't see negation, sarcasm, metaphor, or context. In real research, you spot-check by reading a sample. Connect forward: "Assignment 6 will ask you to make exactly these calls."
 :::
 
 # End-of-deck exercise {background-color="#e67e22"}

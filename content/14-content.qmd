@@ -9,6 +9,11 @@ date: "2026-05-13"
 
 - [R4DS Ch 18: Missing values](https://r4ds.hadley.nz/missing-values)
 
+::: {.callout-important}
+## Assignment 6 is due this Sunday
+[Assignment 6: Data Types & Wrangling](/assignment/06-assignment.qmd) — due Sunday, May 17 at 11:59 PM.
+:::
+
 ::: {.callout-tip}
 ## Assignment 7 is assigned today
 [Assignment 7: Joins & Missing Data](/assignment/07-assignment.qmd) — due Sunday, May 24 at 11:59 PM. The missing-data half is fair game now; we'll cover joins next class.

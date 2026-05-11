@@ -34,46 +34,21 @@ Survey data from a therapy study:
 
 ### Your pen-and-paper version
 
-**Step 1: Count NAs per variable.** Go through each column and count the missing values:
+**Step 1: Count NAs per variable.**
 
-| Variable             | Count of NAs |
-|---------------------|-------------|
-| id                  |             |
-| age                 |             |
-| baseline_depression |             |
-| followup_depression |             |
-| satisfaction        |             |
+| Variable | age | baseline_depression | followup_depression | satisfaction |
+|----------|-----|---------------------|---------------------|--------------|
+| NAs      |     |                     |                     |              |
 
-**Step 2: Find complete cases.** Mark each row as complete or not:
-
-| id | Any NAs in this row? | Complete? |
-|----|:---:|:---:|
-| 1  |     |     |
-| 2  |     |     |
-| 3  |     |     |
-| 4  |     |     |
-| 5  |     |     |
-| 6  |     |     |
-| 7  |     |     |
-| 8  |     |     |
+**Step 2: Find complete cases.** Circle every row with no NAs anywhere: **1   2   3   4   5   6   7   8**
 
 **How many complete cases?** _____
 
-**Step 3: Drop rows missing followup.** Cross out any row where `followup_depression` is NA. Which rows survive?
+**Step 3: Drop rows missing followup.** Which rows survive (i.e., `followup_depression` is not NA)? _____________________
 
-Surviving rows: _____________________________
+**Step 4: Calculate completion rate.** _____ / _____ = _____ = _____%
 
-**How many rows remain?** _____
-
-**Step 4: Calculate completion rate.**
-
-- Total participants: _____
-- Participants with followup data: _____
-- Completion rate: _____ / _____ = _____ = _____%
-
-**Step 5: Think about it.** Look at the rows you crossed out. Do participants missing followup data also tend to be missing other variables? What might this pattern suggest?
-
-Your answer: ___________________________________________________________________
+**Step 5: Think about it.** Do participants missing followup data also tend to be missing other variables? What might this pattern suggest? _______________________________________________________________
 
 **Step 6: Write the code.** Fill in the blanks:
 

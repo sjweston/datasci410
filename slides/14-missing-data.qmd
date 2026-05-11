@@ -49,6 +49,10 @@ If you just delete their data, you might be throwing away the most important par
 Today we learn to detect, explore, and handle missing data honestly.
 
 ::: {.notes}
+**PACING (~80 min total):** Why missing data matters (~5). Types of missing data (~8). Exploring missing data (~10). Handling missing data (~15). Implicit→explicit (~8). Pair coding (~10). Mechanisms + reporting (~12). Multiple imputation (~2). Wrap-up (~5). If running short, cut the multiple imputation section entirely and shorten the MCAR/MAR/MNAR examples — the reporting paragraph at the end is the more important takeaway.
+
+**A6 reminder:** Make sure to flag at the top of class (and again at the end) that Assignment 6 is due Sunday May 17 at 11:59 PM — that's this weekend, so it's the most pressing deadline on their plate.
+
 Ask if anyone ran into NAs while exploring data for their final project. The 30-50% statistic is a real number from attrition research and tends to surprise students. Emphasize the word "honestly" — this session is as much about research ethics and transparency as it is about R functions. Spend ~2 minutes on this opening.
 :::
 
@@ -93,7 +97,7 @@ appointments
 Who didn't show up? You can't tell because they're not in the data!
 
 ::: {.notes}
-This distinction (explicit vs. implicit) is one of the most important conceptual takeaways. Ask students: "Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?" The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. Foreshadow that next session's joins lecture gives us another tool for finding implicit missingness (anti_join).
+This distinction (explicit vs. implicit) is one of the most important conceptual takeaways. Ask students: "Bob is not in the Wednesday data. Did he attend and the data was not recorded? Or did he not attend? Or did he cancel?" The data cannot tell us. This is much harder to detect than explicit NAs because there is nothing to see — the row simply does not exist. We will see complete() later in this deck as the main tool for surfacing implicit missingness within a single dataset.
 :::
 
 ## Why implicit missing matters
@@ -154,49 +158,37 @@ survey |>
 
 ## Better approach: across()
 
-```{r}
-survey |>
-  summarize(
-    across(
-      everything(),
-      ~sum(is.na(.x))
-    )
-  )
-```
-
-. . .
-
-Or as proportions:
+`across(columns, function)` applies the same function to multiple columns at once:
 
 ```{r}
 survey |>
   summarize(
     across(
-      everything(),
-      ~mean(is.na(.x))
+      everything(),       # which columns: all of them
+      ~ sum(is.na(.x))    # what to do: count NAs (.x = "this column")
     )
   )
 ```
 
 ::: {.notes}
-The across() + everything() pattern is new for most students. Explain the tilde (~) shorthand as "for each column, do this." The proportion version (using mean() instead of sum()) is especially useful for reporting — you can say "33% of participants were missing age data." Students often ask whether to report counts or proportions; the answer is both, ideally. Spend ~3 minutes on this slide since the syntax is unfamiliar.
+The across() + everything() pattern is essentially new for most students — they only saw it briefly in Session 10 and were told to focus on output, not mechanics. Walk through the anatomy slowly: across() takes (1) which columns and (2) what to do to each. The tilde (~) plus .x is shorthand for "for each column, do this." Spend ~3 minutes on this slide since the syntax is unfamiliar.
 :::
 
-## Which rows have missing data?
+## Or as proportions
 
 ```{r}
-# Show only rows with any NA
 survey |>
-  filter(if_any(everything(), is.na))
+  summarize(
+    across(
+      everything(),
+      ~ mean(is.na(.x))
+    )
+  )
 ```
 
-. . .
-
-```{r}
-# Show only complete cases
-survey |>
-  filter(if_all(everything(), ~!is.na(.x)))
-```
+::: {.notes}
+Swapping sum() for mean() turns counts into proportions — a useful trick that reuses the TRUE = 1 / FALSE = 0 idea. This is especially useful for reporting: "33% of participants were missing age data." Students often ask whether to report counts or proportions; the answer is both, ideally.
+:::
 
 ## Visualizing missingness
 
@@ -214,18 +206,6 @@ vis_miss(survey)
 The naniar package is optional — students do not need to install it for assignments. But the vis_miss() plot is a great diagnostic tool worth showing. Each column is a variable, each row is a participant, and missing cells are colored. This gives an immediate visual sense of where the holes are. If naniar is not installed on your machine, you can skip this live and just show the rendered output.
 :::
 
-## Patterns of missingness
-
-```{r}
-#| fig-alt: "Upset plot showing which combinations of variables have missing values in the same rows, revealing whether missingness clusters across specific variable pairs."
-# Are certain combinations of variables missing together?
-gg_miss_upset(survey)
-```
-
-. . .
-
-This shows which combinations of variables are missing in the same rows.
-
 # Handling missing data {background-color="#2c3e50"}
 
 ## Strategy 1: Complete case analysis
@@ -233,20 +213,12 @@ This shows which combinations of variables are missing in the same rows.
 **Complete case analysis** (listwise deletion) removes any row with *any* `NA`:
 
 ```{r}
-# Base R way
-na.omit(survey)
-```
-
-. . .
-
-```{r}
-# tidyverse way
 survey |>
   drop_na()
 ```
 
 ::: {.notes}
-Transition cue: "Now that we know how to find missing data, let's talk about what to do about it." Present both the base R and tidyverse approaches so students recognize na.omit() when they see it in other people's code, but encourage them to use drop_na() for consistency with the tidyverse workflow. Students often default to this strategy because it is the simplest — the next slide shows why that can be dangerous.
+Transition cue: "Now that we know how to find missing data, let's talk about what to do about it." Students often default to this strategy because it is the simplest — the next slide shows why that can be dangerous. (Aside, if students ever see `na.omit()` elsewhere: it's the base R equivalent of `drop_na()` — same behavior.)
 :::
 
 ## Dangers of complete case analysis
@@ -281,7 +253,7 @@ survey |>
   drop_na(depression)
 ```
 
-. . .
+## Drop on multiple variables
 
 ```{r}
 # Drop only if depression OR anxiety is missing
@@ -334,14 +306,6 @@ fill() is called "last observation carried forward" (LOCF) in clinical research.
 # Fill upward
 time_series |>
   fill(mood, .direction = "up")
-```
-
-. . .
-
-```{r}
-# Fill both ways
-time_series |>
-  fill(mood, .direction = "updown")
 ```
 
 ## When is filling okay?
@@ -432,7 +396,7 @@ study_completion |>
 Now we can see: Participant 2 missing timepoint 3, Participant 3 missing timepoint 2.
 
 ::: {.notes}
-complete() is the key function for this section. It generates every combination of the variables you specify and fills in NA where data is missing. Walk through the output carefully: the original data had 7 rows, but with 3 participants and 3 timepoints there should be 9 rows. The 2 new rows (with NAs for depression) represent the implicit missing data that is now explicit. This is conceptually similar to what students did with anti_join last session, but complete() does it in one step and keeps everything in a single table.
+complete() is the key function for this section. It generates every combination of the variables you specify and fills in NA where data is missing. Walk through the output carefully: the original data had 7 rows, but with 3 participants and 3 timepoints there should be 9 rows. The 2 new rows (with NAs for depression) represent the implicit missing data that is now explicit. complete() is the cleanest way to surface implicit missingness within a single dataset — one function generates the grid and exposes the gaps.
 :::
 
 ## Why this matters
@@ -449,9 +413,9 @@ study_completion |>
   )
 ```
 
-## Filling after completing
+## Flagging completion
 
-Common pattern: make implicit explicit, then fill with a value:
+Common pattern: make implicit explicit, then flag who completed each timepoint:
 
 ```{r}
 study_completion |>
@@ -460,6 +424,8 @@ study_completion |>
     completed = if_else(is.na(depression), FALSE, TRUE)
   )
 ```
+
+This `completed` flag is the building block for attrition analysis — coming up later in the deck.
 
 # Pair coding break {background-color="#e67e22"}
 
@@ -574,37 +540,44 @@ The practical takeaway for this course: you cannot statistically test whether da
 In longitudinal studies, always check *who* drops out:
 
 ```{r}
-set.seed(9)
-baseline <- tibble(
+study <- tibble(
   id = 1:10,
   condition = rep(c("Treatment", "Control"), each = 5),
-  baseline_depression = rnorm(10, 20, 5)
+  baseline_depression = c(22, 18, 25, 20, 24, 19, 21, 23, 17, 22),
+  followup_depression = c(15, 12, NA, NA, NA, 14, 13, 11, 16, 18)
 )
 
-completers <- tibble(
-  id = c(1, 2, 3, 7, 8, 9, 10)  
-)
+study
 ```
 
-## Attrition by condition
+A missing followup score = a dropout.
+
+::: {.notes}
+This whole section is about applying the missing-data lens — `is.na(followup_depression)` identifies dropouts directly. Walk through the data: rows 3, 4, 5 are missing followup. Rows 1–5 are Treatment, so all three dropouts are in the Treatment condition. Set up the next slide as: "let's confirm that programmatically."
+:::
+
+## Who dropped out?
 
 ```{r}
-# Who dropped out?
-baseline |>
-  anti_join(completers, by = "id")
+study |>
+  filter(is.na(followup_depression))
 ```
 
-## Attrition by condition
+## Dropout by condition
 
 ```{r}
-baseline |>
-  anti_join(completers, by = "id") |>
+study |>
+  filter(is.na(followup_depression)) |>
   count(condition)
 ```
 
 . . .
 
-More dropouts from Treatment condition — this could bias results!
+All dropouts are from the Treatment condition — this could seriously bias results!
+
+::: {.notes}
+This is the punchline. If treatment dropouts are systematically different from completers (e.g., the treatment was unpleasant for some subset), then comparing post-treatment scores between conditions is comparing the people who *tolerated* the treatment to the full Control group — apples to oranges. Tie this to the MNAR discussion: this is exactly the kind of pattern that creates serious bias.
+:::
 
 ## Reporting missing data
 
@@ -619,10 +592,10 @@ In your write-up, report:
 
 Example:
 
-> "Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24) or treatment condition (χ² = 0.8, p = .37). Analyses used complete case analysis (N = 60)."
+> "Eight participants (12%) did not complete the follow-up assessment. Dropout was unrelated to baseline depression scores (t = 1.2, p = .24). Analyses used complete case analysis (N = 60)."
 
 ::: {.notes}
-Read the example paragraph aloud. This is the kind of reporting students should aim for in their final projects. They do not need to run t-tests or chi-squared tests for this class, but they should at minimum report the count and percentage of missing data and state how they handled it. This connects back to Session 1 and Session 16 themes about transparency and reproducibility.
+Read the example paragraph aloud. This is the kind of reporting students should aim for in their final projects — at minimum, the count and percentage of missing data and a statement about how they handled it. They are not expected to run inferential tests for this course; the t-test in the example is just to show what a published version of this paragraph might look like. If a student asks how to test whether dropout is related to a categorical variable like condition (as we just demoed), the standard tool is a chi-squared test of independence — but it is well outside the scope of this course. This connects back to Session 1 and Session 16 themes about transparency and reproducibility.
 :::
 
 # Advanced topic: Multiple imputation {background-color="#2c3e50"}
@@ -648,70 +621,6 @@ We won't cover these methods, but know they exist for when you need them in futu
 ::: {.notes}
 Keep this brief — ~2 minutes. The goal is awareness, not instruction. Students who go on to graduate school will encounter these methods in statistics courses. For now, just knowing the names exist is enough. If a student asks for more detail, suggest they look at the mice package vignette after the course.
 :::
-
-# End-of-deck exercise {background-color="#e67e22"}
-
-## Practice: Longitudinal missing data
-
-::: {.notes}
-This end-of-deck exercise focuses entirely on the missing-data tools from today (no joins yet — that's next session). Task 1 uses complete(), tasks 2-3 combine summarize and filter with missing data logic, and task 4 requires thinking carefully about complete cases. Give students ~10 minutes. If they get stuck on task 4 (computing change scores for complete cases only), suggest they filter for waves 1 and 3 first, then check that both values are non-missing before computing the difference. This exercise is directly relevant to Assignment 7.
-:::
-
-You have a three-wave study:
-
-```{r}
-longitudinal_study <- tibble(
-  participant = c(1, 1, 1, 2, 2, 3, 3, 3, 4, 4),
-  wave = c(1, 2, 3, 1, 2, 1, 2, 3, 1, 3),
-  depression = c(25, 20, 15, 30, 28, 22, 18, 16, 20, NA),
-  anxiety = c(28, 25, 22, 32, NA, 24, 20, 18, 22, 19)
-)
-```
-
-## Your tasks
-
-1. Make implicit missing waves **explicit** using `complete()`
-2. Count how many assessments each participant completed
-3. What percentage of participants completed all three waves?
-4. Compute mean depression change (wave 1 to wave 3) for participants with complete data on those waves
-
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
-
-# 1. Make implicit missing explicit
-long_complete <- longitudinal_study |>
-  complete(participant, wave)
-
-long_complete
-
-# 2. Count assessments per participant
-long_complete |>
-  group_by(participant) |>
-  summarize(
-    n_assessments = sum(!is.na(depression))
-  )
-
-# 3. Percentage completing all 3 waves
-long_complete |>
-  group_by(participant) |>
-  summarize(
-    n_assessments = sum(!is.na(depression))
-  ) |>
-  summarize(
-    pct_complete = mean(n_assessments == 3)
-  )
-
-# 4. Depression change for complete cases
-longitudinal_study |>
-  filter(wave %in% c(1, 3)) |>
-  group_by(participant) |>
-  filter(n() == 2 & all(!is.na(depression))) |>  # Both waves present and non-missing
-  summarize(
-    change = depression[wave == 1] - depression[wave == 3]
-  )
-```
 
 # Wrapping up {background-color="#2c3e50"}
 
@@ -770,9 +679,10 @@ longitudinal_study |>
 
 ✅ **Do:**
 
+- ⚠️ **Finish Assignment 6 — due Sunday May 17 at 11:59 PM**
 - Start Assignment 7 — the missing-data half is fair game now
+- Submit your final project draft (due next Wednesday before class)
 - Check your own final project data for missingness
-- Draft your final project report (due next Wednesday)
 
 ## The one thing to remember
 
@@ -781,5 +691,81 @@ Missing data isn't a problem to solve — it's information about your study. Tre
 See you Wednesday for joins!
 
 ::: {.notes}
-End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results. Remind them that Assignment 7 (Joins and Missing Data) was assigned today and is due Sun May 24, and that the final project draft is due next Wednesday (May 20). Next session covers joins, which pairs naturally with missing data — joins are a major source of NAs, and anti_join gives us another tool for finding implicit missingness.
+End on this reframe. Students tend to think of NAs as a nuisance to get rid of. The takeaway is that missing data tells you something — about your study design, your participants, and potentially about your results.
+
+**Three deadlines to call out by name:**
+1. **Assignment 6 is due Sunday May 17 at 11:59 PM** — that's the most pressing. Linger on this one — it's only 4 days away.
+2. Assignment 7 (Joins + Missing Data) was assigned today, due Sunday May 24. Tell them the missing-data half is doable now; joins comes Wednesday.
+3. Final project **draft** (not the final report) is due next Wednesday May 20 before class.
+
+Next session covers joins, which pairs naturally with missing data — joins are a major source of NAs.
+
+The on-your-own exercise that follows is a take-home practice — point students to it but do not work through it in class.
 :::
+
+# On your own {background-color="#e67e22"}
+
+## Practice: Longitudinal missing data
+
+::: {.notes}
+This is a take-home exercise — students do not need to finish it in class. It focuses entirely on the missing-data tools from today (no joins yet — that's next session). Task 1 uses complete(), tasks 2-3 combine summarize and filter with missing data logic, and task 4 reshapes wide and computes a change score. If they get stuck on task 4 in office hours, remind them: pivot_wider (Session 5) takes them from one-row-per-observation to one-row-per-participant, which is what they need for a wave-1-vs-wave-3 comparison. This exercise is directly relevant to Assignment 7.
+:::
+
+You have a three-wave study:
+
+```{r}
+longitudinal_study <- tibble(
+  participant = c(1, 1, 1, 2, 2, 3, 3, 3, 4, 4),
+  wave = c(1, 2, 3, 1, 2, 1, 2, 3, 1, 3),
+  depression = c(25, 20, 15, 30, 28, 22, 18, 16, 20, NA),
+  anxiety = c(28, 25, 22, 32, NA, 24, 20, 18, 22, 19)
+)
+```
+
+## Your tasks
+
+1. Make implicit missing waves **explicit** using `complete()`
+2. Count how many assessments each participant completed
+3. What percentage of participants completed all three waves?
+4. Reshape the depression data so each participant has one row with columns for wave 1, 2, and 3. Then compute the wave-1-to-wave-3 change for participants with both timepoints. What's the mean change?
+
+```{r}
+#| echo: false
+#| eval: false
+# SOLUTION
+
+# 1. Make implicit missing explicit
+long_complete <- longitudinal_study |>
+  complete(participant, wave)
+
+long_complete
+
+# 2. Count assessments per participant
+long_complete |>
+  group_by(participant) |>
+  summarize(
+    n_assessments = sum(!is.na(depression))
+  )
+
+# 3. Percentage completing all 3 waves
+long_complete |>
+  group_by(participant) |>
+  summarize(
+    n_assessments = sum(!is.na(depression))
+  ) |>
+  summarize(
+    pct_complete = mean(n_assessments == 3)
+  )
+
+# 4. Reshape wide, then compute wave 1 → wave 3 change
+long_complete |>
+  select(participant, wave, depression) |>
+  pivot_wider(
+    names_from = wave,
+    values_from = depression,
+    names_prefix = "wave_"
+  ) |>
+  filter(!is.na(wave_1) & !is.na(wave_3)) |>
+  mutate(change = wave_1 - wave_3) |>
+  summarize(mean_change = mean(change))
+```
