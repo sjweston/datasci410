@@ -1298,7 +1298,7 @@
     "href": "assignment/06-assignment.html#part-1-logical-vectors-recoding-25-points",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Part 1: Logical Vectors & Recoding (25 points)",
-    "text": "Part 1: Logical Vectors & Recoding (25 points)\nHere’s a simulated survey dataset:\nset.seed(410)  # For reproducibility\n\nsurvey &lt;- tibble(\n  id = 1:100,\n  age = round(rnorm(100, mean = 35, sd = 12)),\n  q1 = sample(1:7, 100, replace = TRUE),\n  q2 = sample(1:7, 100, replace = TRUE),\n  q3_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  q4 = sample(1:7, 100, replace = TRUE),\n  q5_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  attention_check = sample(c(4, 1:3, 5:7), 100, replace = TRUE,\n                           prob = c(0.85, rep(0.025, 6)))\n)\n\nTask 1.1\nCreate a logical variable passed_attention that is TRUE if attention_check == 4 and FALSE otherwise. How many participants passed?\n\n\nTask 1.2\nReverse-code q3_reverse and q5_reverse. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables q3 and q5 with the corrected values.\n\n\nTask 1.3\nCreate a scale_mean variable that is the mean of q1, q2, q3, q4, and q5 for each participant.\n\n\nTask 1.4\nCreate an age_group variable using case_when():\n\n“young” if age &lt; 30\n“middle” if age &gt;= 30 and age &lt; 50\n“older” if age &gt;= 50",
+    "text": "Part 1: Logical Vectors & Recoding (25 points)\nHere’s a simulated survey dataset:\nset.seed(410)  # For reproducibility\n\nsurvey &lt;- tibble(\n  id = 1:100,\n  age = round(rnorm(100, mean = 35, sd = 12)),\n  q1 = sample(1:7, 100, replace = TRUE),\n  q2 = sample(1:7, 100, replace = TRUE),\n  q3_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  q4 = sample(1:7, 100, replace = TRUE),\n  q5_reverse = sample(1:7, 100, replace = TRUE),  # Needs reverse coding\n  attention_check = sample(c(4, 1:3, 5:7), 100, replace = TRUE,\n                           prob = c(0.85, rep(0.025, 6)))\n)\n\nTask 1.1\nCreate a logical variable passed_attention that is TRUE if attention_check == 4 and FALSE otherwise. How many participants passed?\n\n\nTask 1.2\nReverse-code q3_reverse and q5_reverse. On a 1-7 scale, reverse coding means: new_value = 8 - old_value. Create new variables q3 and q5 with the corrected values.\n\n\nTask 1.3\nCreate a scale_mean variable that is the mean of q1, q2, q3, q4, and q5 for each participant. Make sure you use the corrected values for q3 and q5.\n\n\nTask 1.4\nCreate an age_group variable using case_when():\n\n“young” if age &lt; 30\n“middle” if age &gt;= 30 and age &lt; 50\n“older” if age &gt;= 50",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1322,7 +1322,7 @@
     "href": "assignment/06-assignment.html#part-3-factors-20-points",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Part 3: Factors (20 points)",
-    "text": "Part 3: Factors (20 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of education levels. What happens if you didn’t set the factor levels? Show both versions.",
+    "text": "Part 3: Factors (20 points)\n\nTask 3.1\nConvert your cleaned education variable to a factor with levels in logical order: “High School”, “College”, “Graduate”.\n# Hint: factor(x, levels = c(...))\n\n\nTask 3.2\nCreate a bar chart of frequency of education levels.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1342,23 +1342,11 @@
     ]
   },
   {
-    "objectID": "assignment/06-assignment.html#part-5-putting-it-together-10-points",
-    "href": "assignment/06-assignment.html#part-5-putting-it-together-10-points",
+    "objectID": "assignment/06-assignment.html#part-5-text-analysis-15-points-extra-credit",
+    "href": "assignment/06-assignment.html#part-5-text-analysis-15-points-extra-credit",
     "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 5: Putting It Together (10 points)",
-    "text": "Part 5: Putting It Together (10 points)\nCreate a complete data cleaning pipeline for the survey data that:\n\nFilters to participants who passed the attention check\nReverse-codes the necessary items\nCreates the scale mean\nCreates the age group factor (in correct order)\nSelects only id, age, age_group, and scale_mean\n\nUse a single piped sequence.",
-    "crumbs": [
-      "Assignments",
-      "Weekly Assignments",
-      "6: Data Types"
-    ]
-  },
-  {
-    "objectID": "assignment/06-assignment.html#part-6-text-analysis-15-points",
-    "href": "assignment/06-assignment.html#part-6-text-analysis-15-points",
-    "title": "Assignment 6: Data Types & Wrangling",
-    "section": "Part 6: Text Analysis (15 points)",
-    "text": "Part 6: Text Analysis (15 points)\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 6.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 6.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 6.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
+    "section": "Part 5: Text Analysis (15 points extra credit)",
+    "text": "Part 5: Text Analysis (15 points extra credit)\nThis part is optional extra credit. Completing it can add up to 15 points on top of your base score (out of 100). You can skip Part 5 entirely without penalty.\nOpen-ended survey responses often contain valuable data. Here are responses from the same study:\nopen_responses &lt;- tibble(\n  id = 1:15,\n  response = c(\n    \"I felt very stressed and anxious throughout the study\",\n    \"The tasks were challenging but I found them interesting\",\n    \"I was confused by some of the instructions at first\",\n    \"Participating made me feel nervous but also curious\",\n    \"The study was well organized and the instructions were clear\",\n    \"I felt overwhelmed at times but managed to stay focused\",\n    \"Some questions were confusing and hard to understand\",\n    \"I enjoyed the experience and learned something new\",\n    \"The tasks were repetitive and I lost focus near the end\",\n    \"I felt calm and confident during the experiment\",\n    \"It was stressful but I liked being part of research\",\n    \"The instructions were clear and easy to follow\",\n    \"I felt anxious about my performance on the tasks\",\n    \"Very interesting study about human behavior and emotion\",\n    \"I found the experience valuable and thought-provoking\"\n  )\n)\n\nTask 5.1\nUse unnest_tokens() from the tidytext package to tokenize the responses into individual words.\n# Hint:\nopen_responses |&gt;\n  unnest_tokens(word, response)\n\n\nTask 5.2\nRemove common stop words (e.g., “the”, “and”, “I”) using anti_join(stop_words). How many unique words remain?\n\n\nTask 5.3\nCount word frequencies and create a bar chart of the 10 most common words. What themes emerge from the responses?",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1370,7 +1358,7 @@
     "href": "assignment/06-assignment.html#grading-rubric",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Grading Rubric",
-    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Create passed_attention logical variable\n6\n\n\n1.2: Reverse-code q3 and q5\n7\n\n\n1.3: Create scale_mean\n6\n\n\n1.4: Create age_group with case_when()\n6\n\n\n2.1: Clean major variable\n10\n\n\n2.2: Clean education variable\n10\n\n\n3.1: Convert education to ordered factor\n5\n\n\n3.2: Bar chart of education levels (both versions)\n5\n\n\n4.1: Age group factor + boxplot of scale_mean\n10\n\n\nPart 5: Complete data cleaning pipeline\n10\n\n\n6.1: Tokenize responses\n5\n\n\n6.2: Remove stop words\n5\n\n\n6.3: Word frequency bar chart\n5\n\n\nQMD file knits without errors\n10\n\n\nTotal\n100\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
+    "text": "Grading Rubric\n\n\n\nTask\nPoints\n\n\n\n\n1.1: Create passed_attention logical variable\n7\n\n\n1.2: Reverse-code q3 and q5\n8\n\n\n1.3: Create scale_mean\n7\n\n\n1.4: Create age_group with case_when()\n8\n\n\n2.1: Clean major variable\n10\n\n\n2.2: Clean education variable\n10\n\n\n3.1: Convert education to ordered factor\n10\n\n\n3.2: Bar chart of education levels (both versions)\n10\n\n\n4.1: Age group factor + boxplot of scale_mean\n20\n\n\nQMD file knits without errors\n10\n\n\nBase Total\n100\n\n\nExtra Credit\n\n\n\n5.1: Tokenize responses\n+5\n\n\n5.2: Remove stop words\n+5\n\n\n5.3: Word frequency bar chart\n+5\n\n\nExtra Credit Total\n+15\n\n\n\nGrading scale per task: Full points = correct. Full - 1 = one minor error (typo, small formatting issue). Half credit = one major error. 0 = not attempted or multiple major errors. “QMD file knits” refers to whether the Quarto document renders successfully, not whether individual code produces correct output.",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
@@ -1382,7 +1370,7 @@
     "href": "assignment/06-assignment.html#submission",
     "title": "Assignment 6: Data Types & Wrangling",
     "section": "Submission",
-    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll data cleaning operations work correctly\nFactors are in correct order\nPipeline produces clean final dataset\nText analysis section complete with visualization",
+    "text": "Submission\n\nYour .qmd file with all code and narrative\nYour rendered HTML file\nAll data cleaning operations work correctly\nFactors are in correct order",
     "crumbs": [
       "Assignments",
       "Weekly Assignments",
