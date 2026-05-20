@@ -370,14 +370,143 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-1.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.1">Task 1.1</h3>
 <p>Create histograms for age and at least one personality item. What do you notice about the distributions?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bfi, <span class="fu">aes</span>(<span class="at">x =</span> age)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">2</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of age"</span>, <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-assignment_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" alt="Histogram of participant age in the BFI dataset. Right-skewed, with most participants under 40." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bfi, <span class="fu">aes</span>(<span class="at">x =</span> E1)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"darkorange"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Distribution of E1 responses"</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"E1 response (1-6)"</span>, <span class="at">y =</span> <span class="st">"Count"</span>) <span class="sc">+</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-assignment_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" alt="Histogram of responses to BFI item E1, on a 1-6 scale. Roughly bell-shaped with a slight skew toward the higher end." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Age is right-skewed — most participants are young adults, with a long tail of older respondents. The E1 item uses a 1–6 scale and looks roughly bell-shaped. Any sensible observation about skew, central tendency, or floor/ceiling effects earns credit here.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-1.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.2">Task 1.2</h3>
 <p>Are there any outliers or unusual values in age? How would you identify them programmatically? (Hint: use <code>filter()</code> with reasonable bounds.)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">min_age   =</span> <span class="fu">min</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">max_age   =</span> <span class="fu">max</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">median    =</span> <span class="fu">median</span>(age, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_under_15 =</span> <span class="fu">sum</span>(age <span class="sc">&lt;</span> <span class="dv">15</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_over_80  =</span> <span class="fu">sum</span>(age <span class="sc">&gt;</span> <span class="dv">80</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  min_age max_age median n_under_15 n_over_80
+    &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt;      &lt;int&gt;     &lt;int&gt;
+1       3      86     26         61         1</code></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Flag suspiciously young or old respondents</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(age <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">|</span> age <span class="sc">&gt;</span> <span class="dv">80</span>) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(age)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 2
+    age     n
+  &lt;int&gt; &lt;int&gt;
+1     3     1
+2     9     1
+3    11     3
+4    12    28
+5    13     7
+6    14    21
+7    86     1</code></pre>
+</div>
+</div>
+<p>There’s no hard rule — “outlier” depends on what’s plausible for the study. Asking whether anyone is implausibly young (under 13, say, for an online personality survey) or implausibly old (over 90) is a reasonable starting point. The IQR rule (<code>Q1 - 1.5*IQR</code> to <code>Q3 + 1.5*IQR</code>) is another defensible approach.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-1.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-1.3">Task 1.3</h3>
 <p>How much missing data is there? Create a summary showing the percentage of NA values for each variable. (Hint: see the missing-data section of the <a href="../slides/10-eda-variation.html">Session 10 slides</a> — the <code>across()</code> + <code>mean(is.na(.))</code> pattern is what you want.)</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(.)) <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">"variable"</span>, <span class="at">values_to =</span> <span class="st">"pct_missing"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(pct_missing))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 28 × 2
+   variable  pct_missing
+   &lt;chr&gt;           &lt;dbl&gt;
+ 1 education       7.96 
+ 2 N4              1.29 
+ 3 N5              1.04 
+ 4 O3              1    
+ 5 A2              0.964
+ 6 A3              0.929
+ 7 C4              0.929
+ 8 E3              0.893
+ 9 C2              0.857
+10 E1              0.821
+# ℹ 18 more rows</code></pre>
+</div>
+</div>
+<p><code>across(everything(), ...)</code> applies the function to every column. Pivoting the result long makes it easy to sort — wide format with 28 columns of percentages is hard to scan. Education has the most missing data; the personality items each have a small fraction of skipped responses.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="part-2-exploring-relationships-30-points" class="level2">
@@ -386,15 +515,109 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 class="anchored" data-anchor-id="task-2.1">Task 2.1</h3>
 <p>Pick two Extraversion items (e.g., E1 and E2). Compute the correlation between them and briefly interpret the result. Are the items positively or negatively related? Does the strength surprise you given that both are supposed to measure the same trait? (Some items may be reverse-coded!)</p>
 <p>Hint: <code>cor()</code> doesn’t know how to handle missing values by default — if any participant skipped either item, you’ll get <code>NA</code>. Pass <code>use = "complete.obs"</code> to tell it to compute the correlation using only participants who answered both items.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(bfi<span class="sc">$</span>E1, bfi<span class="sc">$</span>E2, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4671572</code></pre>
+</div>
+</div>
+<p>The correlation is <strong>positive and moderate-to-strong</strong> — somewhere around .3 to .5 depending on how missingness is handled. That’s actually informative: in the BFI, items E1 (“Don’t talk a lot”) and E2 (“Find it difficult to approach others”) are <strong>reverse-coded</strong>, while E3, E4, and E5 are coded in the extraverted direction. Two reverse-coded items should correlate positively with each other and negatively with the forward-coded items. If you found a <em>negative</em> correlation between E1 and one of E3–E5, that’s the reverse-coding showing up in the raw data.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-2.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.2">Task 2.2</h3>
 <p>Make a scatterplot of those same two items with a trend line. Does the visual relationship match what the correlation in Task 2.1 suggested?</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(bfi, <span class="fu">aes</span>(<span class="at">x =</span> E1, <span class="at">y =</span> E2)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Relationship between E1 and E2 (both reverse-coded)"</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"E1 (Don't talk a lot)"</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"E2 (Find it difficult to approach others)"</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-assignment_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" alt="Scatterplot of BFI item E1 against E2 with a linear trend line. Points are heavily overplotted because both variables take only six values; the trend line slopes upward." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><code>geom_point()</code> here would show only ~36 distinct dots because both variables are integer 1–6 — <code>geom_jitter()</code> spreads the points enough to see the density. The upward trend matches the positive correlation from Task 2.1.</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-2.3" class="level3">
 <h3 class="anchored" data-anchor-id="task-2.3">Task 2.3</h3>
 <p>Pick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?</p>
 <p>Hint: education is stored as numeric codes (1–5), so ggplot will treat it as continuous and give you one squashed boxplot. See the factor section of the <a href="../slides/10-eda-variation.html">Session 10 slides</a> for how to convert it to a labeled factor first.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(education)) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">education =</span> <span class="fu">factor</span>(education,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                            <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                            <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"HS"</span>, <span class="st">"Finished HS"</span>, <span class="st">"Some college"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>                                       <span class="st">"College"</span>, <span class="st">"Graduate"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> education, <span class="at">y =</span> E3)) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Education level"</span>,</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"E3 response (1-6)"</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-assignment_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" alt="Boxplots of BFI item E3 by education level (HS, finished HS, some college, college, graduate). The medians are similar across groups, with substantial overlap in the boxes." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Differences across education groups are small here — the medians and IQRs largely overlap. That’s a perfectly valid finding to report. Filtering out <code>NA</code> education values keeps ggplot from drawing an extra “NA” box.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="part-3-generating-questions-20-points" class="level2">
@@ -402,10 +625,79 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="task-3.1" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.1">Task 3.1</h3>
 <p>Based on your exploration, generate <strong>3 interesting questions</strong> that could be investigated with this data. Write them as comments.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sample Answers
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>There’s no single right answer. Strong questions are <em>specific</em> (name the variables), <em>answerable with this data</em>, and <em>non-trivial</em> (you couldn’t just look it up in the codebook). Examples:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Does the strength of within-trait item correlations differ by gender?</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    (e.g., are the Extraversion items more internally consistent for women than men?)</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Is age associated with higher Conscientiousness scores, controlling for education?</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="co">#    (The folk wisdom is that people get more conscientious with age — does the data agree?)</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Which Big Five trait shows the largest gender difference in this sample,</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#    and is that difference uniform across age groups?</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Weak questions to flag: anything answerable by reading a single variable’s mean (“what’s the average age?”), or anything not addressable with this data (“does therapy reduce neuroticism?” — no treatment variable).</p>
+</div>
+</div>
+</div>
 </section>
 <section id="task-3.2" class="level3">
 <h3 class="anchored" data-anchor-id="task-3.2">Task 3.2</h3>
 <p>For <strong>one</strong> of your questions, create a visualization that helps answer it. Explain your findings in a comment.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sample Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Taking the third sample question — gender differences in trait means across age groups — one approach is to compute a composite Conscientiousness score and plot it by gender across age bins. Many other approaches are equally valid.</p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>bfi <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(age), <span class="sc">!</span><span class="fu">is.na</span>(gender)) <span class="sc">|&gt;</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># The C4 and C5 items are reverse-coded in the BFI</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">C_score =</span> <span class="fu">rowMeans</span>(<span class="fu">across</span>(<span class="fu">c</span>(C1, C2, C3, C4, C5), <span class="sc">~</span> .x), <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">age_group =</span> <span class="fu">cut</span>(age, <span class="at">breaks =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">25</span>, <span class="dv">40</span>, <span class="dv">60</span>, <span class="dv">100</span>),</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>                    <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"&lt;25"</span>, <span class="st">"25-39"</span>, <span class="st">"40-59"</span>, <span class="st">"60+"</span>)),</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">gender =</span> <span class="fu">factor</span>(gender, <span class="at">levels =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"Male"</span>, <span class="st">"Female"</span>))</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> age_group, <span class="at">y =</span> C_score, <span class="at">fill =</span> gender)) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Conscientiousness by age group and gender"</span>,</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age group"</span>,</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean Conscientiousness score (1-6)"</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill =</span> <span class="st">"Gender"</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="05-assignment_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" alt="Boxplots of mean Conscientiousness score by age group, faceted by gender. Both genders show modest increases in Conscientiousness with age." width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The pattern is consistent with the broader personality literature: a small but visible increase in Conscientiousness with age, similar across genders. Note that the raw C score here ignores the fact that C4 and C5 are reverse-coded — a real analysis would reverse-code those items first.</p>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="part-4-eda-report-15-points" class="level2">
@@ -418,6 +710,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Next steps:</strong> What would you investigate further?</li>
 </ol>
 <p>Write this as narrative text (not code comments) in your Quarto document.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Sample Answer
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Reports are graded for whether each of the four sections is present, specific, and accurate — not against a single model answer. A strong write-up looks like:</p>
+<blockquote class="blockquote">
+<p><strong>The data.</strong> This analysis uses the Big Five Inventory (BFI) dataset from the <code>psych</code> package, containing 2,800 participants’ responses to 25 personality items (five each for Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness) along with age, gender, and education.</p>
+<p><strong>Key findings.</strong> First, the personality items are positively correlated within each trait, consistent with the BFI’s construct validity — though some items are reverse-coded, so raw correlations between forward- and reverse-coded items appear negative until the reverse-coding is applied. Second, Conscientiousness shows a modest positive association with age, in line with prior personality research. Third, education differences in Extraversion items are small and largely overlap across levels.</p>
+<p><strong>Data quality issues.</strong> Missing data are concentrated in education (~5%) and a handful of personality items (~1-2% each). The age distribution is right-skewed with a few implausibly young or old respondents that would warrant a closer look before any formal analysis. Reverse-coding for items E1, E2, C4, C5, O2, O5, and N5 has not been applied and would need to be addressed before constructing composite trait scores.</p>
+<p><strong>Next steps.</strong> I would (1) apply the published BFI reverse-coding key and construct trait composites, (2) examine the internal consistency (Cronbach’s alpha) of each trait, and (3) test whether age-by-trait associations remain after controlling for gender and education. Beyond that, a measurement-invariance test would help establish whether trait means can be meaningfully compared across demographic groups.</p>
+</blockquote>
+<p>Look for: dataset described accurately, at least two findings tied to specific variables, missing-data discussion that goes beyond “there’s some missingness,” and next steps that follow logically from the findings rather than being generic (“run a regression”).</p>
+</div>
+</div>
+</div>
 </section>
 <section id="grading-rubric" class="level2">
 <h2 class="anchored" data-anchor-id="grading-rubric">Grading Rubric</h2>

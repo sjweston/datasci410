@@ -20,7 +20,7 @@
 | 4  | 35  | 30                  |
 | 5  | 28  | 20                  |
 
-**`treatment`**
+**`treatment`** *(participant 5 missing)*
 
 | id | condition |
 |----|-----------|
@@ -29,9 +29,7 @@
 | 3  | CBT       |
 | 4  | Control   |
 
-(Note: participant 5 is missing from this table)
-
-**`followup`**
+**`followup`** *(participant 4 missing, but participant 5 is here)*
 
 | id | followup_depression |
 |----|---------------------|
@@ -39,8 +37,6 @@
 | 2  | 23                  |
 | 3  | 10                  |
 | 5  | 18                  |
-
-(Note: participant 4 is missing, but participant 5 is here)
 
 ---
 
@@ -82,9 +78,7 @@ How many participants have `NA` for `followup_depression`? _____
 
 Which participant(s)? _____
 
-**Step 4: Think about why.** What might explain why participant 4 is missing followup data but participant 5 is not?
-
-Your answer: ___________________________________________________________________
+**Step 4: Think about why.** What might explain why participant 4 is missing followup data but participant 5 is not? ____________________________________________________
 
 **Step 5: Write the code.** Fill in the blanks:
 
@@ -100,9 +94,3 @@ complete_data <- baseline_treatment |>
 # Step 3
 sum(is.na(complete_data$___________________))
 ```
-
----
-
-## Check your work
-
-Compare your joined tables and code with your partner's screen. Do your answers match?
