@@ -1,7 +1,18 @@
 ---
 title: "Assignment 5: Exploratory Data Analysis"
 date: "2026-05-10"
+execute:
+  warning: false
+  message: false
 ---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(psych)
+data(bfi)
+bfi <- as_tibble(bfi)
+```
 
 ::: {.callout-note}
 ## Assignment Details
@@ -50,11 +61,69 @@ This contains responses from 2,800 participants on 25 personality items (5 per B
 ### Task 1.1
 Create histograms for age and at least one personality item. What do you notice about the distributions?
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Histogram of participant age in the BFI dataset. Right-skewed, with most participants under 40."
+ggplot(bfi, aes(x = age)) +
+  geom_histogram(binwidth = 2, fill = "steelblue", color = "white") +
+  labs(title = "Distribution of age", x = "Age", y = "Count") +
+  theme_minimal()
+```
+
+```{r}
+#| fig-alt: "Histogram of responses to BFI item E1, on a 1-6 scale. Roughly bell-shaped with a slight skew toward the higher end."
+ggplot(bfi, aes(x = E1)) +
+  geom_histogram(binwidth = 1, fill = "darkorange", color = "white") +
+  labs(title = "Distribution of E1 responses",
+       x = "E1 response (1-6)", y = "Count") +
+  theme_minimal()
+```
+
+Age is right-skewed — most participants are young adults, with a long tail of older respondents. The E1 item uses a 1–6 scale and looks roughly bell-shaped. Any sensible observation about skew, central tendency, or floor/ceiling effects earns credit here.
+:::
+
 ### Task 1.2
 Are there any outliers or unusual values in age? How would you identify them programmatically? (Hint: use `filter()` with reasonable bounds.)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+bfi |>
+  summarize(
+    min_age   = min(age, na.rm = TRUE),
+    max_age   = max(age, na.rm = TRUE),
+    median    = median(age, na.rm = TRUE),
+    n_under_15 = sum(age < 15, na.rm = TRUE),
+    n_over_80  = sum(age > 80, na.rm = TRUE)
+  )
+
+# Flag suspiciously young or old respondents
+bfi |>
+  filter(age < 15 | age > 80) |>
+  count(age)
+```
+
+There's no hard rule — "outlier" depends on what's plausible for the study. Asking whether anyone is implausibly young (under 13, say, for an online personality survey) or implausibly old (over 90) is a reasonable starting point. The IQR rule (`Q1 - 1.5*IQR` to `Q3 + 1.5*IQR`) is another defensible approach.
+:::
+
 ### Task 1.3
 How much missing data is there? Create a summary showing the percentage of NA values for each variable. (Hint: see the missing-data section of the [Session 10 slides](../slides/10-eda-variation.html) — the `across()` + `mean(is.na(.))` pattern is what you want.)
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+bfi |>
+  summarize(across(everything(), ~ mean(is.na(.)) * 100)) |>
+  pivot_longer(everything(), names_to = "variable", values_to = "pct_missing") |>
+  arrange(desc(pct_missing))
+```
+
+`across(everything(), ...)` applies the function to every column. Pivoting the result long makes it easy to sort — wide format with 28 columns of percentages is hard to scan. Education has the most missing data; the personality items each have a small fraction of skipped responses.
+:::
 
 ## Part 2: Exploring Relationships (30 points)
 
@@ -63,21 +132,122 @@ Pick two Extraversion items (e.g., E1 and E2). Compute the correlation between t
 
 Hint: `cor()` doesn't know how to handle missing values by default — if any participant skipped either item, you'll get `NA`. Pass `use = "complete.obs"` to tell it to compute the correlation using only participants who answered both items.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+cor(bfi$E1, bfi$E2, use = "complete.obs")
+```
+
+The correlation is **positive and moderate-to-strong** — somewhere around .3 to .5 depending on how missingness is handled. That's actually informative: in the BFI, items E1 ("Don't talk a lot") and E2 ("Find it difficult to approach others") are **reverse-coded**, while E3, E4, and E5 are coded in the extraverted direction. Two reverse-coded items should correlate positively with each other and negatively with the forward-coded items. If you found a *negative* correlation between E1 and one of E3–E5, that's the reverse-coding showing up in the raw data.
+:::
+
 ### Task 2.2
 Make a scatterplot of those same two items with a trend line. Does the visual relationship match what the correlation in Task 2.1 suggested?
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Scatterplot of BFI item E1 against E2 with a linear trend line. Points are heavily overplotted because both variables take only six values; the trend line slopes upward."
+ggplot(bfi, aes(x = E1, y = E2)) +
+  geom_jitter(alpha = 0.3, width = 0.2, height = 0.2) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    title = "Relationship between E1 and E2 (both reverse-coded)",
+    x = "E1 (Don't talk a lot)",
+    y = "E2 (Find it difficult to approach others)"
+  ) +
+  theme_minimal()
+```
+
+`geom_point()` here would show only ~36 distinct dots because both variables are integer 1–6 — `geom_jitter()` spreads the points enough to see the density. The upward trend matches the positive correlation from Task 2.1.
+:::
 
 ### Task 2.3
 Pick one Extraversion item. Create boxplots showing how it differs by education level. Do you see a difference?
 
 Hint: education is stored as numeric codes (1–5), so ggplot will treat it as continuous and give you one squashed boxplot. See the factor section of the [Session 10 slides](../slides/10-eda-variation.html) for how to convert it to a labeled factor first.
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Boxplots of BFI item E3 by education level (HS, finished HS, some college, college, graduate). The medians are similar across groups, with substantial overlap in the boxes."
+bfi |>
+  filter(!is.na(education)) |>
+  mutate(education = factor(education,
+                            levels = 1:5,
+                            labels = c("HS", "Finished HS", "Some college",
+                                       "College", "Graduate"))) |>
+  ggplot(aes(x = education, y = E3)) +
+  geom_boxplot(fill = "steelblue", alpha = 0.7) +
+  labs(
+    x = "Education level",
+    y = "E3 response (1-6)"
+  ) +
+  theme_minimal()
+```
+
+Differences across education groups are small here — the medians and IQRs largely overlap. That's a perfectly valid finding to report. Filtering out `NA` education values keeps ggplot from drawing an extra "NA" box.
+:::
+
 ## Part 3: Generating Questions (20 points)
 
 ### Task 3.1
 Based on your exploration, generate **3 interesting questions** that could be investigated with this data. Write them as comments.
 
+::: {.callout-note collapse="true"}
+## Sample Answers
+
+There's no single right answer. Strong questions are *specific* (name the variables), *answerable with this data*, and *non-trivial* (you couldn't just look it up in the codebook). Examples:
+
+```r
+# 1. Does the strength of within-trait item correlations differ by gender?
+#    (e.g., are the Extraversion items more internally consistent for women than men?)
+#
+# 2. Is age associated with higher Conscientiousness scores, controlling for education?
+#    (The folk wisdom is that people get more conscientious with age — does the data agree?)
+#
+# 3. Which Big Five trait shows the largest gender difference in this sample,
+#    and is that difference uniform across age groups?
+```
+
+Weak questions to flag: anything answerable by reading a single variable's mean ("what's the average age?"), or anything not addressable with this data ("does therapy reduce neuroticism?" — no treatment variable).
+:::
+
 ### Task 3.2
 For **one** of your questions, create a visualization that helps answer it. Explain your findings in a comment.
+
+::: {.callout-note collapse="true"}
+## Sample Answer
+
+Taking the third sample question — gender differences in trait means across age groups — one approach is to compute a composite Conscientiousness score and plot it by gender across age bins. Many other approaches are equally valid.
+
+```{r}
+#| fig-alt: "Boxplots of mean Conscientiousness score by age group, faceted by gender. Both genders show modest increases in Conscientiousness with age."
+bfi |>
+  filter(!is.na(age), !is.na(gender)) |>
+  mutate(
+    # The C4 and C5 items are reverse-coded in the BFI
+    C_score = rowMeans(across(c(C1, C2, C3, C4, C5), ~ .x), na.rm = TRUE),
+    age_group = cut(age, breaks = c(0, 25, 40, 60, 100),
+                    labels = c("<25", "25-39", "40-59", "60+")),
+    gender = factor(gender, levels = 1:2, labels = c("Male", "Female"))
+  ) |>
+  ggplot(aes(x = age_group, y = C_score, fill = gender)) +
+  geom_boxplot(alpha = 0.7) +
+  labs(
+    title = "Conscientiousness by age group and gender",
+    x = "Age group",
+    y = "Mean Conscientiousness score (1-6)",
+    fill = "Gender"
+  ) +
+  theme_minimal()
+```
+
+The pattern is consistent with the broader personality literature: a small but visible increase in Conscientiousness with age, similar across genders. Note that the raw C score here ignores the fact that C4 and C5 are reverse-coded — a real analysis would reverse-code those items first.
+:::
 
 ## Part 4: EDA Report (15 points)
 
@@ -89,6 +259,22 @@ Write a 1-page (approximately 300-400 words) EDA report summarizing:
 4. **Next steps:** What would you investigate further?
 
 Write this as narrative text (not code comments) in your Quarto document.
+
+::: {.callout-note collapse="true"}
+## Sample Answer
+
+Reports are graded for whether each of the four sections is present, specific, and accurate — not against a single model answer. A strong write-up looks like:
+
+> **The data.** This analysis uses the Big Five Inventory (BFI) dataset from the `psych` package, containing 2,800 participants' responses to 25 personality items (five each for Agreeableness, Conscientiousness, Extraversion, Neuroticism, and Openness) along with age, gender, and education.
+>
+> **Key findings.** First, the personality items are positively correlated within each trait, consistent with the BFI's construct validity — though some items are reverse-coded, so raw correlations between forward- and reverse-coded items appear negative until the reverse-coding is applied. Second, Conscientiousness shows a modest positive association with age, in line with prior personality research. Third, education differences in Extraversion items are small and largely overlap across levels.
+>
+> **Data quality issues.** Missing data are concentrated in education (~5%) and a handful of personality items (~1-2% each). The age distribution is right-skewed with a few implausibly young or old respondents that would warrant a closer look before any formal analysis. Reverse-coding for items E1, E2, C4, C5, O2, O5, and N5 has not been applied and would need to be addressed before constructing composite trait scores.
+>
+> **Next steps.** I would (1) apply the published BFI reverse-coding key and construct trait composites, (2) examine the internal consistency (Cronbach's alpha) of each trait, and (3) test whether age-by-trait associations remain after controlling for gender and education. Beyond that, a measurement-invariance test would help establish whether trait means can be meaningfully compared across demographic groups.
+
+Look for: dataset described accurately, at least two findings tied to specific variables, missing-data discussion that goes beyond "there's some missingness," and next steps that follow logically from the findings rather than being generic ("run a regression").
+:::
 
 ## Grading Rubric
 

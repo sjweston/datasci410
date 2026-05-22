@@ -158,7 +158,7 @@ What's the relationship between these two variables? Does it differ by group?
 - [ ] Clean string variables (fix typos, standardize formatting)
 - [ ] Create and relevel factors for analysis
 - [ ] Demonstrate how factor levels affect ggplot output
-- [ ] Tokenize a set of open-ended survey responses and create a word frequency visualization
+- [ ] *(Extra credit, +15)* Tokenize a set of open-ended survey responses and create a word frequency visualization
 
 **In-Class Exercise (Session 12):**
 Reverse-code these items and calculate the scale mean for each participant.
@@ -207,7 +207,7 @@ Join these two tables. Why are some rows missing? How would you handle this?
 - [ ] Render to HTML
 
 **In-Class Exercise (Session 16):**
-Take this default ggplot and redesign it as a "storytelling" figure. What's the message? What should you emphasize, mute, or cut?
+Pick one figure from your final project draft. Produce two versions: one for your professor (what would go in the report) and one for your roommate (a single image you'd text them with the takeaway). Use at least one annotation technique from class — e.g., `annotate("text")`, `geom_text()` direct labels, `geom_vline()`, `annotate("rect")`, or text-as-data with `theme_void()`.
 
 ---
 

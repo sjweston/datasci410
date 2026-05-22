@@ -957,9 +957,33 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </section>
-<section id="before-we-move-on" class="slide level2">
-<h2>Before we move on</h2>
-<p>📤 <strong><a href="https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins">Submit your code on Canvas</a></strong> for participation credit. Paste what you have — it doesn’t need to work perfectly.</p>
+<section id="solution-missing-data-patterns" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Missing data patterns</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. NAs in every column at once — across() applies sum(is.na(.))</span></span>
+<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    to each variable so we don't have to name them one by one.</span></span>
+<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="sc">|&gt;</span></span>
+<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x)))</span>
+<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Complete cases — drop_na() with no arguments removes any row</span></span>
+<span id="cb45-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    that has an NA anywhere. nrow() then counts what's left.</span></span>
+<span id="cb45-10"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="sc">|&gt;</span></span>
+<span id="cb45-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="sc">|&gt;</span></span>
+<span id="cb45-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>()</span>
+<span id="cb45-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Drop only rows missing followup — pass the column name to drop_na().</span></span>
+<span id="cb45-15"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="sc">|&gt;</span></span>
+<span id="cb45-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(followup_depression)</span>
+<span id="cb45-17"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-18"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Completion rate — !is.na() flips the logic to "has a value",</span></span>
+<span id="cb45-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    and mean() of a TRUE/FALSE vector gives the proportion.</span></span>
+<span id="cb45-20"><a href="" aria-hidden="true" tabindex="-1"></a>therapy_survey <span class="sc">|&gt;</span></span>
+<span id="cb45-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb45-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">completion_rate =</span> <span class="fu">mean</span>(<span class="sc">!</span><span class="fu">is.na</span>(followup_depression))</span>
+<span id="cb45-23"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
 </section></section>
 <section>
 <section id="psychology-specific-considerations" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1047,14 +1071,14 @@ Dr.&nbsp;Sara Weston
 <h2>Attrition analysis</h2>
 <p>In longitudinal studies, always check <em>who</em> drops out:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb45-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
-<span id="cb45-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
-<span id="cb45-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">17</span>, <span class="dv">22</span>),</span>
-<span id="cb45-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">18</span>)</span>
-<span id="cb45-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb45-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb45-8"><a href="" aria-hidden="true" tabindex="-1"></a>study</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb46-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>,</span>
+<span id="cb46-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">condition =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Treatment"</span>, <span class="st">"Control"</span>), <span class="at">each =</span> <span class="dv">5</span>),</span>
+<span id="cb46-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">baseline_depression =</span> <span class="fu">c</span>(<span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">24</span>, <span class="dv">19</span>, <span class="dv">21</span>, <span class="dv">23</span>, <span class="dv">17</span>, <span class="dv">22</span>),</span>
+<span id="cb46-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">followup_depression =</span> <span class="fu">c</span>(<span class="dv">15</span>, <span class="dv">12</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">14</span>, <span class="dv">13</span>, <span class="dv">11</span>, <span class="dv">16</span>, <span class="dv">18</span>)</span>
+<span id="cb46-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb46-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-8"><a href="" aria-hidden="true" tabindex="-1"></a>study</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
       id condition baseline_depression followup_depression
@@ -1089,8 +1113,8 @@ Dr.&nbsp;Sara Weston
 <section id="who-dropped-out" class="slide level2">
 <h2>Who dropped out?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
-<span id="cb47-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
+<span id="cb48-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression))</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 4
      id condition baseline_depression followup_depression
@@ -1104,9 +1128,9 @@ Dr.&nbsp;Sara Weston
 <section id="dropout-by-condition" class="slide level2">
 <h2>Dropout by condition</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
-<span id="cb49-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression)) <span class="sc">|&gt;</span></span>
-<span id="cb49-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="" aria-hidden="true" tabindex="-1"></a>study <span class="sc">|&gt;</span></span>
+<span id="cb50-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(followup_depression)) <span class="sc">|&gt;</span></span>
+<span id="cb50-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(condition)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 2
   condition     n
@@ -1350,12 +1374,12 @@ Dr.&nbsp;Sara Weston
       }</style></aside>
 <p>You have a three-wave study:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal_study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb51-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>),</span>
-<span id="cb51-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">wave =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
-<span id="cb51-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="cn">NA</span>),</span>
-<span id="cb51-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">32</span>, <span class="cn">NA</span>, <span class="dv">24</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
-<span id="cb51-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="" aria-hidden="true" tabindex="-1"></a>longitudinal_study <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb52-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">participant =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>),</span>
+<span id="cb52-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">wave =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="dv">3</span>),</span>
+<span id="cb52-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">depression =</span> <span class="fu">c</span>(<span class="dv">25</span>, <span class="dv">20</span>, <span class="dv">15</span>, <span class="dv">30</span>, <span class="dv">28</span>, <span class="dv">22</span>, <span class="dv">18</span>, <span class="dv">16</span>, <span class="dv">20</span>, <span class="cn">NA</span>),</span>
+<span id="cb52-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">anxiety =</span> <span class="fu">c</span>(<span class="dv">28</span>, <span class="dv">25</span>, <span class="dv">22</span>, <span class="dv">32</span>, <span class="cn">NA</span>, <span class="dv">24</span>, <span class="dv">20</span>, <span class="dv">18</span>, <span class="dv">22</span>, <span class="dv">19</span>)</span>
+<span id="cb52-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </div>
 </section>
 <section id="your-tasks" class="slide level2">
@@ -1366,6 +1390,53 @@ Dr.&nbsp;Sara Weston
 <li>What percentage of participants completed all three waves?</li>
 <li>Reshape the depression data so each participant has one row with columns for wave 1, 2, and 3. Then compute the wave-1-to-wave-3 change for participants with both timepoints. What’s the mean change?</li>
 </ol>
+</section>
+<section id="solution-longitudinal-missing-data" class="slide level2" data-background-color="#e67e22">
+<h2>Solution: Longitudinal missing data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Make implicit missing explicit. complete() generates every</span></span>
+<span id="cb53-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    participant x wave combination and fills in NA where data</span></span>
+<span id="cb53-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    is absent — surfacing dropout that was hidden in the rows.</span></span>
+<span id="cb53-4"><a href="" aria-hidden="true" tabindex="-1"></a>long_complete <span class="ot">&lt;-</span> longitudinal_study <span class="sc">|&gt;</span></span>
+<span id="cb53-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(participant, wave)</span>
+<span id="cb53-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-7"><a href="" aria-hidden="true" tabindex="-1"></a>long_complete</span>
+<span id="cb53-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 2. Count assessments per person — !is.na() is TRUE when a</span></span>
+<span id="cb53-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    score exists, and sum() counts those TRUEs.</span></span>
+<span id="cb53-11"><a href="" aria-hidden="true" tabindex="-1"></a>long_complete <span class="sc">|&gt;</span></span>
+<span id="cb53-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant) <span class="sc">|&gt;</span></span>
+<span id="cb53-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb53-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_assessments =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(depression))</span>
+<span id="cb53-15"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb53-16"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Percentage who completed all 3 waves — a two-step summarize:</span></span>
+<span id="cb53-18"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    first count per participant, then take the mean of the</span></span>
+<span id="cb53-19"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    logical "n_assessments == 3" to get a proportion.</span></span>
+<span id="cb53-20"><a href="" aria-hidden="true" tabindex="-1"></a>long_complete <span class="sc">|&gt;</span></span>
+<span id="cb53-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(participant) <span class="sc">|&gt;</span></span>
+<span id="cb53-22"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb53-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_assessments =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(depression))</span>
+<span id="cb53-24"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-25"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb53-26"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">pct_complete =</span> <span class="fu">mean</span>(n_assessments <span class="sc">==</span> <span class="dv">3</span>)</span>
+<span id="cb53-27"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb53-28"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-29"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># 4. Reshape wide for a per-participant view, then compute change.</span></span>
+<span id="cb53-30"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    pivot_wider() gives one row per person with wave_1/2/3 columns;</span></span>
+<span id="cb53-31"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    filter() keeps only those with both wave 1 and wave 3 so the</span></span>
+<span id="cb53-32"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#    subtraction is well-defined.</span></span>
+<span id="cb53-33"><a href="" aria-hidden="true" tabindex="-1"></a>long_complete <span class="sc">|&gt;</span></span>
+<span id="cb53-34"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(participant, wave, depression) <span class="sc">|&gt;</span></span>
+<span id="cb53-35"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(</span>
+<span id="cb53-36"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_from =</span> wave,</span>
+<span id="cb53-37"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">values_from =</span> depression,</span>
+<span id="cb53-38"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">names_prefix =</span> <span class="st">"wave_"</span></span>
+<span id="cb53-39"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb53-40"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(wave_1) <span class="sc">&amp;</span> <span class="sc">!</span><span class="fu">is.na</span>(wave_3)) <span class="sc">|&gt;</span></span>
+<span id="cb53-41"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">change =</span> wave_1 <span class="sc">-</span> wave_3) <span class="sc">|&gt;</span></span>
+<span id="cb53-42"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_change =</span> <span class="fu">mean</span>(change))</span></code></pre></div>
+</div>
 
 </section></section>
     </div>

@@ -586,7 +586,7 @@ This outline maps every lecture with specific topics, functions, and readings. T
 
 ### Readings (before class)
 - R4DS Ch 11: Communication
-- Dykes: [Data Storytelling: The Essential Data Science Skill](https://www.forbes.com/sites/brentdykes/2016/03/31/data-storytelling-the-essential-data-science-skill-everyone-needs/) (PDF provided)
+- Dykes: [Data Storytelling: The Essential Data Science Skill](https://www.forbes.com/sites/brentdykes/2016/03/31/data-storytelling-the-essential-data-science-skill-everyone-needs/)
 
 ### Assignment
 - **Assigned:** Assignment 8 (Storytelling Report)

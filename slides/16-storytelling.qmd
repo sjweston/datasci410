@@ -32,12 +32,17 @@ execute:
 ```{r}
 #| include: false
 library(tidyverse)
+library(patchwork)
+
+sleep_study <- read_csv("../files/data/sleep_study.csv") |>
+  mutate(sleep_group = factor(sleep_group,
+                              levels = c("Short (<6)", "Medium (6-7)", "Long (7+)")))
 ```
 
 # Why storytelling? {background-color="#2c3e50"}
 
 ::: {.notes}
-Welcome back — reminder that Monday was Memorial Day, so it's been a full week since they were last in class (Session 15 on joins). Today is Session 16: Storytelling with Data. Assignment 7 (the joins + missing data assignment) was due Sunday, and Assignment 8 (Storytelling Report) is assigned today. Also distribute the APA figure formatting handout at the start of class. Structure: ~25 min lecture, ~15 min pair coding, ~20 min lecture part 2, ~10 min work time.
+Welcome back — Monday was Memorial Day, so a full week since Session 15 (joins). Today: Session 16, Storytelling with Data. Assignment 7 (joins + missing data) due Sunday; Assignment 8 (Storytelling Report) assigned today. Distribute APA figure handout at start of class. Structure: ~10 min opening, ~30 min "five audiences" spine, ~15 min pair coding, ~10 min misleading figures, ~10 min sequencing + famous stories, ~5 min critique exercise, ~5 min wrap.
 :::
 
 ## Data alone isn't enough
@@ -54,7 +59,7 @@ You've learned to:
 But **technical skills ≠ communication skills**
 
 ::: {.notes}
-Spend ~2 minutes here. This slide should feel like a pivot — acknowledge everything they've learned so far, then reframe it. The incremental reveal makes the punchline land: all those skills are necessary but not sufficient. This sets up the "why" for the whole session.
+~2 min. Pivot moment — acknowledge what they've built, reframe. Incremental reveal makes the punchline land: necessary but not sufficient.
 :::
 
 ## The data storytelling triad
@@ -96,7 +101,7 @@ Adapted from Brent Dykes
 :::
 
 ::: {.notes}
-This is the Dykes triad from the assigned reading. Spend ~3 minutes here. Walk through each pair: Data + Visuals = Enlighten (like a dashboard — informative but no narrative), Data + Narrative = Explain (like a report — words and numbers but no visuals), Visuals + Narrative = Engage (like an infographic — compelling but potentially empty). The center — all three together — is where you actually change minds or drive action. Students may ask whether "change" is too strong a word; emphasize that even in an academic paper, you're trying to change what the reader believes.
+The Dykes triad from the assigned reading. ~3 min. Walk through each pair: Data + Visuals = Enlighten (dashboard). Data + Narrative = Explain (report). Visuals + Narrative = Engage (infographic). All three = CHANGE. Even in academic writing, you're trying to change what the reader believes.
 :::
 
 ## Why stories work
@@ -110,776 +115,981 @@ This is the Dykes triad from the assigned reading. Spend ~3 minutes here. Walk t
 
 **Stories are persuasive:**
 
-- Charity brochure study: Story about one child raised 2x more donations than statistics about millions
+- Charity brochure study: a story about one child raised 2x more donations than statistics about millions
 
 . . .
 
 **Decisions are emotional:**
 
-- We think we're rational
-- But emotions drive decision-making
-- Stories engage emotions
+- Stories engage emotions; data alone doesn't
 
 ::: {.notes}
-The charity brochure study is from Slovic (2007) — identifiable victim effect. Students sometimes push back on the "decisions are emotional" point; you can cite Damasio's somatic marker hypothesis if it comes up. The key message: if you want your research to matter outside academia, you need to communicate it in a way that connects with people, not just report p-values.
+Charity brochure is Slovic (2007) — identifiable victim effect. If pushback on "decisions are emotional," cite Damasio's somatic marker hypothesis.
 :::
 
-## Your goal as a data scientist
+## Today's question
 
-**Don't just show data — tell a story that:**
+**You have one finding.** You can present it to:
 
-1. Answers a specific question
-2. Provides context
-3. Highlights what matters
-4. Leads to action or understanding
-
-# The storytelling framework {background-color="#2c3e50"}
-
-::: {.notes}
-This section covers Knaflic's 5-step framework. Spend about 15 minutes total on Steps 1-5 before the pair coding break.
-:::
-
-## Step 1: Understand the context
-
-Before making any visualization, ask:
-
-- **Who is the audience?**
-  - Researchers? General public? Clinicians? Grant reviewers?
-- **What do they care about?**
-  - Effect sizes? Practical implications? Cost savings?
-- **What action do you want them to take?**
-  - Fund your research? Change clinical practice? Read your paper?
-
-::: {.notes}
-Emphasize that this is the step most students skip. They jump straight to making a ggplot without asking who will see it or what they should do with it. Ask the class: "Who is the audience for your final project?" — it's their classmates and you, but push them to imagine a real-world audience. This connects directly to their final project planning.
-:::
-
-## Example: Different audiences, different stories
-
-**Finding:** CBT reduces depression by 8 points on the BDI-II (d = 0.65)
+- Other researchers
+- Clinicians or health educators
+- The general public
+- A live audience at a conference
 
 . . .
 
-**For researchers:**
-
-- Effect size, confidence intervals, p-values
-- Comparison to other interventions
-- Limitations and future directions
+Is the figure the same for all of them?
 
 . . .
 
-**For clinicians:**
-
-- Practical significance: "Patients move from moderate to mild depression"
-- How to implement, training required
-- Success rates, dropout rates
+**No. The data is. The figure isn't.**
 
 ::: {.notes}
-Walk through both audiences slowly. The key insight is that the same finding (CBT reduces depression by 8 BDI-II points, d = 0.65) produces fundamentally different presentations depending on who's listening. Researchers want to compare effect sizes; clinicians want to know what it means for their patients. Students sometimes ask "which is right?" — both are. Neither is complete on its own.
+The pivot into the spine. Same data, five audiences, five figures. "The data is one thing; the *figure* is an argument made for a specific reader."
 :::
 
-## Step 2: Choose appropriate visuals
+## Our case study
 
-Match your plot type to your message:
+A simulated dataset of 200 college students:
 
-| Goal | Good choice | Bad choice |
-|------|-------------|------------|
-| Show change over time | Line plot | Pie chart |
-| Compare groups | Bar chart, boxplot | 3D pie chart |
-| Show distribution | Histogram, density | Table |
-| Show relationship | Scatterplot | Multiple pie charts |
-| Show parts of whole | Stacked bar, treemap | 3D bar chart |
-
-::: {.notes}
-Move through the table quickly — this is review from earlier sessions on ggplot. The main new idea is "match your message," not just "match your data type." A scatterplot might be technically correct for a relationship, but if your message is about group differences, a boxplot tells that story better.
-:::
-
-## Step 3: Eliminate clutter
-
-**Clutter** is anything that doesn't help your audience understand the message.
+- `sleep_hours` — average nightly sleep
+- `gpa` — cumulative GPA
+- `year`, `study_hours`, `caffeine_cups`
 
 . . .
 
-Common clutter:
+**The finding:**
 
-- Unnecessary gridlines
-- Heavy borders and backgrounds
-- Too many colors
-- Redundant labels
-- Chart junk (3D effects, shadows, unnecessary decorations)
+> Each extra hour of nightly sleep is associated with about **+0.21 higher GPA**. Students who sleep 7+ hours average **3.39**; students who sleep less than 6 average **2.88**.
 
 ::: {.notes}
-Clutter is Knaflic's term for anything that takes up visual space without adding information. Students often add clutter unintentionally because ggplot defaults include it (gridlines, legends for single-variable color mapping, etc.). The next two slides show a before/after — walk through the cluttered version first and ask students to identify what they'd remove.
+~2 min. State the finding plainly — the *honest* version. As we walk through the five audiences, the framing reshapes — call out where reshaping crosses into misleading. Keep this slide visible long enough that students notice the numbers: 0.21, 3.39, 2.88, 0.5 GPA difference.
 :::
 
-## Example: Cluttered figure
+## Loading the data — follow along
+
+Paste this in your console to get the dataset.
 
 ```{r}
-#| output-location: slide
-#| fig-alt: "Cluttered boxplot of depression scores by treatment condition with a blue background, heavy gridlines, rainbow fill colors, and a redundant legend — demonstrating common visual clutter to avoid."
-therapy_data <- tibble(
-  condition = rep(c("Control", "CBT", "Mindfulness"), each = 30),
-  depression = c(rnorm(30, 18, 5), rnorm(30, 12, 5), rnorm(30, 14, 5))
+#| eval: false
+library(tidyverse)
+
+sleep_study <- read_csv(
+  "https://raw.githubusercontent.com/sjweston/datasci410/main/files/data/sleep_study.csv"
+) |>
+  mutate(sleep_group = factor(sleep_group,
+                              levels = c("Short (<6)",
+                                         "Medium (6-7)",
+                                         "Long (7+)")))
+```
+
+::: {.callout-note}
+The data are **simulated** — 200 fake students with a known sleep–GPA relationship built in. Code that made them: [`scripts/generate-sleep-study.R`](https://github.com/sjweston/datasci410/blob/main/scripts/generate-sleep-study.R).
+:::
+
+::: {.notes}
+~2 min. Have students paste the chunk and confirm it loads. Mention briefly that the data are simulated — we built in a known sleep–GPA effect so we can see how the same finding plays differently for different audiences. The factor() call sets the order of the sleep groups so the bar chart later goes Short → Medium → Long; without it, ggplot would alphabetize them. If anyone wants to see how the data were made, point them at the script.
+:::
+
+# Same finding, five audiences {background-color="#2c3e50"}
+
+::: {.notes}
+~30 min spine. Five audiences, five figures, each teaching one new annotation skill. The payoff is cumulative: by the end they should see that the choice of figure *is* the choice of argument.
+:::
+
+## Audience 1: You
+
+You're mid-analysis. You need to know what's there.
+
+. . .
+
+- **Audience:** yourself
+- **Question:** is there anything here?
+- **Quality bar:** legible, fast
+- **Annotation:** none
+
+::: {.notes}
+The first deliverable has no annotation. The lesson: exploratory work is for you. Don't polish what nobody will see.
+:::
+
+## For you: just look
+
+```{r}
+#| fig-width: 7
+#| fig-height: 4
+#| fig-align: center
+#| fig-alt: "Quick exploratory scatterplot of sleep hours against GPA with a default smoother. Minimal styling, no annotation, no axis polish."
+ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  geom_point() +
+  geom_smooth()
+```
+
+::: {.notes}
+Show this and pause. It's *not pretty* — and that's the point. Ask: "Would you put this in a paper?" No. "Would you ever look at it?" Constantly.
+:::
+
+## Audience 2: Researchers
+
+A reader of a published paper.
+
+. . .
+
+- **Audience:** other psychologists
+- **Question:** how strong is the effect, with what precision?
+- **Quality bar:** APA-style, statistical detail, descriptive title
+- **New skill:** in-plot statistics with `annotate(..., parse = TRUE)`
+
+::: {.notes}
+~2 min setup. Researchers want effect sizes and CIs, not assertions. Title describes; doesn't conclude. Most "neutral" of the five.
+:::
+
+## For researchers: a journal figure
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-align: center
+#| fig-alt: "APA-style scatterplot of sleep hours against GPA with a linear regression line and shaded 95% confidence interval. Statistical annotations show r = 0.56, beta = 0.21, N = 200."
+ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  geom_point(alpha = 0.5, color = "gray40") +
+  geom_smooth(method = "lm", color = "black", fill = "gray80") +
+  annotate("text", x = 4.6, y = 3.95,
+           label = "italic(r) == 0.56", parse = TRUE, hjust = 0, size = 4.2) +
+  annotate("text", x = 4.6, y = 3.80,
+           label = "beta == 0.21", parse = TRUE, hjust = 0, size = 4.2) +
+  annotate("text", x = 4.6, y = 3.65,
+           label = "italic(N) == 200", parse = TRUE, hjust = 0, size = 4.2) +
+  labs(
+    title = "Figure 1",
+    subtitle = "Cumulative GPA by average nightly sleep duration in college students",
+    x = "Average nightly sleep (hours)",
+    y = "Cumulative GPA",
+    caption = "Note. Shaded region represents 95% confidence interval. N = 200."
+  ) +
+  scale_x_continuous(breaks = 4:10) +
+  coord_cartesian(ylim = c(1.5, 4)) +
+  theme_classic(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    plot.subtitle = element_text(face = "italic"),
+    plot.caption = element_text(hjust = 0, face = "italic", size = 10)
+  )
+```
+
+## The new move: stats annotation
+
+```{r}
+#| eval: false
+annotate("text", x = 4.6, y = 3.95,
+         label = "italic(r) == 0.56",
+         parse = TRUE, hjust = 0, size = 4.2)
+```
+
+. . .
+
+- `annotate()` adds text without needing a data frame
+- `parse = TRUE` reads the label as an R expression — math notation, Greek letters
+- `==` (not `=`) for equality in plotmath
+
+::: {.notes}
+`parse = TRUE` lets you typeset proper math. Quick alternative: `label = "r = 0.56"` produces plain text. Plotmath version (italic r, real equals) looks publication-grade. See `?plotmath` for the rest.
+:::
+
+## Full code: journal figure
+
+```{r}
+#| eval: false
+ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  geom_point(alpha = 0.5, color = "gray40") +
+  geom_smooth(method = "lm", color = "black", fill = "gray80") +
+  annotate("text", x = 4.6, y = 3.95,
+           label = "italic(r) == 0.56", parse = TRUE, hjust = 0, size = 4.2) +
+  annotate("text", x = 4.6, y = 3.80,
+           label = "beta == 0.21", parse = TRUE, hjust = 0, size = 4.2) +
+  annotate("text", x = 4.6, y = 3.65,
+           label = "italic(N) == 200", parse = TRUE, hjust = 0, size = 4.2) +
+  labs(
+    title = "Figure 1",
+    subtitle = "Cumulative GPA by average nightly sleep duration in college students",
+    x = "Average nightly sleep (hours)",
+    y = "Cumulative GPA",
+    caption = "Note. Shaded region represents 95% CI. N = 200."
+  ) +
+  scale_x_continuous(breaks = 4:10) +
+  coord_cartesian(ylim = c(1.5, 4)) +
+  theme_classic(base_size = 12) +
+  theme(plot.title = element_text(face = "bold"),
+        plot.subtitle = element_text(face = "italic"))
+```
+
+::: {.notes}
+The full code is here so students can copy and modify. Don't read it aloud — point out that the structure is just: data → geoms → annotations → labels → scales → theme. Each annotate call places one label.
+:::
+
+## Audience 3: Clinicians
+
+An academic advisor making a flyer or running a wellness workshop.
+
+. . .
+
+- **Audience:** practitioners
+- **Question:** what should I do about this?
+- **Quality bar:** at-a-glance, one clear message
+- **New skill:** `geom_text()` direct labels + highlight + assertion title
+
+::: {.notes}
+Practitioners need a takeaway, not a regression coefficient. Title makes a claim. One bar highlighted. Direct labels mean no axis-reading needed.
+:::
+
+## For clinicians: a one-pager
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 4.5
+#| fig-align: center
+#| fig-alt: "Bar chart of mean GPA by sleep group. Short sleepers bar is highlighted in red; Medium and Long bars are gray. Bar values labeled directly above each bar: 2.88, 3.15, 3.39. No gridlines. Assertion title states short sleepers earn nearly half a letter grade less."
+group_means <- sleep_study |>
+  group_by(sleep_group) |>
+  summarize(mean_gpa = mean(gpa), .groups = "drop") |>
+  mutate(highlight = sleep_group == "Short (<6)")
+
+ggplot(group_means, aes(x = sleep_group, y = mean_gpa, fill = highlight)) +
+  geom_col(width = 0.65) +
+  geom_text(aes(label = sprintf("%.2f", mean_gpa)),
+            vjust = -0.6, size = 5.5, fontface = "bold", color = "gray20") +
+  scale_fill_manual(values = c(`TRUE` = "#c0392b", `FALSE` = "gray70")) +
+  scale_y_continuous(limits = c(0, 4), breaks = 0:4,
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Short sleepers earn nearly half a letter grade less",
+    subtitle = "Mean cumulative GPA by average nightly sleep (N = 200 college students)",
+    x = NULL, y = "Mean GPA"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    legend.position = "none",
+    plot.title = element_text(face = "bold", size = 16),
+    plot.title.position = "plot"
+  )
+```
+
+## The new move: direct labels
+
+```{r}
+#| eval: false
+geom_text(aes(label = sprintf("%.2f", mean_gpa)),
+          vjust = -0.6, size = 5.5, fontface = "bold")
+```
+
+. . .
+
+- `geom_text()` puts one label per row of data
+- `aes(label = ...)` says which column to display
+- `sprintf("%.2f", x)` formats the number (2 decimal places)
+- `vjust = -0.6` nudges the label *above* the bar
+
+. . .
+
+**Why direct labels?** The reader shouldn't need to look at the axis to know the value.
+
+::: {.notes}
+The sprintf and vjust pieces are unfamiliar to most students. We'll unpack each on the next two slides.
+:::
+
+## Understanding `sprintf()`
+
+`sprintf()` formats numbers (and other values) into strings.
+
+```{r}
+sprintf("%.2f", 3.14159)   # two decimal places
+sprintf("%.0f", 3.14159)   # zero decimal places
+sprintf("%.1f%%", 67.5)    # one decimal + a literal % sign
+sprintf("%d hours", 7)     # %d for integers
+sprintf("GPA: %.2f", 3.39) # mix text and numbers
+```
+
+. . .
+
+**Reading the format string:**
+
+- `%` = "format something here"
+- `.2` = two decimal places
+- `f` = floating-point number (decimal)
+- `d` = integer (no decimal)
+- `%%` = a literal `%` sign
+
+::: {.notes}
+sprintf comes from C. Format strings feel cryptic but they're a tiny language: `%` starts a slot, the next characters describe what kind of value goes there. Show students that you can mix literal text with format slots — "GPA: %.2f" produces "GPA: 3.39". Worth ~2 min.
+:::
+
+## Understanding `vjust`
+
+`vjust` controls how the label sits relative to its anchor point.
+
+| `vjust` value | What happens |
+|---------------|--------------|
+| `1` | label's **top** sits at the data point (label extends down) |
+| `0.5` | label is **centered** on the data point |
+| `0` | label's **bottom** sits at the data point (label extends up) |
+| `-0.6` | label floats **above** the data point with a gap |
+
+. . .
+
+The trick: `vjust` is "how much of the label is **below** the anchor." Negative values lift the label *up* off the data point.
+
+::: {.notes}
+This is the part everyone trips on. The mental model: vjust is "fraction of label that sits below the data point." So vjust = 0.5 splits 50/50 (centered). vjust = 0 puts none below (label extends up). vjust = -0.6 means -60% is below — i.e., the label floats 60% of its own height above the bar. Demo on the next slide.
+:::
+
+## Seeing `vjust` in action
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 3.5
+#| fig-align: center
+#| fig-alt: "Three bars side by side, each with a label positioned differently. The first label sits at vjust=1 (top of label at bar top), the second at vjust=0 (bottom of label at bar top, touching it), the third at vjust=-0.6 (label floats above the bar with a clear gap)."
+vjust_demo <- tibble(
+  x = c("vjust = 1", "vjust = 0", "vjust = -0.6"),
+  y = c(3, 3, 3),
+  v = c(1, 0, -0.6)
 )
 
-ggplot(therapy_data, aes(x = condition, y = depression, fill = condition)) +
-  geom_boxplot() +
-  labs(title = "Depression Scores by Treatment Condition") +
-  theme_gray() +
+ggplot(vjust_demo, aes(x = factor(x, levels = x), y = y)) +
+  geom_col(fill = "steelblue", width = 0.5) +
+  geom_text(aes(label = "3.00", vjust = v),
+            size = 6, fontface = "bold", color = "darkred") +
+  scale_y_continuous(limits = c(0, 4)) +
+  labs(x = NULL, y = NULL) +
+  theme_classic(base_size = 14)
+```
+
+::: {.notes}
+This makes it concrete. Left: label sits inside the bar (top of label at bar top). Middle: label touches the bar top (bottom of label at bar top). Right: label floats above with a gap. For bar-chart direct labels, you almost always want a small negative vjust like -0.3 to -0.6.
+:::
+
+## Full code: clinician one-pager
+
+```{r}
+#| eval: false
+group_means <- sleep_study |>
+  group_by(sleep_group) |>
+  summarize(mean_gpa = mean(gpa), .groups = "drop") |>
+  mutate(highlight = sleep_group == "Short (<6)")
+
+ggplot(group_means, aes(x = sleep_group, y = mean_gpa, fill = highlight)) +
+  geom_col(width = 0.65) +
+  geom_text(aes(label = sprintf("%.2f", mean_gpa)),
+            vjust = -0.6, size = 5.5, fontface = "bold", color = "gray20") +
+  scale_fill_manual(values = c(`TRUE` = "#c0392b", `FALSE` = "gray70")) +
+  scale_y_continuous(limits = c(0, 4), breaks = 0:4,
+                     expand = expansion(mult = c(0, 0.05))) +
+  labs(
+    title = "Short sleepers earn nearly half a letter grade less",
+    subtitle = "Mean cumulative GPA by average nightly sleep (N = 200)",
+    x = NULL, y = "Mean GPA"
+  ) +
+  theme_classic(base_size = 14) +
+  theme(legend.position = "none",
+        plot.title = element_text(face = "bold", size = 16))
+```
+
+::: {.notes}
+The full code for students to copy. The pieces: summarize down to 3 rows → set highlight flag → bar chart → direct labels → custom fill colors → assertion title → classic theme. Highlight the highlight pattern (`if_else` in a mutate, then `scale_fill_manual`) — it's the workhorse for "make one thing pop."
+:::
+
+## Audience 4: The public
+
+Someone scrolling a feed for two seconds.
+
+. . .
+
+- **Audience:** general public
+- **Question:** is there a number I should remember?
+- **Quality bar:** one number, square format, brand-bold
+- **New skill:** text-as-data — ggplot without a chart
+
+::: {.notes}
+Boldest stylistic move. The "figure" is mostly typography. The point: ggplot's drawing surface is general — you don't have to have a `geom_point()` in there at all.
+:::
+
+## For the public: a social card
+
+```{r}
+#| echo: false
+#| fig-width: 5
+#| fig-height: 5
+#| fig-align: center
+#| fig-alt: "Square social-media graphic on a dark navy background. Large white text reads plus 0.5 GPA points. Subtitle: students who sleep 7+ hours earn higher grades than those who sleep less than 6. Decorative green underline. Small caption: PSY 410, N = 200."
+ggplot() +
+  annotate("text", x = 0.5, y = 0.78,
+           label = "+0.5", size = 38, fontface = "bold",
+           color = "white", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.60,
+           label = "GPA points", size = 9,
+           color = "white", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.40,
+           label = "Students who sleep 7+ hours earn\nhigher grades than those who sleep < 6",
+           size = 5.5, color = "white", hjust = 0.5, lineheight = 1.2) +
+  annotate("segment", x = 0.25, xend = 0.75, y = 0.20, yend = 0.20,
+           color = "#2ecc71", linewidth = 1.2) +
+  annotate("text", x = 0.5, y = 0.13,
+           label = "PSY 410  ·  N = 200", size = 3.8,
+           color = "gray70", hjust = 0.5, fontface = "italic") +
+  xlim(0, 1) + ylim(0, 1) +
+  coord_fixed() +
+  theme_void() +
   theme(
-    panel.background = element_rect(fill = "lightblue"),
-    panel.grid.major = element_line(color = "darkgray", size = 1),
-    panel.grid.minor = element_line(color = "gray", size = 0.5)
+    plot.background = element_rect(fill = "#1a2942", color = NA),
+    panel.background = element_rect(fill = "#1a2942", color = NA),
+    plot.margin = margin(20, 20, 20, 20)
+  )
+```
+
+## The new move: text-as-data
+
+```{r}
+#| eval: false
+ggplot() +
+  annotate("text", x = 0.5, y = 0.78,
+           label = "+0.5", size = 38, fontface = "bold",
+           color = "white") +
+  xlim(0, 1) + ylim(0, 1) +
+  theme_void() +
+  theme(plot.background = element_rect(fill = "#1a2942"))
+```
+
+. . .
+
+- `ggplot()` with no data — the canvas is empty
+- `annotate()` places elements at chosen coordinates
+- `theme_void()` removes axes and gridlines
+- `plot.background` paints the canvas
+
+. . .
+
+**A figure doesn't have to contain a "chart."**
+
+::: {.notes}
+Students often haven't realized ggplot can do this. The "figure" still encodes a number (+0.5) — the number IS the figure. Ask: "Is this honest?" Yes — number is real. "Is it the whole story?" No — but it doesn't claim to be.
+:::
+
+## Full code: social card
+
+```{r}
+#| eval: false
+ggplot() +
+  annotate("text", x = 0.5, y = 0.78,
+           label = "+0.5", size = 38, fontface = "bold",
+           color = "white", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.60,
+           label = "GPA points", size = 9,
+           color = "white", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.40,
+           label = "Students who sleep 7+ hours earn\nhigher grades than those who sleep < 6",
+           size = 5.5, color = "white", hjust = 0.5, lineheight = 1.2) +
+  annotate("segment", x = 0.25, xend = 0.75, y = 0.20, yend = 0.20,
+           color = "#2ecc71", linewidth = 1.2) +
+  annotate("text", x = 0.5, y = 0.13,
+           label = "PSY 410  ·  N = 200", size = 3.8,
+           color = "gray70", hjust = 0.5, fontface = "italic") +
+  xlim(0, 1) + ylim(0, 1) +
+  coord_fixed() +
+  theme_void() +
+  theme(
+    plot.background = element_rect(fill = "#1a2942", color = NA),
+    panel.background = element_rect(fill = "#1a2942", color = NA),
+    plot.margin = margin(20, 20, 20, 20)
   )
 ```
 
 ::: {.notes}
-Point out the specific clutter: the colored background, heavy gridlines, redundant legend (fill maps to the same variable as x-axis), and generic title. Ask students what they notice first — it's probably the blue background, not the data.
+Five `annotate()` calls (four text, one segment) build the whole card. Each one is positioned with x/y coordinates between 0 and 1 (because we set `xlim(0, 1)`). Walk through one annotate call in detail — the rest are just variations on the same pattern with different sizes and positions.
 :::
 
-## Example: Decluttered figure
+## A note on honest framing
 
-```{r}
-#| output-location: slide
-#| fig-alt: "Clean boxplot of depression scores by condition using a single steelblue fill, no legend, a clean theme, and an assertion title stating CBT is most effective — demonstrating effective decluttering."
-ggplot(therapy_data, aes(x = condition, y = depression)) +
-  geom_boxplot(fill = "steelblue", alpha = 0.7) +
-  labs(
-    title = "CBT most effective at reducing depression",
-    subtitle = "Post-treatment BDI-II scores (lower = better)",
-    x = NULL,
-    y = "Depression score"
-  ) +
-  theme_classic()
-```
+| Framing | What it actually means |
+|---------|------------------------|
+| "β = 0.21" | The journal version |
+| "0.5 GPA gap" | The clinician version |
+| "Higher grades" | The social card |
+
+. . .
+
+All true. **Each chooses how much detail to drop.**
+
+. . .
+
+Drop too much and you cross into misleading. We'll come back to this.
 
 ::: {.notes}
-Walk through the changes: theme_classic() removes the background, single fill color removes the legend, the title now makes a claim instead of describing the axes, and the subtitle provides context (what the score means). Emphasize the title shift — from "Depression scores by condition" (label) to "CBT most effective at reducing depression" (assertion). This is a recurring theme in the deck.
+Flags the ethical dimension of audience-tailoring. "Higher grades" is true; "Sleep makes you smarter" would not be. Foreshadow the misleading-figures section. ~2 min.
 :::
 
-## Build your own theme
+## Audience 5: A live audience
 
-`theme_classic()` is a great starting point. You can customize it into a reusable function:
+A roomful of people during a 30-second slide in your talk.
+
+. . .
+
+- **Audience:** conference attendees
+- **Question:** what's the headline?
+- **Quality bar:** readable from the back row
+- **New skill:** `geom_vline()`, `annotate("rect")`, `annotate("label")`
+
+::: {.notes}
+Live audiences can't slow down. Slide must work in seconds. Reference lines + shaded regions + on-plot callouts do the work of axis-reading for them.
+:::
+
+## For a talk: one slide, one point
 
 ```{r}
-theme_story <- function(base_size = 14) {
-  theme_classic(base_size = base_size) %+replace%
-    theme(
-      text = element_text(color = "grey40"),
-      axis.line = element_line(color = "grey60"),
-      axis.ticks = element_line(color = "grey60"),
-      axis.text = element_text(color = "grey40"),
-      plot.title = element_text(color = "grey30", face = "bold", hjust = 0, size = rel(1.3)),
-      plot.subtitle = element_text(color = "grey40", hjust = 0),
-      plot.title.position = "plot",
-      plot.caption.position = "plot"
-    )
-}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4.8
+#| fig-align: center
+#| fig-alt: "Large scatterplot of sleep hours vs GPA with regression line. A dashed green vertical line marks 7 hours and the region from 7 to 9 hours is shaded light green as the recommended zone. Two on-plot callouts highlight the effect size and recommended sleep."
+ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  annotate("rect", xmin = 7, xmax = 9.5, ymin = -Inf, ymax = Inf,
+           fill = "#2ecc71", alpha = 0.10) +
+  geom_point(alpha = 0.4, color = "gray50", size = 2) +
+  geom_smooth(method = "lm", color = "#2c3e50", linewidth = 1.4, se = FALSE) +
+  geom_vline(xintercept = 7, linetype = "dashed",
+             color = "#2ecc71", linewidth = 0.8) +
+  annotate("label", x = 8.25, y = 2.1,
+           label = "Recommended\n7+ hours",
+           color = "#27ae60", fontface = "bold", size = 5,
+           label.size = 0, fill = "white", lineheight = 1) +
+  annotate("label", x = 5.4, y = 3.85,
+           label = "Every extra hour\n= +0.2 GPA",
+           color = "#2c3e50", fontface = "bold", size = 5.5,
+           label.size = 0, fill = "#ecf0f1", lineheight = 1) +
+  labs(
+    title = "More sleep, higher grades",
+    x = "Nightly sleep (hours)", y = "Cumulative GPA"
+  ) +
+  scale_x_continuous(breaks = 4:10) +
+  coord_cartesian(ylim = c(1.5, 4)) +
+  theme_minimal(base_size = 18) +
+  theme(
+    plot.title = element_text(face = "bold", size = 26),
+    panel.grid.minor = element_blank(),
+    axis.title = element_text(color = "gray40")
+  )
+```
+
+## The new move: reference + region + callout
+
+```{r}
+#| eval: false
+annotate("rect", xmin = 7, xmax = 9.5,
+         ymin = -Inf, ymax = Inf,
+         fill = "#2ecc71", alpha = 0.10) +
+geom_vline(xintercept = 7, linetype = "dashed", color = "#2ecc71") +
+annotate("label", x = 5.4, y = 3.85,
+         label = "Every extra hour\n= +0.2 GPA",
+         label.size = 0, fill = "#ecf0f1")
 ```
 
 . . .
 
-Now you can use `theme_story()` anywhere — and every figure looks consistent.
+- `annotate("rect", ...)` draws a shaded region (use `-Inf`/`Inf` to span the panel)
+- `geom_vline()` adds a reference line at a value
+- `annotate("label", ...)` is `annotate("text")` with a background
 
 ::: {.notes}
-This is aspirational for most students at this point — don't expect them to write custom theme functions for their final project. The point is to show that theme customization is reusable, not one-off. If students ask about `%+replace%`, explain it's a ggplot2-specific operator that fully replaces theme elements instead of merging them. They don't need to memorize it; they just need to know the pattern exists.
+The shaded region (7+ as "recommended") is editorial — the data doesn't define 7 as the cutoff; the public health literature does. That's exactly the kind of move students need to recognize in others' work. Honest if you cite the source, less honest if you imply the data alone defines the threshold.
 :::
 
-## Side by side: `theme_classic()` vs `theme_story()`
+## Full code: talk slide
+
+```{r}
+#| eval: false
+ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  annotate("rect", xmin = 7, xmax = 9.5, ymin = -Inf, ymax = Inf,
+           fill = "#2ecc71", alpha = 0.10) +
+  geom_point(alpha = 0.4, color = "gray50", size = 2) +
+  geom_smooth(method = "lm", color = "#2c3e50", linewidth = 1.4, se = FALSE) +
+  geom_vline(xintercept = 7, linetype = "dashed",
+             color = "#2ecc71", linewidth = 0.8) +
+  annotate("label", x = 8.25, y = 2.1,
+           label = "Recommended\n7+ hours",
+           color = "#27ae60", fontface = "bold", size = 5,
+           label.size = 0, fill = "white", lineheight = 1) +
+  annotate("label", x = 5.4, y = 3.85,
+           label = "Every extra hour\n= +0.2 GPA",
+           color = "#2c3e50", fontface = "bold", size = 5.5,
+           label.size = 0, fill = "#ecf0f1", lineheight = 1) +
+  labs(title = "More sleep, higher grades",
+       x = "Nightly sleep (hours)", y = "Cumulative GPA") +
+  scale_x_continuous(breaks = 4:10) +
+  coord_cartesian(ylim = c(1.5, 4)) +
+  theme_minimal(base_size = 18) +
+  theme(plot.title = element_text(face = "bold", size = 26))
+```
+
+::: {.notes}
+Notice the layering order matters: the shaded rect goes FIRST (bottom), then points, then the smoothing line, then the vline, then the labels on top. ggplot draws in order, so later layers sit above earlier ones.
+:::
+
+## What you now have
+
+| Audience | Annotation skill |
+|----------|------------------|
+| You | (restraint) |
+| Researchers | `annotate(..., parse = TRUE)` for stats |
+| Clinicians | `geom_text()` direct labels + highlight |
+| Public | Text-as-data with `theme_void()` |
+| Live audience | `geom_vline()` + `annotate("rect")` + `annotate("label")` |
+
+. . .
+
+**Five figures. One finding. One R skill toolkit.**
+
+::: {.notes}
+Closer for the spine. Don't read the table — let students read it. The R toolkit is genuinely new — these are the annotation skills that turn a chart into an argument.
+:::
+
+# Pair coding break {background-color="#e67e22"}
+
+## Your turn: two audiences
+
+Pick **one figure from your final project draft**. (If you don't have one, use any figure from a recent assignment.)
+
+. . .
+
+Produce **two versions**:
+
+1. **For your professor** — what would go in your final report
+2. **For your roommate** — a single image you'd text them with the takeaway
+
+. . .
+
+Use at least one annotation technique from today on each version.
+
+**Time: 12 minutes**
+
+::: {.notes}
+~12 minutes. The "your roommate" framing forces them to think about an audience with zero context. If stuck on which figure, pick any from A3-A7. Walk around. Common sticking point: they default to making both versions look similar. Push them: "If your roommate already understood the data, why would you text them?"
+:::
+
+## Before we move on
+
+📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — both versions don't need to be polished.
+
+# Misleading figures {background-color="#2c3e50"}
+
+::: {.notes}
+~10 min. Connects back to "honest framing" and to S1's replication-crisis opener. The audience-tailoring lesson has a dark twin.
+:::
+
+## The same move, weaponized
+
+Every annotation we just learned can also mislead:
+
+- Reference lines that imply causation
+- Shaded regions that suggest a threshold the data doesn't support
+- Direct labels that hide the spread
+- Assertion titles that overstate
+
+. . .
+
+The skill is knowing when you've crossed the line.
+
+::: {.notes}
+Bridge from spine to misleading-figures. The tools are the same — what changes is intent and fidelity to the data.
+:::
+
+## Common deceptions
+
+1. **Truncated y-axes** — exaggerate small differences
+2. **Dual axes** — imply false relationships
+3. **Cherry-picked ranges** — hide broader trends
+4. **3D and area charts** — distort comparisons
+
+::: {.notes}
+Truncated y-axes are most common in psych and easiest to demo. Invite students to share examples from news or social media.
+:::
+
+## Example: a truncated y-axis
+
+```{r}
+#| echo: false
+#| fig-width: 8
+#| fig-height: 4
+#| fig-align: center
+#| fig-alt: "Two bar charts side by side. Left: y-axis from 15 to 19, makes treatment look dramatically better than control. Right: y-axis from 0, shows the 2-point difference is modest."
+fake <- tibble(condition = c("Control", "Treatment"), score = c(18, 16))
+
+p_misleading <- ggplot(fake, aes(x = condition, y = score)) +
+  geom_col(fill = "steelblue") +
+  coord_cartesian(ylim = c(15, 19)) +
+  labs(title = "Misleading", subtitle = "y-axis: 15-19",
+       x = NULL, y = "Depression") +
+  theme_classic(base_size = 13)
+
+p_honest <- ggplot(fake, aes(x = condition, y = score)) +
+  geom_col(fill = "steelblue") +
+  coord_cartesian(ylim = c(0, 25)) +
+  labs(title = "Honest", subtitle = "y-axis: 0-25",
+       x = NULL, y = "Depression") +
+  theme_classic(base_size = 13)
+
+p_misleading + p_honest
+```
+
+Same data. The left chart will get reposted; the right one won't.
+
+::: {.notes}
+`coord_cartesian(ylim = ...)` is the code-level move. Ask: "Is the left one *wrong*?" Strictly no — the data is the data. But bars encode magnitude, and a truncated bar implies a magnitude that isn't there.
+:::
+
+## When truncation is fine
+
+✅ The baseline is non-zero (body temperature, blood pressure)
+
+✅ You're showing change over time (line plot)
+
+✅ You explicitly note it in the caption
+
+. . .
+
+❌ **Never truncate bar charts.** Bars encode magnitude — the bar must start at zero.
+
+::: {.notes}
+Bars must start at zero because the height *is* the value. Line charts can start anywhere because slope is what's encoded.
+:::
+
+# One figure isn't a story {background-color="#2c3e50"}
+
+::: {.notes}
+~10 min. The story arc is about sequencing figures. Final project framing — students produce both a written report and a video presentation.
+:::
+
+## A sequence makes the story
+
+One figure shows a finding.
+
+A **sequence** makes an argument:
+
+- Set the stage
+- Show the pattern
+- Show what it means
+
+. . .
+
+Your final project is a sequence. Your video presentation is a sequence.
+
+::: {.notes}
+A single figure is a noun; a sequence is a sentence. Even a 5-minute video has 4-5 figures; their order is the argument.
+:::
+
+## Sequencing for a paper: sleep & GPA
+
+**Build the reader up to your finding.**
+
+```{r}
+#| echo: false
+#| fig-width: 12
+#| fig-height: 3.5
+#| fig-align: center
+#| fig-alt: "Three small panels labeled 1, 2, 3 showing a paper sequence: descriptive distribution of sleep hours, scatterplot with regression line of sleep vs GPA, and bar chart of group means by sleep category."
+p1 <- ggplot(sleep_study, aes(x = sleep_hours)) +
+  geom_histogram(binwidth = 0.5, fill = "gray50", color = "white") +
+  labs(title = "1. Descriptives", x = "Sleep (hours)", y = NULL) +
+  theme_classic(base_size = 11)
+
+p2 <- ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  geom_point(alpha = 0.4, color = "gray40", size = 1) +
+  geom_smooth(method = "lm", color = "black", fill = "gray70") +
+  labs(title = "2. The pattern", x = "Sleep (hours)", y = "GPA") +
+  theme_classic(base_size = 11)
+
+gm_paper <- sleep_study |>
+  group_by(sleep_group) |>
+  summarize(mean_gpa = mean(gpa), .groups = "drop")
+
+p3 <- ggplot(gm_paper, aes(x = sleep_group, y = mean_gpa)) +
+  geom_col(fill = "gray50") +
+  geom_text(aes(label = sprintf("%.2f", mean_gpa)),
+            vjust = -0.5, size = 3.5) +
+  scale_y_continuous(limits = c(0, 4)) +
+  labs(title = "3. The effect", x = NULL, y = "Mean GPA") +
+  theme_classic(base_size = 10) +
+  theme(axis.text.x = element_text(size = 8))
+
+p1 + p2 + p3
+```
+
+**Order:** sample → relationship → effect size. Each figure earns the next.
+
+::: {.notes}
+Walk through left to right. The reader doesn't know the data yet, so figure 1 just shows the distributions exist. Figure 2 shows the relationship. Figure 3 quantifies the effect for groups they can act on. This is the journal convention — Figure 1 is usually descriptive, Figure 2 is the main effect, Figure 3 might be moderation or mechanism.
+:::
+
+## Sequencing for a talk: sleep & GPA
+
+**Lead with the punchline.**
 
 ```{r}
 #| echo: false
 #| fig-width: 10
 #| fig-height: 4
 #| fig-align: center
-#| fig-alt: "Side-by-side bar charts comparing theme_classic and theme_story. The theme_story version has softer grey text, grey axes, and a plot-aligned title, showing how small theme tweaks improve readability."
-library(patchwork)
+#| fig-alt: "Two side-by-side panels showing a talk sequence: an annotated scatter with a shaded recommended zone (the headline), and a big-text callout instructing viewers to aim for 7+ hours of sleep (the action)."
+t1 <- ggplot(sleep_study, aes(x = sleep_hours, y = gpa)) +
+  annotate("rect", xmin = 7, xmax = 9.5, ymin = -Inf, ymax = Inf,
+           fill = "#2ecc71", alpha = 0.12) +
+  geom_point(alpha = 0.4, color = "gray50", size = 1) +
+  geom_smooth(method = "lm", color = "#2c3e50",
+              linewidth = 1, se = FALSE) +
+  geom_vline(xintercept = 7, linetype = "dashed",
+             color = "#2ecc71") +
+  labs(title = "1. More sleep, higher grades",
+       x = "Sleep (hours)", y = "GPA") +
+  theme_minimal(base_size = 12)
 
-p_data <- therapy_data |>
-  group_by(condition) |>
-  summarize(mean_depression = mean(depression))
+t3 <- ggplot() +
+  annotate("text", x = 0.5, y = 0.65, label = "Aim for",
+           size = 7, color = "gray40", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.45, label = "7+ hours",
+           size = 18, fontface = "bold",
+           color = "#27ae60", hjust = 0.5) +
+  annotate("text", x = 0.5, y = 0.25, label = "of sleep",
+           size = 7, color = "gray40", hjust = 0.5) +
+  xlim(0, 1) + ylim(0, 1) + coord_fixed() +
+  labs(title = "2. The action") +
+  theme_void(base_size = 12) +
+  theme(plot.title = element_text(size = 12, hjust = 0.5))
 
-p_classic <- ggplot(p_data, aes(x = condition, y = mean_depression)) +
-  geom_col(fill = "steelblue") +
-  labs(title = "theme_classic()", x = NULL, y = "Depression score") +
-  theme_classic()
-
-p_story <- ggplot(p_data, aes(x = condition, y = mean_depression)) +
-  geom_col(fill = "steelblue") +
-  labs(title = "theme_story()", x = NULL, y = "Depression score") +
-  theme_story()
-
-p_classic + p_story
+t1 + t3
 ```
 
-Grey text, grey axes, title aligned to the full plot — small changes, big improvement.
+**Order:** headline → action. The headline figure carries the evidence; the action slide says what to do about it.
 
-## Gestalt principles of design
+::: {.notes}
+Walk through left to right. Talks lead with the answer because attention is fragile — bury the lede and you lose them. The headline (Audience 5) does double duty — it asserts the finding *and* shows the data. The action slide closes with what the audience should do. A talk doesn't need a separate "evidence" figure; the annotation on the headline already does that work.
+:::
 
-Your brain groups things automatically based on:
+## Famous data stories: Nightingale
 
-1. **Proximity** — things close together are related
-2. **Similarity** — things that look similar are related
-3. **Enclosure** — things inside a boundary are related
-4. **Connection** — things connected by lines are related
+::: {.columns}
+::: {.column width="55%"}
+![Florence Nightingale's "Diagram of the Causes of Mortality in the Army in the East" (1858) — a polar area diagram showing that more soldiers died of preventable disease (blue) than wounds (red) during the Crimean War.](img/nightingale-mortality.jpg){fig-align="center" width="100%"}
+:::
+
+::: {.column width="45%"}
+**Florence Nightingale (1858)**
+
+Showed Parliament that more soldiers died of preventable disease than battle wounds. Changed military medicine.
+
+The blue wedges (disease) dwarf the red (wounds). The visual carries the argument.
+
+[Wikipedia article →](https://en.wikipedia.org/wiki/Florence_Nightingale#Statistics_and_sanitary_reform)
+:::
+:::
+
+::: {.notes}
+~2 min. The chart was politically motivated — Nightingale wanted to convince Parliament to fund sanitation reform. Color is the rhetorical move: blue = preventable, the visual answer is "the blue wedges are huge." She wrote that she designed it "to affect thro' the Eyes what we may fail to convey to the brains of the public through their word-proof ears." Storytelling, on purpose.
+:::
+
+## Famous data stories: Minard
+
+![Charles Joseph Minard's "Carte Figurative" (1869) — Napoleon's 1812 Russian campaign. Six variables on one chart: army size (band width), location (geography), direction (color), distance, temperature (bottom strip), time.](img/minard-napoleon.png){fig-align="center" width="100%"}
+
+[Wikipedia article →](https://en.wikipedia.org/wiki/Charles_Joseph_Minard)
+
+::: {.notes}
+~2 min. The band shows Napoleon's army shrinking from ~422,000 to ~10,000. Edward Tufte called it possibly the best statistical graphic ever drawn. Six variables on one chart and you don't have to be told what happened — the visual *is* the story. Note the bottom strip shows temperature dropping as the army retreats. Storytelling through layered encoding.
+:::
+
+## Famous data stories: Rosling
+
+**Hans Rosling — *200 Countries in 200 Years*** (4 min video)
+
+A bubble chart of life expectancy vs. income, animated across two centuries.
+
+He made global development legible to a general audience by adding **time** as a fourth dimension (animation).
+
+[Watch the video →](https://www.youtube.com/watch?v=jbkSRLYSojo)
+
+::: {.notes}
+~2 min. If time permits, play 60 seconds of the video. Otherwise just plant it as something to watch later. The lesson is that motion-as-encoding can do work that static figures can't — but only because Rosling narrates the story while it animates. The chart alone is incomplete; chart + narration = story.
+:::
+
+## Apply this to your final project
+
+Your final video presentation is a sequence:
+
+- **Slide 1-2:** the question and why it matters
+- **Slide 3-4:** what the data look like (descriptive)
+- **Slide 5-6:** the main finding (with annotation)
+- **Slide 7:** what we should do with it
 
 . . .
 
-Use these principles intentionally!
+Every figure earns the next. **Cut anything that doesn't.**
 
 ::: {.notes}
-These are Gestalt principles from perceptual psychology — connect this to their psych background. They've probably seen these in an intro or sensation/perception course. The point here is that these principles aren't just academic — they have practical design implications. Proximity: group related elements. Similarity: use consistent color/shape for related categories. Enclosure: use facets or annotated rectangles. Connection: use lines to show trajectories.
+Concrete bridge to A8 and the final project. Storytelling isn't optional polish — it's the difference between a video the audience remembers and one they don't.
 :::
 
-## Step 4: Focus attention
-
-**Preattentive attributes** are processed by the brain in < 500ms:
-
-- **Position** (most powerful)
-- **Size**
-- **Color** (especially contrast)
-- **Shape**
-
-. . .
-
-Use these to **direct attention to what matters**
+# Critique exercise {background-color="#e67e22"}
 
 ::: {.notes}
-Preattentive processing is another psych concept they may recognize. The key insight: you can use these attributes to create a visual hierarchy without the viewer even thinking about it. Color contrast is the one they'll use most in practice. The next two slides show the same data with and without strategic use of color to focus attention.
-:::
-
-## Example: Without focus
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bar chart of mean depression scores by condition with all bars in uniform gray. Without color contrast, no single condition stands out and the viewer must work to identify the key finding."
-therapy_summary <- therapy_data |>
-  group_by(condition) |>
-  summarize(mean_depression = mean(depression))
-
-ggplot(therapy_summary, aes(x = condition, y = mean_depression)) +
-  geom_col(fill = "gray50") +
-  labs(
-    title = "Mean depression by condition",
-    x = "Condition",
-    y = "Mean depression score"
-  ) +
-  theme_story()
-```
-
-::: {.notes}
-All bars are the same gray — the viewer has to read every bar and compare. There's no visual cue about which bar matters. Ask students: "What's the takeaway from this figure?" They'll have to work to answer.
-:::
-
-## Example: With focus
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bar chart of mean depression scores where the CBT bar is highlighted in steelblue while other bars are gray, immediately drawing attention to CBT as the most effective condition."
-therapy_summary <- therapy_summary |>
-  mutate(highlight = if_else(condition == "CBT", "Highlight", "Normal"))
-
-ggplot(therapy_summary, aes(x = condition, y = mean_depression, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("Highlight" = "steelblue", "Normal" = "gray70")) +
-  labs(
-    title = "CBT reduces depression more than other conditions",
-    subtitle = "Mean post-treatment BDI-II scores",
-    x = NULL,
-    y = "Depression score"
-  ) +
-  theme_story() +
-  theme(legend.position = "none")
-```
-
-::: {.notes}
-Now CBT pops immediately — the blue bar stands out from the gray. Walk through the code: the `if_else()` + `scale_fill_manual()` pattern is the key technique. Students will use this in the pair coding exercise and in their final projects. Also note the title changed from a label ("Mean depression by condition") to an assertion ("CBT reduces depression more than other conditions"). This is a technique they should apply to every figure.
-:::
-
-## Step 5: Think like a designer
-
-**Visual hierarchy** guides the eye:
-
-1. **Title** — what should they remember?
-2. **Main visual** — the data
-3. **Supporting elements** — axes, labels, legend
-4. **Context** — subtitle, caption, notes
-
-. . .
-
-**Size matters:**
-
-- Important = bigger
-- Secondary = smaller
-
-::: {.notes}
-Move through this quickly — it reinforces what was just shown. The visual hierarchy concept maps to ggplot elements: title = labs(title), main visual = geom layer, supporting = theme elements, context = labs(subtitle, caption). Students often make everything the same size and weight; encourage them to think about what the viewer's eye should land on first.
-:::
-
-## Effective titles
-
-**Bad title:** "Depression scores by condition"
-
-. . .
-
-**Better title:** "CBT most effective at reducing depression"
-
-. . .
-
-**Even better (with context):**
-
-- Title: "CBT reduces depression by 8 points"
-- Subtitle: "Compared to control (2 points) and mindfulness (4 points)"
-
-::: {.notes}
-This is one of the most actionable slides in the deck. Students often ask "but my advisor said the title should be descriptive, not a claim." The answer: it depends on the context. For a final project presentation or a talk, assertion titles are better. For a journal figure, a descriptive title is conventional. Both have their place, but assertion titles force you to know what the figure is actually showing.
-:::
-
-## Color best practices
-
-1. **Use color purposefully** — to highlight, not decorate
-2. **Be colorblind-friendly** — use `viridis` or `ColorBrewer`
-3. **Limit your palette** — 3-5 colors maximum
-4. **Consider meaning** — red = danger/bad, green = good, blue = neutral
-
-## Color example: Before
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bar chart of participant counts by age group using four different fill colors, one per bar. The rainbow coloring adds no information since the x-axis already identifies each group."
-demographics <- tibble(
-  age_group = c("18-25", "26-35", "36-45", "46+"),
-  count = c(45, 67, 52, 23)
-)
-
-ggplot(demographics, aes(x = age_group, y = count, fill = age_group)) +
-  geom_col() +
-  labs(title = "Participants by age group", x = "Age group", y = "Count") +
-  theme_story()
-```
-
-## Color example: After
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Improved bar chart of participants by age group using a single steelblue fill and an assertion title highlighting that the 26-35 age group is the largest."
-ggplot(demographics, aes(x = age_group, y = count)) +
-  geom_col(fill = "steelblue") +
-  labs(
-    title = "Most participants are between 26-35 years old",
-    x = NULL,
-    y = "Number of participants"
-  ) +
-  theme_story()
-```
-
-::: {.notes}
-The before/after is intentionally stark. In the "before," four different colors are used for four bars that all represent the same variable — there's no information in the color. In the "after," one uniform color is used and the title does the storytelling work. Ask: "What information did we lose by using one color?" Answer: none.
-:::
-
-# Critical evaluation of figures {background-color="#2c3e50"}
-
-::: {.notes}
-Transition: "We've talked about making your own figures better. Now let's talk about evaluating other people's figures — including catching problems." This section connects back to Session 1's replication crisis opening. Spend ~10 minutes on the misleading/boring figures section.
-:::
-
-## Misleading figures
-
-Visualizations can deceive (intentionally or not):
-
-1. **Truncated y-axes** — exaggerate small differences
-2. **Dual axes with different scales** — imply false relationships
-3. **Cherry-picked time ranges** — hide broader trends
-4. **3D charts** — distort perception of size
-5. **Area/bubble charts** — hard to compare sizes accurately
-
-::: {.notes}
-Go through each type briefly. Truncated y-axes are the most common in psychology; the next slides show a concrete example. Dual axes are common in policy/media visualizations. Cherry-picked time ranges show up in news coverage of trends. 3D charts are mostly a relic of Excel defaults but still appear. Students may have examples from their own reading — invite them to share.
-:::
-
-## Example: Truncated y-axis
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bar chart with a truncated y-axis starting at 15 instead of 0, making a 2-point difference between Control and Treatment appear dramatically large. Demonstrates how axis manipulation can mislead."
-treatment_effect <- tibble(
-  condition = c("Control", "Treatment"),
-  score = c(18, 16)
-)
-
-ggplot(treatment_effect, aes(x = condition, y = score)) +
-  geom_col(fill = "steelblue") +
-  coord_cartesian(ylim = c(15, 19)) +  # Truncated!
-  labs(
-    title = "MISLEADING: Treatment looks very effective",
-    subtitle = "Y-axis starts at 15, not 0",
-    x = NULL,
-    y = "Depression score"
-  ) +
-  theme_story()
-```
-
-::: {.notes}
-The effect looks dramatic because the y-axis starts at 15 instead of 0. Point out the `coord_cartesian(ylim = c(15, 19))` line — this is how it's done in code, and also how you'd catch it in someone else's code. Ask: "Would this make it into a journal?" — possibly yes, especially if reviewers aren't careful.
-:::
-
-## Fixed: Full y-axis
-
-```{r}
-#| output-location: slide
-#| fig-alt: "Bar chart with the y-axis starting at 0, honestly showing that the 2-point difference between Control and Treatment is modest relative to the full scale."
-ggplot(treatment_effect, aes(x = condition, y = score)) +
-  geom_col(fill = "steelblue") +
-  coord_cartesian(ylim = c(0, 25)) +  # Full scale
-  labs(
-    title = "Honest view: Treatment effect is modest",
-    subtitle = "Y-axis starts at 0",
-    x = NULL,
-    y = "Depression score"
-  ) +
-  theme_story()
-```
-
-::: {.notes}
-Now the effect looks modest — which is honest. The difference is only 2 points on the BDI-II. Let the contrast speak for itself before moving on.
-:::
-
-## When truncated axes are okay
-
-**Truncation is fine when:**
-
-- The baseline is non-zero (e.g., human body temperature)
-- You're showing change over time (line plot)
-- You explicitly note it in the caption
-
-. . .
-
-**Never truncate:**
-
-- Bar charts (bars must start at zero)
-- When comparing magnitudes
-
-::: {.notes}
-Students often ask about this nuance. The rule of thumb is simple: bars must start at zero because the height of the bar encodes the magnitude. Line charts can start anywhere because the slope (change) is what matters, not the absolute position. Body temperature (97-100 F) is a good example — starting at zero would make the variation invisible.
-:::
-
-## Boring: Spaghetti plot with no message
-
-```{r}
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4.5
-#| fig-alt: "Spaghetti plot with eight individual participant lines crossing in all directions, making it impossible to identify any clear trend in depression over time."
-set.seed(42)
-longitudinal <- tibble(
-  participant = rep(1:8, each = 3),
-  time = rep(c("Baseline", "6 months", "12 months"), 8),
-  depression = rnorm(24, 15, 5)
-)
-
-ggplot(longitudinal, aes(x = time, y = depression, group = participant)) +
-  geom_line() +
-  theme_story()
-```
-
-Eight lines going everywhere. What's the takeaway?
-
-## Fixed: One clear message
-
-```{r}
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4.5
-#| fig-alt: "Single line chart showing mean depression scores decreasing steadily from baseline through 6 and 12 months, clearly conveying the trend that the spaghetti plot obscured."
-longitudinal |>
-  group_by(time) |>
-  summarize(mean_depression = mean(depression)) |>
-  mutate(time = factor(time, levels = c("Baseline", "6 months", "12 months"))) |>
-  ggplot(aes(x = time, y = mean_depression, group = 1)) +
-  geom_line(color = "steelblue", linewidth = 1.5) +
-  geom_point(color = "steelblue", size = 4) +
-  labs(
-    title = "Depression decreases steadily over 12 months",
-    subtitle = "Mean BDI-II scores (N = 8)",
-    x = NULL,
-    y = "Depression score"
-  ) +
-  theme_story(base_size = 14)
-```
-
-::: {.notes}
-The spaghetti plot vs. summary line is a common issue in psychology research. The fix here was to summarize (group means) and use a single line. Students may ask "but don't you lose information by summarizing?" — yes, and sometimes you want the individual lines (e.g., to show individual differences). The point is to choose based on your message, not default to showing everything.
-:::
-
-## Boring: Default pie chart
-
-```{r}
-#| echo: false
-#| fig-width: 7
-#| fig-height: 4.5
-#| fig-alt: "Pie chart with eight slices representing therapy types. The similar-sized slices make it difficult to compare categories or determine which therapy is most common."
-set.seed(123)
-therapy_types <- tibble(
-  type = c("CBT", "DBT", "ACT", "Psychodynamic", "EMDR",
-           "IPT", "Exposure", "Other"),
-  n = c(45, 32, 28, 22, 15, 12, 8, 6)
-)
-
-ggplot(therapy_types, aes(x = "", y = n, fill = type)) +
-  geom_col(width = 1) +
-  coord_polar(theta = "y") +
-  theme_void() +
-  labs(fill = "Therapy type")
-```
-
-Eight slices. Which is biggest? By how much?
-
-## Fixed: Ranked bar chart tells the story
-
-```{r}
-#| echo: false
-#| fig-width: 8
-#| fig-height: 4.5
-#| fig-alt: "Horizontal bar chart with therapy types ranked by frequency, clearly showing CBT as the most common approach. The ordered layout makes comparisons between categories easy."
-therapy_types |>
-  mutate(type = fct_reorder(type, n)) |>
-  ggplot(aes(x = n, y = type)) +
-  geom_col(fill = "steelblue", alpha = 0.8) +
-  labs(
-    title = "CBT is the most common therapy approach",
-    subtitle = "N = 168 clinicians surveyed",
-    x = "Number of clinicians",
-    y = NULL
-  ) +
-  theme_story(base_size = 14)
-```
-
-::: {.notes}
-This pair — pie chart vs. ranked bar chart — usually gets a strong reaction. Ask the class to estimate the difference between CBT and DBT from the pie chart. They can't. Then show the bar chart where the comparison is trivial. The lesson: pie charts make it almost impossible to compare slices accurately, especially with more than 3-4 categories. Also point out the `fct_reorder()` — a callback to Session 13 on factors.
-:::
-
-## The "so what?" test
-
-Every figure should answer a question:
-
-- ❌ "Depression scores by condition"
-- ✅ "CBT reduces depression more than control"
-
-. . .
-
-- ❌ "Correlation between age and reaction time"
-- ✅ "Older adults respond 50ms slower per decade"
-
-. . .
-
-**Ask yourself:** If someone only sees this figure for 5 seconds, what should they remember?
-
-::: {.notes}
-This is the single most important takeaway from the entire deck. Linger here. Read the examples aloud and ask which version they'd remember after a conference talk. The 5-second test is a practical heuristic they can apply to every figure in their final project. Before transitioning to the pair coding break, summarize: "Every figure should pass the 'so what?' test. If you can't state the takeaway in one sentence, the figure needs work."
-:::
-
-# Pair coding break {background-color="#e67e22"}
-
-## Your turn: Improve a figure
-
-Here's a messy figure:
-
-```{r}
-#| fig-alt: "Messy bar chart of stress levels by profession with rainbow fill colors, a redundant legend, unsorted bars, a label-style title, and the default gray theme — intended for students to improve."
-stress_data <- tibble(
-  profession = c("Teacher", "Nurse", "Engineer", "Retail", "Admin"),
-  stress = c(7.2, 8.1, 5.5, 6.8, 6.2),
-  burnout = c(6.8, 7.9, 4.8, 6.5, 5.9)
-)
-
-ggplot(stress_data, aes(x = profession, y = stress, fill = profession)) +
-  geom_col() +
-  labs(title = "Stress by Profession") +
-  theme_gray()
-```
-
-::: {.notes}
-Give students ~10 minutes for this exercise. The starting figure has multiple problems: unnecessary legend, rainbow colors, unsorted bars, label-style title, and default theme. Walk around and check that pairs are tackling the problems in a logical order. Common sticking point: students forget `fct_reorder()` — remind them it was in Session 13. The solution uses a horizontal bar chart, which is optional but often reads better for categorical comparisons.
-:::
-
-## Your tasks
-
-1. Remove the unnecessary legend
-2. Reorder professions by stress level
-3. Highlight the profession with highest stress
-4. Add a clear, message-driven title
-5. Clean up the theme using `theme_story()`
-
-**Time: 10 minutes**
-
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
-stress_data <- stress_data |>
-  mutate(
-    profession = fct_reorder(profession, stress),
-    highlight = if_else(profession == "Nurse", "yes", "no")
-  )
-
-ggplot(stress_data, aes(x = stress, y = profession, fill = highlight)) +
-  geom_col() +
-  scale_fill_manual(values = c("yes" = "steelblue", "no" = "gray70")) +
-  labs(
-    title = "Nurses report highest stress levels",
-    subtitle = "Mean stress ratings on 0-10 scale",
-    x = "Stress level",
-    y = NULL
-  ) +
-  theme_story() +
-  theme(legend.position = "none")
-```
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
-
-# Applying to your final project {background-color="#2c3e50"}
-
-::: {.notes}
-Transition to the second half of the lecture (~20 minutes). This section connects the storytelling principles directly to the final project. Students should be thinking about their own data and figures as you go through this.
-:::
-
-## Your final project narrative
-
-Your final project should tell a story with three acts:
-
-:::: {.columns}
-::: {.column width="33%"}
-1. **Setup (Introduction)**
-   - What's the question?
-   - Why does it matter?
-   - What's your hypothesis?
-:::
-
-::: {.column width="33%"}
-2. **Conflict (Results)**
-   - What did you find?
-   - Show with visualizations
-   - Highlight surprising or important patterns
-:::
-
-::: {.column width="33%"}
-3. **Resolution (Discussion)**
-   - What does it mean?
-   - How does it answer your question?
-   - What should we do with this information?
-:::
-::::
-
-::: {.notes}
-The three-act structure maps directly onto a psychology paper: Introduction = Setup, Results = Conflict, Discussion = Resolution. Students sometimes find "conflict" odd for results, but the idea is that the results should present something surprising, interesting, or unresolved — that's what makes the reader care. If your results are exactly what everyone expected, the story is boring.
-:::
-
-## Building a narrative arc
-
-**Weak narrative:**
-
-> "I looked at depression and anxiety. Here's a histogram. Here's a scatterplot. Here's a boxplot. The correlation was 0.65."
-
-. . .
-
-**Strong narrative:**
-
-> "Depression and anxiety often co-occur, but we don't know how strongly they're related in college students. I analyzed 200 student surveys and found a strong correlation (r = .65). This suggests these conditions may share underlying mechanisms and should be treated together."
-
-::: {.notes}
-Read both examples aloud. The weak narrative is a laundry list of plot types — "I made this, then I made this." The strong narrative has a question, a finding, and an implication. Students often struggle with the "so what" — push them to state why their finding matters. Even for a class project, they should be able to articulate why someone should care.
-:::
-
-## One thing to remember
-
-At the end of your presentation, your audience should remember **one key takeaway**.
-
-. . .
-
-**What's yours?**
-
-- "Social media use predicts anxiety in teens"
-- "Mindfulness training reduces stress in nurses"
-- "Memory declines linearly after age 50"
-- "Treatment dropout is higher in low-income participants"
-
-. . .
-
-Every figure, every sentence should support that one key message.
-
-## Practical tips for final projects
-
-1. **Start with your key finding** — then work backward
-2. **One main point per figure** — don't try to show everything at once
-3. **Order matters** — build up to your main finding
-4. **Edit ruthlessly** — remove anything that doesn't support your story
-5. **Get feedback** — show your figures to someone outside the class
-
-# APA figure formatting {background-color="#2c3e50"}
-
-::: {.notes}
-Spend ~2 minutes on the APA section. The main message is: don't obsess over APA formatting for this course. The handout covers the details; class time is better spent on clarity and communication. Students who are writing theses or submitting to journals can consult the handout. Distribute the APA figure formatting handout now if you haven't already.
-:::
-
-## A note on APA formatting
-
-You'll receive a handout on APA figure formatting guidelines.
-
-. . .
-
-**Key points:**
-
-- Journals have **different** requirements
-- APA is a starting point, not gospel
-- Many journals want editable figures (not embedded in Word)
-- Online journals have more flexibility than print
-
-. . .
-
-::: {.callout-note}
-Focus on **clarity and communication** first, then adjust formatting as needed for specific journals.
-:::
-
-## Basic APA figure elements
-
-1. **Figure number** — "Figure 1"
-2. **Title** — brief and descriptive
-3. **Image** — the actual plot
-4. **Note** — additional context, definitions, copyright
-
-. . .
-
-Not included in the figure itself:
-
-- Legend goes in figure note (if needed)
-- No borders around the figure
-
-# End-of-deck exercise {background-color="#e67e22"}
-
-::: {.notes}
-The end-of-deck exercise has two parts. First, ~5 minutes per published figure to critique with a partner, then debrief. Second, the A8 head-start: students pick a dataset and start a minimal Quarto report. Be explicit that A8 is NOT the final project — students conflate them every year. If time is short, skip the second figure and go straight to the A8 scaffolding so they can ask rendering questions while you're in the room.
+~5 min total — give pairs 2-3 min per figure, then quick debrief. Students should diagnose audience, story, annotation moves, and how they'd redesign for a different audience. If time is short, do one figure together as a class and skip the second.
 :::
 
 ## Critique these figures
 
-For each figure, identify:
+For each:
 
-1. What story is it trying to tell?
-2. What works well?
-3. What could be improved?
-4. How would you redesign it?
+1. Who is the audience?
+2. What story is it trying to tell?
+3. What annotation moves did the author make?
+4. How would you redesign it for a *different* audience?
 
 ## Figure 1
 
-![Published figure showing the relationship between social class and identity — used as a critique exercise example](img/class-identity.jpg){fig-align="center" height="550"}
+![Published figure showing the relationship between social class and identity](img/class-identity.jpg){fig-align="center" height="400"}
 
 ## Figure 2
 
-![Published figure showing truth sensitivity results — used as a critique exercise example](img/truth-sensitivity.jpg){fig-align="center" height="550"}
+![Published figure showing truth sensitivity results](img/truth-sensitivity.jpg){fig-align="center" height="400"}
+
+# Wrapping up {background-color="#2c3e50"}
+
+::: {.notes}
+~5 min. Quick — checklist, takeaways, admin, close.
+:::
+
+## The storytelling checklist
+
+Before finalizing any figure, ask:
+
+- [ ] **Who is the audience?** Researchers, practitioners, public, live?
+- [ ] **What's the one message?** Can I state it in a sentence?
+- [ ] **Is the title an assertion or a description?** Match it to the audience.
+- [ ] **Did I use annotation to direct attention?**
+- [ ] **Am I being honest?** No truncated bars, no implied thresholds the data doesn't support.
+- [ ] **Does this figure earn its place in the sequence?**
+
+## A note on APA formatting
+
+You'll receive a handout on APA figure formatting.
+
+. . .
+
+- Journals have **different** requirements
+- APA is a starting point, not gospel
+- Focus on **clarity and communication** first
+
+::: {.callout-note}
+The handout covers the formal rules. Class time is better spent on clarity than on margin sizes.
+:::
 
 ## Head start: Assignment 8
 
@@ -888,79 +1098,50 @@ Start the reproducible report due next week. Pick **one** dataset: `palmerpengui
 Build a minimal `.qmd` with:
 
 1. YAML header including `author`, `date`, `toc: true`, `code-fold: true`
-2. A 2–3 sentence intro stating your research question
+2. A 2-3 sentence intro stating your research question
 3. A setup chunk + `glimpse()` of your data
-4. **One** exploratory visualization with a caption (apply today's storytelling principles)
-5. **One** inline-code statistic in the narrative
+4. **One** exploratory visualization with a caption
+5. **One** annotation move from today (assertion title, highlight, callout, etc.)
 6. Render to HTML to confirm it works end-to-end
 
 ::: {.callout-note}
-A8 is **not** your final project — it's a short, focused reproducible report. Your final project is due June 10 and will be much more substantial.
-:::
-
-# Wrapping up {background-color="#2c3e50"}
-
-::: {.notes}
-Transition to the closing section. Move through this quickly — it's a summary, not new material. If running short on time, you can skip the checklist slide and go straight to key takeaways.
-:::
-
-## The storytelling checklist
-
-Before finalizing any figure, ask:
-
-- [ ] **Is the message clear?** Can someone understand it in 5 seconds?
-- [ ] **Is there clutter?** Can I remove anything without losing meaning?
-- [ ] **Does color help or distract?** Am I using it purposefully?
-- [ ] **Is it accessible?** Colorblind-friendly? Good contrast?
-- [ ] **Does it answer a question?** Can I state the "so what"?
-- [ ] **Is it honest?** Am I representing the data fairly?
-
-## Key takeaways
-
-1. **Data + Visuals + Narrative = Change**
-2. **Know your audience** — tailor your message to who you're speaking to
-3. **Eliminate clutter** — less is more
-4. **Focus attention** — use preattentive attributes strategically
-5. **Be honest** — don't mislead with truncated axes or cherry-picked data
-6. **Pass the "so what?" test** — every figure should answer a question
-7. **One key message** — what do you want them to remember?
-
-## Resources for continued learning
-
-- **Knaflic (2015).** *Storytelling with Data* (on reserve)
-- **Dykes (2016).** ["Data Storytelling: The Essential Data Science Skill"](https://www.forbes.com/sites/brentdykes/2016/03/31/data-storytelling-the-essential-data-science-skill-everyone-needs/)
-- **APA Style:** Figure formatting guidelines (handout provided)
-- **ColorBrewer:** [colorbrewer2.org](https://colorbrewer2.org) for colorblind-safe palettes
-
-::: {.notes}
-Remind students that these are practical resources, not required reading. Knaflic's book is on reserve and is excellent for anyone who wants to go deeper. The ColorBrewer link is something they can use right now for their final projects.
+A8 is **not** your final project. It's a short, focused reproducible report. Your final project is due June 10 and will be much more substantial.
 :::
 
 ## Before next class
 
 📖 **Read:**
 
-- R4DS Ch 28: Quarto
+- A short reading on correlation and simple regression — to be posted on Canvas
 
 ✅ **Do:**
 
-- **Submit Assignment 7** (due today)
-- **Submit Final Project Draft** (due today)
-- Revise your figures based on today's principles
-- Review feedback on your draft
+- Work on **Assignment 8** (due Sunday May 31 at 11:59 PM)
+- Keep moving on your **final project** (full submission due Wed Jun 3)
+- Revise your figures using one audience-shaped version from today
 
 ## Heads up: The Final Prediction
 
 Next session (Correlation & Regression) we'll reveal **Fun Challenge 10: The Final Prediction**.
 
-It's a quick one — you'll look at a scatterplot and predict the correlation. But the deadline is **Tuesday at 11:59 PM**, so you'll get time in class on Monday to work on it with your team.
+A quick one — predict the correlation from a scatterplot. The deadline is **Tuesday at 11:59 PM**, so you'll have Monday in class to work on it with your team.
 
 ::: {.notes}
-Brief mention — 30 seconds. Just plant the seed so teams aren't caught off guard by the short turnaround. They don't need to do anything yet. The actual challenge is revealed and worked on during Session 17.
+30-second mention. Plant the seed so teams aren't caught off guard.
 :::
+
+## Key takeaways
+
+1. **Data + Visuals + Narrative = Change**
+2. **The figure is an argument for a specific reader.** Five audiences → five figures.
+3. **Annotation is your toolkit:** `annotate()`, `geom_text()`, `geom_vline()`, reference lines, shaded regions.
+4. **Be honest** — the same techniques that clarify can also deceive.
+5. **A sequence is a story.** One figure earns the next.
 
 ## The one thing to remember
 
-A figure without a story is just a picture. Ask "so what?" until you have the answer.
+A figure is an argument made for a reader.
 
-See you next week for Quarto and reproducible reports!
+Ask **"who's reading?"** before you ask **"what's the chart?"**
+
+See you Monday for correlation and simple regression!

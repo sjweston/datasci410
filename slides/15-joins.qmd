@@ -156,6 +156,8 @@ Open by asking students if they have ever tried to combine two spreadsheets by h
 
 ## Two tables, one question
 
+Let's start simple with just two of the three files — participants and the survey.
+
 ```{r}
 # Participant information
 participants <- tibble(
@@ -467,40 +469,39 @@ Draw attention to what happened to the row count. The task_data table has 6 rows
 
 ## Joining by multiple keys
 
-For longitudinal data, join on multiple columns:
+Remember the longitudinal example earlier — `participant_id` repeated, but `participant_id` + `timepoint` was unique. Joins handle this too.
 
 ```{r}
-# Time 1 scores
-time1 <- tibble(
-  id = c(1, 2, 3),
-  time = 1,
-  depression = c(20, 18, 25)
+# Depression at two timepoints
+depression_long <- tibble(
+  id = c(1, 1, 2, 2),
+  time = c(1, 2, 1, 2),
+  depression = c(20, 15, 18, 12)
 )
 
-# Time 2 scores
-time2 <- tibble(
-  id = c(1, 2, 3),
-  time = 2,
-  depression = c(15, 12, 22)
+# Anxiety at the same timepoints
+anxiety_long <- tibble(
+  id = c(1, 1, 2, 2),
+  time = c(1, 2, 1, 2),
+  anxiety = c(14, 10, 16, 11)
 )
 ```
 
-## Combining longitudinal data
+## Joining on id AND time
+
+If we joined on `id` alone, each row in one table would match *both* timepoints in the other — wrong! We need to match on **both** columns:
 
 ```{r}
-# Combine into one table
-all_times <- bind_rows(time1, time2)
-
-# Add baseline demographics
-all_times |>
-  left_join(
-    participants |> select(participant_id, age, condition),
-    by = c("id" = "participant_id")  # Keys have different names
-  )
+depression_long |>
+  left_join(anxiety_long, by = c("id", "time"))
 ```
+
+. . .
+
+Pass a vector of column names to `by`. R requires all of them to match.
 
 ::: {.notes}
-Two things to highlight here. First, this is the first time students see the named-vector syntax for `by` when keys have different names — slow down and explain that the left side of the equals sign is the column name in the left table and the right side is the column name in the right table. Second, note the use of select() inside the join to avoid bringing in columns you do not need. Students often ask "can I just join everything?" — yes, but selecting first keeps your result tidy.
+This is the payoff for the compound-key idea from earlier in the deck — when one column does not uniquely identify a row, you join on multiple columns. Walk through what would happen if we used `by = "id"` alone: participant 1's Time 1 depression would match both of participant 1's anxiety rows (Time 1 and Time 2), doubling the output. The vector `c("id", "time")` tells dplyr to require BOTH columns to match. This is the syntax students will use any time longitudinal data is spread across files.
 :::
 
 # Pair coding break {background-color="#e67e22"}
@@ -539,29 +540,34 @@ followup <- tibble(
 Circulate during the exercise. The most common mistake is using inner_join() instead of left_join(), which silently drops participant 5 in step 1. If pairs finish early, ask them to figure out which participants are missing followup data and whether missingness is related to condition. That bridges to the filtering joins section. When time is up, walk through the solution and emphasize step 3 — the sum(is.na()) pattern is the same one they used last session for missing data.
 :::
 
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
-# Step 1: Add treatment to baseline
-baseline_treatment <- baseline |>
-  left_join(treatment, by = "id")
+## Solution: Combine study data {background-color="#e67e22"}
 
-# Step 2: Add followup
-complete_data <- baseline_treatment |>
+```{r}
+#| echo: true
+#| eval: false
+# Steps 1 & 2: Chain two left_joins — baseline is the "spine"
+# so every participant is kept, even those missing later data.
+alldata <- baseline |>
+  left_join(treatment, by = "id") |>
   left_join(followup, by = "id")
 
-complete_data
+alldata
 
-# Step 3: Count missing followup
-sum(is.na(complete_data$followup_depression))
+# Step 3: How many are missing followup?
+alldata |>
+  summarize(
+    miss_followup = sum(is.na(followup_depression))
+  )
+
+# Bonus: count NAs across every column at once
+alldata |>
+  summarize(
+    across(
+      everything(),
+      ~sum(is.na(.))
+    )
+  )
 ```
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # Filtering joins {background-color="#2c3e50"}
 
@@ -705,11 +711,19 @@ participants_dup |>
 
 Each duplicate gets matched → creates extra rows!
 
+## Catch duplicates first
+
+Use the same uniqueness check from earlier — *before* you join:
+
+```{r}
+participants_dup |>
+  count(id) |>
+  filter(n > 1)
+```
+
 . . .
 
-::: {.callout-important}
-Always check for duplicate keys before joining.
-:::
+`id = 1` appears twice. Now you can decide: is this longitudinal data (→ use a compound key) or a data-entry error (→ fix the data)?
 
 ::: {.notes}
 This is the sneakiest bug students will encounter. The join runs without error, but you end up with more rows than expected. Students often do not notice until their summary statistics look wrong. Reinforce the habit: always run the count-and-filter check before joining. Ask: "If your table had 100 participants and after a join it has 105 rows, what happened?" Duplicates.
@@ -746,36 +760,47 @@ Fix the data before joining!
 ## Problem 4: Many-to-many relationships
 
 ```{r}
-# Multiple trials per participant
+# Multiple trials, nested within sessions
 trials <- tibble(
-  id = c(1, 1, 2, 2),
-  trial = c(1, 2, 1, 2),
-  rt = c(450, 430, 380, 390)
+  id      = c(1, 1, 1, 1, 2, 2, 2, 2),
+  session = c(1, 1, 2, 2, 1, 1, 2, 2),
+  trial   = c(1, 2, 1, 2, 1, 2, 1, 2),
+  rt      = c(450, 430, 460, 440, 380, 390, 375, 385)
 )
 
-# Multiple sessions per participant
-sessions <- tibble(
-  id = c(1, 1, 2, 2),
+# Mood reported once per session
+session_mood <- tibble(
+  id      = c(1, 1, 2, 2),
   session = c(1, 2, 1, 2),
-  mood = c(5, 6, 4, 5)
+  mood    = c(5, 6, 4, 5)
 )
 ```
 
-## Many-to-many result
+## What goes wrong
 
 ```{r}
+# Joining on id alone — each trial matches every session for that id
 trials |>
-  left_join(sessions, by = "id")
+  left_join(session_mood, by = "id")
 ```
 
 . . .
 
-Creates all combinations — probably not what you want!
+8 trials became 16 rows. The join silently created all combinations.
 
-**Solution:** Be more specific about what you're joining on, or reshape first.
+## Fix: use a compound key
+
+```{r}
+trials |>
+  left_join(session_mood, by = c("id", "session"))
+```
+
+. . .
+
+Now each trial matches the mood from *its own* session — back to 8 rows.
 
 ::: {.notes}
-Many-to-many joins are rare in well-structured data, but students occasionally create them by accident (e.g., joining on participant ID alone when they should also join on session or timepoint). Point out that the result has 8 rows instead of the expected 4 — every trial got matched with every session for the same participant. The fix is usually to add another column to the `by` argument to make the key unique, or to reshape one of the tables first. You do not need to dwell here — just make sure they recognize the symptom (unexpected row explosion).
+Many-to-many joins are the sneakiest mistake students will make with real data. The join runs without an error — but the row count explodes. Always sanity-check: if you joined an 8-row table with a 4-row table and got 16 rows, something is off. The fix is almost always to add another column to the `by` argument so the match becomes unique. This is the same compound-key idea from the longitudinal join earlier in the deck.
 :::
 
 # Practical psychology examples {background-color="#2c3e50"}
@@ -936,6 +961,37 @@ time2_scores |>
 baseline_demo |>
   anti_join(time3_scores, by = "pid") |>
   count(condition)
+```
+
+## Solution: Longitudinal study {background-color="#e67e22"}
+
+```{r}
+#| echo: true
+#| eval: false
+# 1. Build the complete dataset — baseline is the spine.
+alldata2 <- baseline_demo |>
+  left_join(time1_scores, by = "pid") |>
+  left_join(time2_scores, by = "pid") |>
+  left_join(time3_scores, by = "pid")
+
+# 2. Change score from T1 to T3.
+alldata2 <- alldata2 |>
+  mutate(change = depression_t3 - depression_t1)
+
+# 3a. Who dropped out at T2? (in baseline, missing from time2)
+baseline_demo |>
+  anti_join(time2_scores)
+
+# 3b. Who dropped out at T3? Broken down by condition.
+baseline_demo |>
+  anti_join(time3_scores) |>
+  count(condition)
+
+# Bonus: who finished T2 but dropped before T3? Attach demographics
+# to see who they are.
+time2_scores |>
+  anti_join(time3_scores) |>
+  left_join(baseline_demo)
 ```
 
 # Wrapping up {background-color="#2c3e50"}

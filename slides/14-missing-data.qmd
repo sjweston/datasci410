@@ -454,38 +454,35 @@ therapy_survey <- tibble(
 Circulate during the exercise. For question 1, students can use sum(is.na()) or the across() approach — either is fine. The most common mistake on question 3 is using drop_na() without specifying the column, which drops too many rows. Question 4 is the most interesting: mean(!is.na(followup_depression)) gives the completion rate directly. When reviewing, connect this to reporting: "You would write something like '50% of participants completed the follow-up assessment.'"
 :::
 
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
+## Solution: Missing data patterns {background-color="#e67e22"}
 
-# 1. Count missing by variable
+```{r}
+#| echo: true
+#| eval: false
+# 1. NAs in every column at once — across() applies sum(is.na(.))
+#    to each variable so we don't have to name them one by one.
 therapy_survey |>
   summarize(
     across(everything(), ~sum(is.na(.x)))
   )
 
-# 2. Complete cases
+# 2. Complete cases — drop_na() with no arguments removes any row
+#    that has an NA anywhere. nrow() then counts what's left.
 therapy_survey |>
   drop_na() |>
   nrow()
 
-# 3. Drop if missing followup
+# 3. Drop only rows missing followup — pass the column name to drop_na().
 therapy_survey |>
   drop_na(followup_depression)
 
-# 4. Completion rate
+# 4. Completion rate — !is.na() flips the logic to "has a value",
+#    and mean() of a TRUE/FALSE vector gives the proportion.
 therapy_survey |>
   summarize(
     completion_rate = mean(!is.na(followup_depression))
   )
 ```
-
----
-
-## Before we move on
-
-📤 **[Submit your code on Canvas](https://canvas.uoregon.edu/courses/287793/pages/pair-coding-check-ins)** for participation credit. Paste what you have — it doesn't need to work perfectly.
 
 # Psychology-specific considerations {background-color="#2c3e50"}
 
@@ -758,6 +755,55 @@ long_complete |>
   )
 
 # 4. Reshape wide, then compute wave 1 → wave 3 change
+long_complete |>
+  select(participant, wave, depression) |>
+  pivot_wider(
+    names_from = wave,
+    values_from = depression,
+    names_prefix = "wave_"
+  ) |>
+  filter(!is.na(wave_1) & !is.na(wave_3)) |>
+  mutate(change = wave_1 - wave_3) |>
+  summarize(mean_change = mean(change))
+```
+
+## Solution: Longitudinal missing data {background-color="#e67e22"}
+
+```{r}
+#| echo: true
+#| eval: false
+# 1. Make implicit missing explicit. complete() generates every
+#    participant x wave combination and fills in NA where data
+#    is absent — surfacing dropout that was hidden in the rows.
+long_complete <- longitudinal_study |>
+  complete(participant, wave)
+
+long_complete
+
+# 2. Count assessments per person — !is.na() is TRUE when a
+#    score exists, and sum() counts those TRUEs.
+long_complete |>
+  group_by(participant) |>
+  summarize(
+    n_assessments = sum(!is.na(depression))
+  )
+
+# 3. Percentage who completed all 3 waves — a two-step summarize:
+#    first count per participant, then take the mean of the
+#    logical "n_assessments == 3" to get a proportion.
+long_complete |>
+  group_by(participant) |>
+  summarize(
+    n_assessments = sum(!is.na(depression))
+  ) |>
+  summarize(
+    pct_complete = mean(n_assessments == 3)
+  )
+
+# 4. Reshape wide for a per-participant view, then compute change.
+#    pivot_wider() gives one row per person with wave_1/2/3 columns;
+#    filter() keeps only those with both wave 1 and wave 3 so the
+#    subtraction is well-defined.
 long_complete |>
   select(participant, wave, depression) |>
   pivot_wider(

@@ -7,7 +7,7 @@
 #
 # Weekly workflow:
 #   1. In Canvas: Grades → Export → Download CSV
-#   2. Save as data/private/canvas_gradebook.csv (overwrites the old one)
+#   2. Save as canvas_gradebook.csv (overwrites the old one)
 #   3. Source this script
 #   4. Copy the printed scoreboard code into files/scoreboard.qmd
 #
@@ -18,10 +18,10 @@ library(tidyverse)
 # ── Configuration ────────────────────────────────────────────────────────────
 
 # File paths
-roster_file    <- "data/private/team_rosters.csv"
-gradebook_file <- "data/private/canvas_gradebook.csv"
-output_file    <- "data/private/team_points.csv"
-rankings_file  <- "data/private/team_rankings.csv"
+roster_file    <- "team_rosters.csv"
+gradebook_file <- "canvas_gradebook.csv"
+output_file    <- "team_points.csv"
+rankings_file  <- "team_rankings.csv"
 
 # Team names — update after Session 2 when students choose names.
 # Keys are team numbers (from roster), values are display names.
@@ -33,6 +33,14 @@ team_names <- c(
   "5" = "R-odents",
   "6" = "The Black Cats",
   "7" = "The Bosses"
+)
+
+# Manual bonus points by team (keyed by team number). Add an entry here when
+# awarding points outside the four standard categories. Bonuses are credited
+# to the current week in the rankings.
+team_bonuses <- c(
+  "6" = 3L,  # Challenge 7 grading bonus
+  "7" = 3L   # Challenge 7 grading bonus
 )
 
 # Column patterns — these match Canvas assignment names.
@@ -319,14 +327,22 @@ points <- roster |>
     across(c(pair_coding, assignments, quizzes, fun_challenge),
            ~ replace_na(.x, 0L)),
     team_name = team_names[team],
-    total = pair_coding + assignments + quizzes + fun_challenge
+    bonus = coalesce(unname(team_bonuses[team]), 0L),
+    total = pair_coding + assignments + quizzes + fun_challenge + bonus
   ) |>
   arrange(desc(total), team_name) |>
-  select(team, team_name, pair_coding, assignments, quizzes, fun_challenge, total)
+  select(team, team_name, pair_coding, assignments, quizzes,
+         fun_challenge, bonus, total)
 
 
 # ── Weekly rankings ─────────────────────────────────────────────────────────
 # Compute cumulative points and rank at the end of each week.
+
+bonus_points_tbl <- tibble(
+  team   = names(team_bonuses),
+  week   = current_week,
+  earned = as.integer(team_bonuses)
+)
 
 all_weekly_points <- bind_rows(
   if (length(pair_coding_cols) > 0) {
@@ -348,7 +364,8 @@ all_weekly_points <- bind_rows(
     fun_challenge_points |>
       mutate(week = map_int(column, col_week)) |>
       select(team, week, earned)
-  }
+  },
+  bonus_points_tbl
 )
 
 weekly_totals <- all_weekly_points |>
@@ -388,8 +405,8 @@ points |>
   select(-team) |>
   knitr::kable(
     col.names = c("Team", "Pair Coding", "Assignments", "Quizzes",
-                   "Fun Challenge", "Total"),
-    align = c("l", "c", "c", "c", "c", "c")
+                   "Fun Challenge", "Bonus", "Total"),
+    align = c("l", "c", "c", "c", "c", "c", "c")
   ) |>
   print()
 
@@ -456,14 +473,14 @@ cat("=" |> strrep(60), "\n\n")
 
 cat("scoreboard <- tribble(\n")
 cat('  ~team,', paste0(rep(' ' , 20), collapse = ''),
-    '~pair_coding, ~assignments, ~quizzes, ~fun_challenge,\n')
+    '~pair_coding, ~assignments, ~quizzes, ~fun_challenge, ~bonus,\n')
 for (i in seq_len(nrow(points))) {
   row <- points[i, ]
   comma <- if (i < nrow(points)) "," else ""
-  cat(sprintf('  %-30s %d,            %d,            %d,        %d%s\n',
+  cat(sprintf('  %-30s %d,            %d,            %d,        %d,             %d%s\n',
               paste0('"', row$team_name, '",'),
               row$pair_coding, row$assignments,
-              row$quizzes, row$fun_challenge, comma))
+              row$quizzes, row$fun_challenge, row$bonus, comma))
 }
 cat(")\n")
 

@@ -1,7 +1,31 @@
 ---
 title: "Assignment 4: Visualization Deep Dive"
 date: "2026-05-03"
+execute:
+  warning: false
+  message: false
 ---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(palmerpenguins)
+
+# Simulated partisan_bias data used to render the Part 4 answer key.
+# Students download the real file from Canvas to data/raw/partisan_bias.csv.
+set.seed(2026)
+n_per_team <- 30
+partisan_data <- tibble(
+  participant_id = 1:(3 * n_per_team),
+  team = rep(1:3, each = n_per_team),
+  SP_c = c(rnorm(n_per_team, -0.20, 0.30),
+           rnorm(n_per_team,  0.30, 0.30),
+           rnorm(n_per_team,  0.05, 0.30)),
+  GR_c = c(rnorm(n_per_team,  0.30, 0.30),
+           rnorm(n_per_team, -0.20, 0.30),
+           rnorm(n_per_team,  0.05, 0.30))
+)
+```
 
 ::: {.callout-note}
 ## Assignment Details
@@ -42,6 +66,22 @@ Create a summary table showing mean flipper length, standard deviation (SD), and
 # Don't forget na.rm = TRUE for the mean and sd.
 ```
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+penguins |>
+  group_by(species) |>
+  summarize(
+    mean_flipper = mean(flipper_length_mm, na.rm = TRUE),
+    sd_flipper   = sd(flipper_length_mm,   na.rm = TRUE),
+    n            = n()
+  )
+```
+
+`n()` counts every row in the group, including rows where `flipper_length_mm` is `NA`. If you want only the rows that contributed to the mean, use `sum(!is.na(flipper_length_mm))` instead.
+:::
+
 ### Task 1.2
 Create a bar chart showing mean flipper length by species with error bars representing the **95% confidence interval**. Use `stat_summary()` for both the bar and the error bars — this is the pattern from the Session 8 slides.
 
@@ -65,10 +105,53 @@ ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
 `mean_cl_normal` returns the 95% confidence interval (the Session 8 slides note this is the most common error bar in psychology).
 :::
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Bar chart of mean flipper length in millimeters by penguin species (Adelie, Chinstrap, Gentoo) with 95% confidence interval error bars. Gentoo penguins have the longest flippers by a clear margin."
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+  stat_summary(fun = mean, geom = "bar") +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar", width = 0.2) +
+  scale_fill_viridis_d() +
+  labs(
+    title   = "Mean flipper length by species",
+    caption = "Error bars represent 95% confidence intervals.",
+    x       = "Species",
+    y       = "Flipper length (mm)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+The legend duplicates the x-axis labels, so it's safe to drop it with `theme(legend.position = "none")`. Always say what the error bars represent — in the title, caption, or a figure note.
+:::
+
 ## Part 2: Distributions (25 points)
 
 ### Task 2.1
 Create a histogram of penguin body mass. Try at least three different bin widths in your scratch work to see how the shape changes, then submit a single histogram with the bin width you think works best. In a comment, say what bin width you chose and why.
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Histogram of penguin body mass in grams using 250 g bins, showing a bimodal distribution."
+# Bin width of 250 g shows the bimodal shape clearly without being so jagged
+# that the structure gets lost — wider bins (e.g., 500 g) smooth over the
+# second mode, narrower bins (e.g., 100 g) are too noisy.
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 250, fill = "steelblue", color = "white") +
+  labs(
+    title = "Distribution of penguin body mass",
+    x     = "Body mass (g)",
+    y     = "Count"
+  ) +
+  theme_minimal()
+```
+
+There's no single correct bin width — what matters is that you tried a few and made a deliberate choice. Anything in the 200–400 g range here is defensible.
+:::
 
 ### Task 2.2
 Create overlapping density plots of body mass, colored by species. Set transparency so all distributions are visible.
@@ -78,8 +161,54 @@ Create overlapping density plots of body mass, colored by species. Set transpare
 To color the densities by species, set `fill = species` inside `aes()`, then add `alpha = 0.5` (or similar) inside `geom_density()` to make the overlap visible.
 :::
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Overlapping density plots of body mass by penguin species. Adelie and Chinstrap distributions overlap heavily in the 3,000-4,000 g range; Gentoo sits cleanly above them around 5,000 g."
+ggplot(penguins, aes(x = body_mass_g, fill = species)) +
+  geom_density(alpha = 0.5) +
+  scale_fill_viridis_d() +
+  labs(
+    title = "Body mass by species",
+    x     = "Body mass (g)",
+    y     = "Density",
+    fill  = "Species"
+  ) +
+  theme_minimal()
+```
+
+The histogram in 2.1 showed a bimodal shape; the density plot reveals why — Gentoo penguins are noticeably larger than the other two species. Adelie and Chinstrap overlap almost entirely.
+:::
+
 ### Task 2.3
 Create a boxplot of body mass by species. Then recreate it as a violin plot. In a comment, discuss what each shows that the other doesn't.
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Boxplot of body mass by penguin species. Gentoo's median sits above the upper whisker of both Adelie and Chinstrap."
+ggplot(penguins, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_boxplot() +
+  scale_fill_viridis_d() +
+  labs(x = "Species", y = "Body mass (g)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+#| fig-alt: "Violin plot of body mass by penguin species, showing the full distribution shape for each."
+ggplot(penguins, aes(x = species, y = body_mass_g, fill = species)) +
+  geom_violin() +
+  scale_fill_viridis_d() +
+  labs(x = "Species", y = "Body mass (g)") +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+The boxplot is great for spotting the median, IQR, and outliers at a glance — five-number summary, no shape. The violin shows the full distribution, so you can see whether the data are bimodal, skewed, or symmetric, but you lose the explicit quartile markers. Layering both (`geom_violin() + geom_boxplot(width = 0.1)`) is a common compromise.
+:::
 
 ## Part 3: The "Bad" and "Good" Graph (25 points)
 
@@ -98,8 +227,62 @@ Examples of "bad" choices (pick things you can actually do in ggplot2):
 - Chartjunk: garish background colors, redundant gridlines, distracting fills
 - A geom that doesn't fit the data (e.g., a line plot connecting unordered categories)
 
+::: {.callout-note collapse="true"}
+## Answer
+
+There's no single right answer — credit goes to plots that violate at least four principles *intentionally* and name each violation. Here's one example.
+
+```{r}
+#| fig-alt: "Intentionally bad bar chart of mean highway mpg by car class, with a rainbow palette, truncated y-axis, missing axis labels, a hot pink background, and an overly busy title."
+# Bad choices made on purpose:
+# 1. Rainbow palette (no perceptual ordering, bad for colorblind viewers)
+# 2. Truncated y-axis exaggerating tiny differences
+# 3. Variable names instead of plain-English labels
+# 4. Garish background and 3-D-style gridlines (chartjunk)
+# 5. Redundant legend (color and x-axis encode the same thing)
+ggplot(mpg, aes(x = class, y = hwy, fill = class)) +
+  stat_summary(fun = mean, geom = "bar") +
+  scale_fill_manual(values = rainbow(7)) +
+  coord_cartesian(ylim = c(15, 30)) +
+  labs(title = "AVERAGE HWY MPG!!!", x = "class", y = "hwy") +
+  theme(
+    panel.background = element_rect(fill = "hotpink"),
+    panel.grid.major = element_line(color = "yellow", linewidth = 1.2),
+    axis.text.x      = element_text(angle = 0, size = 6)
+  )
+```
+:::
+
 ### Task 3.2: The Good Graph
 Create a good version of the same data. In comments, explain your design choices.
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Bar chart of mean highway mpg by car class, reordered from highest to lowest, on a y-axis starting at zero with plain-English labels and a single muted fill color."
+# Good choices:
+# 1. Y-axis starts at zero — no exaggeration of differences
+# 2. Classes reordered by mean mpg so the ranking is the story
+# 3. Single, muted fill color (no decorative palette)
+# 4. Plain-English labels and a descriptive title
+# 5. Minimal theme with no chartjunk
+mpg |>
+  group_by(class) |>
+  summarize(mean_hwy = mean(hwy)) |>
+  mutate(class = fct_reorder(class, mean_hwy)) |>
+  ggplot(aes(x = mean_hwy, y = class)) +
+  geom_col(fill = "steelblue") +
+  labs(
+    title = "Compact and subcompact cars get the best highway mileage",
+    x     = "Mean highway mpg",
+    y     = NULL
+  ) +
+  theme_minimal()
+```
+
+A horizontal bar chart with reordered categories is almost always easier to read than a vertical chart with seven labels crammed along the x-axis. Stating the takeaway in the title turns the chart from "data display" into "argument."
+:::
 
 ## Part 4: Recreate a Figure (15 points)
 
@@ -128,6 +311,26 @@ mutate(team = factor(team,
 ```
 :::
 
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| eval: false
+partisan_data <- read_csv("data/raw/partisan_bias.csv")
+```
+
+```{r}
+partisan_data <- partisan_data |>
+  mutate(team = factor(team,
+                       levels = c(1, 2, 3),
+                       labels = c("Spain", "Greece", "No Team")))
+
+partisan_data
+```
+
+Specifying both `levels` and `labels` is safer than relying on the default ordering — if a value of 4 or 0 ever sneaks into the data, it becomes `NA` rather than getting silently mis-labeled.
+:::
+
 ### Task 4.2
 Recreate Figure 3 from the paper (provided on Canvas) as closely as you can. Pay attention to:
 
@@ -141,6 +344,38 @@ You won't match it exactly — plain text axis labels are fine.
 ::: {.callout-tip}
 ## Hint
 The data has `SP_c` and `GR_c` as two separate columns (one row per participant). To plot acceptance threshold by team and statement type, you'll need to **pivot to long format first** so that statement type becomes one column and the *c* value becomes another. Look back at Session 5 (Data Tidying) for `pivot_longer()`.
+:::
+
+::: {.callout-note collapse="true"}
+## Answer
+
+```{r}
+#| fig-alt: "Bar chart of mean acceptance threshold c by team (Spain, Greece, No Team), with separate bars for Pro-Spain and Pro-Greece statements and 95% confidence interval error bars. Team members are more accepting of statements that favor their own side."
+partisan_long <- partisan_data |>
+  pivot_longer(
+    cols      = c(SP_c, GR_c),
+    names_to  = "statement",
+    values_to = "c"
+  ) |>
+  mutate(statement = recode(statement,
+                            SP_c = "Pro-Spain",
+                            GR_c = "Pro-Greece"))
+
+ggplot(partisan_long, aes(x = team, y = c, fill = statement)) +
+  stat_summary(fun = mean, geom = "bar",
+               position = position_dodge(width = 0.9)) +
+  stat_summary(fun.data = mean_cl_normal, geom = "errorbar",
+               width = 0.2,
+               position = position_dodge(width = 0.9)) +
+  labs(
+    x    = "Team",
+    y    = "Acceptance threshold (c)",
+    fill = "Statement type"
+  ) +
+  theme_minimal()
+```
+
+The pivot is the critical step — until `statement` and `c` are their own columns, ggplot has no way to map statement type to `fill`. `position_dodge()` must be set to the *same* width on the bars and the error bars, or the error bars float to the wrong place.
 :::
 
 ## Grading Rubric
