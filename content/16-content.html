@@ -331,19 +331,19 @@ ul.task-list li input[type="checkbox"] {
 <p>📖 <strong>Readings:</strong></p>
 <ul>
 <li><a href="https://r4ds.hadley.nz/communication">R4DS Ch 11: Communication</a></li>
-<li>Dykes: Data Storytelling: The Essential Data Science Skill (PDF on Canvas)</li>
+<li>Dykes: <a href="https://www.forbes.com/sites/brentdykes/2016/03/31/data-storytelling-the-essential-data-science-skill-everyone-needs/">Data Storytelling: The Essential Data Science Skill</a></li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Assignment 7 is due today
+<span class="screen-reader-only">Note</span>Assignment 7 was due Sunday
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><a href="../assignment/07-assignment.html">Assignment 7: Joins &amp; Missing Data</a> — due Sunday, May 24 at 11:59 PM.</p>
+<p><a href="../assignment/07-assignment.html">Assignment 7: Joins &amp; Missing Data</a> — due Sunday, May 24 at 11:59 PM. If you haven’t submitted, do so as soon as possible.</p>
 </div>
 </div>
 </section>
@@ -352,21 +352,11 @@ ul.task-list li input[type="checkbox"] {
 <p>We’ll cover:</p>
 <ul>
 <li>Why storytelling? Data + visuals + narrative = change</li>
-<li>The Knaflic framework:
-<ol type="1">
-<li>Understand the context — who is your audience?</li>
-<li>Choose appropriate visuals — match plot type to message</li>
-<li>Eliminate clutter — less is more</li>
-<li>Focus attention — use preattentive attributes strategically</li>
-<li>Think like a designer — visual hierarchy, accessibility</li>
-</ol></li>
-<li>Critical evaluation of figures:
-<ul>
-<li>Misleading figures — truncated axes, cherry-picked ranges, 3D charts</li>
-<li>Boring figures — no title, too many colors, wrong plot type</li>
-<li>The “so what?” test</li>
-</ul></li>
-<li>Applying storytelling to your final project</li>
+<li><strong>Same finding, five audiences</strong>: walking one dataset (sleep &amp; GPA in college students) through five different deliverables — exploratory, journal/APA, clinician one-pager, social card, conference talk slide</li>
+<li><strong>The annotation toolkit</strong>: <code>annotate()</code>, <code>geom_text()</code> direct labels, <code>geom_vline()</code>, shaded regions, text-as-data with <code>theme_void()</code></li>
+<li><strong>Misleading figures</strong>: truncated axes, implied thresholds, and where audience-tailoring crosses into deception</li>
+<li><strong>Sequencing</strong>: one figure shows a finding; a <em>sequence</em> makes an argument. Paper vs.&nbsp;talk sequencing for your final project</li>
+<li>A brief tour of famous data stories (Nightingale, Minard, Rosling)</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -401,11 +391,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="after-class">After class</h2>
 <p>✅ <strong>Practice:</strong></p>
 <ol type="1">
-<li>Pick one figure from your final project draft. Apply the “so what?” test — can you state the takeaway in one sentence?</li>
-<li>Declutter that figure: remove unnecessary gridlines, legends, and default styling</li>
-<li>Add a clear, informative title that tells the reader what to see (not just what the axes are)</li>
-<li>Try <code>annotate()</code> to add a text label highlighting the key finding</li>
-<li>Show your figure to someone who hasn’t seen your data. Can they understand the point without explanation?</li>
+<li>Pick one figure from a recent assignment or your final project draft. Identify two distinct audiences for it (e.g., your professor and your roommate, or a journal reviewer and a press release reader).</li>
+<li>Produce <strong>two versions</strong> of the figure, each shaped for one of those audiences.</li>
+<li>Use at least two annotation techniques from class — for example, direct labels with <code>geom_text()</code> + <code>sprintf()</code>, a reference line with <code>geom_vline()</code>, a shaded region with <code>annotate("rect")</code>, or text-as-data with <code>theme_void()</code>.</li>
+<li>Write a one-sentence title for each version that makes an <strong>assertion</strong>, not a description (e.g., “CBT reduces depression more than control” rather than “Depression scores by condition”).</li>
+<li>Show both versions to someone outside the class — can they tell which is which?</li>
 </ol>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -413,15 +403,12 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>The “so what?” test
+<span class="screen-reader-only">Note</span>Ask “who’s reading?” first
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Every figure should answer a question. If you can’t complete this sentence, the figure needs work:</p>
-<blockquote class="blockquote">
-<p>“This figure shows that _______________.”</p>
-</blockquote>
-<p>If you find yourself saying “this figure shows the data,” you haven’t found the story yet. Dig deeper.</p>
+<p>A figure is an argument made for a specific reader. The same finding becomes a different figure for a researcher, a clinician, a member of the public, or a live audience.</p>
+<p>Before you ask <strong>“what’s the chart?”</strong> ask <strong>“who’s reading?”</strong> The answer should shape every choice — title, annotation, color, what gets dropped.</p>
 </div>
 </div>
 <section id="handout" class="level3">
