@@ -696,28 +696,28 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 <colgroup>
 <col style="width: 17%">
 <col style="width: 8%">
-<col style="width: 7%">
-<col style="width: 66%">
+<col style="width: 6%">
+<col style="width: 67%">
 </colgroup>
 <thead>
 <tr class="header">
 <th style="text-align: left;">Term</th>
 <th style="text-align: right;">Estimate</th>
-<th style="text-align: right;">p-value</th>
+<th style="text-align: left;">p</th>
 <th style="text-align: left;">In plain language</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td style="text-align: left;">(Intercept)</td>
-<td style="text-align: right;">3.445</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">3.44</td>
+<td style="text-align: left;">&lt; .001</td>
 <td style="text-align: left;">Predicted anxiety when social media = 0 hours</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">hours_social_media</td>
-<td style="text-align: right;">1.139</td>
-<td style="text-align: right;">0</td>
+<td style="text-align: right;">1.14</td>
+<td style="text-align: left;">&lt; .001</td>
 <td style="text-align: left;">For each additional hour of social media, anxiety increases by this much</td>
 </tr>
 </tbody>
@@ -741,8 +741,8 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
       }</style></aside>
 </div>
 </section>
-<section id="r-squared-how-much-does-the-model-explain" class="slide level2">
-<h2>R-squared: How much does the model explain?</h2>
+<section id="r-squared-how-much-can-we-predict" class="slide level2">
+<h2>R-squared: How much can we predict?</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(model)<span class="sc">$</span>r.squared</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -750,17 +750,17 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p><strong>R-squared</strong> tells you the proportion of variation in y explained by x.</p>
+<p><strong>R-squared</strong> is the proportion of variation in y that is predictable from x.</p>
 <ul>
-<li>R² = 0 → the model explains nothing</li>
-<li>R² = 1 → the model explains everything</li>
-<li>R² = 0.21 → social media use explains about 21% of the variation in anxiety scores</li>
+<li>R² = 0 → x tells us nothing about y</li>
+<li>R² = 1 → x perfectly predicts y</li>
+<li>R² = 0.21 → knowing social media use predicts about 21% of the variation in anxiety scores</li>
 </ul>
 </div>
 <div class="fragment">
-<p>The other 79% is explained by other factors (genetics, life events, personality, etc.).</p>
+<p>The other 79% reflects everything else that varies across people (genetics, life events, personality, measurement noise).</p>
 <aside class="notes">
-<p>R-squared is intuitive for students if you frame it as a percentage. “Social media use explains about X% of why people differ in anxiety.” The low R-squared is actually a great teaching moment – in psychology, single predictors rarely explain a lot. That’s why researchers use multiple regression (preview of what’s next). Students sometimes think low R-squared means the model is “bad” – reframe it as “one piece of a bigger puzzle.”</p>
+<p>Be deliberate about language here: “predicts” and “is associated with,” not “explains” or “causes.” Students just heard “correlation does not equal causation” a few slides ago, and “explains” sounds causal even though stats textbooks use it loosely. Reframe low R² as a feature, not a bug: in psychology, single predictors rarely capture most of the variation in human behavior, which is why researchers use multiple regression (preview of what’s next). Students sometimes think low R² means the model is “bad” – reframe it as “one piece of a bigger puzzle.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -947,7 +947,7 @@ F-statistic: 31.91 on 1 and 118 DF,  p-value: 1.138e-07</code></pre>
 <div class="fragment">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Is it significant?</span></span>
-<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(class_survey<span class="sc">$</span>sleep_hrs, class_survey<span class="sc">$</span>stress)</span></code></pre></div>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">cor.test</span>(class_survey<span class="sc">$</span>sleep_hrs, class_survey<span class="sc">$</span>stress, <span class="at">use =</span> <span class="st">"complete.obs"</span>)</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
     Pearson's product-moment correlation
@@ -977,11 +977,47 @@ sample estimates:
       }</style></aside>
 </div>
 </section>
+<section id="does-the-relationship-differ-by-group" class="slide level2">
+<h2>Does the relationship differ by group?</h2>
+<p><code>group_by()</code> + <code>summarize()</code> works the same with <code>cor()</code> as with any other summary:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(chronotype) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">r =</span> <span class="fu">cor</span>(sleep_hrs, stress, <span class="at">use =</span> <span class="st">"complete.obs"</span>),</span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>()</span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  chronotype           r     n
+  &lt;chr&gt;            &lt;dbl&gt; &lt;int&gt;
+1 Evening person  0.0725    22
+2 Morning person -0.474      9
+3 Neither        -0.990      3</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>One pipeline, one correlation per group. Same skill you’ve been using all term — just a new summary function.</p>
+<aside class="notes">
+<p>This slide ties together two big ideas: group_by/summarize from Session 3 and correlation from today. Emphasize that cor() is just another summary statistic, like mean() or sd(). Ask: “Does the sleep–stress relationship look the same across chronotypes, or does it differ?” Let students react to the numbers. If the groups differ noticeably, that’s a great moment to mention that moderation (whether a relationship depends on a third variable) is where this kind of analysis goes next — but don’t go deeper than naming it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
 <section id="regression-does-sleep-predict-stress" class="slide level2">
 <h2>Regression: Does sleep predict stress?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(stress <span class="sc">~</span> sleep_hrs, <span class="at">data =</span> class_survey)</span>
-<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(class_model) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(stress <span class="sc">~</span> sleep_hrs, <span class="at">data =</span> class_survey)</span>
+<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(class_model) <span class="sc">|&gt;</span> knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">digits =</span> <span class="dv">3</span>)</span></code></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
@@ -1019,16 +1055,16 @@ sample estimates:
 <section id="visualize-the-relationship" class="slide level2">
 <h2>Visualize the relationship</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hrs, <span class="at">y =</span> stress)) <span class="sc">+</span></span>
-<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Does Sleep Predict Stress in Our Class?"</span>,</span>
-<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"b = "</span>, slope_val, <span class="st">", R² = "</span>, r2_val),</span>
-<span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Average hours of sleep per night"</span>,</span>
-<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Current stress level (1–10)"</span></span>
-<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb26-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(class_survey, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hrs, <span class="at">y =</span> stress)) <span class="sc">+</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">width =</span> <span class="fl">0.2</span>, <span class="at">height =</span> <span class="fl">0.2</span>, <span class="at">alpha =</span> <span class="fl">0.6</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Does Sleep Predict Stress in Our Class?"</span>,</span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="fu">paste0</span>(<span class="st">"b = "</span>, slope_val, <span class="st">", R² = "</span>, r2_val),</span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Average hours of sleep per night"</span>,</span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Current stress level (1–10)"</span></span>
+<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>)</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1049,29 +1085,29 @@ sample estimates:
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-24-1.png" alt="Scatterplot of hours of sleep versus stress level from the class survey, with a regression line and key statistics in the subtitle." width="960"></p>
+<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Scatterplot of hours of sleep versus stress level from the class survey, with a regression line and key statistics in the subtitle." width="960"></p>
 </figure>
 </div>
 </div>
 </div></section><section id="correlation-matrix-our-class-variables" class="slide level2">
 <h2>Correlation matrix: Our class variables</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
-<span id="cb27-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sleep_hrs, caffeine_per_day, social_media_hrs, stress,</span>
-<span id="cb27-3"><a href="" aria-hidden="true" tabindex="-1"></a>         coding_excited, coding_anxious,</span>
-<span id="cb27-4"><a href="" aria-hidden="true" tabindex="-1"></a>         personality_neur, personality_extra, personality_consc) <span class="sc">|&gt;</span></span>
-<span id="cb27-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb27-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"var1"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>var1, <span class="at">names_to =</span> <span class="st">"var2"</span>, <span class="at">values_to =</span> <span class="st">"r"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb27-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">fill =</span> r)) <span class="sc">+</span></span>
-<span id="cb27-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb27-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(r, <span class="dv">2</span>)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb27-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#e74c3c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"#2c3e50"</span>,</span>
-<span id="cb27-13"><a href="" aria-hidden="true" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
-<span id="cb27-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Correlation Matrix: Our Class"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
-<span id="cb27-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb27-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="" aria-hidden="true" tabindex="-1"></a>class_survey <span class="sc">|&gt;</span></span>
+<span id="cb29-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(sleep_hrs, caffeine_per_day, social_media_hrs, stress,</span>
+<span id="cb29-3"><a href="" aria-hidden="true" tabindex="-1"></a>         coding_excited, coding_anxious,</span>
+<span id="cb29-4"><a href="" aria-hidden="true" tabindex="-1"></a>         personality_neur, personality_extra, personality_consc) <span class="sc">|&gt;</span></span>
+<span id="cb29-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cor</span>(<span class="at">use =</span> <span class="st">"complete.obs"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb29-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rownames_to_column</span>(<span class="st">"var1"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="sc">-</span>var1, <span class="at">names_to =</span> <span class="st">"var2"</span>, <span class="at">values_to =</span> <span class="st">"r"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb29-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> var1, <span class="at">y =</span> var2, <span class="at">fill =</span> r)) <span class="sc">+</span></span>
+<span id="cb29-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb29-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">round</span>(r, <span class="dv">2</span>)), <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb29-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient2</span>(<span class="at">low =</span> <span class="st">"#e74c3c"</span>, <span class="at">mid =</span> <span class="st">"white"</span>, <span class="at">high =</span> <span class="st">"#2c3e50"</span>,</span>
+<span id="cb29-13"><a href="" aria-hidden="true" tabindex="-1"></a>                       <span class="at">midpoint =</span> <span class="dv">0</span>, <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span></span>
+<span id="cb29-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Correlation Matrix: Our Class"</span>, <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb29-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb29-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 </div>
 
 <aside class="notes">
@@ -1091,7 +1127,7 @@ sample estimates:
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-25-1.png" alt="Heatmap correlation matrix of class survey variables including sleep, caffeine, social media, stress, coding excitement, coding anxiety, and personality items, with color intensity showing strength and direction of relationships." width="672"></p>
+<p><img data-src="17-correlation-regression_files/figure-revealjs/unnamed-chunk-26-1.png" alt="Heatmap correlation matrix of class survey variables including sleep, caffeine, social media, stress, coding excitement, coding anxiety, and personality items, with color intensity showing strength and direction of relationships." width="672"></p>
 </figure>
 </div>
 </div>
@@ -1136,44 +1172,13 @@ sample estimates:
 <div class="fragment">
 <p>Adding statistics is now just learning <strong>new functions</strong> in a language you already speak.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple regression — same lm(), just add predictors</span></span>
-<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age <span class="sc">+</span> academic_year, <span class="at">data =</span> study_data)</span>
-<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA — same idea</span></span>
-<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> condition, <span class="at">data =</span> study_data)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Multiple regression — same lm(), just add predictors</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age <span class="sc">+</span> academic_year, <span class="at">data =</span> study_data)</span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA — same idea</span></span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> condition, <span class="at">data =</span> study_data)</span></code></pre></div>
 </div>
 </div>
-</section></section>
-<section>
-<section id="get-a-head-start" class="title-slide slide level1 center" data-background-color="#e67e22">
-<h1>Get a head start</h1>
-
-</section>
-<section id="end-of-deck-exercise" class="slide level2">
-<h2>End-of-deck exercise</h2>
-<aside class="notes">
-<p>Individual work time (~10 minutes). Part A mirrors the anxiety analysis but uses depression (phq9_total), so students can apply the workflow independently. Circulate and check that students can interpret their slope in a sentence — that’s the hardest part. Once Part A is working, push students into Part B: this is the last class session before the final project is due, so any minute spent on their own data is high-value. For students whose project doesn’t have continuous variables, redirect them to figure polish or inline-code reporting instead of forcing a regression that doesn’t fit.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<p><strong>Part A — Practice on <code>study_data</code>:</strong></p>
-<ol type="1">
-<li>Run a regression predicting <code>phq9_total</code> (depression) from <code>hours_social_media</code></li>
-<li>What is the slope? Interpret it in a sentence.</li>
-<li>What is R²? Is social media use a good predictor of depression?</li>
-<li>Create a scatterplot with the regression line and report the key statistics in the subtitle</li>
-<li><strong>Bonus:</strong> Use <code>broom::tidy()</code> to create a clean results table</li>
-</ol>
-<p><strong>Part B — Head start on your final project:</strong></p>
-<p>If your final project has two continuous variables, fit <strong>one</strong> <code>lm()</code> on your own data and add the resulting figure to your report. Even if regression isn’t a central part of your project, a single well-interpreted model can strengthen your Results section. Not a fit for your data? Use the time to polish a figure instead — your project is due Wednesday.</p>
 </section></section>
 <section>
 <section id="fun-challenge-10-the-final-prediction" class="title-slide slide level1 center" data-background-color="#e67e22">
