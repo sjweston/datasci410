@@ -214,7 +214,7 @@ Dr.&nbsp;Sara Weston
 <section id="looking-back" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>Looking back</h1>
 <aside class="notes">
-<p>This is the last class session. The tone should feel celebratory and reflective, not rushed. Students have their final projects due today and presentations during finals week. Start with a warm opening – acknowledge that it’s the end, and that you’re proud of how far they’ve come. The first ~10 minutes are about reflection before moving into the live demo.</p>
+<p>This is the last class session. The tone should feel celebratory and reflective, not rushed. Final project videos are due during finals week, so today is about closing the loop. Start with a warm opening – acknowledge that it’s the end, and that you’re proud of how far they’ve come. The first ~10 minutes are about reflection before moving into the live demo.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -254,19 +254,20 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="a-real-analysis-start-to-finish" class="slide level2">
 <h2>A real analysis: Start to finish</h2>
-<p>Let’s analyze a complete psychology dataset together.</p>
-<p><strong>Research question:</strong> Does social media use predict anxiety in college students?</p>
+<p>Let’s analyze a <strong>real</strong> dataset together — the <a href="https://gss.norc.org/">General Social Survey</a>, included in <code>forcats</code> as <code>gss_cat</code>.</p>
+<p><strong>Research question:</strong> Does age predict daily TV viewing among Americans — and does it differ by political party?</p>
 <div class="fragment">
 <p>I’ll demonstrate the full workflow:</p>
 <ol type="1">
-<li>Import messy data</li>
-<li>Clean and tidy</li>
-<li>Explore with visualizations</li>
-<li>Create publication-ready figures</li>
+<li>Import and explore a real dataset</li>
+<li>Clean and recode categories</li>
+<li>Look at distributions (univariate &amp; by group)</li>
+<li>Quantify the relationship (correlation + regression)</li>
+<li>Reshape with pivots and joins</li>
 <li>Build a Quarto report</li>
 </ol>
 <aside class="notes">
-<p>This live demo should take ~15 minutes total (Steps 1-9). You can either advance through the slides or live-code in RStudio alongside – live-coding is more engaging if time allows. The research question deliberately mirrors what many students are doing for their final projects (social media and mental health), so it should feel relevant. Emphasize that this is the exact workflow they should use for their final project.</p>
+<p>This live demo is the heart of the lecture (~25-30 minutes). The dataset is real, public, and built into tidyverse – no download, no install. The research question is deliberately ordinary: it’s the kind of question a psych undergrad could answer for a class paper. As you walk through, name the session each step came from – this is the explicit “putting it all together” payoff. If time allows, live-code in RStudio alongside the slides.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -282,56 +283,28 @@ Dr.&nbsp;Sara Weston
 </section>
 <section id="the-dataset" class="slide level2">
 <h2>The dataset</h2>
+<p><code>gss_cat</code> is a sample of the General Social Survey (NORC at the University of Chicago), one of the longest-running social surveys in the US.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulated college student survey data</span></span>
-<span id="cb1-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">2026</span>)</span>
-<span id="cb1-3"><a href="" aria-hidden="true" tabindex="-1"></a>social_media <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb1-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">200</span>,</span>
-<span id="cb1-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">age =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">24</span>, <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb1-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">hours_social_media =</span> <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">4</span>, <span class="dv">2</span>),</span>
-<span id="cb1-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">gad7_total =</span> <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">8</span>, <span class="dv">5</span>),  <span class="co"># Generalized Anxiety Disorder scale</span></span>
-<span id="cb1-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">phq9_total =</span> <span class="fu">rnorm</span>(<span class="dv">200</span>, <span class="dv">10</span>, <span class="dv">6</span>),  <span class="co"># Depression scale</span></span>
-<span id="cb1-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">academic_year =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"Freshman"</span>, <span class="st">"Sophomore"</span>, <span class="st">"Junior"</span>, <span class="st">"Senior"</span>),</span>
-<span id="cb1-10"><a href="" aria-hidden="true" tabindex="-1"></a>                        <span class="dv">200</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb1-11"><a href="" aria-hidden="true" tabindex="-1"></a>) <span class="sc">|&gt;</span></span>
-<span id="cb1-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb1-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Make anxiety correlate with social media use</span></span>
-<span id="cb1-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">gad7_total =</span> gad7_total <span class="sc">+</span> hours_social_media <span class="sc">*</span> <span class="fl">0.8</span>,</span>
-<span id="cb1-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Add some missing data</span></span>
-<span id="cb1-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">hours_social_media =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(<span class="dv">200</span>) <span class="sc">&lt;</span> <span class="fl">0.05</span>, <span class="cn">NA_real_</span>, hours_social_media),</span>
-<span id="cb1-17"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">gad7_total =</span> <span class="fu">if_else</span>(<span class="fu">runif</span>(<span class="dv">200</span>) <span class="sc">&lt;</span> <span class="fl">0.08</span>, <span class="cn">NA_real_</span>, gad7_total)</span>
-<span id="cb1-18"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-</div>
-</section>
-<section id="step-1-explore-the-data" class="slide level2">
-<h2>Step 1: Explore the data</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(social_media)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_cat</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 200
-Columns: 6
-$ id                 &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, …
-$ age                &lt;int&gt; 22, 18, 18, 23, 22, 24, 20, 21, 21, 22, 24, 21, 19,…
-$ hours_social_media &lt;dbl&gt; 5.0656451, 2.5780228, 3.6020217, 3.4372534, 6.34185…
-$ gad7_total         &lt;dbl&gt; 19.000689340, 0.004876155, -0.799925122, 3.90750383…
-$ phq9_total         &lt;dbl&gt; 8.148586, 18.018690, 2.761215, 1.546709, 13.866548,…
-$ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore", "Ju…</code></pre>
-</div>
-</div>
-<div class="fragment">
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Check for missing data</span></span>
-<span id="cb4-2"><a href="" aria-hidden="true" tabindex="-1"></a>social_media <span class="sc">|&gt;</span></span>
-<span id="cb4-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x))))</span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-     id   age hours_social_media gad7_total phq9_total academic_year
-  &lt;int&gt; &lt;int&gt;              &lt;int&gt;      &lt;int&gt;      &lt;int&gt;         &lt;int&gt;
-1     0     0                  9         13          0             0</code></pre>
+<pre><code># A tibble: 21,483 × 9
+    year marital         age race  rincome        partyid    relig denom tvhours
+   &lt;int&gt; &lt;fct&gt;         &lt;int&gt; &lt;fct&gt; &lt;fct&gt;          &lt;fct&gt;      &lt;fct&gt; &lt;fct&gt;   &lt;int&gt;
+ 1  2000 Never married    26 White $8000 to 9999  Ind,near … Prot… Sout…      12
+ 2  2000 Divorced         48 White $8000 to 9999  Not str r… Prot… Bapt…      NA
+ 3  2000 Widowed          67 White Not applicable Independe… Prot… No d…       2
+ 4  2000 Never married    39 White Not applicable Ind,near … Orth… Not …       4
+ 5  2000 Divorced         25 White Not applicable Not str d… None  Not …       1
+ 6  2000 Married          25 White $20000 - 24999 Strong de… Prot… Sout…      NA
+ 7  2000 Never married    36 White $25000 or more Not str r… Chri… Not …       3
+ 8  2000 Divorced         44 White $7000 to 7999  Ind,near … Prot… Luth…      NA
+ 9  2000 Married          44 White $25000 or more Not str d… Prot… Other       0
+10  2000 Married          47 White $25000 or more Strong re… Prot… Sout…       3
+# ℹ 21,473 more rows</code></pre>
 </div>
 </div>
 <aside class="notes">
-<p>Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: “What do you notice about the missing data? Which variables have it? How much?” This connects directly back to Session 14 on missing data.</p>
+<p>The GSS has been running since 1972 and is a backbone dataset in sociology and political psychology. The version bundled with forcats covers 2000-2014 and 21,483 respondents. Highlight that this is <em>real data</em> – the kind their grad school mentors actually use.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -343,31 +316,119 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section id="step-1-explore-the-data" class="slide level2">
+<h2>Step 1: Explore the data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(gss_cat)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 21,483
+Columns: 9
+$ year    &lt;int&gt; 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 2000, 20…
+$ marital &lt;fct&gt; Never married, Divorced, Widowed, Never married, Divorced, Mar…
+$ age     &lt;int&gt; 26, 48, 67, 39, 25, 25, 36, 44, 44, 47, 53, 52, 52, 51, 52, 40…
+$ race    &lt;fct&gt; White, White, White, White, White, White, White, White, White,…
+$ rincome &lt;fct&gt; $8000 to 9999, $8000 to 9999, Not applicable, Not applicable, …
+$ partyid &lt;fct&gt; "Ind,near rep", "Not str republican", "Independent", "Ind,near…
+$ relig   &lt;fct&gt; Protestant, Protestant, Protestant, Orthodox-christian, None, …
+$ denom   &lt;fct&gt; "Southern baptist", "Baptist-dk which", "No denomination", "No…
+$ tvhours &lt;int&gt; 12, NA, 2, 4, 1, NA, 3, NA, 0, 3, 2, NA, 1, NA, 1, 7, NA, 3, 3…</code></pre>
 </div>
+</div>
+<aside class="notes">
+<p>Emphasize that the first thing to do with any dataset is glimpse(). It tells you the dimensions, variable names, and types – everything you need to orient yourself.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-1-cont.-check-for-missing-data" class="slide level2">
+<h2>Step 1 (cont.): Check for missing data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb5-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.x))))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 9
+   year marital   age  race rincome partyid relig denom tvhours
+  &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;   &lt;int&gt;
+1     0       0    76     0       0       0     0     0   10146</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Ask: “What do you notice? Which variables have a lot of NAs? Which have none?” tvhours has the most because the question wasn’t asked every year. This connects directly back to Session 14 on missing data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="whats-in-partyid" class="slide level2">
+<h2>What’s in <code>partyid</code>?</h2>
+<p>Before we recode, let’s see what’s actually there:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(partyid)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 10 × 2
+   partyid                n
+   &lt;fct&gt;              &lt;int&gt;
+ 1 No answer            154
+ 2 Don't know             1
+ 3 Other party          393
+ 4 Strong republican   2314
+ 5 Not str republican  3032
+ 6 Ind,near rep        1791
+ 7 Independent         4119
+ 8 Ind,near dem        2499
+ 9 Not str democrat    3690
+10 Strong democrat     3490</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Always check the levels of a categorical variable before recoding it. Students often assume the values they expect; the data has 10 levels including ‘No answer’, ‘Don’t know’, and ‘Other party’. Point out that ‘Ind,near rep’ and ‘Ind,near dem’ are leaners – we’ll group them with Independents in the next step. This habit (count() before case_when()) prevents the most common recoding bug: typos in the lookup strings silently producing NAs.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="step-2-clean-the-data" class="slide level2">
 <h2>Step 2: Clean the data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="ot">&lt;-</span> social_media <span class="sc">|&gt;</span></span>
-<span id="cb6-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Remove rows with missing outcome</span></span>
-<span id="cb6-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(gad7_total) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Create anxiety categories</span></span>
-<span id="cb6-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb6-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_category =</span> <span class="fu">case_when</span>(</span>
-<span id="cb6-7"><a href="" aria-hidden="true" tabindex="-1"></a>      gad7_total <span class="sc">&lt;</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Minimal"</span>,</span>
-<span id="cb6-8"><a href="" aria-hidden="true" tabindex="-1"></a>      gad7_total <span class="sc">&lt;</span> <span class="dv">10</span> <span class="sc">~</span> <span class="st">"Mild"</span>,</span>
-<span id="cb6-9"><a href="" aria-hidden="true" tabindex="-1"></a>      gad7_total <span class="sc">&lt;</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"Moderate"</span>,</span>
-<span id="cb6-10"><a href="" aria-hidden="true" tabindex="-1"></a>      gad7_total <span class="sc">&gt;=</span> <span class="dv">15</span> <span class="sc">~</span> <span class="st">"Severe"</span></span>
-<span id="cb6-11"><a href="" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb6-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">anxiety_category =</span> <span class="fu">factor</span>(anxiety_category,</span>
-<span id="cb6-13"><a href="" aria-hidden="true" tabindex="-1"></a>                              <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Minimal"</span>, <span class="st">"Mild"</span>, <span class="st">"Moderate"</span>, <span class="st">"Severe"</span>)),</span>
-<span id="cb6-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Reorder academic year</span></span>
-<span id="cb6-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">academic_year =</span> <span class="fu">factor</span>(academic_year,</span>
-<span id="cb6-16"><a href="" aria-hidden="true" tabindex="-1"></a>                          <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Freshman"</span>, <span class="st">"Sophomore"</span>, <span class="st">"Junior"</span>, <span class="st">"Senior"</span>))</span>
-<span id="cb6-17"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_clean <span class="ot">&lt;-</span> gss_cat <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(tvhours, age) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">party =</span> <span class="fu">case_when</span>(</span>
+<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>      partyid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Strong republican"</span>, <span class="st">"Not str republican"</span>) <span class="sc">~</span> <span class="st">"Republican"</span>,</span>
+<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>      partyid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Strong democrat"</span>, <span class="st">"Not str democrat"</span>)     <span class="sc">~</span> <span class="st">"Democrat"</span>,</span>
+<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>      partyid <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">"Ind,near rep"</span>, <span class="st">"Independent"</span>, <span class="st">"Ind,near dem"</span>) <span class="sc">~</span> <span class="st">"Independent"</span>,</span>
+<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="cn">NA_character_</span></span>
+<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">party =</span> <span class="fu">factor</span>(party, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>, <span class="st">"Independent"</span>, <span class="st">"Republican"</span>))</span>
+<span id="cb9-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb9-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(party)</span></code></pre></div>
 </div>
 <aside class="notes">
-<p>Walk through each cleaning decision and explain the reasoning. “Why drop_na on the outcome variable?” Because you can’t analyze what you can’t measure. “Why create categories?” Because clinical cutoffs make the continuous scores more interpretable. “Why reorder academic year?” Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 14), case_when (Session 4), factor levels (Session 12).</p>
+<p>Walk through each cleaning decision. “Why drop_na on tvhours and age?” Because we can’t analyze missing values. “Why collapse partyid into three categories?” Because the raw variable has 10 levels including ‘Don’t know’ and ‘No answer’ – too granular to plot. We’re treating ‘near rep’ and ‘near dem’ leaners as Independents for simplicity. Each of these decisions maps to a session: drop_na (Session 14), case_when (Session 4), factor levels (Session 12).</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -383,66 +444,152 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <section id="step-3-descriptive-statistics" class="slide level2">
 <h2>Step 3: Descriptive statistics</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
-<span id="cb7-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb7-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
-<span id="cb7-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb7-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_hours =</span> <span class="fu">mean</span>(hours_social_media, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_hours =</span> <span class="fu">sd</span>(hours_social_media, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_anxiety =</span> <span class="fu">mean</span>(gad7_total),</span>
-<span id="cb7-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_anxiety =</span> <span class="fu">sd</span>(gad7_total)</span>
-<span id="cb7-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tv =</span> <span class="fu">mean</span>(tvhours),</span>
+<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_tv =</span> <span class="fu">sd</span>(tvhours)</span>
+<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 6
-      n mean_age mean_hours sd_hours mean_anxiety sd_anxiety
-  &lt;int&gt;    &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
-1   187     20.9       4.29     1.81         11.5       5.76</code></pre>
+<pre><code># A tibble: 1 × 4
+      n mean_age mean_tv sd_tv
+  &lt;int&gt;    &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;
+1 11026     47.2    2.98  2.57</code></pre>
 </div>
 </div>
 </section>
-<section id="step-4-initial-visualization" class="slide level2">
-<h2>Step 4: Initial visualization</h2>
+<section id="step-3-cont.-group-sizes" class="slide level2">
+<h2>Step 3 (cont.): Group sizes</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Social media use predicts higher anxiety"</span>,</span>
-<span id="cb9-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Self-reported daily hours and GAD-7 scores"</span>,</span>
-<span id="cb9-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Daily social media use (hours)"</span>,</span>
-<span id="cb9-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (GAD-7)"</span></span>
-<span id="cb9-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb9-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(party)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 2
+  party           n
+  &lt;fct&gt;       &lt;int&gt;
+1 Democrat     3832
+2 Independent  4461
+3 Republican   2733</code></pre>
+</div>
+</div>
+</section>
+<section id="step-4-how-much-tv-do-people-watch" class="slide level2">
+<h2>Step 4: How much TV do people watch?</h2>
+<p>Start with <strong>univariate EDA</strong> — one variable at a time.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gss_clean, <span class="fu">aes</span>(<span class="at">x =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="dv">1</span>, <span class="at">fill =</span> <span class="st">"steelblue"</span>, <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most respondents watch 1-3 hours per day"</span>,</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"But the tail stretches to 24 hours"</span>,</span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Hours of TV per day"</span>,</span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Number of respondents"</span></span>
+<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 </div>
 
+<aside class="notes">
+<p>This is Session 10 territory – look at the shape of one variable before anything else. The distribution is right-skewed with a peak at 2 hours and a tail of heavy viewers. Ask: “What kinds of people might be in that tail?” The skew matters because mean &gt; median when data is skewed – a chance to remind them why we often prefer the median for skewed data.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="step-4-initial-visualization-output" class="slide level2 output-location-slide"><h2>Step 4: Initial visualization</h2><div class="cell output-location-slide">
+<section id="step-4-how-much-tv-do-people-watch-output" class="slide level2 output-location-slide"><h2>Step 4: How much TV do people watch?</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-7-1.png" alt="Scatterplot with a linear trend line showing that higher daily social media use is associated with higher GAD-7 anxiety scores among college students." width="960"></p>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Histogram of daily TV hours peaking at 2 hours per day with a long right tail." width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="step-5-compute-correlation" class="slide level2">
-<h2>Step 5: Compute correlation</h2>
+</div></section><section id="step-4-cont.-does-it-differ-by-party" class="slide level2">
+<h2>Step 4 (cont.): Does it differ by party?</h2>
+<p>Now <strong>bivariate EDA</strong> — compare distributions across groups.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Clean data for correlation (remove NAs)</span></span>
-<span id="cb10-2"><a href="" aria-hidden="true" tabindex="-1"></a>correlation_data <span class="ot">&lt;-</span> social_media_clean <span class="sc">|&gt;</span></span>
-<span id="cb10-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(hours_social_media, gad7_total)</span>
-<span id="cb10-4"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value <span class="ot">&lt;-</span> <span class="fu">cor</span>(correlation_data<span class="sc">$</span>hours_social_media,</span>
-<span id="cb10-6"><a href="" aria-hidden="true" tabindex="-1"></a>                 correlation_data<span class="sc">$</span>gad7_total)</span>
-<span id="cb10-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gss_clean, <span class="fu">aes</span>(<span class="at">x =</span> party, <span class="at">y =</span> tvhours, <span class="at">fill =</span> party)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>    <span class="ot">=</span> <span class="st">"#3498db"</span>,</span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"#7f8c8d"</span>,</span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>  <span class="ot">=</span> <span class="st">"#e74c3c"</span></span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"TV viewing distributions look similar across parties"</span>,</span>
+<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Hours of TV per day"</span></span>
+<span id="cb15-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb15-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb15-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>Session 11 – covariation between a categorical and a continuous variable. The boxplot is the workhorse for “does this group matter for that number?” Point out the medians (the bold line inside the box), the IQR (box height), and the outliers (dots). Quick check: medians look similar across parties, so party probably won’t be a big driver in our model.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-4-cont.-does-it-differ-by-party-output" class="slide level2 output-location-slide"><h2>Step 4 (cont.): Does it differ by party?</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Side-by-side boxplots of daily TV hours for Democrats, Independents, and Republicans showing similar medians and spreads." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="step-5-initial-visualization" class="slide level2">
+<h2>Step 5: Initial visualization</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gss_clean, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tvhours)) <span class="sc">+</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>(<span class="at">alpha =</span> <span class="fl">0.15</span>, <span class="at">height =</span> <span class="fl">0.3</span>, <span class="at">width =</span> <span class="dv">0</span>) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"steelblue"</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Older Americans report more daily TV viewing"</span>,</span>
+<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"General Social Survey, 2000-2014"</span>,</span>
+<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Hours of TV per day"</span></span>
+<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb16-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</div>
+
+</section>
+<section id="step-5-initial-visualization-output" class="slide level2 output-location-slide"><h2>Step 5: Initial visualization</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-11-1.png" alt="Scatterplot with a linear trend line showing that older Americans report more daily TV viewing in the General Social Survey." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="step-6-compute-correlation" class="slide level2">
+<h2>Step 6: Compute correlation</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value <span class="ot">&lt;-</span> <span class="fu">cor</span>(gss_clean<span class="sc">$</span>age, gss_clean<span class="sc">$</span>tvhours)</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>cor_value</span></code></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.2541587</code></pre>
+<pre><code>[1] 0.1424147</code></pre>
 </div>
 </div>
 <div class="fragment">
-<p><strong>Finding:</strong> Moderate positive correlation (r = 0.25)</p>
+<p><strong>Finding:</strong> A small but reliable positive correlation (r = 0.14).</p>
 <aside class="notes">
-<p>This is a callback to Monday’s session. Ask students to interpret the correlation in plain language before you advance to the finding. “What does a positive correlation mean here?” Students who were in Session 17 should be able to answer this. Note that we drop_na before computing the correlation – reinforce the habit of handling missing data explicitly.</p>
+<p>This is a callback to Monday’s session. Ask students to interpret the correlation in plain language before you advance to the finding. “What does r ≈ 0.14 mean in real terms?” Students who were in Session 17 should be able to answer this. Worth noting: with N this large, even tiny correlations are ‘statistically significant’ – a great chance to remind them that effect size matters more than p-values.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -456,145 +603,350 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
       }</style></aside>
 </div>
 </section>
-<section id="step-6-explore-by-academic-year" class="slide level2">
-<h2>Step 6: Explore by academic year</h2>
+<section id="step-7-run-a-regression" class="slide level2">
+<h2>Step 7: Run a regression</h2>
+<p>A correlation gives one number. A regression gives a <strong>slope</strong> — how much does TV viewing change per year of age?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(social_media_clean, <span class="fu">aes</span>(<span class="at">x =</span> hours_social_media, <span class="at">y =</span> gad7_total, <span class="at">color =</span> academic_year)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Social media-anxiety relationship holds across academic years"</span>,</span>
-<span id="cb12-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Daily social media use (hours)"</span>,</span>
-<span id="cb12-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Anxiety score (GAD-7)"</span>,</span>
-<span id="cb12-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Academic year"</span></span>
-<span id="cb12-9"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb12-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb12-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a>tv_model <span class="ot">&lt;-</span> <span class="fu">lm</span>(tvhours <span class="sc">~</span> age <span class="sc">+</span> party, <span class="at">data =</span> gss_clean)</span>
+<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(broom)</span>
+<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">tidy</span>(tv_model)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 5
+  term             estimate std.error statistic   p.value
+  &lt;chr&gt;               &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+1 (Intercept)        2.24     0.0795      28.2  5.22e-169
+2 age                0.0212   0.00140     15.2  2.17e- 51
+3 partyIndependent  -0.262    0.0562      -4.67 2.99e-  6
+4 partyRepublican   -0.618    0.0635      -9.73 2.69e- 22</code></pre>
+</div>
+</div>
+<aside class="notes">
+<p>Direct callback to Session 17. The lm() formula syntax (<code>y ~ x1 + x2</code>) is the foundation for almost all R modeling – t-tests, ANOVA, mixed models, even Bayesian models use the same notation. broom::tidy() turns the messy summary() output into a tidy tibble we can pipe and plot. Walk through the estimate column: the age slope tells us about how many additional minutes of TV per year of age.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-7-cont.-how-well-does-it-fit" class="slide level2">
+<h2>Step 7 (cont.): How well does it fit?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">glance</span>(tv_model) <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(r.squared, adj.r.squared, sigma, nobs)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 4
+  r.squared adj.r.squared sigma  nobs
+      &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;
+1    0.0286        0.0284  2.54 11026</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>R² is tiny — age and party explain only a small slice of TV viewing. The story isn’t <em>wrong</em>, it just isn’t the whole story.</p>
+<aside class="notes">
+<p><code>glance()</code> gives one-row model summaries; <code>tidy()</code> gives one row per coefficient. Together they’re the broom workflow. The small R² is the right teaching moment: “statistically significant” ≠ “explains a lot.” Pair this with the earlier note about effect size. This also makes the case for multivariate models in PSY 420 – we’re not capturing the variables that really matter (income, education, screen-time substitution, etc.).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-8-does-the-pattern-differ-by-party" class="slide level2">
+<h2>Step 8: Does the pattern differ by party?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gss_clean, <span class="fu">aes</span>(<span class="at">x =</span> age, <span class="at">y =</span> tvhours, <span class="at">color =</span> party)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>) <span class="sc">+</span></span>
+<span id="cb23-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb23-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Democrat"</span>    <span class="ot">=</span> <span class="st">"#3498db"</span>,</span>
+<span id="cb23-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Independent"</span> <span class="ot">=</span> <span class="st">"#7f8c8d"</span>,</span>
+<span id="cb23-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Republican"</span>  <span class="ot">=</span> <span class="st">"#e74c3c"</span></span>
+<span id="cb23-7"><a href="" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb23-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb23-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Same pattern across the political spectrum"</span>,</span>
+<span id="cb23-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Age (years)"</span>,</span>
+<span id="cb23-11"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Hours of TV per day"</span>,</span>
+<span id="cb23-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">color =</span> <span class="st">"Party"</span></span>
+<span id="cb23-13"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb23-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb23-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"top"</span>)</span></code></pre></div>
 </div>
 
 </section>
-<section id="step-6-explore-by-academic-year-output" class="slide level2 output-location-slide"><h2>Step 6: Explore by academic year</h2><div class="cell output-location-slide">
+<section id="step-8-does-the-pattern-differ-by-party-output" class="slide level2 output-location-slide"><h2>Step 8: Does the pattern differ by party?</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-9-1.png" alt="Scatterplot with separate colored trend lines for each academic year, showing the positive relationship between social media use and anxiety holds across all year groups." width="960"></p>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-15-1.png" alt="Scatterplot with separate colored trend lines for Democrats, Independents, and Republicans, showing a similar positive age-TV slope for all three groups." width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="step-7-anxiety-categories" class="slide level2">
-<h2>Step 7: Anxiety categories</h2>
+</div></section><section id="step-9-tv-viewing-categories" class="slide level2">
+<h2>Step 9: TV viewing categories</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="" aria-hidden="true" tabindex="-1"></a>social_media_clean <span class="sc">|&gt;</span></span>
-<span id="cb13-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(anxiety_category) <span class="sc">|&gt;</span></span>
-<span id="cb13-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">anxiety_category =</span> <span class="fu">fct_rev</span>(anxiety_category)) <span class="sc">|&gt;</span></span>
-<span id="cb13-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> anxiety_category, <span class="at">fill =</span> anxiety_category)) <span class="sc">+</span></span>
-<span id="cb13-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
-<span id="cb13-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
-<span id="cb13-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Minimal"</span> <span class="ot">=</span> <span class="st">"#2ecc71"</span>,</span>
-<span id="cb13-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Mild"</span> <span class="ot">=</span> <span class="st">"#f39c12"</span>,</span>
-<span id="cb13-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Moderate"</span> <span class="ot">=</span> <span class="st">"#e67e22"</span>,</span>
-<span id="cb13-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Severe"</span> <span class="ot">=</span> <span class="st">"#e74c3c"</span></span>
-<span id="cb13-11"><a href="" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
-<span id="cb13-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb13-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most students report mild to moderate anxiety"</span>,</span>
-<span id="cb13-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Distribution of GAD-7 severity categories (N = 184)"</span>,</span>
-<span id="cb13-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of students"</span>,</span>
-<span id="cb13-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb13-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb13-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb13-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb24-3"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">tv_category =</span> <span class="fu">case_when</span>(</span>
+<span id="cb24-4"><a href="" aria-hidden="true" tabindex="-1"></a>      tvhours <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">"None"</span>,</span>
+<span id="cb24-5"><a href="" aria-hidden="true" tabindex="-1"></a>      tvhours <span class="sc">&lt;=</span> <span class="dv">2</span> <span class="sc">~</span> <span class="st">"Light (1-2 hr)"</span>,</span>
+<span id="cb24-6"><a href="" aria-hidden="true" tabindex="-1"></a>      tvhours <span class="sc">&lt;=</span> <span class="dv">4</span> <span class="sc">~</span> <span class="st">"Moderate (3-4 hr)"</span>,</span>
+<span id="cb24-7"><a href="" aria-hidden="true" tabindex="-1"></a>      tvhours <span class="sc">&gt;=</span> <span class="dv">5</span> <span class="sc">~</span> <span class="st">"Heavy (5+ hr)"</span></span>
+<span id="cb24-8"><a href="" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb24-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">tv_category =</span> <span class="fu">factor</span>(tv_category,</span>
+<span id="cb24-10"><a href="" aria-hidden="true" tabindex="-1"></a>                         <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"None"</span>, <span class="st">"Light (1-2 hr)"</span>,</span>
+<span id="cb24-11"><a href="" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Moderate (3-4 hr)"</span>, <span class="st">"Heavy (5+ hr)"</span>))</span>
+<span id="cb24-12"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb24-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(tv_category) <span class="sc">|&gt;</span></span>
+<span id="cb24-14"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> <span class="fu">fct_rev</span>(tv_category), <span class="at">fill =</span> tv_category)) <span class="sc">+</span></span>
+<span id="cb24-15"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>() <span class="sc">+</span></span>
+<span id="cb24-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(</span>
+<span id="cb24-17"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"None"</span>              <span class="ot">=</span> <span class="st">"#2ecc71"</span>,</span>
+<span id="cb24-18"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Light (1-2 hr)"</span>    <span class="ot">=</span> <span class="st">"#f39c12"</span>,</span>
+<span id="cb24-19"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Moderate (3-4 hr)"</span> <span class="ot">=</span> <span class="st">"#e67e22"</span>,</span>
+<span id="cb24-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="st">"Heavy (5+ hr)"</span>     <span class="ot">=</span> <span class="st">"#e74c3c"</span></span>
+<span id="cb24-21"><a href="" aria-hidden="true" tabindex="-1"></a>  )) <span class="sc">+</span></span>
+<span id="cb24-22"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb24-23"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Most Americans watch 1-4 hours of TV per day"</span>,</span>
+<span id="cb24-24"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Number of respondents"</span>,</span>
+<span id="cb24-25"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb24-26"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb24-27"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb24-28"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span></code></pre></div>
 </div>
 
 </section>
-<section id="step-7-anxiety-categories-output" class="slide level2 output-location-slide"><h2>Step 7: Anxiety categories</h2><div class="cell output-location-slide">
+<section id="step-9-tv-viewing-categories-output" class="slide level2 output-location-slide"><h2>Step 9: TV viewing categories</h2><div class="cell output-location-slide">
 <div class="cell-output-display">
 <div>
 <figure>
-<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-10-1.png" alt="Horizontal bar chart showing the distribution of anxiety severity categories, with most students falling in the mild to moderate range and fewer in the minimal or severe categories." width="960"></p>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-16-1.png" alt="Horizontal bar chart of TV viewing categories showing most Americans watch 1-4 hours per day, with smaller groups at None and Heavy." width="960"></p>
 </figure>
 </div>
 </div>
-</div></section><section id="step-8-create-summary-table" class="slide level2">
-<h2>Step 8: Create summary table</h2>
+</div></section><section id="step-10-has-tv-viewing-changed-over-time" class="slide level2">
+<h2>Step 10: Has TV viewing changed over time?</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> social_media_clean <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(anxiety_category) <span class="sc">|&gt;</span></span>
-<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">N =</span> <span class="fu">n</span>(),</span>
-<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_Hours =</span> <span class="fu">mean</span>(hours_social_media, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_Hours =</span> <span class="fu">sd</span>(hours_social_media, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_Age =</span> <span class="fu">mean</span>(age),</span>
-<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
-<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summary_table, <span class="at">digits =</span> <span class="dv">1</span>,</span>
-<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Anxiety Category"</span>, <span class="st">"N"</span>, <span class="st">"M Hours"</span>, <span class="st">"SD Hours"</span>, <span class="st">"M Age"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">|&gt;</span></span>
+<span id="cb25-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_tv =</span> <span class="fu">mean</span>(tvhours), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> year, <span class="at">y =</span> mean_tv)) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb25-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">"steelblue"</span>, <span class="at">size =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb25-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb25-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Mean daily TV viewing across GSS years"</span>,</span>
+<span id="cb25-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Survey year"</span>,</span>
+<span id="cb25-10"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Mean hours of TV per day"</span></span>
+<span id="cb25-11"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb25-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+</div>
+
+<aside class="notes">
+<p>This is a grouped summary feeding straight into a plot – a pattern they’ll use constantly. Note how <code>group_by() |&gt; summarize()</code> collapses 21,000 rows into 8. The line plot is intuitive for time series. Ask: “What might explain a downward drift in TV hours over this period?” (Streaming, YouTube, social media displacing traditional TV.)</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-10-has-tv-viewing-changed-over-time-output" class="slide level2 output-location-slide"><h2>Step 10: Has TV viewing changed over time?</h2><div class="cell output-location-slide">
+<div class="cell-output-display">
+<div>
+<figure>
+<p><img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-17-1.png" alt="Line plot of mean daily TV hours from 2000 to 2014, drifting slightly downward across the period." width="960"></p>
+</figure>
+</div>
+</div>
+</div></section><section id="step-11-add-political-context-with-a-join" class="slide level2">
+<h2>Step 11: Add political context with a join</h2>
+<p>What if we want to label each year by who was president? We need a second table, then a <strong>join</strong> (Session 15).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="" aria-hidden="true" tabindex="-1"></a>president_lookup <span class="ot">&lt;-</span> <span class="fu">tribble</span>(</span>
+<span id="cb26-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="sc">~</span>year, <span class="sc">~</span>president,</span>
+<span id="cb26-3"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2000</span>, <span class="st">"Clinton"</span>,</span>
+<span id="cb26-4"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2002</span>, <span class="st">"G.W. Bush"</span>,</span>
+<span id="cb26-5"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2004</span>, <span class="st">"G.W. Bush"</span>,</span>
+<span id="cb26-6"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2006</span>, <span class="st">"G.W. Bush"</span>,</span>
+<span id="cb26-7"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2008</span>, <span class="st">"G.W. Bush"</span>,</span>
+<span id="cb26-8"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2010</span>, <span class="st">"Obama"</span>,</span>
+<span id="cb26-9"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2012</span>, <span class="st">"Obama"</span>,</span>
+<span id="cb26-10"><a href="" aria-hidden="true" tabindex="-1"></a>   <span class="dv">2014</span>, <span class="st">"Obama"</span></span>
+<span id="cb26-11"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-12"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="" aria-hidden="true" tabindex="-1"></a>president_lookup</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 2
+   year president
+  &lt;dbl&gt; &lt;chr&gt;    
+1  2000 Clinton  
+2  2002 G.W. Bush
+3  2004 G.W. Bush
+4  2006 G.W. Bush
+5  2008 G.W. Bush
+6  2010 Obama    
+7  2012 Obama    
+8  2014 Obama    </code></pre>
+</div>
+</div>
+<aside class="notes">
+<p><code>tribble()</code> is the row-by-row tibble constructor – nice for small lookups like this. The next slide does the actual join. Frame the join as “add columns from another table by matching on a key.” The key here is <code>year</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-11-cont.-the-join" class="slide level2">
+<h2>Step 11 (cont.): The join</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="" aria-hidden="true" tabindex="-1"></a>gss_with_president <span class="ot">&lt;-</span> gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb28-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(president_lookup, <span class="at">by =</span> <span class="st">"year"</span>)</span>
+<span id="cb28-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="" aria-hidden="true" tabindex="-1"></a>gss_with_president <span class="sc">|&gt;</span></span>
+<span id="cb28-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(president) <span class="sc">|&gt;</span></span>
+<span id="cb28-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb28-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb28-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_tv =</span> <span class="fu">mean</span>(tvhours),</span>
+<span id="cb28-9"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb28-10"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb28-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(mean_tv))</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 3
+  president     n mean_tv
+  &lt;chr&gt;     &lt;int&gt;   &lt;dbl&gt;
+1 Obama      4245    3.02
+2 Clinton    1799    2.99
+3 G.W. Bush  4982    2.95</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Tiny differences — but the <em>technique</em> is what counts. Joins let you bring in any external data (codebooks, demographics, neighborhood stats).</p>
+<aside class="notes">
+<p>Big caveat: this is correlation, not causation. TV viewing didn’t change because the president changed. The point is the <em>mechanic</em> of the join, plus <code>arrange(desc(...))</code> to sort. Real psych use: joining survey responses with demographics, or wave 1 with wave 2 of a longitudinal study.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</div>
+</section>
+<section id="step-12-summary-table-by-party" class="slide level2">
+<h2>Step 12: Summary table by party</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="" aria-hidden="true" tabindex="-1"></a>summary_table <span class="ot">&lt;-</span> gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb30-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(party) <span class="sc">|&gt;</span></span>
+<span id="cb30-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb30-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">N        =</span> <span class="fu">n</span>(),</span>
+<span id="cb30-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_Age =</span> <span class="fu">mean</span>(age),</span>
+<span id="cb30-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">Mean_TV  =</span> <span class="fu">mean</span>(tvhours),</span>
+<span id="cb30-7"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">SD_TV    =</span> <span class="fu">sd</span>(tvhours),</span>
+<span id="cb30-8"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups  =</span> <span class="st">"drop"</span></span>
+<span id="cb30-9"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb30-10"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-11"><a href="" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(summary_table, <span class="at">digits =</span> <span class="dv">1</span>,</span>
+<span id="cb30-12"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">"Party"</span>, <span class="st">"N"</span>, <span class="st">"M Age"</span>, <span class="st">"M TV"</span>, <span class="st">"SD TV"</span>))</span></code></pre></div>
 <div class="cell-output-display">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Anxiety Category</th>
+<th style="text-align: left;">Party</th>
 <th style="text-align: right;">N</th>
-<th style="text-align: right;">M Hours</th>
-<th style="text-align: right;">SD Hours</th>
 <th style="text-align: right;">M Age</th>
+<th style="text-align: right;">M TV</th>
+<th style="text-align: right;">SD TV</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Minimal</td>
-<td style="text-align: right;">26</td>
-<td style="text-align: right;">3.9</td>
-<td style="text-align: right;">1.5</td>
-<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">Democrat</td>
+<td style="text-align: right;">3832</td>
+<td style="text-align: right;">48.7</td>
+<td style="text-align: right;">3.3</td>
+<td style="text-align: right;">2.8</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Mild</td>
-<td style="text-align: right;">47</td>
-<td style="text-align: right;">3.9</td>
-<td style="text-align: right;">2.0</td>
-<td style="text-align: right;">21.0</td>
+<td style="text-align: left;">Independent</td>
+<td style="text-align: right;">4461</td>
+<td style="text-align: right;">44.8</td>
+<td style="text-align: right;">2.9</td>
+<td style="text-align: right;">2.6</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Moderate</td>
-<td style="text-align: right;">62</td>
-<td style="text-align: right;">4.1</td>
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">21.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">Severe</td>
-<td style="text-align: right;">52</td>
-<td style="text-align: right;">5.1</td>
-<td style="text-align: right;">1.8</td>
-<td style="text-align: right;">20.7</td>
+<td style="text-align: left;">Republican</td>
+<td style="text-align: right;">2733</td>
+<td style="text-align: right;">49.2</td>
+<td style="text-align: right;">2.7</td>
+<td style="text-align: right;">2.2</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 </section>
-<section id="step-9-write-it-up-in-quarto" class="slide level2">
-<h2>Step 9: Write it up in Quarto</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
-<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from 187 college students</span>
-<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>(M age = 20.9 years).</span>
-<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>Students reported using social media an average of</span>
-<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>4.3</span>
-<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>hours per day (SD = 1.8).</span>
-<span id="cb15-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-9"><a href="" aria-hidden="true" tabindex="-1"></a>Social media use was positively correlated with anxiety scores</span>
-<span id="cb15-10"><a href="" aria-hidden="true" tabindex="-1"></a>(r = 0.25, p &lt; .001), such that students who</span>
-<span id="cb15-11"><a href="" aria-hidden="true" tabindex="-1"></a>used social media more reported higher anxiety levels.</span>
-<span id="cb15-12"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb15-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb15-15"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "Relationship between social media use and anxiety"</span></span>
-<span id="cb15-16"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># [Insert scatterplot code]</span></span>
-<span id="cb15-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div>
+<section id="step-13-write-it-up-in-quarto" class="slide level2">
+<h2>Step 13: Write it up in Quarto</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode markdown"><code class="sourceCode markdown"><span id="cb31-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results</span></span>
+<span id="cb31-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="" aria-hidden="true" tabindex="-1"></a>We analyzed data from <span class="in">`r nrow(gss_clean)`</span> respondents in</span>
+<span id="cb31-4"><a href="" aria-hidden="true" tabindex="-1"></a>the General Social Survey (2000-2014), with a mean age of</span>
+<span id="cb31-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="in">`r round(mean(gss_clean$age), 1)`</span> years. Respondents reported</span>
+<span id="cb31-6"><a href="" aria-hidden="true" tabindex="-1"></a>watching <span class="in">`r round(mean(gss_clean$tvhours), 1)`</span> hours of TV per</span>
+<span id="cb31-7"><a href="" aria-hidden="true" tabindex="-1"></a>day on average (SD = <span class="in">`r round(sd(gss_clean$tvhours), 1)`</span>).</span>
+<span id="cb31-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="" aria-hidden="true" tabindex="-1"></a>Age was positively correlated with daily TV viewing</span>
+<span id="cb31-10"><a href="" aria-hidden="true" tabindex="-1"></a>(r = <span class="in">`r round(cor_value, 2)`</span>), such that older respondents</span>
+<span id="cb31-11"><a href="" aria-hidden="true" tabindex="-1"></a>tended to report more hours of TV.</span></code></pre></div>
 <aside class="notes">
-<p>This is the communication step – the one students often skip. Emphasize that inline R code (the backtick-r expressions) means the numbers in the writeup update automatically if the data changes. No more copy-pasting numbers from output into a Word doc. This is what makes it reproducible. If time allows, show this rendering in a Quarto document to drive the point home.</p>
+<p>The inline R expressions (the backtick-r bits) are the magic. They evaluate at render time, so the numbers in the prose are pulled live from the data. No hand-typed numbers; no copy-paste from console output. If the data changes, the writeup updates automatically. Next slide shows what this renders to.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="step-13-cont.-what-it-renders-to" class="slide level2">
+<h2>Step 13 (cont.): What it renders to</h2>
+<h3 id="results">Results</h3>
+<p>We analyzed data from 11026 respondents in the General Social Survey (2000-2014), with a mean age of 47.2 years. Respondents reported watching 3 hours of TV per day on average (SD = 2.6).</p>
+<p>Age was positively correlated with daily TV viewing (r = 0.14), such that older respondents tended to report more hours of TV. The relationship was similar across Democrats, Independents, and Republicans.</p>
+
+<img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-22-1.png" alt="Small scatterplot of age and daily TV hours with a steelblue linear trend line." width="672" class="r-stretch"><aside class="notes">
+<p>This is the same prose from the previous slide, but rendered. Point at the numbers and say “every one of these came from the data via inline R.” If you change the dataset (add rows, drop a year), every number updates on re-render. This is what ‘reproducible’ actually buys you.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -609,9 +961,18 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 </section>
 <section id="what-this-demonstrates" class="slide level2">
 <h2>What this demonstrates</h2>
-<p>✅ <strong>Complete workflow</strong> — import to interpretation ✅ <strong>Data cleaning</strong> — handling missing data, creating factors ✅ <strong>Multiple visualizations</strong> — exploring from different angles ✅ <strong>Summary statistics</strong> — both numerical and tabular ✅ <strong>Inline reporting</strong> — no hard-coded numbers ✅ <strong>Clear narrative</strong> — telling the story</p>
+<ul>
+<li>✅ <strong>Explore &amp; clean</strong> — <code>glimpse</code>, <code>count</code>, <code>case_when</code>, <code>drop_na</code>, <code>factor</code></li>
+<li>✅ <strong>Univariate &amp; bivariate EDA</strong> — <code>geom_histogram</code>, <code>geom_boxplot</code></li>
+<li>✅ <strong>Quantify</strong> — <code>cor</code>, <code>lm</code>, <code>broom::tidy</code>, <code>broom::glance</code></li>
+<li>✅ <strong>Group &amp; reshape</strong> — <code>group_by</code>, <code>summarize</code>, <code>tribble</code>, <code>left_join</code>, <code>arrange</code></li>
+<li>✅ <strong>Visualize</strong> — scatter, line, bar, box; color, scale, theme, labs</li>
+<li>✅ <strong>Communicate</strong> — <code>kable</code> tables + inline R in Quarto</li>
+</ul>
+<div class="fragment">
+<p><strong>One pipeline. Sixteen sessions of skills.</strong></p>
 <aside class="notes">
-<p>Pause here and take a breath. This checklist summarizes the entire course in six bullet points. Let students appreciate that they can now do every single one of these things. Then transition: “But what happens when things go wrong? Because they will, even for experienced programmers.”</p>
+<p>This is the payoff slide. Read each line and name the session it came from. The closing line should land – they’ve genuinely used skills from nearly every session in one connected analysis. Then transition: “But what happens when things go wrong? Because they will, even for experienced programmers.”</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -623,14 +984,15 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</div>
 </section></section>
 <section>
 <section id="when-things-break" class="title-slide slide level1 center" data-background-color="#2c3e50">
 <h1>When things break</h1>
 
 </section>
-<section id="the-6-errors-youll-see-most-often" class="slide level2">
-<h2>The 6 errors you’ll see most often</h2>
+<section id="the-6-errors-youll-see-most-often-12" class="slide level2">
+<h2>The 6 errors you’ll see most often (1/2)</h2>
 <table class="caption-top">
 <colgroup>
 <col style="width: 25%">
@@ -660,17 +1022,49 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <td>Missing <code>|&gt;</code>, <code>+</code>, comma, or parenthesis</td>
 <td>Check the line <em>before</em> the error</td>
 </tr>
-<tr class="even">
+</tbody>
+</table>
+<aside class="notes">
+<p>Ask students: “Which of these have you gotten this quarter?” Hands will go up for all three. The most common is “object not found” (usually a capitalization issue or forgetting to run an earlier chunk). The “unexpected symbol” error is the trickiest because the actual problem is on the line <em>before</em> the error – emphasize checking the previous line.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="the-6-errors-youll-see-most-often-22" class="slide level2">
+<h2>The 6 errors you’ll see most often (2/2)</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 55%">
+<col style="width: 18%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Error</th>
+<th>What it means</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
 <td><code>non-numeric argument</code></td>
 <td>Math on text — variable is character, not numeric</td>
 <td>Check type with <code>class()</code> or <code>glimpse()</code></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td><code>did you mean '=='?</code></td>
 <td>Used <code>=</code> (assignment) instead of <code>==</code> (comparison) in <code>filter()</code></td>
 <td>Change <code>=</code> to <code>==</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td>ggplot <code>+</code> error</td>
 <td>Missing <code>+</code> between ggplot layers</td>
 <td>Every line except the last needs <code>+</code></td>
@@ -678,7 +1072,7 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 </tbody>
 </table>
 <aside class="notes">
-<p>Spend ~3 minutes on this table. Ask students: “Which of these have you gotten this quarter?” Hands will go up for almost all of them. The most common by far is “object not found” (usually a capitalization issue or forgetting to run an earlier chunk). The “unexpected symbol” error is the trickiest because the actual problem is on the line before the error – emphasize checking the previous line.</p>
+<p>The bottom three are operator and syntax errors. The “did you mean ==” error is friendly – R is literally telling you the fix. The ggplot + error is a classic Session 2 issue that still trips students up; remind them ggplot uses + between layers, not |&gt;.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -740,10 +1134,10 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <p><strong>Good:</strong></p>
 <blockquote>
 <p>“I’m trying to filter my data but getting ‘object not found’:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, x <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: object 'data' not found</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb32-2"><a href="" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">y =</span> <span class="fu">c</span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>))</span>
+<span id="cb32-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(data, x <span class="sc">&gt;</span> <span class="dv">1</span>)</span>
+<span id="cb32-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Error: object 'data' not found</span></span></code></pre></div>
 <p>I expected rows where x &gt; 1.”</p>
 </blockquote>
 </div>
@@ -783,39 +1177,6 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 </section>
 <section id="your-turn-debug-this-code" class="slide level2">
 <h2>Your turn: Debug this code</h2>
-<aside class="notes">
-<p>This is the final pair coding exercise of the course – 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says “object not found.” Bug 2 gives a helpful error (“Did you mean ==?”). Bug 4 gives “unexpected symbol.” This exercise reinforces the debugging strategy from the previous slide.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-<p>This code has several errors. Find and fix them all:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Load data</span></span>
-<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>Study_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">14</span>),</span>
-<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Group =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>)</span>
-<span id="cb17-8"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-9"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Analyze</span></span>
-<span id="cb17-11"><a href="" aria-hidden="true" tabindex="-1"></a>study_data <span class="sc">|&gt;</span></span>
-<span id="cb17-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="at">Group =</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb17-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
-<span id="cb17-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score)</span>
-<span id="cb17-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score)</span>
-<span id="cb17-16"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-</div>
-<p><strong>Time: 10 minutes</strong></p>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -829,6 +1190,36 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 </div>
 </div>
 </div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb33-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="" aria-hidden="true" tabindex="-1"></a>Study_data <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb33-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb33-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">12</span>, <span class="dv">18</span>, <span class="dv">14</span>),</span>
+<span id="cb33-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="at">Group =</span> <span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"A"</span>)</span>
+<span id="cb33-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-9"><a href="" aria-hidden="true" tabindex="-1"></a>study_data <span class="sc">|&gt;</span></span>
+<span id="cb33-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="at">Group =</span> <span class="st">"A"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb33-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb33-12"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(score)</span>
+<span id="cb33-13"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_score =</span> <span class="fu">sd</span>(score)</span>
+<span id="cb33-14"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</div>
+<p><strong>Time: 10 minutes</strong></p>
+<aside class="notes">
+<p>This is the final pair coding exercise of the course – 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says “object not found.” Bug 2 gives a helpful error (“Did you mean ==?”). Bug 4 gives “unexpected symbol.” This exercise reinforces the debugging strategy from the previous slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="before-we-move-on" class="slide level2">
 <h2>Before we move on</h2>
@@ -859,10 +1250,10 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <p>What’s next?</p>
 <ul>
 <li><strong>Statistics in R</strong> — inference, hypothesis testing</li>
-<li><strong>Advanced R programming</strong> — functions, iteration</li>
+<li><strong>Writing functions</strong> — automate repetitive work</li>
 <li><strong>Version control</strong> — Git and GitHub</li>
 <li><strong>Interactive tools</strong> — Shiny dashboards</li>
-<li><strong>Machine learning</strong> — tidymodels framework</li>
+<li><strong>The wider R ecosystem</strong> — tidymodels, tidytext, and more</li>
 </ul>
 </div>
 </section>
@@ -870,14 +1261,14 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <h2>Statistics in R</h2>
 <p>You can now learn inferential statistics:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test (compare two groups)</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(gad7_total <span class="sc">~</span> <span class="fu">I</span>(academic_year <span class="sc">==</span> <span class="st">"Freshman"</span>), <span class="at">data =</span> social_media_clean)</span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA (compare multiple groups)</span></span>
-<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(gad7_total <span class="sc">~</span> academic_year, <span class="at">data =</span> social_media_clean)</span>
-<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression</span></span>
-<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> social_media_clean)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># t-test (compare two groups)</span></span>
+<span id="cb34-2"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(tvhours <span class="sc">~</span> <span class="fu">I</span>(party <span class="sc">==</span> <span class="st">"Republican"</span>), <span class="at">data =</span> gss_clean)</span>
+<span id="cb34-3"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># ANOVA (compare multiple groups)</span></span>
+<span id="cb34-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">aov</span>(tvhours <span class="sc">~</span> party, <span class="at">data =</span> gss_clean)</span>
+<span id="cb34-6"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb34-7"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression</span></span>
+<span id="cb34-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(tvhours <span class="sc">~</span> age <span class="sc">+</span> party, <span class="at">data =</span> gss_clean)</span></code></pre></div>
 </div>
 <div class="fragment">
 <p><strong>Courses to consider:</strong></p>
@@ -905,16 +1296,16 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <h2>Writing functions</h2>
 <p>Automate repetitive tasks:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>compute_scale_score <span class="ot">&lt;-</span> <span class="cf">function</span>(data, items) {</span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">score =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(items)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use it anywhere</span></span>
-<span id="cb19-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Instead of copying this code multiple times...</span></span>
+<span id="cb35-2"><a href="" aria-hidden="true" tabindex="-1"></a>compute_scale_score <span class="ot">&lt;-</span> <span class="cf">function</span>(data, items) {</span>
+<span id="cb35-3"><a href="" aria-hidden="true" tabindex="-1"></a>  data <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rowwise</span>() <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">score =</span> <span class="fu">mean</span>(<span class="fu">c_across</span>(<span class="fu">all_of</span>(items)), <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-6"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb35-7"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb35-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-9"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Use it anywhere</span></span>
+<span id="cb35-10"><a href="" aria-hidden="true" tabindex="-1"></a>phq9_scored <span class="ot">&lt;-</span> <span class="fu">compute_scale_score</span>(my_data, <span class="fu">c</span>(<span class="st">"phq1"</span>, <span class="st">"phq2"</span>, <span class="st">"phq3"</span>))</span></code></pre></div>
 </div>
 </section>
 <section id="version-control-with-git" class="slide level2">
@@ -935,25 +1326,34 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 </section>
 <section id="interactive-visualizations-with-shiny" class="slide level2">
 <h2>Interactive visualizations with Shiny</h2>
-<p>Create web apps for your data:</p>
+<p>Build web apps for your data — no HTML or JavaScript required:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
-<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"condition"</span>, <span class="st">"Choose condition:"</span>, <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"CBT"</span>, <span class="st">"Control"</span>)),</span>
-<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
-<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
-<span id="cb20-9"><a href="" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
-<span id="cb20-10"><a href="" aria-hidden="true" tabindex="-1"></a>    data <span class="sc">|&gt;</span> <span class="fu">filter</span>(condition <span class="sc">==</span> input<span class="sc">$</span>condition) <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(...)</span>
-<span id="cb20-11"><a href="" aria-hidden="true" tabindex="-1"></a>  })</span>
-<span id="cb20-12"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb20-13"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-14"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(shiny)</span>
+<span id="cb36-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="" aria-hidden="true" tabindex="-1"></a>ui <span class="ot">&lt;-</span> <span class="fu">fluidPage</span>(</span>
+<span id="cb36-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">selectInput</span>(<span class="st">"party"</span>, <span class="st">"Choose party:"</span>,</span>
+<span id="cb36-5"><a href="" aria-hidden="true" tabindex="-1"></a>              <span class="at">choices =</span> <span class="fu">c</span>(<span class="st">"Democrat"</span>, <span class="st">"Independent"</span>, <span class="st">"Republican"</span>)),</span>
+<span id="cb36-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plotOutput</span>(<span class="st">"plot"</span>)</span>
+<span id="cb36-7"><a href="" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb36-8"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-9"><a href="" aria-hidden="true" tabindex="-1"></a>server <span class="ot">&lt;-</span> <span class="cf">function</span>(input, output) {</span>
+<span id="cb36-10"><a href="" aria-hidden="true" tabindex="-1"></a>  output<span class="sc">$</span>plot <span class="ot">&lt;-</span> <span class="fu">renderPlot</span>({</span>
+<span id="cb36-11"><a href="" aria-hidden="true" tabindex="-1"></a>    gss_clean <span class="sc">|&gt;</span></span>
+<span id="cb36-12"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">filter</span>(party <span class="sc">==</span> input<span class="sc">$</span>party) <span class="sc">|&gt;</span></span>
+<span id="cb36-13"><a href="" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ggplot</span>(<span class="fu">aes</span>(age, tvhours)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span>
+<span id="cb36-14"><a href="" aria-hidden="true" tabindex="-1"></a>  })</span>
+<span id="cb36-15"><a href="" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb36-16"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-17"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">shinyApp</span>(ui, server)</span></code></pre></div>
 </div>
+</section>
+<section id="see-shiny-in-action" class="slide level2">
+<h2>See Shiny in action</h2>
+<iframe src="https://gallery.shinyapps.io/051-movie-explorer/" width="100%" height="500" frameborder="0">
+</iframe>
+<p>Posit’s classic <a href="https://shiny.posit.co/r/gallery/start-simple/movie-explorer/">Movie Explorer</a> — try the sliders and dropdowns.</p>
 <aside class="notes">
-<p>Shiny is the most visually exciting “what’s next” option. If you have a Shiny app example you can show briefly, that makes a big impact. Students are often surprised that you can build interactive web apps entirely in R without knowing HTML or JavaScript. Keep it to ~1 minute – just enough to spark curiosity.</p>
+<p>This is Posit’s canonical Shiny demo. Let students poke at it for 30-60 seconds. Point out the live filtering – every change updates the plot without reloading. The entire app is ~50 lines of R. After class, students can browse the full gallery at shiny.posit.co/r/gallery for more examples. If the iframe doesn’t load (network/firewall), open the link directly in a browser.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -966,24 +1366,59 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
           display:block!important;
       }</style></aside>
 </section>
-<section id="machine-learning-with-tidymodels" class="slide level2">
-<h2>Machine learning with tidymodels</h2>
-<p>Predictive modeling with tidy syntax:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidymodels)</span>
-<span id="cb21-2"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Split data</span></span>
-<span id="cb21-4"><a href="" aria-hidden="true" tabindex="-1"></a>data_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(social_media_clean)</span>
-<span id="cb21-5"><a href="" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(data_split)</span>
-<span id="cb21-6"><a href="" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">testing</span>(data_split)</span>
-<span id="cb21-7"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit model</span></span>
-<span id="cb21-9"><a href="" aria-hidden="true" tabindex="-1"></a>lm_fit <span class="ot">&lt;-</span> <span class="fu">linear_reg</span>() <span class="sc">|&gt;</span></span>
-<span id="cb21-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">fit</span>(gad7_total <span class="sc">~</span> hours_social_media <span class="sc">+</span> age, <span class="at">data =</span> train_data)</span>
-<span id="cb21-11"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="" aria-hidden="true" tabindex="-1"></a><span class="co"># Make predictions</span></span>
-<span id="cb21-13"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(lm_fit, test_data)</span></code></pre></div>
-</div>
+<section id="go-deeper-into-the-r-ecosystem" class="slide level2">
+<h2>Go deeper into the R ecosystem</h2>
+<p>The R world is huge. A few doorways worth knowing:</p>
+<p><strong>Modeling:</strong></p>
+<ul>
+<li><a href="https://www.tidymodels.org/">tidymodels</a> — predictive modeling with tidy syntax</li>
+<li><a href="https://paul-buerkner.github.io/brms/">brms</a> — Bayesian regression</li>
+<li><a href="https://github.com/lme4/lme4">lme4</a> — mixed-effects models</li>
+</ul>
+<p><strong>Text &amp; language:</strong></p>
+<ul>
+<li><a href="https://www.tidytextmining.com/">tidytext</a> — turn text into tidy data (you’ve seen this)</li>
+<li><a href="https://ellmer.tidyverse.org/">ellmer</a> — call LLMs (Claude, GPT) from R</li>
+</ul>
+<aside class="notes">
+<p>Don’t go deep on any of these – the point is to show that R has a thoughtful, well-built package for almost every task they’ll encounter. tidymodels is the natural next step for anyone interested in prediction or machine learning. ellmer is brand new and worth mentioning because LLM workflows are increasingly part of research.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="go-deeper-cont.-communication-workflow" class="slide level2">
+<h2>Go deeper (cont.): communication &amp; workflow</h2>
+<p><strong>Communication:</strong></p>
+<ul>
+<li><a href="https://www.danieldsjoberg.com/gtsummary/">gtsummary</a> — publication-ready summary tables</li>
+<li><a href="https://quarto.org/">quarto</a> — websites, books, dashboards (you’ve used the basics)</li>
+</ul>
+<p><strong>Workflow:</strong></p>
+<ul>
+<li><a href="https://docs.ropensci.org/targets/">targets</a> — reproducible analysis pipelines</li>
+<li><a href="https://rstudio.github.io/renv/">renv</a> — project-level package management</li>
+</ul>
+<aside class="notes">
+<p>gtsummary is the single biggest time-saver for anyone writing a thesis or paper – it produces APA-style descriptives in one call. targets and renv are about making analyses survive over time: targets caches expensive computations so you don’t re-run them, and renv pins your package versions so the analysis still works two years later. Encourage them to bookmark this slide.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="learning-resources" class="title-slide slide level1 center" data-background-color="#2c3e50">
@@ -1172,7 +1607,7 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
       }</style></aside>
 </div>
 </section>
-<section id="thank-you" class="slide level2">
+<section id="thank-you" class="slide level2" data-background-color="#2c3e50">
 <h2>Thank you</h2>
 <p><strong>Thank you for:</strong></p>
 <ul>
@@ -1183,151 +1618,7 @@ $ academic_year      &lt;chr&gt; "Sophomore", "Junior", "Freshman", "Sophomore",
 <li>Trusting the process</li>
 </ul>
 <div class="fragment">
-<p>You’ve been a great class. I’m excited to see what you do with these skills.</p>
-</div>
-</section></section>
-<section>
-<section id="final-project-presentations" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Final project presentations</h1>
-
-</section>
-<section id="presentation-guidelines" class="slide level2">
-<h2>Presentation guidelines</h2>
-<p><strong>Format:</strong> 5 minutes per person</p>
-<p><strong>What to include:</strong></p>
-<ol type="1">
-<li>Research question (1 min)</li>
-<li>Dataset description (1 min)</li>
-<li>Key finding with visualization (2 min)</li>
-<li>Implications/what you learned (1 min)</li>
-</ol>
-<div class="fragment">
-<p><strong>Tips:</strong></p>
-<ul>
-<li>Show 1-2 of your best figures</li>
-<li>Focus on the story, not technical details</li>
-<li>Practice timing!</li>
-</ul>
-<aside class="notes">
-<p>Presentations happen during finals week, not today. Go through the format and timing quickly. Emphasize that 5 minutes goes fast – students should practice timing at home. The key message: show your best 1-2 figures and tell the story. Don’t try to explain every line of code. The audience wants to hear the finding, not the data wrangling.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</div>
-</section>
-<section id="presentation-order" class="slide level2">
-<h2>Presentation order</h2>
-<p>We’ll go alphabetically by last name.</p>
-<div class="fragment">
-<p><strong>Remember:</strong></p>
-<ul>
-<li>This is a supportive environment</li>
-<li>Everyone is nervous — that’s normal</li>
-<li>We want to hear about your work</li>
-<li>Questions are signs of interest, not criticism</li>
-</ul>
-</div>
-</section></section>
-<section>
-<section id="course-evaluations" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Course evaluations</h1>
-
-</section>
-<section id="please-fill-out-course-evaluations" class="slide level2">
-<h2>Please fill out course evaluations</h2>
-<p>Your feedback helps me improve the course for future students.</p>
-<div class="fragment">
-<p><strong>What’s helpful:</strong></p>
-<ul>
-<li>Specific examples (this assignment, that lecture)</li>
-<li>Constructive suggestions</li>
-<li>What worked well (so I keep doing it)</li>
-<li>What didn’t work (so I can change it)</li>
-</ul>
-</div>
-<div class="fragment">
-<p><strong>I read every evaluation carefully.</strong></p>
-<aside class="notes">
-<p>Give students 5-10 minutes in class to fill out evaluations. They’re much more likely to complete them if given dedicated class time. Step out of the room or move to the back – students give more honest feedback when the instructor isn’t watching. Set a timer so you know when to come back.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</div>
-</section></section>
-<section>
-<section id="final-words" class="title-slide slide level1 center" data-background-color="#2c3e50">
-<h1>Final words</h1>
-
-</section>
-<section id="keep-learning" class="slide level2">
-<h2>Keep learning</h2>
-<p>The field of data science is constantly evolving:</p>
-<ul>
-<li>New packages are released every day</li>
-<li>Best practices change</li>
-<li>Tools improve</li>
-</ul>
-<div class="fragment">
-<p><strong>Stay curious. Stay connected. Keep coding.</strong></p>
-</div>
-</section>
-<section id="youre-now-a-data-scientist" class="slide level2">
-<h2>You’re now a data scientist</h2>
-<p>You have the skills to:</p>
-<ul>
-<li>Answer questions with data</li>
-<li>Create compelling visualizations</li>
-<li>Conduct reproducible research</li>
-<li>Teach yourself new tools</li>
-</ul>
-<div class="fragment">
-<p><strong>Use them.</strong></p>
-<p>Make psychology more reproducible, transparent, and data-driven.</p>
-<aside class="notes">
-<p>This is the aspirational close. The call to action – “Make psychology more reproducible, transparent, and data-driven” – connects back to Session 1’s opening about the replication crisis. The course has come full circle: they started by learning why data science matters for psychology, and they end with the skills to actually do something about it.</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</div>
-</section>
-<section id="final-final-words" class="slide level2">
-<h2>Final final words</h2>
-
-<img data-src="18-putting-it-together_files/figure-revealjs/unnamed-chunk-18-1.png" alt="A smooth logarithmic curve labeled 'Your learning journey continues' showing rapid early growth in skills over time that gradually levels off, representing the learning curve." width="960" class="r-stretch"></section>
-<section id="thank-you-1" class="slide level2" data-background-color="#2c3e50">
-<h2>Thank you!</h2>
-<p>Good luck with your final projects and future data science adventures!</p>
-<p><strong>Stay in touch:</strong></p>
-<ul>
-<li><strong>?var:instructor.email</strong></li>
-<li>Office hours (through finals week)</li>
-</ul>
-<div class="fragment">
-<p><strong>Now let’s see your final projects!</strong> 🎉</p>
+<p>You’ve been a great class. I’m excited to see what you do with these skills. 🎉</p>
 
 </div>
 </section></section>
