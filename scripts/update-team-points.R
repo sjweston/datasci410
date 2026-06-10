@@ -39,7 +39,7 @@ team_names <- c(
 # awarding points outside the four standard categories. Bonuses are credited
 # to the current week in the rankings.
 team_bonuses <- c(
-  "6" = 3L,  # Challenge 7 grading bonus
+  "6" = 4L,  # Challenge 7 grading bonus + Challenge 10 closest-to-truth winner
   "7" = 3L   # Challenge 7 grading bonus
 )
 

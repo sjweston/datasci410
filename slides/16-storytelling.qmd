@@ -404,24 +404,31 @@ The sprintf and vjust pieces are unfamiliar to most students. We'll unpack each 
 
 ```{r}
 sprintf("%.2f", 3.14159)   # two decimal places
-sprintf("%.0f", 3.14159)   # zero decimal places
-sprintf("%.1f%%", 67.5)    # one decimal + a literal % sign
-sprintf("%d hours", 7)     # %d for integers
+sprintf("%.0f", 3.14159)   # rounded to integer
+sprintf("%d hours", 7)     # %d for whole numbers
 sprintf("GPA: %.2f", 3.39) # mix text and numbers
 ```
 
+::: {.notes}
+sprintf comes from C. Walk through one example aloud — `"%.2f"` is the *format string*; `3.14159` is the value getting formatted; the result is the string `"3.14"`. The next slide unpacks the format-string syntax.
+:::
+
+## `sprintf()` — reading the format string
+
+| Piece | What it does |
+|-------|--------------|
+| `%` | "format a value here" |
+| `.2` | two decimal places |
+| `f` | floating-point number (decimal) |
+| `d` | integer (no decimal) |
+| `%%` | a literal `%` sign |
+
 . . .
 
-**Reading the format string:**
-
-- `%` = "format something here"
-- `.2` = two decimal places
-- `f` = floating-point number (decimal)
-- `d` = integer (no decimal)
-- `%%` = a literal `%` sign
+**Example:** `"%.1f%%"` → format the value with 1 decimal place, then add a literal `%`. Applied to `67.5` → `"67.5%"`.
 
 ::: {.notes}
-sprintf comes from C. Format strings feel cryptic but they're a tiny language: `%` starts a slot, the next characters describe what kind of value goes there. Show students that you can mix literal text with format slots — "GPA: %.2f" produces "GPA: 3.39". Worth ~2 min.
+Format strings feel cryptic but they're a tiny language: `%` opens a slot, the next characters describe what kind of value to format. Students rarely need more than `%.2f`, `%d`, and `%%`. Point them at `?sprintf` for the rest.
 :::
 
 ## Understanding `vjust`
@@ -751,6 +758,23 @@ Notice the layering order matters: the shaded rect goes FIRST (bottom), then poi
 
 ::: {.notes}
 Closer for the spine. Don't read the table — let students read it. The R toolkit is genuinely new — these are the annotation skills that turn a chart into an argument.
+:::
+
+## Your annotation toolbox
+
+| Tool | When to use |
+|------|-------------|
+| `annotate("text", ...)` | One-off text at coordinates (use `parse = TRUE` for math) |
+| `annotate("label", ...)` | Same, with a background box |
+| `annotate("rect", ...)` | Shaded region (e.g., a "recommended zone") |
+| `annotate("segment", ...)` | Line or arrow between two points |
+| `geom_text(aes(label = ...))` | Label every row of data (use `sprintf()` to format) |
+| `geom_vline()` / `geom_hline()` | Vertical / horizontal reference line |
+| `geom_abline()` | Reference line with a slope (e.g., y = x) |
+| `ggrepel::geom_text_repel()` | Labels that auto-arrange to avoid overlap |
+
+::: {.notes}
+~2 min. A cheat sheet they can come back to. The first five we used in class; the last three are common moves they'll encounter in other people's code or want in their final project. ggrepel is the one most worth flagging — once they have more than a few labels, manual `geom_text` overlaps and `geom_text_repel` fixes it.
 :::
 
 # Pair coding break {background-color="#e67e22"}

@@ -6,9 +6,9 @@ team,team_name,week,week_points,cumulative,rank
 1,Tyrannotitans,5,3,19,6
 1,Tyrannotitans,6,2,21,5
 1,Tyrannotitans,7,5,26,5
-1,Tyrannotitans,8,0,26,5
-1,Tyrannotitans,9,0,26,5
-1,Tyrannotitans,10,0,26,5
+1,Tyrannotitans,8,2,28,5
+1,Tyrannotitans,9,1,29,5
+1,Tyrannotitans,10,0,29,5
 2,Vitamin R,1,4,4,6
 2,Vitamin R,2,5,9,6
 2,Vitamin R,3,2,11,7
@@ -17,8 +17,8 @@ team,team_name,week,week_points,cumulative,rank
 2,Vitamin R,6,1,17,7
 2,Vitamin R,7,3,20,7
 2,Vitamin R,8,0,20,7
-2,Vitamin R,9,0,20,7
-2,Vitamin R,10,0,20,7
+2,Vitamin R,9,1,21,7
+2,Vitamin R,10,0,21,7
 3,Rticokes,1,4,4,6
 3,Rticokes,2,6,10,4
 3,Rticokes,3,4,14,4
@@ -26,9 +26,9 @@ team,team_name,week,week_points,cumulative,rank
 3,Rticokes,5,3,20,4
 3,Rticokes,6,3,23,4
 3,Rticokes,7,4,27,4
-3,Rticokes,8,1,28,4
-3,Rticokes,9,0,28,4
-3,Rticokes,10,0,28,4
+3,Rticokes,8,2,29,4
+3,Rticokes,9,3,32,4
+3,Rticokes,10,0,32,4
 4,Coderunners,1,5,5,1
 4,Coderunners,2,6,11,1
 4,Coderunners,3,5,16,1
@@ -37,8 +37,8 @@ team,team_name,week,week_points,cumulative,rank
 4,Coderunners,6,0,20,6
 4,Coderunners,7,3,23,6
 4,Coderunners,8,1,24,6
-4,Coderunners,9,0,24,6
-4,Coderunners,10,0,24,6
+4,Coderunners,9,1,25,6
+4,Coderunners,10,1,26,6
 5,R-odents,1,5,5,1
 5,R-odents,2,5,10,4
 5,R-odents,3,4,14,4
@@ -46,9 +46,9 @@ team,team_name,week,week_points,cumulative,rank
 5,R-odents,5,3,22,2
 5,R-odents,6,4,26,3
 5,R-odents,7,4,30,3
-5,R-odents,8,0,30,3
-5,R-odents,9,0,30,3
-5,R-odents,10,0,30,3
+5,R-odents,8,5,35,3
+5,R-odents,9,4,39,3
+5,R-odents,10,2,41,3
 6,The Black Cats,1,5,5,1
 6,The Black Cats,2,6,11,1
 6,The Black Cats,3,5,16,1
@@ -56,9 +56,9 @@ team,team_name,week,week_points,cumulative,rank
 6,The Black Cats,5,5,22,2
 6,The Black Cats,6,5,27,2
 6,The Black Cats,7,6,33,2
-6,The Black Cats,8,3,36,2
-6,The Black Cats,9,0,36,2
-6,The Black Cats,10,0,36,2
+6,The Black Cats,8,4,37,2
+6,The Black Cats,9,4,41,2
+6,The Black Cats,10,7,48,1
 7,The Bosses,1,5,5,1
 7,The Bosses,2,6,11,1
 7,The Bosses,3,5,16,1
@@ -67,5 +67,5 @@ team,team_name,week,week_points,cumulative,rank
 7,The Bosses,6,5,31,1
 7,The Bosses,7,4,35,1
 7,The Bosses,8,3,38,1
-7,The Bosses,9,0,38,1
-7,The Bosses,10,0,38,1
+7,The Bosses,9,5,43,1
+7,The Bosses,10,5,48,1

@@ -27,7 +27,7 @@ library(gt)
 
 scoreboard <- read_csv(here("team_points.csv"), show_col_types = FALSE) |>
   mutate(
-    total = pair_coding + assignments + quizzes + fun_challenge,
+    total = pair_coding + assignments + quizzes + fun_challenge + bonus,
     team_name = fct_reorder(team_name, total)
   )
 
@@ -49,43 +49,112 @@ scoreboard <- scoreboard |>
 n_teams <- n_distinct(rankings$team_name)
 rankings_filtered <- rankings |> filter(week < current_week)
 last_week <- max(rankings_filtered$week)
+
+# Helper: render the standings bar chart at a given reveal stage.
+#   1 = bottom 3 only
+#   2 = + the next two (4th and 3rd place)
+#   3 = + 3rd-place highlight (bronze + label)
+#   4 = + the two leaders tied for 1st
+x_max <- max(scoreboard$total) * 1.18
+
+chart_stage <- function(stage) {
+  d <- scoreboard |>
+    mutate(
+      visible = case_when(
+        stage == 1 ~ total <= 29,
+        stage == 2 ~ total <= 41,
+        stage == 3 ~ total <= 41,
+        stage >= 4 ~ TRUE
+      ),
+      bar_total = if_else(visible, as.numeric(total), NA_real_),
+      bar_label = if_else(visible, as.character(total), ""),
+      bar_fill = case_when(
+        !visible ~ "hidden",
+        stage == 3 & team_name == "R-odents" ~ "third",
+        is_leader & stage >= 4 ~ "leader",
+        TRUE ~ "other"
+      )
+    )
+
+  team_levels <- levels(scoreboard$team_name)
+  visible_set <- d |> filter(visible) |> pull(team_name) |> as.character()
+  y_labels <- if_else(team_levels %in% visible_set, team_levels, "")
+
+  p <- ggplot(d, aes(y = team_name)) +
+    geom_col(aes(x = bar_total, fill = bar_fill), width = 0.7) +
+    geom_text(
+      aes(x = bar_total, label = bar_label),
+      hjust = -0.3, size = 5, fontface = "bold", na.rm = TRUE
+    ) +
+    scale_fill_manual(
+      values = c("leader" = "#e67e22", "other" = "#95a5a6",
+                 "third" = "#cd7f32", "hidden" = NA),
+      guide = "none",
+      na.value = NA
+    ) +
+    scale_y_discrete(labels = y_labels, drop = FALSE) +
+    scale_x_continuous(limits = c(0, x_max), expand = expansion(mult = c(0, 0))) +
+    labs(x = "Total Points", y = NULL) +
+    theme_minimal(base_size = 18) +
+    theme(
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank(),
+      axis.text.y = element_text(face = "bold", size = 16)
+    )
+
+  if (stage == 3) {
+    r_row <- scoreboard |> filter(team_name == "R-odents")
+    p <- p + annotate(
+      "text", x = r_row$total + 4, y = r_row$team_name,
+      label = "third place!", color = "#cd7f32",
+      fontface = "bold", size = 6, hjust = 0
+    )
+  }
+
+  p
+}
 ```
 
 
 ## Week `r current_week` Standings
 
+::: {.r-stack}
+
 ```{r}
-#| label: scoreboard-chart
+#| label: scoreboard-chart-1
 #| fig-width: 10
 #| fig-height: 5.5
-
-# Bar chart
-ggplot(scoreboard, aes(x = total, y = team_name, fill = is_leader)) +
-  geom_col(width = 0.7) +
-  geom_text(
-    aes(label = total),
-    hjust = -0.3,
-    size = 5,
-    fontface = "bold"
-  ) +
-  scale_fill_manual(
-    values = c("TRUE" = "#e67e22", "FALSE" = "#95a5a6"),
-    guide = "none"
-  ) +
-  scale_x_continuous(
-    expand = expansion(mult = c(0, 0.15))
-  ) +
-  labs(
-    x = "Total Points",
-    y = NULL
-  ) +
-  theme_minimal(base_size = 18) +
-  theme(
-    panel.grid.major.y = element_blank(),
-    panel.grid.minor = element_blank(),
-    axis.text.y = element_text(face = "bold", size = 16)
-  )
+chart_stage(1)
 ```
+
+::: {.fragment}
+```{r}
+#| label: scoreboard-chart-2
+#| fig-width: 10
+#| fig-height: 5.5
+chart_stage(2)
+```
+:::
+
+::: {.fragment}
+```{r}
+#| label: scoreboard-chart-3
+#| fig-width: 10
+#| fig-height: 5.5
+chart_stage(3)
+```
+:::
+
+::: {.fragment}
+```{r}
+#| label: scoreboard-chart-4
+#| fig-width: 10
+#| fig-height: 5.5
+chart_stage(4)
+```
+:::
+
+:::
 
 ---
 
@@ -205,11 +274,12 @@ scoreboard |>
     Assignments = assignments,
     Quizzes = quizzes,
     `Fun Challenge` = fun_challenge,
+    Bonus = bonus,
     Total = total
   ) |>
   gt() |>
   data_color(
-    columns = c(`Pair Coding`, Assignments, Quizzes, `Fun Challenge`, Total),
+    columns = c(`Pair Coding`, Assignments, Quizzes, `Fun Challenge`, Bonus, Total),
     palette = "Oranges",
     na_color = "white"
   ) |>

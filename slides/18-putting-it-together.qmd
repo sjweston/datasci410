@@ -37,7 +37,7 @@ library(tidyverse)
 # Looking back {background-color="#2c3e50"}
 
 ::: {.notes}
-This is the last class session. The tone should feel celebratory and reflective, not rushed. Students have their final projects due today and presentations during finals week. Start with a warm opening -- acknowledge that it's the end, and that you're proud of how far they've come. The first ~10 minutes are about reflection before moving into the live demo.
+This is the last class session. The tone should feel celebratory and reflective, not rushed. Final project videos are due during finals week, so today is about closing the loop. Start with a warm opening -- acknowledge that it's the end, and that you're proud of how far they've come. The first ~10 minutes are about reflection before moving into the live demo.
 :::
 
 ## The data science workflow
@@ -56,258 +56,452 @@ Let this diagram sit for a moment. Ask students to name which sessions covered w
 
 ## A real analysis: Start to finish
 
-Let's analyze a complete psychology dataset together.
+Let's analyze a **real** dataset together — the [General Social Survey](https://gss.norc.org/), included in `forcats` as `gss_cat`.
 
-**Research question:** Does social media use predict anxiety in college students?
+**Research question:** Does age predict daily TV viewing among Americans — and does it differ by political party?
 
 . . .
 
 I'll demonstrate the full workflow:
 
-1. Import messy data
-2. Clean and tidy
-3. Explore with visualizations
-4. Create publication-ready figures
-5. Build a Quarto report
+1. Import and explore a real dataset
+2. Clean and recode categories
+3. Look at distributions (univariate & by group)
+4. Quantify the relationship (correlation + regression)
+5. Reshape with pivots and joins
+6. Build a Quarto report
 
 ::: {.notes}
-This live demo should take ~15 minutes total (Steps 1-9). You can either advance through the slides or live-code in RStudio alongside -- live-coding is more engaging if time allows. The research question deliberately mirrors what many students are doing for their final projects (social media and mental health), so it should feel relevant. Emphasize that this is the exact workflow they should use for their final project.
+This live demo is the heart of the lecture (~25-30 minutes). The dataset is real, public, and built into tidyverse -- no download, no install. The research question is deliberately ordinary: it's the kind of question a psych undergrad could answer for a class paper. As you walk through, name the session each step came from -- this is the explicit "putting it all together" payoff. If time allows, live-code in RStudio alongside the slides.
 :::
 
 ## The dataset
 
+`gss_cat` is a sample of the General Social Survey (NORC at the University of Chicago), one of the longest-running social surveys in the US.
+
 ```{r}
-# Simulated college student survey data
-set.seed(2026)
-social_media <- tibble(
-  id = 1:200,
-  age = sample(18:24, 200, replace = TRUE),
-  hours_social_media = rnorm(200, 4, 2),
-  gad7_total = rnorm(200, 8, 5),  # Generalized Anxiety Disorder scale
-  phq9_total = rnorm(200, 10, 6),  # Depression scale
-  academic_year = sample(c("Freshman", "Sophomore", "Junior", "Senior"),
-                        200, replace = TRUE)
-) |>
-  mutate(
-    # Make anxiety correlate with social media use
-    gad7_total = gad7_total + hours_social_media * 0.8,
-    # Add some missing data
-    hours_social_media = if_else(runif(200) < 0.05, NA_real_, hours_social_media),
-    gad7_total = if_else(runif(200) < 0.08, NA_real_, gad7_total)
-  )
+gss_cat
 ```
+
+::: {.notes}
+The GSS has been running since 1972 and is a backbone dataset in sociology and political psychology. The version bundled with forcats covers 2000-2014 and 21,483 respondents. Highlight that this is *real data* -- the kind their grad school mentors actually use.
+:::
 
 ## Step 1: Explore the data
 
 ```{r}
-glimpse(social_media)
+glimpse(gss_cat)
 ```
 
-. . .
+::: {.notes}
+Emphasize that the first thing to do with any dataset is glimpse(). It tells you the dimensions, variable names, and types -- everything you need to orient yourself.
+:::
+
+## Step 1 (cont.): Check for missing data
 
 ```{r}
-# Check for missing data
-social_media |>
+gss_cat |>
   summarize(across(everything(), ~sum(is.na(.x))))
 ```
 
 ::: {.notes}
-Emphasize that the first thing to do with any dataset is glimpse() and check for missing data. These are the two moves they should make before doing anything else. Ask: "What do you notice about the missing data? Which variables have it? How much?" This connects directly back to Session 14 on missing data.
+Ask: "What do you notice? Which variables have a lot of NAs? Which have none?" tvhours has the most because the question wasn't asked every year. This connects directly back to Session 14 on missing data.
+:::
+
+## What's in `partyid`?
+
+Before we recode, let's see what's actually there:
+
+```{r}
+gss_cat |>
+  count(partyid)
+```
+
+::: {.notes}
+Always check the levels of a categorical variable before recoding it. Students often assume the values they expect; the data has 10 levels including 'No answer', 'Don't know', and 'Other party'. Point out that 'Ind,near rep' and 'Ind,near dem' are leaners -- we'll group them with Independents in the next step. This habit (count() before case_when()) prevents the most common recoding bug: typos in the lookup strings silently producing NAs.
 :::
 
 ## Step 2: Clean the data
 
 ```{r}
-social_media_clean <- social_media |>
-  # Remove rows with missing outcome
-  drop_na(gad7_total) |>
-  # Create anxiety categories
+gss_clean <- gss_cat |>
+  drop_na(tvhours, age) |>
   mutate(
-    anxiety_category = case_when(
-      gad7_total < 5 ~ "Minimal",
-      gad7_total < 10 ~ "Mild",
-      gad7_total < 15 ~ "Moderate",
-      gad7_total >= 15 ~ "Severe"
+    party = case_when(
+      partyid %in% c("Strong republican", "Not str republican") ~ "Republican",
+      partyid %in% c("Strong democrat", "Not str democrat")     ~ "Democrat",
+      partyid %in% c("Ind,near rep", "Independent", "Ind,near dem") ~ "Independent",
+      TRUE ~ NA_character_
     ),
-    anxiety_category = factor(anxiety_category,
-                              levels = c("Minimal", "Mild", "Moderate", "Severe")),
-    # Reorder academic year
-    academic_year = factor(academic_year,
-                          levels = c("Freshman", "Sophomore", "Junior", "Senior"))
-  )
+    party = factor(party, levels = c("Democrat", "Independent", "Republican"))
+  ) |>
+  drop_na(party)
 ```
 
 ::: {.notes}
-Walk through each cleaning decision and explain the reasoning. "Why drop_na on the outcome variable?" Because you can't analyze what you can't measure. "Why create categories?" Because clinical cutoffs make the continuous scores more interpretable. "Why reorder academic year?" Because R defaults to alphabetical, which puts Freshman last. Each of these decisions connects to a specific session: drop_na (Session 14), case_when (Session 4), factor levels (Session 12).
+Walk through each cleaning decision. "Why drop_na on tvhours and age?" Because we can't analyze missing values. "Why collapse partyid into three categories?" Because the raw variable has 10 levels including 'Don't know' and 'No answer' -- too granular to plot. We're treating 'near rep' and 'near dem' leaners as Independents for simplicity. Each of these decisions maps to a session: drop_na (Session 14), case_when (Session 4), factor levels (Session 12).
 :::
 
 ## Step 3: Descriptive statistics
 
 ```{r}
-social_media_clean |>
+gss_clean |>
   summarize(
     n = n(),
     mean_age = mean(age),
-    mean_hours = mean(hours_social_media, na.rm = TRUE),
-    sd_hours = sd(hours_social_media, na.rm = TRUE),
-    mean_anxiety = mean(gad7_total),
-    sd_anxiety = sd(gad7_total)
+    mean_tv = mean(tvhours),
+    sd_tv = sd(tvhours)
   )
 ```
 
-## Step 4: Initial visualization
+## Step 3 (cont.): Group sizes
+
+```{r}
+gss_clean |>
+  count(party)
+```
+
+## Step 4: How much TV do people watch?
+
+Start with **univariate EDA** — one variable at a time.
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Scatterplot with a linear trend line showing that higher daily social media use is associated with higher GAD-7 anxiety scores among college students."
-ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total)) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "steelblue") +
+#| fig-alt: "Histogram of daily TV hours peaking at 2 hours per day with a long right tail."
+ggplot(gss_clean, aes(x = tvhours)) +
+  geom_histogram(binwidth = 1, fill = "steelblue", color = "white") +
   labs(
-    title = "Social media use predicts higher anxiety",
-    subtitle = "Self-reported daily hours and GAD-7 scores",
-    x = "Daily social media use (hours)",
-    y = "Anxiety score (GAD-7)"
+    title = "Most respondents watch 1-3 hours per day",
+    subtitle = "But the tail stretches to 24 hours",
+    x = "Hours of TV per day",
+    y = "Number of respondents"
   ) +
   theme_minimal()
 ```
 
-## Step 5: Compute correlation
+::: {.notes}
+This is Session 10 territory -- look at the shape of one variable before anything else. The distribution is right-skewed with a peak at 2 hours and a tail of heavy viewers. Ask: "What kinds of people might be in that tail?" The skew matters because mean > median when data is skewed -- a chance to remind them why we often prefer the median for skewed data.
+:::
+
+## Step 4 (cont.): Does it differ by party?
+
+Now **bivariate EDA** — compare distributions across groups.
 
 ```{r}
-# Clean data for correlation (remove NAs)
-correlation_data <- social_media_clean |>
-  drop_na(hours_social_media, gad7_total)
+#| output-location: slide
+#| fig-alt: "Side-by-side boxplots of daily TV hours for Democrats, Independents, and Republicans showing similar medians and spreads."
+ggplot(gss_clean, aes(x = party, y = tvhours, fill = party)) +
+  geom_boxplot(alpha = 0.7) +
+  scale_fill_manual(values = c(
+    "Democrat"    = "#3498db",
+    "Independent" = "#7f8c8d",
+    "Republican"  = "#e74c3c"
+  )) +
+  labs(
+    title = "TV viewing distributions look similar across parties",
+    x = NULL,
+    y = "Hours of TV per day"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
 
-cor_value <- cor(correlation_data$hours_social_media,
-                 correlation_data$gad7_total)
+::: {.notes}
+Session 11 -- covariation between a categorical and a continuous variable. The boxplot is the workhorse for "does this group matter for that number?" Point out the medians (the bold line inside the box), the IQR (box height), and the outliers (dots). Quick check: medians look similar across parties, so party probably won't be a big driver in our model.
+:::
 
+## Step 5: Initial visualization
+
+```{r}
+#| output-location: slide
+#| fig-alt: "Scatterplot with a linear trend line showing that older Americans report more daily TV viewing in the General Social Survey."
+ggplot(gss_clean, aes(x = age, y = tvhours)) +
+  geom_jitter(alpha = 0.15, height = 0.3, width = 0) +
+  geom_smooth(method = "lm", color = "steelblue") +
+  labs(
+    title = "Older Americans report more daily TV viewing",
+    subtitle = "General Social Survey, 2000-2014",
+    x = "Age (years)",
+    y = "Hours of TV per day"
+  ) +
+  theme_minimal()
+```
+
+## Step 6: Compute correlation
+
+```{r}
+cor_value <- cor(gss_clean$age, gss_clean$tvhours)
 cor_value
 ```
 
 . . .
 
-**Finding:** Moderate positive correlation (r = `r round(cor_value, 2)`)
+**Finding:** A small but reliable positive correlation (r = `r round(cor_value, 2)`).
 
 ::: {.notes}
-This is a callback to Monday's session. Ask students to interpret the correlation in plain language before you advance to the finding. "What does a positive correlation mean here?" Students who were in Session 17 should be able to answer this. Note that we drop_na before computing the correlation -- reinforce the habit of handling missing data explicitly.
+This is a callback to Monday's session. Ask students to interpret the correlation in plain language before you advance to the finding. "What does r ≈ 0.14 mean in real terms?" Students who were in Session 17 should be able to answer this. Worth noting: with N this large, even tiny correlations are 'statistically significant' -- a great chance to remind them that effect size matters more than p-values.
 :::
 
-## Step 6: Explore by academic year
+## Step 7: Run a regression
+
+A correlation gives one number. A regression gives a **slope** — how much does TV viewing change per year of age?
+
+```{r}
+tv_model <- lm(tvhours ~ age + party, data = gss_clean)
+
+library(broom)
+tidy(tv_model)
+```
+
+::: {.notes}
+Direct callback to Session 17. The lm() formula syntax (`y ~ x1 + x2`) is the foundation for almost all R modeling -- t-tests, ANOVA, mixed models, even Bayesian models use the same notation. broom::tidy() turns the messy summary() output into a tidy tibble we can pipe and plot. Walk through the estimate column: the age slope tells us about how many additional minutes of TV per year of age.
+:::
+
+## Step 7 (cont.): How well does it fit?
+
+```{r}
+glance(tv_model) |>
+  select(r.squared, adj.r.squared, sigma, nobs)
+```
+
+. . .
+
+R² is tiny — age and party explain only a small slice of TV viewing. The story isn't *wrong*, it just isn't the whole story.
+
+::: {.notes}
+`glance()` gives one-row model summaries; `tidy()` gives one row per coefficient. Together they're the broom workflow. The small R² is the right teaching moment: "statistically significant" ≠ "explains a lot." Pair this with the earlier note about effect size. This also makes the case for multivariate models in PSY 420 -- we're not capturing the variables that really matter (income, education, screen-time substitution, etc.).
+:::
+
+## Step 8: Does the pattern differ by party?
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Scatterplot with separate colored trend lines for each academic year, showing the positive relationship between social media use and anxiety holds across all year groups."
-ggplot(social_media_clean, aes(x = hours_social_media, y = gad7_total, color = academic_year)) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", se = FALSE) +
+#| fig-alt: "Scatterplot with separate colored trend lines for Democrats, Independents, and Republicans, showing a similar positive age-TV slope for all three groups."
+ggplot(gss_clean, aes(x = age, y = tvhours, color = party)) +
+  geom_smooth(method = "lm") +
+  scale_color_manual(values = c(
+    "Democrat"    = "#3498db",
+    "Independent" = "#7f8c8d",
+    "Republican"  = "#e74c3c"
+  )) +
   labs(
-    title = "Social media-anxiety relationship holds across academic years",
-    x = "Daily social media use (hours)",
-    y = "Anxiety score (GAD-7)",
-    color = "Academic year"
+    title = "Same pattern across the political spectrum",
+    x = "Age (years)",
+    y = "Hours of TV per day",
+    color = "Party"
   ) +
   theme_minimal() +
   theme(legend.position = "top")
 ```
 
-## Step 7: Anxiety categories
+## Step 9: TV viewing categories
 
 ```{r}
 #| output-location: slide
-#| fig-alt: "Horizontal bar chart showing the distribution of anxiety severity categories, with most students falling in the mild to moderate range and fewer in the minimal or severe categories."
-social_media_clean |>
-  count(anxiety_category) |>
-  mutate(anxiety_category = fct_rev(anxiety_category)) |>
-  ggplot(aes(x = n, y = anxiety_category, fill = anxiety_category)) +
+#| fig-alt: "Horizontal bar chart of TV viewing categories showing most Americans watch 1-4 hours per day, with smaller groups at None and Heavy."
+gss_clean |>
+  mutate(
+    tv_category = case_when(
+      tvhours == 0 ~ "None",
+      tvhours <= 2 ~ "Light (1-2 hr)",
+      tvhours <= 4 ~ "Moderate (3-4 hr)",
+      tvhours >= 5 ~ "Heavy (5+ hr)"
+    ),
+    tv_category = factor(tv_category,
+                         levels = c("None", "Light (1-2 hr)",
+                                    "Moderate (3-4 hr)", "Heavy (5+ hr)"))
+  ) |>
+  count(tv_category) |>
+  ggplot(aes(x = n, y = fct_rev(tv_category), fill = tv_category)) +
   geom_col() +
   scale_fill_manual(values = c(
-    "Minimal" = "#2ecc71",
-    "Mild" = "#f39c12",
-    "Moderate" = "#e67e22",
-    "Severe" = "#e74c3c"
+    "None"              = "#2ecc71",
+    "Light (1-2 hr)"    = "#f39c12",
+    "Moderate (3-4 hr)" = "#e67e22",
+    "Heavy (5+ hr)"     = "#e74c3c"
   )) +
   labs(
-    title = "Most students report mild to moderate anxiety",
-    subtitle = "Distribution of GAD-7 severity categories (N = 184)",
-    x = "Number of students",
+    title = "Most Americans watch 1-4 hours of TV per day",
+    x = "Number of respondents",
     y = NULL
   ) +
   theme_minimal() +
   theme(legend.position = "none")
 ```
 
-## Step 8: Create summary table
+## Step 10: Has TV viewing changed over time?
 
 ```{r}
-summary_table <- social_media_clean |>
-  group_by(anxiety_category) |>
+#| output-location: slide
+#| fig-alt: "Line plot of mean daily TV hours from 2000 to 2014, drifting slightly downward across the period."
+gss_clean |>
+  group_by(year) |>
+  summarize(mean_tv = mean(tvhours), .groups = "drop") |>
+  ggplot(aes(x = year, y = mean_tv)) +
+  geom_line(color = "steelblue", linewidth = 1.2) +
+  geom_point(color = "steelblue", size = 3) +
+  labs(
+    title = "Mean daily TV viewing across GSS years",
+    x = "Survey year",
+    y = "Mean hours of TV per day"
+  ) +
+  theme_minimal()
+```
+
+::: {.notes}
+This is a grouped summary feeding straight into a plot -- a pattern they'll use constantly. Note how `group_by() |> summarize()` collapses 21,000 rows into 8. The line plot is intuitive for time series. Ask: "What might explain a downward drift in TV hours over this period?" (Streaming, YouTube, social media displacing traditional TV.)
+:::
+
+## Step 11: Add political context with a join
+
+What if we want to label each year by who was president? We need a second table, then a **join** (Session 15).
+
+```{r}
+president_lookup <- tribble(
+  ~year, ~president,
+   2000, "Clinton",
+   2002, "G.W. Bush",
+   2004, "G.W. Bush",
+   2006, "G.W. Bush",
+   2008, "G.W. Bush",
+   2010, "Obama",
+   2012, "Obama",
+   2014, "Obama"
+)
+
+president_lookup
+```
+
+::: {.notes}
+`tribble()` is the row-by-row tibble constructor -- nice for small lookups like this. The next slide does the actual join. Frame the join as "add columns from another table by matching on a key." The key here is `year`.
+:::
+
+## Step 11 (cont.): The join
+
+```{r}
+gss_with_president <- gss_clean |>
+  left_join(president_lookup, by = "year")
+
+gss_with_president |>
+  group_by(president) |>
   summarize(
-    N = n(),
-    Mean_Hours = mean(hours_social_media, na.rm = TRUE),
-    SD_Hours = sd(hours_social_media, na.rm = TRUE),
-    Mean_Age = mean(age),
+    n = n(),
+    mean_tv = mean(tvhours),
     .groups = "drop"
+  ) |>
+  arrange(desc(mean_tv))
+```
+
+. . .
+
+Tiny differences — but the *technique* is what counts. Joins let you bring in any external data (codebooks, demographics, neighborhood stats).
+
+::: {.notes}
+Big caveat: this is correlation, not causation. TV viewing didn't change because the president changed. The point is the *mechanic* of the join, plus `arrange(desc(...))` to sort. Real psych use: joining survey responses with demographics, or wave 1 with wave 2 of a longitudinal study.
+:::
+
+## Step 12: Summary table by party
+
+```{r}
+summary_table <- gss_clean |>
+  group_by(party) |>
+  summarize(
+    N        = n(),
+    Mean_Age = mean(age),
+    Mean_TV  = mean(tvhours),
+    SD_TV    = sd(tvhours),
+    .groups  = "drop"
   )
 
 knitr::kable(summary_table, digits = 1,
-             col.names = c("Anxiety Category", "N", "M Hours", "SD Hours", "M Age"))
+             col.names = c("Party", "N", "M Age", "M TV", "SD TV"))
 ```
 
-## Step 9: Write it up in Quarto
+## Step 13: Write it up in Quarto
 
-````markdown
+```{verbatim, lang="markdown"}
 ## Results
 
-We analyzed data from `r nrow(social_media_clean)` college students
-(M age = `r round(mean(social_media_clean$age), 1)` years).
-Students reported using social media an average of
-`r round(mean(social_media_clean$hours_social_media, na.rm = TRUE), 1)`
-hours per day (SD = `r round(sd(social_media_clean$hours_social_media, na.rm = TRUE), 1)`).
+We analyzed data from `r nrow(gss_clean)` respondents in
+the General Social Survey (2000-2014), with a mean age of
+`r round(mean(gss_clean$age), 1)` years. Respondents reported
+watching `r round(mean(gss_clean$tvhours), 1)` hours of TV per
+day on average (SD = `r round(sd(gss_clean$tvhours), 1)`).
 
-Social media use was positively correlated with anxiety scores
-(r = `r round(cor_value, 2)`, p < .001), such that students who
-used social media more reported higher anxiety levels.
-
-```{{r}}
-#| echo: false
-#| fig-cap: "Relationship between social media use and anxiety"
-# [Insert scatterplot code]
+Age was positively correlated with daily TV viewing
+(r = `r round(cor_value, 2)`), such that older respondents
+tended to report more hours of TV.
 ```
-````
 
 ::: {.notes}
-This is the communication step -- the one students often skip. Emphasize that inline R code (the backtick-r expressions) means the numbers in the writeup update automatically if the data changes. No more copy-pasting numbers from output into a Word doc. This is what makes it reproducible. If time allows, show this rendering in a Quarto document to drive the point home.
+The inline R expressions (the backtick-r bits) are the magic. They evaluate at render time, so the numbers in the prose are pulled live from the data. No hand-typed numbers; no copy-paste from console output. If the data changes, the writeup updates automatically. Next slide shows what this renders to.
+:::
+
+## Step 13 (cont.): What it renders to
+
+### Results
+
+We analyzed data from `r nrow(gss_clean)` respondents in the General Social Survey (2000-2014), with a mean age of `r round(mean(gss_clean$age), 1)` years. Respondents reported watching `r round(mean(gss_clean$tvhours), 1)` hours of TV per day on average (SD = `r round(sd(gss_clean$tvhours), 1)`).
+
+Age was positively correlated with daily TV viewing (r = `r round(cor_value, 2)`), such that older respondents tended to report more hours of TV. The relationship was similar across Democrats, Independents, and Republicans.
+
+```{r}
+#| echo: false
+#| fig-width: 7
+#| fig-height: 2.5
+#| fig-alt: "Small scatterplot of age and daily TV hours with a steelblue linear trend line."
+ggplot(gss_clean, aes(age, tvhours)) +
+  geom_jitter(alpha = 0.08, height = 0.3, width = 0) +
+  geom_smooth(method = "lm", color = "steelblue", se = FALSE) +
+  labs(x = "Age (years)", y = "TV hours/day") +
+  theme_minimal(base_size = 11)
+```
+
+::: {.notes}
+This is the same prose from the previous slide, but rendered. Point at the numbers and say "every one of these came from the data via inline R." If you change the dataset (add rows, drop a year), every number updates on re-render. This is what 'reproducible' actually buys you.
 :::
 
 ## What this demonstrates
 
-✅ **Complete workflow** — import to interpretation
-✅ **Data cleaning** — handling missing data, creating factors
-✅ **Multiple visualizations** — exploring from different angles
-✅ **Summary statistics** — both numerical and tabular
-✅ **Inline reporting** — no hard-coded numbers
-✅ **Clear narrative** — telling the story
+- ✅ **Explore & clean** — `glimpse`, `count`, `case_when`, `drop_na`, `factor`
+- ✅ **Univariate & bivariate EDA** — `geom_histogram`, `geom_boxplot`
+- ✅ **Quantify** — `cor`, `lm`, `broom::tidy`, `broom::glance`
+- ✅ **Group & reshape** — `group_by`, `summarize`, `tribble`, `left_join`, `arrange`
+- ✅ **Visualize** — scatter, line, bar, box; color, scale, theme, labs
+- ✅ **Communicate** — `kable` tables + inline R in Quarto
+
+. . .
+
+**One pipeline. Sixteen sessions of skills.**
 
 ::: {.notes}
-Pause here and take a breath. This checklist summarizes the entire course in six bullet points. Let students appreciate that they can now do every single one of these things. Then transition: "But what happens when things go wrong? Because they will, even for experienced programmers."
+This is the payoff slide. Read each line and name the session it came from. The closing line should land -- they've genuinely used skills from nearly every session in one connected analysis. Then transition: "But what happens when things go wrong? Because they will, even for experienced programmers."
 :::
 
 # When things break {background-color="#2c3e50"}
 
-## The 6 errors you'll see most often
+## The 6 errors you'll see most often (1/2)
 
 | Error | What it means | Fix |
 |-------|---------------|-----|
 | `object 'x' not found` | Typo, wrong capitalization, or object not created yet | Check spelling; run the code that creates it |
 | `could not find function` | Typo in function name or package not loaded | Check spelling; run `library()` |
 | `unexpected symbol` | Missing `|>`, `+`, comma, or parenthesis | Check the line *before* the error |
+
+::: {.notes}
+Ask students: "Which of these have you gotten this quarter?" Hands will go up for all three. The most common is "object not found" (usually a capitalization issue or forgetting to run an earlier chunk). The "unexpected symbol" error is the trickiest because the actual problem is on the line *before* the error -- emphasize checking the previous line.
+:::
+
+## The 6 errors you'll see most often (2/2)
+
+| Error | What it means | Fix |
+|-------|---------------|-----|
 | `non-numeric argument` | Math on text — variable is character, not numeric | Check type with `class()` or `glimpse()` |
 | `did you mean '=='?` | Used `=` (assignment) instead of `==` (comparison) in `filter()` | Change `=` to `==` |
 | ggplot `+` error | Missing `+` between ggplot layers | Every line except the last needs `+` |
 
 ::: {.notes}
-Spend ~3 minutes on this table. Ask students: "Which of these have you gotten this quarter?" Hands will go up for almost all of them. The most common by far is "object not found" (usually a capitalization issue or forgetting to run an earlier chunk). The "unexpected symbol" error is the trickiest because the actual problem is on the line before the error -- emphasize checking the previous line.
+The bottom three are operator and syntax errors. The "did you mean ==" error is friendly -- R is literally telling you the fix. The ggplot + error is a classic Session 2 issue that still trips students up; remind them ggplot uses + between layers, not |>.
 :::
 
 ## A 5-step debugging strategy
@@ -380,24 +574,20 @@ The reprex concept is a life skill for programming. Emphasize the contrast betwe
 
 ## Your turn: Debug this code
 
-::: {.notes}
-This is the final pair coding exercise of the course -- 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says "object not found." Bug 2 gives a helpful error ("Did you mean ==?"). Bug 4 gives "unexpected symbol." This exercise reinforces the debugging strategy from the previous slide.
+::: {.callout-tip}
+There are at least 4 bugs. Read each line carefully and check: names, operators, punctuation.
 :::
-
-This code has several errors. Find and fix them all:
 
 ```{r}
 #| eval: false
 library(tidyverse)
 
-# Load data
 Study_data <- tibble(
   id = 1:5,
   Score = c(10, 15, 12, 18, 14),
   Group = c("A", "B", "A", "B", "A")
 )
 
-# Analyze
 study_data |>
   filter(Group = "A") |>
   summarize(
@@ -408,8 +598,8 @@ study_data |>
 
 **Time: 10 minutes**
 
-::: {.callout-tip}
-There are at least 4 bugs. Read each line carefully and check: names, operators, punctuation.
+::: {.notes}
+This is the final pair coding exercise of the course -- 10 minutes. There are 4 bugs: (1) Study_data vs study_data capitalization mismatch, (2) single = instead of == in filter, (3) Score vs score capitalization mismatch, (4) missing comma between summarize arguments. Circulate and see how quickly pairs find all four. Bug 1 and 3 (capitalization) are the trickiest because the error message just says "object not found." Bug 2 gives a helpful error ("Did you mean ==?"). Bug 4 gives "unexpected symbol." This exercise reinforces the debugging strategy from the previous slide.
 :::
 
 ```{r}
@@ -419,14 +609,12 @@ There are at least 4 bugs. Read each line carefully and check: names, operators,
 
 library(tidyverse)
 
-# Load data
 study_data <- tibble(  # Bug 1: Changed Study_data to study_data
   id = 1:5,
   Score = c(10, 15, 12, 18, 14),
   Group = c("A", "B", "A", "B", "A")
 )
 
-# Analyze
 study_data |>
   filter(Group == "A") |>  # Bug 2: Changed = to ==
   summarize(
@@ -456,10 +644,10 @@ This course covered **data wrangling and visualization** — the foundation of d
 What's next?
 
 - **Statistics in R** — inference, hypothesis testing
-- **Advanced R programming** — functions, iteration
+- **Writing functions** — automate repetitive work
 - **Version control** — Git and GitHub
 - **Interactive tools** — Shiny dashboards
-- **Machine learning** — tidymodels framework
+- **The wider R ecosystem** — tidymodels, tidytext, and more
 
 ## Statistics in R
 
@@ -468,13 +656,13 @@ You can now learn inferential statistics:
 ```{r}
 #| eval: false
 # t-test (compare two groups)
-t.test(gad7_total ~ I(academic_year == "Freshman"), data = social_media_clean)
+t.test(tvhours ~ I(party == "Republican"), data = gss_clean)
 
 # ANOVA (compare multiple groups)
-aov(gad7_total ~ academic_year, data = social_media_clean)
+aov(tvhours ~ party, data = gss_clean)
 
 # Regression
-lm(gad7_total ~ hours_social_media + age, data = social_media_clean)
+lm(tvhours ~ age + party, data = gss_clean)
 ```
 
 . . .
@@ -523,50 +711,73 @@ Track changes to your code over time:
 
 ## Interactive visualizations with Shiny
 
-Create web apps for your data:
+Build web apps for your data — no HTML or JavaScript required:
 
 ```{r}
 #| eval: false
 library(shiny)
 
 ui <- fluidPage(
-  selectInput("condition", "Choose condition:", choices = c("CBT", "Control")),
+  selectInput("party", "Choose party:",
+              choices = c("Democrat", "Independent", "Republican")),
   plotOutput("plot")
 )
 
 server <- function(input, output) {
   output$plot <- renderPlot({
-    data |> filter(condition == input$condition) |> ggplot(...)
+    gss_clean |>
+      filter(party == input$party) |>
+      ggplot(aes(age, tvhours)) + geom_point()
   })
 }
 
 shinyApp(ui, server)
 ```
 
+## See Shiny in action
+
+<iframe src="https://gallery.shinyapps.io/051-movie-explorer/" width="100%" height="500" frameborder="0"></iframe>
+
+Posit's classic [Movie Explorer](https://shiny.posit.co/r/gallery/start-simple/movie-explorer/) — try the sliders and dropdowns.
+
 ::: {.notes}
-Shiny is the most visually exciting "what's next" option. If you have a Shiny app example you can show briefly, that makes a big impact. Students are often surprised that you can build interactive web apps entirely in R without knowing HTML or JavaScript. Keep it to ~1 minute -- just enough to spark curiosity.
+This is Posit's canonical Shiny demo. Let students poke at it for 30-60 seconds. Point out the live filtering -- every change updates the plot without reloading. The entire app is ~50 lines of R. After class, students can browse the full gallery at shiny.posit.co/r/gallery for more examples. If the iframe doesn't load (network/firewall), open the link directly in a browser.
 :::
 
-## Machine learning with tidymodels
+## Go deeper into the R ecosystem
 
-Predictive modeling with tidy syntax:
+The R world is huge. A few doorways worth knowing:
 
-```{r}
-#| eval: false
-library(tidymodels)
+**Modeling:**
 
-# Split data
-data_split <- initial_split(social_media_clean)
-train_data <- training(data_split)
-test_data <- testing(data_split)
+- [tidymodels](https://www.tidymodels.org/) — predictive modeling with tidy syntax
+- [brms](https://paul-buerkner.github.io/brms/) — Bayesian regression
+- [lme4](https://github.com/lme4/lme4) — mixed-effects models
 
-# Fit model
-lm_fit <- linear_reg() |>
-  fit(gad7_total ~ hours_social_media + age, data = train_data)
+**Text & language:**
 
-# Make predictions
-predict(lm_fit, test_data)
-```
+- [tidytext](https://www.tidytextmining.com/) — turn text into tidy data (you've seen this)
+- [ellmer](https://ellmer.tidyverse.org/) — call LLMs (Claude, GPT) from R
+
+::: {.notes}
+Don't go deep on any of these -- the point is to show that R has a thoughtful, well-built package for almost every task they'll encounter. tidymodels is the natural next step for anyone interested in prediction or machine learning. ellmer is brand new and worth mentioning because LLM workflows are increasingly part of research.
+:::
+
+## Go deeper (cont.): communication & workflow
+
+**Communication:**
+
+- [gtsummary](https://www.danieldsjoberg.com/gtsummary/) — publication-ready summary tables
+- [quarto](https://quarto.org/) — websites, books, dashboards (you've used the basics)
+
+**Workflow:**
+
+- [targets](https://docs.ropensci.org/targets/) — reproducible analysis pipelines
+- [renv](https://rstudio.github.io/renv/) — project-level package management
+
+::: {.notes}
+gtsummary is the single biggest time-saver for anyone writing a thesis or paper -- it produces APA-style descriptives in one call. targets and renv are about making analyses survive over time: targets caches expensive computations so you don't re-run them, and renv pins your package versions so the analysis still works two years later. Encourage them to bookmark this slide.
+:::
 
 # Learning resources {background-color="#2c3e50"}
 
@@ -694,7 +905,7 @@ If you take one thing from this course: **You can learn hard things.**
 This is the single most important message of the course. Many students came in believing they "aren't math people" or "can't code." They now have evidence that they can. The callout box should be the emotional peak of the session. Pause after it. Let the room be quiet for a moment.
 :::
 
-## Thank you
+## Thank you {background-color="#2c3e50"}
 
 **Thank you for:**
 
@@ -706,139 +917,4 @@ This is the single most important message of the course. Many students came in b
 
 . . .
 
-You've been a great class. I'm excited to see what you do with these skills.
-
-# Final project presentations {background-color="#2c3e50"}
-
-## Presentation guidelines
-
-**Format:** 5 minutes per person
-
-**What to include:**
-
-1. Research question (1 min)
-2. Dataset description (1 min)
-3. Key finding with visualization (2 min)
-4. Implications/what you learned (1 min)
-
-. . .
-
-**Tips:**
-
-- Show 1-2 of your best figures
-- Focus on the story, not technical details
-- Practice timing!
-
-::: {.notes}
-Presentations happen during finals week, not today. Go through the format and timing quickly. Emphasize that 5 minutes goes fast -- students should practice timing at home. The key message: show your best 1-2 figures and tell the story. Don't try to explain every line of code. The audience wants to hear the finding, not the data wrangling.
-:::
-
-## Presentation order
-
-We'll go alphabetically by last name.
-
-. . .
-
-**Remember:**
-
-- This is a supportive environment
-- Everyone is nervous — that's normal
-- We want to hear about your work
-- Questions are signs of interest, not criticism
-
-# Course evaluations {background-color="#2c3e50"}
-
-## Please fill out course evaluations
-
-Your feedback helps me improve the course for future students.
-
-. . .
-
-**What's helpful:**
-
-- Specific examples (this assignment, that lecture)
-- Constructive suggestions
-- What worked well (so I keep doing it)
-- What didn't work (so I can change it)
-
-. . .
-
-**I read every evaluation carefully.**
-
-::: {.notes}
-Give students 5-10 minutes in class to fill out evaluations. They're much more likely to complete them if given dedicated class time. Step out of the room or move to the back -- students give more honest feedback when the instructor isn't watching. Set a timer so you know when to come back.
-:::
-
-# Final words {background-color="#2c3e50"}
-
-## Keep learning
-
-The field of data science is constantly evolving:
-
-- New packages are released every day
-- Best practices change
-- Tools improve
-
-. . .
-
-**Stay curious. Stay connected. Keep coding.**
-
-## You're now a data scientist
-
-You have the skills to:
-
-- Answer questions with data
-- Create compelling visualizations
-- Conduct reproducible research
-- Teach yourself new tools
-
-. . .
-
-**Use them.**
-
-Make psychology more reproducible, transparent, and data-driven.
-
-::: {.notes}
-This is the aspirational close. The call to action -- "Make psychology more reproducible, transparent, and data-driven" -- connects back to Session 1's opening about the replication crisis. The course has come full circle: they started by learning why data science matters for psychology, and they end with the skills to actually do something about it.
-:::
-
-## Final final words
-
-```{r}
-#| echo: false
-#| fig-width: 10
-#| fig-height: 5
-#| fig-alt: "A smooth logarithmic curve labeled 'Your learning journey continues' showing rapid early growth in skills over time that gradually levels off, representing the learning curve."
-tibble(
-  x = seq(0, 10, 0.1),
-  y = log(x + 1) * 2
-) |>
-  ggplot(aes(x = x, y = y)) +
-  geom_line(color = "steelblue", size = 2) +
-  annotate("text", x = 5, y = 4,
-           label = "Your learning journey continues...",
-           size = 6, color = "steelblue") +
-  labs(
-    x = "Time",
-    y = "Skills"
-  ) +
-  theme_minimal() +
-  theme(
-    axis.text = element_blank(),
-    axis.ticks = element_blank(),
-    panel.grid = element_blank()
-  )
-```
-
-## Thank you! {background-color="#2c3e50"}
-
-Good luck with your final projects and future data science adventures!
-
-**Stay in touch:**
-
-- {{< var instructor.email >}}
-- Office hours (through finals week)
-
-. . .
-
-**Now let's see your final projects!** 🎉
+You've been a great class. I'm excited to see what you do with these skills. 🎉

@@ -5,7 +5,7 @@ date: "2026-06-03"
 
 ::: {.callout-note}
 ## Milestone Details
-**Due:** Wednesday, June 3 before class (Session 18)
+**Due:** Wednesday, June 3 at 11:59 PM (Session 18)
 **Submit:** Zip file containing `.qmd`, rendered `.html`, and dataset(s) on Canvas
 **Points:** 60
 :::

@@ -4,7 +4,7 @@
 
 **Name:** ______________________________ **Date:** ______________
 
-*No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
+*No laptop today? No problem. Work with a partner who has a laptop and compare your work at the end.*
 
 ---
 
@@ -15,14 +15,12 @@ This code has several errors. Find and fix them all.
 ```r
 library(tidyverse)
 
-# Load data
 Study_data <- tibble(
   id = 1:5,
   Score = c(10, 15, 12, 18, 14),
   Group = c("A", "B", "A", "B", "A")
 )
 
-# Analyze
 study_data |>
   filter(Group = "A") |>
   summarize(
@@ -31,70 +29,41 @@ study_data |>
   )
 ```
 
-### Your pen-and-paper version
+**Hint:** There are at least 4 bugs. Check names (capitalization), operators (`=` vs `==`), and punctuation.
 
-**Step 1: Read the code carefully.** Go line by line and circle every error you can find. There are at least 4 bugs.
+---
 
-**Step 2: List the errors.** For each bug, explain what's wrong and how to fix it:
+## Step 1: Mark up the code above
 
-| # | Line | What's wrong | Fix |
-|---|------|-------------|-----|
-| 1 |      |             |     |
-| 2 |      |             |     |
-| 3 |      |             |     |
-| 4 |      |             |     |
+Circle each error in the code block. Cross it out and write the fix above or below it.
 
-**Step 3: Categorize the errors.** For each bug, what *type* of error is it? Write the letter:
+## Step 2: List the bugs
 
-- **(A)** Name mismatch (variable/object name doesn't match)
-- **(B)** Wrong operator (using the wrong symbol)
-- **(C)** Syntax error (missing punctuation, brackets, etc.)
+| # | Line | What's wrong | How to fix it |
+|---|------|--------------|---------------|
+| 1 |      |              |               |
+| 2 |      |              |               |
+| 3 |      |              |               |
+| 4 |      |              |               |
 
-| Bug # | Type |
-|-------|------|
-| 1     |      |
-| 2     |      |
-| 3     |      |
-| 4     |      |
+## Step 3: Which error would R show *first*?
 
-**Step 4: Predict the error messages.** For each bug, what error would R give you? Match:
+R stops at the first error and doesn't report the rest. Which bug do you think R would catch first when you run this code? Why?
 
-- `Error: object 'study_data' not found`
-- `Error in filter(): ... did you mean '=='?`
-- `Error: unexpected symbol`
-- `Error: object 'score' not found`
+________________________________________________________________
 
-**Step 5: Write the corrected code.** Rewrite the full code block with all fixes applied:
+________________________________________________________________
 
-```r
-library(tidyverse)
-
-# Load data
-__________ <- tibble(
-  id = 1:5,
-  Score = c(10, 15, 12, 18, 14),
-  Group = c("A", "B", "A", "B", "A")
-)
-
-# Analyze
-__________ |>
-  filter(Group _____ "A") |>
-  summarize(
-    mean_score = mean(________)___
-    sd_score = sd(________)
-  )
-```
-
-**Step 6: What should the output be?** After fixing the code, what values do you expect?
-
-Group A has scores: _____, _____, _____
-
-mean_score = _____
-
-sd_score = _____ (hint: use n-1 in the denominator)
+________________________________________________________________
 
 ---
 
 ## Check your work
 
-Compare your error list and corrected code with your partner's screen. Did you find all 4 bugs?
+Compare your bug list with your partner's screen. Did you find all 4?
+
+If your partner ran the corrected code, what did `summarize()` return for Group A?
+
+**mean_score** = _________ **sd_score** = _________
+
+**Did R catch the bug you predicted first?** (circle one) **Yes** / **No** — actual first error: _______________

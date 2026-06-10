@@ -640,34 +640,69 @@ Dr.&nbsp;Sara Weston
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "3.14"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.0f"</span>, <span class="fl">3.14159</span>)   <span class="co"># zero decimal places</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.0f"</span>, <span class="fl">3.14159</span>)   <span class="co"># rounded to integer</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "3"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%.1f%%"</span>, <span class="fl">67.5</span>)    <span class="co"># one decimal + a literal % sign</span></span></code></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "67.5%"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%d hours"</span>, <span class="dv">7</span>)     <span class="co"># %d for integers</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"%d hours"</span>, <span class="dv">7</span>)     <span class="co"># %d for whole numbers</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "7 hours"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"GPA: %.2f"</span>, <span class="fl">3.39</span>) <span class="co"># mix text and numbers</span></span></code></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">sprintf</span>(<span class="st">"GPA: %.2f"</span>, <span class="fl">3.39</span>) <span class="co"># mix text and numbers</span></span></code></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "GPA: 3.39"</code></pre>
 </div>
 </div>
-<div class="fragment">
-<p><strong>Reading the format string:</strong></p>
-<ul>
-<li><code>%</code> = “format something here”</li>
-<li><code>.2</code> = two decimal places</li>
-<li><code>f</code> = floating-point number (decimal)</li>
-<li><code>d</code> = integer (no decimal)</li>
-<li><code>%%</code> = a literal <code>%</code> sign</li>
-</ul>
 <aside class="notes">
-<p>sprintf comes from C. Format strings feel cryptic but they’re a tiny language: <code>%</code> starts a slot, the next characters describe what kind of value goes there. Show students that you can mix literal text with format slots — “GPA: %.2f” produces “GPA: 3.39”. Worth ~2 min.</p>
+<p>sprintf comes from C. Walk through one example aloud — <code>"%.2f"</code> is the <em>format string</em>; <code>3.14159</code> is the value getting formatted; the result is the string <code>"3.14"</code>. The next slide unpacks the format-string syntax.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="sprintf-reading-the-format-string" class="slide level2">
+<h2><code>sprintf()</code> — reading the format string</h2>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th>Piece</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>%</code></td>
+<td>“format a value here”</td>
+</tr>
+<tr class="even">
+<td><code>.2</code></td>
+<td>two decimal places</td>
+</tr>
+<tr class="odd">
+<td><code>f</code></td>
+<td>floating-point number (decimal)</td>
+</tr>
+<tr class="even">
+<td><code>d</code></td>
+<td>integer (no decimal)</td>
+</tr>
+<tr class="odd">
+<td><code>%%</code></td>
+<td>a literal <code>%</code> sign</td>
+</tr>
+</tbody>
+</table>
+<div class="fragment">
+<p><strong>Example:</strong> <code>"%.1f%%"</code> → format the value with 1 decimal place, then add a literal <code>%</code>. Applied to <code>67.5</code> → <code>"67.5%"</code>.</p>
+<aside class="notes">
+<p>Format strings feel cryptic but they’re a tiny language: <code>%</code> opens a slot, the next characters describe what kind of value to format. Students rarely need more than <code>%.2f</code>, <code>%d</code>, and <code>%%</code>. Point them at <code>?sprintf</code> for the rest.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -747,26 +782,26 @@ Dr.&nbsp;Sara Weston
 <section id="full-code-clinician-one-pager" class="slide level2">
 <h2>Full code: clinician one-pager</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> sleep_study <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sleep_group) <span class="sc">|&gt;</span></span>
-<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_gpa =</span> <span class="fu">mean</span>(gpa), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">highlight =</span> sleep_group <span class="sc">==</span> <span class="st">"Short (&lt;6)"</span>)</span>
-<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_means, <span class="fu">aes</span>(<span class="at">x =</span> sleep_group, <span class="at">y =</span> mean_gpa, <span class="at">fill =</span> highlight)) <span class="sc">+</span></span>
-<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
-<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_gpa)),</span>
-<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">size =</span> <span class="fl">5.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"gray20"</span>) <span class="sc">+</span></span>
-<span id="cb16-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"gray70"</span>)) <span class="sc">+</span></span>
-<span id="cb16-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>,</span>
-<span id="cb16-12"><a href="" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="sc">+</span></span>
-<span id="cb16-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb16-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Short sleepers earn nearly half a letter grade less"</span>,</span>
-<span id="cb16-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean cumulative GPA by average nightly sleep (N = 200)"</span>,</span>
-<span id="cb16-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean GPA"</span></span>
-<span id="cb16-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb16-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
-<span id="cb16-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
-<span id="cb16-20"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="" aria-hidden="true" tabindex="-1"></a>group_means <span class="ot">&lt;-</span> sleep_study <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(sleep_group) <span class="sc">|&gt;</span></span>
+<span id="cb14-3"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_gpa =</span> <span class="fu">mean</span>(gpa), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">highlight =</span> sleep_group <span class="sc">==</span> <span class="st">"Short (&lt;6)"</span>)</span>
+<span id="cb14-5"><a href="" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(group_means, <span class="fu">aes</span>(<span class="at">x =</span> sleep_group, <span class="at">y =</span> mean_gpa, <span class="at">fill =</span> highlight)) <span class="sc">+</span></span>
+<span id="cb14-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">width =</span> <span class="fl">0.65</span>) <span class="sc">+</span></span>
+<span id="cb14-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">sprintf</span>(<span class="st">"%.2f"</span>, mean_gpa)),</span>
+<span id="cb14-9"><a href="" aria-hidden="true" tabindex="-1"></a>            <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.6</span>, <span class="at">size =</span> <span class="fl">5.5</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">color =</span> <span class="st">"gray20"</span>) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">`</span><span class="at">TRUE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"#c0392b"</span>, <span class="st">`</span><span class="at">FALSE</span><span class="st">`</span> <span class="ot">=</span> <span class="st">"gray70"</span>)) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">4</span>), <span class="at">breaks =</span> <span class="dv">0</span><span class="sc">:</span><span class="dv">4</span>,</span>
+<span id="cb14-12"><a href="" aria-hidden="true" tabindex="-1"></a>                     <span class="at">expand =</span> <span class="fu">expansion</span>(<span class="at">mult =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-14"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Short sleepers earn nearly half a letter grade less"</span>,</span>
+<span id="cb14-15"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Mean cumulative GPA by average nightly sleep (N = 200)"</span>,</span>
+<span id="cb14-16"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>, <span class="at">y =</span> <span class="st">"Mean GPA"</span></span>
+<span id="cb14-17"><a href="" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_classic</span>(<span class="at">base_size =</span> <span class="dv">14</span>) <span class="sc">+</span></span>
+<span id="cb14-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>,</span>
+<span id="cb14-20"><a href="" aria-hidden="true" tabindex="-1"></a>        <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">16</span>))</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>The full code for students to copy. The pieces: summarize down to 3 rows → set highlight flag → bar chart → direct labels → custom fill colors → assertion title → classic theme. Highlight the highlight pattern (<code>if_else</code> in a mutate, then <code>scale_fill_manual</code>) — it’s the workhorse for “make one thing pop.”</p>
@@ -814,13 +849,13 @@ Dr.&nbsp;Sara Weston
 <section id="the-new-move-text-as-data" class="slide level2">
 <h2>The new move: text-as-data</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.78</span>,</span>
-<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"+0.5"</span>, <span class="at">size =</span> <span class="dv">38</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
-<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb15-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.78</span>,</span>
+<span id="cb15-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"+0.5"</span>, <span class="at">size =</span> <span class="dv">38</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb15-4"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>) <span class="sc">+</span></span>
+<span id="cb15-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb15-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb15-7"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>))</span></code></pre></div>
 </div>
 <div class="fragment">
 <ul>
@@ -850,29 +885,29 @@ Dr.&nbsp;Sara Weston
 <section id="full-code-social-card" class="slide level2">
 <h2>Full code: social card</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.78</span>,</span>
-<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"+0.5"</span>, <span class="at">size =</span> <span class="dv">38</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
-<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.60</span>,</span>
-<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"GPA points"</span>, <span class="at">size =</span> <span class="dv">9</span>,</span>
-<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.40</span>,</span>
-<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Students who sleep 7+ hours earn</span><span class="sc">\n</span><span class="st">higher grades than those who sleep &lt; 6"</span>,</span>
-<span id="cb18-10"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">5.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">0.25</span>, <span class="at">xend =</span> <span class="fl">0.75</span>, <span class="at">y =</span> <span class="fl">0.20</span>, <span class="at">yend =</span> <span class="fl">0.20</span>,</span>
-<span id="cb18-12"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#2ecc71"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
-<span id="cb18-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.13</span>,</span>
-<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"PSY 410  ·  N = 200"</span>, <span class="at">size =</span> <span class="fl">3.8</span>,</span>
-<span id="cb18-15"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"gray70"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
-<span id="cb18-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb18-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
-<span id="cb18-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
-<span id="cb18-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb18-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb18-21"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb18-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>)</span>
-<span id="cb18-23"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb16-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.78</span>,</span>
+<span id="cb16-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"+0.5"</span>, <span class="at">size =</span> <span class="dv">38</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>,</span>
+<span id="cb16-4"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.60</span>,</span>
+<span id="cb16-6"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"GPA points"</span>, <span class="at">size =</span> <span class="dv">9</span>,</span>
+<span id="cb16-7"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb16-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.40</span>,</span>
+<span id="cb16-9"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Students who sleep 7+ hours earn</span><span class="sc">\n</span><span class="st">higher grades than those who sleep &lt; 6"</span>,</span>
+<span id="cb16-10"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">size =</span> <span class="fl">5.5</span>, <span class="at">color =</span> <span class="st">"white"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">lineheight =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb16-11"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"segment"</span>, <span class="at">x =</span> <span class="fl">0.25</span>, <span class="at">xend =</span> <span class="fl">0.75</span>, <span class="at">y =</span> <span class="fl">0.20</span>, <span class="at">yend =</span> <span class="fl">0.20</span>,</span>
+<span id="cb16-12"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#2ecc71"</span>, <span class="at">linewidth =</span> <span class="fl">1.2</span>) <span class="sc">+</span></span>
+<span id="cb16-13"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"text"</span>, <span class="at">x =</span> <span class="fl">0.5</span>, <span class="at">y =</span> <span class="fl">0.13</span>,</span>
+<span id="cb16-14"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"PSY 410  ·  N = 200"</span>, <span class="at">size =</span> <span class="fl">3.8</span>,</span>
+<span id="cb16-15"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"gray70"</span>, <span class="at">hjust =</span> <span class="fl">0.5</span>, <span class="at">fontface =</span> <span class="st">"italic"</span>) <span class="sc">+</span></span>
+<span id="cb16-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb16-17"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_fixed</span>() <span class="sc">+</span></span>
+<span id="cb16-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_void</span>() <span class="sc">+</span></span>
+<span id="cb16-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb16-20"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb16-21"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"#1a2942"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb16-22"><a href="" aria-hidden="true" tabindex="-1"></a>    <span class="at">plot.margin =</span> <span class="fu">margin</span>(<span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">20</span>)</span>
+<span id="cb16-23"><a href="" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Five <code>annotate()</code> calls (four text, one segment) build the whole card. Each one is positioned with x/y coordinates between 0 and 1 (because we set <code>xlim(0, 1)</code>). Walk through one annotate call in detail — the rest are just variations on the same pattern with different sizes and positions.</p>
@@ -964,13 +999,13 @@ Dr.&nbsp;Sara Weston
 <section id="the-new-move-reference-region-callout" class="slide level2">
 <h2>The new move: reference + region + callout</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="dv">7</span>, <span class="at">xmax =</span> <span class="fl">9.5</span>,</span>
-<span id="cb19-2"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>,</span>
-<span id="cb19-3"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"#2ecc71"</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
-<span id="cb19-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#2ecc71"</span>) <span class="sc">+</span></span>
-<span id="cb19-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">5.4</span>, <span class="at">y =</span> <span class="fl">3.85</span>,</span>
-<span id="cb19-6"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">label =</span> <span class="st">"Every extra hour</span><span class="sc">\n</span><span class="st">= +0.2 GPA"</span>,</span>
-<span id="cb19-7"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#ecf0f1"</span>)</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="dv">7</span>, <span class="at">xmax =</span> <span class="fl">9.5</span>,</span>
+<span id="cb17-2"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>,</span>
+<span id="cb17-3"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">fill =</span> <span class="st">"#2ecc71"</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
+<span id="cb17-4"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"#2ecc71"</span>) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">5.4</span>, <span class="at">y =</span> <span class="fl">3.85</span>,</span>
+<span id="cb17-6"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">label =</span> <span class="st">"Every extra hour</span><span class="sc">\n</span><span class="st">= +0.2 GPA"</span>,</span>
+<span id="cb17-7"><a href="" aria-hidden="true" tabindex="-1"></a>         <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#ecf0f1"</span>)</span></code></pre></div>
 </div>
 <div class="fragment">
 <ul>
@@ -996,27 +1031,27 @@ Dr.&nbsp;Sara Weston
 <section id="full-code-talk-slide" class="slide level2">
 <h2>Full code: talk slide</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep_study, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hours, <span class="at">y =</span> gpa)) <span class="sc">+</span></span>
-<span id="cb20-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="dv">7</span>, <span class="at">xmax =</span> <span class="fl">9.5</span>, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>,</span>
-<span id="cb20-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"#2ecc71"</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
-<span id="cb20-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb20-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"#2c3e50"</span>, <span class="at">linewidth =</span> <span class="fl">1.4</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb20-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
-<span id="cb20-7"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"#2ecc71"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb20-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">8.25</span>, <span class="at">y =</span> <span class="fl">2.1</span>,</span>
-<span id="cb20-9"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Recommended</span><span class="sc">\n</span><span class="st">7+ hours"</span>,</span>
-<span id="cb20-10"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#27ae60"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">5</span>,</span>
-<span id="cb20-11"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">lineheight =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb20-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">5.4</span>, <span class="at">y =</span> <span class="fl">3.85</span>,</span>
-<span id="cb20-13"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Every extra hour</span><span class="sc">\n</span><span class="st">= +0.2 GPA"</span>,</span>
-<span id="cb20-14"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#2c3e50"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">5.5</span>,</span>
-<span id="cb20-15"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#ecf0f1"</span>, <span class="at">lineheight =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb20-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"More sleep, higher grades"</span>,</span>
-<span id="cb20-17"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nightly sleep (hours)"</span>, <span class="at">y =</span> <span class="st">"Cumulative GPA"</span>) <span class="sc">+</span></span>
-<span id="cb20-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span></span>
-<span id="cb20-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
-<span id="cb20-20"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
-<span id="cb20-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">26</span>))</span></code></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sleep_study, <span class="fu">aes</span>(<span class="at">x =</span> sleep_hours, <span class="at">y =</span> gpa)) <span class="sc">+</span></span>
+<span id="cb18-2"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"rect"</span>, <span class="at">xmin =</span> <span class="dv">7</span>, <span class="at">xmax =</span> <span class="fl">9.5</span>, <span class="at">ymin =</span> <span class="sc">-</span><span class="cn">Inf</span>, <span class="at">ymax =</span> <span class="cn">Inf</span>,</span>
+<span id="cb18-3"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">fill =</span> <span class="st">"#2ecc71"</span>, <span class="at">alpha =</span> <span class="fl">0.10</span>) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">"gray50"</span>, <span class="at">size =</span> <span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb18-5"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">color =</span> <span class="st">"#2c3e50"</span>, <span class="at">linewidth =</span> <span class="fl">1.4</span>, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb18-6"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">7</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>,</span>
+<span id="cb18-7"><a href="" aria-hidden="true" tabindex="-1"></a>             <span class="at">color =</span> <span class="st">"#2ecc71"</span>, <span class="at">linewidth =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb18-8"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">8.25</span>, <span class="at">y =</span> <span class="fl">2.1</span>,</span>
+<span id="cb18-9"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Recommended</span><span class="sc">\n</span><span class="st">7+ hours"</span>,</span>
+<span id="cb18-10"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#27ae60"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">5</span>,</span>
+<span id="cb18-11"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">lineheight =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">annotate</span>(<span class="st">"label"</span>, <span class="at">x =</span> <span class="fl">5.4</span>, <span class="at">y =</span> <span class="fl">3.85</span>,</span>
+<span id="cb18-13"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label =</span> <span class="st">"Every extra hour</span><span class="sc">\n</span><span class="st">= +0.2 GPA"</span>,</span>
+<span id="cb18-14"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">color =</span> <span class="st">"#2c3e50"</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">5.5</span>,</span>
+<span id="cb18-15"><a href="" aria-hidden="true" tabindex="-1"></a>           <span class="at">label.size =</span> <span class="dv">0</span>, <span class="at">fill =</span> <span class="st">"#ecf0f1"</span>, <span class="at">lineheight =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb18-16"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"More sleep, higher grades"</span>,</span>
+<span id="cb18-17"><a href="" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Nightly sleep (hours)"</span>, <span class="at">y =</span> <span class="st">"Cumulative GPA"</span>) <span class="sc">+</span></span>
+<span id="cb18-18"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">4</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb18-19"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">ylim =</span> <span class="fu">c</span>(<span class="fl">1.5</span>, <span class="dv">4</span>)) <span class="sc">+</span></span>
+<span id="cb18-20"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">18</span>) <span class="sc">+</span></span>
+<span id="cb18-21"><a href="" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">26</span>))</span></code></pre></div>
 </div>
 <aside class="notes">
 <p>Notice the layering order matters: the shaded rect goes FIRST (bottom), then points, then the smoothing line, then the vline, then the labels on top. ggplot draws in order, so later layers sit above earlier ones.</p>
@@ -1084,6 +1119,68 @@ Dr.&nbsp;Sara Weston
           display:block!important;
       }</style></aside>
 </div>
+</section>
+<section id="your-annotation-toolbox" class="slide level2">
+<h2>Your annotation toolbox</h2>
+<table class="caption-top">
+<colgroup>
+<col style="width: 31%">
+<col style="width: 68%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Tool</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>annotate("text", ...)</code></td>
+<td>One-off text at coordinates (use <code>parse = TRUE</code> for math)</td>
+</tr>
+<tr class="even">
+<td><code>annotate("label", ...)</code></td>
+<td>Same, with a background box</td>
+</tr>
+<tr class="odd">
+<td><code>annotate("rect", ...)</code></td>
+<td>Shaded region (e.g., a “recommended zone”)</td>
+</tr>
+<tr class="even">
+<td><code>annotate("segment", ...)</code></td>
+<td>Line or arrow between two points</td>
+</tr>
+<tr class="odd">
+<td><code>geom_text(aes(label = ...))</code></td>
+<td>Label every row of data (use <code>sprintf()</code> to format)</td>
+</tr>
+<tr class="even">
+<td><code>geom_vline()</code> / <code>geom_hline()</code></td>
+<td>Vertical / horizontal reference line</td>
+</tr>
+<tr class="odd">
+<td><code>geom_abline()</code></td>
+<td>Reference line with a slope (e.g., y = x)</td>
+</tr>
+<tr class="even">
+<td><code>ggrepel::geom_text_repel()</code></td>
+<td>Labels that auto-arrange to avoid overlap</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<p>~2 min. A cheat sheet they can come back to. The first five we used in class; the last three are common moves they’ll encounter in other people’s code or want in their final project. ggrepel is the one most worth flagging — once they have more than a few labels, manual <code>geom_text</code> overlaps and <code>geom_text_repel</code> fixes it.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="pair-coding-break" class="title-slide slide level1 center" data-background-color="#e67e22">

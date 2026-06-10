@@ -4,111 +4,128 @@
 
 **Name:** ______________________________ **Date:** ______________
 
-*No laptop today? No problem. This handout lets you practice the same skills on paper. Work with a partner who has a laptop and compare your work at the end.*
-
----
-
-## The data: `stress_data`
-
-Mean stress and burnout ratings (0–10 scale) by profession:
-
-| profession | stress | burnout |
-|-----------|--------|---------|
-| Teacher    | 7.2    | 6.8     |
-| Nurse      | 8.1    | 7.9     |
-| Engineer   | 5.5    | 4.8     |
-| Retail     | 6.8    | 6.5     |
-| Admin      | 6.2    | 5.9     |
-
-Your partner has a default bar chart on screen that needs improvement.
+*No laptop today? No problem. This handout walks you through the same exercise on paper. Work with a partner who has a laptop and compare your sketches with their figures at the end.*
 
 ---
 
 ## The task (same as the slide exercise)
 
-The original code produces a basic, unpolished bar chart:
+Take **one finding** and produce **two versions** of a figure:
+
+1. **For your professor** — what would go in your final written report
+2. **For your roommate** — a single image you'd text them with the takeaway
+
+Use at least one annotation technique from today on each version.
+
+---
+
+## Step 1: Pick a finding
+
+Write down **one finding** in a single sentence. Use your final project if you can picture it; if not, use the fallback below.
+
+**Your finding:** _______________________________________________________
+
+> **Fallback:** *"College students who sleep 7+ hours per night have a cumulative GPA about 0.5 points higher than students who sleep less than 6 hours."*
+
+What variables are involved? **x:** _______________  **y:** _______________
+
+What kind of chart fits this finding (circle one)?
+**scatterplot · bar chart · line chart · histogram · big-number card**
+
+---
+
+## Step 2: Plan Version A — For your professor
+
+**Audience profile.** Your professor reads carefully, wants statistical detail, and expects an APA-style figure.
+
+- Title style (circle one): **descriptive** ("Figure 1: GPA by sleep group") or **assertion** ("Short sleepers earn lower grades")? _____________
+- One statistic to include in-plot (r, β, N, p, mean): _____________
+- Theme (circle one): **theme_classic** · **theme_minimal** · **theme_void**
+- Highlight one group? **yes / no.** If yes, which? _____________
+
+**Sketch it.** Draw axes, data, title, and any annotation. Label the axes with units.
+
+```
+  y |
+    |
+    |
+    |________________________ x
+```
+
+**Title you'd write:** _____________________________________________________
+
+**One annotation move you'd use** (e.g., `annotate("text", parse = TRUE)` for stats, `geom_smooth()` with CI, caption with N):
+
+________________________________________________________________________
+
+---
+
+## Step 3: Plan Version B — For your roommate
+
+**Audience profile.** Your roommate is scrolling their phone, knows nothing about your study, and gives you 2 seconds before swiping away.
+
+- The figure should fit on a phone screen. Shape (circle one): **square · tall · wide**
+- One number they should remember: _____________
+- Do you need axes at all? **yes / no**
+- Title style: **assertion only.** Write the headline as if it were a text message.
+
+**Sketch it.** This figure is mostly typography — a big number and a short sentence. Don't draw a full chart unless you need one.
+
+```
+  +---------------------------------+
+  |                                 |
+  |                                 |
+  |                                 |
+  |                                 |
+  +---------------------------------+
+```
+
+**Headline (≤ 8 words):** ________________________________________________
+
+**Annotation move you'd use** (e.g., `theme_void()` + `annotate("text")` for big number, `annotate("segment")` for a decorative underline, dark `plot.background`):
+
+________________________________________________________________________
+
+---
+
+## Step 4: Compare the two versions
+
+| Question | Version A (professor) | Version B (roommate) |
+|----------|----------------------|----------------------|
+| What's dropped from the data? |  |  |
+| What's emphasized? |  |  |
+| Is the title a description or an assertion? |  |  |
+| Could it mislead? How? |  |  |
+
+**The honest-framing question:** Version B drops a lot of detail. Is it still **honest**? Why or why not? ________________________________________________
+
+---
+
+## Step 5: Skeleton code
+
+Fill in the blanks for **Version B** (the social-card style). You don't need real data — `ggplot()` can draw a canvas with no data at all.
 
 ```r
-ggplot(stress_data, aes(x = profession, y = stress, fill = profession)) +
-  geom_col() +
-  labs(title = "Stress by Profession") +
-  theme_gray()
-```
-
-Improve it by:
-
-1. Removing the unnecessary legend
-2. Reordering professions by stress level
-3. Highlighting the profession with highest stress
-4. Adding a clear, message-driven title
-5. Cleaning up the theme
-
-### Your pen-and-paper version
-
-**Step 1: Reorder the data.** Rank the professions from lowest to highest stress:
-
-| Rank | Profession | Stress |
-|------|-----------|--------|
-| 1    |           |        |
-| 2    |           |        |
-| 3    |           |        |
-| 4    |           |        |
-| 5    |           |        |
-
-**Step 2: Write a message-driven title.** The current title is "Stress by Profession" — this describes the axes but says nothing about the finding. Write a title that tells the reader what to take away:
-
-Your title: ___________________________________________________________________
-
-**Step 3: Plan the highlighting.** Which profession should be highlighted? ___________
-
-What color would you use for the highlight? _____________
-
-What color for the non-highlighted bars? _____________
-
-**Step 4: Horizontal vs. vertical?** Should the bars be horizontal or vertical? Why?
-
-Your answer: ___________________________________________________________________
-
-**Step 5: Sketch the improved figure.** Draw it by hand below, incorporating all your improvements:
-
-```
-              |
-              |
-              |
-              |
-              |
-              |
-              |
-              |
-              |________________________________
-```
-
-**Step 6: Write the improved code.** Fill in the blanks:
-
-```r
-stress_data <- stress_data |>
-  mutate(
-    profession = fct_reorder(profession, _______),
-    highlight = if_else(profession == "________", "yes", "no")
-  )
-
-ggplot(stress_data, aes(x = stress, y = profession,
-                         fill = __________)) +
-  geom_col() +
-  scale_fill_manual(values = c("yes" = "___________",
-                                "no" = "___________")) +
-  labs(
-    title = "________________________________",
-    subtitle = "________________________________",
-    x = "____________",
-    y = ______
-  ) +
-  theme___________() +
-  theme(legend.position = "________")
+ggplot() +
+  annotate("text", x = 0.5, y = 0.7,
+           label = "__________",          # the big number
+           size = 38, fontface = "bold",
+           color = "__________") +        # text color
+  annotate("text", x = 0.5, y = 0.4,
+           label = "__________",          # your headline (≤ 8 words)
+           size = 5, color = "white") +
+  xlim(0, 1) + ylim(0, 1) +
+  coord_fixed() +
+  theme______() +                          # which theme strips everything?
+  theme(plot.background = element_rect(fill = "__________"))
 ```
 
 ---
 
 ## Check your work
 
-Compare your sketch and code with your partner's screen. Do your rankings, title, and highlighting choices match?
+Trade handouts with your partner. For each version, ask:
+
+- Could a reader from that audience tell what the finding is in **5 seconds**?
+- Is the title doing the work, or is the chart doing the work? (Both should align.)
+- What annotation from today shows up in each sketch?

@@ -356,15 +356,21 @@ This output is intimidating. Do not try to explain every line. Point to the Coef
 
 ```{r}
 #| echo: false
+format_p_apa <- function(p) {
+  ifelse(p < .001, "< .001",
+         paste0("= ", sub("^0", "", sprintf("%.3f", p))))
+}
+
 tidy(model) |>
   mutate(
     meaning = c(
       "Predicted anxiety when social media = 0 hours",
       "For each additional hour of social media, anxiety increases by this much"
-    )
+    ),
+    p = format_p_apa(p.value)
   ) |>
-  select(term, estimate, p.value, meaning) |>
-  knitr::kable(digits = 3, col.names = c("Term", "Estimate", "p-value", "In plain language"))
+  select(term, estimate, p, meaning) |>
+  knitr::kable(digits = 2, col.names = c("Term", "Estimate", "p", "In plain language"))
 ```
 
 . . .
@@ -375,7 +381,7 @@ tidy(model) |>
 This is the most important slide in the regression section. The "in plain language" column does the heavy lifting -- linger here. Ask a student to read the interpretation of the slope aloud. Students often struggle with the intercept: "What does it mean to use 0 hours of social media?" Acknowledge that the intercept doesn't always have a meaningful interpretation, but it anchors the line. The slope is what they should focus on.
 :::
 
-## R-squared: How much does the model explain?
+## R-squared: How much can we predict?
 
 ```{r}
 glance(model)$r.squared
@@ -383,18 +389,18 @@ glance(model)$r.squared
 
 . . .
 
-**R-squared** tells you the proportion of variation in y explained by x.
+**R-squared** is the proportion of variation in y that is predictable from x.
 
-- R² = 0 → the model explains nothing
-- R² = 1 → the model explains everything
-- R² = `r round(glance(model)$r.squared, 2)` → social media use explains about `r round(glance(model)$r.squared * 100)`% of the variation in anxiety scores
+- R² = 0 → x tells us nothing about y
+- R² = 1 → x perfectly predicts y
+- R² = `r round(glance(model)$r.squared, 2)` → knowing social media use predicts about `r round(glance(model)$r.squared * 100)`% of the variation in anxiety scores
 
 . . .
 
-The other `r 100 - round(glance(model)$r.squared * 100)`% is explained by other factors (genetics, life events, personality, etc.).
+The other `r 100 - round(glance(model)$r.squared * 100)`% reflects everything else that varies across people (genetics, life events, personality, measurement noise).
 
 ::: {.notes}
-R-squared is intuitive for students if you frame it as a percentage. "Social media use explains about X% of why people differ in anxiety." The low R-squared is actually a great teaching moment -- in psychology, single predictors rarely explain a lot. That's why researchers use multiple regression (preview of what's next). Students sometimes think low R-squared means the model is "bad" -- reframe it as "one piece of a bigger puzzle."
+Be deliberate about language here: "predicts" and "is associated with," not "explains" or "causes." Students just heard "correlation does not equal causation" a few slides ago, and "explains" sounds causal even though stats textbooks use it loosely. Reframe low R² as a feature, not a bug: in psychology, single predictors rarely capture most of the variation in human behavior, which is why researchers use multiple regression (preview of what's next). Students sometimes think low R² means the model is "bad" -- reframe it as "one piece of a bigger puzzle."
 :::
 
 ## Visualizing the regression line
@@ -485,11 +491,32 @@ cor(class_survey$sleep_hrs, class_survey$stress, use = "complete.obs")
 
 ```{r}
 # Is it significant?
-cor.test(class_survey$sleep_hrs, class_survey$stress)
+cor.test(class_survey$sleep_hrs, class_survey$stress, use = "complete.obs")
 ```
 
 ::: {.notes}
 This is a callback to Session 10 where we looked at class data visually. Now we can put a number on it. Ask: "Is this what you expected? Does more sleep go with less stress, or more?" Let a student interpret the sign and magnitude before you confirm.
+:::
+
+## Does the relationship differ by group?
+
+`group_by()` + `summarize()` works the same with `cor()` as with any other summary:
+
+```{r}
+class_survey |>
+  group_by(chronotype) |>
+  summarize(
+    r = cor(sleep_hrs, stress, use = "complete.obs"),
+    n = n()
+  )
+```
+
+. . .
+
+One pipeline, one correlation per group. Same skill you've been using all term — just a new summary function.
+
+::: {.notes}
+This slide ties together two big ideas: group_by/summarize from Session 3 and correlation from today. Emphasize that cor() is just another summary statistic, like mean() or sd(). Ask: "Does the sleep–stress relationship look the same across chronotypes, or does it differ?" Let students react to the numbers. If the groups differ noticeably, that's a great moment to mention that moderation (whether a relationship depends on a third variable) is where this kind of analysis goes next — but don't go deeper than naming it.
 :::
 
 ## Regression: Does sleep predict stress?
@@ -597,50 +624,6 @@ lm(gad7_total ~ hours_social_media + age + academic_year, data = study_data)
 
 # ANOVA — same idea
 aov(gad7_total ~ condition, data = study_data)
-```
-
-# Get a head start {background-color="#e67e22"}
-
-## End-of-deck exercise
-
-::: {.notes}
-Individual work time (~10 minutes). Part A mirrors the anxiety analysis but uses depression (phq9_total), so students can apply the workflow independently. Circulate and check that students can interpret their slope in a sentence — that's the hardest part. Once Part A is working, push students into Part B: this is the last class session before the final project is due, so any minute spent on their own data is high-value. For students whose project doesn't have continuous variables, redirect them to figure polish or inline-code reporting instead of forcing a regression that doesn't fit.
-:::
-
-**Part A — Practice on `study_data`:**
-
-1. Run a regression predicting `phq9_total` (depression) from `hours_social_media`
-2. What is the slope? Interpret it in a sentence.
-3. What is R²? Is social media use a good predictor of depression?
-4. Create a scatterplot with the regression line and report the key statistics in the subtitle
-5. **Bonus:** Use `broom::tidy()` to create a clean results table
-
-**Part B — Head start on your final project:**
-
-If your final project has two continuous variables, fit **one** `lm()` on your own data and add the resulting figure to your report. Even if regression isn't a central part of your project, a single well-interpreted model can strengthen your Results section. Not a fit for your data? Use the time to polish a figure instead — your project is due Wednesday.
-
-```{r}
-#| echo: false
-#| eval: false
-# SOLUTION
-model2 <- lm(phq9_total ~ hours_social_media, data = study_data)
-
-tidy(model2)
-glance(model2)$r.squared
-
-ggplot(study_data, aes(x = hours_social_media, y = phq9_total)) +
-  geom_point(alpha = 0.5) +
-  geom_smooth(method = "lm", color = "steelblue") +
-  labs(
-    title = "Social media use predicts higher depression scores",
-    subtitle = paste0("b = ", round(tidy(model2)$estimate[2], 2),
-                      ", R² = ", round(glance(model2)$r.squared, 2)),
-    x = "Daily social media use (hours)",
-    y = "Depression score (PHQ-9)"
-  ) +
-  theme_minimal()
-
-tidy(model2) |> knitr::kable(digits = 3)
 ```
 
 # Fun Challenge 10: The Final Prediction {background-color="#e67e22"}
